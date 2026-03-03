@@ -1,0 +1,30 @@
+aid: codat
+name: Codat
+segments:
+  - Unified_API
+description: >-
+  Codat is a unified API platform focused on SMB financial data, connecting to 30+ accounting, ERP, banking, and payment platforms.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Unified_API
+created: '2026-03-03'
+modified: '2026-03-03'
+url: https://raw.githubusercontent.com/api-evangelist/codat/refs/heads/main/apis.yml
+specificationVersion: '0.19'
+apis:
+  - aid: codat:codat
+    name: Codat
+    description: >-
+      Codat is a unified API platform focused on SMB financial data, connecting to 30+ accounting, ERP, banking, and payment platforms.
+    humanURL: https://example.com
+    tags:
+      - Unified_API
+    properties:
+      - type: Documentation
+        url: https://example.com
+maintainers:
+  - FN: Kin Lane
+    email: info@apievangelist.com
