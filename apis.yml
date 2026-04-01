@@ -11,7 +11,7 @@ image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Unified_API
 created: '2026-03-03'
-modified: '2026-03-03'
+modified: '2026-04-01'
 url: https://raw.githubusercontent.com/api-evangelist/codat/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
@@ -32,6 +32,8 @@ apis:
         url: https://docs.codat.io/platform-api
       - type: OpenAPI Source
         url: https://github.com/codatio/oas
+      - type: OpenAPI
+        url: openapi/codat-platform-openapi.json
   - aid: codat:lending-api
     name: Codat Lending API
     description: >-
@@ -48,6 +50,8 @@ apis:
         url: https://docs.codat.io/lending/overview
       - type: API Reference
         url: https://docs.codat.io/lending-api
+      - type: OpenAPI
+        url: openapi/codat-lending-openapi.json
       - type: OpenAPI Source
         url: https://github.com/codatio/oas
   - aid: codat:bank-feeds-api
@@ -63,6 +67,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.codat.io/bank-feeds/overview
+      - type: OpenAPI
+        url: openapi/codat-bank-feeds-openapi.json
       - type: API Reference
         url: https://docs.codat.io/bank-feeds-api
       - type: OpenAPI Source
