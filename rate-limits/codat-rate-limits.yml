@@ -4,117 +4,64 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Codat
 providerId: codat
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - Unified_API
+  - Unified API
+  - Accounting
+  - Banking
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Codat API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
+description: Codat enforces a daily request quota that scales with the number of Active Connected Companies
+  (ACCs) plus a per-ACC concurrency cap. A separate IP-based DoS protection rejects more than 1,000 requests
+  per minute from a single IP. All rate-limit responses use HTTP 429 with a Retry-After header. Live counters
+  are exposed via X-Rate-Limit-Limit / X-Rate-Limit-Remaining / X-Rate-Limit-Reset response headers and
+  webhook events fire when limits are reached or reset.
+sources:
+  - https://docs.codat.io/using-the-api/rate-limits
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
+  limit: X-Rate-Limit-Limit
+  remaining: X-Rate-Limit-Remaining
+  reset: X-Rate-Limit-Reset
   retryAfter: Retry-After
-  policy: RateLimit-Policy
 responseCodes:
   throttled: 429
   quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
+  - name: Daily request quota
+    scope: account
+    metric: requests_per_day
+    limit: 1000 + 1000 per Active Connected Company
+    timeFrame: day
+    notes: Formula is `1,000 x (1 + number of ACCs)`. Resets daily at 00:00 UTC. Example, 100 ACCs = 101,000
+      requests/day.
+  - name: Per-ACC concurrency
+    scope: account
+    metric: concurrent_requests
     limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Codat Platform API
-      - Codat Lending API
-      - Codat Bank Feeds API
-      - Codat Sync for Expenses API
-      - Codat Bill Pay API
-      - Codat Spend Insights API
-      - Codat Sync for Commerce API
-      - Codat Sync for Payroll API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Codat Platform API
-      - Codat Lending API
-      - Codat Bank Feeds API
-      - Codat Sync for Expenses API
-      - Codat Bill Pay API
-      - Codat Spend Insights API
-      - Codat Sync for Commerce API
-      - Codat Sync for Payroll API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Codat Platform API
-      - Codat Lending API
-      - Codat Bank Feeds API
-      - Codat Sync for Expenses API
-      - Codat Bill Pay API
-      - Codat Spend Insights API
-      - Codat Sync for Commerce API
-      - Codat Sync for Payroll API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Codat Platform API
-      - Codat Lending API
-      - Codat Bank Feeds API
-      - Codat Sync for Expenses API
-      - Codat Bill Pay API
-      - Codat Spend Insights API
-      - Codat Sync for Commerce API
-      - Codat Sync for Payroll API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
+    notes: Maximum of 10 concurrent in-flight requests per Active Connected Company.
+  - name: IP-based DoS protection
+    scope: IP
     metric: requests_per_minute
     limit: 1000
-    burst: 5000
     timeFrame: minute
-    applies:
-      - Codat Platform API
-      - Codat Lending API
-      - Codat Bank Feeds API
-      - Codat Sync for Expenses API
-      - Codat Bill Pay API
-      - Codat Spend Insights API
-      - Codat Sync for Commerce API
-      - Codat Sync for Payroll API
+    notes: Hard ceiling on requests originating from any single IP address. Sustained traffic above this
+      ceiling may be blocked without warning.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Retry-After
+    description: 429 responses include a Retry-After header advising when the limit window will reset. Honor
+      this value before retrying.
+  - name: Daily reset
+    description: Quotas reset daily at 00:00 UTC.
+  - name: Webhook signaling
+    description: Codat fires `client.rateLimit.reached` and `client.rateLimit.reset` webhook events so consumers
+      can react programmatically.
+  - name: Scaling with ACCs
+    description: Adding new Active Connected Companies linearly increases the daily request quota; right-size
+      ACC lifecycle to avoid orphan companies that consume quota.
+  - name: Backoff strategy
+    description: On 429, back off using the Retry-After value with jitter; do not retry tighter than the
+      indicated reset window.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
