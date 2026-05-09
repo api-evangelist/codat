@@ -1,0 +1,13 @@
+{
+  "repo": "codat",
+  "feeds": [
+    {
+      "source": "https://codat.io/blog/",
+      "feed_url": "https://codat.io/feed/",
+      "title": "Codat",
+      "saved": 0
+    }
+  ],
+  "fetched": "2026-05-09T20:17:51Z",
+  "post_count": 0
+}
