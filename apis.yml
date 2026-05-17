@@ -28,7 +28,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.codat.io/using-the-api/overview
-      - type: API Reference
+      - type: APIReference
         url: https://docs.codat.io/platform-api
       - type: OpenAPI Source
         url: https://github.com/codatio/oas
@@ -48,7 +48,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.codat.io/lending/overview
-      - type: API Reference
+      - type: APIReference
         url: https://docs.codat.io/lending-api
       - type: OpenAPI
         url: openapi/codat-lending-openapi.json
@@ -69,7 +69,7 @@ apis:
         url: https://docs.codat.io/bank-feeds/overview
       - type: OpenAPI
         url: openapi/codat-bank-feeds-openapi.json
-      - type: API Reference
+      - type: APIReference
         url: https://docs.codat.io/bank-feeds-api
       - type: OpenAPI Source
         url: https://github.com/codatio/oas
@@ -86,7 +86,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.codat.io/expenses/overview
-      - type: API Reference
+      - type: APIReference
         url: https://docs.codat.io/sync-for-expenses-api
       - type: OpenAPI Source
         url: https://github.com/codatio/oas
@@ -103,7 +103,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.codat.io/payables/overview
-      - type: API Reference
+      - type: APIReference
         url: https://docs.codat.io/sync-for-payables-v2-api
       - type: OpenAPI Source
         url: https://github.com/codatio/oas
@@ -120,7 +120,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.codat.io/spend-insights/overview
-      - type: API Reference
+      - type: APIReference
         url: https://docs.codat.io/spend-insights-api
       - type: OpenAPI Source
         url: https://github.com/codatio/oas
@@ -137,7 +137,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.codat.io/commerce/overview
-      - type: API Reference
+      - type: APIReference
         url: https://docs.codat.io/sync-for-commerce-api
       - type: OpenAPI Source
         url: https://github.com/codatio/oas
@@ -154,7 +154,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.codat.io/payroll/overview
-      - type: API Reference
+      - type: APIReference
         url: https://docs.codat.io/sync-for-payroll-api
       - type: OpenAPI Source
         url: https://github.com/codatio/oas
@@ -163,21 +163,21 @@ common:
     url: https://app.codat.io/
   - type: Documentation
     url: https://docs.codat.io/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://docs.codat.io/get-started/first-steps
   - type: SDKs
     url: https://docs.codat.io/get-started/libraries
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/codatio
   - type: Blog
     url: https://codat.io/blog/
-  - type: Change Log
+  - type: ChangeLog
     url: https://docs.codat.io/updates
-  - type: Status
+  - type: StatusPage
     url: https://status.codat.io
-  - type: Sign Up
+  - type: SignUp
     url: https://codat.io/start-building/
   - type: About
     url: https://codat.io/about/
