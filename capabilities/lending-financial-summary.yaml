@@ -1,0 +1,104 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lending — Financial summary
+  description: 'Lending — Financial summary. 2 operations. Lead operation: Download credit model Excel. Self-contained Naftiko
+    capability covering one Codat business surface.'
+  tags:
+  - Codat
+  - Financial summary
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: lending-financial-summary
+    baseUri: https://api.codat.io
+    description: Lending — Financial summary business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-companyId-reports-creditModel-reportId-excel
+      path: /companies/{companyId}/reports/creditModel/{reportId}/excel
+      operations:
+      - name: downloadcreditmodelexcel
+        method: GET
+        description: Download credit model Excel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-reports-creditModel-reportId-financialSummary
+      path: /companies/{companyId}/reports/creditModel/{reportId}/financialSummary
+      operations:
+      - name: getfinancialsummary
+        method: GET
+        description: Get financial summary insights
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: lending-financial-summary-rest
+    port: 8080
+    description: REST adapter for Lending — Financial summary. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/reports/creditmodel/{reportid}/excel
+      name: companies-companyid-reports-creditmodel-reportid-excel
+      description: REST surface for companies-companyId-reports-creditModel-reportId-excel.
+      operations:
+      - method: GET
+        name: downloadcreditmodelexcel
+        description: Download credit model Excel
+        call: lending-financial-summary.downloadcreditmodelexcel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/reports/creditmodel/{reportid}/financialsummary
+      name: companies-companyid-reports-creditmodel-reportid-financialsummary
+      description: REST surface for companies-companyId-reports-creditModel-reportId-financialSummary.
+      operations:
+      - method: GET
+        name: getfinancialsummary
+        description: Get financial summary insights
+        call: lending-financial-summary.getfinancialsummary
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: lending-financial-summary-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lending — Financial summary. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: download-credit-model-excel
+      description: Download credit model Excel
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-financial-summary.downloadcreditmodelexcel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-financial-summary-insights
+      description: Get financial summary insights
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-financial-summary.getfinancialsummary
+      outputParameters:
+      - type: object
+        mapping: $.

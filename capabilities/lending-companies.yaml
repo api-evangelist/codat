@@ -1,0 +1,244 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lending — Companies
+  description: 'Lending — Companies. 6 operations. Lead operation: List companies. Self-contained Naftiko capability covering
+    one Codat business surface.'
+  tags:
+  - Codat
+  - Companies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: lending-companies
+    baseUri: https://api.codat.io
+    description: Lending — Companies business capability. Self-contained, no shared references.
+    resources:
+    - name: companies
+      path: /companies
+      operations:
+      - name: listcompanies
+        method: GET
+        description: List companies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tags
+          in: query
+          type: string
+          description: Filter companies by tags using the "equals" (=), "not equals" (!=), and "contains" (~) operators with
+            [Codat’s query language](https://docs.codat.io/using-the-a
+      - name: createcompany
+        method: POST
+        description: Create company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: companies-companyId
+      path: /companies/{companyId}
+      operations:
+      - name: replacecompany
+        method: PUT
+        description: Replace company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: updatecompany
+        method: PATCH
+        description: Update company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deletecompany
+        method: DELETE
+        description: Delete a company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getcompany
+        method: GET
+        description: Get company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: lending-companies-rest
+    port: 8080
+    description: REST adapter for Lending — Companies. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/companies
+      name: companies
+      description: REST surface for companies.
+      operations:
+      - method: GET
+        name: listcompanies
+        description: List companies
+        call: lending-companies.listcompanies
+        with:
+          tags: rest.tags
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcompany
+        description: Create company
+        call: lending-companies.createcompany
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}
+      name: companies-companyid
+      description: REST surface for companies-companyId.
+      operations:
+      - method: PUT
+        name: replacecompany
+        description: Replace company
+        call: lending-companies.replacecompany
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatecompany
+        description: Update company
+        call: lending-companies.updatecompany
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecompany
+        description: Delete a company
+        call: lending-companies.deletecompany
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getcompany
+        description: Get company
+        call: lending-companies.getcompany
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: lending-companies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lending — Companies. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-companies
+      description: List companies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-companies.listcompanies
+      with:
+        tags: tools.tags
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-company
+      description: Create company
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: lending-companies.createcompany
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: replace-company
+      description: Replace company
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: lending-companies.replacecompany
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-company
+      description: Update company
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: lending-companies.updatecompany
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-company
+      description: Delete a company
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: lending-companies.deletecompany
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-company
+      description: Get company
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-companies.getcompany
+      outputParameters:
+      - type: object
+        mapping: $.

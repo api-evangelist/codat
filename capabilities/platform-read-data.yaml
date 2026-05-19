@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Platform API — Read data
+  description: 'Platform API — Read data. 1 operations. Lead operation: Get validation results. Self-contained Naftiko capability
+    covering one Codat business surface.'
+  tags:
+  - Codat
+  - Read data
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-read-data
+    baseUri: https://api.codat.io
+    description: Platform API — Read data business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-companyId-sync-datasetId-validation
+      path: /companies/{companyId}/sync/{datasetId}/validation
+      operations:
+      - name: getreadvalidationresults
+        method: GET
+        description: Get validation results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: platform-read-data-rest
+    port: 8080
+    description: REST adapter for Platform API — Read data. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/sync/{datasetid}/validation
+      name: companies-companyid-sync-datasetid-validation
+      description: REST surface for companies-companyId-sync-datasetId-validation.
+      operations:
+      - method: GET
+        name: getreadvalidationresults
+        description: Get validation results
+        call: platform-read-data.getreadvalidationresults
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-read-data-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Platform API — Read data. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-validation-results
+      description: Get validation results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-read-data.getreadvalidationresults
+      outputParameters:
+      - type: object
+        mapping: $.

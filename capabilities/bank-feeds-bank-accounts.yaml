@@ -1,0 +1,146 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bank Feeds — Bank accounts
+  description: 'Bank Feeds — Bank accounts. 3 operations. Lead operation: List bank accounts. Self-contained Naftiko capability
+    covering one Codat business surface.'
+  tags:
+  - Codat
+  - Bank accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bank-feeds-bank-accounts
+    baseUri: https://api.codat.io
+    description: Bank Feeds — Bank accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-companyId-connections-connectionId-data-bankAccounts
+      path: /companies/{companyId}/connections/{connectionId}/data/bankAccounts
+      operations:
+      - name: listbankaccounts
+        method: GET
+        description: List bank accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-options-bankAccounts
+      path: /companies/{companyId}/connections/{connectionId}/options/bankAccounts
+      operations:
+      - name: getcreatebankaccountsmodel
+        method: GET
+        description: Get create/update bank account model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-push-bankAccounts
+      path: /companies/{companyId}/connections/{connectionId}/push/bankAccounts
+      operations:
+      - name: createbankaccount
+        method: POST
+        description: Create bank account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: bank-feeds-bank-accounts-rest
+    port: 8080
+    description: REST adapter for Bank Feeds — Bank accounts. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/bankaccounts
+      name: companies-companyid-connections-connectionid-data-bankaccounts
+      description: REST surface for companies-companyId-connections-connectionId-data-bankAccounts.
+      operations:
+      - method: GET
+        name: listbankaccounts
+        description: List bank accounts
+        call: bank-feeds-bank-accounts.listbankaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/options/bankaccounts
+      name: companies-companyid-connections-connectionid-options-bankaccounts
+      description: REST surface for companies-companyId-connections-connectionId-options-bankAccounts.
+      operations:
+      - method: GET
+        name: getcreatebankaccountsmodel
+        description: Get create/update bank account model
+        call: bank-feeds-bank-accounts.getcreatebankaccountsmodel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/push/bankaccounts
+      name: companies-companyid-connections-connectionid-push-bankaccounts
+      description: REST surface for companies-companyId-connections-connectionId-push-bankAccounts.
+      operations:
+      - method: POST
+        name: createbankaccount
+        description: Create bank account
+        call: bank-feeds-bank-accounts.createbankaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bank-feeds-bank-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bank Feeds — Bank accounts. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-bank-accounts
+      description: List bank accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bank-feeds-bank-accounts.listbankaccounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-create-update-bank-account
+      description: Get create/update bank account model
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bank-feeds-bank-accounts.getcreatebankaccountsmodel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-bank-account
+      description: Create bank account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bank-feeds-bank-accounts.createbankaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

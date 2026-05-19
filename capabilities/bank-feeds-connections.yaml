@@ -1,0 +1,199 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bank Feeds — Connections
+  description: 'Bank Feeds — Connections. 5 operations. Lead operation: List connections. Self-contained Naftiko capability
+    covering one Codat business surface.'
+  tags:
+  - Codat
+  - Connections
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bank-feeds-connections
+    baseUri: https://api.codat.io
+    description: Bank Feeds — Connections business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-companyId-connections
+      path: /companies/{companyId}/connections
+      operations:
+      - name: listconnections
+        method: GET
+        description: List connections
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createconnection
+        method: POST
+        description: Create connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: companies-companyId-connections-connectionId
+      path: /companies/{companyId}/connections/{connectionId}
+      operations:
+      - name: getconnection
+        method: GET
+        description: Get connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteconnection
+        method: DELETE
+        description: Delete connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: unlinkconnection
+        method: PATCH
+        description: Unlink connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: bank-feeds-connections-rest
+    port: 8080
+    description: REST adapter for Bank Feeds — Connections. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/connections
+      name: companies-companyid-connections
+      description: REST surface for companies-companyId-connections.
+      operations:
+      - method: GET
+        name: listconnections
+        description: List connections
+        call: bank-feeds-connections.listconnections
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createconnection
+        description: Create connection
+        call: bank-feeds-connections.createconnection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}
+      name: companies-companyid-connections-connectionid
+      description: REST surface for companies-companyId-connections-connectionId.
+      operations:
+      - method: GET
+        name: getconnection
+        description: Get connection
+        call: bank-feeds-connections.getconnection
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteconnection
+        description: Delete connection
+        call: bank-feeds-connections.deleteconnection
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: unlinkconnection
+        description: Unlink connection
+        call: bank-feeds-connections.unlinkconnection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bank-feeds-connections-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bank Feeds — Connections. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-connections
+      description: List connections
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bank-feeds-connections.listconnections
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-connection
+      description: Create connection
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bank-feeds-connections.createconnection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-connection
+      description: Get connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bank-feeds-connections.getconnection
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-connection
+      description: Delete connection
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: bank-feeds-connections.deleteconnection
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unlink-connection
+      description: Unlink connection
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: bank-feeds-connections.unlinkconnection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

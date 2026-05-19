@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lending — Data integrity
+  description: 'Lending — Data integrity. 3 operations. Lead operation: List data integrity details. Self-contained Naftiko
+    capability covering one Codat business surface.'
+  tags:
+  - Codat
+  - Data integrity
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: lending-data-integrity
+    baseUri: https://api.codat.io
+    description: Lending — Data integrity business capability. Self-contained, no shared references.
+    resources:
+    - name: data-companies-companyId-assess-dataTypes-dataType-dataIntegrity-details
+      path: /data/companies/{companyId}/assess/dataTypes/{dataType}/dataIntegrity/details
+      operations:
+      - name: listdataintegritydetails
+        method: GET
+        description: List data integrity details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-companies-companyId-assess-dataTypes-dataType-dataIntegrity-status
+      path: /data/companies/{companyId}/assess/dataTypes/{dataType}/dataIntegrity/status
+      operations:
+      - name: getdataintegritystatus
+        method: GET
+        description: Get data integrity status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-companies-companyId-assess-dataTypes-dataType-dataIntegrity-summaries
+      path: /data/companies/{companyId}/assess/dataTypes/{dataType}/dataIntegrity/summaries
+      operations:
+      - name: getdataintegritysummaries
+        method: GET
+        description: Get data integrity summaries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: lending-data-integrity-rest
+    port: 8080
+    description: REST adapter for Lending — Data integrity. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/data/companies/{companyid}/assess/datatypes/{datatype}/dataintegrity/details
+      name: data-companies-companyid-assess-datatypes-datatype-dataintegrity-details
+      description: REST surface for data-companies-companyId-assess-dataTypes-dataType-dataIntegrity-details.
+      operations:
+      - method: GET
+        name: listdataintegritydetails
+        description: List data integrity details
+        call: lending-data-integrity.listdataintegritydetails
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/companies/{companyid}/assess/datatypes/{datatype}/dataintegrity/status
+      name: data-companies-companyid-assess-datatypes-datatype-dataintegrity-status
+      description: REST surface for data-companies-companyId-assess-dataTypes-dataType-dataIntegrity-status.
+      operations:
+      - method: GET
+        name: getdataintegritystatus
+        description: Get data integrity status
+        call: lending-data-integrity.getdataintegritystatus
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/companies/{companyid}/assess/datatypes/{datatype}/dataintegrity/summaries
+      name: data-companies-companyid-assess-datatypes-datatype-dataintegrity-summaries
+      description: REST surface for data-companies-companyId-assess-dataTypes-dataType-dataIntegrity-summaries.
+      operations:
+      - method: GET
+        name: getdataintegritysummaries
+        description: Get data integrity summaries
+        call: lending-data-integrity.getdataintegritysummaries
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: lending-data-integrity-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lending — Data integrity. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-data-integrity-details
+      description: List data integrity details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-data-integrity.listdataintegritydetails
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-data-integrity-status
+      description: Get data integrity status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-data-integrity.getdataintegritystatus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-data-integrity-summaries
+      description: Get data integrity summaries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-data-integrity.getdataintegritysummaries
+      outputParameters:
+      - type: object
+        mapping: $.

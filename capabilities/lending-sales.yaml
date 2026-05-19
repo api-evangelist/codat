@@ -1,0 +1,775 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lending — Sales
+  description: 'Lending — Sales. 23 operations. Lead operation: List customers. Self-contained Naftiko capability covering
+    one Codat business surface.'
+  tags:
+  - Codat
+  - Sales
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: lending-sales
+    baseUri: https://api.codat.io
+    description: Lending — Sales business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-companyId-connections-connectionId-data-commerce-customers
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-customers
+      operations:
+      - name: listcommercecustomers
+        method: GET
+        description: List customers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-customers-customerId
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-customers/{customerId}
+      operations:
+      - name: getcommercecustomer
+        method: GET
+        description: Get customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-disputes
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-disputes
+      operations:
+      - name: listcommercedisputes
+        method: GET
+        description: List disputes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-disputes-disputeId
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-disputes/{disputeId}
+      operations:
+      - name: getcommercedispute
+        method: GET
+        description: Get dispute
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-locations
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-locations
+      operations:
+      - name: listcommercelocations
+        method: GET
+        description: List locations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-locations-locationId
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-locations/{locationId}
+      operations:
+      - name: getcommercelocation
+        method: GET
+        description: Get location
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-orders
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-orders
+      operations:
+      - name: listcommerceorders
+        method: GET
+        description: List orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-orders-orderId
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-orders/{orderId}
+      operations:
+      - name: getcommerceorder
+        method: GET
+        description: Get order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-paymentMethods
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-paymentMethods
+      operations:
+      - name: listcommercepaymentmethods
+        method: GET
+        description: List payment methods
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-paymentMethods-paymen
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-paymentMethods/{paymentMethodId}
+      operations:
+      - name: getcommercepaymentmethod
+        method: GET
+        description: Get payment method
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-payments
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-payments
+      operations:
+      - name: listcommercepayments
+        method: GET
+        description: List payments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-payments-paymentId
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-payments/{paymentId}
+      operations:
+      - name: getcommercepayment
+        method: GET
+        description: Get payment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-productCategories
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-productCategories
+      operations:
+      - name: listcommerceproductcategories
+        method: GET
+        description: List product categories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-productCategories-pro
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-productCategories/{productId}
+      operations:
+      - name: getcommerceproductcategory
+        method: GET
+        description: Get product category
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-products
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-products
+      operations:
+      - name: listcommerceproducts
+        method: GET
+        description: List products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-products-productId
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-products/{productId}
+      operations:
+      - name: getcommerceproduct
+        method: GET
+        description: Get product
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-transactions
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-transactions
+      operations:
+      - name: listcommercetransactions
+        method: GET
+        description: List transactions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-data-commerce-transactions-transact
+      path: /companies/{companyId}/connections/{connectionId}/data/commerce-transactions/{transactionId}
+      operations:
+      - name: getcommercetransaction
+        method: GET
+        description: Get transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-companies-companyId-connections-connectionId-assess-commerceMetrics-custome
+      path: /data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/customerRetention
+      operations:
+      - name: getcommercecustomerretentionmetrics
+        method: GET
+        description: Get customer retention metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-companies-companyId-connections-connectionId-assess-commerceMetrics-lifetim
+      path: /data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/lifetimeValue
+      operations:
+      - name: getcommercelifetimevaluemetrics
+        method: GET
+        description: Get lifetime value metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-companies-companyId-connections-connectionId-assess-commerceMetrics-orders
+      path: /data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/orders
+      operations:
+      - name: getcommerceordersreport
+        method: GET
+        description: Get orders report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-companies-companyId-connections-connectionId-assess-commerceMetrics-refunds
+      path: /data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/refunds
+      operations:
+      - name: getcommercerefundsreport
+        method: GET
+        description: Get refunds report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-companies-companyId-connections-connectionId-assess-commerceMetrics-revenue
+      path: /data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/revenue
+      operations:
+      - name: getcommercerevenuemetrics
+        method: GET
+        description: Get commerce revenue metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: lending-sales-rest
+    port: 8080
+    description: REST adapter for Lending — Sales. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-customers
+      name: companies-companyid-connections-connectionid-data-commerce-customers
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-customers.
+      operations:
+      - method: GET
+        name: listcommercecustomers
+        description: List customers
+        call: lending-sales.listcommercecustomers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-customers/{customerid}
+      name: companies-companyid-connections-connectionid-data-commerce-customers-customerid
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-customers-customerId.
+      operations:
+      - method: GET
+        name: getcommercecustomer
+        description: Get customer
+        call: lending-sales.getcommercecustomer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-disputes
+      name: companies-companyid-connections-connectionid-data-commerce-disputes
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-disputes.
+      operations:
+      - method: GET
+        name: listcommercedisputes
+        description: List disputes
+        call: lending-sales.listcommercedisputes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-disputes/{disputeid}
+      name: companies-companyid-connections-connectionid-data-commerce-disputes-disputeid
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-disputes-disputeId.
+      operations:
+      - method: GET
+        name: getcommercedispute
+        description: Get dispute
+        call: lending-sales.getcommercedispute
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-locations
+      name: companies-companyid-connections-connectionid-data-commerce-locations
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-locations.
+      operations:
+      - method: GET
+        name: listcommercelocations
+        description: List locations
+        call: lending-sales.listcommercelocations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-locations/{locationid}
+      name: companies-companyid-connections-connectionid-data-commerce-locations-locationid
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-locations-locationId.
+      operations:
+      - method: GET
+        name: getcommercelocation
+        description: Get location
+        call: lending-sales.getcommercelocation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-orders
+      name: companies-companyid-connections-connectionid-data-commerce-orders
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-orders.
+      operations:
+      - method: GET
+        name: listcommerceorders
+        description: List orders
+        call: lending-sales.listcommerceorders
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-orders/{orderid}
+      name: companies-companyid-connections-connectionid-data-commerce-orders-orderid
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-orders-orderId.
+      operations:
+      - method: GET
+        name: getcommerceorder
+        description: Get order
+        call: lending-sales.getcommerceorder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-paymentmethods
+      name: companies-companyid-connections-connectionid-data-commerce-paymentmethods
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-paymentMethods.
+      operations:
+      - method: GET
+        name: listcommercepaymentmethods
+        description: List payment methods
+        call: lending-sales.listcommercepaymentmethods
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-paymentmethods/{paymentmethodid}
+      name: companies-companyid-connections-connectionid-data-commerce-paymentmethods-paymen
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-paymentMethods-paymen.
+      operations:
+      - method: GET
+        name: getcommercepaymentmethod
+        description: Get payment method
+        call: lending-sales.getcommercepaymentmethod
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-payments
+      name: companies-companyid-connections-connectionid-data-commerce-payments
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-payments.
+      operations:
+      - method: GET
+        name: listcommercepayments
+        description: List payments
+        call: lending-sales.listcommercepayments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-payments/{paymentid}
+      name: companies-companyid-connections-connectionid-data-commerce-payments-paymentid
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-payments-paymentId.
+      operations:
+      - method: GET
+        name: getcommercepayment
+        description: Get payment
+        call: lending-sales.getcommercepayment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-productcategories
+      name: companies-companyid-connections-connectionid-data-commerce-productcategories
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-productCategories.
+      operations:
+      - method: GET
+        name: listcommerceproductcategories
+        description: List product categories
+        call: lending-sales.listcommerceproductcategories
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-productcategories/{productid}
+      name: companies-companyid-connections-connectionid-data-commerce-productcategories-pro
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-productCategories-pro.
+      operations:
+      - method: GET
+        name: getcommerceproductcategory
+        description: Get product category
+        call: lending-sales.getcommerceproductcategory
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-products
+      name: companies-companyid-connections-connectionid-data-commerce-products
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-products.
+      operations:
+      - method: GET
+        name: listcommerceproducts
+        description: List products
+        call: lending-sales.listcommerceproducts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-products/{productid}
+      name: companies-companyid-connections-connectionid-data-commerce-products-productid
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-products-productId.
+      operations:
+      - method: GET
+        name: getcommerceproduct
+        description: Get product
+        call: lending-sales.getcommerceproduct
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-transactions
+      name: companies-companyid-connections-connectionid-data-commerce-transactions
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-transactions.
+      operations:
+      - method: GET
+        name: listcommercetransactions
+        description: List transactions
+        call: lending-sales.listcommercetransactions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/data/commerce-transactions/{transactionid}
+      name: companies-companyid-connections-connectionid-data-commerce-transactions-transact
+      description: REST surface for companies-companyId-connections-connectionId-data-commerce-transactions-transact.
+      operations:
+      - method: GET
+        name: getcommercetransaction
+        description: Get transaction
+        call: lending-sales.getcommercetransaction
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/companies/{companyid}/connections/{connectionid}/assess/commercemetrics/customerretention
+      name: data-companies-companyid-connections-connectionid-assess-commercemetrics-custome
+      description: REST surface for data-companies-companyId-connections-connectionId-assess-commerceMetrics-custome.
+      operations:
+      - method: GET
+        name: getcommercecustomerretentionmetrics
+        description: Get customer retention metrics
+        call: lending-sales.getcommercecustomerretentionmetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/companies/{companyid}/connections/{connectionid}/assess/commercemetrics/lifetimevalue
+      name: data-companies-companyid-connections-connectionid-assess-commercemetrics-lifetim
+      description: REST surface for data-companies-companyId-connections-connectionId-assess-commerceMetrics-lifetim.
+      operations:
+      - method: GET
+        name: getcommercelifetimevaluemetrics
+        description: Get lifetime value metrics
+        call: lending-sales.getcommercelifetimevaluemetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/companies/{companyid}/connections/{connectionid}/assess/commercemetrics/orders
+      name: data-companies-companyid-connections-connectionid-assess-commercemetrics-orders
+      description: REST surface for data-companies-companyId-connections-connectionId-assess-commerceMetrics-orders.
+      operations:
+      - method: GET
+        name: getcommerceordersreport
+        description: Get orders report
+        call: lending-sales.getcommerceordersreport
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/companies/{companyid}/connections/{connectionid}/assess/commercemetrics/refunds
+      name: data-companies-companyid-connections-connectionid-assess-commercemetrics-refunds
+      description: REST surface for data-companies-companyId-connections-connectionId-assess-commerceMetrics-refunds.
+      operations:
+      - method: GET
+        name: getcommercerefundsreport
+        description: Get refunds report
+        call: lending-sales.getcommercerefundsreport
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/companies/{companyid}/connections/{connectionid}/assess/commercemetrics/revenue
+      name: data-companies-companyid-connections-connectionid-assess-commercemetrics-revenue
+      description: REST surface for data-companies-companyId-connections-connectionId-assess-commerceMetrics-revenue.
+      operations:
+      - method: GET
+        name: getcommercerevenuemetrics
+        description: Get commerce revenue metrics
+        call: lending-sales.getcommercerevenuemetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: lending-sales-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lending — Sales. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-customers
+      description: List customers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.listcommercecustomers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-customer
+      description: Get customer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommercecustomer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-disputes
+      description: List disputes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.listcommercedisputes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-dispute
+      description: Get dispute
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommercedispute
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-locations
+      description: List locations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.listcommercelocations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-location
+      description: Get location
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommercelocation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-orders
+      description: List orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.listcommerceorders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-order
+      description: Get order
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommerceorder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-payment-methods
+      description: List payment methods
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.listcommercepaymentmethods
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-payment-method
+      description: Get payment method
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommercepaymentmethod
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-payments
+      description: List payments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.listcommercepayments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-payment
+      description: Get payment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommercepayment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-product-categories
+      description: List product categories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.listcommerceproductcategories
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-product-category
+      description: Get product category
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommerceproductcategory
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-products
+      description: List products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.listcommerceproducts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-product
+      description: Get product
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommerceproduct
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-transactions
+      description: List transactions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.listcommercetransactions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-transaction
+      description: Get transaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommercetransaction
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-customer-retention-metrics
+      description: Get customer retention metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommercecustomerretentionmetrics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-lifetime-value-metrics
+      description: Get lifetime value metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommercelifetimevaluemetrics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-orders-report
+      description: Get orders report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommerceordersreport
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-refunds-report
+      description: Get refunds report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommercerefundsreport
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-commerce-revenue-metrics
+      description: Get commerce revenue metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-sales.getcommercerevenuemetrics
+      outputParameters:
+      - type: object
+        mapping: $.

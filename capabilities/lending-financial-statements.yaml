@@ -1,0 +1,264 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lending — Financial statements
+  description: 'Lending — Financial statements. 7 operations. Lead operation: List accounts. Self-contained Naftiko capability
+    covering one Codat business surface.'
+  tags:
+  - Codat
+  - Financial statements
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: lending-financial-statements
+    baseUri: https://api.codat.io
+    description: Lending — Financial statements business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-companyId-data-accounts
+      path: /companies/{companyId}/data/accounts
+      operations:
+      - name: listaccountingaccounts
+        method: GET
+        description: List accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-data-accounts-accountId
+      path: /companies/{companyId}/data/accounts/{accountId}
+      operations:
+      - name: getaccountingaccount
+        method: GET
+        description: Get account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-data-financials-balanceSheet
+      path: /companies/{companyId}/data/financials/balanceSheet
+      operations:
+      - name: getaccountingbalancesheet
+        method: GET
+        description: Get balance sheet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-data-financials-cashFlowStatement
+      path: /companies/{companyId}/data/financials/cashFlowStatement
+      operations:
+      - name: getaccountingcashflowstatement
+        method: GET
+        description: Get cash flow statement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-data-financials-profitAndLoss
+      path: /companies/{companyId}/data/financials/profitAndLoss
+      operations:
+      - name: getaccountingprofitandloss
+        method: GET
+        description: Get profit and loss
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-reports-enhancedBalanceSheet-accounts
+      path: /companies/{companyId}/reports/enhancedBalanceSheet/accounts
+      operations:
+      - name: getcategorizedbalancesheetstatement
+        method: GET
+        description: Get categorized balance sheet statement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-reports-enhancedProfitAndLoss-accounts
+      path: /companies/{companyId}/reports/enhancedProfitAndLoss/accounts
+      operations:
+      - name: getcategorizedprofitandlossstatement
+        method: GET
+        description: Get categorized profit and loss statement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: lending-financial-statements-rest
+    port: 8080
+    description: REST adapter for Lending — Financial statements. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/data/accounts
+      name: companies-companyid-data-accounts
+      description: REST surface for companies-companyId-data-accounts.
+      operations:
+      - method: GET
+        name: listaccountingaccounts
+        description: List accounts
+        call: lending-financial-statements.listaccountingaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/data/accounts/{accountid}
+      name: companies-companyid-data-accounts-accountid
+      description: REST surface for companies-companyId-data-accounts-accountId.
+      operations:
+      - method: GET
+        name: getaccountingaccount
+        description: Get account
+        call: lending-financial-statements.getaccountingaccount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/data/financials/balancesheet
+      name: companies-companyid-data-financials-balancesheet
+      description: REST surface for companies-companyId-data-financials-balanceSheet.
+      operations:
+      - method: GET
+        name: getaccountingbalancesheet
+        description: Get balance sheet
+        call: lending-financial-statements.getaccountingbalancesheet
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/data/financials/cashflowstatement
+      name: companies-companyid-data-financials-cashflowstatement
+      description: REST surface for companies-companyId-data-financials-cashFlowStatement.
+      operations:
+      - method: GET
+        name: getaccountingcashflowstatement
+        description: Get cash flow statement
+        call: lending-financial-statements.getaccountingcashflowstatement
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/data/financials/profitandloss
+      name: companies-companyid-data-financials-profitandloss
+      description: REST surface for companies-companyId-data-financials-profitAndLoss.
+      operations:
+      - method: GET
+        name: getaccountingprofitandloss
+        description: Get profit and loss
+        call: lending-financial-statements.getaccountingprofitandloss
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/reports/enhancedbalancesheet/accounts
+      name: companies-companyid-reports-enhancedbalancesheet-accounts
+      description: REST surface for companies-companyId-reports-enhancedBalanceSheet-accounts.
+      operations:
+      - method: GET
+        name: getcategorizedbalancesheetstatement
+        description: Get categorized balance sheet statement
+        call: lending-financial-statements.getcategorizedbalancesheetstatement
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/reports/enhancedprofitandloss/accounts
+      name: companies-companyid-reports-enhancedprofitandloss-accounts
+      description: REST surface for companies-companyId-reports-enhancedProfitAndLoss-accounts.
+      operations:
+      - method: GET
+        name: getcategorizedprofitandlossstatement
+        description: Get categorized profit and loss statement
+        call: lending-financial-statements.getcategorizedprofitandlossstatement
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: lending-financial-statements-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lending — Financial statements. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-accounts
+      description: List accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-financial-statements.listaccountingaccounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account
+      description: Get account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-financial-statements.getaccountingaccount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-balance-sheet
+      description: Get balance sheet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-financial-statements.getaccountingbalancesheet
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cash-flow-statement
+      description: Get cash flow statement
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-financial-statements.getaccountingcashflowstatement
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-profit-and-loss
+      description: Get profit and loss
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-financial-statements.getaccountingprofitandloss
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-categorized-balance-sheet-statement
+      description: Get categorized balance sheet statement
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-financial-statements.getcategorizedbalancesheetstatement
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-categorized-profit-and-loss
+      description: Get categorized profit and loss statement
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-financial-statements.getcategorizedprofitandlossstatement
+      outputParameters:
+      - type: object
+        mapping: $.

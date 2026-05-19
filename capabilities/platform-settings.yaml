@@ -1,0 +1,417 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Platform API — Settings
+  description: 'Platform API — Settings. 11 operations. Lead operation: List API keys. Self-contained Naftiko capability covering
+    one Codat business surface.'
+  tags:
+  - Codat
+  - Settings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-settings
+    baseUri: https://api.codat.io
+    description: Platform API — Settings business capability. Self-contained, no shared references.
+    resources:
+    - name: apiKeys
+      path: /apiKeys
+      operations:
+      - name: listapikeys
+        method: GET
+        description: List API keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createapikey
+        method: POST
+        description: Create API key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: apiKeys-apiKeyId
+      path: /apiKeys/{apiKeyId}
+      operations:
+      - name: deleteapikey
+        method: DELETE
+        description: Delete API key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: apiKeyId
+          in: path
+          type: string
+          description: Unique identifier for api key.
+          required: true
+    - name: connectionManagement-corsSettings
+      path: /connectionManagement/corsSettings
+      operations:
+      - name: getconnectionmanagementcorssettings
+        method: GET
+        description: Get CORS settings (old)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setconnectionmanagementcorssettings
+        method: POST
+        description: Set CORS settings (old)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: corsSettings
+      path: /corsSettings
+      operations:
+      - name: getcorssettings
+        method: GET
+        description: Get CORS settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setcorssettings
+        method: POST
+        description: Set CORS settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: profile
+      path: /profile
+      operations:
+      - name: getprofile
+        method: GET
+        description: Get profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateprofile
+        method: PUT
+        description: Update profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: profile-syncSettings
+      path: /profile/syncSettings
+      operations:
+      - name: getprofilesyncsettings
+        method: GET
+        description: Get sync settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateprofilesyncsettings
+        method: POST
+        description: Update all sync settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: platform-settings-rest
+    port: 8080
+    description: REST adapter for Platform API — Settings. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/apikeys
+      name: apikeys
+      description: REST surface for apiKeys.
+      operations:
+      - method: GET
+        name: listapikeys
+        description: List API keys
+        call: platform-settings.listapikeys
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapikey
+        description: Create API key
+        call: platform-settings.createapikey
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apikeys/{apikeyid}
+      name: apikeys-apikeyid
+      description: REST surface for apiKeys-apiKeyId.
+      operations:
+      - method: DELETE
+        name: deleteapikey
+        description: Delete API key
+        call: platform-settings.deleteapikey
+        with:
+          apiKeyId: rest.apiKeyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connectionmanagement/corssettings
+      name: connectionmanagement-corssettings
+      description: REST surface for connectionManagement-corsSettings.
+      operations:
+      - method: GET
+        name: getconnectionmanagementcorssettings
+        description: Get CORS settings (old)
+        call: platform-settings.getconnectionmanagementcorssettings
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: setconnectionmanagementcorssettings
+        description: Set CORS settings (old)
+        call: platform-settings.setconnectionmanagementcorssettings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/corssettings
+      name: corssettings
+      description: REST surface for corsSettings.
+      operations:
+      - method: GET
+        name: getcorssettings
+        description: Get CORS settings
+        call: platform-settings.getcorssettings
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: setcorssettings
+        description: Set CORS settings
+        call: platform-settings.setcorssettings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/profile
+      name: profile
+      description: REST surface for profile.
+      operations:
+      - method: GET
+        name: getprofile
+        description: Get profile
+        call: platform-settings.getprofile
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateprofile
+        description: Update profile
+        call: platform-settings.updateprofile
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/profile/syncsettings
+      name: profile-syncsettings
+      description: REST surface for profile-syncSettings.
+      operations:
+      - method: GET
+        name: getprofilesyncsettings
+        description: Get sync settings
+        call: platform-settings.getprofilesyncsettings
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateprofilesyncsettings
+        description: Update all sync settings
+        call: platform-settings.updateprofilesyncsettings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-settings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Platform API — Settings. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-api-keys
+      description: List API keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-settings.listapikeys
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-api-key
+      description: Create API key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-settings.createapikey
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-key
+      description: Delete API key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: platform-settings.deleteapikey
+      with:
+        apiKeyId: tools.apiKeyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cors-settings-old
+      description: Get CORS settings (old)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-settings.getconnectionmanagementcorssettings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-cors-settings-old
+      description: Set CORS settings (old)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-settings.setconnectionmanagementcorssettings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cors-settings
+      description: Get CORS settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-settings.getcorssettings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-cors-settings
+      description: Set CORS settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-settings.setcorssettings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-profile
+      description: Get profile
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-settings.getprofile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-profile
+      description: Update profile
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: platform-settings.updateprofile
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sync-settings
+      description: Get sync settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-settings.getprofilesyncsettings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-all-sync-settings
+      description: Update all sync settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-settings.updateprofilesyncsettings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

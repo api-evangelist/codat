@@ -1,0 +1,283 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bank Feeds — Source accounts
+  description: 'Bank Feeds — Source accounts. 7 operations. Lead operation: Create single source account. Self-contained Naftiko
+    capability covering one Codat business surface.'
+  tags:
+  - Codat
+  - Source accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bank-feeds-source-accounts
+    baseUri: https://api.codat.io
+    description: Bank Feeds — Source accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-companyId-connections-connectionId-connectionInfo-bankFeedAccounts
+      path: /companies/{companyId}/connections/{connectionId}/connectionInfo/bankFeedAccounts
+      operations:
+      - name: createsourceaccount
+        method: POST
+        description: Create single source account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: listsourceaccounts
+        method: GET
+        description: List source accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-connectionInfo-bankFeedAccounts-bat
+      path: /companies/{companyId}/connections/{connectionId}/connectionInfo/bankFeedAccounts/batch
+      operations:
+      - name: createbatchsourceaccount
+        method: POST
+        description: Create source accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: companies-companyId-connections-connectionId-connectionInfo-bankFeedAccounts-cre
+      path: /companies/{companyId}/connections/{connectionId}/connectionInfo/bankFeedAccounts/credentials
+      operations:
+      - name: generatecredentials
+        method: POST
+        description: Generate source account credentials
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletebankfeedcredentials
+        method: DELETE
+        description: Delete all source account credentials
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-connections-connectionId-connectionInfo-bankFeedAccounts-acc
+      path: /companies/{companyId}/connections/{connectionId}/connectionInfo/bankFeedAccounts/{accountId}
+      operations:
+      - name: updatesourceaccount
+        method: PATCH
+        description: Update source account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deletesourceaccount
+        method: DELETE
+        description: Delete source account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: bank-feeds-source-accounts-rest
+    port: 8080
+    description: REST adapter for Bank Feeds — Source accounts. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/connections/{connectionid}/connectioninfo/bankfeedaccounts
+      name: companies-companyid-connections-connectionid-connectioninfo-bankfeedaccounts
+      description: REST surface for companies-companyId-connections-connectionId-connectionInfo-bankFeedAccounts.
+      operations:
+      - method: POST
+        name: createsourceaccount
+        description: Create single source account
+        call: bank-feeds-source-accounts.createsourceaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listsourceaccounts
+        description: List source accounts
+        call: bank-feeds-source-accounts.listsourceaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/connectioninfo/bankfeedaccounts/batch
+      name: companies-companyid-connections-connectionid-connectioninfo-bankfeedaccounts-bat
+      description: REST surface for companies-companyId-connections-connectionId-connectionInfo-bankFeedAccounts-bat.
+      operations:
+      - method: POST
+        name: createbatchsourceaccount
+        description: Create source accounts
+        call: bank-feeds-source-accounts.createbatchsourceaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/connectioninfo/bankfeedaccounts/credentials
+      name: companies-companyid-connections-connectionid-connectioninfo-bankfeedaccounts-cre
+      description: REST surface for companies-companyId-connections-connectionId-connectionInfo-bankFeedAccounts-cre.
+      operations:
+      - method: POST
+        name: generatecredentials
+        description: Generate source account credentials
+        call: bank-feeds-source-accounts.generatecredentials
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletebankfeedcredentials
+        description: Delete all source account credentials
+        call: bank-feeds-source-accounts.deletebankfeedcredentials
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/connections/{connectionid}/connectioninfo/bankfeedaccounts/{accountid}
+      name: companies-companyid-connections-connectionid-connectioninfo-bankfeedaccounts-acc
+      description: REST surface for companies-companyId-connections-connectionId-connectionInfo-bankFeedAccounts-acc.
+      operations:
+      - method: PATCH
+        name: updatesourceaccount
+        description: Update source account
+        call: bank-feeds-source-accounts.updatesourceaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletesourceaccount
+        description: Delete source account
+        call: bank-feeds-source-accounts.deletesourceaccount
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bank-feeds-source-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bank Feeds — Source accounts. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-single-source-account
+      description: Create single source account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bank-feeds-source-accounts.createsourceaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-source-accounts
+      description: List source accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bank-feeds-source-accounts.listsourceaccounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-source-accounts
+      description: Create source accounts
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bank-feeds-source-accounts.createbatchsourceaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generate-source-account-credentials
+      description: Generate source account credentials
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bank-feeds-source-accounts.generatecredentials
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-all-source-account-credentials
+      description: Delete all source account credentials
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: bank-feeds-source-accounts.deletebankfeedcredentials
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-source-account
+      description: Update source account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: bank-feeds-source-accounts.updatesourceaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-source-account
+      description: Delete source account
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: bank-feeds-source-accounts.deletesourceaccount
+      outputParameters:
+      - type: object
+        mapping: $.

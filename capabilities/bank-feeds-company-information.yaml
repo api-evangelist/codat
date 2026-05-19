@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bank Feeds — Company information
+  description: 'Bank Feeds — Company information. 1 operations. Lead operation: Get company information. Self-contained Naftiko
+    capability covering one Codat business surface.'
+  tags:
+  - Codat
+  - Company information
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bank-feeds-company-information
+    baseUri: https://api.codat.io
+    description: Bank Feeds — Company information business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-companyId-connections-connectionId-bankFeeds-info
+      path: /companies/{companyId}/connections/{connectionId}/bankFeeds/info
+      operations:
+      - name: getcompanyinformation
+        method: GET
+        description: Get company information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: bank-feeds-company-information-rest
+    port: 8080
+    description: REST adapter for Bank Feeds — Company information. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/connections/{connectionid}/bankfeeds/info
+      name: companies-companyid-connections-connectionid-bankfeeds-info
+      description: REST surface for companies-companyId-connections-connectionId-bankFeeds-info.
+      operations:
+      - method: GET
+        name: getcompanyinformation
+        description: Get company information
+        call: bank-feeds-company-information.getcompanyinformation
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bank-feeds-company-information-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bank Feeds — Company information. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-company-information
+      description: Get company information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bank-feeds-company-information.getcompanyinformation
+      outputParameters:
+      - type: object
+        mapping: $.

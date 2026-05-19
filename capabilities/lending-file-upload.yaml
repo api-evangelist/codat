@@ -1,0 +1,155 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lending — File upload
+  description: 'Lending — File upload. 3 operations. Lead operation: Upload files for a company. Self-contained Naftiko capability
+    covering one Codat business surface.'
+  tags:
+  - Codat
+  - File upload
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CODAT_API_KEY: CODAT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: lending-file-upload
+    baseUri: https://api.codat.io
+    description: Lending — File upload business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-companyId-connections-connectionId-files
+      path: /companies/{companyId}/connections/{connectionId}/files
+      operations:
+      - name: uploadfiles
+        method: POST
+        description: Upload files for a company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: companies-companyId-files
+      path: /companies/{companyId}/files
+      operations:
+      - name: listfiles
+        method: GET
+        description: List all files uploaded by a company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-companyId-files-download
+      path: /companies/{companyId}/files/download
+      operations:
+      - name: downloadfiles
+        method: GET
+        description: Download all files for a company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: date
+          in: query
+          type: string
+          description: Only download files uploaded on this date.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.CODAT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: lending-file-upload-rest
+    port: 8080
+    description: REST adapter for Lending — File upload. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/companies/{companyid}/connections/{connectionid}/files
+      name: companies-companyid-connections-connectionid-files
+      description: REST surface for companies-companyId-connections-connectionId-files.
+      operations:
+      - method: POST
+        name: uploadfiles
+        description: Upload files for a company
+        call: lending-file-upload.uploadfiles
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/files
+      name: companies-companyid-files
+      description: REST surface for companies-companyId-files.
+      operations:
+      - method: GET
+        name: listfiles
+        description: List all files uploaded by a company
+        call: lending-file-upload.listfiles
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{companyid}/files/download
+      name: companies-companyid-files-download
+      description: REST surface for companies-companyId-files-download.
+      operations:
+      - method: GET
+        name: downloadfiles
+        description: Download all files for a company
+        call: lending-file-upload.downloadfiles
+        with:
+          date: rest.date
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: lending-file-upload-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lending — File upload. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: upload-files-company
+      description: Upload files for a company
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: lending-file-upload.uploadfiles
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-files-uploaded-company
+      description: List all files uploaded by a company
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-file-upload.listfiles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-all-files-company
+      description: Download all files for a company
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lending-file-upload.downloadfiles
+      with:
+        date: tools.date
+      outputParameters:
+      - type: object
+        mapping: $.
