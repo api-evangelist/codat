@@ -1,0 +1,17 @@
+{
+  "operationId": "rotate-zapier-key",
+  "method": "POST",
+  "path": "/webhooks/integrationKeys/zapier",
+  "summary": "Rotate Zapier key",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Integration key",
+      "example": {
+        "key": "sk_integ_WM4dfoK1nKZnDE_kceze6hWDjbRwOZwG.us"
+      }
+    }
+  ]
+}

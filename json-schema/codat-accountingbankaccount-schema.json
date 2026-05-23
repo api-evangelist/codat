@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingBankAccount",
+  "title": "Accounting: Bank account",
+  "description": "> **Accessing Bank Accounts through Banking API**\n> \n> This datatype was originally used for accessing bank account data both in accounting integrations and open banking aggregators. \n> \n> To view bank account data through the Banking API, please refer to the new [Banking: Account](https://docs.codat.io/lending-api#/schemas/Account) data type.\n\n## Overview\n\nA list of bank accounts associated with a company and a specific data connection.\n\nBank accounts data includes:\n* The name and ID of the account in the accounting software.\n* The currency and balance of the account.\n* The sort code and account number.",
+  "type": "object",
+  "allOf": [
+    {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the account, unique for the company in the accounting software."
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/AccountingBankAccount/definitions/bankAccountPrototype"
+    },
+    {
+      "properties": {
+        "metadata": {
+          "$ref": "#/components/schemas/Metadata"
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "definitions": {
+    "bankAccountPrototype": {
+      "title": "Bank account prototype",
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "nullable": true,
+          "description": "Name of the bank account in the accounting software."
+        },
+        "accountType": {
+          "$ref": "#/components/schemas/AccountingBankAccountType"
+        },
+        "nominalCode": {
+          "type": "string",
+          "nullable": true,
+          "description": "Code used to identify each nominal account for a business."
+        },
+        "sortCode": {
+          "type": "string",
+          "nullable": true,
+          "description": "Sort code for the bank account.\n\nXero integrations\nThe sort code is only displayed when the currency = GBP and the sort code and account number sum to 14 digits. For non-GBP accounts, this field is not populated."
+        },
+        "accountNumber": {
+          "type": "string",
+          "nullable": true,
+          "description": "Account number for the bank account.\n\nXero integrations\nOnly a UK account number shows for bank accounts with GBP currency and a combined total of sort code and account number that equals 14 digits, For non-GBP accounts, the full bank account number is populated.\n\nFreeAgent integrations\nFor Credit accounts, only the last four digits are required. For other types, the field is optional."
+        },
+        "iBan": {
+          "type": "string",
+          "nullable": true,
+          "description": "International bank account number of the account. Often used when making or receiving international payments."
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "Base currency of the bank account."
+        },
+        "balance": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Balance of the bank account."
+        },
+        "institution": {
+          "type": "string",
+          "nullable": true,
+          "description": "The institution of the bank account."
+        },
+        "availableBalance": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Total available balance of the bank account as reported by the underlying data source. This may take into account overdrafts or pending transactions for example."
+        },
+        "overdraftLimit": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Pre-arranged overdraft limit of the account.\n\nThe value is always positive. For example, an overdraftLimit of `1000` means that the balance of the account can go down to `-1000`."
+        },
+        "status": {
+          "$ref": "#/components/schemas/AccountingBankAccount/definitions/bankAccountStatus"
+        }
+      }
+    },
+    "bankAccountCreateResponse": {
+      "title": "Create bank account response",
+      "allOf": [
+        {
+          "properties": {
+            "data": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/AccountingBankAccount"
+                },
+                {
+                  "deprecated": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "$ref": "#/components/schemas/PushOperation"
+        }
+      ]
+    },
+    "bankAccountRef": {
+      "title": "Bank account reference",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Bank account 'id' for the account transaction."
+        },
+        "name": {
+          "type": "string",
+          "description": "bank account 'name' for the account transaction."
+        }
+      },
+      "description": "Links to the Account transactions data type."
+    },
+    "bankAccounts": {
+      "title": "Accounting: Bank accounts",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AccountingBankAccount"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/components/schemas/PagingInfo"
+        }
+      ]
+    },
+    "bankAccountStatus": {
+      "title": "Account status",
+      "enum": [
+        "Unknown",
+        "Active",
+        "Archived",
+        "Pending"
+      ],
+      "type": "string",
+      "description": "Status of the bank account.",
+      "example": "Active"
+    }
+  }
+}

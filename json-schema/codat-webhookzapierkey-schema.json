@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WebhookZapierKey",
+  "title": "Zapier integration key",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Integration key used to authorize Zapier's HTTP requests with Codat.",
+      "example": "sk_integ_WM4dfoK1nKZnDE_kceze6hWDjbRwOZwG.us"
+    }
+  },
+  "examples": [
+    {
+      "key": "sk_integ_WM4dfoK1nKZnDE_kceze6hWDjbRwOZwG.us"
+    }
+  ]
+}

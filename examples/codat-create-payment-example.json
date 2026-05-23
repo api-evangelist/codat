@@ -1,0 +1,190 @@
+{
+  "operationId": "create-payment",
+  "method": "POST",
+  "path": "/companies/{companyId}/connections/{connectionId}/push/payments",
+  "summary": "Create payment",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "customerRef": {
+          "id": "80000002-1674552702",
+          "companyName": "string"
+        },
+        "accountRef": {
+          "id": "8000002E-1675267199",
+          "name": "Undeposited Funds"
+        },
+        "paymentMethodRef": {
+          "id": "string",
+          "name": "string"
+        },
+        "totalAmount": 28,
+        "currency": "USD",
+        "currencyRate": 1,
+        "date": "2023-02-10T11:47:04.792Z",
+        "note": "note 14/02 1147",
+        "lines": [
+          {
+            "amount": 28,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "181-1676374586",
+                "amount": -28,
+                "currencyRate": 1
+              }
+            ],
+            "allocatedOnDate": "2023-02-11T11:47:04.792Z"
+          }
+        ],
+        "reference": "ref 14/02 1147"
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "customerRef": {
+          "id": "CUST1"
+        },
+        "accountRef": {
+          "id": "1200",
+          "name": "Bank Current Account"
+        },
+        "paymentMethodRef": {
+          "id": "4405"
+        },
+        "totalAmount": 4,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2023-03-17T11:47:04.792Z",
+        "note": "note 07/03 14.31",
+        "lines": [
+          {
+            "amount": 4,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "INV-31",
+                "amount": -4,
+                "currencyRate": 1
+              }
+            ],
+            "allocatedOnDate": "2023-02-11T11:47:04.792Z"
+          }
+        ],
+        "reference": "ref"
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "customerRef": {
+          "id": "30444c5bd4964fd787c7f8e2e5301ce1",
+          "companyName": "Stanley test customer"
+        },
+        "accountRef": {
+          "id": "9a25937b267a11e797950a57719b2edb",
+          "name": "Current"
+        },
+        "totalAmount": 0.17,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2023-03-20T11:47:04.792Z",
+        "note": "Need to send products asap.",
+        "lines": [
+          {
+            "amount": 0.17,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "bb85db9226d7450fb99eb83e7fb37505",
+                "amount": -0.17,
+                "currencyRate": 1
+              }
+            ],
+            "allocatedOnDate": "2023-02-11T11:47:04.792Z"
+          }
+        ],
+        "reference": "normal payment 20/03 17.05"
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "customerRef": {
+          "id": "19"
+        },
+        "accountRef": {
+          "id": "81"
+        },
+        "date": "2022-03-12T00:00:00",
+        "totalAmount": 0,
+        "lines": [
+          {
+            "amount": 0,
+            "links": [
+              {
+                "id": "246",
+                "type": "Invoice",
+                "amount": -1.1
+              },
+              {
+                "id": "280",
+                "type": "CreditNote",
+                "amount": 1.1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "data": {
+          "customerRef": {
+            "id": "19"
+          },
+          "accountRef": {
+            "id": "81"
+          },
+          "totalAmount": 0,
+          "date": "2022-03-12T00:00:00",
+          "lines": [
+            {
+              "amount": 0,
+              "links": [
+                {
+                  "type": "Invoice",
+                  "id": "246",
+                  "amount": -1.1
+                },
+                {
+                  "type": "CreditNote",
+                  "id": "280",
+                  "amount": 1.1
+                }
+              ]
+            }
+          ]
+        },
+        "dataType": "payments",
+        "companyId": "ffa6368e-fde4-4165-9a0a-4bda1a6f916e",
+        "pushOperationKey": "673f5d97-1c53-41ef-b9c8-cc9a8415d17c",
+        "dataConnectionKey": "bbecdbf3-913a-43ae-9c91-e830b3686657",
+        "requestedOnUtc": "0001-01-01T00:00:00",
+        "status": "Pending",
+        "statusCode": 202
+      }
+    }
+  ]
+}

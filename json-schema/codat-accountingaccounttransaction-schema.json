@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingAccountTransaction",
+  "title": "Accounting: Account transaction",
+  "description": "> **Language tip:** In Codat, account transactions represent all transactions posted to a bank account within an accounting software. For bank transactions posted within a banking platform, refer to [Banking transactions](https://docs.codat.io/lending-api#/operations/list-all-banking-transactions).\n\n## Overview\n\nIn Codat\u2019s data model, account transactions represent bank activity within an accounting software. All transactions that go through a bank account are recorded as account transactions.\n\nAccount transactions are created as a result of different business activities, for example:\n\n* Payments: for example, receiving money for payment against an invoice.\n* Bill payments: for example, spending money for a payment against a bill.\n* Direct costs: for example, withdrawing money from a bank account, either for cash purposes or to make a payment.\n* Direct incomes: for example, selling an item directly to a contact and receiving payment at point of sale.\n* Transfers: for example, transferring money between two bank accounts.\n\nAccount transactions is the parent data type of [payments](https://docs.codat.io/lending-api#/schemas/Payment), [bill payments](https://docs.codat.io/lending-api#/schemas/BillPayment), [direct costs](https://docs.codat.io/lending-api#/schemas/DirectCost), [direct incomes](https://docs.codat.io/lending-api#/schemas/DirectIncome), and [transfers](https://docs.codat.io/lending-api#/schemas/Transfer).",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the direct cost (unique to the company)."
+        },
+        "transactionId": {
+          "type": "string",
+          "nullable": true,
+          "description": "Identifier of the transaction (unique to the company)."
+        },
+        "note": {
+          "type": "string",
+          "nullable": true,
+          "description": "Additional information about the account transaction, if available."
+        },
+        "bankAccountRef": {
+          "$ref": "#/components/schemas/AccountingBankAccount/definitions/bankAccountRef",
+          "description": "Reference to the bank account the account transaction is recorded against."
+        },
+        "date": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date the account transaction was recorded in the platform."
+        },
+        "status": {
+          "enum": [
+            "Unknown",
+            "Unreconciled",
+            "Reconciled",
+            "Void"
+          ],
+          "type": "string",
+          "description": "The status of the account transaction."
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency"
+        },
+        "currencyRate": {
+          "$ref": "#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate"
+        },
+        "lines": {
+          "type": "array",
+          "nullable": true,
+          "description": "Array of account transaction lines.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingAccountTransaction/definitions/accountTransactionLine"
+          }
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Total amount of the account transactions, inclusive of tax."
+        },
+        "metadata": {
+          "$ref": "#/components/schemas/Metadata"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "definitions": {
+    "accountTransactionLine": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "Description of the account transaction."
+        },
+        "recordRef": {
+          "$ref": "#/components/schemas/AccountingAccountTransaction/definitions/accountTransactionLineRecordRef"
+        },
+        "amount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Amount in the bill payment currency."
+        }
+      }
+    },
+    "accountTransactionLineRecordRef": {
+      "type": "object",
+      "title": "Record reference",
+      "description": "Links an account transaction line to the underlying record that created it.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "'id' of the underlying record or data type."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Name of underlying data type.",
+          "enum": [
+            "bankTransactions",
+            "billCreditNotes",
+            "billPayments",
+            "bills",
+            "creditNotes",
+            "directCosts",
+            "directIncomes",
+            "invoices",
+            "journalEntries",
+            "payments",
+            "transfers"
+          ],
+          "example": "transfers"
+        }
+      }
+    }
+  }
+}

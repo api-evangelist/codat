@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankingTransactionCategory",
+  "title": "Banking: Transaction category",
+  "description": "The Banking Transaction Categories data type provides a list of hierarchical categories associated with a transaction for greater contextual meaning to transaction activity.\n\nResponses are paged, so you should provide `page` and `pageSize` query parameters in your request.",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "description": "Status of the bank transaction category.",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The unique identifier of the bank transaction category."
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The name of the bank transaction category."
+        },
+        "parentId": {
+          "type": "string",
+          "nullable": true,
+          "description": "The unique identifier of the parent bank transaction category."
+        },
+        "hasChildren": {
+          "type": "boolean",
+          "description": "A Boolean indicating whether there are other bank transaction categories beneath this one in the hierarchy."
+        },
+        "status": {
+          "$ref": "#/components/schemas/BankingTransactionCategory/definitions/transactionCategoryStatus"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "required": [
+    "id",
+    "name"
+  ],
+  "definitions": {
+    "transactionCategoryRef": {
+      "type": "object",
+      "x-internal": true,
+      "description": "An object of bank transaction category reference data.",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The unique category reference id for the bank transaction."
+        },
+        "name": {
+          "type": "string",
+          "nullable": true,
+          "description": "The category name reference for the bank transaction."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "transactionCategoryStatus": {
+      "type": "string",
+      "description": "The status of the transaction category.",
+      "x-internal": true,
+      "enum": [
+        "Unknown",
+        "Active",
+        "Archived"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "id": "auto-and-transport",
+      "name": "Auto & Transport",
+      "hasChildren": true,
+      "status": "Active",
+      "modifiedDate": "2022-05-23T16:32:50",
+      "sourceModifiedDate": "2021-04-24T07:59:10"
+    }
+  ]
+}

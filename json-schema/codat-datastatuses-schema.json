@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataStatuses",
+  "title": "Data statuses",
+  "x-internal": true,
+  "type": "object",
+  "properties": {
+    "accountTransactions": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "balanceSheet": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "bankAccounts": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "bankTransactions": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "billCreditNotes": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "billPayments": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "bills": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "cashFlowStatement": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "chartOfAccounts": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "company": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "creditNotes": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "customers": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "directCosts": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "directIncomes": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "invoices": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "itemReceipts": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "items": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "journalEntries": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "journals": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "paymentMethods": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "payments": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "profitAndLoss": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "purchaseOrders": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "salesOrders": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "suppliers": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "taxRates": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "trackingCategories": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "transfers": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "banking-accountBalances": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "banking-accounts": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "banking-transactionCategories": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "banking-transactions": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-companyInfo": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-customers": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-disputes": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-locations": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-orders": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-paymentMethods": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-payments": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-productCategories": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-products": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-taxComponents": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    },
+    "commerce-transactions": {
+      "$ref": "#/components/schemas/DataStatus",
+      "nullable": true
+    }
+  }
+}

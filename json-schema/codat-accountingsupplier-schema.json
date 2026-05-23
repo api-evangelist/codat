@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingSupplier",
+  "title": "Accounting: Supplier",
+  "description": "## Overview\n\nFrom the **Suppliers** endpoints, you can retrieve a list of [all the suppliers for a company](https://docs.codat.io/lending-api#/operations/list-suppliers). Suppliers' data links to accounts payable [bills](https://docs.codat.io/lending-api#/schemas/Bill).",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the supplier, unique to the company in the accounting software."
+        },
+        "supplierName": {
+          "type": "string",
+          "nullable": true,
+          "description": "Name of the supplier as recorded in the accounting system, typically the company name."
+        },
+        "contactName": {
+          "type": "string",
+          "nullable": true,
+          "description": "Name of the main contact for the supplier."
+        },
+        "emailAddress": {
+          "type": "string",
+          "nullable": true,
+          "description": "Email address that the supplier may be contacted on."
+        },
+        "phone": {
+          "type": "string",
+          "nullable": true,
+          "description": "Phone number that the supplier may be contacted on.",
+          "examples": [
+            "+44 25691 154789",
+            "(877) 492-8687",
+            "01224 658 999"
+          ]
+        },
+        "addresses": {
+          "type": "array",
+          "nullable": true,
+          "description": "An array of Addresses.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingAddress"
+          }
+        },
+        "registrationNumber": {
+          "type": "string",
+          "nullable": true,
+          "description": "Company number of the supplier. In the UK, this is typically the company registration number issued by Companies House."
+        },
+        "taxNumber": {
+          "type": "string",
+          "nullable": true,
+          "description": "Supplier's company tax number."
+        },
+        "status": {
+          "$ref": "#/components/schemas/AccountingSupplier/definitions/supplierStatus"
+        },
+        "defaultCurrency": {
+          "type": "string",
+          "nullable": true,
+          "description": "Default currency the supplier's transactional data is recorded in."
+        },
+        "metadata": {
+          "$ref": "#/components/schemas/Metadata"
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "required": [
+    "status"
+  ],
+  "definitions": {
+    "supplierRef": {
+      "title": "Supplier reference",
+      "description": "Reference to the supplier the record relates to.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The supplier's unique ID"
+        },
+        "supplierName": {
+          "type": "string",
+          "nullable": true,
+          "description": "The supplier's name"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "supplierStatus": {
+      "description": "Status of the supplier.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Active",
+        "Archived"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "id": "C520FFD4-F6F6-4FC2-A6D2-5D7088B2B14F",
+      "supplierName": "Kelly's Industrial Supplies",
+      "contactName": "Kelly's Industrial Supplies",
+      "emailAddress": "sales@kellysupplies.com",
+      "phone": "07999 999999",
+      "addresses": [
+        {
+          "type": "Billing",
+          "line1": "Unit 51",
+          "line2": "Bakersfield Industrial Estate",
+          "city": "Bakersfield",
+          "region": "California",
+          "country": "USA",
+          "postalcode": "93308"
+        }
+      ],
+      "registrationNumber": "string",
+      "taxNumber": "string",
+      "status": "Unknown",
+      "defaultCurrency": "string",
+      "metadata": {
+        "isDeleted": true
+      },
+      "supplementalData": {
+        "content": {
+          "property1": {
+            "property1": null,
+            "property2": null
+          },
+          "property2": {
+            "property1": null,
+            "property2": null
+          }
+        }
+      },
+      "modifiedDate": "2022-10-23T00:00:00Z",
+      "sourceModifiedDate": "2022-10-23T00:00:00Z"
+    }
+  ]
+}

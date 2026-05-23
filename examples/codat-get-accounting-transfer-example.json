@@ -1,0 +1,342 @@
+{
+  "operationId": "get-accounting-transfer",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/transfers/{transferId}",
+  "summary": "Get transfer",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "id": "0bd2f801-6f02-44d6-a2ab-5431553d16f9",
+        "description": "depositing 16531.08 into Current Account",
+        "contactRef": {
+          "id": "e4baf949-cb1d-4341-8452-200a93baa3fa",
+          "dataType": "customers"
+        },
+        "date": "2022-04-25T07:20:00",
+        "from": {
+          "accountRef": {
+            "id": "ff8fdc4c-2aad-4ec1-9430-6bd201832eb3",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 16531.08,
+          "status": "Unknown"
+        },
+        "to": {
+          "accountRef": {
+            "id": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 16531.08,
+          "status": "Unknown"
+        },
+        "trackingCategoryRefs": [],
+        "depositedRecordRefs": [
+          {
+            "id": "fc253cca-0dfe-46e8-b75f-c7fb3db760b2",
+            "dataType": "directIncomes"
+          }
+        ],
+        "modifiedDate": "2023-04-26T12:38:18",
+        "sourceModifiedDate": "2022-04-25T07:20:00",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "G00001",
+        "date": "2020-11-26T00:00:00",
+        "from": {
+          "accountRef": {
+            "id": "cf1417b3-89d1-ea11-bbaa-000d3a2b9185",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 20,
+          "status": "Unknown"
+        },
+        "to": {
+          "accountRef": {
+            "id": "ce1417b3-89d1-ea11-bbaa-000d3a2b9185",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 20,
+          "status": "Unknown"
+        },
+        "trackingCategoryRefs": [],
+        "depositedRecordRefs": [],
+        "modifiedDate": "2023-03-27T14:21:26",
+        "sourceModifiedDate": "2020-11-26T12:16:44Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "id": "307335275",
+        "description": "Transfer from Savings Account to Freeagent Test12",
+        "date": "2018-06-14T00:00:00",
+        "from": {
+          "accountRef": {
+            "id": "532100",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 0.69,
+          "status": "Unknown"
+        },
+        "to": {
+          "accountRef": {
+            "id": "708504",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 0.69,
+          "status": "Unknown"
+        },
+        "trackingCategoryRefs": [
+          {
+            "id": "761"
+          }
+        ],
+        "depositedRecordRefs": [],
+        "modifiedDate": "2023-04-25T14:21:36",
+        "sourceModifiedDate": "2022-03-23T15:55:58Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "id": "2-1",
+        "contactRef": {
+          "id": "417",
+          "dataType": "customers"
+        },
+        "date": "2021-03-10T00:00:00",
+        "from": {
+          "accountRef": {
+            "id": "122",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 90,
+          "status": "Unknown"
+        },
+        "to": {
+          "accountRef": {
+            "id": "513",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 90,
+          "status": "Unknown"
+        },
+        "trackingCategoryRefs": [
+          {
+            "id": "location-1"
+          }
+        ],
+        "depositedRecordRefs": [
+          {
+            "id": "428",
+            "dataType": "payments"
+          }
+        ],
+        "modifiedDate": "2022-09-20T08:16:26",
+        "sourceModifiedDate": "2022-04-28T13:36:47"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "4B1-933288922",
+        "description": "Funds Transfer",
+        "date": "2024-10-14T00:00:00",
+        "from": {
+          "accountRef": {
+            "id": "30000-933270541",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 15000,
+          "status": "Unknown"
+        },
+        "to": {
+          "accountRef": {
+            "id": "20000-933270541",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 15000,
+          "status": "Unknown"
+        },
+        "trackingCategoryRefs": [],
+        "depositedRecordRefs": [],
+        "modifiedDate": "2023-04-26T09:13:45",
+        "sourceModifiedDate": "2023-12-16T05:03:58",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "646",
+        "date": "2020-08-21T00:00:00",
+        "from": {
+          "accountRef": {
+            "id": "102",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 73.41,
+          "status": "Unknown"
+        },
+        "to": {
+          "accountRef": {
+            "id": "108",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 73.41,
+          "status": "Unknown"
+        },
+        "trackingCategoryRefs": [],
+        "depositedRecordRefs": [],
+        "modifiedDate": "2023-04-26T09:36:33",
+        "sourceModifiedDate": "2020-08-26T11:41:20Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "1881",
+        "date": "2020-08-29T00:00:00",
+        "from": {
+          "accountRef": {
+            "id": "60",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 86.19,
+          "status": "Unknown"
+        },
+        "to": {
+          "accountRef": {
+            "id": "61",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 86.19,
+          "status": "Unknown"
+        },
+        "trackingCategoryRefs": [],
+        "depositedRecordRefs": [],
+        "modifiedDate": "2023-01-18T11:03:00",
+        "sourceModifiedDate": "2020-09-03T11:19:54Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "id": "434bce57215a11e8b45c025132dab352",
+        "description": "Some cheque",
+        "date": "2018-03-06T00:00:00",
+        "from": {
+          "accountRef": {
+            "id": "9a3f0ed6267a11e797950a57719b2edb",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 1000,
+          "status": "Unknown"
+        },
+        "to": {
+          "accountRef": {
+            "id": "9a2c3770267a11e797950a57719b2edb",
+            "dataType": "bankAccounts"
+          },
+          "currency": "GBP",
+          "amount": 1000,
+          "status": "Unknown"
+        },
+        "trackingCategoryRefs": [],
+        "depositedRecordRefs": [],
+        "modifiedDate": "2022-10-24T14:54:11",
+        "sourceModifiedDate": "2018-03-06T16:20:19Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "4844",
+        "description": "Description",
+        "date": "2022-03-10T00:00:00",
+        "from": {
+          "accountRef": {
+            "id": "CHECKINGACCOUNT:12",
+            "dataType": "bankAccounts"
+          },
+          "currency": "ZAR",
+          "amount": 418.27,
+          "status": "Unknown"
+        },
+        "to": {
+          "accountRef": {
+            "id": "CHECKINGACCOUNT:9",
+            "dataType": "bankAccounts"
+          },
+          "currency": "CAD",
+          "amount": 35.45,
+          "status": "Unknown"
+        },
+        "trackingCategoryRefs": [
+          {
+            "id": "LOCATION-10",
+            "name": "South Africa"
+          }
+        ],
+        "depositedRecordRefs": [],
+        "modifiedDate": "2023-02-23T14:18:48",
+        "sourceModifiedDate": "2022-03-10T12:38:23",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    }
+  ]
+}

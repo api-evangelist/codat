@@ -1,0 +1,628 @@
+{
+  "operationId": "get-accounting-direct-cost",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/directCosts/{directCostId}",
+  "summary": "Get direct cost",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "id": "994ad234-ca05-466e-8e6a-117783b38cf6",
+        "reference": "005b7b62-dc9f-42d2-85a2-4a2cefc6bab2",
+        "note": "Direct Cost with 1 line items, totaling 242.20",
+        "contactRef": {
+          "id": "D4Q4iYwHou",
+          "dataType": "suppliers"
+        },
+        "issueDate": "2022-04-27T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Underground - Drain Saddle Branches 160mm x 110mm x 87 \ufffd",
+            "accountRef": {
+              "id": "7403e960-5b72-42ff-abf4-c870ad8910bd",
+              "name": "Purchases"
+            },
+            "taxRateRef": {
+              "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+              "name": "Sales Tax (10%)",
+              "effectiveTaxRate": 10
+            },
+            "unitAmount": 220.18,
+            "quantity": 1,
+            "discountAmount": 0,
+            "discountPercentage": 0,
+            "subTotal": 220.18,
+            "taxAmount": 22.02,
+            "totalAmount": 242.2,
+            "itemRef": {
+              "id": "2",
+              "name": "Solvent Weld Branch 160mm x 110mm x 87 \ufffd"
+            },
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "994ad234-ca05-466e-8e6a-117783b38cf6",
+              "note": "Payment for direct cost 994ad234-ca05-466e-8e6a-117783b38cf6",
+              "reference": "Direct Cost 994ad234-ca05-466e-8e6a-117783b38cf6",
+              "accountRef": {
+                "id": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+                "name": "Business Current Account"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-04-27T00:00:00",
+              "totalAmount": 242.2
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2022-04-27T00:00:00",
+              "totalAmount": -242.2
+            }
+          }
+        ],
+        "subTotal": 220.18,
+        "taxAmount": 22.02,
+        "totalAmount": 242.2,
+        "modifiedDate": "2023-04-26T12:38:18Z",
+        "sourceModifiedDate": "2022-09-18T20:59:02",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "6ab3e391-97d7-ec11-8e7e-000d3a0cfe40",
+        "reference": "INS000090",
+        "note": "3931",
+        "issueDate": "2022-05-21T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "test expenses 2",
+            "accountRef": {
+              "id": "30"
+            },
+            "taxRateRef": {
+              "id": "cc81fea8-2917-ed11-90eb-002248009df3",
+              "name": "",
+              "effectiveTaxRate": 0
+            },
+            "unitAmount": 17.89,
+            "quantity": -1,
+            "subTotal": -17.89,
+            "taxAmount": 0,
+            "totalAmount": -17.89,
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "6ab3e391-97d7-ec11-8e7e-000d3a0cfe40",
+              "accountRef": {
+                "id": "TEST"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-05-21T00:00:00",
+              "totalAmount": -17.89
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2022-05-21T00:00:00",
+              "totalAmount": -17.89
+            }
+          }
+        ],
+        "subTotal": -17.89,
+        "taxAmount": 0,
+        "totalAmount": -17.89,
+        "modifiedDate": "2023-03-27T14:21:25Z",
+        "sourceModifiedDate": "2022-05-19T17:17:33Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "id": "190325254",
+        "note": "Atomic Software Limite Wellington,Nzl",
+        "issueDate": "2017-11-23T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Atomic Software Limite Wellington,Nzl",
+            "accountRef": {
+              "id": "285",
+              "name": "Accommodation and Meals"
+            },
+            "unitAmount": 11.92,
+            "quantity": 1,
+            "subTotal": 11.92,
+            "taxAmount": 2.38,
+            "totalAmount": 14.3,
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "190325254",
+              "note": "Atomic Software Limite Wellington,Nzl",
+              "accountRef": {
+                "id": "750-1",
+                "name": "Bank Account: Business Current Account"
+              },
+              "currency": "GBP",
+              "paidOnDate": "2017-11-23T00:00:00",
+              "totalAmount": 14.3
+            },
+            "allocation": {
+              "currency": "GBP",
+              "allocatedOnDate": "2017-11-23T00:00:00",
+              "totalAmount": 14.3
+            }
+          }
+        ],
+        "subTotal": 11.92,
+        "taxAmount": 2.38,
+        "totalAmount": 14.3,
+        "modifiedDate": "2023-04-25T14:20:36Z",
+        "sourceModifiedDate": "2019-11-22T14:31:14Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "id": "29870062",
+        "reference": "Food to keep me working",
+        "note": "Food to keep me working",
+        "contactRef": {
+          "id": "Sainsburys",
+          "dataType": "suppliers"
+        },
+        "issueDate": "2019-02-12T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Food to keep me working",
+            "accountRef": {
+              "id": "3361426",
+              "name": "Meals & Entertainment"
+            },
+            "unitAmount": 10,
+            "quantity": 1,
+            "subTotal": 10,
+            "taxAmount": 0,
+            "totalAmount": 10,
+            "trackingCategoryRefs": [
+              {
+                "id": "4370503",
+                "name": "Meals & Entertainment"
+              }
+            ]
+          }
+        ],
+        "paymentAllocations": [],
+        "subTotal": 10,
+        "taxAmount": 0,
+        "totalAmount": 10,
+        "modifiedDate": "2023-03-24T16:07:23Z",
+        "sourceModifiedDate": "2021-10-28T15:21:46",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "D7B-933784104",
+        "reference": "93",
+        "contactRef": {
+          "id": "360000-933272659",
+          "dataType": "suppliers"
+        },
+        "issueDate": "2022-12-01T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "accountRef": {
+              "id": "3C0000-933270542",
+              "name": "Rent"
+            },
+            "unitAmount": 1200,
+            "quantity": 1,
+            "subTotal": 1200,
+            "totalAmount": 1200,
+            "trackingCategoryRefs": [
+              {
+                "id": "80000007-1197713802",
+                "name": "Overhead"
+              }
+            ],
+            "tracking": {
+              "recordRefs": [
+                {
+                  "id": "80000007-1197713802",
+                  "dataType": "trackingCategories"
+                },
+                {
+                  "id": "800000B0-1197755238",
+                  "dataType": "customers"
+                }
+              ]
+            }
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "D7B-933784104",
+              "accountRef": {
+                "id": "20000-933270541",
+                "name": "Checking"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-12-01T00:00:00",
+              "totalAmount": 1200
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2022-12-01T00:00:00",
+              "totalAmount": 1200
+            }
+          }
+        ],
+        "subTotal": 1200,
+        "taxAmount": 0,
+        "totalAmount": 1200,
+        "modifiedDate": "2023-04-26T09:13:57Z",
+        "sourceModifiedDate": "2023-12-16T05:04:10",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "PUR-85",
+        "note": "Opening Balance from Bank",
+        "issueDate": "2015-08-12T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "accountRef": {
+              "id": "55",
+              "name": "Opening Balance Equity"
+            },
+            "taxRateRef": {
+              "id": "NON",
+              "name": "NON",
+              "effectiveTaxRate": 0
+            },
+            "unitAmount": 3831.8,
+            "quantity": 1,
+            "subTotal": 3831.8,
+            "taxAmount": 0,
+            "totalAmount": 3831.8,
+            "trackingCategoryRefs": [],
+            "tracking": {
+              "recordRefs": []
+            }
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "85",
+              "reference": "Opening Balance from Bank",
+              "accountRef": {
+                "id": "57",
+                "name": "Visa Credit Card"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2015-08-12T00:00:00",
+              "totalAmount": 3831.8
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2015-08-12T00:00:00",
+              "totalAmount": -3831.8
+            }
+          }
+        ],
+        "subTotal": 3831.8,
+        "taxAmount": 0,
+        "totalAmount": 3831.8,
+        "modifiedDate": "2023-04-26T09:36:40Z",
+        "sourceModifiedDate": "2016-09-12T18:13:07Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "PUR-15",
+        "note": "Payment to Google",
+        "issueDate": "2018-09-21T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Payment to Google",
+            "accountRef": {
+              "id": "37",
+              "name": "Computer equipment accumulated depreciation brought forward"
+            },
+            "taxRateRef": {
+              "id": "NON",
+              "name": "NON",
+              "effectiveTaxRate": 0
+            },
+            "unitAmount": 1.59,
+            "quantity": 1,
+            "subTotal": 1.59,
+            "taxAmount": 0,
+            "totalAmount": 1.59,
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "15",
+              "reference": "Payment to Google",
+              "accountRef": {
+                "id": "61",
+                "name": "Dave PP Current"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2018-09-21T00:00:00",
+              "totalAmount": 1.59
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2018-09-21T00:00:00",
+              "totalAmount": -1.59
+            }
+          }
+        ],
+        "subTotal": 1.59,
+        "taxAmount": 0,
+        "totalAmount": 1.59,
+        "modifiedDate": "2023-01-18T11:02:59Z",
+        "sourceModifiedDate": "2018-12-17T14:56:44Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "id": "73",
+        "reference": "DD/STO",
+        "issueDate": "2021-01-29T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Electrcity Direct Debit",
+            "accountRef": {
+              "id": "7200",
+              "name": "Electricity"
+            },
+            "taxRateRef": {
+              "id": "3"
+            },
+            "unitAmount": 150,
+            "quantity": 1,
+            "subTotal": 150,
+            "taxAmount": 12,
+            "totalAmount": 162,
+            "trackingCategoryRefs": [
+              {
+                "id": "department_0",
+                "name": "Default"
+              }
+            ]
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "73",
+              "reference": "DD/STO",
+              "accountRef": {
+                "id": "1200",
+                "name": "Bank Current Account"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2021-01-29T00:00:00",
+              "totalAmount": 162
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2021-01-29T00:00:00",
+              "totalAmount": 162
+            }
+          }
+        ],
+        "subTotal": 150,
+        "taxAmount": 12,
+        "totalAmount": 162,
+        "modifiedDate": "2023-03-30T14:42:35Z",
+        "sourceModifiedDate": "2022-11-25T09:43:54",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "CCTRANSACTION:4355",
+        "reference": "",
+        "note": "Test 1",
+        "issueDate": "2020-01-20T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "accountRef": {
+              "id": "195",
+              "name": "Insurance"
+            },
+            "taxRateRef": {
+              "id": "62018"
+            },
+            "unitAmount": 9.99,
+            "quantity": 1,
+            "subTotal": 9.99,
+            "taxAmount": 2,
+            "totalAmount": 11.99,
+            "trackingCategoryRefs": [
+              {
+                "id": "LOCATION-8",
+                "name": "United Kingdom"
+              }
+            ]
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "4355",
+              "note": "",
+              "reference": "",
+              "accountRef": {
+                "id": "348",
+                "name": "CMRR Renewal"
+              },
+              "currency": "GBP",
+              "paidOnDate": "2020-01-20T00:00:00",
+              "totalAmount": 11.99
+            },
+            "allocation": {
+              "currency": "GBP",
+              "allocatedOnDate": "2020-01-20T00:00:00",
+              "totalAmount": 11.99
+            }
+          }
+        ],
+        "subTotal": 9.99,
+        "taxAmount": 2,
+        "totalAmount": 11.99,
+        "modifiedDate": "2022-10-28T11:10:28Z",
+        "sourceModifiedDate": "2022-08-22T09:26:42"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "dc1bb034-7bbf-4e84-b418-b7f4aee59d72",
+        "reference": "",
+        "contactRef": {
+          "id": "737982b0-2811-44c9-bdb3-3b26a3a6ef8c",
+          "dataType": "suppliers"
+        },
+        "issueDate": "2022-11-22T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Bank fee",
+            "accountRef": {
+              "id": "2c410b86-de57-49d1-b540-4e8ce824979c",
+              "name": "Bank Fees"
+            },
+            "unitAmount": 15,
+            "quantity": 1,
+            "subTotal": 15,
+            "taxAmount": 0,
+            "totalAmount": 15,
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "dc1bb034-7bbf-4e84-b418-b7f4aee59d72",
+              "accountRef": {
+                "id": "bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4",
+                "name": "Business Bank Account"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-11-22T00:00:00",
+              "totalAmount": 15
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2022-11-22T00:00:00",
+              "totalAmount": 15
+            }
+          }
+        ],
+        "subTotal": 15,
+        "taxAmount": 0,
+        "totalAmount": 15,
+        "modifiedDate": "2023-03-15T20:36:09Z",
+        "sourceModifiedDate": "2021-01-03T21:43:46",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    }
+  ]
+}

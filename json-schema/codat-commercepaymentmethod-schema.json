@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommercePaymentMethod",
+  "title": "Commerce: Payment method",
+  "description": "A Payment Method represents the payment method(s) used to make payments.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the PaymentMethod",
+          "example": "Alipay"
+        },
+        "status": {
+          "description": "Status of the Payment Method.",
+          "x-internal": true,
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Active",
+            "Archived"
+          ]
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ]
+}

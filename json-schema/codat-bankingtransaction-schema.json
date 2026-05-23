@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankingTransaction",
+  "title": "Banking: Transaction",
+  "description": "The Banking Transactions data type provides an immutable source of up-to-date information on income and expenditure.\n\nResponses are paged, so you should provide `page` and `pageSize` query parameters in your request.",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The unique identifier of the bank transaction."
+        },
+        "accountId": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The unique identifier of the bank account."
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "The description of the bank transaction."
+        },
+        "amount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The amount of the bank transaction."
+        },
+        "currency": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The currency of the bank transaction."
+        },
+        "postedDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date the bank transaction was cleared."
+        },
+        "authorizedDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date the bank transaction was authorized."
+        },
+        "code": {
+          "$ref": "#/components/schemas/BankingTransaction/definitions/transactionCode"
+        },
+        "merchantName": {
+          "type": "string",
+          "nullable": true,
+          "description": "The name of the merchant."
+        },
+        "transactionCategoryRef": {
+          "$ref": "#/components/schemas/BankingTransactionCategory/definitions/transactionCategoryRef"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "required": [
+    "id",
+    "accountId",
+    "currency"
+  ],
+  "definitions": {
+    "transactionCode": {
+      "type": "string",
+      "x-internal": true,
+      "description": "Code to identify the underlying transaction.",
+      "enum": [
+        "Unknown",
+        "Fee",
+        "Payment",
+        "Cash",
+        "Transfer",
+        "Interest",
+        "Cashback",
+        "Cheque",
+        "DirectDebit",
+        "Purchase",
+        "StandingOrder",
+        "Adjustment",
+        "Credit",
+        "Other",
+        "NotSupported"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "id": "0130b5bb-1419-40f6-8a27-7362d0381229",
+      "accountId": "1703194f-7805-4da8-bac0-2ba5da4a4216",
+      "description": "Payments for direct income ce149943-c157-43fc-aac7-42a716b655b6",
+      "amount": 5062.39,
+      "currency": "GBP",
+      "postedDate": "2021-07-06T00:00:00",
+      "authorizedDate": "2021-07-06T00:00:00",
+      "merchantName": "New Look",
+      "transactionCategoryRef": {
+        "id": "health-and-fitness-sports"
+      },
+      "modifiedDate": "2022-05-23T16:32:50Z",
+      "sourceModifiedDate": "2021-06-28T10:48:12"
+    }
+  ]
+}

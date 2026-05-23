@@ -1,0 +1,384 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingBillCreditNote",
+  "title": "Accounting: Bill credit note",
+  "description": "> **Bill credit notes or credit notes?**\n> \n> In Codat, bill credit notes represent accounts payable only. For accounts receivable, see [Credit notes](https://docs.codat.io/lending-api#/schemas/CreditNote).\n\n## Overview\n\nA bill credit note is issued by a supplier for the purpose of recording credit. For example, if a supplier was unable to fulfil an order that was placed by a business, or delivered damaged goods, they would issue a bill credit note. A bill credit note reduces the amount a business owes to the supplier. It can be refunded to the business or used to pay off future bills.\n\nIn the Codat API, a bill credit note is an accounts payable record issued by a [supplier](https://docs.codat.io/lending-api#/schemas/Supplier). \n\nA bill credit note includes details of:\n* The original and remaining credit.\n* Any allocations of the credit against other records, such as [bills](https://docs.codat.io/lending-api#/schemas/Bill).\n* The supplier that issued the bill credit note.",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the bill credit note that is unique to a company in the accounting software.",
+          "example": "1509398f-98e2-436d-8a5d-c042e0c74ffc"
+        },
+        "billCreditNoteNumber": {
+          "type": "string",
+          "nullable": true,
+          "description": "Friendly reference for the bill credit note.",
+          "example": "91fe2a83-e161-4c21-929d-c5c10c4b07e5"
+        },
+        "supplierRef": {
+          "$ref": "#/components/schemas/AccountingSupplier/definitions/supplierRef"
+        },
+        "withholdingTax": {
+          "type": "array",
+          "nullable": true,
+          "items": {
+            "$ref": "#/components/schemas/AccountingBill/allOf/0/properties/withholdingTax/items"
+          }
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Total amount of credit that has been applied to the business' account with the supplier, including discounts and tax.",
+          "example": 805.78
+        },
+        "totalDiscount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Total value of any discounts applied.",
+          "example": 0
+        },
+        "subTotal": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Total amount of the bill credit note, including discounts but excluding tax.",
+          "example": 805.78
+        },
+        "totalTaxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Amount of tax included in the bill credit note.",
+          "example": 0
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Percentage rate of any discount applied to the bill credit note.",
+          "example": 0
+        },
+        "remainingCredit": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Amount of the bill credit note that is still outstanding.",
+          "example": 0
+        },
+        "status": {
+          "$ref": "#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteStatus"
+        },
+        "issueDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Date the bill credit note was issued by the supplier.",
+          "example": "2022-03-15T00:00:00"
+        },
+        "allocatedOnDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "nullable": true,
+          "description": "Date the bill credit note was fully refunded or allocated.",
+          "example": "2022-09-15T16:35:00"
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "Currency of the bill credit note."
+        },
+        "currencyRate": {
+          "$ref": "#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate"
+        },
+        "lineItems": {
+          "type": "array",
+          "nullable": true,
+          "description": "An array of line ",
+          "items": {
+            "$ref": "#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem"
+          }
+        },
+        "paymentAllocations": {
+          "nullable": true,
+          "type": "array",
+          "description": "An array of payment allocations.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingPaymentAllocation"
+          }
+        },
+        "createdFromRefs": {
+          "nullable": true,
+          "type": "array",
+          "description": "An array of records the credit note was created from.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingRecordRef"
+          }
+        },
+        "note": {
+          "type": "string",
+          "nullable": true,
+          "description": "Any additional information about the bill credit note.",
+          "example": "Bill Credit Note with 1 line items, totaling 805.78"
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        },
+        "metadata": {
+          "$ref": "#/components/schemas/Metadata"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "required": [
+    "totalAmount",
+    "totalDiscount",
+    "subTotal",
+    "totalTaxAmount",
+    "discountPercentage",
+    "status"
+  ],
+  "definitions": {
+    "billCreditNoteStatus": {
+      "type": "string",
+      "description": "Current state of the bill credit note",
+      "enum": [
+        "Unknown",
+        "Draft",
+        "Submitted",
+        "Paid",
+        "Void",
+        "PartiallyPaid"
+      ],
+      "example": "Paid"
+    },
+    "billCreditNoteLineItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "Friendly name of each line item. For example, the goods or service for which credit has been received."
+        },
+        "unitAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Unit price of the goods or service."
+        },
+        "quantity": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Number of units of the goods or service for which credit has been received."
+        },
+        "unitOfMeasurement": {
+          "type": "string",
+          "nullable": true,
+          "description": "The measurement which defines a unit for this item (e.g. 'kilogram', 'litre')."
+        },
+        "discountAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Value of any discounts applied."
+        },
+        "subTotal": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Amount of credit associated with the line item, including discounts but excluding tax."
+        },
+        "taxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Amount of tax associated with the line item."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Total amount of the line item, including discounts and tax."
+        },
+        "accountRef": {
+          "$ref": "#/components/schemas/AccountingAccount/definitions/accountRef"
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Percentage rate of any discount applied to the line item."
+        },
+        "taxRateRef": {
+          "title": "Tax rate reference",
+          "type": "object",
+          "description": "Data types that reference a tax rate, for example invoice and bill line items, use a taxRateRef that includes the ID and name of the linked tax rate.\n\nFound on:\n\n- Bill line items\n- Bill Credit Note line items\n- Credit Note line items\n- Direct incomes line items\n- Invoice line items\n- Items",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the tax rate in the accounting software."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the tax rate in the accounting software."
+            },
+            "effectiveTaxRate": {
+              "type": "number",
+              "format": "decimal",
+              "description": "Applicable tax rate."
+            }
+          }
+        },
+        "itemRef": {
+          "description": "Reference to the item the line is linked to.",
+          "title": "Item reference",
+          "type": "object",
+          "properties": {
+            "id": {
+              "minLength": 1,
+              "type": "string",
+              "description": "Unique identifier for the item in the accounting software."
+            },
+            "name": {
+              "type": "string",
+              "nullable": true,
+              "description": "Name of the item in the accounting software."
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "createdFromLineRef": {
+          "$ref": "#/components/schemas/AccountingBill/definitions/billLineItem/properties/purchaseOrderLineRef/allOf/0",
+          "description": "Reference to the line of the item that the current line was created from."
+        },
+        "trackingCategoryRefs": {
+          "type": "array",
+          "nullable": true,
+          "deprecated": true,
+          "description": "Reference to the tracking categories to which the line item is linked.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingTrackingCategory/definitions/trackingCategoryRef"
+          }
+        },
+        "tracking": {
+          "$ref": "#/components/schemas/AccountsPayableTracking"
+        }
+      },
+      "required": [
+        "unitAmount",
+        "quantity"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "id": "6a0e9dfb-87b0-47d3-aaaf-9753ae9e757d",
+      "billCreditNoteNumber": "14763237",
+      "totalAmount": 693,
+      "remainingCredit": 693,
+      "status": "Submitted",
+      "issueDate": "2019-02-18T16:03:07.268Z",
+      "note": "Track separately",
+      "currency": "USD",
+      "lineItems": [
+        {
+          "description": "AcmeMagnet",
+          "unitAmount": 25,
+          "discountAmount": 0,
+          "quantity": 4,
+          "subTotal": 100,
+          "taxAmount": 10,
+          "totalAmount": 110,
+          "itemRef": {
+            "id": "3"
+          },
+          "taxRateRef": {
+            "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498"
+          },
+          "accountRef": {
+            "id": "3f267b10-757d-44c0-bef9-20f70cc8fbe3"
+          },
+          "trackingCategoryRefs": [
+            {
+              "id": "department_1",
+              "name": "ACMERockets"
+            },
+            {
+              "id": "costcode_2",
+              "name": "ACM2-ACMESigns"
+            }
+          ],
+          "createdFromLineRef": [
+            {
+              "id": "8462",
+              "dataType": "bill",
+              "lineNumber": 1
+            }
+          ]
+        },
+        {
+          "description": "ACMEDisintegratingPistol",
+          "unitAmount": 25,
+          "discountAmount": 0,
+          "quantity": 3,
+          "subTotal": 75,
+          "taxAmount": 7.5,
+          "totalAmount": 82.5,
+          "itemRef": {
+            "id": "3abf0883-03f7-44c6-bc15-1372522d25e1"
+          },
+          "taxRateRef": {
+            "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498"
+          },
+          "accountRef": {
+            "id": "3f267b10-757d-44c0-bef9-20f70cc8fbe3"
+          }
+        },
+        {
+          "description": "ACMEWhippedCreamDispenser",
+          "unitAmount": 52,
+          "discountAmount": 0,
+          "quantity": 6,
+          "subTotal": 312,
+          "taxAmount": 31.2,
+          "totalAmount": 343.2,
+          "itemRef": {
+            "id": "3691f3d9-0ff7-4358-8a93-bed31c1b4b03"
+          },
+          "taxRateRef": {
+            "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498"
+          },
+          "accountRef": {
+            "id": "3f267b10-757d-44c0-bef9-20f70cc8fbe3"
+          }
+        },
+        {
+          "description": "ACMEJetPropelledPogoStick",
+          "unitAmount": 130,
+          "discountAmount": 0,
+          "quantity": 1,
+          "subTotal": 130,
+          "taxAmount": 27.3,
+          "totalAmount": 157.3,
+          "itemRef": {
+            "id": "075410d4-7edc-4936-ba52-9e1e43cbe300"
+          },
+          "taxRateRef": {
+            "id": "d606732b-db18-44d7-823b-7f15f42c32ea"
+          },
+          "accountRef": {
+            "id": "3f267b10-757d-44c0-bef9-20f70cc8fbe3"
+          }
+        }
+      ],
+      "supplierRef": {
+        "id": "67C6A7A1-5E84-4AC4-B950-24A114E379D0",
+        "supplierName": "Chin's Gas and Oil"
+      },
+      "createdFromLineRef": {
+        "id": "8462",
+        "dataType": "bills",
+        "line": 1
+      }
+    }
+  ]
+}

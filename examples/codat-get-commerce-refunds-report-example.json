@@ -1,0 +1,123 @@
+{
+  "operationId": "get-commerce-refunds-report",
+  "method": "GET",
+  "path": "/data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/refunds",
+  "summary": "Get refunds report",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "example": [
+        {
+          "reportInfo": {
+            "name": "refunds",
+            "displayName": "Refunds"
+          },
+          "dimensions": [
+            {
+              "index": 0,
+              "displayName": "Period",
+              "type": "datespan",
+              "items": [
+                {
+                  "index": 0,
+                  "displayName": "Period 0",
+                  "start": "2022-01-01",
+                  "end": "2022-12-31"
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "displayName": "Refund metrics",
+              "type": "string",
+              "items": [
+                {
+                  "index": 0,
+                  "value": "Number of refunds"
+                },
+                {
+                  "index": 1,
+                  "value": "Value of refunds"
+                },
+                {
+                  "index": 2,
+                  "value": "Refund rate"
+                }
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "displayName": "Count",
+              "index": 0,
+              "type": "int"
+            },
+            {
+              "displayName": "Value",
+              "units": "GBP",
+              "index": 1,
+              "type": "currency"
+            },
+            {
+              "displayName": "Percentage",
+              "units": "%",
+              "index": 2,
+              "type": "percentage"
+            }
+          ],
+          "reportData": [
+            {
+              "dimension": 0,
+              "dimensionDisplayName": "Period",
+              "item": 0,
+              "itemDisplayName": "Period 0",
+              "components": [
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Refund metrics",
+                  "item": 0,
+                  "itemDisplayName": "Number of refunds",
+                  "measures": [
+                    {
+                      "index": 0,
+                      "measureDisplayName": "Count",
+                      "value": 39
+                    }
+                  ]
+                },
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Refund metrics",
+                  "item": 1,
+                  "itemDisplayName": "Value of refunds",
+                  "measures": [
+                    {
+                      "index": 1,
+                      "measureDisplayName": "Value",
+                      "value": 642.82
+                    }
+                  ]
+                },
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Refund metrics",
+                  "item": 2,
+                  "itemDisplayName": "Refund rate",
+                  "measures": [
+                    {
+                      "index": 2,
+                      "measureDisplayName": "Percentage",
+                      "value": 0.41
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

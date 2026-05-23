@@ -1,0 +1,25 @@
+{
+  "operationId": "update-company",
+  "method": "PATCH",
+  "path": "/companies/{companyId}",
+  "summary": "Update company",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Update tags",
+      "example": {
+        "tags": {
+          "refrence": "new reference"
+        }
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Update name",
+      "example": {
+        "name": "New Name"
+      }
+    }
+  ],
+  "responseExamples": []
+}

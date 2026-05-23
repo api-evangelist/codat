@@ -1,0 +1,1696 @@
+{
+  "operationId": "get-create-transfers-model",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/options/transfers",
+  "summary": "Get create transfer model",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "type": "Object",
+        "displayName": "Transfer",
+        "description": "Transfers to or from a bank account",
+        "properties": {
+          "description": {
+            "type": "String",
+            "displayName": "Transfer Description",
+            "description": "The description of the transfer",
+            "required": false
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Reference",
+            "description": "The customer or supplier for this transfer if known",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "ContactRef.Id",
+                      "details": "Must match the ID of an existing customer or supplier."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "dataType": {
+                "type": "String",
+                "displayName": "DataType",
+                "description": "The name of the data type for which the ID is valid.",
+                "options": [
+                  {
+                    "value": "customers",
+                    "type": "String",
+                    "displayName": "customers",
+                    "required": false
+                  },
+                  {
+                    "value": "suppliers",
+                    "type": "String",
+                    "displayName": "suppliers",
+                    "required": false
+                  }
+                ],
+                "required": true
+              }
+            },
+            "required": false
+          },
+          "date": {
+            "type": "DateTime",
+            "displayName": "Transfer Date",
+            "description": "The date the transfer occurred",
+            "required": true
+          },
+          "from": {
+            "type": "Object",
+            "displayName": "Transfered From",
+            "description": "The account and amount that money was transfered from",
+            "properties": {
+              "currency": {
+                "type": "String",
+                "displayName": "Currency",
+                "description": "The currency of the transfer",
+                "required": false
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "From.Amount",
+                      "details": "Transfer Amount must be greater than zero."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing bank or nominal account."
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "dataType": {
+                    "type": "String",
+                    "displayName": "DataType",
+                    "description": "The name of the data type for which the ID is valid.",
+                    "options": [
+                      {
+                        "value": "chartOfAccounts",
+                        "type": "String",
+                        "displayName": "chartOfAccounts",
+                        "required": false
+                      }
+                    ],
+                    "required": true
+                  }
+                },
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "From.AccountRef",
+                      "details": "Transfers between two bank accounts must be handled with two separate transfers to/from an offset account (only balance sheet type nominal account)."
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": true
+          },
+          "to": {
+            "type": "Object",
+            "displayName": "Transfered To",
+            "description": "The account and amount that money was transfered to",
+            "properties": {
+              "currency": {
+                "type": "String",
+                "displayName": "Currency",
+                "description": "The currency of the transfer",
+                "required": false
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "To.Amount",
+                      "details": "Transfer Amount must be greater than zero."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing bank or nominal account."
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "dataType": {
+                    "type": "String",
+                    "displayName": "DataType",
+                    "description": "The name of the data type for which the ID is valid.",
+                    "options": [
+                      {
+                        "value": "chartOfAccounts",
+                        "type": "String",
+                        "displayName": "chartOfAccounts",
+                        "required": false
+                      }
+                    ],
+                    "required": true
+                  }
+                },
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "To.AccountRef",
+                      "details": "Transfers between two bank accounts must be handled with two separate transfers to/from an offset account (only balance sheet type nominal account)."
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": true
+          },
+          "trackingCategoryRefs": {
+            "type": "Array",
+            "displayName": "Tracking Category References",
+            "description": "A collection of categories this transfer is being tracked against",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The identifier for the item, unique per tracking category",
+                "required": false
+              }
+            },
+            "required": false
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "type": "Object",
+        "displayName": "Transfer",
+        "description": "Transfers to or from a bank account",
+        "properties": {
+          "description": {
+            "type": "String",
+            "displayName": "Transfer Description",
+            "description": "The description of the transfer",
+            "required": false
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Reference",
+            "description": "The customer or supplier for this transfer if known",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "ContactRef.Id",
+                      "details": "Must match the ID of an existing customer or supplier."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "dataType": {
+                "type": "String",
+                "displayName": "DataType",
+                "description": "The name of the data type for which the ID is valid.",
+                "options": [
+                  {
+                    "value": "customers",
+                    "type": "String",
+                    "displayName": "customers",
+                    "required": false
+                  },
+                  {
+                    "value": "suppliers",
+                    "type": "String",
+                    "displayName": "suppliers",
+                    "required": false
+                  }
+                ],
+                "required": true
+              }
+            },
+            "required": false
+          },
+          "date": {
+            "type": "DateTime",
+            "displayName": "Transfer Date",
+            "description": "The date the transfer occurred",
+            "required": true
+          },
+          "from": {
+            "type": "Object",
+            "displayName": "Transfered From",
+            "description": "The account and amount that money was transfered from",
+            "properties": {
+              "currency": {
+                "type": "String",
+                "displayName": "Currency",
+                "description": "The currency of the transfer",
+                "required": false
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "From.Amount",
+                      "details": "Transfer Amount must be greater than zero."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing bank or nominal account."
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "dataType": {
+                    "type": "String",
+                    "displayName": "DataType",
+                    "description": "The name of the data type for which the ID is valid.",
+                    "options": [
+                      {
+                        "value": "chartOfAccounts",
+                        "type": "String",
+                        "displayName": "chartOfAccounts",
+                        "required": false
+                      }
+                    ],
+                    "required": true
+                  }
+                },
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "From.AccountRef",
+                      "details": "Transfers between two bank accounts must be handled with two separate transfers to/from an offset account (only balance sheet type nominal account)."
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": true
+          },
+          "to": {
+            "type": "Object",
+            "displayName": "Transfered To",
+            "description": "The account and amount that money was transfered to",
+            "properties": {
+              "currency": {
+                "type": "String",
+                "displayName": "Currency",
+                "description": "The currency of the transfer",
+                "required": false
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "To.Amount",
+                      "details": "Transfer Amount must be greater than zero."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing bank or nominal account."
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "dataType": {
+                    "type": "String",
+                    "displayName": "DataType",
+                    "description": "The name of the data type for which the ID is valid.",
+                    "options": [
+                      {
+                        "value": "chartOfAccounts",
+                        "type": "String",
+                        "displayName": "chartOfAccounts",
+                        "required": false
+                      }
+                    ],
+                    "required": true
+                  }
+                },
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "To.AccountRef",
+                      "details": "Transfers between two bank accounts must be handled with two separate transfers to/from an offset account (only balance sheet type nominal account)."
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": true
+          },
+          "trackingCategoryRefs": {
+            "type": "Array",
+            "displayName": "Tracking Category References",
+            "description": "A collection of categories this transfer is being tracked against",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The identifier for the item, unique per tracking category",
+                "required": false
+              }
+            },
+            "required": false
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "type": "Object",
+        "displayName": "Transfer",
+        "description": "Transfers to or from a bank account",
+        "properties": {
+          "date": {
+            "type": "DateTime",
+            "displayName": "Transfer Date",
+            "description": "The date the transfer occurred",
+            "required": true
+          },
+          "from": {
+            "type": "Object",
+            "displayName": "Transfered From",
+            "description": "The account and amount that money was transfered from",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing bank account."
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": true
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "From.Amount",
+                      "details": "Must be provided and be greater than zero."
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": true
+          },
+          "to": {
+            "type": "Object",
+            "displayName": "Transfered To",
+            "description": "The account and amount that money was transfered to",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing bank account."
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": true
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "To.Amount",
+                      "details": "If provided, must be greater than zero."
+                    },
+                    {
+                      "field": "To.Amount",
+                      "details": "It will be taken into account just if the accounts are in different currencies and will override the automatic currency conversion."
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": true
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "type": "Object",
+        "displayName": "Transfer",
+        "description": "Transfers to or from a bank account",
+        "properties": {
+          "description": {
+            "type": "String",
+            "displayName": "Transfer Description",
+            "description": "The description of the transfer",
+            "required": false
+          },
+          "date": {
+            "type": "DateTime",
+            "displayName": "Transfer Date",
+            "description": "The date the transfer occurred",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Date",
+                  "details": "Will default to today's date if not provided"
+                }
+              ]
+            }
+          },
+          "from": {
+            "type": "Object",
+            "displayName": "Transfered From",
+            "description": "The account and amount that money was transfered from",
+            "properties": {
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Either the 'From' account or the 'To' account must be a bank account - the other must be an undeposited funds account"
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "to": {
+            "type": "Object",
+            "displayName": "Transfered To",
+            "description": "The account and amount that money was transfered to",
+            "properties": {
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Either the 'From' account or the 'To' account must be a bank account - the other must be an undeposited funds account"
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "depositedRecordRefs": {
+            "type": "Array",
+            "displayName": "Deposited Record References",
+            "description": "A collection of selected transactions to associate with the transfer. Use this field to include transactions which are posted to the undeposited funds (or other holding) account within this transfer.",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "trackingCategoryRefs": {
+            "type": "Array",
+            "displayName": "Tracking Category References",
+            "description": "A collection of categories this transfer is being tracked against",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The identifier for the item, unique per tracking category",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "TrackingCategoryRefs.Id",
+                      "details": "One location, one department and one classification may be provided"
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": false
+          }
+        },
+        "required": true,
+        "validation": {
+          "warnings": [
+            {
+              "details": "Currently only transfers between bank accounts and undeposited funds accounts are supported"
+            }
+          ],
+          "information": []
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "type": "Object",
+        "displayName": "Transfer",
+        "description": "Transfers to or from a bank account",
+        "properties": {
+          "from": {
+            "type": "Object",
+            "displayName": "Transfered From",
+            "description": "The account and amount that money was transfered from",
+            "properties": {
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "From.Amount",
+                      "details": "Value should match To.Amount"
+                    },
+                    {
+                      "field": "From.Amount",
+                      "details": "Value should be greater than zero"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "currency": {
+                "type": "String",
+                "displayName": "Currency",
+                "description": "The currency of the transfer",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "From.Currency",
+                      "details": "This value is not used in the push, and will be ignored."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "to": {
+            "type": "Object",
+            "displayName": "Transfered To",
+            "description": "The account and amount that money was transfered to",
+            "properties": {
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "To.Amount",
+                      "details": "Value should match To.Amount"
+                    },
+                    {
+                      "field": "To.Amount",
+                      "details": "Value should be greater than zero"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "currency": {
+                "type": "String",
+                "displayName": "Currency",
+                "description": "The currency of the transfer",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "To.Currency",
+                      "details": "This value is not used in the push, and will be ignored."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "trackingCategoryRefs": {
+            "type": "Array",
+            "displayName": "Tracking Category References",
+            "description": "A collection of categories this transfer is being tracked against",
+            "required": false
+          },
+          "description": {
+            "type": "String",
+            "displayName": "Transfer Description",
+            "description": "The description of the transfer",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Description",
+                  "details": "Max length of 4096 characters."
+                }
+              ],
+              "information": []
+            }
+          },
+          "date": {
+            "type": "DateTime",
+            "displayName": "Transfer Date",
+            "description": "The date the transfer occurred",
+            "required": true
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Reference",
+            "description": "The customer or supplier for this transfer if known",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "ContactRef",
+                  "details": "This value is not used in the push, and will be ignored."
+                }
+              ],
+              "information": []
+            }
+          },
+          "sourceModifiedDate": {
+            "type": "DateTime",
+            "displayName": "Source Modified Date",
+            "description": "The date the record was last changed in the originating system",
+            "required": true
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "type": "Object",
+        "displayName": "Transfer",
+        "description": "Transfers to or from a bank account",
+        "properties": {
+          "description": {
+            "type": "String",
+            "displayName": "Transfer Description",
+            "description": "The description of the transfer",
+            "required": false
+          },
+          "from": {
+            "type": "Object",
+            "displayName": "Transfered From",
+            "description": "The account and amount that money was transfered from",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "to": {
+            "type": "Object",
+            "displayName": "Transfered To",
+            "description": "The account and amount that money was transfered to",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "depositedRecordRefs": {
+            "type": "Array",
+            "displayName": "Deposited Record References",
+            "description": "A collection of selected transactions to associate with the transfer. Use this field to include transactions which are posted to the undeposited funds (or other holding) account within this transfer.",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true
+              },
+              "dataType": {
+                "type": "String",
+                "displayName": "DataType",
+                "description": "The name of the data type for which the ID is valid.",
+                "options": [
+                  {
+                    "value": "payments",
+                    "type": "String",
+                    "displayName": "Payments",
+                    "required": false
+                  },
+                  {
+                    "value": "directIncomes",
+                    "type": "String",
+                    "displayName": "DirectIncomes",
+                    "required": false
+                  },
+                  {
+                    "value": "journalEntries",
+                    "type": "String",
+                    "displayName": "JournalEntries",
+                    "required": false
+                  }
+                ],
+                "required": true
+              }
+            },
+            "required": false
+          }
+        },
+        "required": true,
+        "validation": {
+          "warnings": [
+            {
+              "details": "When pushing a transfer using two different currencies, the exchange rate will be calculated and passed to QuickBooks, QuickBooks performs rounding on this value which may affect the values in the transfer"
+            },
+            {
+              "details": "Transfers between accounts in different currencies can only be made if multi-currency is enabled for company"
+            },
+            {
+              "details": "The currency of at least one of the accounts used must be the same as the company's currency"
+            }
+          ],
+          "information": []
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "type": "Object",
+        "displayName": "Transfer",
+        "description": "Transfers to or from a bank account",
+        "properties": {
+          "description": {
+            "type": "String",
+            "displayName": "Transfer Description",
+            "description": "The description of the transfer",
+            "required": false
+          },
+          "from": {
+            "type": "Object",
+            "displayName": "Transfered From",
+            "description": "The account and amount that money was transfered from",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "to": {
+            "type": "Object",
+            "displayName": "Transfered To",
+            "description": "The account and amount that money was transfered to",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "depositedRecordRefs": {
+            "type": "Array",
+            "displayName": "Deposited Record References",
+            "description": "A collection of selected transactions to associate with the transfer. Use this field to include transactions which are posted to the undeposited funds (or other holding) account within this transfer.",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true
+              },
+              "dataType": {
+                "type": "String",
+                "displayName": "DataType",
+                "description": "The name of the data type for which the ID is valid.",
+                "options": [
+                  {
+                    "value": "payments",
+                    "type": "String",
+                    "displayName": "Payments",
+                    "required": false
+                  },
+                  {
+                    "value": "directIncomes",
+                    "type": "String",
+                    "displayName": "DirectIncomes",
+                    "required": false
+                  },
+                  {
+                    "value": "journalEntries",
+                    "type": "String",
+                    "displayName": "JournalEntries",
+                    "required": false
+                  }
+                ],
+                "required": true
+              }
+            },
+            "required": false
+          }
+        },
+        "required": true,
+        "validation": {
+          "warnings": [
+            {
+              "details": "When pushing a transfer using two different currencies, the exchange rate will be calculated and passed to QuickBooks, QuickBooks performs rounding on this value which may affect the values in the transfer"
+            },
+            {
+              "details": "Transfers between accounts in different currencies can only be made if multi-currency is enabled for company"
+            },
+            {
+              "details": "The currency of at least one of the accounts used must be the same as the company's currency"
+            }
+          ],
+          "information": []
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "type": "Object",
+        "displayName": "Transfer",
+        "description": "Transfers to or from a bank account",
+        "properties": {
+          "description": {
+            "type": "String",
+            "displayName": "Transfer Description",
+            "description": "The description of the transfer",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Description",
+                  "details": "Must be provided if pushing a bank deposit."
+                }
+              ],
+              "information": [
+                {
+                  "field": "Description",
+                  "details": "Must not be longer than 2000 characters."
+                }
+              ]
+            }
+          },
+          "date": {
+            "type": "DateTime",
+            "displayName": "Transfer Date",
+            "description": "The date the transfer occurred",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Date",
+                  "details": "Must be provided."
+                }
+              ]
+            }
+          },
+          "from": {
+            "type": "Object",
+            "displayName": "Transfered From",
+            "description": "The account and amount that money was transfered from",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must be different from To.AccountRef.Id."
+                        },
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing bank account in the company's base currency."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "From.Amount",
+                      "details": "Must be equal to To.Amount."
+                    },
+                    {
+                      "field": "From.Amount",
+                      "details": "Must be greater than zero."
+                    }
+                  ]
+                }
+              }
+            },
+            "required": true
+          },
+          "to": {
+            "type": "Object",
+            "displayName": "Transfered To",
+            "description": "The account and amount that money was transfered to",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must be different from From.AccountRef.Id."
+                        },
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing bank account in the company's base currency."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "To.Amount",
+                      "details": "Must be equal to From.Amount."
+                    },
+                    {
+                      "field": "To.Amount",
+                      "details": "Must be greater than zero."
+                    }
+                  ]
+                }
+              }
+            },
+            "required": true
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sandbox",
+      "example": {
+        "type": "Object",
+        "displayName": "Transfer",
+        "description": "Transfers to or from a bank account",
+        "properties": {
+          "description": {
+            "type": "String",
+            "displayName": "Transfer Description",
+            "description": "The description of the transfer",
+            "required": true
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Reference",
+            "description": "The customer or supplier for this transfer if known",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true
+              },
+              "dataType": {
+                "type": "String",
+                "displayName": "DataType",
+                "description": "The name of the data type for which the ID is valid.",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "date": {
+            "type": "DateTime",
+            "displayName": "Transfer Date",
+            "description": "The date the transfer occurred",
+            "required": true
+          },
+          "from": {
+            "type": "Object",
+            "displayName": "Transfered From",
+            "description": "The account and amount that money was transfered from",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true
+                  },
+                  "dataType": {
+                    "type": "String",
+                    "displayName": "DataType",
+                    "description": "The name of the data type for which the ID is valid.",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "currency": {
+                "type": "String",
+                "displayName": "Currency",
+                "description": "The currency of the transfer",
+                "required": true
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true
+              },
+              "status": {
+                "type": "String",
+                "displayName": "Status",
+                "description": "The status of the transfer in the account",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "to": {
+            "type": "Object",
+            "displayName": "Transfered To",
+            "description": "The account and amount that money was transfered to",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true
+                  },
+                  "dataType": {
+                    "type": "String",
+                    "displayName": "DataType",
+                    "description": "The name of the data type for which the ID is valid.",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "currency": {
+                "type": "String",
+                "displayName": "Currency",
+                "description": "The currency of the transfer",
+                "required": true
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true
+              },
+              "status": {
+                "type": "String",
+                "displayName": "Status",
+                "description": "The status of the transfer in the account",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "trackingCategoryRefs": {
+            "type": "Array",
+            "displayName": "Tracking Category References",
+            "description": "A collection of categories this transfer is being tracked against",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The identifier for the item, unique per tracking category",
+                "required": true
+              },
+              "name": {
+                "type": "String",
+                "displayName": "Tracking Category Name",
+                "description": "The name of the category referenced by the identifier",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "depositedRecordRefs": {
+            "type": "Array",
+            "displayName": "Deposited Record References",
+            "description": "A collection of selected transactions to associate with the transfer. Use this field to include transactions which are posted to the undeposited funds (or other holding) account within this transfer.",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true
+              },
+              "dataType": {
+                "type": "String",
+                "displayName": "DataType",
+                "description": "The name of the data type for which the ID is valid.",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "metadata": {
+            "type": "Object",
+            "displayName": "Metadata",
+            "description": "Miscellaneous data about the item",
+            "properties": {
+              "isDeleted": {
+                "type": "Boolean",
+                "displayName": "IsDeleted",
+                "description": "A boolean to indicate whether the object has been deleted",
+                "required": true
+              }
+            },
+            "required": true
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "type": "Object",
+        "displayName": "Transfer",
+        "description": "Transfers to or from a bank account",
+        "properties": {
+          "date": {
+            "type": "DateTime",
+            "displayName": "Transfer Date",
+            "description": "The date the transfer occurred",
+            "required": true
+          },
+          "from": {
+            "type": "Object",
+            "displayName": "Transfered From",
+            "description": "The account and amount that money was transfered from",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing bank account."
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": true
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "From.Amount",
+                      "details": "Must be equal to To.Amount."
+                    },
+                    {
+                      "field": "From.Amount",
+                      "details": "Must be greater than zero."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "status": {
+                "type": "String",
+                "displayName": "Status",
+                "description": "The status of the transfer in the account",
+                "options": [
+                  {
+                    "value": "Unknown",
+                    "type": "String",
+                    "displayName": "Unknown",
+                    "required": false
+                  },
+                  {
+                    "value": "Unreconciled",
+                    "type": "String",
+                    "displayName": "Unreconciled",
+                    "required": false
+                  },
+                  {
+                    "value": "Reconciled",
+                    "type": "String",
+                    "displayName": "Reconciled",
+                    "required": false
+                  }
+                ],
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "From.Status",
+                      "details": "Must be provided."
+                    }
+                  ]
+                }
+              }
+            },
+            "required": true
+          },
+          "to": {
+            "type": "Object",
+            "displayName": "Transfered To",
+            "description": "The account and amount that money was transfered to",
+            "properties": {
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Account Reference",
+                "description": "Reference to the bank or nominal account",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the record",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing bank account."
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": true
+              },
+              "amount": {
+                "type": "Number",
+                "displayName": "Amount",
+                "description": "The amount transfered",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "To.Amount",
+                      "details": "Must be equal to From.Amount."
+                    },
+                    {
+                      "field": "To.Amount",
+                      "details": "Must be greater than zero."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "status": {
+                "type": "String",
+                "displayName": "Status",
+                "description": "The status of the transfer in the account",
+                "options": [
+                  {
+                    "value": "Unknown",
+                    "type": "String",
+                    "displayName": "Unknown",
+                    "required": false
+                  },
+                  {
+                    "value": "Unreconciled",
+                    "type": "String",
+                    "displayName": "Unreconciled",
+                    "required": false
+                  },
+                  {
+                    "value": "Reconciled",
+                    "type": "String",
+                    "displayName": "Reconciled",
+                    "required": false
+                  }
+                ],
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "To.Status",
+                      "details": "Must be provided."
+                    }
+                  ]
+                }
+              }
+            },
+            "required": true
+          }
+        },
+        "required": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "operationId": "get-banking-transaction-category",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/banking-transactionCategories/{transactionCategoryId}",
+  "summary": "Get transaction category",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Basiq",
+      "example": {
+        "id": "bank-fee",
+        "name": "Bank Fee",
+        "hasChildren": false,
+        "status": "Active",
+        "modifiedDate": "2022-10-28T07:14:46"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Plaid",
+      "example": {
+        "id": "BANK_FEES",
+        "name": "BANK_FEES",
+        "hasChildren": true,
+        "status": "Active",
+        "modifiedDate": "2022-10-27T10:50:17"
+      }
+    }
+  ]
+}

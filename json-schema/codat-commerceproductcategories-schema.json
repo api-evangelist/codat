@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommerceProductCategories",
+  "title": "Commerce: Product categories",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CommerceProductCategory"
+          }
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PagingInfo"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "operationId": "get-read-validation-results",
+  "method": "GET",
+  "path": "/companies/{companyId}/sync/{datasetId}/validation",
+  "summary": "Get validation results",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Validation result",
+      "example": {
+        "errors": [
+          {
+            "ruleId": "accounting-bill-030",
+            "itemId": "fc2f2d1a-ff4d-40c6-a7fb-4bd7d04f4008",
+            "message": "A bill's lines summed (69.99) should be the same as TotalAmount (70.00).",
+            "validatorName": "BillValidator"
+          }
+        ],
+        "warnings": [
+          {
+            "ruleId": "accounting-bill-032",
+            "itemId": "1d3979e5-7c28-432e-b562-04e9013c1ea0",
+            "message": "A bill's lines sub total amount summed (3201.20) should be the same as SubTotal (3201.25)",
+            "validatorName": "BillValidator"
+          }
+        ]
+      }
+    }
+  ]
+}

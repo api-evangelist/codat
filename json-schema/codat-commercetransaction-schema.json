@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommerceTransaction",
+  "title": "Commerce: Transaction",
+  "description": "Details of all financial transactions recorded in the commerce or point of sale system are added to the Transactions data type. For example, payments, service charges, and fees.\n\nYou can use data from the Transactions endpoints to calculate key metrics, such as:  \n- Transaction volumes  \n- Average transaction volume  \n- Average transaction value  \n- Returns  \n- Payouts",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "totalAmount": {
+          "description": "The total transaction amount",
+          "type": "number",
+          "format": "decimal",
+          "examples": [
+            194.12,
+            -283.56,
+            0
+          ]
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency"
+        },
+        "type": {
+          "$ref": "#/components/schemas/CommerceTransaction/definitions/transactionType"
+        },
+        "subType": {
+          "description": "Non-standardised transaction type data from the commerce software",
+          "type": "string",
+          "examples": [
+            "CardPayment",
+            "Invoice payment"
+          ]
+        },
+        "transactionSourceRef": {
+          "description": "Link to the source event which triggered this transaction",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/CommerceTransaction/definitions/transactionSourceRef"
+            }
+          ]
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        }
+      }
+    },
+    {
+      "allOf": [
+        {
+          "type": "object",
+          "x-stoplight": {
+            "id": "c590b4405180f"
+          },
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/CommerceOrder/allOf/2"
+            },
+            {
+              "type": "object",
+              "x-stoplight": {
+                "id": "gdyjg7bg783br"
+              },
+              "properties": {
+                "sourceCreatedDate": {
+                  "$ref": "#/components/schemas/DateTime",
+                  "description": "The date on which this record was created in the originating system"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+        }
+      ],
+      "x-stoplight": {
+        "id": "9e815c1766554"
+      }
+    }
+  ],
+  "definitions": {
+    "transactionSourceRef": {
+      "title": "Transaction Source Reference",
+      "x-internal": true,
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CommerceRecordRef"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "$ref": "#/components/schemas/CommerceTransaction/definitions/transactionSourceType"
+            }
+          }
+        }
+      ]
+    },
+    "transactionSourceType": {
+      "x-internal": true,
+      "type": "string",
+      "description": "The type of source the transaction arose.",
+      "enum": [
+        "Fee",
+        "Order",
+        "Payment",
+        "ServiceCharge",
+        "Unknown"
+      ]
+    },
+    "transactionType": {
+      "x-internal": true,
+      "description": "The type of the platform transaction:  \n- `Unknown`  \n- `FailedPayout` \u2014 Failed transfer of funds from the seller's merchant account to their bank account.  \n- `Payment` \u2014 Credit and debit card payments.  \n- `PaymentFee` \u2014 Payment provider's fee on each card payment.  \n- `PaymentFeeRefund` \u2014 Payment provider's fee that has been refunded to the seller.  \n- `Payout` \u2014 Transfer of funds from the seller's merchant account to their bank account.  \n- `Refund` \u2014 Refunds to a customer's credit or debit card.  \n- `Transfer` \u2014 Secure transfer of funds to the seller's bank account.  ",
+      "type": "string",
+      "enum": [
+        "Payment",
+        "Refund",
+        "Payout",
+        "FailedPayout",
+        "Transfer",
+        "PaymentFee",
+        "PaymentFeeRefund",
+        "Unknown"
+      ]
+    }
+  },
+  "examples": []
+}

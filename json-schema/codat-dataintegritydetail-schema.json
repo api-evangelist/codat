@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataIntegrityDetail",
+  "title": "Data integrity detail",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "ID GUID of the transaction."
+    },
+    "type": {
+      "type": "string",
+      "description": "The data type of the record."
+    },
+    "connectionId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID GUID representing the connection of the accounting or banking platform.",
+      "readOnly": true
+    },
+    "date": {
+      "$ref": "#/components/schemas/DateTime",
+      "description": "The date of the transaction."
+    },
+    "description": {
+      "type": "string",
+      "description": "The transaction description."
+    },
+    "amount": {
+      "type": "number",
+      "format": "decimal",
+      "description": "The transaction value."
+    },
+    "currency": {
+      "$ref": "#/components/schemas/SourceAccount/properties/currency",
+      "description": "The currency of the transaction."
+    },
+    "matches": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataIntegrityDetail/definitions/dataIntegrityMatch"
+      }
+    }
+  },
+  "definitions": {
+    "dataIntegrityMatch": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID GUID of the transaction."
+        },
+        "type": {
+          "type": "string",
+          "description": "The data type which the data type in the URL has been matched against. For example, if you've matched accountTransactions and banking-transactions, and you call this endpoint with accountTransactions in the URL, this property would be banking-transactions."
+        },
+        "connectionId": {
+          "type": "string",
+          "description": "ID GUID representing the connection of the accounting or banking platform.",
+          "format": "uuid"
+        },
+        "date": {
+          "type": "string",
+          "description": "The date of the transaction."
+        },
+        "description": {
+          "type": "string",
+          "description": "The transaction description."
+        },
+        "amount": {
+          "type": "string",
+          "description": "The transaction value."
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "The currency of the transaction."
+        }
+      }
+    }
+  }
+}

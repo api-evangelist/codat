@@ -1,0 +1,78 @@
+{
+  "operationId": "get-commerce-lifetime-value-metrics",
+  "method": "GET",
+  "path": "/data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/lifetimeValue",
+  "summary": "Get lifetime value metrics",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "example": [
+        {
+          "reportInfo": {
+            "name": "lifetime_value",
+            "displayName": "Lifetime Value"
+          },
+          "dimensions": [
+            {
+              "index": 0,
+              "displayName": "Period",
+              "type": "datespan",
+              "items": [
+                {
+                  "index": 0,
+                  "displayName": "Period 0",
+                  "start": "2022-01-01",
+                  "end": "2022-12-31"
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "displayName": "Lifetime value metrics",
+              "type": "string",
+              "items": [
+                {
+                  "index": 0,
+                  "value": "Lifetime value"
+                }
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "displayName": "Value",
+              "units": "GBP",
+              "index": 0,
+              "type": "currency"
+            }
+          ],
+          "reportData": [
+            {
+              "dimension": 0,
+              "dimensionDisplayName": "Period",
+              "item": 0,
+              "itemDisplayName": "Period 0",
+              "components": [
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Lifetime value metrics",
+                  "item": 0,
+                  "itemDisplayName": "Lifetime value",
+                  "measures": [
+                    {
+                      "index": 0,
+                      "measureDisplayName": "Value",
+                      "value": 3782.07
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

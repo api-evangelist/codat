@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingCreditNotes",
+  "title": "Accounting: Credit notes",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AccountingCreditNote"
+          }
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PagingInfo"
+    }
+  ]
+}

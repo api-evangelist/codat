@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CompanyRequestBody",
+  "title": "Create company request",
+  "x-internal": true,
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of company being connected.",
+      "pattern": "^[A-Za-z0-9\\s\\-',&@.,?!\\s]+$",
+      "minLength": 1,
+      "example": "Bank of Dave"
+    },
+    "description": {
+      "type": "string",
+      "example": "Requested early access to the new financing scheme.",
+      "description": "Additional information about the company. This can be used to store foreign IDs, references, etc."
+    },
+    "tags": {
+      "$ref": "#/components/schemas/Company/definitions/companyDetails/properties/tags"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

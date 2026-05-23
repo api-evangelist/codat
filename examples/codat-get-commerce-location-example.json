@@ -1,0 +1,79 @@
+{
+  "operationId": "get-commerce-location",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-locations/{locationId}",
+  "summary": "Get location",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clover",
+      "example": {
+        "id": "GA3WP1ZC3ZFK1",
+        "name": "Codat",
+        "address": {
+          "type": "Inventory",
+          "line1": "301 Ink Rooms, 28 Easton Street",
+          "city": "London",
+          "region": "London",
+          "country": "GB",
+          "postalCode": "WC1X 0BE"
+        },
+        "modifiedDate": "2023-01-09T11:01:03Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Lightspeed K Trial",
+      "example": {
+        "id": "647208621834538",
+        "name": "QA Shared - New Test Site",
+        "address": {
+          "type": "Unknown",
+          "country": "AU"
+        },
+        "modifiedDate": "2023-03-02T09:48:48Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "id": "61375348894",
+        "name": "301 Ink Rooms, 28 Easton St",
+        "address": {
+          "type": "Inventory",
+          "line1": "301 Ink Rooms, 28 Easton St",
+          "city": "London",
+          "region": "London",
+          "country": "GB",
+          "postalCode": "WC1X 0BE"
+        },
+        "modifiedDate": "2023-02-10T15:18:25Z",
+        "sourceModifiedDate": "2021-03-19T10:06:06"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Square",
+      "example": {
+        "id": "D8DVHD1G6NT2J",
+        "name": "Codat Limited",
+        "address": {
+          "type": "Inventory",
+          "line1": "301 Ink Rooms",
+          "line2": "28 Easton Street",
+          "city": "London",
+          "country": "GB",
+          "postalCode": "WC1X0BE"
+        },
+        "modifiedDate": "2022-08-02T10:27:32Z",
+        "sourceModifiedDate": "2020-01-17T14:07:30Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Profile",
+  "title": "Profile",
+  "description": "Describes your Codat client instance",
+  "examples": [
+    {
+      "name": "Bob's Burgers",
+      "logoUrl": "https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png",
+      "iconUrl": "https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico",
+      "redirectUrl": "https://bobs-burgers.{countrySuffix}/{companyId}",
+      "whiteListUrls": [
+        "https://bobs-burgers.com",
+        "https://bobs-burgers.co.uk"
+      ],
+      "confirmCompanyName": true
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "Bob's Burgers",
+      "description": "The name given to the instance."
+    },
+    "logoUrl": {
+      "type": "string",
+      "description": "Static url to your organization's logo.",
+      "example": "https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png"
+    },
+    "iconUrl": {
+      "type": "string",
+      "description": "Static url to your organization's icon.",
+      "example": "https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico"
+    },
+    "redirectUrl": {
+      "type": "string",
+      "example": "https://bobs-burgers.{countrySuffix}/{companyId}",
+      "description": "The redirect URL pasted on to the SMB once Codat's [Hosted Link](https://docs.codat.io/auth-flow/authorize-hosted-link) has been completed by the SMB."
+    },
+    "whiteListUrls": {
+      "type": "array",
+      "description": "A list of urls that are allowed to communicate with Codat. If empty any url is allowed to communicate with Codat.",
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "example": "https://bobs-burgers.com",
+        "description": "A url that is allowed to communicate with Codat."
+      }
+    },
+    "apiKey": {
+      "type": "string",
+      "deprecated": true,
+      "example": "sartANTjHAkLdbyDfaynoTQb7pkmj6hXHmnQKMrB",
+      "description": "The API key for this Codat instance."
+    },
+    "confirmCompanyName": {
+      "type": "boolean",
+      "deprecated": true,
+      "description": "`True` if the company name has been confirmed."
+    }
+  },
+  "required": [
+    "name",
+    "redirectUrl"
+  ],
+  "x-stoplight": {
+    "id": "b1fyq05edangf"
+  }
+}

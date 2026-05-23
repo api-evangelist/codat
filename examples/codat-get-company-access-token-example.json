@@ -1,0 +1,19 @@
+{
+  "operationId": "get-company-access-token",
+  "method": "GET",
+  "path": "/companies/{companyId}/accessToken",
+  "summary": "Get company access token",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Simple company",
+      "example": {
+        "expiresIn": 86400,
+        "accessToken": "string",
+        "tokenType": "Bearer"
+      }
+    }
+  ]
+}

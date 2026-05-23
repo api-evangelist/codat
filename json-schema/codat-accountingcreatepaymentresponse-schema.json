@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingCreatePaymentResponse",
+  "title": "Accounting: Create payment response",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AccountingPayment"
+            },
+            {
+              "deprecated": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PushOperation"
+    }
+  ]
+}

@@ -1,0 +1,1204 @@
+{
+  "operationId": "list-commerce-products",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-products",
+  "summary": "List products",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Amazon Seller Central",
+      "example": {
+        "results": [
+          {
+            "id": "Chromecast",
+            "categorization": "DEVICE",
+            "name": "Chromecast",
+            "description": "Cast from your phone to your TV with this all new chromecast.",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "packaging_asin_gating",
+                "name": "Chromecast in a cardboard box",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "sku": "packaging_asin_gating",
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 50
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "2021-02-07T12:30:01Z"
+              }
+            ],
+            "createdDate": "2021-02-07T12:30:01Z",
+            "modifiedDate": "2023-01-09T09:12:11Z",
+            "sourceModifiedDate": "2022-08-17T09:07:07Z",
+            "status": "Published"
+          },
+          {
+            "id": "vb554a-bl1915",
+            "categorization": "COAT",
+            "name": "Waterproof Jacket",
+            "description": "Wind and rainproof, keeping you dry all year round.",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "ARRIS,SB6141",
+                "name": "Waterproof Jacket (Black)",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "sku": "ARRIS,SB6141",
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 200
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "2021-02-07T12:30:01Z"
+              },
+              {
+                "id": "RTN66U-N9000",
+                "name": "Waterproof Jacket (Blue)",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "sku": "RTN66U-N9000",
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 200
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "2021-02-07T12:30:01Z"
+              },
+              {
+                "id": "TLWR841N",
+                "name": "Waterproof Jacket (Red)",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "sku": "TLWR841N",
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 200
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "2021-02-07T12:30:01Z"
+              }
+            ],
+            "createdDate": "2021-02-07T12:30:01Z",
+            "modifiedDate": "2023-01-09T09:12:11Z",
+            "sourceModifiedDate": "2022-08-17T09:07:07Z",
+            "status": "Published"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 3,
+        "_links": {
+          "current": {
+            "href": "/companies/6a59da96-e6d2-4c5c-ace7-65ba8be6a472/connections/58be1638-2c74-4ad4-8ff3-8c5b98b5f0fe/data/commerce-products?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/6a59da96-e6d2-4c5c-ace7-65ba8be6a472/connections/58be1638-2c74-4ad4-8ff3-8c5b98b5f0fe/data/commerce-products"
+          },
+          "next": {
+            "href": "/companies/6a59da96-e6d2-4c5c-ace7-65ba8be6a472/connections/58be1638-2c74-4ad4-8ff3-8c5b98b5f0fe/data/commerce-products?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "BigCommerce",
+      "example": {
+        "results": [
+          {
+            "id": "103",
+            "categorization": "Shop All, Utility",
+            "name": "[Sample] Canvas Laundry Cart",
+            "description": "The last laundry cart you'll ever buy. This industrial non-collapsable cart is constructed with a steel framed body using heavyweight canvas capped with a soft leather rim sitting on four smooth rolling casters. Keeps the grubby garments off the floor and almost makes laundry enjoyable. Can also be used as the ideal storage solution: many people find it ideal for children's toys or a load of chopped firewood. Load it up and wheel it away. Natural Heavyweight Canvas with Vegetable Tanned Leather Rim Measure\ufffd",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "71",
+                "name": "[Sample] Canvas Laundry Cart",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "sku": "CLC",
+                "barcode": "",
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 200
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              }
+            ],
+            "createdDate": "2015-07-03T18:48:07Z",
+            "modifiedDate": "2023-04-11T10:33:49Z",
+            "sourceModifiedDate": "2022-06-16T07:59:46Z",
+            "status": "Published"
+          },
+          {
+            "id": "104",
+            "categorization": "Shop All, Utility",
+            "name": "[Sample] Utility Caddy",
+            "description": "This powder coated steel utility caddy ensures your cleaning essentials are stowed away in one spot ready for your household chores. Brushes, cloths, liquid soaps can all easily be stashed away. Also ideal to be used as a garden caddy to easily grab from the shed for a days work. Works well as a mop bucket too. The wood carrying handle ensures a comfortable grip when toting it from room to room. Measures 19 h x 36 w x 20 dia cm/7.5 h x 14.1 w x 7.8 dia in",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "72",
+                "name": "[Sample] Utility Caddy",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "sku": "OFSUC",
+                "barcode": "",
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 45.95
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              }
+            ],
+            "createdDate": "2015-07-03T18:49:26Z",
+            "modifiedDate": "2023-04-11T10:33:49Z",
+            "sourceModifiedDate": "2015-07-03T20:45:54Z",
+            "status": "Published"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 18,
+        "_links": {
+          "current": {
+            "href": "/companies/d1ebcf6d-f7f9-4841-8a06-fec12c492a48/connections/7c0a21e8-938a-40a4-b0f7-5ab5d46804b0/data/commerce-products?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d1ebcf6d-f7f9-4841-8a06-fec12c492a48/connections/7c0a21e8-938a-40a4-b0f7-5ab5d46804b0/data/commerce-products"
+          },
+          "next": {
+            "href": "/companies/d1ebcf6d-f7f9-4841-8a06-fec12c492a48/connections/7c0a21e8-938a-40a4-b0f7-5ab5d46804b0/data/commerce-products?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clover",
+      "example": {
+        "results": [
+          {
+            "id": "DJANHKK2AVEYY",
+            "name": "Coffee",
+            "description": "Coffee",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "DJANHKK2AVEYY",
+                "name": "Coffee",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "12222",
+                "barcode": "1234",
+                "vatPercentage": 20,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 3
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "0001-01-01T00:00:00"
+              }
+            ],
+            "createdDate": "0001-01-01T00:00:00",
+            "modifiedDate": "2023-01-09T11:01:03Z",
+            "sourceModifiedDate": "2021-05-24T15:50:55Z",
+            "status": "Published"
+          },
+          {
+            "id": "NMZHKK6FKF6ZJ",
+            "name": "Laptop",
+            "description": "Cool Laptop",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "NMZHKK6FKF6ZJ",
+                "name": "Laptop",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "111",
+                "barcode": "123",
+                "vatPercentage": 20,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 1000
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "0001-01-01T00:00:00"
+              }
+            ],
+            "createdDate": "0001-01-01T00:00:00",
+            "modifiedDate": "2023-01-09T11:01:03Z",
+            "sourceModifiedDate": "2021-05-24T08:19:14Z",
+            "status": "Published"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 3,
+        "_links": {
+          "current": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-products?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-products"
+          },
+          "next": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-products?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Lightspeed K Trial",
+      "example": {
+        "results": [
+          {
+            "id": "647208621834539",
+            "categorization": "Alcoholic beverages",
+            "name": "Alcoholic beverages",
+            "description": "Alcoholic beverages",
+            "productCategoryRefs": [
+              {
+                "id": "647208621834281",
+                "name": "Alcoholic beverages"
+              }
+            ],
+            "isGiftCard": false,
+            "variants": [],
+            "createdDate": "0001-01-01T00:00:00",
+            "modifiedDate": "2023-03-02T09:50:32Z",
+            "status": "Published"
+          },
+          {
+            "id": "647208621834542",
+            "categorization": "NA beverages",
+            "name": "NA beverages",
+            "description": "NA beverages",
+            "productCategoryRefs": [
+              {
+                "id": "647208621834282",
+                "name": "NA beverages"
+              }
+            ],
+            "isGiftCard": false,
+            "variants": [],
+            "createdDate": "0001-01-01T00:00:00",
+            "modifiedDate": "2023-03-02T09:50:32Z",
+            "status": "Published"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 39,
+        "_links": {
+          "current": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-products?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-products"
+          },
+          "next": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-products?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "PrestaShop",
+      "example": {
+        "results": [
+          {
+            "id": "1",
+            "categorization": "Home - Clothes - Men",
+            "name": "Hummingbird printed t-shirt",
+            "description": "Symbol of lightness and delicacy, the hummingbird evokes curiosity and joy. Studio Design' PolyFaune collection features classic products with colorful patterns, inspired by the traditional japanese origamis. To wear with a chino or jeans. The sublimation textile printing process provides an exceptional color rendering and a color, guaranteed overtime.",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "8",
+                "name": "Hummingbird printed t-shirt (Size = XL, Color = Black)",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "demo_1",
+                "vatPercentage": 6,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 23.9
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 300,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "4",
+                "name": "Hummingbird printed t-shirt (Size = M, Color = Black)",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "demo_1",
+                "vatPercentage": 6,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 23.9
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 300,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "5",
+                "name": "Hummingbird printed t-shirt (Size = L, Color = White)",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "demo_1",
+                "vatPercentage": 6,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 23.9
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 300,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "3",
+                "name": "Hummingbird printed t-shirt (Size = M, Color = White)",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "demo_1",
+                "vatPercentage": 6,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 23.9
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 300,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "6",
+                "name": "Hummingbird printed t-shirt (Size = L, Color = Black)",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "demo_1",
+                "vatPercentage": 6,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 23.9
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 300,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "1",
+                "name": "Hummingbird printed t-shirt (Size = S, Color = White)",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "demo_1",
+                "vatPercentage": 6,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 23.9
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 300,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "2",
+                "name": "Hummingbird printed t-shirt (Size = S, Color = Black)",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "demo_1",
+                "vatPercentage": 6,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 23.9
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 300,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "7",
+                "name": "Hummingbird printed t-shirt (Size = XL, Color = White)",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "demo_1",
+                "vatPercentage": 6,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 23.9
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 300,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              }
+            ],
+            "createdDate": "2021-09-02T06:00:49",
+            "modifiedDate": "2022-01-26T15:09:42Z",
+            "sourceModifiedDate": "2021-09-02T06:00:49",
+            "status": "Published"
+          },
+          {
+            "id": "10",
+            "categorization": "Home - Accessories - Home Accessories",
+            "name": "Brown bear cushion",
+            "description": "The brown bear cushion will add a graphic and colorful touch to your sofa, armchair or bed. Create a modern and zen atmosphere that inspires relaxation. Cover 100% cotton, machine washable at 60\ufffd / Filling 100% hypoallergenic polyester.",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "24",
+                "name": "Brown bear cushion (Color = White)",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "demo_16",
+                "vatPercentage": 6,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 18.9
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 300,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "25",
+                "name": "Brown bear cushion (Color = Black)",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "demo_16",
+                "vatPercentage": 6,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 18.9
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 300,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "0001-01-01T00:00:00"
+              }
+            ],
+            "createdDate": "2021-09-02T06:00:49",
+            "modifiedDate": "2022-01-26T15:09:42Z",
+            "sourceModifiedDate": "2021-09-02T06:00:49",
+            "status": "Published"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 22,
+        "_links": {
+          "current": {
+            "href": "/companies/2bf78e61-58ca-421a-a430-5dfa59cf15b0/connections/30774c1f-fdcd-491e-9e60-47e316b3ab9b/data/commerce-products?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/2bf78e61-58ca-421a-a430-5dfa59cf15b0/connections/30774c1f-fdcd-491e-9e60-47e316b3ab9b/data/commerce-products"
+          },
+          "next": {
+            "href": "/companies/2bf78e61-58ca-421a-a430-5dfa59cf15b0/connections/30774c1f-fdcd-491e-9e60-47e316b3ab9b/data/commerce-products?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "results": [
+          {
+            "id": "6595494117534",
+            "categorization": "Asus",
+            "name": "Monitor",
+            "description": "",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "39444526694558",
+                "name": "Monitor",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "sku": "",
+                "barcode": "",
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 150
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 91,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "2021-03-19T10:13:22Z"
+              }
+            ],
+            "createdDate": "2021-03-19T10:13:22Z",
+            "modifiedDate": "2023-02-10T15:18:25Z",
+            "sourceModifiedDate": "2022-08-01T13:05:22Z",
+            "status": "Published"
+          },
+          {
+            "id": "6595497066654",
+            "categorization": "Logitech",
+            "name": "Mouse",
+            "description": "",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "39444533706910",
+                "name": "Mouse",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "sku": "",
+                "barcode": "",
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 25
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 71,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "2021-03-19T10:14:01Z"
+              }
+            ],
+            "createdDate": "2021-03-19T10:14:01Z",
+            "modifiedDate": "2023-02-10T15:18:25Z",
+            "sourceModifiedDate": "2022-08-01T13:05:22Z",
+            "status": "Published"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 4,
+        "_links": {
+          "current": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-products?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-products"
+          },
+          "next": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-products?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Square",
+      "example": {
+        "results": [
+          {
+            "id": "AX54KZQ3UAVCVPUMNEGFEU35",
+            "categorization": "Hardware",
+            "name": "Monitor",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "A5BUT6SYUNYRSQ2R7GZ6UKN6",
+                "name": "Regular",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 10,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 200
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "2021-02-18T15:47:31Z"
+              }
+            ],
+            "createdDate": "2021-02-18T15:47:31Z",
+            "modifiedDate": "2021-06-17T14:23:02Z",
+            "sourceModifiedDate": "2021-02-18T15:47:31Z",
+            "status": "Unknown"
+          },
+          {
+            "id": "FYRIQNFTFRGQNQZGZG66MJWI",
+            "categorization": "Furniture",
+            "name": "Desk",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "VMKSQEABA3WIYGXNAV63JOTZ",
+                "name": "Regular",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 10,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 70
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "2021-02-18T15:47:45Z"
+              }
+            ],
+            "createdDate": "2021-02-18T15:47:45Z",
+            "modifiedDate": "2021-06-17T14:23:02Z",
+            "sourceModifiedDate": "2021-02-18T15:47:45Z",
+            "status": "Unknown"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 4,
+        "_links": {
+          "current": {
+            "href": "/companies/25debd39-e024-41a1-a86c-4fd47f29c853/connections/d5071fdf-a769-48f3-b39e-e588d515bb83/data/commerce-products?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/25debd39-e024-41a1-a86c-4fd47f29c853/connections/d5071fdf-a769-48f3-b39e-e588d515bb83/data/commerce-products"
+          },
+          "next": {
+            "href": "/companies/25debd39-e024-41a1-a86c-4fd47f29c853/connections/d5071fdf-a769-48f3-b39e-e588d515bb83/data/commerce-products?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stripe Test",
+      "example": {
+        "results": [
+          {
+            "id": "prod_IaSbzLnxOHmC0i",
+            "name": "Blue T Shirt",
+            "description": "Nice cozy cotton t shirt",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "price_1ICJVEA8m8S1Gh7OIOCDOG8j",
+                "name": "Blue T Shirt - Standard Price",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 15
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "2021-01-22T06:52:16Z"
+              },
+              {
+                "id": "price_1ICJQgA8m8S1Gh7OfErQdx5R",
+                "name": "Blue T Shirt - Standard Price",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "USD",
+                    "unitPrice": 30
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "2021-01-22T06:47:34Z"
+              },
+              {
+                "id": "price_1HzHiCA8m8S1Gh7OXZVa6r3F",
+                "name": "Blue T Shirt - Standard Price",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 15
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "2020-12-17T08:19:48Z"
+              }
+            ],
+            "createdDate": "2020-12-17T08:17:48Z",
+            "modifiedDate": "2022-09-30T11:18:27Z",
+            "sourceModifiedDate": "2021-01-22T06:52:17Z",
+            "status": "Published"
+          },
+          {
+            "id": "prod_IQ6G1MDsvUb87Y",
+            "name": "Laptop",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "price_1HpG3tA8m8S1Gh7Oa6bGLvVD",
+                "name": "Laptop - Standard Price",
+                "quantity": 0,
+                "isTaxEnabled": false,
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 100
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "2020-11-19T16:32:45Z"
+              }
+            ],
+            "createdDate": "2020-11-19T16:32:45Z",
+            "modifiedDate": "2022-09-30T11:18:27Z",
+            "sourceModifiedDate": "2022-05-12T23:31:33Z",
+            "status": "Published"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 4,
+        "_links": {
+          "current": {
+            "href": "/companies/8206e78e-e340-411e-b315-473c4ab73b48/connections/43e58373-0a1d-44a0-97f0-9fa9993a14fa/data/commerce-products?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/8206e78e-e340-411e-b315-473c4ab73b48/connections/43e58373-0a1d-44a0-97f0-9fa9993a14fa/data/commerce-products"
+          },
+          "next": {
+            "href": "/companies/8206e78e-e340-411e-b315-473c4ab73b48/connections/43e58373-0a1d-44a0-97f0-9fa9993a14fa/data/commerce-products?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "WooCommerce",
+      "example": {
+        "results": [
+          {
+            "id": "27",
+            "categorization": "Hardware",
+            "name": "Monitor",
+            "description": "",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "27",
+                "name": "Monitor",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 150
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "2021-03-11T08:55:22"
+              }
+            ],
+            "createdDate": "2021-03-11T08:55:22",
+            "modifiedDate": "2021-07-13T16:19:00Z",
+            "sourceModifiedDate": "2021-03-11T09:03:15",
+            "status": "Published"
+          },
+          {
+            "id": "28",
+            "categorization": "Hardware",
+            "name": "Keyboard",
+            "description": "",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "28",
+                "name": "Keyboard",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 0,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 30
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": true,
+                "createdDate": "2021-03-11T09:02:58"
+              }
+            ],
+            "createdDate": "2021-03-11T09:02:58",
+            "modifiedDate": "2021-07-13T16:19:00Z",
+            "sourceModifiedDate": "2021-03-11T09:02:58",
+            "status": "Published"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 3,
+        "_links": {
+          "current": {
+            "href": "/companies/010c6f53-8fc8-40ab-9ed5-41191cf9c6b5/connections/7545ca2e-5f58-4f98-8af2-3b2c38bb8074/data/commerce-products?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/010c6f53-8fc8-40ab-9ed5-41191cf9c6b5/connections/7545ca2e-5f58-4f98-8af2-3b2c38bb8074/data/commerce-products"
+          },
+          "next": {
+            "href": "/companies/010c6f53-8fc8-40ab-9ed5-41191cf9c6b5/connections/7545ca2e-5f58-4f98-8af2-3b2c38bb8074/data/commerce-products?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zettle",
+      "example": {
+        "results": [
+          {
+            "id": "9d21fd90-a34a-11eb-b574-ad6abe469b61",
+            "categorization": "Clothing",
+            "name": "T-Shirt",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "bb9bcf30-a34a-11eb-b574-ad6abe469b61",
+                "name": "Medium",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 20,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 10
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "b919df40-a34a-11eb-b574-ad6abe469b61",
+                "name": "Large",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 20,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 10
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "bcb5cab0-a34a-11eb-b574-ad6abe469b61",
+                "name": "Small",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 20,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 10
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "0001-01-01T00:00:00"
+              }
+            ],
+            "createdDate": "2021-04-22T09:12:09Z",
+            "modifiedDate": "2021-10-27T15:22:37Z",
+            "sourceModifiedDate": "2021-08-04T14:32:20Z",
+            "status": "Published"
+          },
+          {
+            "id": "e02c2930-a34a-11eb-b9db-8f5efc0924aa",
+            "categorization": "Clothing",
+            "name": "Hoodie",
+            "productCategoryRefs": [],
+            "isGiftCard": false,
+            "variants": [
+              {
+                "id": "fa180e40-a34a-11eb-b9db-8f5efc0924aa",
+                "name": "Medium",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 20,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 30
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "fc412fd0-a34a-11eb-b9db-8f5efc0924aa",
+                "name": "Extra Large",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 20,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 30
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "f8a03b50-a34a-11eb-b9db-8f5efc0924aa",
+                "name": "Small",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 20,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 30
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "0001-01-01T00:00:00"
+              },
+              {
+                "id": "fac1bbc0-a34a-11eb-b9db-8f5efc0924aa",
+                "name": "Large",
+                "quantity": 0,
+                "isTaxEnabled": true,
+                "vatPercentage": 20,
+                "prices": [
+                  {
+                    "currency": "GBP",
+                    "unitPrice": 30
+                  }
+                ],
+                "inventory": {
+                  "totalQuantity": 0,
+                  "locations": []
+                },
+                "shippingRequired": false,
+                "createdDate": "0001-01-01T00:00:00"
+              }
+            ],
+            "createdDate": "2021-04-22T09:13:26Z",
+            "modifiedDate": "2021-10-27T15:22:37Z",
+            "sourceModifiedDate": "2021-08-04T14:31:58Z",
+            "status": "Published"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 2,
+        "_links": {
+          "current": {
+            "href": "/companies/9d448ad0-4508-47fc-bd3b-6950493151f1/connections/c7baa8da-3302-464b-8aa1-edcd4c900902/data/commerce-products?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/9d448ad0-4508-47fc-bd3b-6950493151f1/connections/c7baa8da-3302-464b-8aa1-edcd4c900902/data/commerce-products"
+          }
+        }
+      }
+    }
+  ]
+}

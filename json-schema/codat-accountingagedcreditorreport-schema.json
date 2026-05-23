@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingAgedCreditorReport",
+  "title": "Accounting: Aged creditors report",
+  "description": "The Aged Creditors report shows the total balance owed by a business to its suppliers over time.\n\nYou can generate it for a company based on recently synced data from your customers' accounting software. The report is available in the **Reports** tab in the Codat portal.\n\nTotal assets or liabilities are grouped into 30-day periods for each supplier, up to the current date. You can adjust the report date, period length, and number of periods to show on each report. The data can be grouped by customer or currency.\n\n> It is not guaranteed that write-offs are included in the Aged Creditors report.\n\n## Underlying data\n\nThe Aged Creditors report is generated from a set of required data types: [Suppliers](https://docs.codat.io/lending-api#/schemas/Supplier), [Bills](https://docs.codat.io/lending-api#/schemas/Bill), [Bill credit notes](https://docs.codat.io/lending-api#/schemas/BillCreditNote), and [Bill payments](https://docs.codat.io/lending-api#/schemas/BillPayment).\n\nTo generate the report, the underlying data types must have been synced within 24 hours of each other. Otherwise an error is displayed when you try to run the report. Sync the required data types by clicking the link in the error, and then run the report again.\n\n> The Aged Creditor report runs based on the **issue dates** of the underlying data types rather than the due date.\n\n## Accessing the Aged Creditors report in Portal\n\nApart from returning the report via the API as JSON and query, you can also return the Aged Creditors report in the Codat portal.\n\n1. In the navigation bar, click **Companies**.\n2. Click the name of the company you want to generate the report for. The company's data page is displayed.\n3. Click the **Accounting** tab then click **Reports**.\n4. Select **Aged Creditors**.\n5. _(Optional)_ Edit the default reporting parameters.\n   a. You can change the report date in the **Date** box. By default, the report includes transactions that occurred up to, but not including, today's date. To include transactions for today, enter tomorrow's date. \n   b. In the **Period Length Days** box, select the default period length for each column (the default is 30 days).\n   b. In the **Number of Periods** box, enter the number of periods to show as columns in the report (the default is 4 periods).\n6. To run the report, click **Load aged creditors**.\n7. The report is generated and displayed at the bottom of the page.\n\nThe report will be grouped per supplier and depending on the periods requested. The details indicates whether the amounts owed come from outstanding bills or bill credit notes.",
+  "type": "object",
+  "properties": {
+    "generated": {
+      "$ref": "#/components/schemas/DateTime",
+      "description": "Date and time the report was generated."
+    },
+    "reportDate": {
+      "$ref": "#/components/schemas/DateTime",
+      "description": "Date the report is generated up to."
+    },
+    "data": {
+      "type": "array",
+      "description": "Array of aged creditor.",
+      "items": {
+        "$ref": "#/components/schemas/AccountingAgedCreditorReport/definitions/agedCreditor"
+      }
+    }
+  },
+  "examples": [
+    {
+      "generated": "2022-10-23T00:00:00Z",
+      "reportDate": "2022-10-23T00:00:00Z",
+      "data": [
+        {
+          "customerId": "f594cefb-7750-4c3a-bab2-b5322026dee9",
+          "customerName": "John Doe",
+          "agedCurrencyOutstanding": [
+            {
+              "currency": "GBP",
+              "agedOutstandingAmounts": [
+                {
+                  "fromDate": "2022-10-01T00:00:00Z",
+                  "toDate": "2022-10-31T00:00:00Z",
+                  "amount": 1547.5,
+                  "details": [
+                    {
+                      "name": "Bills",
+                      "amount": 1547.5
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "agedCreditor": {
+      "title": "Aged creditor",
+      "type": "object",
+      "properties": {
+        "supplierId": {
+          "type": "string",
+          "description": "Supplier ID of the aged creditor.",
+          "example": "f594cefb-7750-4c3a-bab2-b5322026dee9"
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "Supplier name of the aged creditor.",
+          "example": "John Doe"
+        },
+        "agedCurrencyOutstanding": {
+          "type": "array",
+          "description": "Array of aged creditors by currency.",
+          "items": {
+            "$ref": "#/components/schemas/AgedCurrencyOutstanding"
+          }
+        }
+      }
+    }
+  }
+}

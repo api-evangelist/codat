@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PhoneNumber",
+  "title": "Phone",
+  "type": "object",
+  "x-internal": true,
+  "properties": {
+    "number": {
+      "type": "string",
+      "nullable": true,
+      "examples": [
+        "+44 25691 154789",
+        "(877) 492-8687",
+        "01224 658 999"
+      ],
+      "description": "A phone number."
+    },
+    "type": {
+      "description": "The type of phone number",
+      "type": "string",
+      "enum": [
+        "Primary",
+        "Landline",
+        "Mobile",
+        "Fax",
+        "Unknown"
+      ]
+    }
+  },
+  "required": [
+    "type"
+  ]
+}

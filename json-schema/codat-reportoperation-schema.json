@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReportOperation",
+  "title": "Report",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier of the report",
+      "example": "52c0f26b-051a-43ff-b02a-258eec67f5ef"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "InProgress",
+        "Complete",
+        "Error"
+      ],
+      "description": "The status of the report generation."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "categorizedBankStatement",
+        "creditModel",
+        "spendAnalysis"
+      ],
+      "description": "The name of the generated report."
+    },
+    "requestedDate": {
+      "description": "The date and time on which the report was requested.",
+      "$ref": "#/components/schemas/DateTime"
+    },
+    "updatedDate": {
+      "description": "The date and time on which the report was last updated.",
+      "$ref": "#/components/schemas/DateTime"
+    },
+    "errorMessage": {
+      "type": "string",
+      "nullable": true,
+      "description": "A short message describing any errors that occurred while generating the report."
+    }
+  },
+  "description": "Information about report generation.",
+  "definitions": {
+    "reports": {
+      "title": "Reports",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ReportOperation"
+              },
+              "minLength": 0,
+              "maxLength": 2000
+            }
+          }
+        },
+        {
+          "$ref": "#/components/schemas/PagingInfo"
+        }
+      ]
+    }
+  }
+}

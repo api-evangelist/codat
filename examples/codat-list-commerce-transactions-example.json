@@ -1,0 +1,279 @@
+{
+  "operationId": "list-commerce-transactions",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-transactions",
+  "summary": "List transactions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie",
+      "example": {
+        "results": [
+          {
+            "id": "re_Azhe8TzfUK",
+            "totalAmount": -20,
+            "currency": "EUR",
+            "type": "Refund",
+            "createdDate": "2022-01-17T16:00:46",
+            "modifiedDate": "2022-03-17T15:47:28Z"
+          },
+          {
+            "id": "re_NPKEJhQveu",
+            "totalAmount": -60,
+            "currency": "EUR",
+            "type": "Refund",
+            "createdDate": "2022-01-17T16:00:05",
+            "modifiedDate": "2022-03-17T15:47:28Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 7,
+        "_links": {
+          "current": {
+            "href": "/companies/a68cb447-182d-4bbe-be1a-f526d11d69d5/connections/dfbf847b-cde8-4b00-b2f9-af51dec0d337/data/commerce-transactions?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/a68cb447-182d-4bbe-be1a-f526d11d69d5/connections/dfbf847b-cde8-4b00-b2f9-af51dec0d337/data/commerce-transactions"
+          },
+          "next": {
+            "href": "/companies/a68cb447-182d-4bbe-be1a-f526d11d69d5/connections/dfbf847b-cde8-4b00-b2f9-af51dec0d337/data/commerce-transactions?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie Test",
+      "example": {
+        "results": [
+          {
+            "id": "re_Azhe8TzfUK",
+            "totalAmount": -20,
+            "currency": "EUR",
+            "type": "Refund",
+            "subType": "PaymentRefund",
+            "createdDate": "2022-01-17T16:00:46",
+            "modifiedDate": "2022-08-17T11:33:19Z"
+          },
+          {
+            "id": "re_NPKEJhQveu",
+            "totalAmount": -60,
+            "currency": "EUR",
+            "type": "Refund",
+            "subType": "PaymentRefund",
+            "createdDate": "2022-01-17T16:00:05",
+            "modifiedDate": "2022-08-17T11:33:19Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 7,
+        "_links": {
+          "current": {
+            "href": "/companies/b978f9fe-8d63-4cfc-b2c2-b61b72e22785/connections/d564f8fd-0766-4ab8-a427-7c893f9b9ff6/data/commerce-transactions?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/b978f9fe-8d63-4cfc-b2c2-b61b72e22785/connections/d564f8fd-0766-4ab8-a427-7c893f9b9ff6/data/commerce-transactions"
+          },
+          "next": {
+            "href": "/companies/b978f9fe-8d63-4cfc-b2c2-b61b72e22785/connections/d564f8fd-0766-4ab8-a427-7c893f9b9ff6/data/commerce-transactions?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "results": [
+          {
+            "id": "ShopifyPayment-1633176289438",
+            "totalAmount": 175,
+            "currency": "GBP",
+            "type": "Payment",
+            "subType": "charge",
+            "transactionSourceRef": {
+              "id": "3684116791454",
+              "type": "Order"
+            },
+            "createdDate": "2021-03-19T13:16:26",
+            "modifiedDate": "2023-02-10T15:18:23Z",
+            "sourceModifiedDate": "2021-03-19T13:16:26"
+          },
+          {
+            "id": "ShopifyPayment-1633176289438:Fee",
+            "totalAmount": -4.05,
+            "currency": "GBP",
+            "type": "PaymentFee",
+            "subType": "charge",
+            "transactionSourceRef": {
+              "id": "3684116791454",
+              "type": "Order"
+            },
+            "createdDate": "2021-03-19T13:16:26",
+            "modifiedDate": "2023-02-10T15:18:23Z",
+            "sourceModifiedDate": "2021-03-19T13:16:26"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 64,
+        "_links": {
+          "current": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-transactions?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-transactions"
+          },
+          "next": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-transactions?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stripe Test",
+      "example": {
+        "results": [
+          {
+            "id": "txn_1HpGQUA8m8S1Gh7OR21pB0Yj",
+            "totalAmount": 50,
+            "currency": "GBP",
+            "type": "Payment",
+            "subType": "charge",
+            "transactionSourceRef": {
+              "id": "ch_1HpGQUA8m8S1Gh7Ot4WDTus5",
+              "type": "Payment"
+            },
+            "createdDate": "2020-11-19T16:56:06Z",
+            "modifiedDate": "2022-09-30T11:18:28Z"
+          },
+          {
+            "id": "txn_1HpGQUA8m8S1Gh7OR21pB0Yj:Stripe processing fees",
+            "totalAmount": -0.9,
+            "currency": "GBP",
+            "type": "PaymentFee",
+            "subType": "stripe_fee",
+            "transactionSourceRef": {
+              "id": "ch_1HpGQUA8m8S1Gh7Ot4WDTus5",
+              "type": "Payment"
+            },
+            "createdDate": "2020-11-19T16:56:06Z",
+            "modifiedDate": "2022-09-30T11:18:28Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 70,
+        "_links": {
+          "current": {
+            "href": "/companies/8206e78e-e340-411e-b315-473c4ab73b48/connections/43e58373-0a1d-44a0-97f0-9fa9993a14fa/data/commerce-transactions?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/8206e78e-e340-411e-b315-473c4ab73b48/connections/43e58373-0a1d-44a0-97f0-9fa9993a14fa/data/commerce-transactions"
+          },
+          "next": {
+            "href": "/companies/8206e78e-e340-411e-b315-473c4ab73b48/connections/43e58373-0a1d-44a0-97f0-9fa9993a14fa/data/commerce-transactions?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "SumUp",
+      "example": {
+        "results": [
+          {
+            "id": "46d36a64-ea48-4e37-9340-3548cbf3ca2f",
+            "totalAmount": 15,
+            "currency": "GBP",
+            "type": "Payment",
+            "subType": "PAYMENT",
+            "createdDate": "2021-03-26T21:09:59Z",
+            "modifiedDate": "2022-09-14T10:58:03Z"
+          },
+          {
+            "id": "471914a4-a82f-4fc4-b39b-9986fd706d26",
+            "totalAmount": 215,
+            "currency": "GBP",
+            "type": "Payment",
+            "subType": "PAYMENT",
+            "createdDate": "2021-03-30T12:22:14Z",
+            "modifiedDate": "2022-09-14T10:58:03Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 3,
+        "_links": {
+          "current": {
+            "href": "/companies/e170dbe2-be50-474f-b449-82add37108de/connections/1e631dd5-a30b-4bad-ad5c-315c9743535b/data/commerce-transactions?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/e170dbe2-be50-474f-b449-82add37108de/connections/1e631dd5-a30b-4bad-ad5c-315c9743535b/data/commerce-transactions"
+          },
+          "next": {
+            "href": "/companies/e170dbe2-be50-474f-b449-82add37108de/connections/1e631dd5-a30b-4bad-ad5c-315c9743535b/data/commerce-transactions?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zettle",
+      "example": {
+        "results": [
+          {
+            "id": "PAYMENT:09b94cfc-2d98-11eb-8021-0e1b9dcbeca1",
+            "totalAmount": 25,
+            "currency": "GBP",
+            "type": "Payment",
+            "transactionSourceRef": {
+              "id": "09b94cfc-2d98-11eb-8021-0e1b9dcbeca1",
+              "type": "Unknown"
+            },
+            "createdDate": "2020-11-23T14:27:38Z",
+            "modifiedDate": "2021-10-27T15:23:04Z",
+            "sourceModifiedDate": "2020-11-25T23:10:01Z"
+          },
+          {
+            "id": "PAYMENT:226580d6-2d98-11eb-a35c-fed5e63de507",
+            "totalAmount": 58.5,
+            "currency": "GBP",
+            "type": "Payment",
+            "transactionSourceRef": {
+              "id": "226580d6-2d98-11eb-a35c-fed5e63de507",
+              "type": "Unknown"
+            },
+            "createdDate": "2020-11-23T14:28:20Z",
+            "modifiedDate": "2021-10-27T15:23:04Z",
+            "sourceModifiedDate": "2020-11-25T23:10:02Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 16,
+        "_links": {
+          "current": {
+            "href": "/companies/9d448ad0-4508-47fc-bd3b-6950493151f1/connections/c7baa8da-3302-464b-8aa1-edcd4c900902/data/commerce-transactions?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/9d448ad0-4508-47fc-bd3b-6950493151f1/connections/c7baa8da-3302-464b-8aa1-edcd4c900902/data/commerce-transactions"
+          },
+          "next": {
+            "href": "/companies/9d448ad0-4508-47fc-bd3b-6950493151f1/connections/c7baa8da-3302-464b-8aa1-edcd4c900902/data/commerce-transactions?page=2&pageSize=2"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SourceAccountV2BatchCreateResponse",
+  "title": "Batch source account (v2) creation response",
+  "description": "Account ID and resulting object of the batch `Create source account` request.",
+  "type": "object",
+  "properties": {
+    "sourceAccountId": {
+      "type": "string",
+      "description": "Unique ID for the source account.",
+      "examples": [
+        "12345"
+      ]
+    },
+    "result": {
+      "$ref": "#/components/schemas/SourceAccountV2BatchCreateResponse/definitions/sourceAccountV2BatchCreateResult"
+    }
+  },
+  "definitions": {
+    "sourceAccountV2BatchCreateResult": {
+      "title": "Source Account V2 Batch CreateResult",
+      "description": "Status details and corresponding object of the `Create account` operation.",
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "description": "The HTTP status code for the creation of the source account"
+        },
+        "error": {
+          "type": "string",
+          "nullable": true,
+          "description": "A brief description of the error."
+        },
+        "account": {
+          "$ref": "#/components/schemas/SourceAccountV2"
+        }
+      }
+    }
+  }
+}

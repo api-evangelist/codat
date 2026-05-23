@@ -1,0 +1,75 @@
+{
+  "operationId": "list-categorized-bank-statement-accounts",
+  "method": "GET",
+  "path": "/companies/{companyId}/reports/categorizedBankStatement/{reportId}/accounts",
+  "summary": "List categorized bank statement accounts",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "example": {
+        "pageNumber": 1,
+        "pageSize": 10,
+        "totalResults": 15,
+        "_links": {
+          "self": {
+            "href": "/companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions"
+          },
+          "current": {
+            "href": "/companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=1&pageSize=10"
+          },
+          "next": {
+            "href": "/companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=2&pageSize=10"
+          }
+        },
+        "results": [
+          {
+            "sourceRef": {
+              "sourceType": "Banking"
+            },
+            "platformName": "Banking Sandbox",
+            "accountProvider": "Lloyds Bank",
+            "accountName": "Business Savings Account",
+            "accountType": "Debit",
+            "currency": "GBP",
+            "currentBalance": 0
+          },
+          {
+            "sourceRef": {
+              "sourceType": "Banking"
+            },
+            "platformName": "Banking Sandbox",
+            "accountProvider": "Lloyds Bank",
+            "accountName": "Banking - Business Credit Card",
+            "accountType": "Credit",
+            "currency": "GBP",
+            "currentBalance": 0
+          },
+          {
+            "sourceRef": {
+              "sourceType": "Banking"
+            },
+            "platformName": "Banking Sandbox",
+            "accountProvider": "Lloyds Bank",
+            "accountName": "Business Undeposited Funds",
+            "accountType": "Debit",
+            "currency": "GBP",
+            "currentBalance": 0
+          },
+          {
+            "sourceRef": {
+              "sourceType": "Banking"
+            },
+            "platformName": "Banking Sandbox",
+            "accountProvider": "Lloyds Bank",
+            "accountName": "Business Current Account",
+            "accountType": "Debit",
+            "currency": "GBP",
+            "currentBalance": 0
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "operationId": "list-banking-account-balances",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/banking-accountBalances",
+  "summary": "List account balances",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Basiq",
+      "example": {
+        "results": [
+          {
+            "accountId": "4811e776-6187-48d9-afee-635fb0d89d93",
+            "balance": {
+              "current": 11389.85
+            },
+            "date": "2017-12-31T00:00:00Z",
+            "modifiedDate": "2022-10-28T07:15:07Z"
+          },
+          {
+            "accountId": "4811e776-6187-48d9-afee-635fb0d89d93",
+            "balance": {
+              "current": 8002.09
+            },
+            "date": "2018-01-01T00:00:00Z",
+            "modifiedDate": "2022-10-28T07:15:07Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 3103,
+        "_links": {
+          "current": {
+            "href": "/companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-accountBalances?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-accountBalances"
+          },
+          "next": {
+            "href": "/companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-accountBalances?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Plaid",
+      "example": {
+        "results": [
+          {
+            "accountId": "3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB",
+            "balance": {
+              "current": 205.78
+            },
+            "date": "2022-10-13T00:00:00",
+            "modifiedDate": "2022-10-27T10:50:16Z"
+          },
+          {
+            "accountId": "3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB",
+            "balance": {
+              "current": 205.78
+            },
+            "date": "2022-10-14T00:00:00",
+            "modifiedDate": "2022-10-27T10:50:16Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 14,
+        "_links": {
+          "current": {
+            "href": "/companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-accountBalances?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-accountBalances"
+          },
+          "next": {
+            "href": "/companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-accountBalances?page=2&pageSize=2"
+          }
+        }
+      }
+    }
+  ]
+}

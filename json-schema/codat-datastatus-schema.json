@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataStatus",
+  "title": "Data status",
+  "description": "Describes the state of data in the Codat cache for a company and data type",
+  "type": "object",
+  "required": [
+    "dataType",
+    "currentStatus"
+  ],
+  "properties": {
+    "dataType": {
+      "title": "Data types",
+      "x-internal": true,
+      "type": "string",
+      "description": "Available data types",
+      "enum": [
+        "accountTransactions",
+        "balanceSheet",
+        "bankAccounts",
+        "bankTransactions",
+        "billCreditNotes",
+        "billPayments",
+        "bills",
+        "cashFlowStatement",
+        "chartOfAccounts",
+        "company",
+        "creditNotes",
+        "customers",
+        "directCosts",
+        "directIncomes",
+        "invoices",
+        "itemReceipts",
+        "items",
+        "journalEntries",
+        "journals",
+        "paymentMethods",
+        "payments",
+        "profitAndLoss",
+        "purchaseOrders",
+        "salesOrders",
+        "suppliers",
+        "taxRates",
+        "trackingCategories",
+        "transfers",
+        "banking-accountBalances",
+        "banking-accounts",
+        "banking-transactionCategories",
+        "banking-transactions",
+        "commerce-companyInfo",
+        "commerce-customers",
+        "commerce-disputes",
+        "commerce-locations",
+        "commerce-orders",
+        "commerce-paymentMethods",
+        "commerce-payments",
+        "commerce-productCategories",
+        "commerce-products",
+        "commerce-taxComponents",
+        "commerce-transactions"
+      ],
+      "example": "invoices"
+    },
+    "lastSuccessfulSync": {
+      "$ref": "#/components/schemas/DateTime"
+    },
+    "currentStatus": {
+      "$ref": "#/components/schemas/PullOperation/properties/status"
+    },
+    "latestSyncId": {
+      "type": "string",
+      "description": "Unique identifier for most recent sync of data type.",
+      "format": "uuid",
+      "example": "ad474a37-2003-478e-baee-9af9f1ec2fe3"
+    },
+    "latestSuccessfulSyncId": {
+      "type": "string",
+      "description": "Unique identifier for the most recent successful sync of data type.",
+      "format": "uuid",
+      "example": "8220fc90-55b6-47bc-9417-48ac6ea93101"
+    }
+  },
+  "examples": [
+    {
+      "dataType": "string",
+      "lastSuccessfulSync": "2022-01-01T13:00:00.000Z",
+      "currentStatus": "string",
+      "latestSyncId": "ad474a37-2003-478e-baee-9af9f1ec2fe3",
+      "latestSuccessfulSyncId": "8220fc90-55b6-47bc-9417-48ac6ea93101"
+    }
+  ]
+}

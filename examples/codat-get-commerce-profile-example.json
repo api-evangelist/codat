@@ -1,0 +1,76 @@
+{
+  "operationId": "get-commerce-profile",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-info",
+  "summary": "Get company commerce profile",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Example 1",
+      "example": {
+        "companyName": "Codat",
+        "companyLegalName": "Codat Ltd",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "301 Ink Rooms",
+            "line2": "28 Easton Street",
+            "city": "London",
+            "region": "England",
+            "country": "United Kingdom",
+            "postalCode": "WC1X 0BE"
+          },
+          {
+            "type": "Delivery",
+            "line1": "28 Easton Street",
+            "city": "London",
+            "country": "UK",
+            "postalCode": "WC1X 0BE"
+          }
+        ],
+        "phoneNumbers": [
+          {
+            "number": "02012 345678",
+            "type": "Landline"
+          },
+          {
+            "number": "07123 456789",
+            "type": "Mobile"
+          },
+          {
+            "number": "02012 345678",
+            "type": "Fax"
+          }
+        ],
+        "webLinks": [
+          {
+            "type": "Website",
+            "url": "https://www.codat.io/"
+          },
+          {
+            "type": "Social",
+            "url": "https://www.linkedin.com/company/codat-limited/"
+          }
+        ],
+        "registrationNumber": "5590111724",
+        "baseCurrency": "GBP",
+        "accountBalances": [
+          {
+            "available": 20053.23,
+            "pending": 2034.23,
+            "reserved": 517.23,
+            "currency": "GBP"
+          }
+        ],
+        "sourceUrls": {
+          "Api": "https://api.codat.io"
+        },
+        "createdDate": "2019-03-07T16:50:49",
+        "modifiedDate": "2022-03-10T15:42:13",
+        "sourceModifiedDate": "2021-06-10T01:48:49"
+      }
+    }
+  ]
+}

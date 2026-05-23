@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataTypeWriteWebhook",
+  "title": "Write data type webhook",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "ba29118f-5406-4e59-b05c-ba307ca38d01",
+      "description": "Unique identifier of the event."
+    },
+    "eventType": {
+      "type": "string",
+      "description": "The type of event.",
+      "examples": [
+        "bills.write.successful",
+        "bills.write.unsuccessful"
+      ]
+    },
+    "generatedDate": {
+      "$ref": "#/components/schemas/DateTime",
+      "description": "The date time in UTC the event was generated in Codat."
+    },
+    "payload": {
+      "$ref": "#/components/schemas/DataTypeWriteWebhook/definitions/dataTypeWriteWebhookPayload"
+    }
+  },
+  "definitions": {
+    "dataTypeWriteWebhookPayload": {
+      "title": "Payload",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the write request. This is also known as the push operation ID."
+        },
+        "type": {
+          "$ref": "#/components/schemas/DataTypeWriteWebhook/definitions/writeType"
+        },
+        "referenceCompany": {
+          "$ref": "#/components/schemas/Company/definitions/companyReference"
+        },
+        "connectionId": {
+          "$ref": "#/components/parameters/connectionId/schema"
+        },
+        "requestedOnDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date time in UTC the write request was submitted."
+        },
+        "completedOnDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date time in UTC the write request completed."
+        },
+        "status": {
+          "$ref": "#/components/schemas/DataTypeWriteWebhook/definitions/writeStatus"
+        },
+        "record": {
+          "$ref": "#/components/schemas/DataTypeWriteWebhook/definitions/dataTypeWriteWebhookRecord",
+          "nullable": true
+        },
+        "attachmentId": {
+          "type": "string",
+          "nullable": true,
+          "description": "Unique identifier for the uploaded attachment, null if no attachment uploaded."
+        }
+      }
+    },
+    "dataTypeWriteWebhookRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the data type created, updated, deleted, or had an attachment uploaded in the accounting platform."
+        }
+      }
+    },
+    "writeType": {
+      "title": "Write type",
+      "description": "Type of write request.",
+      "type": "string",
+      "enum": [
+        "Create",
+        "Update",
+        "Delete",
+        "UploadAttachment"
+      ]
+    },
+    "writeStatus": {
+      "title": "Write request status",
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Failed",
+        "Success",
+        "TimedOut"
+      ],
+      "description": "The current status of the write request, which is the same as the push operation status."
+    }
+  }
+}

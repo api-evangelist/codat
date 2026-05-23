@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SupplementalDataConfiguration",
+  "title": "Supplemental data configuration",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "supplementalDataConfig": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "title": "Supplemental data source configuration",
+        "description": "The client's defined name for the object.",
+        "properties": {
+          "dataSource": {
+            "type": "string",
+            "description": "The underlying endpoint of the source system which the configuration is targeting. "
+          },
+          "pullData": {
+            "type": "object",
+            "description": "The additional properties that are required when pulling records.",
+            "additionalProperties": {
+              "type": "string",
+              "description": "The client's defined name for the property with the value being the source system's property name which the mapping is targeting."
+            }
+          },
+          "pushData": {
+            "type": "object",
+            "description": "The additional properties that are required to create and/or update records.",
+            "additionalProperties": {
+              "type": "string",
+              "description": "The client's defined name for the property with the value being the source system's property name which the mapping is targeting."
+            }
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "supplementalDataConfig": {
+        "orders-supplemental-data": {
+          "dataSource": "/orders",
+          "pullData": {
+            "orderNumber": "order_num"
+          },
+          "pushData": {
+            "orderNumber": "order_num"
+          }
+        }
+      }
+    }
+  ]
+}

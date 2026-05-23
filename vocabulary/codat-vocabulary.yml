@@ -1,0 +1,42 @@
+name: Codat Domain Vocabulary
+provider: Codat
+providerId: codat
+description: Tag-derived vocabulary for the Codat API surface; sourced from openapi/ tags.
+terms:
+- term: Companies
+  description: Create and manage your SMB users' companies.
+- term: Connections
+  description: Create new and manage existing data connections for a company.
+- term: Bank statements
+  description: Retrieve banking data from linked bank accounts.
+- term: Sales
+  description: Retrieve standardized sales data from a linked commerce software.
+- term: Financial statements
+  description: Financial data and reports from a linked accounting software.
+- term: Liabilities
+  description: Debt and other liabilities.
+- term: Accounts payable
+  description: Data from a linked accounting software representing money the business owes money to its suppliers.
+- term: Accounts receivable
+  description: Data from a linked accounting software representing money owed to the business for sold goods or services.
+- term: Accounting bank data
+  description: Access bank transactions from an accounting software.
+- term: Transactions
+  description: Data from a linked accounting software representing transactions.
+- term: Company info
+  description: View company information fetched from the source platform.
+- term: Data integrity
+  description: Match mutable accounting data with immutable banking data to increase confidence in financial data.
+- term: Excel reports
+  description: Download reports in Excel format.
+- term: Manage data
+  description: Control how data is retrieved from an integration.
+- term: File upload
+  description: Endpoints to manage uploaded files.
+- term: Loan writeback
+  description: Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure
+    in your lending process to maintain an accurate position of a loan during the entire lending cycle.
+- term: Manage reports
+  description: Generate and review generated reports for a company.
+- term: Financial summary
+  description: View financial summary information for a company, including credit model reports and accounting score.

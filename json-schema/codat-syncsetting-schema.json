@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SyncSetting",
+  "title": "SyncSetting",
+  "description": "Describes how often, and how much history, should be fetched for the given data type when a pull operation is queued.",
+  "examples": [
+    {
+      "dataType": "invoices",
+      "fetchOnFirstLink": true,
+      "syncSchedule": 24,
+      "syncOrder": 0,
+      "syncFromUtc": "2020-01-01T12:00:00.000Z",
+      "syncFromWindow": 24,
+      "monthsToSync": 24,
+      "isLocked": true
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "dataType": {
+      "$ref": "#/components/schemas/DataStatus/properties/dataType"
+    },
+    "fetchOnFirstLink": {
+      "type": "boolean",
+      "description": "Whether this data type should be queued after a company has authorized a connection."
+    },
+    "syncSchedule": {
+      "type": "integer",
+      "example": 24,
+      "description": "Number of hours after which this data type should be refreshed."
+    },
+    "syncOrder": {
+      "type": "integer",
+      "description": "The sync in which data types are queued for a sync."
+    },
+    "syncFromUtc": {
+      "$ref": "#/components/schemas/DateTime",
+      "description": "Date from which data should be fetched. Set this *or* `syncFromWindow`."
+    },
+    "syncFromWindow": {
+      "type": "integer",
+      "example": 24,
+      "description": "Number of months of data to be fetched. Set this *or* `syncFromUTC`."
+    },
+    "monthsToSync": {
+      "type": "integer",
+      "example": 24,
+      "description": "Months of data to fetch, for report data types (`balanceSheet` & `profitAndLoss`) only."
+    },
+    "isLocked": {
+      "type": "boolean",
+      "description": "`True` if the [sync setting](https://docs.codat.io/knowledge-base/advanced-sync-settings) is locked."
+    }
+  },
+  "required": [
+    "dataType",
+    "fetchOnFirstLink",
+    "syncSchedule",
+    "syncOrder"
+  ]
+}

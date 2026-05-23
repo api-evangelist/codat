@@ -1,0 +1,213 @@
+{
+  "operationId": "get-commerce-customer",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-customers/{customerId}",
+  "summary": "Get customer",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "BigCommerce",
+      "example": {
+        "id": "1",
+        "customerName": "Amy Jones",
+        "emailAddress": "a.durbanjackson+amy@codat.io",
+        "defaultCurrency": "XXX",
+        "phone": "07770666777",
+        "addresses": [
+          {
+            "type": "Unknown",
+            "line1": "My Billing Address ./*drop table",
+            "city": "Portsmouth",
+            "region": "",
+            "country": "United Kingdom",
+            "postalCode": "PS13HJ"
+          },
+          {
+            "type": "Unknown",
+            "line1": "This is my address, I cant hit enter.",
+            "city": "Portsmouth",
+            "region": "",
+            "country": "United Kingdom",
+            "postalCode": "PS13HJ"
+          }
+        ],
+        "createdDate": "2022-06-15T15:54:15Z",
+        "modifiedDate": "2023-04-11T10:33:49Z",
+        "sourceModifiedDate": "2022-06-15T15:54:15Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clover",
+      "example": {
+        "id": "2CBJ8R898ZJAR",
+        "customerName": "",
+        "addresses": [],
+        "createdDate": "2021-09-22T13:10:12Z",
+        "modifiedDate": "2023-01-09T11:01:03Z",
+        "sourceModifiedDate": "0001-01-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie",
+      "example": {
+        "id": "cst_NUkBHQmekz",
+        "customerName": "Frod Baggins",
+        "emailAddress": "frodo.baggings@theshire.com",
+        "addresses": [],
+        "createdDate": "2022-01-18T11:41:54",
+        "modifiedDate": "2022-03-17T15:47:28Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie Test",
+      "example": {
+        "id": "cst_NUkBHQmekz",
+        "customerName": "Frod Baggins",
+        "emailAddress": "frodo.baggings@theshire.com",
+        "addresses": [],
+        "createdDate": "2022-01-18T11:41:54",
+        "modifiedDate": "2022-08-17T11:33:19Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "PrestaShop",
+      "example": {
+        "id": "2",
+        "customerName": "Bob Smith",
+        "emailAddress": "bob.smith@example.com",
+        "addresses": [
+          {
+            "type": "Unknown",
+            "line1": "1 test street",
+            "city": "City Test",
+            "region": "Virginia",
+            "country": "US",
+            "postalCode": "55678"
+          }
+        ],
+        "createdDate": "2021-09-02T07:54:26",
+        "modifiedDate": "2022-01-26T15:09:42Z",
+        "sourceModifiedDate": "2021-09-02T07:54:26"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "id": "5839032287390",
+        "customerName": "AL A",
+        "emailAddress": "a.macra@codat.io",
+        "addresses": [
+          {
+            "type": "Unknown",
+            "line1": "301 Ink Rooms, 28 Easton St, Farringdon",
+            "line2": "28 Easton St, Farringdon",
+            "city": "London",
+            "region": "England",
+            "country": "United Kingdom",
+            "postalCode": "WC1X 0BE"
+          }
+        ],
+        "createdDate": "2021-11-18T15:24:03",
+        "modifiedDate": "2023-02-10T15:18:25Z",
+        "sourceModifiedDate": "2021-11-18T15:24:03"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Square",
+      "example": {
+        "id": "FT9948H3VD6GF8MPDD5438KY1M",
+        "emailAddress": "fake@name.com",
+        "phone": "+441234567890",
+        "addresses": [
+          {
+            "type": "Unknown",
+            "line1": "1 Main Street",
+            "line2": "Flat 20",
+            "city": "London",
+            "region": "London",
+            "postalCode": "W1A 1AA"
+          }
+        ],
+        "createdDate": "2021-03-08T11:21:11Z",
+        "modifiedDate": "2022-08-02T10:27:32Z",
+        "sourceModifiedDate": "2021-03-08T11:21:11Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stripe Test",
+      "example": {
+        "id": "cus_LXdjls7KY5ZHaz",
+        "customerName": "Barry Smith",
+        "emailAddress": "barry@example.com",
+        "defaultCurrency": "gbp",
+        "addresses": [],
+        "note": "Test Subscription",
+        "createdDate": "2022-04-20T07:59:52Z",
+        "modifiedDate": "2022-09-30T11:18:27Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "WooCommerce",
+      "example": {
+        "id": "201694267",
+        "customerName": "Qa Test",
+        "emailAddress": "a.macra@codat.io",
+        "phone": "",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "",
+            "line2": "",
+            "city": "",
+            "region": "",
+            "country": "",
+            "postalCode": ""
+          }
+        ],
+        "createdDate": "2021-03-11T09:04:27",
+        "modifiedDate": "2021-07-13T16:19:00Z",
+        "sourceModifiedDate": "2021-03-11T09:07:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zettle",
+      "example": {
+        "id": "firstname.lastname@example.com",
+        "customerName": "Firstname Lastname",
+        "emailAddress": "firstname.lastname@example.com",
+        "addresses": [
+          {
+            "type": "Unknown",
+            "line1": "Line1",
+            "city": "City",
+            "country": "GB",
+            "postalCode": "TT1 1TT"
+          }
+        ],
+        "createdDate": "2021-01-07T16:17:34",
+        "modifiedDate": "2021-01-27T13:08:51Z",
+        "sourceModifiedDate": "2021-01-08T09:57:56"
+      }
+    }
+  ]
+}

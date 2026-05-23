@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingCreateBankTransactionsResponse",
+  "title": "Accounting: Create/update bank transaction response",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AccountingCreateBankTransactions"
+            },
+            {
+              "deprecated": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PushOperation"
+    }
+  ]
+}

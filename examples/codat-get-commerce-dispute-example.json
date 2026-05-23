@@ -1,0 +1,52 @@
+{
+  "operationId": "get-commerce-dispute",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-disputes/{disputeId}",
+  "summary": "Get dispute",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "id": "8502411422",
+        "disputedTransactions": [
+          {
+            "id": "3684116791454",
+            "type": "Order"
+          }
+        ],
+        "totalAmount": 175,
+        "currency": "GBP",
+        "status": "Processing",
+        "reason": "fraudulent",
+        "dueDate": "2021-03-28T00:00:00",
+        "createdDate": "2021-03-19T13:16:27",
+        "modifiedDate": "2023-02-10T15:18:22Z",
+        "sourceModifiedDate": "2021-03-28T11:00:17"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stripe Test",
+      "example": {
+        "id": "dp_1Hqhl8A8m8S1Gh7OJrvF3gsK",
+        "disputedTransactions": [
+          {
+            "id": "txn_1Hqhl8A8m8S1Gh7OtmAPNr9e",
+            "type": "Payment"
+          }
+        ],
+        "totalAmount": 25,
+        "currency": "GBP",
+        "status": "Processing",
+        "reason": "fraudulent",
+        "dueDate": "2020-12-02T23:59:59Z",
+        "createdDate": "2020-11-23T16:19:22Z",
+        "modifiedDate": "2022-09-30T11:18:27Z"
+      }
+    }
+  ]
+}

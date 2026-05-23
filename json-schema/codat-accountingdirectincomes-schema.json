@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingDirectIncomes",
+  "title": "Accounting: Direct incomes",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AccountingDirectIncome"
+          }
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PagingInfo"
+    }
+  ]
+}

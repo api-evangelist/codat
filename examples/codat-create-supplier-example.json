@@ -1,0 +1,19 @@
+{
+  "operationId": "create-supplier",
+  "method": "POST",
+  "path": "/companies/{companyId}/connections/{connectionId}/push/suppliers",
+  "summary": "Create supplier",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "73593",
+        "supplierName": "test 20230420 1004",
+        "contactName": "Joe Bloggs",
+        "status": "Active"
+      }
+    }
+  ],
+  "responseExamples": []
+}

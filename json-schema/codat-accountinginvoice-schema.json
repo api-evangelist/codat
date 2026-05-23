@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingInvoice",
+  "title": "Accounting: Invoice",
+  "description": "> **Invoices or bills?**\n>\n> We distinguish between invoices where the company *owes money* vs. *is owed money*. If the company issued an invoice, and is owed money (accounts receivable) we call this an Invoice.\n>\n> See [Bills](https://docs.codat.io/lending-api#/schemas/Bill) for the accounts payable equivalent of bills.\n\n## Overview\n\nAn invoice is an itemized record of goods sold or services provided to a [customer](https://docs.codat.io/lending-api#/schemas/Customer).\n\nIn Codat, an invoice contains details of:\n\n- The timeline of the invoice\u2014when it was raised, marked as paid, last edited, and so on.\n- How much the invoice is for, what portion of the invoice is tax or discounts, and what currency the amounts are represented in. \n- Who the invoice has been raised to; the _customer_.\n- The breakdown of what the invoice is for; the _line items_.\n- Any [payments](https://docs.codat.io/lending-api#/schemas/Payment) assigned to the invoice; the _payment allocations_.\n\n> **Invoice PDF downloads**  \n>\n> You can <a className=\"external\" href=\"https://docs.codat.io/lending-api#/operations/get-invoice-pdf\" target=\"_blank\">download a PDF version</a> of an invoice for supported integrations.\n> \n> The filename will be invoice-{number}.pdf.\n\n> **Referencing an invoice in Sage 50 and ClearBooks**\n>\n> In Sage 50 and ClearBooks, you may prefer to use the **invoiceNumber** to identify an invoice rather than the invoice **id**. Each time a draft invoice is submitted or printed, the draft **id** becomes void and a submitted invoice with a new **id** exists in its place. In both platforms, the **invoiceNumber** should remain the same.",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the invoice, unique to the company in the accounting software."
+        },
+        "invoiceNumber": {
+          "type": "string",
+          "nullable": true,
+          "description": "Friendly reference for the invoice. If available, this appears in the file name of invoice attachments."
+        },
+        "customerRef": {
+          "$ref": "#/components/schemas/AccountingCustomer/definitions/accountingCustomerRef",
+          "description": "Reference to the customer the invoice has been issued to."
+        },
+        "salesOrderRefs": {
+          "type": "array",
+          "nullable": true,
+          "description": "List of references to related Sales orders.",
+          "items": {
+            "title": "Sales order reference",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier to a record in `dataType`."
+              },
+              "dataType": {
+                "type": "string",
+                "description": "The underlying data type associated to the reference `id`.",
+                "enum": [
+                  "salesOrders"
+                ]
+              }
+            }
+          }
+        },
+        "issueDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Date of the invoice as recorded in the accounting system."
+        },
+        "dueDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Date the customer is due to be paid by."
+        },
+        "paidOnDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Date the invoice was marked as paid in the accounting system. If this field is not available from the accounting software, it is calculated by Codat using associated payments."
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "Currency of the invoice."
+        },
+        "currencyRate": {
+          "$ref": "#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate"
+        },
+        "lineItems": {
+          "type": "array",
+          "nullable": true,
+          "description": "An array of line items.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingInvoice/definitions/invoiceLineItem"
+          }
+        },
+        "paymentAllocations": {
+          "type": "array",
+          "nullable": true,
+          "description": "An array of payment allocations.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingPaymentAllocation"
+          }
+        },
+        "withholdingTax": {
+          "type": "array",
+          "nullable": true,
+          "items": {
+            "$ref": "#/components/schemas/AccountingBill/allOf/0/properties/withholdingTax/items"
+          }
+        },
+        "totalDiscount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Numerical value of discounts applied to the invoice."
+        },
+        "subTotal": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Total amount of the invoice excluding any taxes."
+        },
+        "additionalTaxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Additional tax amount applied to invoice."
+        },
+        "additionalTaxPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Percentage rate of any additional tax applied to the invoice."
+        },
+        "totalTaxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Amount of tax on the invoice."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Amount of the invoice, inclusive of tax."
+        },
+        "amountDue": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Amount outstanding on the invoice."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Percentage rate (from 0 to 100) of discounts applied to the invoice. For example: A 5% discount will return a value of `5`, not `0.05`."
+        },
+        "status": {
+          "$ref": "#/components/schemas/AccountingInvoice/definitions/invoiceStatus"
+        },
+        "note": {
+          "type": "string",
+          "nullable": true,
+          "description": "Any additional information about the invoice. Where possible, Codat links to a data field in the accounting software that is publicly available. This means that the contents of the note field are included when an invoice is emailed from the accounting software to the customer."
+        },
+        "metadata": {
+          "$ref": "#/components/schemas/Metadata"
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "required": [
+    "issueDate",
+    "totalTaxAmount",
+    "totalAmount",
+    "amountDue",
+    "status"
+  ],
+  "definitions": {
+    "invoiceLineItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "Friendly name of the goods or services provided."
+        },
+        "unitAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Price of each unit of goods or services."
+        },
+        "quantity": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Number of units of goods or services provided."
+        },
+        "discountAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Numerical value of any discounts applied."
+        },
+        "subTotal": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Amount of the line, inclusive of discounts but exclusive of tax."
+        },
+        "taxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Amount of tax for the line."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Total amount of the line, including tax. When pushing invoices to Xero, the total amount is exclusive of tax to allow automatic calculations if a tax rate or tax amount is not specified."
+        },
+        "accountRef": {
+          "$ref": "#/components/schemas/AccountingAccount/definitions/accountRef",
+          "description": "Reference to the account to which the line item is linked."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Percentage rate (from 0 to 100) of any discounts applied to the unit amount."
+        },
+        "taxRateRef": {
+          "$ref": "#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/taxRateRef",
+          "description": "Reference to the tax rate to which the line item is linked."
+        },
+        "itemRef": {
+          "$ref": "#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/itemRef",
+          "description": "Reference to the item the line is linked to."
+        },
+        "trackingCategoryRefs": {
+          "type": "array",
+          "nullable": true,
+          "description": "Reference to the tracking categories to which the line item is linked.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingTrackingCategory/definitions/trackingCategoryRef"
+          }
+        },
+        "tracking": {
+          "$ref": "#/components/schemas/AccountsReceivableTracking"
+        },
+        "isDirectIncome": {
+          "type": "boolean",
+          "description": "The invoice is a direct income if `True`."
+        }
+      },
+      "required": [
+        "unitAmount",
+        "quantity"
+      ]
+    },
+    "invoiceStatus": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Draft",
+        "Submitted",
+        "PartiallyPaid",
+        "Paid",
+        "Void"
+      ],
+      "description": "Current state of the invoice:\n\n- `Draft` - Invoice hasn't been submitted to the supplier. It may be in a pending state or is scheduled for future submission, for example by email.\n- `Submitted` - Invoice is no longer a draft. It has been processed and, or, sent to the customer. In this state, it will impact the ledger. It also has no payments made against it, meaning `amountDue` will usually equal `totalAmount` (unless tax is witheld).\n- `PartiallyPaid` - The balance paid against the invoice is positive, but less than the total invoice amount, meaning `0 < amountDue < totalAmount`.\n- `Paid` - Invoice is paid in full. This includes if the invoice has been credited or overpaid, meaning `amountDue == 0`.\n- `Void` - An invoice can become Void when it's deleted, refunded, written off, or cancelled. A voided invoice may still be PartiallyPaid, and so all outstanding amounts on voided invoices are removed from the accounts receivable account."
+    }
+  }
+}

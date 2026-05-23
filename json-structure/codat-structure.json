@@ -1,0 +1,2429 @@
+{
+  "provider": "Codat",
+  "providerId": "codat",
+  "kind": "json-structure",
+  "description": "Structural overview of the Codat API surface; extracted from openapi/.",
+  "schemaCount": 144,
+  "operationCount": 156,
+  "schemas": [
+    {
+      "name": "AccountCategoriesUpdatedWebhook",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "AccountingAccount",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingAccounts",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingAccountTransaction",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingAccountTransactions",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingAddress",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "type"
+      ]
+    },
+    {
+      "name": "AccountingAgedCreditorReport",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "AccountingAgedDebtorReport",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "AccountingAttachment",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingBalanceSheet",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "reports"
+      ]
+    },
+    {
+      "name": "AccountingBankAccount",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingBankAccounts",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingBankAccountType",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingBankTransaction",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingBankTransactions",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingBill",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "issueDate",
+        "status",
+        "subTotal",
+        "taxAmount",
+        "totalAmount"
+      ]
+    },
+    {
+      "name": "AccountingBillCreditNote",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "totalAmount",
+        "totalDiscount",
+        "subTotal",
+        "totalTaxAmount",
+        "discountPercentage",
+        "status"
+      ]
+    },
+    {
+      "name": "AccountingBillCreditNotes",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingBillPayment",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "date"
+      ]
+    },
+    {
+      "name": "AccountingBillPayments",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingBills",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingCashFlowStatement",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "reports",
+        "reportBasis",
+        "reportInput"
+      ]
+    },
+    {
+      "name": "AccountingCompanyInfo",
+      "type": "object",
+      "propertyCount": 14,
+      "required": []
+    },
+    {
+      "name": "AccountingCreateAccountResponse",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingCreateBankAccountResponse",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingCreateBankTransactions",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "AccountingCreateBankTransactionsResponse",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingCreateDirectCostResponse",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingCreatePaymentResponse",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingCreateSupplierResponse",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingCreateTransferResponse",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingCreditNote",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "totalAmount",
+        "totalDiscount",
+        "subTotal",
+        "totalTaxAmount",
+        "discountPercentage",
+        "remainingCredit",
+        "status"
+      ]
+    },
+    {
+      "name": "AccountingCreditNotes",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingCustomer",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "status"
+      ]
+    },
+    {
+      "name": "AccountingCustomers",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingDirectCost",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingDirectCosts",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingDirectIncome",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "issueDate",
+        "currency",
+        "lineItems",
+        "paymentAllocations",
+        "subTotal",
+        "taxAmount",
+        "totalAmount"
+      ]
+    },
+    {
+      "name": "AccountingDirectIncomes",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingInvoice",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "issueDate",
+        "totalTaxAmount",
+        "totalAmount",
+        "amountDue",
+        "status"
+      ]
+    },
+    {
+      "name": "AccountingInvoices",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingJournal",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingJournalEntries",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingJournalEntry",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingJournals",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingPayment",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "date"
+      ]
+    },
+    {
+      "name": "AccountingPaymentAllocation",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "payment",
+        "allocation"
+      ]
+    },
+    {
+      "name": "AccountingPaymentMethod",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingPayments",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingProfitAndLossReport",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "reports",
+        "reportBasis"
+      ]
+    },
+    {
+      "name": "AccountingRecordRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "AccountingSupplier",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "status"
+      ]
+    },
+    {
+      "name": "AccountingSuppliers",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingTrackingCategory",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingTransfer",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountingTransfers",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AccountsPayableTracking",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "categoryRefs",
+        "isBilledTo",
+        "isRebilledTo"
+      ]
+    },
+    {
+      "name": "AccountsReceivableTracking",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "categoryRefs",
+        "isBilledTo",
+        "isRebilledTo"
+      ]
+    },
+    {
+      "name": "AgedCurrencyOutstanding",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Attachments",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "BankFeedBankAccountMapping",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "sourceAccountId"
+      ]
+    },
+    {
+      "name": "BankFeedBankAccountMappingResponse",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "BankFeedMapping",
+      "type": "object",
+      "propertyCount": 10,
+      "required": []
+    },
+    {
+      "name": "BankingAccount",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "id",
+        "name",
+        "type",
+        "balance",
+        "identifiers",
+        "currency",
+        "institution"
+      ]
+    },
+    {
+      "name": "BankingAccountBalance",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "accountId",
+        "balance",
+        "date"
+      ]
+    },
+    {
+      "name": "BankingAccountBalances",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "BankingAccounts",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "BankingTransaction",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "id",
+        "accountId",
+        "currency"
+      ]
+    },
+    {
+      "name": "BankingTransactionCategories",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "BankingTransactionCategory",
+      "type": "object",
+      "propertyCount": 0,
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "name": "BankingTransactions",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "BankStatementUploadConfiguration",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "CategorizedBankStatementAccounts",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CategorizedBankStatementTransactions",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "ClientRateLimitWebhook",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "CommerceAddress",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "CommerceCompanyInfo",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceCustomer",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceCustomers",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceDispute",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceDisputes",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceLocation",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceLocations",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceOrder",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceOrders",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommercePayment",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommercePaymentMethod",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommercePaymentMethods",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommercePayments",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceProduct",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceProductCategories",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceProductCategory",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceProducts",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceRecordRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    {
+      "name": "CommerceReport",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "CommerceTaxComponent",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceTransaction",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CommerceTransactions",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "Companies",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "Company",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "CompanyRequestBody",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "CompanyUpdateRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Connection",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "id",
+        "integrationId",
+        "integrationKey",
+        "sourceId",
+        "platformName",
+        "linkUrl",
+        "status",
+        "created",
+        "sourceType"
+      ]
+    },
+    {
+      "name": "Connections",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "DataIntegrityDetail",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "DataIntegrityDetails",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "DataIntegrityStatus",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "DataIntegrityStatuses",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "DataIntegritySummaries",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "DataIntegritySummary",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "DataStatus",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "dataType",
+        "currentStatus"
+      ]
+    },
+    {
+      "name": "DataStatusResponse",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "DataType",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "DateTime",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "EndUploadSessionRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "EnhancedCashFlowTransactions",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "EnhancedFinancialReport",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "EnhancedInvoicesReport",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ErrorMessage",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "ExcelStatus",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "File",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Files",
+      "type": "array",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "FileUpload",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "file"
+      ]
+    },
+    {
+      "name": "FinancialSummary",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "LoanSummary",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "LoanTransactions",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Metadata",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "PagingInfo",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "pageNumber",
+        "pageSize",
+        "totalResults",
+        "_links"
+      ]
+    },
+    {
+      "name": "PaymentMethodRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "id"
+      ]
+    },
+    {
+      "name": "PhoneNumber",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "type"
+      ]
+    },
+    {
+      "name": "ProjectRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "id"
+      ]
+    },
+    {
+      "name": "PullOperation",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "id",
+        "companyId",
+        "connectionId",
+        "dataType",
+        "status",
+        "requested",
+        "progress",
+        "isCompleted",
+        "isErrored"
+      ]
+    },
+    {
+      "name": "PullOperations",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "PushOperation",
+      "type": "object",
+      "propertyCount": 13,
+      "required": [
+        "companyId",
+        "pushOperationKey",
+        "dataConnectionKey",
+        "requestedOnUtc",
+        "status",
+        "statusCode"
+      ]
+    },
+    {
+      "name": "PushOperations",
+      "type": null,
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "PushOption",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "displayName",
+        "required",
+        "type"
+      ]
+    },
+    {
+      "name": "ReportLine",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "value"
+      ]
+    },
+    {
+      "name": "ReportOperation",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "SourceAccount",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "id"
+      ]
+    },
+    {
+      "name": "SourceAccountV2",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "id",
+        "accountName",
+        "accountType",
+        "accountNumber",
+        "currency",
+        "balance"
+      ]
+    },
+    {
+      "name": "StartUploadSessionRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "SupplementalData",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ThirdPartySchema",
+      "type": "object",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "WebLink",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/companies",
+      "operationId": "list-companies",
+      "summary": "List companies",
+      "tags": [
+        "Companies"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies",
+      "operationId": "create-company",
+      "summary": "Create company",
+      "tags": [
+        "Companies"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}",
+      "operationId": "get-company",
+      "summary": "Get company",
+      "tags": [
+        "Companies"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/companies/{companyId}",
+      "operationId": "replace-company",
+      "summary": "Replace company",
+      "tags": [
+        "Companies"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/companies/{companyId}",
+      "operationId": "delete-company",
+      "summary": "Delete a company",
+      "tags": [
+        "Companies"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/companies/{companyId}",
+      "operationId": "update-company",
+      "summary": "Update company",
+      "tags": [
+        "Companies"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections",
+      "operationId": "list-connections",
+      "summary": "List connections",
+      "tags": [
+        "Connections"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections",
+      "operationId": "create-connection",
+      "summary": "Create connection",
+      "tags": [
+        "Connections"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}",
+      "operationId": "get-connection",
+      "summary": "Get connection",
+      "tags": [
+        "Connections"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/companies/{companyId}/connections/{connectionId}",
+      "operationId": "delete-connection",
+      "summary": "Delete connection",
+      "tags": [
+        "Connections"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/companies/{companyId}/connections/{connectionId}",
+      "operationId": "unlink-connection",
+      "summary": "Unlink connection",
+      "tags": [
+        "Connections"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/data/all",
+      "operationId": "refresh-all-data-types",
+      "summary": "Refresh all data",
+      "tags": [
+        "Manage data"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/dataStatus",
+      "operationId": "get-data-status",
+      "summary": "Get data status",
+      "tags": [
+        "Manage data"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/data/queue/{dataType}",
+      "operationId": "refresh-data-type",
+      "summary": "Refresh data type",
+      "tags": [
+        "Manage data"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/history",
+      "operationId": "list-pull-operations",
+      "summary": "List pull operations",
+      "tags": [
+        "Manage data"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/history/{datasetId}",
+      "operationId": "get-pull-operation",
+      "summary": "Get pull operation",
+      "tags": [
+        "Manage data"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/companies/{companyId}/assess/dataTypes/{dataType}/dataIntegrity/status",
+      "operationId": "get-data-integrity-status",
+      "summary": "Get data integrity status",
+      "tags": [
+        "Data integrity"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/companies/{companyId}/assess/dataTypes/{dataType}/dataIntegrity/summaries",
+      "operationId": "get-data-integrity-summaries",
+      "summary": "Get data integrity summaries",
+      "tags": [
+        "Data integrity"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/companies/{companyId}/assess/dataTypes/{dataType}/dataIntegrity/details",
+      "operationId": "list-data-integrity-details",
+      "summary": "List data integrity details",
+      "tags": [
+        "Data integrity"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/enhancedProfitAndLoss/accounts",
+      "operationId": "get-categorized-profit-and-loss-statement",
+      "summary": "Get categorized profit and loss statement",
+      "tags": [
+        "Financial statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/enhancedBalanceSheet/accounts",
+      "operationId": "get-categorized-balance-sheet-statement",
+      "summary": "Get categorized balance sheet statement",
+      "tags": [
+        "Financial statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/enhancedCashFlow/transactions",
+      "operationId": "get-categorized-bank-statement",
+      "summary": "Get categorized bank statement",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/enhancedInvoices",
+      "operationId": "list-reconciled-invoices",
+      "summary": "List reconciled invoices",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/liabilities/loans/transactions",
+      "operationId": "list-loan-transactions",
+      "summary": "List loan transactions",
+      "tags": [
+        "Liabilities"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/reports/liabilities/loans/transactions",
+      "operationId": "generate-loan-transactions",
+      "summary": "Generate loan transactions report",
+      "tags": [
+        "Liabilities"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/liabilities/loans",
+      "operationId": "get-loan-summary",
+      "summary": "Get loan summaries",
+      "tags": [
+        "Liabilities"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/reports/liabilities/loans",
+      "operationId": "generate-loan-summary",
+      "summary": "Generate loan summaries report",
+      "tags": [
+        "Liabilities"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/revenue",
+      "operationId": "get-commerce-revenue-metrics",
+      "summary": "Get commerce revenue metrics",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/orders",
+      "operationId": "get-commerce-orders-report",
+      "summary": "Get orders report",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/refunds",
+      "operationId": "get-commerce-refunds-report",
+      "summary": "Get refunds report",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/customerRetention",
+      "operationId": "get-commerce-customer-retention-metrics",
+      "summary": "Get customer retention metrics",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/lifetimeValue",
+      "operationId": "get-commerce-lifetime-value-metrics",
+      "summary": "Get lifetime value metrics",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/companies/{companyId}/assess/excel",
+      "operationId": "get-excel-report-generation-status",
+      "summary": "Get Excel report status",
+      "tags": [
+        "Excel reports"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/data/companies/{companyId}/assess/excel",
+      "operationId": "generate-excel-report",
+      "summary": "Generate Excel report",
+      "tags": [
+        "Excel reports"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/data/companies/{companyId}/assess/excel/download",
+      "operationId": "download-excel-report",
+      "summary": "Download Excel report",
+      "tags": [
+        "Excel reports"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/accountTransactions",
+      "operationId": "list-accounting-account-transactions",
+      "summary": "List account transactions",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/accountTransactions/{accountTransactionId}",
+      "operationId": "get-accounting-account-transaction",
+      "summary": "Get account transaction",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/accounts",
+      "operationId": "list-accounting-accounts",
+      "summary": "List accounts",
+      "tags": [
+        "Financial statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/accounts/{accountId}",
+      "operationId": "get-accounting-account",
+      "summary": "Get account",
+      "tags": [
+        "Financial statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/billCreditNotes",
+      "operationId": "list-accounting-bill-credit-notes",
+      "summary": "List bill credit notes",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/billCreditNotes/{billCreditNoteId}",
+      "operationId": "get-accounting-bill-credit-note",
+      "summary": "Get bill credit note",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/billPayments",
+      "operationId": "list-accounting-bill-payments",
+      "summary": "List bill payments",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/billPayments/{billPaymentId}",
+      "operationId": "get-accounting-bill-payment",
+      "summary": "Get bill payment",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/bills",
+      "operationId": "list-accounting-bills",
+      "summary": "List bills",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/bills/{billId}",
+      "operationId": "get-accounting-bill",
+      "summary": "Get bill",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/bills/{billId}/attachments",
+      "operationId": "list-accounting-bill-attachments",
+      "summary": "List bill attachments",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/bills/{billId}/attachments/{attachmentId}",
+      "operationId": "get-accounting-bill-attachment",
+      "summary": "Get bill attachment",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/bills/{billId}/attachments/{attachmentId}/download",
+      "operationId": "download-accounting-bill-attachment",
+      "summary": "Download bill attachment",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/creditNotes",
+      "operationId": "list-accounting-credit-notes",
+      "summary": "List credit notes",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/creditNotes/{creditNoteId}",
+      "operationId": "get-accounting-credit-note",
+      "summary": "Get credit note",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/customers",
+      "operationId": "list-accounting-customers",
+      "summary": "List customers",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/customers/{customerId}",
+      "operationId": "get-accounting-customer",
+      "summary": "Get customer",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/customers/{customerId}/attachments",
+      "operationId": "list-accounting-customer-attachments",
+      "summary": "List customer attachments",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/customers/{customerId}/attachments/{attachmentId}",
+      "operationId": "get-accounting-customer-attachment",
+      "summary": "Get customer attachment",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/customers/{customerId}/attachments/{attachmentId}/download",
+      "operationId": "download-accounting-customer-attachment",
+      "summary": "Download customer attachment",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/directCosts",
+      "operationId": "list-accounting-direct-costs",
+      "summary": "List direct costs",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/directCosts/{directCostId}",
+      "operationId": "get-accounting-direct-cost",
+      "summary": "Get direct cost",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/directCosts/{directCostId}/attachments/{attachmentId}",
+      "operationId": "get-accounting-direct-cost-attachment",
+      "summary": "Get direct cost attachment",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/directCosts/{directCostId}/attachments/{attachmentId}/download",
+      "operationId": "download-accounting-direct-cost-attachment",
+      "summary": "Download direct cost attachment",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/directCosts/{directCostId}/attachments",
+      "operationId": "list-accounting-direct-cost-attachments",
+      "summary": "List direct cost attachments",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/directIncomes",
+      "operationId": "list-accounting-direct-incomes",
+      "summary": "List direct incomes",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/directIncomes/{directIncomeId}",
+      "operationId": "get-accounting-direct-income",
+      "summary": "Get direct income",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/directIncomes/{directIncomeId}/attachments/{attachmentId}",
+      "operationId": "get-accounting-direct-income-attachment",
+      "summary": "Get direct income attachment",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/directIncomes/{directIncomeId}/attachments/{attachmentId}/download",
+      "operationId": "download-accounting-direct-income-attachment",
+      "summary": "Download direct income attachment",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/directIncomes/{directIncomeId}/attachments",
+      "operationId": "list-accounting-direct-income-attachments",
+      "summary": "List direct income attachments",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/info",
+      "operationId": "get-accounting-profile",
+      "summary": "Get company accounting profile",
+      "tags": [
+        "Company info"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/invoices",
+      "operationId": "list-accounting-invoices",
+      "summary": "List invoices",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/invoices/{invoiceId}",
+      "operationId": "get-accounting-invoice",
+      "summary": "Get invoice",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/invoices/{invoiceId}/pdf",
+      "operationId": "download-accounting-invoice-pdf",
+      "summary": "Get invoice as PDF",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/invoices/{invoiceId}/attachments",
+      "operationId": "list-accounting-invoice-attachments",
+      "summary": "List invoice attachments",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/invoices/{invoiceId}/attachments/{attachmentId}",
+      "operationId": "get-accounting-invoice-attachment",
+      "summary": "Get invoice attachment",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/invoices/{invoiceId}/attachments/{attachmentId}/download",
+      "operationId": "download-accounting-invoice-attachment",
+      "summary": "Download invoice attachment",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/journalEntries",
+      "operationId": "list-accounting-journal-entries",
+      "summary": "List journal entries",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/journalEntries/{journalEntryId}",
+      "operationId": "get-accounting-journal-entry",
+      "summary": "Get journal entry",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/journals",
+      "operationId": "list-accounting-journals",
+      "summary": "List journals",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/journals/{journalId}",
+      "operationId": "get-accounting-journal",
+      "summary": "Get journal",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/payments",
+      "operationId": "list-accounting-payments",
+      "summary": "List payments",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/payments/{paymentId}",
+      "operationId": "get-accounting-payment",
+      "summary": "Get payment",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/suppliers",
+      "operationId": "list-accounting-suppliers",
+      "summary": "List suppliers",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/suppliers/{supplierId}",
+      "operationId": "get-accounting-supplier",
+      "summary": "Get supplier",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/suppliers/{supplierId}/attachments",
+      "operationId": "list-accounting-supplier-attachments",
+      "summary": "List supplier attachments",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/suppliers/{supplierId}/attachments/{attachmentId}",
+      "operationId": "get-accounting-supplier-attachment",
+      "summary": "Get supplier attachment",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/suppliers/{supplierId}/attachments/{attachmentId}/download",
+      "operationId": "download-accounting-supplier-attachment",
+      "summary": "Download supplier attachment",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/transfers",
+      "operationId": "list-accounting-transfers",
+      "summary": "List transfers",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/transfers/{transferId}",
+      "operationId": "get-accounting-transfer",
+      "summary": "Get transfer",
+      "tags": [
+        "Transactions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/bankAccounts",
+      "operationId": "list-accounting-bank-accounts",
+      "summary": "List bank accounts",
+      "tags": [
+        "Accounting bank data"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/bankAccounts/{accountId}",
+      "operationId": "get-accounting-bank-account",
+      "summary": "Get bank account",
+      "tags": [
+        "Accounting bank data"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/bankAccounts/{accountId}/bankTransactions",
+      "operationId": "list-accounting-bank-account-transactions",
+      "summary": "List bank account transactions",
+      "tags": [
+        "Accounting bank data"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/agedDebtor/available",
+      "operationId": "is-aged-debtors-report-available",
+      "summary": "Aged debtors report available",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/agedDebtor",
+      "operationId": "get-accounting-aged-debtors-report",
+      "summary": "Aged debtors report",
+      "tags": [
+        "Accounts receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/agedCreditor/available",
+      "operationId": "is-aged-creditors-report-available",
+      "summary": "Aged creditors report available",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/agedCreditor",
+      "operationId": "get-accounting-aged-creditors-report",
+      "summary": "Aged creditors report",
+      "tags": [
+        "Accounts payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/financials/balanceSheet",
+      "operationId": "get-accounting-balance-sheet",
+      "summary": "Get balance sheet",
+      "tags": [
+        "Financial statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/financials/profitAndLoss",
+      "operationId": "get-accounting-profit-and-loss",
+      "summary": "Get profit and loss",
+      "tags": [
+        "Financial statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/data/financials/cashFlowStatement",
+      "operationId": "get-accounting-cash-flow-statement",
+      "summary": "Get cash flow statement",
+      "tags": [
+        "Financial statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/banking-accountBalances",
+      "operationId": "list-banking-account-balances",
+      "summary": "List account balances",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/banking-accounts",
+      "operationId": "list-banking-accounts",
+      "summary": "List accounts",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/banking-accounts/{accountId}",
+      "operationId": "get-banking-account",
+      "summary": "Get account",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/banking-transactions",
+      "operationId": "list-banking-transactions",
+      "summary": "List transactions",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/banking-transactions/{transactionId}",
+      "operationId": "get-banking-transaction",
+      "summary": "Get bank transaction",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/banking-transactionCategories",
+      "operationId": "list-banking-transaction-categories",
+      "summary": "List transaction categories",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/banking-transactionCategories/{transactionCategoryId}",
+      "operationId": "get-banking-transaction-category",
+      "summary": "Get transaction category",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-customers",
+      "operationId": "list-commerce-customers",
+      "summary": "List customers",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-customers/{customerId}",
+      "operationId": "get-commerce-customer",
+      "summary": "Get customer",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-disputes",
+      "operationId": "list-commerce-disputes",
+      "summary": "List disputes",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-disputes/{disputeId}",
+      "operationId": "get-commerce-dispute",
+      "summary": "Get dispute",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-info",
+      "operationId": "get-commerce-profile",
+      "summary": "Get company commerce profile",
+      "tags": [
+        "Company info"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-locations",
+      "operationId": "list-commerce-locations",
+      "summary": "List locations",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-locations/{locationId}",
+      "operationId": "get-commerce-location",
+      "summary": "Get location",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-orders",
+      "operationId": "list-commerce-orders",
+      "summary": "List orders",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-orders/{orderId}",
+      "operationId": "get-commerce-order",
+      "summary": "Get order",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-paymentMethods",
+      "operationId": "list-commerce-payment-methods",
+      "summary": "List payment methods",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-paymentMethods/{paymentMethodId}",
+      "operationId": "get-commerce-payment-method",
+      "summary": "Get payment method",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-payments",
+      "operationId": "list-commerce-payments",
+      "summary": "List payments",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-payments/{paymentId}",
+      "operationId": "get-commerce-payment",
+      "summary": "Get payment",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-productCategories",
+      "operationId": "list-commerce-product-categories",
+      "summary": "List product categories",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-productCategories/{productId}",
+      "operationId": "get-commerce-product-category",
+      "summary": "Get product category",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-products",
+      "operationId": "list-commerce-products",
+      "summary": "List products",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-products/{productId}",
+      "operationId": "get-commerce-product",
+      "summary": "Get product",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-transactions",
+      "operationId": "list-commerce-transactions",
+      "summary": "List transactions",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-transactions/{transactionId}",
+      "operationId": "get-commerce-transaction",
+      "summary": "Get transaction",
+      "tags": [
+        "Sales"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/files",
+      "operationId": "list-files",
+      "summary": "List all files uploaded by a company",
+      "tags": [
+        "File upload"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/files/download",
+      "operationId": "download-files",
+      "summary": "Download all files for a company",
+      "tags": [
+        "File upload"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/files",
+      "operationId": "upload-files",
+      "summary": "Upload files for a company",
+      "tags": [
+        "File upload"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/options/bankAccounts",
+      "operationId": "get-create-update-bankAccounts-model",
+      "summary": "Get create/update bank account model",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/push/bankAccounts",
+      "operationId": "create-bank-account",
+      "summary": "Create bank account",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/options/chartOfAccounts",
+      "operationId": "get-create-chartOfAccounts-model",
+      "summary": "Get create account model",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/push/accounts",
+      "operationId": "create-account",
+      "summary": "Create account",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/connectionInfo/bankFeedAccounts",
+      "operationId": "create-source-account",
+      "summary": "Create source account",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/bankFeedAccounts/mapping",
+      "operationId": "get-bank-account-mapping",
+      "summary": "List bank feed account mappings",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/bankFeedAccounts/mapping",
+      "operationId": "create-bank-account-mapping",
+      "summary": "Create bank feed account mapping",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/options/suppliers",
+      "operationId": "get-create-update-suppliers-model",
+      "summary": "Get create/update supplier model",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/push/suppliers",
+      "operationId": "create-supplier",
+      "summary": "Create supplier",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/options/transfers",
+      "operationId": "get-create-transfers-model",
+      "summary": "Get create transfer model",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/push/transfers",
+      "operationId": "create-transfer",
+      "summary": "Create transfer",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/options/bankAccounts/{accountId}/bankTransactions",
+      "operationId": "get-create-bank-transactions-model",
+      "summary": "Get create bank account transactions model",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/push/bankAccounts/{accountId}/bankTransactions",
+      "operationId": "create-bank-transactions",
+      "summary": "Create bank account transactions",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/options/directCosts",
+      "operationId": "get-create-directCosts-model",
+      "summary": "Get create direct cost model",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/push/directCosts",
+      "operationId": "create-direct-cost",
+      "summary": "Create direct cost",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/options/payments",
+      "operationId": "get-create-payment-model",
+      "summary": "Get create payment model",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/push/payments",
+      "operationId": "create-payment",
+      "summary": "Create payment",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/push/{pushOperationKey}",
+      "operationId": "get-create-operation",
+      "summary": "Get create operation",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/push",
+      "operationId": "list-create-operations",
+      "summary": "List create operations",
+      "tags": [
+        "Loan writeback"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/connections/{connectionId}/bankStatements/upload/configuration",
+      "operationId": "get-bank-statement-upload-configuration",
+      "summary": "Get upload configuration",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/bankStatements/upload/configuration",
+      "operationId": "set-bank-statement-upload-configuration",
+      "summary": "Set upload configuration",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/bankStatements/upload/startSession",
+      "operationId": "start-bank-statement-upload-session",
+      "summary": "Start upload session",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/bankStatements/upload/dataset/{datasetId}/upload",
+      "operationId": "upload-bank-statement-data",
+      "summary": "Upload data",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/connections/{connectionId}/bankStatements/upload/dataset/{datasetId}/endSession",
+      "operationId": "end-bank-statement-upload-session",
+      "summary": "End upload session",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies/{companyId}/reports/{reportType}",
+      "operationId": "generate-report",
+      "summary": "Generate report",
+      "tags": [
+        "Manage reports"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/{reportType}/{reportId}/status",
+      "operationId": "get-report-status",
+      "summary": "Get report status",
+      "tags": [
+        "Manage reports"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/categorizedBankStatement/{reportId}/transactions",
+      "operationId": "get-categorized-bank-statement-transactions",
+      "summary": "Get categorized bank statement transactions",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/categorizedBankStatement/{reportId}/accounts",
+      "operationId": "list-categorized-bank-statement-accounts",
+      "summary": "List categorized bank statement accounts",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/categorizedBankStatement/{reportId}/excel",
+      "operationId": "download-categorized-bank-statement-excel",
+      "summary": "Download categorized bank statement Excel",
+      "tags": [
+        "Bank statements"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/creditModel/{reportId}/excel",
+      "operationId": "download-credit-model-excel",
+      "summary": "Download credit model Excel",
+      "tags": [
+        "Financial summary"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports",
+      "operationId": "list-reports",
+      "summary": "List reports",
+      "tags": [
+        "Manage reports"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{companyId}/reports/creditModel/{reportId}/financialSummary",
+      "operationId": "get-financial-summary",
+      "summary": "Get financial summary insights",
+      "tags": [
+        "Financial summary"
+      ]
+    }
+  ]
+}

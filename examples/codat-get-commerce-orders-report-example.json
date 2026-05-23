@@ -1,0 +1,117 @@
+{
+  "operationId": "get-commerce-orders-report",
+  "method": "GET",
+  "path": "/data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/orders",
+  "summary": "Get orders report",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "example": [
+        {
+          "reportInfo": {
+            "name": "orders",
+            "displayName": "Orders"
+          },
+          "dimensions": [
+            {
+              "index": 0,
+              "displayName": "Period",
+              "type": "datespan",
+              "items": [
+                {
+                  "index": 0,
+                  "displayName": "Period 0",
+                  "start": "2022-01-01",
+                  "end": "2022-12-31"
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "displayName": "Order metrics",
+              "type": "string",
+              "items": [
+                {
+                  "index": 0,
+                  "value": "Number of orders"
+                },
+                {
+                  "index": 1,
+                  "value": "Total value"
+                },
+                {
+                  "index": 2,
+                  "value": "Average order value"
+                }
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "displayName": "Count",
+              "index": 0,
+              "type": "int"
+            },
+            {
+              "displayName": "Value",
+              "units": "GBP",
+              "index": 1,
+              "type": "currency"
+            }
+          ],
+          "reportData": [
+            {
+              "dimension": 0,
+              "dimensionDisplayName": "Period",
+              "item": 0,
+              "itemDisplayName": "Period 0",
+              "components": [
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Order metrics",
+                  "item": 0,
+                  "itemDisplayName": "Number of orders",
+                  "measures": [
+                    {
+                      "index": 0,
+                      "measureDisplayName": "Count",
+                      "value": 94
+                    }
+                  ]
+                },
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Order metrics",
+                  "item": 1,
+                  "itemDisplayName": "Total value",
+                  "measures": [
+                    {
+                      "index": 1,
+                      "measureDisplayName": "Value",
+                      "value": 3315.18
+                    }
+                  ]
+                },
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Order metrics",
+                  "item": 2,
+                  "itemDisplayName": "Average order value",
+                  "measures": [
+                    {
+                      "index": 1,
+                      "measureDisplayName": "Value",
+                      "value": 35.27
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

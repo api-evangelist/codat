@@ -1,0 +1,16 @@
+{
+  "operationId": "unlink-connection",
+  "method": "PATCH",
+  "path": "/companies/{companyId}/connections/{connectionId}",
+  "summary": "Unlink connection",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Example",
+      "example": {
+        "status": "Unlinked"
+      }
+    }
+  ],
+  "responseExamples": []
+}

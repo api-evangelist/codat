@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingCreateTransferResponse",
+  "title": "Accounting: Create transfer response",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AccountingTransfer"
+            },
+            {
+              "deprecated": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PushOperation"
+    }
+  ]
+}

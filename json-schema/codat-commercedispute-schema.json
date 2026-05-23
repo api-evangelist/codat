@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommerceDispute",
+  "title": "Commerce: Dispute",
+  "description": "A customer may file a payment dispute with their bank or other card issuer when they're unsatisfied with their purchase or believe they have been charged incorrectly. For example:  \n- They didn't receive an order.  \n- The product they received was different to the commerce store's description.  \n- They've been the victim of online fraud.  \n\nYou can use data from the Disputes endpoints to calculate key metrics, such as the number of chargebacks.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/0"
+    },
+    {
+      "type": "object",
+      "required": [
+        "currency"
+      ],
+      "properties": {
+        "disputedTransactions": {
+          "description": "Link to the source event(s) which triggered this transaction.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CommerceTransaction/definitions/transactionSourceRef"
+          }
+        },
+        "totalAmount": {
+          "description": "Total transaction amount that is under dispute.",
+          "format": "decimal",
+          "examples": [
+            194.12,
+            -283.56,
+            0
+          ]
+        },
+        "currency": {
+          "description": "Currency of the disputed transaction.",
+          "$ref": "#/components/schemas/SourceAccount/properties/currency"
+        },
+        "status": {
+          "$ref": "#/components/schemas/CommerceDispute/definitions/disputeStatus"
+        },
+        "reason": {
+          "description": "Reason for the dispute",
+          "type": "string",
+          "examples": [
+            "Unhappy with product"
+          ]
+        },
+        "dueDate": {
+          "description": "Date when the next action in the dispute resolution is due",
+          "$ref": "#/components/schemas/DateTime"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/2"
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "definitions": {
+    "disputeStatus": {
+      "description": "Current status of the dispute",
+      "x-internal": true,
+      "type": "string",
+      "enum": [
+        "Won",
+        "Lost",
+        "Accepted",
+        "Processing",
+        "ChargeRefunded",
+        "EvidenceRequired",
+        "InquiryEvidenceRequired",
+        "InquiryProcessing",
+        "InquiryClosed",
+        "WaitingThirdParty",
+        "Unknown"
+      ],
+      "example": "EvidenceRequired"
+    }
+  },
+  "examples": [
+    {
+      "id": "03e608e3-bd1c-454f-8c2b-fb0133e43b95",
+      "disputedTransactions": [
+        {
+          "id": "e63ad857-7e12-4e64-9185-cdfd7c45d09d",
+          "type": "Order"
+        }
+      ],
+      "totalAmount": -47.66,
+      "currency": "GBP",
+      "status": "InquiryEvidenceRequired",
+      "reason": "Unhappy with product",
+      "dueDate": "2021-03-29T14:39:55",
+      "createdDate": "2021-03-22T14:39:55",
+      "modifiedDate": "2022-02-02T11:02:45Z",
+      "sourceModifiedDate": "2021-03-22T14:39:55"
+    }
+  ]
+}

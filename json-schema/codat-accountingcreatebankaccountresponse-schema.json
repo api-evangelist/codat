@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingCreateBankAccountResponse",
+  "title": "Accounting: Create bank account response",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AccountingBankAccount"
+            },
+            {
+              "deprecated": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PushOperation"
+    }
+  ]
+}

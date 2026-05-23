@@ -1,0 +1,171 @@
+{
+  "operationId": "get-accounting-account-transaction",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/accountTransactions/{accountTransactionId}",
+  "summary": "Get account transaction",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "id": "062b3a9b-b04f-4d9c-9ebc-81dcb5bbf285",
+        "transactionId": "356deb9f-98e6-4d6f-8db3-b378241895a1",
+        "note": "Direct income 38e8c917-0afc-4583-8ffe-1b53ad601197",
+        "bankAccountRef": {
+          "id": "ff8fdc4c-2aad-4ec1-9430-6bd201832eb3",
+          "name": "Undeposited Funds"
+        },
+        "date": "2022-04-19T00:00:00",
+        "status": "Unreconciled",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lines": [
+          {
+            "description": "Payment for direct income $38e8c917-0afc-4583-8ffe-1b53ad601197",
+            "recordRef": {
+              "id": "38e8c917-0afc-4583-8ffe-1b53ad601197",
+              "dataType": "directIncomes"
+            },
+            "amount": 188.33
+          }
+        ],
+        "totalAmount": 188.33,
+        "modifiedDate": "2023-04-26T12:38:18",
+        "sourceModifiedDate": "2022-05-13T01:06:00",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "D7B-933784104",
+        "transactionId": "D7B-933784104",
+        "bankAccountRef": {
+          "id": "20000-933270541",
+          "name": "Checking"
+        },
+        "date": "2022-12-01T00:00:00",
+        "status": "Unknown",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lines": [
+          {
+            "recordRef": {
+              "id": "D7B-933784104",
+              "dataType": "directCosts"
+            },
+            "amount": -1200
+          }
+        ],
+        "totalAmount": -1200,
+        "modifiedDate": "2023-04-26T09:13:23",
+        "sourceModifiedDate": "2023-12-16T05:04:10",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "85",
+        "transactionId": "85",
+        "note": "Opening Balance from Bank",
+        "bankAccountRef": {
+          "id": "57",
+          "name": "Visa Credit Card"
+        },
+        "date": "2015-08-12T00:00:00",
+        "status": "Unknown",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lines": [
+          {
+            "description": "Opening Balance from Bank",
+            "recordRef": {
+              "id": "PUR-85",
+              "dataType": "directCosts"
+            },
+            "amount": -3831.8
+          }
+        ],
+        "totalAmount": -3831.8,
+        "modifiedDate": "2023-04-26T09:37:16",
+        "sourceModifiedDate": "2016-09-12T18:13:07Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "1",
+        "transactionId": "1",
+        "note": "Opening Balance from Bank",
+        "bankAccountRef": {
+          "id": "61",
+          "name": "Dave PP Current"
+        },
+        "date": "2018-09-21T00:00:00",
+        "status": "Unknown",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lines": [
+          {
+            "recordRef": {
+              "id": "1",
+              "dataType": "directIncomes"
+            },
+            "amount": 170.23
+          }
+        ],
+        "totalAmount": 170.23,
+        "modifiedDate": "2023-01-18T11:03:12",
+        "sourceModifiedDate": "2018-12-17T14:56:20Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "74004690-82a1-4810-aaca-6ce575af94b4",
+        "transactionId": "74004690-82a1-4810-aaca-6ce575af94b4",
+        "bankAccountRef": {
+          "id": "bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4",
+          "name": "Business Bank Account"
+        },
+        "date": "2021-12-20T00:00:00",
+        "status": "Reconciled",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lines": [
+          {
+            "recordRef": {
+              "id": "74004690-82a1-4810-aaca-6ce575af94b4",
+              "dataType": "billPayments"
+            },
+            "amount": -7267.2
+          }
+        ],
+        "totalAmount": -7267.2,
+        "modifiedDate": "2023-03-15T20:37:10",
+        "sourceModifiedDate": "2021-01-02T22:51:40",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    }
+  ]
+}

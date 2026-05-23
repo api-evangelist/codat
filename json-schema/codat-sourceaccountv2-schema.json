@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SourceAccountV2",
+  "title": "Source account (v2)",
+  "type": "object",
+  "description": "The target bank account in a supported accounting software for ingestion into a bank feed.",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique ID for the bank account."
+    },
+    "accountName": {
+      "type": "string",
+      "description": "The bank account name."
+    },
+    "accountType": {
+      "type": "string",
+      "description": "The type of bank account e.g. checking, savings, loan, creditCard, prepaidCard.",
+      "enum": [
+        "checking",
+        "savings",
+        "loan",
+        "creditCard",
+        "prepaidCard"
+      ]
+    },
+    "accountNumber": {
+      "type": "string",
+      "description": "The account number."
+    },
+    "sortCode": {
+      "type": "string",
+      "nullable": true,
+      "description": "The sort code."
+    },
+    "routingInfo": {
+      "$ref": "#/components/schemas/SourceAccountV2/definitions/routingInfo"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/SourceAccount/properties/currency"
+    },
+    "balance": {
+      "type": "number",
+      "format": "decimal",
+      "description": "The latest balance for the bank account."
+    },
+    "accountInfo": {
+      "$ref": "#/components/schemas/SourceAccountV2/definitions/accountInfo"
+    },
+    "modifiedDate": {
+      "$ref": "#/components/schemas/DateTime",
+      "nullable": true,
+      "description": "The last date the bank account was modified."
+    },
+    "status": {
+      "type": "string",
+      "nullable": true,
+      "description": "Status of the source account.",
+      "enum": [
+        "pending",
+        "connected",
+        "connecting",
+        "disconnected",
+        "unknown"
+      ]
+    },
+    "feedStartDate": {
+      "nullable": true,
+      "title": "Date",
+      "type": "string",
+      "example": "2022-10-23",
+      "description": "In Codat's data model, dates are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date fields are formatted as strings; for example:\n```\n2020-10-08\n```"
+    }
+  },
+  "required": [
+    "id",
+    "accountName",
+    "accountType",
+    "accountNumber",
+    "currency",
+    "balance"
+  ],
+  "definitions": {
+    "sourceAccountV2Prototype": {
+      "title": "Source account (v2)",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/components/schemas/SourceAccountV2/properties/id"
+        },
+        "accountName": {
+          "$ref": "#/components/schemas/SourceAccountV2/properties/accountName"
+        },
+        "accountType": {
+          "$ref": "#/components/schemas/SourceAccountV2/properties/accountType"
+        },
+        "accountNumber": {
+          "$ref": "#/components/schemas/SourceAccountV2/properties/accountNumber"
+        },
+        "routingInfo": {
+          "$ref": "#/components/schemas/SourceAccountV2/definitions/routingInfo"
+        },
+        "sortCode": {
+          "$ref": "#/components/schemas/SourceAccountV2/properties/sortCode"
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency"
+        },
+        "balance": {
+          "$ref": "#/components/schemas/SourceAccountV2/properties/balance"
+        },
+        "modifiedDate": {
+          "$ref": "#/components/schemas/SourceAccountV2/properties/modifiedDate"
+        },
+        "accountInfo": {
+          "$ref": "#/components/schemas/SourceAccountV2/definitions/accountInfo"
+        }
+      },
+      "required": [
+        "id",
+        "accountName",
+        "accountType",
+        "accountNumber",
+        "currency",
+        "balance"
+      ]
+    },
+    "accountInfo": {
+      "title": "Account Info",
+      "type": "object",
+      "nullable": true,
+      "properties": {
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "Description of the account."
+        },
+        "nickname": {
+          "type": "string",
+          "nullable": true,
+          "description": "Name given to the account by the user. Used in UIs to assist in account selection."
+        },
+        "accountOpenDate": {
+          "$ref": "#/components/schemas/SourceAccountV2/properties/feedStartDate",
+          "nullable": true,
+          "description": "Date when the account was opened or created at the provider"
+        },
+        "availableBalance": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Balance of funds available for use. This includes pending activity."
+        }
+      }
+    },
+    "sourceAccounts": {
+      "title": "Source accounts",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SourceAccountV2"
+      }
+    },
+    "routingInfo": {
+      "title": "Routing Info",
+      "type": "object",
+      "description": "Routing information for the bank. This does not include account number.",
+      "properties": {
+        "bankCode": {
+          "type": "string",
+          "nullable": true,
+          "description": "The numeric identifier of the routing number"
+        },
+        "type": {
+          "type": "string",
+          "nullable": true,
+          "default": "bankcode",
+          "enum": [
+            "rtn",
+            "aba",
+            "swift",
+            "bsb",
+            "iban",
+            "nz2",
+            "trno",
+            "sortcode",
+            "blz",
+            "ifsc",
+            "bankcode",
+            "apca",
+            "clabe"
+          ],
+          "description": "The type of routing number."
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": "acc-001",
+      "accountName": "account-081",
+      "accountType": "checking",
+      "accountNumber": "12345670",
+      "routingInfo": {
+        "bankCode": "021001088",
+        "type": "bankcode"
+      },
+      "currency": "GBP",
+      "balance": 99.99,
+      "accountInfo": {
+        "description": "account description 1",
+        "nickname": "account 123",
+        "accountOpenDate": "2023-05-06",
+        "availableBalance": 10
+      },
+      "modifiedDate": "2024-08-02T00:00:00.000Z",
+      "status": "pending",
+      "feedStartDate": "2024-05-01"
+    },
+    {
+      "id": "acc-002",
+      "accountName": "account-083",
+      "accountType": "savings",
+      "accountNumber": "23456789",
+      "routingInfo": {
+        "bankCode": "021001088",
+        "type": "bankcode"
+      },
+      "currency": "GBP",
+      "balance": 400,
+      "accountInfo": {
+        "description": "account description 2",
+        "nickname": "account 1290",
+        "accountOpenDate": "2023-05-23",
+        "availableBalance": 400
+      },
+      "modifiedDate": "2024-08-02T00:00:00.000Z",
+      "status": "pending",
+      "feedStartDate": "2024-05-01"
+    }
+  ]
+}

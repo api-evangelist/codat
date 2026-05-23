@@ -1,0 +1,97 @@
+{
+  "operationId": "get-accounting-journal",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/journals/{journalId}",
+  "summary": "Get journal",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "id": "90bb7784-083b-4bcb-a534-b30756cee65d",
+        "journalCode": "GJ",
+        "name": "General Journal",
+        "type": "General Journal",
+        "hasChildren": true,
+        "createdOn": "2021-12-11T13:04:02",
+        "status": "Active",
+        "modifiedDate": "2023-04-26T12:38:18Z",
+        "sourceModifiedDate": "2022-07-15T20:19:02",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "211317b3-89d1-ea11-bbaa-000d3a2b9185",
+        "journalCode": "ASSETS",
+        "name": "ASSETS",
+        "type": "Assets",
+        "hasChildren": true,
+        "status": "Active",
+        "modifiedDate": "2023-03-27T14:21:10Z",
+        "sourceModifiedDate": "2023-02-02T10:26:25Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "id": "aae31284-e23d-456b-9957-fbf4bcef6c19",
+        "journalCode": "21",
+        "name": "12345678",
+        "type": "Bank",
+        "hasChildren": false,
+        "createdOn": "2019-11-05T14:44:51",
+        "status": "Active",
+        "modifiedDate": "2022-10-26T13:31:58Z",
+        "sourceModifiedDate": "2020-01-24T11:41:25Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "id": "05b9febe-34b3-4836-8277-002294b233a9",
+        "journalCode": "25",
+        "name": "annaBankAccount1",
+        "type": "Bank",
+        "hasChildren": false,
+        "createdOn": "2021-04-26T16:44:47",
+        "status": "Active",
+        "modifiedDate": "2022-10-26T13:33:08Z",
+        "sourceModifiedDate": "2021-04-26T16:44:47Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "207",
+        "journalCode": "AJPT",
+        "name": "A Journal Push Test",
+        "type": "",
+        "hasChildren": false,
+        "createdOn": "2022-01-17T10:44:23",
+        "status": "Active",
+        "modifiedDate": "2023-04-04T16:31:30Z",
+        "sourceModifiedDate": "2022-01-17T10:44:23",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StartScheduledSyncResult",
+  "title": "Start scheduled sync result",
+  "type": "object",
+  "description": "Represents the result of an ad-hoc sync request.",
+  "properties": {
+    "syncId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier for the created sync."
+    }
+  },
+  "required": [
+    "syncId"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankTransactions",
+  "title": "Bank transactions",
+  "type": "array",
+  "maxItems": 1000,
+  "items": {
+    "title": "Bank transaction",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Identifier for the bank account transaction, unique for the company in the accounting software.",
+        "example": "716422529"
+      },
+      "date": {
+        "title": "Local date time",
+        "type": "string",
+        "examples": [
+          "2023-08-22T10:21:00",
+          "2023-08-22"
+        ],
+        "description": "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2023-08-22T10:21:00\n2023-08-22\n```\n\nWhen pushing bank transaction data to Codat, the date is treated as a local date. This means:\n\n- The date/time is used exactly as provided, without any timezone conversion.\n- If a timezone offset is included (e.g., `2023-08-22T10:21:00-05:00`), the offset will be ignored and only the local date/time portion will be used.\n- We recommend providing dates without a timezone suffix for clarity (e.g., `2023-08-22T10:21:00` rather than `2023-08-22T10:21:00Z`)."
+      },
+      "description": {
+        "type": "string",
+        "nullable": true,
+        "description": "Description of the bank transaction.",
+        "example": "Debit for Payment Id sdp-1-57379a43-c4b8-49f5-bd7c-699189ee7a60"
+      },
+      "counterparty": {
+        "type": "string",
+        "nullable": true,
+        "description": "The giving or receiving party such as a person or organization.",
+        "example": "ACME INC"
+      },
+      "reference": {
+        "type": "string",
+        "nullable": true,
+        "description": "An optional reference to the bank transaction.",
+        "example": "reference for transaction"
+      },
+      "reconciled": {
+        "type": "boolean",
+        "nullable": true,
+        "description": "`True` if the bank transaction has been [reconciled](https://www.xero.com/uk/guides/what-is-bank-reconciliation/) in the accounting software.",
+        "example": false
+      },
+      "amount": {
+        "type": "number",
+        "format": "decimal",
+        "description": "The amount transacted in the bank transaction.",
+        "example": 999.99
+      },
+      "balance": {
+        "type": "number",
+        "format": "decimal",
+        "description": "The remaining balance in the account with ID `accountId`. This field is optional for QuickBooks Online but is required for Xero, Sage, NetSuite, Exact, and FreeAgent.",
+        "example": -999.99
+      },
+      "transactionType": {
+        "title": "Bank transaction type",
+        "nullable": true,
+        "description": "Type of transaction for the bank statement line.",
+        "type": "string",
+        "enum": [
+          "Unknown",
+          "Credit",
+          "Debit",
+          "Int",
+          "Div",
+          "Fee",
+          "SerChg",
+          "Dep",
+          "Atm",
+          "Pos",
+          "Xfer",
+          "Check",
+          "Payment",
+          "Cash",
+          "DirectDep",
+          "DirectDebit",
+          "RepeatPmt",
+          "Other"
+        ]
+      }
+    }
+  }
+}

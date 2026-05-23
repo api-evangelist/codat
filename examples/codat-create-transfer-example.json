@@ -1,0 +1,45 @@
+{
+  "operationId": "create-transfer",
+  "method": "POST",
+  "path": "/companies/{companyId}/connections/{connectionId}/push/transfers",
+  "summary": "Create transfer",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "description": "test transfers push 20230126 12.08",
+        "contactRef": {
+          "id": "80000028-167239230944",
+          "dataType": "customers"
+        },
+        "date": "2023-01-26T11:51:18.104Z",
+        "from": {
+          "accountRef": {
+            "id": "80000028-1671794219",
+            "dataType": "bankAccounts"
+          },
+          "amount": 12
+        },
+        "to": {
+          "accountRef": {
+            "id": "80000004-1671793811",
+            "dataType": "bankAccounts"
+          },
+          "amount": 12
+        },
+        "status": "Unknown",
+        "trackingCategoryRefs": [
+          {
+            "id": "80000001-1674553252",
+            "name": "Class 1"
+          }
+        ],
+        "metadata": {
+          "isDeleted": true
+        }
+      }
+    }
+  ],
+  "responseExamples": []
+}

@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Company",
+  "title": "Company",
+  "description": "\ufeffIn Codat, a company represents a business sharing access to their data. Each company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources such as one connection to [Xero](https://docs.codat.io/integrations/accounting/xero/accounting-xero) for accounting data, two connections to [Plaid](https://docs.codat.io/integrations/banking/plaid/banking-plaid) for two bank accounts and a connection to [Zettle](https://docs.codat.io/integrations/commerce/zettle/commerce-zettle) for POS data.\n\nTypically each company is one of your customers.\n\nWhen you create a company, you can specify a `name` and we will automatically generate a unique `id` for the company. You can also add a `description` to store any additional information about the company.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Company/definitions/companyDetails"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "dataConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Connection"
+          }
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "companyDetails": {
+      "title": "Company details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/components/parameters/companyId/schema"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the company",
+          "example": "Codat Ltd."
+        },
+        "description": {
+          "$ref": "#/components/schemas/CompanyRequestBody/properties/description",
+          "nullable": true
+        },
+        "redirect": {
+          "type": "string",
+          "format": "uri",
+          "description": "The `redirect` [Link URL](https://docs.codat.io/auth-flow/authorize-hosted-link) enabling the customer to start their auth flow journey for the company.",
+          "example": "https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739"
+        },
+        "lastSync": {
+          "$ref": "#/components/schemas/DateTime",
+          "nullable": true
+        },
+        "created": {
+          "$ref": "#/components/schemas/DateTime"
+        },
+        "createdByUserName": {
+          "type": "string",
+          "description": "Name of user that created the company in Codat.",
+          "nullable": true
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of products that are currently enabled for the company."
+        },
+        "tags": {
+          "title": "Tags",
+          "type": "object",
+          "maxProperties": 10,
+          "propertyNames": {
+            "pattern": "^.{1,27}$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "description": "A collection of user-defined key-value pairs that store custom metadata against the company."
+        },
+        "referenceParentCompany": {
+          "$ref": "#/components/schemas/Company/definitions/companyReference",
+          "nullable": true,
+          "description": "The parent entity or controlling organization of this company. Null if the company has no parent."
+        },
+        "referenceSubsidiaryCompanies": {
+          "type": "array",
+          "nullable": false,
+          "description": "A list of subsidiary companies owned or controlled by this entity. Empty if the company has no children.",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/components/schemas/Company/definitions/companyReference"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "redirect"
+      ]
+    },
+    "companyReference": {
+      "title": "Company reference",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/components/parameters/companyId/schema"
+        },
+        "name": {
+          "$ref": "#/components/schemas/Company/definitions/companyDetails/properties/name"
+        },
+        "description": {
+          "$ref": "#/components/schemas/Company/definitions/companyDetails/properties/description"
+        },
+        "links": {
+          "type": "object",
+          "description": "A collection of links for the company.",
+          "properties": {
+            "portal": {
+              "type": "string",
+              "format": "uri",
+              "description": "Link to the company page in the portal."
+            }
+          }
+        },
+        "tags": {
+          "$ref": "#/components/schemas/Company/definitions/companyDetails/properties/tags"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": "0498e921-9b53-4396-a412-4f2f5983b0a2",
+      "name": "string",
+      "redirect": "https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739",
+      "lastSync": "2022-01-01T12:00:00.000Z",
+      "created": "2022-01-01T12:00:00.000Z",
+      "createdByUserName": "string",
+      "tags": {
+        "region": "us",
+        "uid": "f6b0c253-16c7-4da1-a0c5-9c871e9c9d6c"
+      },
+      "dataConnections": [
+        {
+          "id": "ee2eb431-c0fa-4dc9-93fa-d29781c12bcd",
+          "integrationId": "bf083d72-62c7-493e-aec9-81b4dbba7e2c",
+          "integrationKey": "dfxm",
+          "sourceId": "bdd831ce-eebd-4896-89a7-20e5ee8989ee",
+          "platformName": "Basiq",
+          "linkUrl": "https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start",
+          "status": "Linked",
+          "lastSync": "2022-10-27T10:22:43.6464237Z",
+          "created": "2022-10-27T09:53:29Z",
+          "sourceType": "Banking"
+        }
+      ],
+      "products": [
+        "spend-insights",
+        "lending"
+      ]
+    }
+  ]
+}

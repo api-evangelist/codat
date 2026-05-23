@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingInvoices",
+  "title": "Accounting: Invoices",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AccountingInvoice"
+          }
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PagingInfo"
+    }
+  ]
+}

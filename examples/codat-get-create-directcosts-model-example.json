@@ -1,0 +1,3947 @@
+{
+  "operationId": "get-create-directCosts-model",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/options/directCosts",
+  "summary": "Get create direct cost model",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "",
+        "properties": {
+          "reference": {
+            "type": "String",
+            "displayName": "Reference",
+            "description": "User friendly reference for the direct transaction",
+            "required": false
+          },
+          "note": {
+            "type": "String",
+            "displayName": "Note",
+            "description": "The note attached to the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Note",
+                  "details": "is not supported and will be ignored"
+                }
+              ]
+            }
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Ref",
+            "description": "The contact associated with the direct transaction, if known",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "ContactRef",
+                  "details": "is not supported and will be ignored"
+                }
+              ]
+            }
+          },
+          "issueDate": {
+            "type": "DateTime",
+            "displayName": "Issue Date",
+            "description": "The date the direct transaction was issued",
+            "required": true
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency of the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Currency",
+                  "details": "If unspecified, base currency is assumed. Must agree with the bank account in PaymentAllocations"
+                }
+              ]
+            }
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Exchange Rate",
+            "description": "The exchange rate between the currency of the direct transaction and the base currency of the company",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "CurrencyRate",
+                  "details": "Required if the currency is not the base currency"
+                }
+              ]
+            }
+          },
+          "subTotal": {
+            "type": "Number",
+            "displayName": "Sub Total Amount",
+            "description": "The total amount of the direct transaction excluding any taxes",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "SubTotal",
+                  "details": "is not supported and will be ignored"
+                }
+              ]
+            }
+          },
+          "taxAmount": {
+            "type": "Number",
+            "displayName": "Tax Amount",
+            "description": "The total amount of tax on the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "TaxAmount",
+                  "details": "is not supported and will be ignored"
+                }
+              ]
+            }
+          },
+          "totalAmount": {
+            "type": "Number",
+            "displayName": "Total Amount",
+            "description": "The amount of the direct transaction, inclusive of tax",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "TotalAmount",
+                  "details": "is not supported and will be ignored"
+                }
+              ]
+            }
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Direct Transaction Lines",
+            "description": "A collection of lines that detail items related to the direct transaction",
+            "properties": {
+              "description": {
+                "type": "String",
+                "displayName": "Description",
+                "description": "Friendly name of the goods or services purchased",
+                "required": false
+              },
+              "unitAmount": {
+                "type": "Number",
+                "displayName": "Unit Amount",
+                "description": "The price of each unit of goods or services",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.UnitAmount",
+                      "details": "is not supported and will be ignored"
+                    }
+                  ]
+                }
+              },
+              "quantity": {
+                "type": "Number",
+                "displayName": "Quantity",
+                "description": "The number of units of goods or services purchased",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.Quantity",
+                      "details": "is not supported and will be ignored"
+                    }
+                  ]
+                }
+              },
+              "discountAmount": {
+                "type": "Number",
+                "displayName": "Discount Amount",
+                "description": "The value, in the given currency, of any discounts applied",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.DiscountAmount",
+                      "details": "is not supported and will be ignored"
+                    }
+                  ]
+                }
+              },
+              "discountPercentage": {
+                "type": "Number",
+                "displayName": "Discount Percentage",
+                "description": "The percentage rate of any discount that has been applied",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.DiscountPercentage",
+                      "details": "is not supported and will be ignored"
+                    }
+                  ]
+                }
+              },
+              "subTotal": {
+                "type": "Number",
+                "displayName": "Sub Total Amount",
+                "description": "The amount of the line, inclusive of discounts but exclusive of tax",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.SubTotal",
+                      "details": "Required if totalAmount is not specified"
+                    }
+                  ]
+                }
+              },
+              "taxAmount": {
+                "type": "Number",
+                "displayName": "Tax Amount",
+                "description": "The amount of tax for the line",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.TaxAmount",
+                      "details": "is not supported and will be ignored"
+                    }
+                  ]
+                }
+              },
+              "totalAmount": {
+                "type": "Number",
+                "displayName": "Total Amount",
+                "description": "The total amount of the line, inclusive of discounts and tax",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.TotalAmount",
+                      "details": "Required if subTotal is not specified"
+                    }
+                  ]
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Account Reference",
+                "description": "Reference to the nominal account the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Account ID",
+                    "description": "The identifier for the account",
+                    "required": true
+                  },
+                  "name": {
+                    "type": "String",
+                    "displayName": "Name",
+                    "description": "Name of the account",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "AccountRef.Name",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true
+              },
+              "taxRateRef": {
+                "type": "Object",
+                "displayName": "Tax Rate Reference",
+                "description": "Reference to the tax rate code the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the tax rate",
+                    "required": true
+                  },
+                  "name": {
+                    "type": "String",
+                    "displayName": "Name",
+                    "description": "The name of the tax rate referenced by the identifier",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "TaxRateRef.Name",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  },
+                  "effectiveTaxRate": {
+                    "type": "Number",
+                    "displayName": "Effective Tax Rate",
+                    "description": "The total applied tax percentage, including compounding details",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "TaxRateRef.EffectiveTaxRate",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true
+              },
+              "itemRef": {
+                "type": "Object",
+                "displayName": "Item Reference",
+                "description": "Reference to the product or service type, or inventory item",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.ItemRef",
+                      "details": "is not supported and will be ignored"
+                    }
+                  ]
+                }
+              },
+              "trackingCategoryRefs": {
+                "type": "Array",
+                "displayName": "Tracking Category References",
+                "description": "A collection of categories this item is being tracked against",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.TrackingCategoryRefs",
+                      "details": "is not supported and will be ignored"
+                    }
+                  ]
+                }
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "LineItems",
+                  "details": "Only one line is supported"
+                }
+              ],
+              "information": []
+            }
+          },
+          "paymentAllocations": {
+            "type": "Array",
+            "displayName": "Payment Allocations",
+            "description": "A collection of payments allocated to the direct transaction",
+            "properties": {
+              "payment": {
+                "type": "Object",
+                "displayName": "Payment",
+                "description": "The payment to be allocated",
+                "properties": {
+                  "accountRef": {
+                    "type": "Object",
+                    "displayName": "Account Reference",
+                    "description": "Reference to the account associated with the allocated payment",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Account ID",
+                        "description": "The identifier for the account",
+                        "required": true
+                      },
+                      "name": {
+                        "type": "String",
+                        "displayName": "Name",
+                        "description": "Name of the account",
+                        "required": false,
+                        "validation": {
+                          "warnings": [],
+                          "information": [
+                            {
+                              "field": "AccountRef.Name",
+                              "details": "is not supported and will be ignored"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "required": true
+                  },
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency for the payment",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Payment.Currency",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  },
+                  "currencyRate": {
+                    "type": "Number",
+                    "displayName": "Currency Exchange Rate",
+                    "description": "The exchange rate between the currency of the allocated payment and the currency of the base company",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Payment.CurrencyRate",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  },
+                  "paidOnDate": {
+                    "type": "DateTime",
+                    "displayName": "Paid On Date",
+                    "description": "The date the payment was paid",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Payment.PaidOnDate",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  },
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been paid",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Payment.TotalAmount",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true
+              },
+              "allocation": {
+                "type": "Object",
+                "displayName": "Allocation",
+                "description": "The allocation information",
+                "properties": {
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency of the transaction",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Allocation.Currency",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  },
+                  "currencyRate": {
+                    "type": "Number",
+                    "displayName": "Currency Exchange Rate",
+                    "description": "The exchange rate between the currency of the allocated payment and the currency of the transaction",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Allocation.CurrencyRate",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  },
+                  "allocatedOnDate": {
+                    "type": "DateTime",
+                    "displayName": "Allocated On Date",
+                    "description": "The date the payment was allocated",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Allocation.AllocatedOnDate",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  },
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been allocated",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Allocation.TotalAmount",
+                          "details": "is not supported and will be ignored"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "PaymentAllocations",
+                  "details": "Only one line is supported"
+                }
+              ],
+              "information": []
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "",
+        "properties": {
+          "id": {
+            "type": "String",
+            "displayName": "Unique Direct Transaction ID",
+            "description": "The identifier for the direct transaction, unique to the company",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Id",
+                  "details": "will be ignored on push. "
+                }
+              ],
+              "information": []
+            }
+          },
+          "reference": {
+            "type": "String",
+            "displayName": "Reference",
+            "description": "User friendly reference for the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Reference",
+                  "details": "is not supported by FreeAgent and will not be mapped. "
+                }
+              ],
+              "information": []
+            }
+          },
+          "note": {
+            "type": "String",
+            "displayName": "Note",
+            "description": "The note attached to the direct transaction",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Note",
+                  "details": "must be provided"
+                }
+              ]
+            }
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Ref",
+            "description": "The contact associated with the direct transaction, if known",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "ContactRef.Id",
+                      "details": "is not supported by FreeAgent and will be ignored on push. "
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "dataType": {
+                "type": "String",
+                "displayName": "DataType",
+                "description": "The name of the data type for which the ID is valid.",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "ContactRef.DataType",
+                      "details": "is not supported by FreeAgent and will be ignored on push. "
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": false
+          },
+          "issueDate": {
+            "type": "DateTime",
+            "displayName": "Issue Date",
+            "description": "The date the direct transaction was issued",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "IssueDate",
+                  "details": "must be provided"
+                }
+              ]
+            }
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency of the direct transaction",
+            "required": false
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Exchange Rate",
+            "description": "The exchange rate between the currency of the direct transaction and the base currency of the company",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "CurrencyRate",
+                  "details": "will be ignored on push. "
+                }
+              ],
+              "information": []
+            }
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Direct Transaction Lines",
+            "description": "A collection of lines that detail items related to the direct transaction",
+            "properties": {
+              "description": {
+                "type": "String",
+                "displayName": "Description",
+                "description": "Friendly name of the goods or services purchased",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.Description",
+                      "details": "If a Note is provided, this field will be ignored on push. "
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "unitAmount": {
+                "type": "Number",
+                "displayName": "Unit Amount",
+                "description": "The price of each unit of goods or services",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.UnitAmount",
+                      "details": "will be ignored on push. "
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "quantity": {
+                "type": "Number",
+                "displayName": "Quantity",
+                "description": "The number of units of goods or services purchased",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.Quantity",
+                      "details": "will be ignored on push. "
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "subTotal": {
+                "type": "Number",
+                "displayName": "Sub Total Amount",
+                "description": "The amount of the line, inclusive of discounts but exclusive of tax",
+                "required": false
+              },
+              "taxAmount": {
+                "type": "Number",
+                "displayName": "Tax Amount",
+                "description": "The amount of tax for the line",
+                "required": false
+              },
+              "totalAmount": {
+                "type": "Number",
+                "displayName": "Total Amount",
+                "description": "The total amount of the line, inclusive of discounts and tax",
+                "required": false
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Account Reference",
+                "description": "Reference to the nominal account the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Account ID",
+                    "description": "The identifier for the account",
+                    "required": true,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "must be provided"
+                        }
+                      ]
+                    }
+                  },
+                  "name": {
+                    "type": "String",
+                    "displayName": "Name",
+                    "description": "Name of the account",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Name",
+                          "details": "will be ignored on push. "
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": true
+              },
+              "taxRateRef": {
+                "type": "Object",
+                "displayName": "Tax Rate Reference",
+                "description": "Reference to the tax rate code the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the tax rate",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "TaxRateRef.Id",
+                          "details": "will be ignored on push. "
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "name": {
+                    "type": "String",
+                    "displayName": "Name",
+                    "description": "The name of the tax rate referenced by the identifier",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "TaxRateRef.Name",
+                          "details": "will be ignored on push. "
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "effectiveTaxRate": {
+                    "type": "Number",
+                    "displayName": "Effective Tax Rate",
+                    "description": "The total applied tax percentage, including compounding details",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "TaxRateRef.EffectiveTaxRate",
+                          "details": "will be ignored on push. "
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": false
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "LineItems",
+                  "details": "Exactly one line item must be specified"
+                }
+              ],
+              "information": []
+            }
+          },
+          "paymentAllocations": {
+            "type": "Array",
+            "displayName": "Payment Allocations",
+            "description": "A collection of payments allocated to the direct transaction",
+            "properties": {
+              "payment": {
+                "type": "Object",
+                "displayName": "Payment",
+                "description": "The payment to be allocated",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The identifier for the allocated payment",
+                    "required": false
+                  },
+                  "note": {
+                    "type": "String",
+                    "displayName": "Note",
+                    "description": "Any additional text based information associated with the allocated payment",
+                    "required": false
+                  },
+                  "reference": {
+                    "type": "String",
+                    "displayName": "Reference",
+                    "description": "Reference associated with the allocated payment",
+                    "required": false
+                  },
+                  "accountRef": {
+                    "type": "Object",
+                    "displayName": "Account Reference",
+                    "description": "Reference to the account associated with the allocated payment",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Account ID",
+                        "description": "The identifier for the account",
+                        "required": true,
+                        "validation": {
+                          "warnings": [],
+                          "information": [
+                            {
+                              "field": "AccountRef.Id",
+                              "details": "must be provided"
+                            }
+                          ]
+                        }
+                      },
+                      "name": {
+                        "type": "String",
+                        "displayName": "Name",
+                        "description": "Name of the account",
+                        "required": false,
+                        "validation": {
+                          "warnings": [
+                            {
+                              "field": "AccountRef.Name",
+                              "details": "will be ignored on push. "
+                            }
+                          ],
+                          "information": []
+                        }
+                      }
+                    },
+                    "required": true
+                  },
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency for the payment",
+                    "required": false
+                  },
+                  "currencyRate": {
+                    "type": "Number",
+                    "displayName": "Currency Exchange Rate",
+                    "description": "The exchange rate between the currency of the allocated payment and the currency of the base company",
+                    "required": false
+                  },
+                  "paidOnDate": {
+                    "type": "DateTime",
+                    "displayName": "Paid On Date",
+                    "description": "The date the payment was paid",
+                    "required": false
+                  },
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been paid",
+                    "required": false
+                  }
+                },
+                "required": true
+              },
+              "allocation": {
+                "type": "Object",
+                "displayName": "Allocation",
+                "description": "The allocation information",
+                "properties": {
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency of the transaction",
+                    "required": false
+                  },
+                  "currencyRate": {
+                    "type": "Number",
+                    "displayName": "Currency Exchange Rate",
+                    "description": "The exchange rate between the currency of the allocated payment and the currency of the transaction",
+                    "required": false
+                  },
+                  "allocatedOnDate": {
+                    "type": "DateTime",
+                    "displayName": "Allocated On Date",
+                    "description": "The date the payment was allocated",
+                    "required": false
+                  },
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been allocated",
+                    "required": false
+                  }
+                },
+                "required": false
+              }
+            },
+            "required": true
+          },
+          "subTotal": {
+            "type": "Number",
+            "displayName": "Sub Total Amount",
+            "description": "The total amount of the direct transaction excluding any taxes",
+            "required": false
+          },
+          "taxAmount": {
+            "type": "Number",
+            "displayName": "Tax Amount",
+            "description": "The total amount of tax on the direct transaction",
+            "required": false
+          },
+          "totalAmount": {
+            "type": "Number",
+            "displayName": "Total Amount",
+            "description": "The amount of the direct transaction, inclusive of tax",
+            "required": false
+          },
+          "modifiedDate": {
+            "type": "DateTime",
+            "displayName": "Modified Date",
+            "description": "The date the record was last updated in the system cache",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "ModifiedDate",
+                  "details": "will be ignored on push. "
+                }
+              ],
+              "information": []
+            }
+          },
+          "sourceModifiedDate": {
+            "type": "DateTime",
+            "displayName": "Source Modified Date",
+            "description": "The date the record was last changed in the originating system",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "SourceModifiedDate",
+                  "details": "will be ignored on push. "
+                }
+              ],
+              "information": []
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "Direct Cost",
+        "properties": {
+          "note": {
+            "type": "String",
+            "displayName": "Note",
+            "description": "The note attached to the direct transaction",
+            "required": false
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Ref",
+            "description": "The contact associated with the direct transaction, if known",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "issueDate": {
+            "type": "DateTime",
+            "displayName": "Issue Date",
+            "description": "The date the direct transaction was issued",
+            "required": true
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency of the direct transaction",
+            "required": true
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Exchange Rate",
+            "description": "The exchange rate between the currency of the direct transaction and the base currency of the company",
+            "required": true
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Direct Transaction Lines",
+            "description": "A collection of lines that detail items related to the direct transaction",
+            "properties": {
+              "description": {
+                "type": "String",
+                "displayName": "Description",
+                "description": "Friendly name of the goods or services purchased",
+                "required": false
+              },
+              "unitAmount": {
+                "type": "Number",
+                "displayName": "Unit Amount",
+                "description": "The price of each unit of goods or services",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.UnitAmount",
+                      "details": "Should have the same sign across all line items"
+                    }
+                  ]
+                }
+              },
+              "quantity": {
+                "type": "Number",
+                "displayName": "Quantity",
+                "description": "The number of units of goods or services purchased",
+                "required": false
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Account Reference",
+                "description": "Reference to the nominal account the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Account ID",
+                    "description": "The identifier for the account",
+                    "required": true
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.AccountRef",
+                      "details": "Should not be a bank account"
+                    },
+                    {
+                      "field": "LineItems.AccountRef",
+                      "details": "Should only be specified when pushing an expense"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "itemRef": {
+                "type": "Object",
+                "displayName": "Item Reference",
+                "description": "Reference to the product or service type, or inventory item",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the item",
+                    "required": true
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.ItemRef",
+                      "details": "Should only be specified when pushing an item (not an expense)"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "taxRateRef": {
+                "type": "Object",
+                "displayName": "Tax Rate Reference",
+                "description": "Reference to the tax rate code the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the tax rate",
+                    "required": true
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.TaxRateRef",
+                      "details": "Should be specified when item type is not 'Discount'"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "trackingCategoryRefs": {
+                "type": "Array",
+                "displayName": "Tracking Category References",
+                "description": "A collection of categories this item is being tracked against",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The identifier for the item, unique per tracking category",
+                    "required": true
+                  }
+                },
+                "required": false
+              }
+            },
+            "required": true
+          },
+          "paymentAllocations": {
+            "type": "Array",
+            "displayName": "Payment Allocations",
+            "description": "A collection of payments allocated to the direct transaction",
+            "properties": {
+              "payment": {
+                "type": "Object",
+                "displayName": "Payment",
+                "description": "The payment to be allocated",
+                "properties": {
+                  "accountRef": {
+                    "type": "Object",
+                    "displayName": "Account Reference",
+                    "description": "Reference to the account associated with the allocated payment",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Account ID",
+                        "description": "The identifier for the account",
+                        "required": true,
+                        "validation": {
+                          "warnings": [
+                            {
+                              "field": "AccountRef.Id",
+                              "details": "Must match the ID of an existing account of type 'Bank' OR type 'Credit Card'"
+                            }
+                          ],
+                          "information": []
+                        }
+                      }
+                    },
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "allocation": {
+                "type": "Object",
+                "displayName": "Allocation",
+                "description": "The allocation information",
+                "required": true
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "PaymentAllocations",
+                  "details": "Must contain a single allocation"
+                }
+              ]
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "Direct Cost",
+        "properties": {
+          "reference": {
+            "type": "String",
+            "displayName": "Reference",
+            "description": "User friendly reference for the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Reference",
+                  "details": "Represents the check number"
+                }
+              ],
+              "information": []
+            }
+          },
+          "note": {
+            "type": "String",
+            "displayName": "Note",
+            "description": "The note attached to the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Note",
+                  "details": "Max length of 4096 characters."
+                }
+              ],
+              "information": []
+            }
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Ref",
+            "description": "The contact associated with the direct transaction, if known",
+            "required": false
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency of the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Currency",
+                  "details": "Must be a three letter ISO code"
+                },
+                {
+                  "field": "Currency",
+                  "details": "Can only be set if the QuickBooks Desktop company has Multicurrency enabled."
+                }
+              ],
+              "information": [
+                {
+                  "field": "Currency",
+                  "details": "If not set, will default to the default currency"
+                }
+              ]
+            }
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Exchange Rate",
+            "description": "The exchange rate between the currency of the direct transaction and the base currency of the company",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "CurrencyRate",
+                  "details": "If not set, will default to the rate set within QuickBooks Desktop, if no rate is set in QuickBooks Desktop, it will default to 1."
+                },
+                {
+                  "field": "CurrencyRate",
+                  "details": "Can only be set if the QuickBooks Desktop company has Multicurrency enabled."
+                }
+              ]
+            }
+          },
+          "issueDate": {
+            "type": "DateTime",
+            "displayName": "Issue Date",
+            "description": "The date the direct transaction was issued",
+            "required": true
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Direct Transaction Lines",
+            "description": "A collection of lines that detail items related to the direct transaction",
+            "properties": {
+              "description": {
+                "type": "String",
+                "displayName": "Description",
+                "description": "Friendly name of the goods or services purchased",
+                "required": true
+              },
+              "unitAmount": {
+                "type": "Number",
+                "displayName": "Unit Amount",
+                "description": "The price of each unit of goods or services",
+                "required": true
+              },
+              "quantity": {
+                "type": "Number",
+                "displayName": "Quantity",
+                "description": "The number of units of goods or services purchased",
+                "required": true
+              },
+              "subTotal": {
+                "type": "Number",
+                "displayName": "Sub Total Amount",
+                "description": "The amount of the line, inclusive of discounts but exclusive of tax",
+                "required": false
+              },
+              "taxAmount": {
+                "type": "Number",
+                "displayName": "Tax Amount",
+                "description": "The amount of tax for the line",
+                "required": true
+              },
+              "totalAmount": {
+                "type": "Number",
+                "displayName": "Total Amount",
+                "description": "The total amount of the line, inclusive of discounts and tax",
+                "required": false
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Account Reference",
+                "description": "Reference to the nominal account the line item is linked to",
+                "required": true
+              },
+              "taxRateRef": {
+                "type": "Object",
+                "displayName": "Tax Rate Reference",
+                "description": "Reference to the tax rate code the line item is linked to",
+                "required": true
+              },
+              "itemRef": {
+                "type": "Object",
+                "displayName": "Item Reference",
+                "description": "Reference to the product or service type, or inventory item",
+                "required": true
+              },
+              "trackingCategoryRefs": {
+                "type": "Array",
+                "displayName": "Tracking Category References",
+                "description": "A collection of categories this item is being tracked against",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "paymentAllocations": {
+            "type": "Array",
+            "displayName": "Payment Allocations",
+            "description": "A collection of payments allocated to the direct transaction",
+            "properties": {
+              "payment": {
+                "type": "Object",
+                "displayName": "Payment",
+                "description": "The payment to be allocated",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The identifier for the allocated payment",
+                    "required": true
+                  },
+                  "accountRef": {
+                    "type": "Object",
+                    "displayName": "Account Reference",
+                    "description": "Reference to the account associated with the allocated payment",
+                    "required": true,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Payment.AccountRef",
+                          "details": "The account in which to make the deposit"
+                        }
+                      ]
+                    }
+                  },
+                  "reference": {
+                    "type": "String",
+                    "displayName": "Reference",
+                    "description": "Reference associated with the allocated payment",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Payment.Reference",
+                          "details": "Use to reference the check number of this deposit."
+                        }
+                      ]
+                    }
+                  },
+                  "note": {
+                    "type": "String",
+                    "displayName": "Note",
+                    "description": "Any additional text based information associated with the allocated payment",
+                    "required": true
+                  },
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency for the payment",
+                    "required": true
+                  },
+                  "currencyRate": {
+                    "type": "Number",
+                    "displayName": "Currency Exchange Rate",
+                    "description": "The exchange rate between the currency of the allocated payment and the currency of the base company",
+                    "required": true
+                  },
+                  "paidOnDate": {
+                    "type": "DateTime",
+                    "displayName": "Paid On Date",
+                    "description": "The date the payment was paid",
+                    "required": true
+                  },
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been paid",
+                    "required": true
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "PaymentAllocations",
+                  "details": "Must contain a single payment allocation"
+                }
+              ],
+              "information": []
+            }
+          },
+          "taxAmount": {
+            "type": "Number",
+            "displayName": "Tax Amount",
+            "description": "The total amount of tax on the direct transaction",
+            "required": true
+          },
+          "subTotal": {
+            "type": "Number",
+            "displayName": "Sub Total Amount",
+            "description": "The total amount of the direct transaction excluding any taxes",
+            "required": false
+          },
+          "totalAmount": {
+            "type": "Number",
+            "displayName": "Total Amount",
+            "description": "The amount of the direct transaction, inclusive of tax",
+            "required": false
+          },
+          "sourceModifiedDate": {
+            "type": "DateTime",
+            "displayName": "Source Modified Date",
+            "description": "The date the record was last changed in the originating system",
+            "required": false
+          },
+          "modifiedDate": {
+            "type": "DateTime",
+            "displayName": "Modified Date",
+            "description": "The date the record was last updated in the system cache",
+            "required": false
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "Direct Cost",
+        "properties": {
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Ref",
+            "description": "The contact associated with the direct transaction, if known",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true
+              },
+              "dataType": {
+                "type": "String",
+                "displayName": "DataType",
+                "description": "The name of the data type for which the ID is valid.",
+                "options": [
+                  {
+                    "value": "Suppliers",
+                    "type": "String",
+                    "displayName": "Suppliers",
+                    "required": false
+                  }
+                ],
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "issueDate": {
+            "type": "DateTime",
+            "displayName": "Issue Date",
+            "description": "The date the direct transaction was issued",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "IssueDate",
+                  "details": "If the issue date is not supplied, the current date on the server is used."
+                }
+              ]
+            }
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Exchange Rate",
+            "description": "The exchange rate between the currency of the direct transaction and the base currency of the company",
+            "required": false
+          },
+          "reference": {
+            "type": "String",
+            "displayName": "Reference",
+            "description": "User friendly reference for the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Reference",
+                  "details": "Must be less than 22 characters."
+                }
+              ],
+              "information": []
+            }
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency of the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Currency",
+                  "details": "Required if multi-currency is enabled for the company."
+                }
+              ]
+            }
+          },
+          "note": {
+            "type": "String",
+            "displayName": "Note",
+            "description": "The note attached to the direct transaction",
+            "required": false
+          },
+          "paymentAllocations": {
+            "type": "Array",
+            "displayName": "Payment Allocations",
+            "description": "A collection of payments allocated to the direct transaction",
+            "properties": {
+              "allocation": {
+                "type": "Object",
+                "displayName": "Allocation",
+                "description": "The allocation information",
+                "properties": {
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been allocated",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "Allocation.TotalAmount",
+                          "details": "Must match the sum of the line items"
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency of the transaction",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "Allocation.Currency",
+                          "details": "Must match the Currency of the company"
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": false
+              },
+              "payment": {
+                "type": "Object",
+                "displayName": "Payment",
+                "description": "The payment to be allocated",
+                "properties": {
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been paid",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "Payment.TotalAmount",
+                          "details": "Must match the sum of the line items"
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency for the payment",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "Payment.Currency",
+                          "details": "Must match the Currency of the company"
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "accountRef": {
+                    "type": "Object",
+                    "displayName": "Account Reference",
+                    "description": "Reference to the account associated with the allocated payment",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Account ID",
+                        "description": "The identifier for the account",
+                        "required": true,
+                        "validation": {
+                          "warnings": [],
+                          "information": [
+                            {
+                              "field": "AccountRef.Id",
+                              "details": "Must be Bank, Cash or Asset account"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "required": true
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "PaymentAllocations",
+                  "details": "Must have exactly one payment allocation."
+                }
+              ],
+              "information": []
+            }
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Direct Transaction Lines",
+            "description": "A collection of lines that detail items related to the direct transaction",
+            "properties": {
+              "trackingCategoryRefs": {
+                "type": "Array",
+                "displayName": "Tracking Category References",
+                "description": "A collection of categories this item is being tracked against",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The identifier for the item, unique per tracking category",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "TrackingCategoryRefs.TrackingCategoryRefs",
+                          "details": "Must be a valid Id"
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.TrackingCategoryRefs",
+                      "details": "Only one tracking category of type CLASS can be provided per item."
+                    },
+                    {
+                      "field": "LineItems.TrackingCategoryRefs",
+                      "details": "Only one tracking category of type DEPARTMENT can be provided per invoice."
+                    },
+                    {
+                      "field": "LineItems.TrackingCategoryRefs",
+                      "details": "All DEPARTMENT tracking categories must be the same"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Account Reference",
+                "description": "Reference to the nominal account the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Account ID",
+                    "description": "The identifier for the account",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must be an Expense or Income account"
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.AccountRef",
+                      "details": "Must be set if ItemRef is not"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "itemRef": {
+                "type": "Object",
+                "displayName": "Item Reference",
+                "description": "Reference to the product or service type, or inventory item",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the item",
+                    "required": true
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.ItemRef",
+                      "details": "Must be set if AccountRef is not"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "description": {
+                "type": "String",
+                "displayName": "Description",
+                "description": "Friendly name of the goods or services purchased",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.Description",
+                      "details": "Must be less than 4000 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "quantity": {
+                "type": "Number",
+                "displayName": "Quantity",
+                "description": "The number of units of goods or services purchased",
+                "required": true
+              },
+              "unitAmount": {
+                "type": "Number",
+                "displayName": "Unit Amount",
+                "description": "The price of each unit of goods or services",
+                "required": true
+              },
+              "taxAmount": {
+                "type": "Number",
+                "displayName": "Tax Amount",
+                "description": "The amount of tax for the line",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.TaxAmount",
+                      "details": "Must be specified on all line items or none. If specified will override QBO tax calculations."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "taxRateRef": {
+                "type": "Object",
+                "displayName": "Tax Rate Reference",
+                "description": "Reference to the tax rate code the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the tax rate",
+                    "required": true,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "TaxRateRef.Id",
+                          "details": "If an organisation has Automated Sales Tax enabled for US locales, then only 'TAX' (Automated Sales Tax) or 'NON' (no tax) can be used. If Automated Sales Tax is disabled for US locales then 'TAX' (Automated Sales Tax) will not be accepted and a different tax rate must be used."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.TaxRateRef",
+                      "details": "Required for all companies except QuickBooks Online France companies."
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": true
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "Direct Cost",
+        "properties": {
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Ref",
+            "description": "The contact associated with the direct transaction, if known",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true
+              },
+              "dataType": {
+                "type": "String",
+                "displayName": "DataType",
+                "description": "The name of the data type for which the ID is valid.",
+                "options": [
+                  {
+                    "value": "Suppliers",
+                    "type": "String",
+                    "displayName": "Suppliers",
+                    "required": false
+                  }
+                ],
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "issueDate": {
+            "type": "DateTime",
+            "displayName": "Issue Date",
+            "description": "The date the direct transaction was issued",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "IssueDate",
+                  "details": "If the issue date is not supplied, the current date on the server is used."
+                }
+              ]
+            }
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Exchange Rate",
+            "description": "The exchange rate between the currency of the direct transaction and the base currency of the company",
+            "required": false
+          },
+          "reference": {
+            "type": "String",
+            "displayName": "Reference",
+            "description": "User friendly reference for the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Reference",
+                  "details": "Must be less than 22 characters."
+                }
+              ],
+              "information": []
+            }
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency of the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Currency",
+                  "details": "Required if multi-currency is enabled for the company."
+                }
+              ]
+            }
+          },
+          "note": {
+            "type": "String",
+            "displayName": "Note",
+            "description": "The note attached to the direct transaction",
+            "required": false
+          },
+          "paymentAllocations": {
+            "type": "Array",
+            "displayName": "Payment Allocations",
+            "description": "A collection of payments allocated to the direct transaction",
+            "properties": {
+              "allocation": {
+                "type": "Object",
+                "displayName": "Allocation",
+                "description": "The allocation information",
+                "properties": {
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been allocated",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "Allocation.TotalAmount",
+                          "details": "Must match the sum of the line items"
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency of the transaction",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "Allocation.Currency",
+                          "details": "Must match the Currency of the company"
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": false
+              },
+              "payment": {
+                "type": "Object",
+                "displayName": "Payment",
+                "description": "The payment to be allocated",
+                "properties": {
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been paid",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "Payment.TotalAmount",
+                          "details": "Must match the sum of the line items"
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency for the payment",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "Payment.Currency",
+                          "details": "Must match the Currency of the company"
+                        }
+                      ],
+                      "information": []
+                    }
+                  },
+                  "accountRef": {
+                    "type": "Object",
+                    "displayName": "Account Reference",
+                    "description": "Reference to the account associated with the allocated payment",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Account ID",
+                        "description": "The identifier for the account",
+                        "required": true,
+                        "validation": {
+                          "warnings": [],
+                          "information": [
+                            {
+                              "field": "AccountRef.Id",
+                              "details": "Must be Bank, Cash or Asset account"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "required": true
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "PaymentAllocations",
+                  "details": "Must have exactly one payment allocation."
+                }
+              ],
+              "information": []
+            }
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Direct Transaction Lines",
+            "description": "A collection of lines that detail items related to the direct transaction",
+            "properties": {
+              "trackingCategoryRefs": {
+                "type": "Array",
+                "displayName": "Tracking Category References",
+                "description": "A collection of categories this item is being tracked against",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The identifier for the item, unique per tracking category",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "TrackingCategoryRefs.TrackingCategoryRefs",
+                          "details": "Must be a valid Id"
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.TrackingCategoryRefs",
+                      "details": "Only one tracking category of type CLASS can be provided per item."
+                    },
+                    {
+                      "field": "LineItems.TrackingCategoryRefs",
+                      "details": "Only one tracking category of type DEPARTMENT can be provided per invoice."
+                    },
+                    {
+                      "field": "LineItems.TrackingCategoryRefs",
+                      "details": "All DEPARTMENT tracking categories must be the same"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Account Reference",
+                "description": "Reference to the nominal account the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Account ID",
+                    "description": "The identifier for the account",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must be an Expense or Income account"
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.AccountRef",
+                      "details": "Must be set if ItemRef is not"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "itemRef": {
+                "type": "Object",
+                "displayName": "Item Reference",
+                "description": "Reference to the product or service type, or inventory item",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the item",
+                    "required": true
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.ItemRef",
+                      "details": "Must be set if AccountRef is not"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "description": {
+                "type": "String",
+                "displayName": "Description",
+                "description": "Friendly name of the goods or services purchased",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.Description",
+                      "details": "Must be less than 4000 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "quantity": {
+                "type": "Number",
+                "displayName": "Quantity",
+                "description": "The number of units of goods or services purchased",
+                "required": true
+              },
+              "unitAmount": {
+                "type": "Number",
+                "displayName": "Unit Amount",
+                "description": "The price of each unit of goods or services",
+                "required": true
+              },
+              "taxAmount": {
+                "type": "Number",
+                "displayName": "Tax Amount",
+                "description": "The amount of tax for the line",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.TaxAmount",
+                      "details": "Must be specified on all line items or none. If specified will override QBO tax calculations."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "taxRateRef": {
+                "type": "Object",
+                "displayName": "Tax Rate Reference",
+                "description": "Reference to the tax rate code the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the tax rate",
+                    "required": true,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "TaxRateRef.Id",
+                          "details": "If an organisation has Automated Sales Tax enabled for US locales, then only 'TAX' (Automated Sales Tax) or 'NON' (no tax) can be used. If Automated Sales Tax is disabled for US locales then 'TAX' (Automated Sales Tax) will not be accepted and a different tax rate must be used."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.TaxRateRef",
+                      "details": "Required for all companies except QuickBooks Online France companies."
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": true
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "Direct Cost",
+        "properties": {
+          "reference": {
+            "type": "String",
+            "displayName": "Reference",
+            "description": "The user reference for this direct cost.",
+            "required": false
+          },
+          "issueDate": {
+            "type": "Number",
+            "displayName": "Issue Date",
+            "description": "The date this payment was issued.",
+            "required": true
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency in which the direct cost is issued in.",
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "currency",
+                  "details": "This must match the target account's default currency."
+                }
+              ],
+              "information": []
+            }
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Rate",
+            "description": "The currency rate associated with this transaction.",
+            "required": true
+          },
+          "accountRef": {
+            "type": "Object",
+            "displayName": "Bank Account",
+            "description": "The bank account to pay this direct cost from.",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Account Id",
+                "description": "Nominal code of the bank account.",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "accountRef.id",
+                      "details": "Must match the ID of an existing bank account and have a max length of 8 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": true
+          },
+          "subTotal": {
+            "type": "Number",
+            "displayName": "Sub Total",
+            "description": "The net amount being paid in this direct cost.",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "details": "This must equal the sum of the line net amounts"
+                }
+              ]
+            }
+          },
+          "taxAmount": {
+            "type": "Number",
+            "displayName": "Tax Amount",
+            "description": "The tax amount being paid in this direct cost.",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "details": "This must equal the sum of the line tax amounts"
+                }
+              ]
+            }
+          },
+          "totalAmount": {
+            "type": "Number",
+            "displayName": "Total Amount",
+            "description": "The total amount being paid in this direct cost.",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "details": "This must equal the sum of the line amounts"
+                }
+              ]
+            }
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Line Items",
+            "description": "Line items of the direct cost.",
+            "properties": {
+              "description": {
+                "type": "String",
+                "displayName": "description",
+                "description": "Description of the direct cost line item.",
+                "required": false
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Code",
+                "description": "Target bank account for the direct cost line item.",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Id",
+                    "description": "The ID of the Account the line is linked to.",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "unitAmount": {
+                "type": "Number",
+                "displayName": "Unit Amount",
+                "description": "Unit amount for the direct cost line item.",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.unitAmount",
+                      "details": "Cannot equal 0 and will be set to Net amount if not provided accordingly."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "quantity": {
+                "type": "Number",
+                "displayName": "Quantity",
+                "description": "Quantity for the direct cost line item.",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.quantity",
+                      "details": "Must be 1 or -1."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "subTotal": {
+                "type": "Number",
+                "displayName": "Net Amount",
+                "description": "Amount for the direct cost line item. Debit entries are considered positive, and credit entries are considered negative.",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.subTotal",
+                      "details": "Cannot have both subtotal and tax amount as 0 for line item."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "taxAmount": {
+                "type": "Number",
+                "displayName": "Tax Amount",
+                "description": "Tax amount for the direct cost line item.",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.taxAmount",
+                      "details": "Cannot have both tax amount and subtotal as 0 for line item."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "totalAmount": {
+                "type": "Number",
+                "displayName": "Total Amount",
+                "description": "Total amount for the direct cost line item.",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.totalAmount",
+                      "details": "Will be auto populated using tax amount and net amount."
+                    }
+                  ]
+                }
+              },
+              "taxCode": {
+                "type": "Number",
+                "displayName": "Tax Code Id",
+                "description": "The tax code ID associated with this transaction.",
+                "required": true
+              },
+              "trackingCategoryRefs": {
+                "type": "Object",
+                "displayName": "Tracking Category References",
+                "description": "Tracking categories associated with this transaction.",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Id",
+                    "description": "The ID of the tracking category associated with the transaction",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "id",
+                          "details": "A department is required. If a project reference is provided, the cost code for that project must also be provided."
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true
+          }
+        },
+        "required": true,
+        "validation": {
+          "warnings": [],
+          "information": [
+            {
+              "details": "Pushing to Sage 50 2015 (v21) or below is not supported. To enable push, please upgrade to at least Sage 50 2016 (v22) and re-sync the company."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "Direct Cost",
+        "properties": {
+          "note": {
+            "type": "String",
+            "displayName": "Note",
+            "description": "The note attached to the direct transaction",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Note",
+                  "details": "Must be used to provide payee's name and contain no more than 80 characters."
+                }
+              ]
+            }
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Direct Transaction Lines",
+            "description": "A collection of lines that detail items related to the direct transaction",
+            "properties": {
+              "unitAmount": {
+                "type": "Number",
+                "displayName": "Unit Amount",
+                "description": "The price of each unit of goods or services",
+                "required": true
+              },
+              "taxRateRef": {
+                "type": "Object",
+                "displayName": "Tax Rate Reference",
+                "description": "Reference to the tax rate code the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the tax rate",
+                    "required": true,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "TaxRateRef.Id",
+                          "details": "Must be an existing tax rate in Sage Intacct."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Account Reference",
+                "description": "Reference to the nominal account the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Account ID",
+                    "description": "The identifier for the account",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "description": {
+                "type": "String",
+                "displayName": "Description",
+                "description": "Friendly name of the goods or services purchased",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.Description",
+                      "details": "Must not contain no more than 1000 characters."
+                    }
+                  ]
+                }
+              },
+              "taxAmount": {
+                "type": "Number",
+                "displayName": "Tax Amount",
+                "description": "The amount of tax for the line",
+                "required": false
+              },
+              "totalAmount": {
+                "type": "Number",
+                "displayName": "Total Amount",
+                "description": "The total amount of the line, inclusive of discounts and tax",
+                "required": false
+              },
+              "subTotal": {
+                "type": "Number",
+                "displayName": "Sub Total Amount",
+                "description": "The amount of the line, inclusive of discounts but exclusive of tax",
+                "required": false
+              },
+              "trackingCategoryRefs": {
+                "type": "Array",
+                "displayName": "Tracking Category References",
+                "description": "A collection of categories this item is being tracked against",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The identifier for the item, unique per tracking category",
+                    "required": false
+                  },
+                  "name": {
+                    "type": "String",
+                    "displayName": "Tracking Category Name",
+                    "description": "The name of the category referenced by the identifier",
+                    "required": false
+                  }
+                },
+                "required": false
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "LineItems",
+                  "details": "Must contain at least one line item."
+                }
+              ]
+            }
+          },
+          "paymentAllocations": {
+            "type": "Array",
+            "displayName": "Payment Allocations",
+            "description": "A collection of payments allocated to the direct transaction",
+            "properties": {
+              "payment": {
+                "type": "Object",
+                "displayName": "Payment",
+                "description": "The payment to be allocated",
+                "properties": {
+                  "paidOnDate": {
+                    "type": "DateTime",
+                    "displayName": "Paid On Date",
+                    "description": "The date the payment was paid",
+                    "required": true
+                  },
+                  "accountRef": {
+                    "type": "Object",
+                    "displayName": "Account Reference",
+                    "description": "Reference to the account associated with the allocated payment",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Account ID",
+                        "description": "The identifier for the account",
+                        "required": true
+                      }
+                    },
+                    "required": true
+                  },
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been paid",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Payment.TotalAmount",
+                          "details": "If provided, must match the sum of the line items."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true
+              },
+              "allocation": {
+                "type": "Object",
+                "displayName": "Allocation",
+                "description": "The allocation information",
+                "properties": {
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been allocated",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Allocation.TotalAmount",
+                          "details": "If provided, must match the sum of the line items."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "PaymentAllocations",
+                  "details": "Must contain a single allocation."
+                }
+              ]
+            }
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency of the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Currency",
+                  "details": "When supplying a currency ensure that it exists in your Sage Intacct entity otherwise the request will fail."
+                }
+              ],
+              "information": []
+            }
+          },
+          "reference": {
+            "type": "String",
+            "displayName": "Reference",
+            "description": "User friendly reference for the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Reference",
+                  "details": "Must not contain no more than 45 characters."
+                }
+              ]
+            }
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Exchange Rate",
+            "description": "The exchange rate between the currency of the direct transaction and the base currency of the company",
+            "required": false
+          },
+          "totalAmount": {
+            "type": "Number",
+            "displayName": "Total Amount",
+            "description": "The amount of the direct transaction, inclusive of tax",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "TotalAmount",
+                  "details": "If provided, must match the sum of the line items."
+                }
+              ]
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sandbox",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "Direct Cost",
+        "properties": {
+          "reference": {
+            "type": "String",
+            "displayName": "Reference",
+            "description": "User friendly reference for the direct transaction",
+            "required": true
+          },
+          "note": {
+            "type": "String",
+            "displayName": "Note",
+            "description": "The note attached to the direct transaction",
+            "required": true
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Ref",
+            "description": "The contact associated with the direct transaction, if known",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true
+              },
+              "dataType": {
+                "type": "String",
+                "displayName": "DataType",
+                "description": "The name of the data type for which the ID is valid.",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "issueDate": {
+            "type": "DateTime",
+            "displayName": "Issue Date",
+            "description": "The date the direct transaction was issued",
+            "required": true
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency of the direct transaction",
+            "required": true
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Exchange Rate",
+            "description": "The exchange rate between the currency of the direct transaction and the base currency of the company",
+            "required": true
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Direct Transaction Lines",
+            "description": "A collection of lines that detail items related to the direct transaction",
+            "properties": {
+              "description": {
+                "type": "String",
+                "displayName": "Description",
+                "description": "Friendly name of the goods or services purchased",
+                "required": true
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Account Reference",
+                "description": "Reference to the nominal account the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Account ID",
+                    "description": "The identifier for the account",
+                    "required": true
+                  },
+                  "name": {
+                    "type": "String",
+                    "displayName": "Name",
+                    "description": "Name of the account",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "taxRateRef": {
+                "type": "Object",
+                "displayName": "Tax Rate Reference",
+                "description": "Reference to the tax rate code the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the tax rate",
+                    "required": true
+                  },
+                  "name": {
+                    "type": "String",
+                    "displayName": "Name",
+                    "description": "The name of the tax rate referenced by the identifier",
+                    "required": true
+                  },
+                  "effectiveTaxRate": {
+                    "type": "Number",
+                    "displayName": "Effective Tax Rate",
+                    "description": "The total applied tax percentage, including compounding details",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "unitAmount": {
+                "type": "Number",
+                "displayName": "Unit Amount",
+                "description": "The price of each unit of goods or services",
+                "required": true
+              },
+              "quantity": {
+                "type": "Number",
+                "displayName": "Quantity",
+                "description": "The number of units of goods or services purchased",
+                "required": true
+              },
+              "discountAmount": {
+                "type": "Number",
+                "displayName": "Discount Amount",
+                "description": "The value, in the given currency, of any discounts applied",
+                "required": true
+              },
+              "discountPercentage": {
+                "type": "Number",
+                "displayName": "Discount Percentage",
+                "description": "The percentage rate of any discount that has been applied",
+                "required": true
+              },
+              "subTotal": {
+                "type": "Number",
+                "displayName": "Sub Total Amount",
+                "description": "The amount of the line, inclusive of discounts but exclusive of tax",
+                "required": true
+              },
+              "taxAmount": {
+                "type": "Number",
+                "displayName": "Tax Amount",
+                "description": "The amount of tax for the line",
+                "required": true
+              },
+              "totalAmount": {
+                "type": "Number",
+                "displayName": "Total Amount",
+                "description": "The total amount of the line, inclusive of discounts and tax",
+                "required": true
+              },
+              "itemRef": {
+                "type": "Object",
+                "displayName": "Item Reference",
+                "description": "Reference to the product or service type, or inventory item",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the item",
+                    "required": true
+                  },
+                  "name": {
+                    "type": "String",
+                    "displayName": "Name",
+                    "description": "The name of the item referenced by the identifier",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "trackingCategoryRefs": {
+                "type": "Array",
+                "displayName": "Tracking Category References",
+                "description": "A collection of categories this item is being tracked against",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The identifier for the item, unique per tracking category",
+                    "required": true
+                  },
+                  "name": {
+                    "type": "String",
+                    "displayName": "Tracking Category Name",
+                    "description": "The name of the category referenced by the identifier",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "tracking": {
+                "type": "Object",
+                "displayName": "Tracking",
+                "description": "Information this item is being tracked against",
+                "properties": {
+                  "recordRefs": {
+                    "type": "Array",
+                    "displayName": "Record References",
+                    "description": "A collection of records this item is being tracked against",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Identifier",
+                        "description": "The reference identifier for the record",
+                        "required": true
+                      },
+                      "dataType": {
+                        "type": "String",
+                        "displayName": "DataType",
+                        "description": "The name of the data type for which the ID is valid.",
+                        "required": true
+                      }
+                    },
+                    "required": true
+                  },
+                  "invoiceTo": {
+                    "type": "Object",
+                    "displayName": "Invoice To",
+                    "description": "The entity the record should be invoiced to",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Identifier",
+                        "description": "The reference identifier for the record",
+                        "required": true
+                      },
+                      "dataType": {
+                        "type": "String",
+                        "displayName": "DataType",
+                        "description": "The name of the data type for which the ID is valid.",
+                        "required": true
+                      }
+                    },
+                    "required": true
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "paymentAllocations": {
+            "type": "Array",
+            "displayName": "Payment Allocations",
+            "description": "A collection of payments allocated to the direct transaction",
+            "properties": {
+              "payment": {
+                "type": "Object",
+                "displayName": "Payment",
+                "description": "The payment to be allocated",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The identifier for the allocated payment",
+                    "required": true
+                  },
+                  "note": {
+                    "type": "String",
+                    "displayName": "Note",
+                    "description": "Any additional text based information associated with the allocated payment",
+                    "required": true
+                  },
+                  "reference": {
+                    "type": "String",
+                    "displayName": "Reference",
+                    "description": "Reference associated with the allocated payment",
+                    "required": true
+                  },
+                  "accountRef": {
+                    "type": "Object",
+                    "displayName": "Account Reference",
+                    "description": "Reference to the account associated with the allocated payment",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Account ID",
+                        "description": "The identifier for the account",
+                        "required": true
+                      },
+                      "name": {
+                        "type": "String",
+                        "displayName": "Name",
+                        "description": "Name of the account",
+                        "required": true
+                      }
+                    },
+                    "required": true
+                  },
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency for the payment",
+                    "required": true
+                  },
+                  "currencyRate": {
+                    "type": "Number",
+                    "displayName": "Currency Exchange Rate",
+                    "description": "The exchange rate between the currency of the allocated payment and the currency of the base company",
+                    "required": true
+                  },
+                  "paidOnDate": {
+                    "type": "DateTime",
+                    "displayName": "Paid On Date",
+                    "description": "The date the payment was paid",
+                    "required": true
+                  },
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been paid",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "allocation": {
+                "type": "Object",
+                "displayName": "Allocation",
+                "description": "The allocation information",
+                "properties": {
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency of the transaction",
+                    "required": true
+                  },
+                  "currencyRate": {
+                    "type": "Number",
+                    "displayName": "Currency Exchange Rate",
+                    "description": "The exchange rate between the currency of the allocated payment and the currency of the transaction",
+                    "required": true
+                  },
+                  "allocatedOnDate": {
+                    "type": "DateTime",
+                    "displayName": "Allocated On Date",
+                    "description": "The date the payment was allocated",
+                    "required": true
+                  },
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been allocated",
+                    "required": true
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "subTotal": {
+            "type": "Number",
+            "displayName": "Sub Total Amount",
+            "description": "The total amount of the direct transaction excluding any taxes",
+            "required": true
+          },
+          "taxAmount": {
+            "type": "Number",
+            "displayName": "Tax Amount",
+            "description": "The total amount of tax on the direct transaction",
+            "required": true
+          },
+          "totalAmount": {
+            "type": "Number",
+            "displayName": "Total Amount",
+            "description": "The amount of the direct transaction, inclusive of tax",
+            "required": true
+          },
+          "metadata": {
+            "type": "Object",
+            "displayName": "Metadata",
+            "description": "Miscellaneous data about the item",
+            "properties": {
+              "isDeleted": {
+                "type": "Boolean",
+                "displayName": "IsDeleted",
+                "description": "A boolean to indicate whether the object has been deleted",
+                "required": true
+              }
+            },
+            "required": true
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "Direct Cost",
+        "properties": {
+          "issueDate": {
+            "type": "DateTime",
+            "displayName": "Issue Date",
+            "description": "The date the direct transaction was issued",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "IssueDate",
+                  "details": "Must be provided."
+                }
+              ]
+            }
+          },
+          "reference": {
+            "type": "String",
+            "displayName": "Reference",
+            "description": "User friendly reference for the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Reference",
+                  "details": "Must not exceed 255 characters."
+                }
+              ]
+            }
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency of the direct transaction",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Currency",
+                  "details": "Must be provided."
+                }
+              ]
+            }
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Exchange Rate",
+            "description": "The exchange rate between the currency of the direct transaction and the base currency of the company",
+            "required": false
+          },
+          "taxAmount": {
+            "type": "Number",
+            "displayName": "Tax Amount",
+            "description": "The total amount of tax on the direct transaction",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "TaxAmount",
+                  "details": "Must be provided."
+                }
+              ]
+            }
+          },
+          "totalAmount": {
+            "type": "Number",
+            "displayName": "Total Amount",
+            "description": "The amount of the direct transaction, inclusive of tax",
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "TotalAmount",
+                  "details": "Must be provided."
+                }
+              ]
+            }
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Ref",
+            "description": "The contact associated with the direct transaction, if known",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "ContactRef.Id",
+                      "details": "Must be a valid GUID."
+                    },
+                    {
+                      "field": "ContactRef.Id",
+                      "details": "Must match the ID of an existing contact."
+                    }
+                  ],
+                  "information": [
+                    {
+                      "field": "ContactRef.Id",
+                      "details": "Must be provided."
+                    }
+                  ]
+                }
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "ContactRef",
+                  "details": "Must be provided."
+                }
+              ]
+            }
+          },
+          "paymentAllocations": {
+            "type": "Array",
+            "displayName": "Payment Allocations",
+            "description": "A collection of payments allocated to the direct transaction",
+            "properties": {
+              "payment": {
+                "type": "Object",
+                "displayName": "Payment",
+                "description": "The payment to be allocated",
+                "properties": {
+                  "accountRef": {
+                    "type": "Object",
+                    "displayName": "Account Reference",
+                    "description": "Reference to the account associated with the allocated payment",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Account ID",
+                        "description": "The identifier for the account",
+                        "required": true,
+                        "validation": {
+                          "warnings": [
+                            {
+                              "field": "AccountRef.Id",
+                              "details": "Must be a bank account."
+                            },
+                            {
+                              "field": "AccountRef.Id",
+                              "details": "Must match the ID of an existing bank account."
+                            }
+                          ],
+                          "information": [
+                            {
+                              "field": "AccountRef.Id",
+                              "details": "Must be provided."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "required": true,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Payment.AccountRef",
+                          "details": "Must be provided."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "PaymentAllocations.Payment",
+                      "details": "Must be provided."
+                    }
+                  ]
+                }
+              },
+              "allocation": {
+                "type": "Object",
+                "displayName": "Allocation",
+                "description": "The allocation information",
+                "properties": {
+                  "totalAmount": {
+                    "type": "Number",
+                    "displayName": "Total Amount",
+                    "description": "The total amount that has been allocated",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "Allocation.TotalAmount",
+                          "details": "Must be equal to the sum of line items."
+                        }
+                      ],
+                      "information": [
+                        {
+                          "field": "Allocation.TotalAmount",
+                          "details": "Must be provided."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "PaymentAllocations.Allocation",
+                      "details": "Must be provided."
+                    }
+                  ]
+                }
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "PaymentAllocations",
+                  "details": "Must be provided."
+                }
+              ]
+            }
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Direct Transaction Lines",
+            "description": "A collection of lines that detail items related to the direct transaction",
+            "properties": {
+              "description": {
+                "type": "String",
+                "displayName": "Description",
+                "description": "Friendly name of the goods or services purchased",
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.Description",
+                      "details": "Must not be longer than 4000 characters long."
+                    }
+                  ]
+                }
+              },
+              "quantity": {
+                "type": "Number",
+                "displayName": "Quantity",
+                "description": "The number of units of goods or services purchased",
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.Quantity",
+                      "details": "Must be provided."
+                    }
+                  ]
+                }
+              },
+              "unitAmount": {
+                "type": "Number",
+                "displayName": "Unit Amount",
+                "description": "The price of each unit of goods or services",
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.UnitAmount",
+                      "details": "Must be provided."
+                    }
+                  ]
+                }
+              },
+              "totalAmount": {
+                "type": "Number",
+                "displayName": "Total Amount",
+                "description": "The total amount of the line, inclusive of discounts and tax",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "LineItems.TotalAmount",
+                      "details": "When negative, the push item will be converted to a DirectIncome and will be pushed accordingly."
+                    }
+                  ],
+                  "information": [
+                    {
+                      "field": "LineItems.TotalAmount",
+                      "details": "When one line is negative, all lines must be negative."
+                    }
+                  ]
+                }
+              },
+              "taxAmount": {
+                "type": "Number",
+                "displayName": "Tax Amount",
+                "description": "The amount of tax for the line",
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.TaxAmount",
+                      "details": "Must be provided."
+                    }
+                  ]
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Account Reference",
+                "description": "Reference to the nominal account the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Account ID",
+                    "description": "The identifier for the account",
+                    "required": true,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must be a valid GUID."
+                        },
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must match the ID of an existing account."
+                        }
+                      ],
+                      "information": [
+                        {
+                          "field": "AccountRef.Id",
+                          "details": "Must be provided."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.AccountRef",
+                      "details": "Must be provided."
+                    }
+                  ]
+                }
+              },
+              "trackingCategoryRefs": {
+                "type": "Array",
+                "displayName": "Tracking Category References",
+                "description": "A collection of categories this item is being tracked against",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The identifier for the item, unique per tracking category",
+                    "required": true,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "TrackingCategoryRefs.Id",
+                          "details": "Must be provided."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.TrackingCategoryRefs",
+                      "details": "Tracking categories must not have the same parent tracking category."
+                    },
+                    {
+                      "field": "LineItems.TrackingCategoryRefs",
+                      "details": "Maximum of 2 Tracking Categories."
+                    }
+                  ]
+                }
+              },
+              "taxRateRef": {
+                "type": "Object",
+                "displayName": "Tax Rate Reference",
+                "description": "Reference to the tax rate code the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the tax rate",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "TaxRateRef.Id",
+                          "details": "Must match the ID of an existing tax rate."
+                        }
+                      ],
+                      "information": [
+                        {
+                          "field": "TaxRateRef.Id",
+                          "details": "If not provided, will be set to the default tax rate for the line's account."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": false
+              },
+              "itemRef": {
+                "type": "Object",
+                "displayName": "Item Reference",
+                "description": "Reference to the product or service type, or inventory item",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the item",
+                    "required": false,
+                    "validation": {
+                      "warnings": [
+                        {
+                          "field": "ItemRef.Id",
+                          "details": "Must be a valid GUID."
+                        },
+                        {
+                          "field": "ItemRef.Id",
+                          "details": "Must match the ID of an existing item."
+                        }
+                      ],
+                      "information": []
+                    }
+                  }
+                },
+                "required": false
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "LineItems",
+                  "details": "Must be provided."
+                }
+              ]
+            }
+          }
+        },
+        "required": true,
+        "validation": {
+          "warnings": [
+            {
+              "details": "When negative, the push item will be converted to a DirectIncome and will be pushed accordingly."
+            }
+          ],
+          "information": []
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zoho Books",
+      "example": {
+        "type": "Object",
+        "displayName": "Direct Cost",
+        "description": "Direct Cost",
+        "properties": {
+          "reference": {
+            "type": "String",
+            "displayName": "Reference",
+            "description": "User friendly reference for the direct transaction",
+            "required": false
+          },
+          "note": {
+            "type": "String",
+            "displayName": "Note",
+            "description": "The note attached to the direct transaction",
+            "required": false
+          },
+          "issueDate": {
+            "type": "DateTime",
+            "displayName": "Issue Date",
+            "description": "The date the direct transaction was issued",
+            "required": true
+          },
+          "currencyRate": {
+            "type": "Number",
+            "displayName": "Currency Exchange Rate",
+            "description": "The exchange rate between the currency of the direct transaction and the base currency of the company",
+            "required": false
+          },
+          "contactRef": {
+            "type": "Object",
+            "displayName": "Contact Ref",
+            "description": "The contact associated with the direct transaction, if known",
+            "properties": {
+              "id": {
+                "type": "String",
+                "displayName": "Identifier",
+                "description": "The reference identifier for the record",
+                "required": false
+              }
+            },
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "ContactRef",
+                  "details": "Required when pushing a negative direct cost & should reference either a Customer or Supplier when provided"
+                }
+              ]
+            }
+          },
+          "lineItems": {
+            "type": "Array",
+            "displayName": "Direct Transaction Lines",
+            "description": "A collection of lines that detail items related to the direct transaction",
+            "properties": {
+              "totalAmount": {
+                "type": "Number",
+                "displayName": "Total Amount",
+                "description": "The total amount of the line, inclusive of discounts and tax",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.TotalAmount",
+                      "details": "Should be provided when SubTotal is not provided"
+                    }
+                  ]
+                }
+              },
+              "subTotal": {
+                "type": "Number",
+                "displayName": "Sub Total Amount",
+                "description": "The amount of the line, inclusive of discounts but exclusive of tax",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "LineItems.SubTotal",
+                      "details": "Should be provided when TotalAmount is not provided"
+                    }
+                  ]
+                }
+              },
+              "accountRef": {
+                "type": "Object",
+                "displayName": "Nominal Account Reference",
+                "description": "Reference to the nominal account the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Account ID",
+                    "description": "The identifier for the account",
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "taxRateRef": {
+                "type": "Object",
+                "displayName": "Tax Rate Reference",
+                "description": "Reference to the tax rate code the line item is linked to",
+                "properties": {
+                  "id": {
+                    "type": "String",
+                    "displayName": "Identifier",
+                    "description": "The reference identifier for the tax rate",
+                    "required": false
+                  }
+                },
+                "required": false
+              },
+              "trackingCategoryRefs": {
+                "type": "Array",
+                "displayName": "Tracking Category References",
+                "description": "A collection of categories this item is being tracked against",
+                "required": false
+              }
+            },
+            "required": true
+          },
+          "currency": {
+            "type": "String",
+            "displayName": "Currency",
+            "description": "The currency of the direct transaction",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Currency",
+                  "details": "Is required when pushing a negative direct cost"
+                }
+              ]
+            }
+          },
+          "paymentAllocations": {
+            "type": "Array",
+            "displayName": "Payment Allocations",
+            "description": "A collection of payments allocated to the direct transaction",
+            "properties": {
+              "payment": {
+                "type": "Object",
+                "displayName": "Payment",
+                "description": "The payment to be allocated",
+                "properties": {
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency for the payment",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Payment.Currency",
+                          "details": "Is required when pushing a negative direct cost"
+                        }
+                      ]
+                    }
+                  },
+                  "accountRef": {
+                    "type": "Object",
+                    "displayName": "Account Reference",
+                    "description": "Reference to the account associated with the allocated payment",
+                    "properties": {
+                      "id": {
+                        "type": "String",
+                        "displayName": "Account ID",
+                        "description": "The identifier for the account",
+                        "required": true
+                      }
+                    },
+                    "required": true
+                  }
+                },
+                "required": true
+              },
+              "allocation": {
+                "type": "Object",
+                "displayName": "Allocation",
+                "description": "The allocation information",
+                "properties": {
+                  "currency": {
+                    "type": "String",
+                    "displayName": "Currency",
+                    "description": "The currency of the transaction",
+                    "required": false,
+                    "validation": {
+                      "warnings": [],
+                      "information": [
+                        {
+                          "field": "Allocation.Currency",
+                          "details": "Is required when pushing a negative direct cost"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": true
+              }
+            },
+            "required": true
+          }
+        },
+        "required": true
+      }
+    }
+  ]
+}

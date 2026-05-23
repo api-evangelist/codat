@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingCustomer",
+  "title": "Accounting: Customer",
+  "description": "## Overview\n\nA customer is a person or organisation that buys goods or services. From the Customers endpoints, you can retrieve a [list of all the customers of a company](https://api.codat.io/swagger/index.html#/Customers/get_companies__companyId__data_customers).\n\nCustomers' data links to accounts receivable [invoices](https://docs.codat.io/lending-api#/schemas/Invoice).\n",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the customer, unique to the company in the accounting software."
+        },
+        "customerName": {
+          "type": "string",
+          "nullable": true,
+          "description": "Name of the customer as recorded in the accounting system, typically the company name."
+        },
+        "contactName": {
+          "type": "string",
+          "nullable": true,
+          "description": "Name of the main contact for the identified customer."
+        },
+        "emailAddress": {
+          "type": "string",
+          "nullable": true,
+          "description": "Email address the customer can be contacted by."
+        },
+        "defaultCurrency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "Default currency the transactional data of the customer is recorded in."
+        },
+        "phone": {
+          "type": "string",
+          "nullable": true,
+          "description": "Phone number the customer can be contacted by."
+        },
+        "addresses": {
+          "type": "array",
+          "nullable": true,
+          "description": "An array of Addresses.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingAddress"
+          }
+        },
+        "contacts": {
+          "type": "array",
+          "nullable": true,
+          "description": "An array of Contacts.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingCustomer/definitions/contact"
+          }
+        },
+        "registrationNumber": {
+          "type": "string",
+          "nullable": true,
+          "description": "Company number. In the UK, this is typically the Companies House company registration number."
+        },
+        "taxNumber": {
+          "type": "string",
+          "nullable": true,
+          "description": "Company tax number."
+        },
+        "status": {
+          "$ref": "#/components/schemas/AccountingCustomer/definitions/customerStatus",
+          "description": "Current state of the customer."
+        },
+        "metadata": {
+          "$ref": "#/components/schemas/Metadata"
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "required": [
+    "status"
+  ],
+  "definitions": {
+    "accountingCustomerRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string",
+          "description": "`id` from the Customers data type"
+        },
+        "companyName": {
+          "type": "string",
+          "nullable": true,
+          "description": "`customerName` from the Customer data type"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "customerStatus": {
+      "description": "Status of customer.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Active",
+        "Archived"
+      ]
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "nullable": true,
+          "description": "Name of a contact for a customer."
+        },
+        "email": {
+          "type": "string",
+          "nullable": true,
+          "description": "Email of a contact for a customer."
+        },
+        "phone": {
+          "type": "array",
+          "nullable": true,
+          "description": "An array of Phone numbers.",
+          "items": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          }
+        },
+        "address": {
+          "$ref": "#/components/schemas/AccountingAddress",
+          "description": "An object of Address information."
+        },
+        "status": {
+          "$ref": "#/components/schemas/AccountingCustomer/definitions/customerStatus"
+        },
+        "modifiedDate": {
+          "$ref": "#/components/schemas/DateTime"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    }
+  }
+}

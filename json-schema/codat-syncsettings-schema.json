@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SyncSettings",
+  "title": "Sync settings",
+  "x-internal": true,
+  "type": "object",
+  "properties": {
+    "clientId": {
+      "$ref": "#/components/schemas/ClientId"
+    },
+    "settings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SyncSetting"
+      }
+    },
+    "overridesDefaults": {
+      "type": "boolean",
+      "description": "Set to `True` if you want to override the default [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings)."
+    }
+  }
+}

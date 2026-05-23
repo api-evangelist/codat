@@ -1,0 +1,97 @@
+{
+  "operationId": "get-commerce-payment-method",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-paymentMethods/{paymentMethodId}",
+  "summary": "Get payment method",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Amazon Seller Central",
+      "example": {
+        "id": "COD",
+        "name": "Cash On Delivery",
+        "status": "Active",
+        "modifiedDate": "2023-01-09T09:12:03Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "BigCommerce",
+      "example": {
+        "id": "bigcommerce_gift_certificate",
+        "name": "Gift Certificate",
+        "status": "Active",
+        "modifiedDate": "2023-04-11T10:33:48Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clover",
+      "example": {
+        "id": "0DPQ6QP48YYHW",
+        "name": "TapMango Wallet",
+        "status": "Active",
+        "modifiedDate": "2023-01-09T11:01:04Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Lightspeed K Trial",
+      "example": {
+        "id": "647208621834260",
+        "name": "Cash",
+        "status": "Active",
+        "modifiedDate": "2023-03-02T09:48:56Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie",
+      "example": {
+        "id": "applepay",
+        "name": "Apple Pay",
+        "status": "Unknown",
+        "modifiedDate": "2022-08-09T15:08:19Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie Test",
+      "example": {
+        "id": "applepay",
+        "name": "Apple Pay",
+        "status": "Unknown",
+        "modifiedDate": "2022-08-17T11:33:19Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Square",
+      "example": {
+        "id": "BANK_ACCOUNT",
+        "name": "Bank Account",
+        "status": "Unknown",
+        "modifiedDate": "2022-08-02T10:27:32Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "SumUp",
+      "example": {
+        "id": "CASH",
+        "name": "Cash",
+        "status": "Active",
+        "modifiedDate": "2022-09-14T10:58:03Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ThirdPartySchema",
+  "title": "Third-party schema",
+  "description": "The format should be identical to the file format receieved from the third-party banking source (e.g. Plaid or TrueLayer).",
+  "type": "object",
+  "x-speakeasy-type-override": "any"
+}

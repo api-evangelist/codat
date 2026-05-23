@@ -1,0 +1,85 @@
+{
+  "operationId": "create-company",
+  "method": "POST",
+  "path": "/companies",
+  "summary": "Create company",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "With no description",
+      "example": {
+        "name": "Technicalium"
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "With a description",
+      "example": {
+        "name": "Technicalium",
+        "description": "Technology services, including web and app design and development"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "With no description",
+      "example": {
+        "id": "ab12c58d-a678-4ebf-a159-ae99e1807bd0",
+        "name": "Technicalium",
+        "description": "",
+        "platform": "",
+        "redirect": "https://link.codat.io/company/ab12c58d-a678-4ebf-a159-ae99e1807bd0",
+        "dataConnections": [],
+        "created": "2022-11-10T10:45:18.1950523Z",
+        "createdByUserName": "Dan Tzabar",
+        "products": [
+          "spend-insights"
+        ],
+        "referenceSubsidiaryCompanies": []
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "With a description",
+      "example": {
+        "id": "ab12c58d-a678-4ebf-a159-ae99e1807bd0",
+        "name": "Technicalium",
+        "description": "Technology services, including web and app design and development",
+        "platform": "",
+        "redirect": "https://link.codat.io/company/ab12c58d-a678-4ebf-a159-ae99e1807bd0",
+        "dataConnections": [],
+        "created": "2022-11-10T10:45:18.1950523Z",
+        "createdByUserName": "Dan Tzabar",
+        "products": [
+          "spend-insights"
+        ],
+        "referenceSubsidiaryCompanies": []
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "With a tag",
+      "example": {
+        "id": "ab12c58d-a678-4ebf-a159-ae99e1807bd0",
+        "name": "Technicalium",
+        "description": "",
+        "platform": "",
+        "redirect": "https://link.codat.io/company/ab12c58d-a678-4ebf-a159-ae99e1807bd0",
+        "dataConnections": [],
+        "created": "2022-11-10T10:45:18.1950523Z",
+        "createdByUserName": "Dan Tzabar",
+        "products": [
+          "spend-insights"
+        ],
+        "tags": {
+          "region": "us"
+        },
+        "referenceSubsidiaryCompanies": []
+      }
+    }
+  ]
+}

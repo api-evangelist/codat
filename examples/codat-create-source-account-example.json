@@ -1,0 +1,46 @@
+{
+  "operationId": "create-source-account",
+  "method": "POST",
+  "path": "/companies/{companyId}/connections/{connectionId}/connectionInfo/bankFeedAccounts",
+  "summary": "Create single source account",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Version 2",
+      "example": {
+        "id": "acc-001",
+        "accountName": "account-081",
+        "accountType": "checking",
+        "accountNumber": "12345670",
+        "routingInfo": {
+          "bankCode": "021001088",
+          "type": "bankcode"
+        },
+        "currency": "GBP",
+        "balance": 99.99,
+        "accountInfo": {
+          "description": "account description 1",
+          "nickname": "account 123",
+          "accountOpenDate": "2023-05-06",
+          "availableBalance": 10
+        },
+        "modifiedDate": "2024-08-02T00:00:00.000Z"
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Version 1",
+      "example": {
+        "id": "acc-002",
+        "accountName": "account-081",
+        "sortCode": "123456",
+        "accountType": "Credit",
+        "accountNumber": "12345670",
+        "currency": "GBP",
+        "balance": 99.99,
+        "modifiedDate": "2023-01-09T14:14:14.1057478Z"
+      }
+    }
+  ],
+  "responseExamples": []
+}

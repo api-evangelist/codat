@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankStatementUploadConfiguration",
+  "title": "Banking data upload settings",
+  "description": "Configuration settings for uploading banking data to Codat",
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string",
+      "enum": [
+        "codat"
+      ],
+      "description": "The source of the banking data that determines its format"
+    },
+    "accountId": {
+      "type": "string",
+      "description": "The ID of the account in the third-party platform"
+    },
+    "providerId": {
+      "type": "string",
+      "description": "TrueLayer provider ID (only required if source is TrueLayer)"
+    }
+  }
+}

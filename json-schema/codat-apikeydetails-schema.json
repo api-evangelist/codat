@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApiKeyDetails",
+  "title": "API key details",
+  "description": "Details of the API key.",
+  "type": "object",
+  "allOf": [
+    {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the API key.",
+          "example": "e288a972-b402-4b21-93f9-b5335ae5679c"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 50,
+          "nullable": true,
+          "description": "A meaningful name assigned to the API key.",
+          "example": "azure-invoice-finance-processor"
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The API key value used to make authenticated http requests.",
+          "example": "ztHQGvnC4XN2CgUhaDWEG4ySLUJqWjp7zkbZkGHd"
+        }
+      }
+    },
+    {
+      "nullable": true,
+      "description": "Datetime in UTC the API key was created. The created date will be null if the API key created before YYYY-MM-DD.",
+      "title": "Created date",
+      "type": "object",
+      "x-internal": true,
+      "properties": {
+        "createdDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date the entity was created."
+        }
+      }
+    }
+  ]
+}

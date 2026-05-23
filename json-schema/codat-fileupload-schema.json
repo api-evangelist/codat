@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FileUpload",
+  "title": "Attachment upload",
+  "type": "object",
+  "x-internal": true,
+  "required": [
+    "file"
+  ],
+  "properties": {
+    "file": {
+      "$ref": "#/components/schemas/FileUpload/definitions/codatFile"
+    }
+  },
+  "definitions": {
+    "codatFile": {
+      "type": "string",
+      "description": "The file to be uploaded as an attachment.",
+      "format": "binary"
+    }
+  }
+}

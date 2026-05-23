@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AgedCurrencyOutstanding",
+  "title": "Accounting: Aged currency outstanding",
+  "type": "object",
+  "properties": {
+    "currency": {
+      "$ref": "#/components/schemas/SourceAccount/properties/currency"
+    },
+    "agedOutstandingAmounts": {
+      "type": "array",
+      "description": "Array of outstanding amounts by period.",
+      "items": {
+        "$ref": "#/components/schemas/AgedCurrencyOutstanding/definitions/agedOutstandingAmount"
+      }
+    }
+  },
+  "definitions": {
+    "agedOutstandingAmount": {
+      "type": "object",
+      "title": "Aged outstanding amount",
+      "properties": {
+        "fromDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Start date of period."
+        },
+        "toDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "End date of period."
+        },
+        "amount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The amount outstanding."
+        },
+        "details": {
+          "type": "array",
+          "description": "Array of details.",
+          "items": {
+            "$ref": "#/components/schemas/AgedCurrencyOutstanding/definitions/agedOutstandingAmountDetail"
+          }
+        }
+      }
+    },
+    "agedOutstandingAmountDetail": {
+      "type": "object",
+      "title": "Amounts outstanding by data type",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of data type with outstanding amount for given period."
+        },
+        "amount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The amount outstanding."
+        }
+      }
+    }
+  }
+}

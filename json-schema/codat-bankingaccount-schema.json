@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankingAccount",
+  "title": "Banking: Bank account",
+  "description": "This data type provides a list of all the SMB's bank accounts, with rich data like balances, account numbers, and institutions holding the accounts.\n\nResponses are paged, so you should provide `page` and `pageSize` query parameters in your request.",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The ID of the account from the provider."
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The name of the account according to the provider."
+        },
+        "informalName": {
+          "type": "string",
+          "nullable": true,
+          "description": "The friendly name of the account, chosen by the holder. This may not have been set by the account holder and therefore is not always available."
+        },
+        "holder": {
+          "type": "string",
+          "nullable": true,
+          "description": "The name of the person or company who holds the account."
+        },
+        "type": {
+          "$ref": "#/components/schemas/AccountingBankAccountType"
+        },
+        "balance": {
+          "$ref": "#/components/schemas/BankingAccountBalance/definitions/accountBalanceAmounts",
+          "description": "An object containing bank balance data."
+        },
+        "identifiers": {
+          "$ref": "#/components/schemas/BankingAccount/definitions/accountIdentifiers"
+        },
+        "currency": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The currency code for the account."
+        },
+        "institution": {
+          "$ref": "#/components/schemas/BankingAccount/definitions/accountInstitution"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "required": [
+    "id",
+    "name",
+    "type",
+    "balance",
+    "identifiers",
+    "currency",
+    "institution"
+  ],
+  "definitions": {
+    "accountIdentifiers": {
+      "title": "Account Identifiers",
+      "description": "An object containing bank account identification information.",
+      "type": "object",
+      "x-internal": true,
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "$ref": "#/components/schemas/BankingAccount/definitions/accountIdentifierType"
+        },
+        "subtype": {
+          "type": "string",
+          "nullable": true,
+          "description": "Detailed account category"
+        },
+        "number": {
+          "type": "string",
+          "nullable": true,
+          "description": "The account number for the account. When combined with the`bankCode`, this is usually enough to uniquely identify an account within a jurisdiction."
+        },
+        "bankCode": {
+          "type": "string",
+          "nullable": true,
+          "description": "The local (usually national) routing number for the account.\n\nThis is known by different names in different countries:\n* BSB code (Australia)\n* routing number (Canada, USA)\n* sort code (UK)"
+        },
+        "iban": {
+          "type": "string",
+          "nullable": true,
+          "description": "The international bank account number (IBAN) for the account, if known."
+        },
+        "bic": {
+          "type": "string",
+          "nullable": true,
+          "description": "The ISO 9362 code (commonly called SWIFT code, SWIFT-BIC or BIC) for the account."
+        },
+        "maskedAccountNumber": {
+          "type": "string",
+          "nullable": true,
+          "description": "A portion of the actual account `number` to help account identification where number is tokenised (Plaid only)"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "accountIdentifierType": {
+      "type": "string",
+      "x-internal": true,
+      "description": "Type of account",
+      "enum": [
+        "Account",
+        "Card",
+        "Credit",
+        "Depository",
+        "Investment",
+        "Loan",
+        "Other"
+      ]
+    },
+    "accountInstitution": {
+      "title": "Account Institution",
+      "description": "The bank or other financial institution providing the account.",
+      "x-internal": true,
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The institution's ID, according to the provider."
+        },
+        "name": {
+          "type": "string",
+          "description": "The institution's name, according to the underlying provider."
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "results": [
+        {
+          "id": "1703194f-7805-4da8-bac0-2ba5da4a4216",
+          "name": "Business Current Account",
+          "informalName": "Codat",
+          "holder": "Codat Ltd",
+          "type": "Debit",
+          "balance": {
+            "available": -459987.97,
+            "current": -459964.9,
+            "limit": 5000
+          },
+          "identifiers": {
+            "type": "Depository",
+            "subtype": "checking",
+            "number": "46762629",
+            "bankCode": "009911",
+            "iban": "GB29 LOYD 4773 2346 7626 29",
+            "bic": "LOYDGB21006",
+            "maskedAccountNumber": "LOYDGB21006"
+          },
+          "currency": "GBP",
+          "institution": {
+            "id": "lloyds-bank",
+            "name": "Lloyds Bank"
+          },
+          "modifiedDate": "2022-05-23T16:32:50Z",
+          "sourceModifiedDate": "2021-08-14T05:04:12"
+        }
+      ]
+    }
+  ]
+}

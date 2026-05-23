@@ -1,0 +1,115 @@
+{
+  "operationId": "list-banking-transactions",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/banking-transactions",
+  "summary": "List transactions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Basiq",
+      "example": {
+        "results": [
+          {
+            "id": "00017a94-c681-448d-ba8d-585a81b4128f",
+            "accountId": "feb76128-7650-4b02-a323-e1606146be0c",
+            "description": "RENTALCARTOLLPH131865 PARRAMATTA  AU Card xx0399 Value Date: 25/07/2019",
+            "amount": -14.26,
+            "currency": "AUD",
+            "postedDate": "2019-07-31T00:00:00Z",
+            "code": "Unknown",
+            "merchantName": "",
+            "transactionCategoryRef": {
+              "id": "payment",
+              "name": "Payment"
+            },
+            "modifiedDate": "2022-10-28T07:15:10Z"
+          },
+          {
+            "id": "0023c431-35c8-41f5-b75e-9239413cde7e",
+            "accountId": "4811e776-6187-48d9-afee-635fb0d89d93",
+            "description": "Transfer from xx9263 CommBank app Shop",
+            "amount": 191,
+            "currency": "AUD",
+            "postedDate": "2018-07-31T00:00:00Z",
+            "code": "Unknown",
+            "merchantName": "",
+            "transactionCategoryRef": {
+              "id": "transfer",
+              "name": "Transfer"
+            },
+            "modifiedDate": "2022-10-28T07:15:10Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 3319,
+        "_links": {
+          "current": {
+            "href": "/companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactions?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactions"
+          },
+          "next": {
+            "href": "/companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactions?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Plaid",
+      "example": {
+        "results": [
+          {
+            "id": "1514wvMMajumgG7xWA1Bt8o15xP5k3fmeo9Bg_EC6E0DC820E1F9D1A2300BF4A5B80513",
+            "accountId": "3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB",
+            "description": "CREDIT CARD 3333 PAYMENT *//",
+            "amount": -25,
+            "currency": "CAD",
+            "postedDate": "2021-05-10T00:00:00",
+            "authorizedDate": "2021-05-09T00:00:00",
+            "code": "Unknown",
+            "transactionCategoryRef": {
+              "id": "TRANSFER_OUT.TRANSFER_OUT_ACCOUNT_TRANSFER",
+              "name": "TRANSFER_OUT_ACCOUNT_TRANSFER"
+            },
+            "modifiedDate": "2022-10-27T10:50:25Z"
+          },
+          {
+            "id": "1514wvMMajumgG7xWA1Bt8oDLxlpm3i3zraD7_6DB63D1DACF6F5824C80F8BE2E066DB5",
+            "accountId": "3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB",
+            "description": "CREDIT CARD 3333 PAYMENT *//",
+            "amount": -25,
+            "currency": "CAD",
+            "postedDate": "2022-10-02T00:00:00",
+            "authorizedDate": "2022-10-01T00:00:00",
+            "code": "Unknown",
+            "transactionCategoryRef": {
+              "id": "TRANSFER_OUT.TRANSFER_OUT_ACCOUNT_TRANSFER",
+              "name": "TRANSFER_OUT_ACCOUNT_TRANSFER"
+            },
+            "modifiedDate": "2022-10-27T10:50:25Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 49,
+        "_links": {
+          "current": {
+            "href": "/companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactions?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactions"
+          },
+          "next": {
+            "href": "/companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactions?page=2&pageSize=2"
+          }
+        }
+      }
+    }
+  ]
+}

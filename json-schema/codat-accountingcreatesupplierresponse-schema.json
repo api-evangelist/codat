@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingCreateSupplierResponse",
+  "title": "Accounting: Create supplier response",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AccountingSupplier"
+            },
+            {
+              "deprecated": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PushOperation"
+    }
+  ]
+}

@@ -1,0 +1,615 @@
+{
+  "operationId": "get-accounting-bill-payment",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/billPayments/{billPaymentId}",
+  "summary": "Get bill payment",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "id": "dcb18480-8b69-44d8-aa26-268b6a80d170",
+        "supplierRef": {
+          "id": "8GeHBdBZiZ",
+          "supplierName": "DuBuque, Goyette and Franecki"
+        },
+        "accountRef": {
+          "id": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+          "name": "Business Current Account"
+        },
+        "totalAmount": 71351.42,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2022-05-06T00:00:00",
+        "note": "Bill Payment against bill 81539597-e681-40c9-a4dd-ec2fffcde572",
+        "paymentMethodRef": {
+          "id": "cb4a5647-aa86-40ab-bb4f-158acaa99c12",
+          "name": "Check payments-u4p"
+        },
+        "lines": [
+          {
+            "amount": 71351.42,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "81539597-e681-40c9-a4dd-ec2fffcde572",
+                "amount": -71351.42,
+                "currencyRate": 1
+              }
+            ],
+            "allocatedOnDate": "2022-05-06T00:00:00"
+          }
+        ],
+        "modifiedDate": "2023-04-26T12:38:17Z",
+        "sourceModifiedDate": "2022-05-06T00:00:00",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "19387f05-8ad1-ea11-bbaa-000d3a2b9185",
+        "supplierRef": {
+          "id": "c41217b3-89d1-ea11-bbaa-000d3a2b9185",
+          "supplierName": "Wide World Importers"
+        },
+        "accountRef": {
+          "id": "621217b3-89d1-ea11-bbaa-000d3a2b9185",
+          "name": "Petty Cash"
+        },
+        "totalAmount": 234,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2019-01-01T00:00:00",
+        "note": "Invoice 107006",
+        "lines": [
+          {
+            "amount": 234,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "c8cb06bf-89d1-ea11-bbaa-000d3a2b9185-108006",
+                "amount": -234,
+                "currencyRate": 1
+              }
+            ],
+            "allocatedOnDate": "2019-01-01T00:00:00"
+          }
+        ],
+        "modifiedDate": "2023-03-27T14:21:25Z",
+        "reference": "108006",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "id": "da7e456f-76f7-42ac-8dad-d90a040f3afb",
+        "supplierRef": {
+          "id": "63fadca8-4905-475a-b32a-b4341293bcf4",
+          "supplierName": "Kelly's Industrial Supplies"
+        },
+        "accountRef": {
+          "id": "d79d65bd-1d7d-4f55-95d3-76b3a7b7b823",
+          "name": "Bank 1"
+        },
+        "totalAmount": -5,
+        "currency": "EUR",
+        "currencyRate": 1,
+        "date": "2019-11-05T00:00:00Z",
+        "lines": [
+          {
+            "amount": -5,
+            "links": [
+              {
+                "type": "PaymentOnAccount",
+                "id": "63fadca8-4905-475a-b32a-b4341293bcf4",
+                "amount": 5,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-10-26T13:35:13Z",
+        "sourceModifiedDate": "2019-11-05T14:26:22Z",
+        "reference": "19200008"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "id": "7a5f621b-739f-4ed8-b738-2aae3ef886ac",
+        "supplierRef": {
+          "id": "a7cad20d-44db-442b-ac1f-90475802d6fb",
+          "supplierName": "Pencils Pencils Pencils"
+        },
+        "accountRef": {
+          "id": "4a4e34b5-7f62-4b64-a44a-073398b14b41",
+          "name": "Bank"
+        },
+        "totalAmount": 123,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2017-10-11T00:00:00Z",
+        "lines": [
+          {
+            "amount": 123,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "e7a45898-2db3-424c-acb9-a51647740f26",
+                "amount": -123,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-10-26T13:33:17Z",
+        "sourceModifiedDate": "2017-10-11T10:12:29Z",
+        "reference": "17200006"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "id": "135234103",
+        "supplierRef": {
+          "id": "7169654",
+          "supplierName": "The Eagle"
+        },
+        "totalAmount": 14.3,
+        "currency": "GBP",
+        "date": "2017-11-23T00:00:00",
+        "note": "ATOMIC SOFTWARE LIMITE WELLINGTON,NZL OTHER \ufffd14.30 - Bill payment against Pints1 (The Eagle)",
+        "lines": [
+          {
+            "amount": 14.3,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "10659723",
+                "amount": -14.3,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-04-25T14:21:36Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "id": "16",
+        "supplierRef": {
+          "id": "29"
+        },
+        "accountRef": {
+          "id": "167679",
+          "name": "Cash"
+        },
+        "totalAmount": 10,
+        "currency": "GBP",
+        "date": "2021-08-18T00:00:00",
+        "note": "Bill payment",
+        "lines": [
+          {
+            "amount": 10,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "16",
+                "amount": -10,
+                "currencyRate": 1
+              }
+            ],
+            "allocatedOnDate": "2021-08-18T00:00:00"
+          }
+        ],
+        "modifiedDate": "2023-03-24T16:07:23Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "id": "112",
+        "supplierRef": {
+          "id": "724",
+          "supplierName": "Vendor A.A.A"
+        },
+        "accountRef": {
+          "id": "825",
+          "name": "Codat Europe Bank"
+        },
+        "totalAmount": 120,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2021-03-26T00:00:00",
+        "lines": [
+          {
+            "amount": 120,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "7",
+                "amount": -120,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-01-30T14:48:40Z",
+        "sourceModifiedDate": "2021-03-26T10:31:06",
+        "reference": "Bill Payment #1"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "3A09-1071529982",
+        "supplierRef": {
+          "id": "720000-1071512482",
+          "supplierName": "Bayshore Auto Mall"
+        },
+        "accountRef": {
+          "id": "20000-933270541",
+          "name": "Checking"
+        },
+        "totalAmount": 532.97,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2023-01-11T00:00:00",
+        "note": "Monthly Truck Payment",
+        "lines": [
+          {
+            "amount": 532.97,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "38AA-1071513625",
+                "amount": -532.97,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-04-26T09:09:20Z",
+        "sourceModifiedDate": "2023-12-16T05:04:58",
+        "reference": "101",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "20",
+        "supplierRef": {
+          "id": "4",
+          "supplierName": "BILLy elliot"
+        },
+        "totalAmount": 0,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2019-05-13T00:00:00",
+        "lines": [
+          {
+            "amount": 0,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "18",
+                "amount": -5,
+                "currencyRate": 1
+              },
+              {
+                "type": "CreditNote",
+                "id": "19",
+                "amount": 5,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-01-18T11:02:47Z",
+        "sourceModifiedDate": "2019-05-13T13:14:26Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "158",
+        "supplierRef": {
+          "id": "57",
+          "supplierName": "Hall's Promo Items"
+        },
+        "accountRef": {
+          "id": "81",
+          "name": "Current"
+        },
+        "totalAmount": 7940.6,
+        "currency": "HKD",
+        "currencyRate": 0.078807,
+        "date": "2016-01-23T00:00:00",
+        "lines": [
+          {
+            "amount": 7940.6,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "157",
+                "amount": -7940.6,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-04-26T09:36:42Z",
+        "sourceModifiedDate": "2016-09-13T21:19:36Z",
+        "reference": "1067",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 200cloud",
+      "example": {
+        "id": "45462",
+        "supplierRef": {
+          "id": "CON001",
+          "supplierName": "Concept Stationery Supplies"
+        },
+        "totalAmount": 27,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2020-01-05T00:00:00Z",
+        "note": "",
+        "lines": [
+          {
+            "amount": 27,
+            "links": [
+              {
+                "type": "PaymentOnAccount",
+                "id": "CON001",
+                "amount": -27,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-10-14T09:35:54Z",
+        "sourceModifiedDate": "2020-02-28T14:23:46Z",
+        "reference": "Payment invoice 1"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "id": "255",
+        "supplierRef": {
+          "id": "CON001",
+          "supplierName": "Concept Stationery Supplies"
+        },
+        "totalAmount": 370.71,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2022-01-29T00:00:00",
+        "note": "Purchase payment 255 linked to, purchase invoice 86, purchase invoice 87, purchase invoice 250, purchase invoice 251, purchase invoice 252.",
+        "lines": [
+          {
+            "amount": 117.5,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "86",
+                "amount": -117.5,
+                "currencyRate": 1
+              }
+            ]
+          },
+          {
+            "amount": 64.63,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "87",
+                "amount": -64.63,
+                "currencyRate": 1
+              }
+            ]
+          },
+          {
+            "amount": 50.57,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "250",
+                "amount": -50.57,
+                "currencyRate": 1
+              }
+            ]
+          },
+          {
+            "amount": 36.87,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "251",
+                "amount": -36.87,
+                "currencyRate": 1
+              }
+            ]
+          },
+          {
+            "amount": 101.14,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "252",
+                "amount": -101.14,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-03-30T14:42:37Z",
+        "sourceModifiedDate": "2022-11-25T09:43:54",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "id": "d953b45e156011e8b45c025132dab352",
+        "supplierRef": {
+          "id": "ca430e0d156011e8b45c025132dab352",
+          "supplierName": "Test Supplier"
+        },
+        "accountRef": {
+          "id": "9a25937b267a11e797950a57719b2edb",
+          "name": "Current"
+        },
+        "totalAmount": 52.02,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2018-02-15T00:00:00",
+        "note": "Supplier payment using credit/debit card - Cool stuff",
+        "lines": [
+          {
+            "amount": 52.02,
+            "links": [
+              {
+                "type": "PaymentOnAccount",
+                "id": "ca430e0d156011e8b45c025132dab352",
+                "amount": -52.02,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-10-24T14:54:04Z",
+        "sourceModifiedDate": "2019-11-20T09:30:03Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "4471",
+        "supplierRef": {
+          "id": "3",
+          "supplierName": "ADP"
+        },
+        "accountRef": {
+          "id": "353",
+          "name": "Current Account"
+        },
+        "totalAmount": 20,
+        "currency": "GBP",
+        "date": "2022-01-06T00:00:00",
+        "note": "",
+        "paymentMethodRef": {
+          "id": "6",
+          "name": "Cash"
+        },
+        "lines": [
+          {
+            "amount": 20,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "4470",
+                "amount": -20,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-04-04T16:32:13Z",
+        "sourceModifiedDate": "2022-02-23T12:03:30",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "74004690-82a1-4810-aaca-6ce575af94b4",
+        "supplierRef": {
+          "id": "1262c350-fe0f-40ec-aeff-41c95b4a45af",
+          "supplierName": "DIISR - Small Business Services"
+        },
+        "accountRef": {
+          "id": "bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4",
+          "name": "Business Bank Account"
+        },
+        "totalAmount": 7267.2,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2021-12-20T00:00:00",
+        "lines": [
+          {
+            "amount": 7267.2,
+            "links": [
+              {
+                "type": "Bill",
+                "id": "3945273c-cc04-479f-a4b5-1e3dc7a55ed1",
+                "amount": -7267.2,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-03-15T20:37:10Z",
+        "sourceModifiedDate": "2021-01-02T22:51:40",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    }
+  ]
+}

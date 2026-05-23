@@ -1,0 +1,59 @@
+{
+  "operationId": "create-webhook-consumer",
+  "method": "POST",
+  "path": "/webhooks",
+  "summary": "Create webhook consumer",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Subscribe consumer to one or more event types",
+      "example": {
+        "url": "https://example.com/webhoook-consumer",
+        "eventTypes": [
+          "DataSyncCompleted",
+          "Dataset data changed"
+        ]
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Subscribe consumer with disabled endpoint",
+      "example": {
+        "url": "https://example.com/webhoook-consumer",
+        "eventTypes": [
+          "DataSyncCompleted"
+        ],
+        "disabled": true
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Subscribe consumer to one or more event types",
+      "example": {
+        "id": "12571faf-0898-47e7-afdd-0fe9eb0a9bf5",
+        "url": "https://example.com/webhoook-consumer",
+        "eventTypes": [
+          "DataSyncCompleted",
+          "DatasetDataChanged"
+        ],
+        "disabled": false
+      }
+    },
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Subscribe consumer with disabled endpoint",
+      "example": {
+        "id": "12571faf-0898-47e7-afdd-0fe9eb0a9bf5",
+        "url": "https://example.com/webhoook-consumer",
+        "eventTypes": [
+          "DataSyncCompleted"
+        ],
+        "disabled": true
+      }
+    }
+  ]
+}

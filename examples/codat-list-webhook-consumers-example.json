@@ -1,0 +1,34 @@
+{
+  "operationId": "list-webhook-consumers",
+  "method": "GET",
+  "path": "/webhooks",
+  "summary": "List webhook consumers",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Webhook consumers",
+      "example": {
+        "results": [
+          {
+            "id": "12571faf-0898-47e7-afdd-0fe9eb0a9bf5",
+            "url": "https://example.com/webhoook-consumers/sync-complete",
+            "eventTypes": [
+              "DataSyncCompleted"
+            ],
+            "disabled": false
+          },
+          {
+            "id": "ca3cac86-7925-4759-abc2-96405780fdfa",
+            "url": "https://example.com/webhoook-consumers/dataset-changed",
+            "eventTypes": [
+              "DatasetDataChanged"
+            ],
+            "disabled": true
+          }
+        ]
+      }
+    }
+  ]
+}

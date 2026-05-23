@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ConnectionManagementAllowedOrigins",
+  "title": "Allowed origins",
+  "type": "object",
+  "properties": {
+    "allowedOrigins": {
+      "type": "array",
+      "description": "An array of allowed origins (i.e. your domains) to permit cross-origin resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)).n resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)).",
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "description": "A domain you want to allow CORS with Codat."
+      }
+    }
+  },
+  "example": {
+    "allowedOrigins": [
+      "https://www.bank-of-dave.com"
+    ]
+  }
+}

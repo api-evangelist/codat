@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PullOperation",
+  "title": "Pull operation",
+  "description": "Information about a queued, in progress or completed pull operation.\n*Formally called `dataset`*",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier of the pull operation.",
+      "example": "943accd0-4247-42d8-865b-363c8629e1da"
+    },
+    "companyId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier of the company associated to this pull operation.",
+      "example": "22ece347-e5f6-4896-95e0-35a4c7f17023"
+    },
+    "connectionId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier of the connection associated to this pull operation.",
+      "example": "50830828-7d39-4367-b0eb-5ddb2de5faa5"
+    },
+    "dataType": {
+      "title": "Data types",
+      "x-internal": true,
+      "type": "string",
+      "description": "The data type you are requesting in a pull operation."
+    },
+    "status": {
+      "title": "Dataset status",
+      "type": "string",
+      "description": "The current status of the dataset.",
+      "enum": [
+        "Initial",
+        "Queued",
+        "Fetching",
+        "MapQueued",
+        "Mapping",
+        "Complete",
+        "FetchError",
+        "MapError",
+        "InternalError",
+        "ProcessingQueued",
+        "Processing",
+        "ProcessingError",
+        "ValidationQueued",
+        "Validating",
+        "ValidationError",
+        "AuthError",
+        "Cancelled",
+        "NotSupported",
+        "RateLimitError",
+        "PermissionsError",
+        "PrerequisiteNotMet"
+      ]
+    },
+    "statusDescription": {
+      "type": "string",
+      "nullable": true,
+      "description": "Additional information about the dataset status.",
+      "example": "Paused until 2022-10-23T00:00:00.000Z"
+    },
+    "errorMessage": {
+      "type": "string",
+      "nullable": true,
+      "description": "A message about a transient or persistent error returned by Codat or the source platform."
+    },
+    "requested": {
+      "$ref": "#/components/schemas/DateTime"
+    },
+    "completed": {
+      "$ref": "#/components/schemas/DateTime"
+    },
+    "progress": {
+      "type": "integer",
+      "description": "An integer signifying the progress of the pull operation."
+    },
+    "isCompleted": {
+      "type": "boolean",
+      "description": "`True` if the pull operation is completed successfully. The `isCompleted` property is not queryable. To filter failed pull operations, query by `status!=Complete&&status!=NotSupported` instead."
+    },
+    "isErrored": {
+      "type": "boolean",
+      "description": "`True` if the pull operation entered an error state."
+    }
+  },
+  "required": [
+    "id",
+    "companyId",
+    "connectionId",
+    "dataType",
+    "status",
+    "requested",
+    "progress",
+    "isCompleted",
+    "isErrored"
+  ],
+  "examples": [
+    {
+      "id": "97d60846-f07a-4d42-b5a0-0bdcc6ebf56b",
+      "companyId": "4645bd78-8988-45bc-ac9e-67ba5df6e4e5",
+      "connectionId": "51baa045-4836-4317-a42e-3542e991e581",
+      "dataType": "invoices",
+      "status": "Initial",
+      "statusDescription": "Paused until 2022-10-23T00:00:00.000Z",
+      "requested": "2022-11-14T11:18:37.2798351Z",
+      "progress": 10,
+      "isCompleted": false,
+      "isErrored": false
+    }
+  ]
+}

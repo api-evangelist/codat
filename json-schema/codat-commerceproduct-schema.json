@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommerceProduct",
+  "title": "Commerce: Product",
+  "description": "A Product is an item in the company's inventory, and includes information about the price and quantity of all products, and variants thereof, available for sale.\n",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the product in the commerce or POS system",
+          "examples": [
+            "Hard Drive",
+            "Windows Installation",
+            "Software Support (Hourly)"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the product recorded in the commerce or point of sale platform.",
+          "examples": [
+            "1tb Western Digital Hard Drive",
+            "Install of Windows 11 (Professional Edition)",
+            "1 hour of support from an agent (phone or remote)"
+          ]
+        },
+        "categorization": {
+          "type": "string",
+          "description": "Retail category that the product is assigned to e.g. `Hardware`.",
+          "examples": [
+            "Hardware",
+            "Software",
+            "Support Services"
+          ]
+        },
+        "isGiftCard": {
+          "type": "boolean",
+          "description": "Whether the product represents a gift card or voucher that\ncan be redeemed in the commerce or POS platform.\n"
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CommerceProduct/definitions/productVariant"
+          }
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "productRef": {
+      "type": "object",
+      "description": "Reference that links the line item to the correct product details.",
+      "properties": {
+        "id": {
+          "description": "The unique identifier of the product being referenced.",
+          "type": "string",
+          "examples": [
+            "13d946f0-c5d5-42bc-b092-97ece17923ab",
+            "9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2",
+            7110701885,
+            "EILBDVJVNUAGVKRQ"
+          ]
+        },
+        "name": {
+          "description": "Name of the product being referenced.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "productVariant": {
+      "title": "Product Variant",
+      "description": "Represents a variation of a product available for sale, for example an item of clothing that may be available for sale in multiple sizes and colors.\n",
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CommerceOrder/allOf/0",
+          "description": "Identifier of the product variant, unique to the company."
+        },
+        {
+          "properties": {
+            "name": {
+              "type": "string",
+              "examples": [
+                "Red Coat",
+                "Black Coat",
+                "Large Brown Hat"
+              ],
+              "description": "Name of the product recorded in the commerce or point of sale platform."
+            },
+            "isTaxEnabled": {
+              "type": "boolean",
+              "description": "Whether sales taxes are enabled for this product variant."
+            },
+            "sku": {
+              "type": "string",
+              "examples": [
+                "Coat-Red-Lrg",
+                "Coat-Black-Md",
+                "LargeBrownHat",
+                "A725BA2"
+              ],
+              "description": "SKU (stock keeping unit) of the variant, as defined by the merchant."
+            },
+            "barcode": {
+              "type": "string",
+              "examples": [
+                "564158468416486458646886484",
+                "CSE370"
+              ],
+              "description": "Unique product number of the variant. This might be a barcode, UPC, ISBN, etc."
+            },
+            "unitOfMeasure": {
+              "type": "string",
+              "examples": [
+                "kg",
+                "m",
+                "meters"
+              ],
+              "description": "Unit of measure for the variant, such as `kg` or `meters`."
+            },
+            "vatPercentage": {
+              "type": "number",
+              "format": "decimal",
+              "examples": [
+                12.5,
+                0,
+                20
+              ],
+              "description": "VAT rate for the product variant if sales taxes are enabled."
+            },
+            "prices": {
+              "type": "array",
+              "description": "Prices for the product variants in different currencies.",
+              "items": {
+                "$ref": "#/components/schemas/CommerceProduct/definitions/productPrice"
+              }
+            },
+            "inventory": {
+              "$ref": "#/components/schemas/CommerceProduct/definitions/productInventory"
+            },
+            "shippingRequired": {
+              "type": "boolean",
+              "description": "Indicates whether or not the product requires physical delivery."
+            },
+            "status": {
+              "$ref": "#/components/schemas/CommerceProduct/definitions/productVariantStatus"
+            }
+          }
+        },
+        {
+          "$ref": "#/components/schemas/CommerceOrder/allOf/2"
+        },
+        {
+          "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+        }
+      ]
+    },
+    "productVariantRef": {
+      "title": "Product variant reference",
+      "type": "object",
+      "description": "Reference that links the line item to the specific version of product that has been ordered.",
+      "properties": {
+        "id": {
+          "description": "The unique identifier of the product variant being referenced.",
+          "type": "string",
+          "examples": [
+            "13d946f0-c5d5-42bc-b092-97ece17923ab",
+            "9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2",
+            7110701885,
+            "EILBDVJVNUAGVKRQ"
+          ]
+        },
+        "name": {
+          "description": "Name of the product variant being referenced.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "productPrice": {
+      "title": "Product Price Variant",
+      "x-internal": true,
+      "type": "object",
+      "properties": {
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "nullable": true
+        },
+        "unitPrice": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The product variant's unit price."
+        }
+      }
+    },
+    "productInventory": {
+      "title": "Product Inventory",
+      "description": "Information about the total inventory as well as the locations inventory is in.",
+      "x-internal": true,
+      "type": "object",
+      "properties": {
+        "totalQuantity": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "The total quantity of stock remaining across locations."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CommerceProduct/definitions/productInventoryLocation"
+          }
+        }
+      }
+    },
+    "productInventoryLocation": {
+      "title": "Product Inventory Location",
+      "x-internal": true,
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The quantity of stock remaining at location."
+        },
+        "locationRef": {
+          "$ref": "#/components/schemas/CommerceLocation/definitions/locationRef"
+        }
+      }
+    },
+    "productVariantStatus": {
+      "x-internal": true,
+      "type": "string",
+      "description": "The status of the product variant.",
+      "enum": [
+        "Unknown",
+        "Published",
+        "Unpublished"
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Attachments",
+  "title": "Attachments",
+  "x-internal": true,
+  "type": "object",
+  "properties": {
+    "attachments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AccountingAttachment"
+      },
+      "nullable": true
+    }
+  }
+}

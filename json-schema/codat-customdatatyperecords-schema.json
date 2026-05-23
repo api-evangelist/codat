@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomDataTypeRecords",
+  "title": "Custom data type records",
+  "type": "object",
+  "description": "Resulting records pulled from the source platform for a specific custom data type.",
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CustomDataTypeRecords/definitions/customDataTypeRecord"
+      }
+    },
+    "pageNumber": {
+      "$ref": "#/components/schemas/PagingInfo/properties/pageNumber"
+    },
+    "pageSize": {
+      "$ref": "#/components/schemas/PagingInfo/properties/pageSize"
+    },
+    "totalResults": {
+      "$ref": "#/components/schemas/PagingInfo/properties/totalResults"
+    }
+  },
+  "definitions": {
+    "customDataTypeRecord": {
+      "title": "Custom data type record",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "nullable": false,
+          "description": "Unique identifier of the record."
+        },
+        "content": {
+          "type": "object",
+          "description": "Values from the source system for the properties defined in the custom data type configuration.",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "modifiedDate": {
+          "title": "ModifiedDate",
+          "x-internal": true,
+          "type": "object",
+          "properties": {
+            "modifiedDate": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/DateTime"
+                },
+                {
+                  "description": "The date when the record was last fetched from the accounting software, commerce software, or open banking provider and updated in Codat\u2019s data cache.\n\nUse it to identify and retrieve records that have changed since your last fetch. For example, filtering `modifiedDate` to today will provide new records updated in Codat today.\n\nThis date is populated for all data types except for attachments, balance sheets, company information, and profit & loss reports ([read more](https://docs.codat.io/using-the-api/modified-dates#modified-date)).\n\nIn Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>."
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

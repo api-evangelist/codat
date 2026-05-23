@@ -1,0 +1,4098 @@
+{
+  "operationId": "get-accounting-profit-and-loss",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/financials/profitAndLoss",
+  "summary": "Get profit and loss",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T00:00:00",
+            "income": {
+              "accountId": "",
+              "name": "Income",
+              "value": 146840.42,
+              "items": [
+                {
+                  "accountId": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales",
+                  "value": 146840.42,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "accountId": "",
+              "name": "Cost of Sales",
+              "value": 29955.45,
+              "items": [
+                {
+                  "accountId": "7403e960-5b72-42ff-abf4-c870ad8910bd",
+                  "name": "Purchases",
+                  "value": 29955.45,
+                  "items": []
+                }
+              ]
+            },
+            "grossProfit": 116884.97,
+            "expenses": {
+              "accountId": "",
+              "name": "Expenses",
+              "value": 62407.18,
+              "items": [
+                {
+                  "accountId": "868591ad-f9c2-4956-a5ec-c32c1d48c6f3",
+                  "name": "Advertising & Marketing",
+                  "value": 24962.87,
+                  "items": []
+                },
+                {
+                  "accountId": "940c8a59-3348-4a0b-a1b1-781d9f29cc8b",
+                  "name": "Depreciation Expense",
+                  "value": 1550.12,
+                  "items": []
+                },
+                {
+                  "accountId": "e7ac3baa-cfbe-40c1-a172-83d22e84435b",
+                  "name": "Entertainment-100% business",
+                  "value": 1410.61,
+                  "items": []
+                },
+                {
+                  "accountId": "b5e801e8-8dbc-4390-ac99-3b0fff54a89f",
+                  "name": "General Expenses",
+                  "value": 1283.66,
+                  "items": []
+                },
+                {
+                  "accountId": "5360066d-1474-49f6-a7a5-c66d5f6032ba",
+                  "name": "Light, Power, Heating",
+                  "value": 1168.13,
+                  "items": []
+                },
+                {
+                  "accountId": "138a8eb3-5c08-4e59-a3bc-892119694447",
+                  "name": "Motor Vehicle Expenses",
+                  "value": 944.89,
+                  "items": []
+                },
+                {
+                  "accountId": "1734ff00-2a17-45b4-8db6-2dc2e832c460",
+                  "name": "Postage, Freight & Courier",
+                  "value": 977.96,
+                  "items": []
+                },
+                {
+                  "accountId": "7aa7988a-ff61-4cb8-bef3-15395355d108",
+                  "name": "Printing & Stationery",
+                  "value": 889.94,
+                  "items": []
+                },
+                {
+                  "accountId": "9cbe5fe4-ca60-4792-8bf1-de01fb7010aa",
+                  "name": "Rent",
+                  "value": 8000,
+                  "items": []
+                },
+                {
+                  "accountId": "04f7111b-55d4-4efc-b329-1bd5c791933a",
+                  "name": "Repairs & Maintenance",
+                  "value": 719.86,
+                  "items": []
+                },
+                {
+                  "accountId": "7d8d0322-f452-47de-a8e8-54b0130e6f38",
+                  "name": "Subscriptions",
+                  "value": 40,
+                  "items": []
+                },
+                {
+                  "accountId": "043b6bcb-dfe6-4c97-9b4c-f9b300fe3f03",
+                  "name": "Telephone & Internet",
+                  "value": 45,
+                  "items": []
+                },
+                {
+                  "accountId": "df62060b-41cc-4bf2-9de7-c7e537b5663a",
+                  "name": "Travel - National",
+                  "value": 6000.46,
+                  "items": []
+                },
+                {
+                  "accountId": "eef78ed1-dfed-447c-bdba-3a49fb2c044b",
+                  "name": "Audit & Accountancy fees",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "f3aa84fe-5c31-4107-b207-7e0419f636d7",
+                  "name": "Bank Fees",
+                  "value": 609.29,
+                  "items": []
+                },
+                {
+                  "accountId": "c16f5c35-8283-47da-9d09-5fecb183b0cb",
+                  "name": "Cleaning",
+                  "value": 130,
+                  "items": []
+                },
+                {
+                  "accountId": "fb3210ef-edeb-48af-bb49-b85d40c1e6bb",
+                  "name": "Corporation Tax",
+                  "value": 630.62,
+                  "items": []
+                },
+                {
+                  "accountId": "7f6a0e92-65be-4333-9a0a-d981b03bedd1",
+                  "name": "Wages",
+                  "value": 12000,
+                  "items": []
+                },
+                {
+                  "accountId": "e8a0a24e-2dab-46b1-bfe1-6e92551c04e8",
+                  "name": "Purchase Discounts",
+                  "value": 510.1,
+                  "items": []
+                },
+                {
+                  "accountId": "4378ddba-36b4-4b35-9970-bd972b20d137",
+                  "name": "Amortization",
+                  "value": 5.72,
+                  "items": []
+                },
+                {
+                  "accountId": "78785fd7-f197-4c34-aa17-6e76b9255d34",
+                  "name": "Interest Paid (operating)",
+                  "value": 527.95,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": 54477.79,
+            "otherExpenses": {
+              "accountId": "",
+              "name": "Other Expenses",
+              "value": 350.44,
+              "items": [
+                {
+                  "accountId": "cbf82e0d-87a7-464d-b567-9274ea94a1c0",
+                  "name": "Charitable and Political Donations",
+                  "value": 350.44,
+                  "items": []
+                }
+              ]
+            },
+            "otherIncome": {
+              "accountId": "",
+              "name": "Other Income",
+              "value": 850.22,
+              "items": [
+                {
+                  "accountId": "68794a8f-b22d-4520-b97b-025b7cb10f94",
+                  "name": "Other Revenue",
+                  "value": 850.22,
+                  "items": []
+                }
+              ]
+            },
+            "netOtherIncome": 499.78,
+            "netProfit": 54977.57
+          },
+          {
+            "fromDate": "2023-02-01T00:00:00",
+            "toDate": "2023-02-28T00:00:00",
+            "income": {
+              "accountId": "",
+              "name": "Income",
+              "value": 108461.81,
+              "items": [
+                {
+                  "accountId": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales",
+                  "value": 108461.81,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "accountId": "",
+              "name": "Cost of Sales",
+              "value": 18438.51,
+              "items": [
+                {
+                  "accountId": "7403e960-5b72-42ff-abf4-c870ad8910bd",
+                  "name": "Purchases",
+                  "value": 18438.51,
+                  "items": []
+                }
+              ]
+            },
+            "grossProfit": 90023.3,
+            "expenses": {
+              "accountId": "",
+              "name": "Expenses",
+              "value": 46096.28,
+              "items": [
+                {
+                  "accountId": "868591ad-f9c2-4956-a5ec-c32c1d48c6f3",
+                  "name": "Advertising & Marketing",
+                  "value": 18438.51,
+                  "items": []
+                },
+                {
+                  "accountId": "940c8a59-3348-4a0b-a1b1-781d9f29cc8b",
+                  "name": "Depreciation Expense",
+                  "value": 669.33,
+                  "items": []
+                },
+                {
+                  "accountId": "e7ac3baa-cfbe-40c1-a172-83d22e84435b",
+                  "name": "Entertainment-100% business",
+                  "value": 609.09,
+                  "items": []
+                },
+                {
+                  "accountId": "b5e801e8-8dbc-4390-ac99-3b0fff54a89f",
+                  "name": "General Expenses",
+                  "value": 554.28,
+                  "items": []
+                },
+                {
+                  "accountId": "5360066d-1474-49f6-a7a5-c66d5f6032ba",
+                  "name": "Light, Power, Heating",
+                  "value": 448.35,
+                  "items": []
+                },
+                {
+                  "accountId": "138a8eb3-5c08-4e59-a3bc-892119694447",
+                  "name": "Motor Vehicle Expenses",
+                  "value": 412.48,
+                  "items": []
+                },
+                {
+                  "accountId": "1734ff00-2a17-45b4-8db6-2dc2e832c460",
+                  "name": "Postage, Freight & Courier",
+                  "value": 426.92,
+                  "items": []
+                },
+                {
+                  "accountId": "7aa7988a-ff61-4cb8-bef3-15395355d108",
+                  "name": "Printing & Stationery",
+                  "value": 388.49,
+                  "items": []
+                },
+                {
+                  "accountId": "9cbe5fe4-ca60-4792-8bf1-de01fb7010aa",
+                  "name": "Rent",
+                  "value": 8000,
+                  "items": []
+                },
+                {
+                  "accountId": "04f7111b-55d4-4efc-b329-1bd5c791933a",
+                  "name": "Repairs & Maintenance",
+                  "value": 314.25,
+                  "items": []
+                },
+                {
+                  "accountId": "7d8d0322-f452-47de-a8e8-54b0130e6f38",
+                  "name": "Subscriptions",
+                  "value": 40,
+                  "items": []
+                },
+                {
+                  "accountId": "043b6bcb-dfe6-4c97-9b4c-f9b300fe3f03",
+                  "name": "Telephone & Internet",
+                  "value": 45,
+                  "items": []
+                },
+                {
+                  "accountId": "df62060b-41cc-4bf2-9de7-c7e537b5663a",
+                  "name": "Travel - National",
+                  "value": 325.25,
+                  "items": []
+                },
+                {
+                  "accountId": "eef78ed1-dfed-447c-bdba-3a49fb2c044b",
+                  "name": "Audit & Accountancy fees",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "f3aa84fe-5c31-4107-b207-7e0419f636d7",
+                  "name": "Bank Fees",
+                  "value": 2600.97,
+                  "items": []
+                },
+                {
+                  "accountId": "c16f5c35-8283-47da-9d09-5fecb183b0cb",
+                  "name": "Cleaning",
+                  "value": 130,
+                  "items": []
+                },
+                {
+                  "accountId": "fb3210ef-edeb-48af-bb49-b85d40c1e6bb",
+                  "name": "Corporation Tax",
+                  "value": 239.41,
+                  "items": []
+                },
+                {
+                  "accountId": "7f6a0e92-65be-4333-9a0a-d981b03bedd1",
+                  "name": "Wages",
+                  "value": 12000,
+                  "items": []
+                },
+                {
+                  "accountId": "e8a0a24e-2dab-46b1-bfe1-6e92551c04e8",
+                  "name": "Purchase Discounts",
+                  "value": 220.26,
+                  "items": []
+                },
+                {
+                  "accountId": "4378ddba-36b4-4b35-9970-bd972b20d137",
+                  "name": "Amortization",
+                  "value": 5.72,
+                  "items": []
+                },
+                {
+                  "accountId": "78785fd7-f197-4c34-aa17-6e76b9255d34",
+                  "name": "Interest Paid (operating)",
+                  "value": 227.97,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": 43927.02,
+            "otherExpenses": {
+              "accountId": "",
+              "name": "Other Expenses",
+              "value": 350.44,
+              "items": [
+                {
+                  "accountId": "cbf82e0d-87a7-464d-b567-9274ea94a1c0",
+                  "name": "Charitable and Political Donations",
+                  "value": 350.44,
+                  "items": []
+                }
+              ]
+            },
+            "otherIncome": {
+              "accountId": "",
+              "name": "Other Income",
+              "value": 850.22,
+              "items": [
+                {
+                  "accountId": "68794a8f-b22d-4520-b97b-025b7cb10f94",
+                  "name": "Other Revenue",
+                  "value": 850.22,
+                  "items": []
+                }
+              ]
+            },
+            "netOtherIncome": 499.78,
+            "netProfit": 44426.8
+          }
+        ],
+        "reportBasis": "Unknown",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-03-01T00:00:00",
+        "earliestAvailableMonth": "2018-04-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 658.5,
+              "items": [
+                {
+                  "name": "Sales Returns & Allowances",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "8aba49ae-461a-ed11-90eb-000d3a873324",
+                      "name": "0121 - ",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "1e1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10400 - Sales Returns & Allowances",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Income, Services",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "ac6a3a74-c69f-ec11-80f1-0022481b4546",
+                      "name": "10005-1 - Child",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "161217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10100 - Income, Services",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Income, Jobs",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "1f2618f9-c79f-ec11-80f1-0022481b4546",
+                      "name": "10005-2 - Child Child",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "1a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10250 - Job Sales",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "de1cabee-4a33-ed11-97e8-0022481aa72d",
+                      "name": "1005002 - Test account no cat 2",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "b74b0c08-aa59-eb11-89f9-00224800a7ae",
+                      "name": "1006 - Account without category Income ",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "023a8eba-c12e-ed11-97e8-000d3a8753f5",
+                      "name": "3213 - vdfgdf",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "aa666f5a-c22e-ed11-97e8-0022480052b7",
+                      "name": "TEST INCOME A/C - ",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Income, Product Sales",
+                  "value": 658.5,
+                  "items": [
+                    {
+                      "accountId": "181217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10200 - Income, Product Sales",
+                      "value": 658.5,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Sales Discounts",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "1c1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10300 - Sales Discounts",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Job Sales Contra",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "201217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10450 - Job Sales Applied",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Income",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "221217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10500 - Interest Income",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Goods Sold",
+              "value": 2735.64,
+              "items": [
+                {
+                  "name": "Materials",
+                  "value": 2735.64,
+                  "items": [
+                    {
+                      "accountId": "281217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "20100 - Cost of Materials",
+                      "value": 2735.64,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Labour",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "2a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "20200 - Cost of Labour",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Jobs Cost",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "2c1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "20300 - Job Costs",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "grossProfit": -2077.14,
+            "expenses": {
+              "name": "Expense",
+              "value": 41.77,
+              "items": [
+                {
+                  "name": "",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "e9b4e2c2-4b33-ed11-97e8-0022481aa72d",
+                      "name": "1005003 - Expense Test account no cat",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "1d60f4a2-6d19-ed11-90eb-002248009024",
+                      "name": "1234512345 - Invalid VAT Posting Setup",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Interest Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "bd407350-340b-ec11-86bc-0022481a4971",
+                      "name": "1093 - export with misc type",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "381217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30300 - Interest Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Other Income & Expenses",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "2e1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "20399 - Job Costs Applied",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "4e1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31400 - Office Supplies Expense",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "501217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31500 - Miscellaneous Expense",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "521217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31600 - Depreciation, Equipment",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "541217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31900 - Rounding",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Benefits Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "57a95f12-9ecf-ec11-8e7e-00224800faf5",
+                      "name": "23 - test account",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Fees Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "3f6818aa-a4cf-ec11-8e7e-00224800faf5",
+                      "name": "30 - test expenses 2",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "3a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30400 - Bank Charges and Fees",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "3c1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30500 - Processing Fees",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Rent Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "341217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30100 - Rent Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Advertising Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "361217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30200 - Advertising Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Bad Debt Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "3e1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30600 - Bad Debt Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Salaries Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "401217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30700 - Salaries Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Payroll Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "421217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30800 - Payroll Tax Expense",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "441217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30900 - Workers Compensation ",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Insurance Expense",
+                  "value": 41.77,
+                  "items": [
+                    {
+                      "accountId": "461217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31000 - Health & Dental Insurance Expense",
+                      "value": 41.77,
+                      "items": []
+                    },
+                    {
+                      "accountId": "481217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31100 - Life Insurance Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Repairs and Maintenance Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "4a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31200 - Repairs and Maintenance Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Utilities Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "4c1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31300 - Utilities Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Travel Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "61d17174-61db-ec11-82f9-002248008de8",
+                      "name": "999992 - Payhawk General",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "3a37ed38-a6cf-ec11-8e7e-00224800faf5",
+                      "name": "999998 - Payhawk General",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "64ee049b-a1cf-ec11-8e7e-00224800faf5",
+                      "name": "999999 - Payhawk General",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "netOperatingProfit": -2118.91,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": -2118.91
+          },
+          {
+            "fromDate": "2023-02-01T00:00:00",
+            "toDate": "2023-02-28T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 414.51,
+              "items": [
+                {
+                  "name": "Sales Returns & Allowances",
+                  "value": -125.17,
+                  "items": [
+                    {
+                      "accountId": "8aba49ae-461a-ed11-90eb-000d3a873324",
+                      "name": "0121 - ",
+                      "value": -125.17,
+                      "items": []
+                    },
+                    {
+                      "accountId": "1e1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10400 - Sales Returns & Allowances",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Income, Services",
+                  "value": -10,
+                  "items": [
+                    {
+                      "accountId": "ac6a3a74-c69f-ec11-80f1-0022481b4546",
+                      "name": "10005-1 - Child",
+                      "value": -10,
+                      "items": []
+                    },
+                    {
+                      "accountId": "161217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10100 - Income, Services",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Income, Jobs",
+                  "value": -12.91,
+                  "items": [
+                    {
+                      "accountId": "1f2618f9-c79f-ec11-80f1-0022481b4546",
+                      "name": "10005-2 - Child Child",
+                      "value": -12.91,
+                      "items": []
+                    },
+                    {
+                      "accountId": "1a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10250 - Job Sales",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "de1cabee-4a33-ed11-97e8-0022481aa72d",
+                      "name": "1005002 - Test account no cat 2",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "b74b0c08-aa59-eb11-89f9-00224800a7ae",
+                      "name": "1006 - Account without category Income ",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "023a8eba-c12e-ed11-97e8-000d3a8753f5",
+                      "name": "3213 - vdfgdf",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "aa666f5a-c22e-ed11-97e8-0022480052b7",
+                      "name": "TEST INCOME A/C - ",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Income, Product Sales",
+                  "value": 430.4,
+                  "items": [
+                    {
+                      "accountId": "181217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10200 - Income, Product Sales",
+                      "value": 430.4,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Sales Discounts",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "1c1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10300 - Sales Discounts",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Job Sales Contra",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "201217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10450 - Job Sales Applied",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Income",
+                  "value": 132.19,
+                  "items": [
+                    {
+                      "accountId": "221217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "10500 - Interest Income",
+                      "value": 132.19,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Goods Sold",
+              "value": 328,
+              "items": [
+                {
+                  "name": "Materials",
+                  "value": 328,
+                  "items": [
+                    {
+                      "accountId": "281217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "20100 - Cost of Materials",
+                      "value": 328,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Labour",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "2a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "20200 - Cost of Labour",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Jobs Cost",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "2c1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "20300 - Job Costs",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "grossProfit": 86.51,
+            "expenses": {
+              "name": "Expense",
+              "value": 1482.02,
+              "items": [
+                {
+                  "name": "",
+                  "value": 9.52,
+                  "items": [
+                    {
+                      "accountId": "e9b4e2c2-4b33-ed11-97e8-0022481aa72d",
+                      "name": "1005003 - Expense Test account no cat",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "1d60f4a2-6d19-ed11-90eb-002248009024",
+                      "name": "1234512345 - Invalid VAT Posting Setup",
+                      "value": 9.52,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Interest Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "bd407350-340b-ec11-86bc-0022481a4971",
+                      "name": "1093 - export with misc type",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "381217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30300 - Interest Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Other Income & Expenses",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "2e1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "20399 - Job Costs Applied",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "4e1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31400 - Office Supplies Expense",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "501217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31500 - Miscellaneous Expense",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "521217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31600 - Depreciation, Equipment",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "541217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31900 - Rounding",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Benefits Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "57a95f12-9ecf-ec11-8e7e-00224800faf5",
+                      "name": "23 - test account",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Fees Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "3f6818aa-a4cf-ec11-8e7e-00224800faf5",
+                      "name": "30 - test expenses 2",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "3a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30400 - Bank Charges and Fees",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "3c1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30500 - Processing Fees",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Rent Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "341217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30100 - Rent Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Advertising Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "361217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30200 - Advertising Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Bad Debt Expense",
+                  "value": -1.82,
+                  "items": [
+                    {
+                      "accountId": "3e1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30600 - Bad Debt Expense",
+                      "value": -1.82,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Salaries Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "401217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30700 - Salaries Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Payroll Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "421217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30800 - Payroll Tax Expense",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "441217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "30900 - Workers Compensation ",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Insurance Expense",
+                  "value": 1474.32,
+                  "items": [
+                    {
+                      "accountId": "461217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31000 - Health & Dental Insurance Expense",
+                      "value": 1474.32,
+                      "items": []
+                    },
+                    {
+                      "accountId": "481217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31100 - Life Insurance Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Repairs and Maintenance Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "4a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31200 - Repairs and Maintenance Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Utilities Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "4c1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                      "name": "31300 - Utilities Expense",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Travel Expense",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "61d17174-61db-ec11-82f9-002248008de8",
+                      "name": "999992 - Payhawk General",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "3a37ed38-a6cf-ec11-8e7e-00224800faf5",
+                      "name": "999998 - Payhawk General",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "64ee049b-a1cf-ec11-8e7e-00224800faf5",
+                      "name": "999999 - Payhawk General",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "netOperatingProfit": -1395.51,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": -1395.51
+          }
+        ],
+        "reportBasis": "Accrual",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-03-01T00:00:00",
+        "earliestAvailableMonth": "2021-04-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2022-09-01T00:00:00Z",
+            "toDate": "2022-09-30T00:00:00Z",
+            "income": {
+              "name": "Income",
+              "value": -286,
+              "items": [
+                {
+                  "accountId": "2421e8a0-5355-4ec0-af11-021fe4f39fcd",
+                  "name": "8000 - Omzet binnenland hoog tarief",
+                  "value": -286,
+                  "items": []
+                },
+                {
+                  "accountId": "0b5b5d8b-1c0c-4767-88d8-c99206da6ace",
+                  "name": "555777 - Sales",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": -286,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": -286,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 5.25,
+              "items": [
+                {
+                  "accountId": "e405eff6-5c15-43b9-a5f0-ba592b26fbbe",
+                  "name": "9410 - Inkoopkortingen",
+                  "value": 5.25,
+                  "items": []
+                }
+              ]
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": -5.25,
+            "netProfit": -291.25
+          },
+          {
+            "fromDate": "2022-08-01T00:00:00Z",
+            "toDate": "2022-08-31T00:00:00Z",
+            "income": {
+              "name": "Income",
+              "value": 664.73,
+              "items": [
+                {
+                  "accountId": "2421e8a0-5355-4ec0-af11-021fe4f39fcd",
+                  "name": "8000 - Omzet binnenland hoog tarief",
+                  "value": 643.33,
+                  "items": []
+                },
+                {
+                  "accountId": "62981769-c358-4ee5-aa8a-c9d5c559dd5c",
+                  "name": "9275 - Activa realisatie verlies",
+                  "value": -13.6,
+                  "items": []
+                },
+                {
+                  "accountId": "f93008c5-f45b-4200-82a8-d0d5e1584ee7",
+                  "name": "1234567 - james_test2",
+                  "value": 35,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 664.73,
+            "expenses": {
+              "name": "Expenses",
+              "value": 13.6,
+              "items": [
+                {
+                  "accountId": "62981769-c358-4ee5-aa8a-c9d5c559dd5c",
+                  "name": "9275 - Activa realisatie verlies",
+                  "value": 13.6,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": 651.13,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 45,
+              "items": [
+                {
+                  "accountId": "e405eff6-5c15-43b9-a5f0-ba592b26fbbe",
+                  "name": "9410 - Inkoopkortingen",
+                  "value": 45,
+                  "items": []
+                }
+              ]
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": -45,
+            "netProfit": 606.13
+          }
+        ],
+        "reportBasis": "Unknown",
+        "currency": "EUR",
+        "mostRecentAvailableMonth": "2022-09-01T00:00:00",
+        "earliestAvailableMonth": "2020-11-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2022-10-01T00:00:00Z",
+            "toDate": "2022-10-31T00:00:00Z",
+            "income": {
+              "name": "Income",
+              "value": -2,
+              "items": [
+                {
+                  "accountId": "43acd218-6a95-445f-994c-660273e0ced9",
+                  "name": "41000 - Sales",
+                  "value": -2,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": -2,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": -2,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": -2
+          },
+          {
+            "fromDate": "2022-09-01T00:00:00Z",
+            "toDate": "2022-09-30T00:00:00Z",
+            "income": {
+              "name": "Income",
+              "value": 208,
+              "items": [
+                {
+                  "accountId": "43acd218-6a95-445f-994c-660273e0ced9",
+                  "name": "41000 - Sales",
+                  "value": 208,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 208,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": 208,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 208
+          }
+        ],
+        "reportBasis": "Unknown",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2022-10-01T00:00:00",
+        "earliestAvailableMonth": "2020-11-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-04-01T00:00:00",
+            "toDate": "2023-04-30T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          },
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 24.05,
+              "items": [
+                {
+                  "accountId": "3384197",
+                  "name": "Advertising",
+                  "value": 0.21,
+                  "items": []
+                },
+                {
+                  "accountId": "3380421",
+                  "name": "Car & Truck Expenses",
+                  "value": 11,
+                  "items": []
+                },
+                {
+                  "accountId": "3361426",
+                  "name": "Meals & Entertainment",
+                  "value": 12.82,
+                  "items": []
+                },
+                {
+                  "accountId": "3379249",
+                  "name": "Supplies",
+                  "value": 0.02,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": -24.05,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": -24.04
+          }
+        ],
+        "reportBasis": "Cash",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-04-01T00:00:00",
+        "earliestAvailableMonth": "2021-05-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "KashFlow",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2022-09-01T00:00:00",
+            "toDate": "2022-09-30T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost Of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          },
+          {
+            "fromDate": "2022-08-01T00:00:00",
+            "toDate": "2022-08-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost Of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          }
+        ],
+        "reportBasis": "Unknown",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2022-09-01T00:00:00",
+        "earliestAvailableMonth": "2020-10-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "MYOB AccountRight and Essentials",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2022-11-01T00:00:00",
+            "toDate": "2022-11-30T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          },
+          {
+            "fromDate": "2022-10-01T00:00:00",
+            "toDate": "2022-10-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          }
+        ],
+        "reportBasis": "Accrual",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2022-11-01T00:00:00",
+        "earliestAvailableMonth": "2020-12-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": -123.45,
+              "items": [
+                {
+                  "accountId": "58",
+                  "name": "Expenses",
+                  "value": -123.45,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": 123.45,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 123.45
+          },
+          {
+            "fromDate": "2023-01-01T00:00:00",
+            "toDate": "2023-01-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 11,
+              "items": [
+                {
+                  "accountId": "108",
+                  "name": "Shipping and Handling",
+                  "value": 11,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 11,
+            "expenses": {
+              "name": "Expenses",
+              "value": 11,
+              "items": [
+                {
+                  "accountId": "58",
+                  "name": "Expenses",
+                  "value": 11,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          }
+        ],
+        "reportBasis": "Accrual",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-03-01T00:00:00",
+        "earliestAvailableMonth": "2022-11-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-04-01T00:00:00",
+            "toDate": "2023-04-30T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 7673.5,
+              "items": [
+                {
+                  "accountId": "170000-933270541",
+                  "name": "40100 \ufffd Construction Income",
+                  "value": 7673.5,
+                  "items": [
+                    {
+                      "accountId": "190000-933270541",
+                      "name": "40130 \ufffd Labor Income",
+                      "value": 840,
+                      "items": []
+                    },
+                    {
+                      "accountId": "1A0000-933270542",
+                      "name": "40140 \ufffd Materials Income",
+                      "value": 4103.5,
+                      "items": []
+                    },
+                    {
+                      "accountId": "1C0000-933270542",
+                      "name": "40150 \ufffd Subcontracted Labor Income",
+                      "value": 2730,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Goods Sold",
+              "value": 1729.85,
+              "items": [
+                {
+                  "accountId": "1E0000-933270542",
+                  "name": "50100 \ufffd Cost of Goods Sold",
+                  "value": 329.85,
+                  "items": []
+                },
+                {
+                  "accountId": "300000-933270542",
+                  "name": "54000 \ufffd Job Expenses",
+                  "value": 1400,
+                  "items": [
+                    {
+                      "accountId": "340000-933270542",
+                      "name": "54500 \ufffd Subcontractors",
+                      "value": 1400,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "grossProfit": 5943.65,
+            "expenses": {
+              "name": "Expense",
+              "value": 2417.29,
+              "items": [
+                {
+                  "accountId": "1F0000-933270542",
+                  "name": "60100 \ufffd Automobile",
+                  "value": 1066.56,
+                  "items": [
+                    {
+                      "accountId": "200000-933270542",
+                      "name": "60110 \ufffd Fuel",
+                      "value": 162,
+                      "items": []
+                    },
+                    {
+                      "accountId": "580000-1071498064",
+                      "name": "60120 \ufffd Insurance",
+                      "value": 712.56,
+                      "items": []
+                    },
+                    {
+                      "accountId": "210000-933270542",
+                      "name": "60130 \ufffd Repairs and Maintenance",
+                      "value": 192,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "accountId": "230000-933270542",
+                  "name": "60600 \ufffd Bank Service Charges",
+                  "value": 12.5,
+                  "items": []
+                },
+                {
+                  "accountId": "290000-933270542",
+                  "name": "62100 \ufffd Insurance",
+                  "value": 675,
+                  "items": [
+                    {
+                      "accountId": "2A0000-933270542",
+                      "name": "62110 \ufffd Disability Insurance",
+                      "value": 50,
+                      "items": []
+                    },
+                    {
+                      "accountId": "2B0000-933270542",
+                      "name": "62120 \ufffd Liability Insurance",
+                      "value": 350,
+                      "items": []
+                    },
+                    {
+                      "accountId": "2C0000-933270542",
+                      "name": "62130 \ufffd Work Comp",
+                      "value": 275,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "accountId": "2D0000-933270542",
+                  "name": "62400 \ufffd Interest Expense",
+                  "value": 438.3,
+                  "items": [
+                    {
+                      "accountId": "2F0000-933270542",
+                      "name": "62420 \ufffd Loan Interest",
+                      "value": 438.3,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "accountId": "480000-933270542",
+                  "name": "65100 \ufffd Utilities",
+                  "value": 224.93,
+                  "items": [
+                    {
+                      "accountId": "490000-933270542",
+                      "name": "65110 \ufffd Gas and Electric",
+                      "value": 120.93,
+                      "items": []
+                    },
+                    {
+                      "accountId": "4A0000-933270542",
+                      "name": "65120 \ufffd Telephone",
+                      "value": 80,
+                      "items": []
+                    },
+                    {
+                      "accountId": "4B0000-933270542",
+                      "name": "65130 \ufffd Water",
+                      "value": 24,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "netOperatingProfit": 3526.36,
+            "otherExpenses": {
+              "name": "Other Expense",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 3526.36
+          },
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 16500,
+              "items": [
+                {
+                  "accountId": "170000-933270541",
+                  "name": "40100 \ufffd Construction Income",
+                  "value": 16500,
+                  "items": [
+                    {
+                      "accountId": "1C0000-933270542",
+                      "name": "40150 \ufffd Subcontracted Labor Income",
+                      "value": 16500,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Goods Sold",
+              "value": 7500,
+              "items": [
+                {
+                  "accountId": "300000-933270542",
+                  "name": "54000 \ufffd Job Expenses",
+                  "value": 7500,
+                  "items": [
+                    {
+                      "accountId": "340000-933270542",
+                      "name": "54500 \ufffd Subcontractors",
+                      "value": 7500,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "grossProfit": 9000,
+            "expenses": {
+              "name": "Expense",
+              "value": 3159.99,
+              "items": [
+                {
+                  "accountId": "1F0000-933270542",
+                  "name": "60100 \ufffd Automobile",
+                  "value": 359,
+                  "items": [
+                    {
+                      "accountId": "200000-933270542",
+                      "name": "60110 \ufffd Fuel",
+                      "value": 127,
+                      "items": []
+                    },
+                    {
+                      "accountId": "210000-933270542",
+                      "name": "60130 \ufffd Repairs and Maintenance",
+                      "value": 232,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "accountId": "230000-933270542",
+                  "name": "60600 \ufffd Bank Service Charges",
+                  "value": 12.5,
+                  "items": []
+                },
+                {
+                  "accountId": "290000-933270542",
+                  "name": "62100 \ufffd Insurance",
+                  "value": 675,
+                  "items": [
+                    {
+                      "accountId": "2A0000-933270542",
+                      "name": "62110 \ufffd Disability Insurance",
+                      "value": 50,
+                      "items": []
+                    },
+                    {
+                      "accountId": "2B0000-933270542",
+                      "name": "62120 \ufffd Liability Insurance",
+                      "value": 350,
+                      "items": []
+                    },
+                    {
+                      "accountId": "2C0000-933270542",
+                      "name": "62130 \ufffd Work Comp",
+                      "value": 275,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "accountId": "2D0000-933270542",
+                  "name": "62400 \ufffd Interest Expense",
+                  "value": 456.29,
+                  "items": [
+                    {
+                      "accountId": "2F0000-933270542",
+                      "name": "62420 \ufffd Loan Interest",
+                      "value": 456.29,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "accountId": "3D0000-933270542",
+                  "name": "64200 \ufffd Repairs",
+                  "value": 1164,
+                  "items": [
+                    {
+                      "accountId": "3F0000-933270542",
+                      "name": "64220 \ufffd Computer Repairs",
+                      "value": 714,
+                      "items": []
+                    },
+                    {
+                      "accountId": "400000-933270542",
+                      "name": "64230 \ufffd Equipment Repairs",
+                      "value": 450,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "accountId": "480000-933270542",
+                  "name": "65100 \ufffd Utilities",
+                  "value": 493.2,
+                  "items": [
+                    {
+                      "accountId": "490000-933270542",
+                      "name": "65110 \ufffd Gas and Electric",
+                      "value": 389.2,
+                      "items": []
+                    },
+                    {
+                      "accountId": "4A0000-933270542",
+                      "name": "65120 \ufffd Telephone",
+                      "value": 80,
+                      "items": []
+                    },
+                    {
+                      "accountId": "4B0000-933270542",
+                      "name": "65130 \ufffd Water",
+                      "value": 24,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "netOperatingProfit": 5840.01,
+            "otherExpenses": {
+              "name": "Other Expense",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 93.42,
+              "items": [
+                {
+                  "accountId": "4C0000-933270542",
+                  "name": "70200 \ufffd Interest Income",
+                  "value": 93.42,
+                  "items": []
+                }
+              ]
+            },
+            "netOtherIncome": 93.42,
+            "netProfit": 5933.43
+          }
+        ],
+        "reportBasis": "Accrual",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-04-01T00:00:00",
+        "earliestAvailableMonth": "2021-05-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-04-01T00:00:00",
+            "toDate": "2023-04-30T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 35.7,
+              "items": [
+                {
+                  "accountId": "68",
+                  "name": "Billable Expenses Income",
+                  "value": -15,
+                  "items": []
+                },
+                {
+                  "accountId": "44",
+                  "name": "Sales",
+                  "value": 130,
+                  "items": []
+                },
+                {
+                  "accountId": "66",
+                  "name": "Sales of Product Income",
+                  "value": 42.5,
+                  "items": []
+                },
+                {
+                  "accountId": "1",
+                  "name": "Services",
+                  "value": -131.8,
+                  "items": []
+                },
+                {
+                  "accountId": "149",
+                  "name": "Shipping Income",
+                  "value": 10,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": -8.16,
+              "items": [
+                {
+                  "accountId": "67",
+                  "name": "Cost of sales",
+                  "value": 33.51,
+                  "items": []
+                },
+                {
+                  "accountId": "69",
+                  "name": "Cost of Sales - billable expenses",
+                  "value": -41.67,
+                  "items": []
+                }
+              ]
+            },
+            "grossProfit": 43.86,
+            "expenses": {
+              "name": "Expenses",
+              "value": -987,
+              "items": [
+                {
+                  "accountId": "148",
+                  "name": "Billable Test",
+                  "value": -250,
+                  "items": []
+                },
+                {
+                  "accountId": "16",
+                  "name": "Computer and Internet Expenses",
+                  "value": -897,
+                  "items": []
+                },
+                {
+                  "accountId": "18",
+                  "name": "Depreciation Expense",
+                  "value": 100,
+                  "items": []
+                },
+                {
+                  "accountId": "19",
+                  "name": "Dues and Subscriptions",
+                  "value": -40,
+                  "items": []
+                },
+                {
+                  "accountId": "64",
+                  "name": "Purchases",
+                  "value": 100,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": 1030.86,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 1030.86
+          },
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 1664.93,
+              "items": [
+                {
+                  "accountId": "14",
+                  "name": "Commission Income",
+                  "value": 64,
+                  "items": []
+                },
+                {
+                  "accountId": "44",
+                  "name": "Sales",
+                  "value": 952.29,
+                  "items": []
+                },
+                {
+                  "accountId": "43",
+                  "name": "Sales Discounts",
+                  "value": 9.05,
+                  "items": []
+                },
+                {
+                  "accountId": "66",
+                  "name": "Sales of Product Income",
+                  "value": 223.52,
+                  "items": []
+                },
+                {
+                  "accountId": "1",
+                  "name": "Services",
+                  "value": 392.32,
+                  "items": []
+                },
+                {
+                  "accountId": "149",
+                  "name": "Shipping Income",
+                  "value": 23.75,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 2568.09,
+              "items": [
+                {
+                  "accountId": "67",
+                  "name": "Cost of sales",
+                  "value": 27.09,
+                  "items": []
+                },
+                {
+                  "accountId": "69",
+                  "name": "Cost of Sales - billable expenses",
+                  "value": 41,
+                  "items": []
+                },
+                {
+                  "accountId": "10",
+                  "name": "Entertainment Booking Fees paid on behalf of clients",
+                  "value": 2500,
+                  "items": []
+                }
+              ]
+            },
+            "grossProfit": -903.16,
+            "expenses": {
+              "name": "Expenses",
+              "value": 397.62,
+              "items": [
+                {
+                  "accountId": "148",
+                  "name": "Billable Test",
+                  "value": -35.75,
+                  "items": []
+                },
+                {
+                  "accountId": "12",
+                  "name": "Business Licenses and Permits",
+                  "value": -8,
+                  "items": []
+                },
+                {
+                  "accountId": "16",
+                  "name": "Computer and Internet Expenses",
+                  "value": 42.46,
+                  "items": []
+                },
+                {
+                  "accountId": "20",
+                  "name": "Equipment rental",
+                  "value": -22.76,
+                  "items": []
+                },
+                {
+                  "accountId": "116",
+                  "name": "HM Revenue & Customs (VAT) Expense",
+                  "value": -25.2,
+                  "items": []
+                },
+                {
+                  "accountId": "24",
+                  "name": "Insurance Expense",
+                  "value": 5.32,
+                  "items": []
+                },
+                {
+                  "accountId": "23",
+                  "name": "Insurance Expense-Health Insurance",
+                  "value": -34,
+                  "items": []
+                },
+                {
+                  "accountId": "31",
+                  "name": "Marketing Expense",
+                  "value": -11.56,
+                  "items": []
+                },
+                {
+                  "accountId": "35",
+                  "name": "Office Supplies",
+                  "value": -12.89,
+                  "items": []
+                },
+                {
+                  "accountId": "64",
+                  "name": "Purchases",
+                  "value": 500,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": -1300.78,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 11.92,
+              "items": [
+                {
+                  "accountId": "52",
+                  "name": "Exchange Gain or Loss",
+                  "value": 11.92,
+                  "items": []
+                }
+              ]
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 29.41,
+              "items": [
+                {
+                  "accountId": "21",
+                  "name": "Finance Charge Income",
+                  "value": -13.44,
+                  "items": []
+                },
+                {
+                  "accountId": "27",
+                  "name": "Insurance Proceeds Received",
+                  "value": 7.85,
+                  "items": []
+                },
+                {
+                  "accountId": "29",
+                  "name": "Interest income",
+                  "value": 15,
+                  "items": []
+                },
+                {
+                  "accountId": "39",
+                  "name": "Proceeds from Sale of Assets",
+                  "value": 20,
+                  "items": []
+                }
+              ]
+            },
+            "netOtherIncome": 17.49,
+            "netProfit": -1283.29
+          }
+        ],
+        "reportBasis": "Accrual",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-04-01T00:00:00",
+        "earliestAvailableMonth": "2021-05-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-01-01T00:00:00",
+            "toDate": "2023-01-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 4300,
+              "items": [
+                {
+                  "accountId": "68",
+                  "name": "303 HM Revenue & Customs (VAT) Expense",
+                  "value": 250,
+                  "items": []
+                },
+                {
+                  "accountId": "22",
+                  "name": "408 Travelling expenses",
+                  "value": 4050,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": -4300,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": -4300
+          },
+          {
+            "fromDate": "2022-12-01T00:00:00",
+            "toDate": "2022-12-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 10,
+              "items": [
+                {
+                  "accountId": "16",
+                  "name": "292 Advertising",
+                  "value": 10,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": -10,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": -10
+          }
+        ],
+        "reportBasis": "Accrual",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-01-01T00:00:00",
+        "earliestAvailableMonth": "2021-02-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 200cloud",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2020-12-01T00:00:00Z",
+            "toDate": "2020-12-31T00:00:00Z",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": [
+                {
+                  "name": "Total Sales",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "101",
+                      "name": "Product Sales",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "102",
+                      "name": "Export Sales",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "103",
+                      "name": "Sales of Assets",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "104",
+                      "name": "Credit Charges (Late Payments)",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "105",
+                      "name": "Other Sales",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": [
+                {
+                  "name": "Total Purchases",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "201",
+                      "name": "Purchases",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "202",
+                      "name": "Purchase Charges",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "203",
+                      "name": "Stock",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Total Direct Expenses",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "301",
+                      "name": "Labour",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "302",
+                      "name": "Commissions",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "303",
+                      "name": "Sales Promotion",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "304",
+                      "name": "Miscellaneous Expenses",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": [
+                {
+                  "name": "Total Overheads",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "401",
+                      "name": "Gross Wages",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "402",
+                      "name": "Rent and Rates",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "403",
+                      "name": "Heat, Light and Power",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "404",
+                      "name": "Motor Expenses",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "405",
+                      "name": "Travelling and Entertainment",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "406",
+                      "name": "Printing and Stationery",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "407",
+                      "name": "Professional Fees",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "408",
+                      "name": "Equipment Hire and Rental",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "409",
+                      "name": "Maintenance",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "410",
+                      "name": "Bank Charges and Interest",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "411",
+                      "name": "Depreciation",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "412",
+                      "name": "Bad Debts",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "413",
+                      "name": "General Expenses",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "414",
+                      "name": "Suspense & Mispostings",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "10,1001",
+                  "name": "Taxation",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          },
+          {
+            "fromDate": "2020-11-01T00:00:00Z",
+            "toDate": "2020-11-30T00:00:00Z",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": [
+                {
+                  "name": "Total Sales",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "101",
+                      "name": "Product Sales",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "102",
+                      "name": "Export Sales",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "103",
+                      "name": "Sales of Assets",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "104",
+                      "name": "Credit Charges (Late Payments)",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "105",
+                      "name": "Other Sales",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": [
+                {
+                  "name": "Total Purchases",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "201",
+                      "name": "Purchases",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "202",
+                      "name": "Purchase Charges",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "203",
+                      "name": "Stock",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Total Direct Expenses",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "301",
+                      "name": "Labour",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "302",
+                      "name": "Commissions",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "303",
+                      "name": "Sales Promotion",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "304",
+                      "name": "Miscellaneous Expenses",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": [
+                {
+                  "name": "Total Overheads",
+                  "value": 0,
+                  "items": [
+                    {
+                      "accountId": "401",
+                      "name": "Gross Wages",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "402",
+                      "name": "Rent and Rates",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "403",
+                      "name": "Heat, Light and Power",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "404",
+                      "name": "Motor Expenses",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "405",
+                      "name": "Travelling and Entertainment",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "406",
+                      "name": "Printing and Stationery",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "407",
+                      "name": "Professional Fees",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "408",
+                      "name": "Equipment Hire and Rental",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "409",
+                      "name": "Maintenance",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "410",
+                      "name": "Bank Charges and Interest",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "411",
+                      "name": "Depreciation",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "412",
+                      "name": "Bad Debts",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "413",
+                      "name": "General Expenses",
+                      "value": 0,
+                      "items": []
+                    },
+                    {
+                      "accountId": "414",
+                      "name": "Suspense & Mispostings",
+                      "value": 0,
+                      "items": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "10,1001",
+                  "name": "Taxation",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          }
+        ],
+        "reportBasis": "Accrual",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2020-12-01T00:00:00",
+        "earliestAvailableMonth": "2015-01-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          },
+          {
+            "fromDate": "2023-02-01T00:00:00",
+            "toDate": "2023-02-28T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          }
+        ],
+        "reportBasis": "Unknown",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-03-01T00:00:00",
+        "earliestAvailableMonth": "2021-04-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2022-10-01T00:00:00",
+            "toDate": "2022-10-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": -7749,
+              "items": [
+                {
+                  "accountId": "9a994b92267a11e797950a57719b2edb",
+                  "name": "4000 - Sales Type A",
+                  "value": -7740,
+                  "items": []
+                },
+                {
+                  "accountId": "9a994e06267a11e797950a57719b2edb",
+                  "name": "4009 - Sales Discounts",
+                  "value": -9,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 11602000,
+              "items": [
+                {
+                  "accountId": "9a995955267a11e797950a57719b2edb",
+                  "name": "5000 - Cost of sales - goods",
+                  "value": 11602000,
+                  "items": []
+                }
+              ]
+            },
+            "grossProfit": -11609749,
+            "expenses": {
+              "name": "Expenses",
+              "value": -1.83,
+              "items": [
+                {
+                  "accountId": "9a99a91c267a11e797950a57719b2edb",
+                  "name": "8211 - Exchange rate gain/(loss)",
+                  "value": -1.83,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": -11609747.17,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": -11609747.17
+          },
+          {
+            "fromDate": "2022-09-01T00:00:00",
+            "toDate": "2022-09-30T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 501,
+              "items": [
+                {
+                  "accountId": "9a994b92267a11e797950a57719b2edb",
+                  "name": "4000 - Sales Type A",
+                  "value": 511,
+                  "items": []
+                },
+                {
+                  "accountId": "9a994e06267a11e797950a57719b2edb",
+                  "name": "4009 - Sales Discounts",
+                  "value": -10,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 13220073.7,
+              "items": [
+                {
+                  "accountId": "9a995955267a11e797950a57719b2edb",
+                  "name": "5000 - Cost of sales - goods",
+                  "value": 13220073.7,
+                  "items": []
+                }
+              ]
+            },
+            "grossProfit": -13219572.7,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": -13219572.7,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": -148.34,
+              "items": [
+                {
+                  "accountId": "9a995491267a11e797950a57719b2edb",
+                  "name": "4900 - Other income",
+                  "value": -148.34,
+                  "items": []
+                }
+              ]
+            },
+            "netOtherIncome": -148.34,
+            "netProfit": -13219721.04
+          }
+        ],
+        "reportBasis": "Unknown",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2022-10-01T00:00:00",
+        "earliestAvailableMonth": "2020-11-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Wave",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2022-11-01T00:00:00",
+            "toDate": "2022-11-30T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 7.01,
+              "items": [
+                {
+                  "name": "Unrealized Gain on Foreign Exchange",
+                  "value": 7.01,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Goods Sold",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 7.01,
+            "expenses": {
+              "name": "Operating Expenses",
+              "value": 555,
+              "items": [
+                {
+                  "name": "Office Supplies",
+                  "value": 555,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": -547.99,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": -547.99
+          },
+          {
+            "fromDate": "2022-10-01T00:00:00",
+            "toDate": "2022-10-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 8.36,
+              "items": [
+                {
+                  "name": "Unrealized Gain on Foreign Exchange",
+                  "value": 8.36,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Goods Sold",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 8.36,
+            "expenses": {
+              "name": "Operating Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": 8.36,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 8.36
+          }
+        ],
+        "reportBasis": "Accrual",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2022-11-01T00:00:00",
+        "earliestAvailableMonth": "2020-12-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 0,
+              "items": []
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 0,
+              "items": []
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Expenses",
+              "value": 0,
+              "items": []
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          },
+          {
+            "fromDate": "2023-02-01T00:00:00",
+            "toDate": "2023-02-28T00:00:00",
+            "income": {
+              "name": "Income",
+              "value": 14496.51,
+              "items": [
+                {
+                  "accountId": "c563b607-fb0e-4d06-9ddb-76fdeef20ae3",
+                  "name": "Sales",
+                  "value": 14496.51,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Sales",
+              "value": 700,
+              "items": [
+                {
+                  "accountId": "127f3b99-8dc2-4b7e-854c-91ef9bd2757b",
+                  "name": "Purchases",
+                  "value": 700,
+                  "items": []
+                }
+              ]
+            },
+            "grossProfit": 13796.51,
+            "expenses": {
+              "name": "Expenses",
+              "value": 2026.92,
+              "items": [
+                {
+                  "accountId": "f96c9458-d724-47bf-8f74-a9d5726465ce",
+                  "name": "General Expenses",
+                  "value": 215.87,
+                  "items": []
+                },
+                {
+                  "accountId": "d50842c3-af67-4233-b8c9-df3180f5b7bd",
+                  "name": "Light, Power, Heating",
+                  "value": 103.43,
+                  "items": []
+                },
+                {
+                  "accountId": "0be1631e-cc7e-4c27-951f-308c3307c0fe",
+                  "name": "Motor Vehicle Expenses",
+                  "value": 342.79,
+                  "items": []
+                },
+                {
+                  "accountId": "a49cc958-968e-4b54-96d6-8853c036009e",
+                  "name": "Postage, Freight & Courier",
+                  "value": 94.19,
+                  "items": []
+                },
+                {
+                  "accountId": "cba6527d-f102-4538-b421-e483233e9d5a",
+                  "name": "Printing & Stationery",
+                  "value": 24.58,
+                  "items": []
+                },
+                {
+                  "accountId": "dae8e236-24bb-4a7a-9787-c5fd89385e03",
+                  "name": "Rent",
+                  "value": 984.38,
+                  "items": []
+                },
+                {
+                  "accountId": "a40f43e2-c7b0-4187-919a-04ccdc14a630",
+                  "name": "Subscriptions",
+                  "value": 14.9,
+                  "items": []
+                },
+                {
+                  "accountId": "f3c73c3d-9887-4377-b18b-0374ab62e4aa",
+                  "name": "Telephone & Internet",
+                  "value": 45.11,
+                  "items": []
+                },
+                {
+                  "accountId": "c7b73345-7f25-428a-bb97-7b20a1470a53",
+                  "name": "Travel - National",
+                  "value": 201.67,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": 11769.59,
+            "otherExpenses": {
+              "name": "Other Expenses",
+              "value": 0,
+              "items": []
+            },
+            "otherIncome": {
+              "name": "Other Income",
+              "value": 0,
+              "items": []
+            },
+            "netOtherIncome": 0,
+            "netProfit": 11769.59
+          }
+        ],
+        "reportBasis": "Accrual",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-03-01T00:00:00",
+        "earliestAvailableMonth": "2021-04-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zoho Books",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2022-10-01T00:00:00",
+            "toDate": "2022-10-31T00:00:00",
+            "income": {
+              "name": "Operating Income",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "104957000000000394",
+                  "name": "Discount",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000379",
+                  "name": "General Income",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000099070",
+                  "name": "General Income Child Test",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000382",
+                  "name": "Interest Income",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000385",
+                  "name": "Late Fee Income",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000503",
+                  "name": "Other Charges",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000376",
+                  "name": "Sales",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000506",
+                  "name": "Shipping Charge",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Goods Sold",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "104957000000000509",
+                  "name": "Cost of Goods Sold",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "grossProfit": 0,
+            "expenses": {
+              "name": "Operating Expense",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "104957000000000391",
+                  "name": "Advertising And Marketing",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000406",
+                  "name": "Air Travel Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000412",
+                  "name": "Automobile Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000427",
+                  "name": "Bad Debt",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000397",
+                  "name": "Bank Fees and Charges",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000442",
+                  "name": "Consultant Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000400",
+                  "name": "Credit Card Charges",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000439",
+                  "name": "Depreciation Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000243027",
+                  "name": "Fuel/Mileage Expenses",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000415",
+                  "name": "IT and Internet Expenses",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000421",
+                  "name": "Janitorial Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000454",
+                  "name": "Lodging",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000436",
+                  "name": "Meals and Entertainment",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000388",
+                  "name": "Office Supplies",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000448",
+                  "name": "Other Expenses",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000424",
+                  "name": "Postage",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000430",
+                  "name": "Printing and Stationery",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000639102",
+                  "name": "Purchase Discounts",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000418",
+                  "name": "Rent Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000445",
+                  "name": "Repairs and Maintenance",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000433",
+                  "name": "Salaries and Employee Wages",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000409",
+                  "name": "Telephone Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000463",
+                  "name": "Uncategorized",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": 0,
+            "otherExpenses": {
+              "name": "Non Operating Expense",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "104957000000000403",
+                  "name": "Exchange Gain or Loss",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000099003",
+                  "name": "Insurance Expenses (Test Other Expense)",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "otherIncome": {
+              "name": "Non Operating Income",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "104957000000054032",
+                  "name": "Flat Rate Profit",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000099009",
+                  "name": "Interest Earned (Test Other Income)",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "netOtherIncome": 0,
+            "netProfit": 0
+          },
+          {
+            "fromDate": "2022-09-01T00:00:00",
+            "toDate": "2022-09-30T00:00:00",
+            "income": {
+              "name": "Operating Income",
+              "value": 69,
+              "items": [
+                {
+                  "accountId": "104957000000000394",
+                  "name": "Discount",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000379",
+                  "name": "General Income",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000099070",
+                  "name": "General Income Child Test",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000382",
+                  "name": "Interest Income",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000385",
+                  "name": "Late Fee Income",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000503",
+                  "name": "Other Charges",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000376",
+                  "name": "Sales",
+                  "value": 69,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000506",
+                  "name": "Shipping Charge",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "costOfSales": {
+              "name": "Cost of Goods Sold",
+              "value": 35,
+              "items": [
+                {
+                  "accountId": "104957000000000509",
+                  "name": "Cost of Goods Sold",
+                  "value": 35,
+                  "items": []
+                }
+              ]
+            },
+            "grossProfit": 34,
+            "expenses": {
+              "name": "Operating Expense",
+              "value": 69,
+              "items": [
+                {
+                  "accountId": "104957000000000391",
+                  "name": "Advertising And Marketing",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000406",
+                  "name": "Air Travel Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000412",
+                  "name": "Automobile Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000427",
+                  "name": "Bad Debt",
+                  "value": 69,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000397",
+                  "name": "Bank Fees and Charges",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000442",
+                  "name": "Consultant Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000400",
+                  "name": "Credit Card Charges",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000439",
+                  "name": "Depreciation Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000243027",
+                  "name": "Fuel/Mileage Expenses",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000415",
+                  "name": "IT and Internet Expenses",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000421",
+                  "name": "Janitorial Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000454",
+                  "name": "Lodging",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000436",
+                  "name": "Meals and Entertainment",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000388",
+                  "name": "Office Supplies",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000448",
+                  "name": "Other Expenses",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000424",
+                  "name": "Postage",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000430",
+                  "name": "Printing and Stationery",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000639102",
+                  "name": "Purchase Discounts",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000418",
+                  "name": "Rent Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000445",
+                  "name": "Repairs and Maintenance",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000433",
+                  "name": "Salaries and Employee Wages",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000409",
+                  "name": "Telephone Expense",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000463",
+                  "name": "Uncategorized",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "netOperatingProfit": -35,
+            "otherExpenses": {
+              "name": "Non Operating Expense",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "104957000000000403",
+                  "name": "Exchange Gain or Loss",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000099003",
+                  "name": "Insurance Expenses (Test Other Expense)",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "otherIncome": {
+              "name": "Non Operating Income",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "104957000000054032",
+                  "name": "Flat Rate Profit",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000099009",
+                  "name": "Interest Earned (Test Other Income)",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "netOtherIncome": 0,
+            "netProfit": -35
+          }
+        ],
+        "reportBasis": "Accrual",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2022-10-01T00:00:00",
+        "earliestAvailableMonth": "2020-11-01T00:00:00"
+      }
+    }
+  ]
+}

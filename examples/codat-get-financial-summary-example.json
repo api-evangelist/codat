@@ -1,0 +1,31 @@
+{
+  "operationId": "get-financial-summary",
+  "method": "GET",
+  "path": "/companies/{companyId}/reports/creditModel/{reportId}/financialSummary",
+  "summary": "Get financial summary insights",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "example": {
+        "booksClosedDate": {
+          "date": "2025-05-31T00:00:00Z",
+          "reason": [
+            "One or more accounts show a deviation from expected movements for March 2025",
+            "One of the marketing accounts haven't been booked for February 2025",
+            "One of the inventory accounts haven't been booked for March 2025"
+          ]
+        },
+        "accountingScore": {
+          "score": 90,
+          "reason": [
+            "Balance sheet is unbalanced.",
+            "Negative Tangible Assets on Balance Sheet",
+            "Negative Accounts Receivable on Balance Sheet"
+          ]
+        }
+      }
+    }
+  ]
+}

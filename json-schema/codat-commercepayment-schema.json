@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommercePayment",
+  "title": "Commerce: Payment",
+  "description": "Payments contain details of all payments made by customers to a company, including: amounts, currency used, payment method, payment provider, and payment status.\n\nRefunds are recorded as separate, negative payments. Note that a refund can only occur in relation to a payment that has been completed (i.e. has a status of `Paid`). When a customer cancels an order _before_ a payment has been completed, the payment shows as `Cancelled`.\n\nYou can use data from the Payments endpoints to calculate key metrics, such as gross sales and monthly recurring revenue (MRR).",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Payment Amount (including gratuity)",
+          "examples": [
+            194.12,
+            -283.56,
+            0
+          ]
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "Currency in which the payment was made"
+        },
+        "paymentMethodRef": {
+          "$ref": "#/components/schemas/PaymentMethodRef"
+        },
+        "status": {
+          "$ref": "#/components/schemas/CommercePayment/definitions/paymentStatus"
+        },
+        "paymentProvider": {
+          "type": "string",
+          "description": "Service provider of the payment, if applicable.",
+          "examples": [
+            "Amazon Pay",
+            "Checkout.com",
+            "SagePay"
+          ]
+        },
+        "dueDate": {
+          "description": "Date by which payment must be made",
+          "$ref": "#/components/schemas/DateTime"
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/2"
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "definitions": {
+    "paymentStatus": {
+      "type": "string",
+      "x-internal": true,
+      "description": "Status of the payment.",
+      "enum": [
+        "Pending",
+        "Authorized",
+        "Paid",
+        "Failed",
+        "Cancelled",
+        "Unknown"
+      ]
+    },
+    "paymentType": {
+      "type": "string",
+      "x-internal": true,
+      "nullable": true,
+      "description": "Type of payment.",
+      "enum": [
+        "Cash",
+        "Card",
+        "Invoice",
+        "OnlineCard",
+        "Swish",
+        "Vipps",
+        "Mobile",
+        "StoreCredit",
+        "Paypal",
+        "Custom",
+        "Prepaid",
+        "Unknown"
+      ],
+      "example": "Cash"
+    },
+    "paymentRef": {
+      "x-internal": true,
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CommerceOrder/allOf/0"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "format": "decimal",
+              "nullable": true,
+              "description": "Payment Amount (including gratuity).",
+              "examples": [
+                194.12,
+                -283.56,
+                0
+              ]
+            },
+            "currency": {
+              "$ref": "#/components/schemas/SourceAccount/properties/currency",
+              "description": "Currency in which the payment was made."
+            },
+            "type": {
+              "$ref": "#/components/schemas/CommercePayment/definitions/paymentType"
+            },
+            "status": {
+              "$ref": "#/components/schemas/CommercePayment/definitions/paymentStatus"
+            },
+            "paymentProvider": {
+              "type": "string",
+              "description": "Service provider of the payment, if applicable.",
+              "examples": [
+                "Amazon Pay",
+                "Checkout.com",
+                "SagePay"
+              ]
+            },
+            "dueDate": {
+              "description": "Date by which payment must be made",
+              "$ref": "#/components/schemas/DateTime"
+            }
+          }
+        },
+        {
+          "$ref": "#/components/schemas/CommerceOrder/allOf/2"
+        },
+        {
+          "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+        }
+      ]
+    }
+  }
+}

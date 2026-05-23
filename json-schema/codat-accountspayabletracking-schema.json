@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountsPayableTracking",
+  "title": "Tracking",
+  "x-internal": true,
+  "type": "object",
+  "description": "Categories, and a project and customer, against which the item is tracked.",
+  "properties": {
+    "categoryRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AccountingTrackingCategory/definitions/trackingCategoryRef"
+      }
+    },
+    "customerRef": {
+      "$ref": "#/components/schemas/AccountingCustomer/definitions/accountingCustomerRef"
+    },
+    "projectRef": {
+      "$ref": "#/components/schemas/ProjectRef"
+    },
+    "isBilledTo": {
+      "$ref": "#/components/schemas/AccountsPayableTracking/definitions/billedToType"
+    },
+    "isRebilledTo": {
+      "$ref": "#/components/schemas/AccountsPayableTracking/definitions/billedToType"
+    }
+  },
+  "required": [
+    "categoryRefs",
+    "isBilledTo",
+    "isRebilledTo"
+  ],
+  "definitions": {
+    "billedToType": {
+      "type": "string",
+      "description": "Defines if the invoice or credit note is billed/rebilled to a project or customer.",
+      "enum": [
+        "Unknown",
+        "NotApplicable",
+        "Customer",
+        "Project"
+      ]
+    }
+  }
+}

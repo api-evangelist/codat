@@ -1,0 +1,150 @@
+{
+  "operationId": "get-commerce-customer-retention-metrics",
+  "method": "GET",
+  "path": "/data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/customerRetention",
+  "summary": "Get customer retention metrics",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "example": [
+        {
+          "reportInfo": {
+            "name": "customer_retention",
+            "displayName": "Customer Retention"
+          },
+          "dimensions": [
+            {
+              "index": 0,
+              "displayName": "Period",
+              "type": "datespan",
+              "items": [
+                {
+                  "index": 0,
+                  "displayName": "Period 0",
+                  "start": "2022-01-01",
+                  "end": "2022-12-31"
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "displayName": "Customer retention metrics",
+              "type": "string",
+              "items": [
+                {
+                  "index": 0,
+                  "value": "Existing customers"
+                },
+                {
+                  "index": 1,
+                  "value": "New customers"
+                },
+                {
+                  "index": 2,
+                  "value": "Total customers"
+                },
+                {
+                  "index": 3,
+                  "value": "Retention rate"
+                },
+                {
+                  "index": 4,
+                  "value": "Repeat rate"
+                }
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "displayName": "Count",
+              "index": 0,
+              "type": "int"
+            },
+            {
+              "displayName": "Percentage",
+              "index": 1,
+              "type": "percentage"
+            }
+          ],
+          "reportData": [
+            {
+              "dimension": 0,
+              "dimensionDisplayName": "Period",
+              "item": 0,
+              "itemDisplayName": "Period 0",
+              "components": [
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Customer retention metrics",
+                  "item": 0,
+                  "itemDisplayName": "Existing customers",
+                  "measures": [
+                    {
+                      "index": 0,
+                      "measureDisplayName": "Count",
+                      "value": 13
+                    }
+                  ]
+                },
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Customer retention metrics",
+                  "item": 1,
+                  "itemDisplayName": "New customers",
+                  "measures": [
+                    {
+                      "index": 0,
+                      "measureDisplayName": "Count",
+                      "value": 47
+                    }
+                  ]
+                },
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Customer retention metrics",
+                  "item": 2,
+                  "itemDisplayName": "Total customers",
+                  "measures": [
+                    {
+                      "index": 0,
+                      "measureDisplayName": "Count",
+                      "value": 60
+                    }
+                  ]
+                },
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Customer retention metrics",
+                  "item": 3,
+                  "itemDisplayName": "Retention rate",
+                  "measures": [
+                    {
+                      "index": 1,
+                      "measureDisplayName": "Percentage",
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Customer retention metrics",
+                  "item": 4,
+                  "itemDisplayName": "Repeat rate",
+                  "measures": [
+                    {
+                      "index": 1,
+                      "measureDisplayName": "Percentage",
+                      "value": 21.67
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

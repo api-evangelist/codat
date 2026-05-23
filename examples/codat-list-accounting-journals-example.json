@@ -1,0 +1,253 @@
+{
+  "operationId": "list-accounting-journals",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/journals",
+  "summary": "List journals",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "results": [
+          {
+            "id": "90bb7784-083b-4bcb-a534-b30756cee65d",
+            "journalCode": "GJ",
+            "name": "General Journal",
+            "type": "General Journal",
+            "hasChildren": true,
+            "createdOn": "2021-12-11T13:04:02",
+            "status": "Active",
+            "modifiedDate": "2023-04-26T12:38:18Z",
+            "sourceModifiedDate": "2022-07-15T20:19:02",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "07b94827-c0a5-4cc7-ba58-3f9efec3b4b3",
+            "journalCode": "PAY",
+            "name": "Payroll Journal",
+            "type": "Payroll Journal",
+            "parentId": "90bb7784-083b-4bcb-a534-b30756cee65d",
+            "hasChildren": false,
+            "createdOn": "2021-12-11T13:04:02",
+            "status": "Active",
+            "modifiedDate": "2023-04-26T12:38:18Z",
+            "sourceModifiedDate": "2022-07-24T14:17:02",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "_links": {
+          "current": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals"
+          },
+          "next": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals?page=2&pageSize=2"
+          }
+        },
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 4
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "results": [
+          {
+            "id": "211317b3-89d1-ea11-bbaa-000d3a2b9185",
+            "journalCode": "ASSETS",
+            "name": "ASSETS",
+            "type": "Assets",
+            "hasChildren": true,
+            "status": "Active",
+            "modifiedDate": "2023-03-27T14:21:10Z",
+            "sourceModifiedDate": "2023-02-02T10:26:25Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "9a94ef78-92ec-ec11-82f9-000d3a8746a9",
+            "journalCode": "BNKDEPOSIT-BNKD",
+            "name": "BNKD",
+            "type": "Bank Deposits",
+            "parentId": "af7d7e6b-e5c8-ec11-8e7e-000d3a86e04a",
+            "hasChildren": false,
+            "createdOn": "2022-06-15T10:03:59",
+            "status": "Active",
+            "modifiedDate": "2023-03-27T14:21:10Z",
+            "sourceModifiedDate": "2022-06-15T22:45:30Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "_links": {
+          "current": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals"
+          },
+          "next": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals?page=2&pageSize=2"
+          }
+        },
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 46
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "results": [
+          {
+            "id": "aae31284-e23d-456b-9957-fbf4bcef6c19",
+            "journalCode": "21",
+            "name": "12345678",
+            "type": "Bank",
+            "hasChildren": false,
+            "createdOn": "2019-11-05T14:44:51",
+            "status": "Active",
+            "modifiedDate": "2022-10-26T13:31:58Z",
+            "sourceModifiedDate": "2020-01-24T11:41:25Z"
+          },
+          {
+            "id": "74677165-1bd3-49b4-87d0-32d974674f86",
+            "journalCode": "23",
+            "name": "Abraham's Billion Dollar stuff",
+            "type": "Bank",
+            "hasChildren": false,
+            "createdOn": "2019-11-22T13:35:57",
+            "status": "Active",
+            "modifiedDate": "2022-10-26T13:31:58Z",
+            "sourceModifiedDate": "2019-11-22T13:35:57Z"
+          }
+        ],
+        "_links": {
+          "current": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals"
+          },
+          "next": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals?page=2&pageSize=2"
+          }
+        },
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 47
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "results": [
+          {
+            "id": "05b9febe-34b3-4836-8277-002294b233a9",
+            "journalCode": "25",
+            "name": "annaBankAccount1",
+            "type": "Bank",
+            "hasChildren": false,
+            "createdOn": "2021-04-26T16:44:47",
+            "status": "Active",
+            "modifiedDate": "2022-10-26T13:33:08Z",
+            "sourceModifiedDate": "2021-04-26T16:44:47Z"
+          },
+          {
+            "id": "b9c3d6a6-4ce2-4714-9ff6-fb15892300f7",
+            "journalCode": "31",
+            "name": "annaBankAccount10",
+            "type": "Bank",
+            "hasChildren": false,
+            "createdOn": "2021-05-18T10:24:18",
+            "status": "Active",
+            "modifiedDate": "2022-10-26T13:33:08Z",
+            "sourceModifiedDate": "2021-05-18T10:24:18Z"
+          }
+        ],
+        "_links": {
+          "current": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals"
+          },
+          "next": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals?page=2&pageSize=2"
+          }
+        },
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 21
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "results": [
+          {
+            "id": "207",
+            "journalCode": "AJPT",
+            "name": "A Journal Push Test",
+            "type": "",
+            "hasChildren": false,
+            "createdOn": "2022-01-17T10:44:23",
+            "status": "Active",
+            "modifiedDate": "2023-04-04T16:31:30Z",
+            "sourceModifiedDate": "2022-01-17T10:44:23",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "223",
+            "journalCode": "AJPT2",
+            "name": "A Journal Push Test 2",
+            "type": "",
+            "hasChildren": false,
+            "createdOn": "2022-01-18T15:39:07",
+            "status": "Active",
+            "modifiedDate": "2023-04-04T16:31:30Z",
+            "sourceModifiedDate": "2022-01-18T15:39:07",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "_links": {
+          "current": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals"
+          },
+          "next": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/journals?page=2&pageSize=2"
+          }
+        },
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 1211
+      }
+    }
+  ]
+}

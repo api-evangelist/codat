@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingPaymentMethod",
+  "title": "Accounting: Payment method",
+  "description": "## Overview\n\nA Payment Method represents the payment method(s) used to pay a Bill. Payment Methods are referenced on [Bill Payments](https://docs.codat.io/lending-api#/schemas/BillPayment) and [Payments](https://docs.codat.io/lending-api#/schemas/Payment).",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the payment method."
+        },
+        "name": {
+          "type": "string",
+          "nullable": true,
+          "description": "Name of the payment method."
+        },
+        "type": {
+          "$ref": "#/components/schemas/AccountingPaymentMethod/definitions/paymentMethodType"
+        },
+        "status": {
+          "$ref": "#/components/schemas/CommercePaymentMethod/allOf/1/properties/status"
+        },
+        "metadata": {
+          "$ref": "#/components/schemas/Metadata"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "definitions": {
+    "paymentMethodType": {
+      "description": "Method of payment.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Cash",
+        "Check",
+        "CreditCard",
+        "DebitCard",
+        "BankTransfer",
+        "Other"
+      ]
+    }
+  }
+}

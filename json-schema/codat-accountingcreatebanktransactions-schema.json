@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingCreateBankTransactions",
+  "title": "Accounting: Create bank account transactions",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "type": "string",
+      "description": "Unique identifier for a bank account.",
+      "examples": [
+        "13d946f0-c5d5-42bc-b092-97ece17923ab",
+        "9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2",
+        "7110701885",
+        "EILBDVJVNUAGVKRQ",
+        "Checking 0202"
+      ]
+    },
+    "transactions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AccountingCreateBankTransactions/definitions/CreateBankAccountTransaction"
+      }
+    }
+  },
+  "definitions": {
+    "CreateBankAccountTransaction": {
+      "title": "Bank account transaction",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the bank account transaction, unique for the company in the accounting software."
+        },
+        "amount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The amount transacted in the bank transaction."
+        },
+        "date": {
+          "$ref": "#/components/schemas/DateTime"
+        },
+        "description": {
+          "nullable": false,
+          "type": "string",
+          "description": "Description of the bank transaction."
+        },
+        "balance": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The remaining balance in the account with ID `accountId`."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "operationId": "list-commerce-payment-methods",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-paymentMethods",
+  "summary": "List payment methods",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Amazon Seller Central",
+      "example": {
+        "results": [
+          {
+            "id": "COD",
+            "name": "Cash On Delivery",
+            "status": "Active",
+            "modifiedDate": "2023-01-09T09:12:03Z"
+          },
+          {
+            "id": "GC",
+            "name": "Gift Card",
+            "status": "Active",
+            "modifiedDate": "2023-01-09T09:12:03Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 3,
+        "_links": {
+          "current": {
+            "href": "/companies/6a59da96-e6d2-4c5c-ace7-65ba8be6a472/connections/58be1638-2c74-4ad4-8ff3-8c5b98b5f0fe/data/commerce-paymentMethods?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/6a59da96-e6d2-4c5c-ace7-65ba8be6a472/connections/58be1638-2c74-4ad4-8ff3-8c5b98b5f0fe/data/commerce-paymentMethods"
+          },
+          "next": {
+            "href": "/companies/6a59da96-e6d2-4c5c-ace7-65ba8be6a472/connections/58be1638-2c74-4ad4-8ff3-8c5b98b5f0fe/data/commerce-paymentMethods?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "BigCommerce",
+      "example": {
+        "results": [
+          {
+            "id": "bigcommerce_gift_certificate",
+            "name": "Gift Certificate",
+            "status": "Active",
+            "modifiedDate": "2023-04-11T10:33:48Z"
+          },
+          {
+            "id": "bigcommerce_store_credit",
+            "name": "Store Credit",
+            "status": "Active",
+            "modifiedDate": "2023-04-11T10:33:48Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 2,
+        "_links": {
+          "current": {
+            "href": "/companies/d1ebcf6d-f7f9-4841-8a06-fec12c492a48/connections/7c0a21e8-938a-40a4-b0f7-5ab5d46804b0/data/commerce-paymentMethods?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d1ebcf6d-f7f9-4841-8a06-fec12c492a48/connections/7c0a21e8-938a-40a4-b0f7-5ab5d46804b0/data/commerce-paymentMethods"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clover",
+      "example": {
+        "results": [
+          {
+            "id": "0DPQ6QP48YYHW",
+            "name": "TapMango Wallet",
+            "status": "Active",
+            "modifiedDate": "2023-01-09T11:01:04Z"
+          },
+          {
+            "id": "24H1ANYP1BNXG",
+            "name": "MyTab",
+            "status": "Active",
+            "modifiedDate": "2023-01-09T11:01:04Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 13,
+        "_links": {
+          "current": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-paymentMethods?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-paymentMethods"
+          },
+          "next": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-paymentMethods?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Lightspeed K Trial",
+      "example": {
+        "results": [
+          {
+            "id": "647208621834260",
+            "name": "Cash",
+            "status": "Active",
+            "modifiedDate": "2023-03-02T09:48:56Z"
+          },
+          {
+            "id": "647208621834261",
+            "name": "Credit Card",
+            "status": "Active",
+            "modifiedDate": "2023-03-02T09:48:56Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 11,
+        "_links": {
+          "current": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-paymentMethods?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-paymentMethods"
+          },
+          "next": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-paymentMethods?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie",
+      "example": {
+        "results": [
+          {
+            "id": "applepay",
+            "name": "Apple Pay",
+            "status": "Unknown",
+            "modifiedDate": "2022-08-09T15:08:19Z"
+          },
+          {
+            "id": "bancontact",
+            "name": "Bancontact",
+            "status": "Unknown",
+            "modifiedDate": "2022-08-09T15:08:19Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 19,
+        "_links": {
+          "current": {
+            "href": "/companies/a2503b54-143c-4705-8bec-9ef84f51ca86/connections/4c8df852-f1b3-4642-939b-c33d6f34a312/data/commerce-paymentMethods?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/a2503b54-143c-4705-8bec-9ef84f51ca86/connections/4c8df852-f1b3-4642-939b-c33d6f34a312/data/commerce-paymentMethods"
+          },
+          "next": {
+            "href": "/companies/a2503b54-143c-4705-8bec-9ef84f51ca86/connections/4c8df852-f1b3-4642-939b-c33d6f34a312/data/commerce-paymentMethods?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie Test",
+      "example": {
+        "results": [
+          {
+            "id": "applepay",
+            "name": "Apple Pay",
+            "status": "Unknown",
+            "modifiedDate": "2022-08-17T11:33:19Z"
+          },
+          {
+            "id": "bancontact",
+            "name": "Bancontact",
+            "status": "Unknown",
+            "modifiedDate": "2022-08-17T11:33:19Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 19,
+        "_links": {
+          "current": {
+            "href": "/companies/b978f9fe-8d63-4cfc-b2c2-b61b72e22785/connections/d564f8fd-0766-4ab8-a427-7c893f9b9ff6/data/commerce-paymentMethods?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/b978f9fe-8d63-4cfc-b2c2-b61b72e22785/connections/d564f8fd-0766-4ab8-a427-7c893f9b9ff6/data/commerce-paymentMethods"
+          },
+          "next": {
+            "href": "/companies/b978f9fe-8d63-4cfc-b2c2-b61b72e22785/connections/d564f8fd-0766-4ab8-a427-7c893f9b9ff6/data/commerce-paymentMethods?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Square",
+      "example": {
+        "results": [
+          {
+            "id": "BANK_ACCOUNT",
+            "name": "Bank Account",
+            "status": "Unknown",
+            "modifiedDate": "2022-08-02T10:27:32Z"
+          },
+          {
+            "id": "BUY_NOW_PAY_LATER",
+            "name": "Buy Now Pay Later",
+            "status": "Unknown",
+            "modifiedDate": "2022-08-02T10:27:32Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 20,
+        "_links": {
+          "current": {
+            "href": "/companies/d779fc82-a098-4107-a9fc-c2a1dda3d522/connections/9b098b74-3770-4dad-9001-4c283a39f1e5/data/commerce-paymentMethods?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d779fc82-a098-4107-a9fc-c2a1dda3d522/connections/9b098b74-3770-4dad-9001-4c283a39f1e5/data/commerce-paymentMethods"
+          },
+          "next": {
+            "href": "/companies/d779fc82-a098-4107-a9fc-c2a1dda3d522/connections/9b098b74-3770-4dad-9001-4c283a39f1e5/data/commerce-paymentMethods?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "SumUp",
+      "example": {
+        "results": [
+          {
+            "id": "CASH",
+            "name": "Cash",
+            "status": "Active",
+            "modifiedDate": "2022-09-14T10:58:03Z"
+          },
+          {
+            "id": "CC_CUSTOMER_ENTERED",
+            "name": "Credit Card",
+            "status": "Active",
+            "modifiedDate": "2022-09-14T10:58:03Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 8,
+        "_links": {
+          "current": {
+            "href": "/companies/e170dbe2-be50-474f-b449-82add37108de/connections/1e631dd5-a30b-4bad-ad5c-315c9743535b/data/commerce-paymentMethods?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/e170dbe2-be50-474f-b449-82add37108de/connections/1e631dd5-a30b-4bad-ad5c-315c9743535b/data/commerce-paymentMethods"
+          },
+          "next": {
+            "href": "/companies/e170dbe2-be50-474f-b449-82add37108de/connections/1e631dd5-a30b-4bad-ad5c-315c9743535b/data/commerce-paymentMethods?page=2&pageSize=2"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankingAccounts",
+  "title": "Banking: Bank accounts",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/BankingAccount"
+          }
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PagingInfo"
+    }
+  ]
+}

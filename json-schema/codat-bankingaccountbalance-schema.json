@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankingAccountBalance",
+  "title": "Banking: Account balance",
+  "description": "The Banking Account Balances data type provides a list of balances for a bank account including end-of-day batch balance or running balances per transaction.\n\nResponses are paged, so you should provide `page` and `pageSize` query parameters in your request.\n\n> **How often should I pull Account Balances?**\n>\n> Because these balances are closing balances, we recommend you pull Account Balance no more frequently than daily. If you require a live intraday balance, this can be found for each account on the [Account](https://docs.codat.io/lending-api#/schemas/Account) data type.\n> \n> Whilst you can choose to sync hourly, this may incur usage charges from Plaid or TrueLayer.",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The unique identifier of the account."
+        },
+        "balance": {
+          "$ref": "#/components/schemas/BankingAccountBalance/definitions/accountBalanceAmounts"
+        },
+        "date": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Date of the balance."
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "required": [
+    "accountId",
+    "balance",
+    "date"
+  ],
+  "definitions": {
+    "accountBalanceAmounts": {
+      "title": "Account Balance Amounts",
+      "x-internal": true,
+      "type": "object",
+      "properties": {
+        "available": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "The balance available in the account, including any pending transactions. This doesn't include additional funds available from any overdrafts."
+        },
+        "current": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The balance of the account only including cleared transactions."
+        },
+        "limit": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "The minimum allowed balance for the account. For example, a $100.00 overdraft would show as a limit of `-100.00`."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Depending on the data provided by the underlying bank, not all balances are always available."
+    }
+  },
+  "examples": [
+    {
+      "accountBalances": [
+        {
+          "accountId": "cce404db-27f7-4286-95db-622b53596cf4",
+          "balance": {
+            "available": 714374.48,
+            "current": 714374.57,
+            "limit": 5000
+          },
+          "date": "2021-03-18T00:00:00"
+        },
+        {
+          "accountId": "cce404db-27f7-4286-95db-622b53596cf4",
+          "balance": {
+            "available": 714374.48,
+            "current": 714374.57,
+            "limit": 5000
+          },
+          "date": "2021-03-19T00:00:00"
+        },
+        {
+          "accountId": "cce404db-27f7-4286-95db-622b53596cf4",
+          "balance": {
+            "available": 714195.66,
+            "current": 714204.39,
+            "limit": 5000
+          },
+          "date": "2021-03-22T00:00:00"
+        },
+        {
+          "accountId": "2f593774-1075-4805-a552-84eecc7eb264",
+          "balance": {
+            "available": -644945.42,
+            "current": -644925.84,
+            "limit": 0
+          },
+          "date": "2022-03-09T00:00:00"
+        }
+      ]
+    }
+  ]
+}

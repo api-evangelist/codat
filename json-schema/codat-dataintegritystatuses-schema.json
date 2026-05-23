@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataIntegrityStatuses",
+  "title": "Data integrity statuses",
+  "x-internal": true,
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataIntegrityStatus"
+      }
+    }
+  }
+}

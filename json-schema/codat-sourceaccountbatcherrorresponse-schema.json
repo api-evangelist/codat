@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SourceAccountBatchErrorResponse",
+  "title": "Batch source account creation error",
+  "description": "Describes the error that occured when trying to create the specified source account.",
+  "type": "object",
+  "properties": {
+    "sourceAccountId": {
+      "type": "string",
+      "description": "Unique ID for the source account.",
+      "examples": [
+        "12345"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "description": "The error status code for the attempted creation of the source account.",
+          "type": "string",
+          "examples": [
+            409
+          ]
+        },
+        "error": {
+          "description": "The error description for the attempted creation of the source account.",
+          "type": "string",
+          "examples": [
+            "A bank account already exists with the same Id"
+          ]
+        }
+      }
+    }
+  }
+}

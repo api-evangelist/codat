@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WebhookConsumer",
+  "title": "Webhook consumer",
+  "type": "object",
+  "description": "\ufeffA webhook consumer is an HTTP endpoint that developers can configure to subscribe to Codat's supported event types.\n\nSee our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview).\n",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "8a210b68-6988-11ed-a1eb-0242ac120002",
+      "description": "Unique identifier for the webhook consumer."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL that will consume webhook events dispatched by Codat."
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Flag that enables or disables the endpoint from receiving events. Disabled when set to `true`.",
+      "nullable": true,
+      "default": false
+    },
+    "eventTypes": {
+      "type": "array",
+      "description": "An array of event types the webhook consumer subscribes to.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "companyTags": {
+      "type": "array",
+      "nullable": true,
+      "description": "Company tags provide an additional way to filter messages, independent of event types. Company tags are case-sensitive, and only messages from companies with matching tags will be sent to this endpoint. Use the format `tagKey:tagValue`.",
+      "items": {
+        "type": "string",
+        "maxLength": 128
+      },
+      "maxItems": 10
+    }
+  },
+  "definitions": {
+    "webhookConsumerPrototype": {
+      "title": "Create webhook consumer",
+      "type": "object",
+      "properties": {
+        "url": {
+          "$ref": "#/components/schemas/WebhookConsumer/properties/url"
+        },
+        "disabled": {
+          "$ref": "#/components/schemas/WebhookConsumer/properties/disabled"
+        },
+        "eventTypes": {
+          "$ref": "#/components/schemas/WebhookConsumer/properties/eventTypes"
+        },
+        "companyTags": {
+          "$ref": "#/components/schemas/WebhookConsumer/properties/companyTags"
+        }
+      }
+    },
+    "webhookConsumers": {
+      "title": "Webhook consumers",
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/components/schemas/WebhookConsumer"
+          }
+        }
+      }
+    }
+  }
+}

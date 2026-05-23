@@ -1,0 +1,118 @@
+{
+  "operationId": "list-commerce-disputes",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-disputes",
+  "summary": "List disputes",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "results": [
+          {
+            "id": "8502411422",
+            "disputedTransactions": [
+              {
+                "id": "3684116791454",
+                "type": "Order"
+              }
+            ],
+            "totalAmount": 175,
+            "currency": "GBP",
+            "status": "Processing",
+            "reason": "fraudulent",
+            "dueDate": "2021-03-28T00:00:00",
+            "createdDate": "2021-03-19T13:16:27",
+            "modifiedDate": "2023-02-10T15:18:22Z",
+            "sourceModifiedDate": "2021-03-28T11:00:17"
+          },
+          {
+            "id": "8502444190",
+            "disputedTransactions": [
+              {
+                "id": "3684119445662",
+                "type": "Order"
+              }
+            ],
+            "totalAmount": 600,
+            "currency": "GBP",
+            "status": "Processing",
+            "reason": "fraudulent",
+            "dueDate": "2021-03-28T00:00:00",
+            "createdDate": "2021-03-19T13:18:31",
+            "modifiedDate": "2023-02-10T15:18:22Z",
+            "sourceModifiedDate": "2021-03-28T11:00:18"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 2,
+        "_links": {
+          "current": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-disputes?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-disputes"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stripe Test",
+      "example": {
+        "results": [
+          {
+            "id": "dp_1Hqhl8A8m8S1Gh7OJrvF3gsK",
+            "disputedTransactions": [
+              {
+                "id": "txn_1Hqhl8A8m8S1Gh7OtmAPNr9e",
+                "type": "Payment"
+              }
+            ],
+            "totalAmount": 25,
+            "currency": "GBP",
+            "status": "Processing",
+            "reason": "fraudulent",
+            "dueDate": "2020-12-02T23:59:59Z",
+            "createdDate": "2020-11-23T16:19:22Z",
+            "modifiedDate": "2022-09-30T11:18:27Z"
+          },
+          {
+            "id": "dp_1HqiwVA8m8S1Gh7OpS3ozlcd",
+            "disputedTransactions": [
+              {
+                "id": "txn_1HqiwVA8m8S1Gh7O0IVelTQ5",
+                "type": "Payment"
+              }
+            ],
+            "totalAmount": 55,
+            "currency": "GBP",
+            "status": "Lost",
+            "reason": "product_not_received",
+            "dueDate": "2020-12-02T23:59:59Z",
+            "createdDate": "2020-11-23T17:35:11Z",
+            "modifiedDate": "2022-09-30T11:18:27Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 5,
+        "_links": {
+          "current": {
+            "href": "/companies/8206e78e-e340-411e-b315-473c4ab73b48/connections/43e58373-0a1d-44a0-97f0-9fa9993a14fa/data/commerce-disputes?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/8206e78e-e340-411e-b315-473c4ab73b48/connections/43e58373-0a1d-44a0-97f0-9fa9993a14fa/data/commerce-disputes"
+          },
+          "next": {
+            "href": "/companies/8206e78e-e340-411e-b315-473c4ab73b48/connections/43e58373-0a1d-44a0-97f0-9fa9993a14fa/data/commerce-disputes?page=2&pageSize=2"
+          }
+        }
+      }
+    }
+  ]
+}

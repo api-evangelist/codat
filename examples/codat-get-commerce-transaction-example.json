@@ -1,0 +1,105 @@
+{
+  "operationId": "get-commerce-transaction",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-transactions/{transactionId}",
+  "summary": "Get transaction",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie",
+      "example": {
+        "id": "re_Azhe8TzfUK",
+        "totalAmount": -20,
+        "currency": "EUR",
+        "type": "Refund",
+        "createdDate": "2022-01-17T16:00:46",
+        "modifiedDate": "2022-03-17T15:47:28Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie Test",
+      "example": {
+        "id": "re_Azhe8TzfUK",
+        "totalAmount": -20,
+        "currency": "EUR",
+        "type": "Refund",
+        "subType": "PaymentRefund",
+        "createdDate": "2022-01-17T16:00:46",
+        "modifiedDate": "2022-08-17T11:33:19Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "id": "ShopifyPayment-1633176289438",
+        "totalAmount": 175,
+        "currency": "GBP",
+        "type": "Payment",
+        "subType": "charge",
+        "transactionSourceRef": {
+          "id": "3684116791454",
+          "type": "Order"
+        },
+        "createdDate": "2021-03-19T13:16:26",
+        "modifiedDate": "2023-02-10T15:18:23Z",
+        "sourceModifiedDate": "2021-03-19T13:16:26"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stripe Test",
+      "example": {
+        "id": "txn_1HpGQUA8m8S1Gh7OR21pB0Yj",
+        "totalAmount": 50,
+        "currency": "GBP",
+        "type": "Payment",
+        "subType": "charge",
+        "transactionSourceRef": {
+          "id": "ch_1HpGQUA8m8S1Gh7Ot4WDTus5",
+          "type": "Payment"
+        },
+        "createdDate": "2020-11-19T16:56:06Z",
+        "modifiedDate": "2022-09-30T11:18:28Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "SumUp",
+      "example": {
+        "id": "46d36a64-ea48-4e37-9340-3548cbf3ca2f",
+        "totalAmount": 15,
+        "currency": "GBP",
+        "type": "Payment",
+        "subType": "PAYMENT",
+        "createdDate": "2021-03-26T21:09:59Z",
+        "modifiedDate": "2022-09-14T10:58:03Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zettle",
+      "example": {
+        "id": "PAYMENT:09b94cfc-2d98-11eb-8021-0e1b9dcbeca1",
+        "totalAmount": 25,
+        "currency": "GBP",
+        "type": "Payment",
+        "transactionSourceRef": {
+          "id": "09b94cfc-2d98-11eb-8021-0e1b9dcbeca1",
+          "type": "Unknown"
+        },
+        "createdDate": "2020-11-23T14:27:38Z",
+        "modifiedDate": "2021-10-27T15:23:04Z",
+        "sourceModifiedDate": "2020-11-25T23:10:01Z"
+      }
+    }
+  ]
+}

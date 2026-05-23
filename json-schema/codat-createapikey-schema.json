@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateApiKey",
+  "title": "Create API key",
+  "description": "Details about the newly created API key.",
+  "x-internal": true,
+  "type": "object",
+  "properties": {
+    "name": {
+      "$ref": "#/components/schemas/ApiKeyDetails/allOf/0/properties/name"
+    }
+  }
+}

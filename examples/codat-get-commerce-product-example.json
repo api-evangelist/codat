@@ -1,0 +1,593 @@
+{
+  "operationId": "get-commerce-product",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-products/{productId}",
+  "summary": "Get product",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Amazon Seller Central",
+      "example": {
+        "id": "Chromecast",
+        "categorization": "DEVICE",
+        "name": "Chromecast",
+        "description": "Cast from your phone to your TV with this all new chromecast.",
+        "productCategoryRefs": [],
+        "isGiftCard": false,
+        "variants": [
+          {
+            "id": "packaging_asin_gating",
+            "name": "Chromecast in a cardboard box",
+            "quantity": 0,
+            "isTaxEnabled": false,
+            "sku": "packaging_asin_gating",
+            "vatPercentage": 0,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 50
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": false,
+            "createdDate": "2021-02-07T12:30:01Z"
+          }
+        ],
+        "createdDate": "2021-02-07T12:30:01Z",
+        "modifiedDate": "2023-01-09T09:12:11Z",
+        "sourceModifiedDate": "2022-08-17T09:07:07Z",
+        "status": "Published"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "BigCommerce",
+      "example": {
+        "id": "103",
+        "categorization": "Shop All, Utility",
+        "name": "[Sample] Canvas Laundry Cart",
+        "description": "The last laundry cart you'll ever buy. This industrial non-collapsable cart is constructed with a steel framed body using heavyweight canvas capped with a soft leather rim sitting on four smooth rolling casters. Keeps the grubby garments off the floor and almost makes laundry enjoyable. Can also be used as the ideal storage solution: many people find it ideal for children's toys or a load of chopped firewood. Load it up and wheel it away. Natural Heavyweight Canvas with Vegetable Tanned Leather Rim Measure\ufffd",
+        "productCategoryRefs": [],
+        "isGiftCard": false,
+        "variants": [
+          {
+            "id": "71",
+            "name": "[Sample] Canvas Laundry Cart",
+            "quantity": 0,
+            "isTaxEnabled": false,
+            "sku": "CLC",
+            "barcode": "",
+            "vatPercentage": 0,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 200
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "0001-01-01T00:00:00"
+          }
+        ],
+        "createdDate": "2015-07-03T18:48:07Z",
+        "modifiedDate": "2023-04-11T10:33:49Z",
+        "sourceModifiedDate": "2022-06-16T07:59:46Z",
+        "status": "Published"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clover",
+      "example": {
+        "id": "DJANHKK2AVEYY",
+        "name": "Coffee",
+        "description": "Coffee",
+        "productCategoryRefs": [],
+        "isGiftCard": false,
+        "variants": [
+          {
+            "id": "DJANHKK2AVEYY",
+            "name": "Coffee",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "sku": "12222",
+            "barcode": "1234",
+            "vatPercentage": 20,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 3
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": false,
+            "createdDate": "0001-01-01T00:00:00"
+          }
+        ],
+        "createdDate": "0001-01-01T00:00:00",
+        "modifiedDate": "2023-01-09T11:01:03Z",
+        "sourceModifiedDate": "2021-05-24T15:50:55Z",
+        "status": "Published"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Lightspeed K Trial",
+      "example": {
+        "id": "647208621834539",
+        "categorization": "Alcoholic beverages",
+        "name": "Alcoholic beverages",
+        "description": "Alcoholic beverages",
+        "productCategoryRefs": [
+          {
+            "id": "647208621834281",
+            "name": "Alcoholic beverages"
+          }
+        ],
+        "isGiftCard": false,
+        "variants": [],
+        "createdDate": "0001-01-01T00:00:00",
+        "modifiedDate": "2023-03-02T09:50:32Z",
+        "status": "Published"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "PrestaShop",
+      "example": {
+        "id": "1",
+        "categorization": "Home - Clothes - Men",
+        "name": "Hummingbird printed t-shirt",
+        "description": "Symbol of lightness and delicacy, the hummingbird evokes curiosity and joy. Studio Design' PolyFaune collection features classic products with colorful patterns, inspired by the traditional japanese origamis. To wear with a chino or jeans. The sublimation textile printing process provides an exceptional color rendering and a color, guaranteed overtime.",
+        "productCategoryRefs": [],
+        "isGiftCard": false,
+        "variants": [
+          {
+            "id": "8",
+            "name": "Hummingbird printed t-shirt (Size = XL, Color = Black)",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "sku": "demo_1",
+            "vatPercentage": 6,
+            "prices": [
+              {
+                "currency": "USD",
+                "unitPrice": 23.9
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 300,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "0001-01-01T00:00:00"
+          },
+          {
+            "id": "4",
+            "name": "Hummingbird printed t-shirt (Size = M, Color = Black)",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "sku": "demo_1",
+            "vatPercentage": 6,
+            "prices": [
+              {
+                "currency": "USD",
+                "unitPrice": 23.9
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 300,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "0001-01-01T00:00:00"
+          },
+          {
+            "id": "5",
+            "name": "Hummingbird printed t-shirt (Size = L, Color = White)",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "sku": "demo_1",
+            "vatPercentage": 6,
+            "prices": [
+              {
+                "currency": "USD",
+                "unitPrice": 23.9
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 300,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "0001-01-01T00:00:00"
+          },
+          {
+            "id": "3",
+            "name": "Hummingbird printed t-shirt (Size = M, Color = White)",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "sku": "demo_1",
+            "vatPercentage": 6,
+            "prices": [
+              {
+                "currency": "USD",
+                "unitPrice": 23.9
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 300,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "0001-01-01T00:00:00"
+          },
+          {
+            "id": "6",
+            "name": "Hummingbird printed t-shirt (Size = L, Color = Black)",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "sku": "demo_1",
+            "vatPercentage": 6,
+            "prices": [
+              {
+                "currency": "USD",
+                "unitPrice": 23.9
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 300,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "0001-01-01T00:00:00"
+          },
+          {
+            "id": "1",
+            "name": "Hummingbird printed t-shirt (Size = S, Color = White)",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "sku": "demo_1",
+            "vatPercentage": 6,
+            "prices": [
+              {
+                "currency": "USD",
+                "unitPrice": 23.9
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 300,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "0001-01-01T00:00:00"
+          },
+          {
+            "id": "2",
+            "name": "Hummingbird printed t-shirt (Size = S, Color = Black)",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "sku": "demo_1",
+            "vatPercentage": 6,
+            "prices": [
+              {
+                "currency": "USD",
+                "unitPrice": 23.9
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 300,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "0001-01-01T00:00:00"
+          },
+          {
+            "id": "7",
+            "name": "Hummingbird printed t-shirt (Size = XL, Color = White)",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "sku": "demo_1",
+            "vatPercentage": 6,
+            "prices": [
+              {
+                "currency": "USD",
+                "unitPrice": 23.9
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 300,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "0001-01-01T00:00:00"
+          }
+        ],
+        "createdDate": "2021-09-02T06:00:49",
+        "modifiedDate": "2022-01-26T15:09:42Z",
+        "sourceModifiedDate": "2021-09-02T06:00:49",
+        "status": "Published"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "id": "6595494117534",
+        "categorization": "Asus",
+        "name": "Monitor",
+        "description": "",
+        "productCategoryRefs": [],
+        "isGiftCard": false,
+        "variants": [
+          {
+            "id": "39444526694558",
+            "name": "Monitor",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "sku": "",
+            "barcode": "",
+            "vatPercentage": 0,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 150
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 91,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "2021-03-19T10:13:22Z"
+          }
+        ],
+        "createdDate": "2021-03-19T10:13:22Z",
+        "modifiedDate": "2023-02-10T15:18:25Z",
+        "sourceModifiedDate": "2022-08-01T13:05:22Z",
+        "status": "Published"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Square",
+      "example": {
+        "id": "AX54KZQ3UAVCVPUMNEGFEU35",
+        "categorization": "Hardware",
+        "name": "Monitor",
+        "productCategoryRefs": [],
+        "isGiftCard": false,
+        "variants": [
+          {
+            "id": "A5BUT6SYUNYRSQ2R7GZ6UKN6",
+            "name": "Regular",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "vatPercentage": 10,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 200
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": false,
+            "createdDate": "2021-02-18T15:47:31Z"
+          }
+        ],
+        "createdDate": "2021-02-18T15:47:31Z",
+        "modifiedDate": "2021-06-17T14:23:02Z",
+        "sourceModifiedDate": "2021-02-18T15:47:31Z",
+        "status": "Unknown"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stripe Test",
+      "example": {
+        "id": "prod_IaSbzLnxOHmC0i",
+        "name": "Blue T Shirt",
+        "description": "Nice cozy cotton t shirt",
+        "productCategoryRefs": [],
+        "isGiftCard": false,
+        "variants": [
+          {
+            "id": "price_1ICJVEA8m8S1Gh7OIOCDOG8j",
+            "name": "Blue T Shirt - Standard Price",
+            "quantity": 0,
+            "isTaxEnabled": false,
+            "vatPercentage": 0,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 15
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "2021-01-22T06:52:16Z"
+          },
+          {
+            "id": "price_1ICJQgA8m8S1Gh7OfErQdx5R",
+            "name": "Blue T Shirt - Standard Price",
+            "quantity": 0,
+            "isTaxEnabled": false,
+            "vatPercentage": 0,
+            "prices": [
+              {
+                "currency": "USD",
+                "unitPrice": 30
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "2021-01-22T06:47:34Z"
+          },
+          {
+            "id": "price_1HzHiCA8m8S1Gh7OXZVa6r3F",
+            "name": "Blue T Shirt - Standard Price",
+            "quantity": 0,
+            "isTaxEnabled": false,
+            "vatPercentage": 0,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 15
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "2020-12-17T08:19:48Z"
+          }
+        ],
+        "createdDate": "2020-12-17T08:17:48Z",
+        "modifiedDate": "2022-09-30T11:18:27Z",
+        "sourceModifiedDate": "2021-01-22T06:52:17Z",
+        "status": "Published"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "WooCommerce",
+      "example": {
+        "id": "27",
+        "categorization": "Hardware",
+        "name": "Monitor",
+        "description": "",
+        "productCategoryRefs": [],
+        "isGiftCard": false,
+        "variants": [
+          {
+            "id": "27",
+            "name": "Monitor",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "vatPercentage": 0,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 150
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": true,
+            "createdDate": "2021-03-11T08:55:22"
+          }
+        ],
+        "createdDate": "2021-03-11T08:55:22",
+        "modifiedDate": "2021-07-13T16:19:00Z",
+        "sourceModifiedDate": "2021-03-11T09:03:15",
+        "status": "Published"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zettle",
+      "example": {
+        "id": "9d21fd90-a34a-11eb-b574-ad6abe469b61",
+        "categorization": "Clothing",
+        "name": "T-Shirt",
+        "productCategoryRefs": [],
+        "isGiftCard": false,
+        "variants": [
+          {
+            "id": "bb9bcf30-a34a-11eb-b574-ad6abe469b61",
+            "name": "Medium",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "vatPercentage": 20,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 10
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": false,
+            "createdDate": "0001-01-01T00:00:00"
+          },
+          {
+            "id": "b919df40-a34a-11eb-b574-ad6abe469b61",
+            "name": "Large",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "vatPercentage": 20,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 10
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": false,
+            "createdDate": "0001-01-01T00:00:00"
+          },
+          {
+            "id": "bcb5cab0-a34a-11eb-b574-ad6abe469b61",
+            "name": "Small",
+            "quantity": 0,
+            "isTaxEnabled": true,
+            "vatPercentage": 20,
+            "prices": [
+              {
+                "currency": "GBP",
+                "unitPrice": 10
+              }
+            ],
+            "inventory": {
+              "totalQuantity": 0,
+              "locations": []
+            },
+            "shippingRequired": false,
+            "createdDate": "0001-01-01T00:00:00"
+          }
+        ],
+        "createdDate": "2021-04-22T09:12:09Z",
+        "modifiedDate": "2021-10-27T15:22:37Z",
+        "sourceModifiedDate": "2021-08-04T14:32:20Z",
+        "status": "Published"
+      }
+    }
+  ]
+}

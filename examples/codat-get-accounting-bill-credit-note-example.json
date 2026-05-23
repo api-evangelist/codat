@@ -1,0 +1,923 @@
+{
+  "operationId": "get-accounting-bill-credit-note",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/billCreditNotes/{billCreditNoteId}",
+  "summary": "Get bill credit note",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "0deaed0a-9f51-eb11-89f9-00224800af18",
+        "billCreditNoteNumber": "109001",
+        "supplierRef": {
+          "id": "be1217b3-89d1-ea11-bbaa-000d3a2b9185",
+          "supplierName": "Fabrikam, Inc."
+        },
+        "withholdingTax": [],
+        "totalAmount": 8,
+        "totalDiscount": 0,
+        "subTotal": 8,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 8,
+        "status": "Submitted",
+        "issueDate": "2020-12-21T00:00:00",
+        "currency": "GBP",
+        "lineItems": [
+          {
+            "description": "Abdi Item No VAT",
+            "unitAmount": 8,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 8,
+            "taxAmount": 0,
+            "totalAmount": 8,
+            "accountRef": {
+              "id": "6a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Inventory"
+            },
+            "discountPercentage": 0,
+            "taxRateRef": {
+              "id": "6bbc0fb9-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Setup for EXPORT / ZERO",
+              "effectiveTaxRate": 0
+            },
+            "itemRef": {
+              "id": "ITEM-dbc37b18-4209-eb11-bbf6-0022481ad2e8-EXPORT-EXPORT",
+              "name": "Abdi Item No VAT / General Business Posting Group: 'EXPORT' / VAT Business Posting Group: 'EXPORT'"
+            },
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2023-03-27T14:21:26Z",
+        "metadata": {
+          "isDeleted": false
+        },
+        "note": "BCN001"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "id": "443bd109-e1ed-4de2-b1ab-3b13e980d288",
+        "billCreditNoteNumber": "19600007",
+        "supplierRef": {
+          "id": "5e6f49b9-6489-4b82-83e7-291d308919bb",
+          "supplierName": "Mickey Mouse"
+        },
+        "withholdingTax": [],
+        "totalAmount": 12.1,
+        "totalDiscount": 0,
+        "subTotal": 10,
+        "totalTaxAmount": 2.1,
+        "discountPercentage": 0,
+        "remainingCredit": 12.1,
+        "status": "Submitted",
+        "issueDate": "2019-12-16T00:00:00Z",
+        "currency": "EUR",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Cheesecake",
+            "unitAmount": 10,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 10,
+            "taxAmount": 2.1,
+            "totalAmount": 12.1,
+            "accountRef": {
+              "id": "5f139759-b554-4314-862e-b9d88e5b2e1b",
+              "name": "Af te dragen loonheffing"
+            },
+            "taxRateRef": {
+              "id": "84277189-ad16-456c-b501-ca31f0a483cc",
+              "name": "BTW prive gebruik",
+              "effectiveTaxRate": 21
+            },
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2022-10-26T13:32:18Z",
+        "sourceModifiedDate": "2020-01-03T15:06:19Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "id": "f9083d38-40c7-4b5f-a693-f4670e3d85bc",
+        "billCreditNoteNumber": "19600008",
+        "supplierRef": {
+          "id": "1c703cce-967c-4476-a86a-32e35341a8f5",
+          "supplierName": "Customer Bill Supplier"
+        },
+        "withholdingTax": [],
+        "totalAmount": 99999,
+        "totalDiscount": 0,
+        "subTotal": 99999,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 99999,
+        "status": "Submitted",
+        "issueDate": "2019-10-30T00:00:00Z",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Oil Change",
+            "unitAmount": -150,
+            "quantity": 1000.5,
+            "discountAmount": 0,
+            "subTotal": -150075,
+            "totalAmount": -150075,
+            "accountRef": {
+              "id": "885ff551-664d-451b-995b-cb114c9877d0",
+              "name": "Unallocated Cash"
+            },
+            "itemRef": {
+              "id": "3001"
+            },
+            "trackingCategoryRefs": []
+          },
+          {
+            "description": "description",
+            "unitAmount": 250074,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 250074,
+            "totalAmount": 250074,
+            "accountRef": {
+              "id": "885ff551-664d-451b-995b-cb114c9877d0",
+              "name": "Unallocated Cash"
+            },
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2022-10-26T13:33:23Z",
+        "sourceModifiedDate": "2019-10-30T13:12:56Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "id": "10665024",
+        "billCreditNoteNumber": "Bill Credit",
+        "supplierRef": {
+          "id": "6161941",
+          "supplierName": "A & J Fabtech Ltd"
+        },
+        "withholdingTax": [],
+        "totalAmount": 1500,
+        "totalDiscount": 0,
+        "subTotal": 1250,
+        "totalTaxAmount": 250,
+        "discountPercentage": 0,
+        "remainingCredit": 1500,
+        "status": "Submitted",
+        "issueDate": "2018-08-22T00:00:00",
+        "currency": "GBP",
+        "lineItems": [
+          {
+            "description": "A & J Fabtech Ltd - Bill Credit Note Bill Credit",
+            "unitAmount": 1250,
+            "quantity": 1,
+            "taxAmount": 250,
+            "totalAmount": 1500,
+            "accountRef": {
+              "id": "285",
+              "name": "Accommodation and Meals"
+            },
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2023-04-25T14:19:10Z",
+        "sourceModifiedDate": "2018-08-22T13:22:08Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "KashFlow",
+      "example": {
+        "id": "91339087",
+        "billCreditNoteNumber": "5",
+        "supplierRef": {
+          "id": "6202387",
+          "supplierName": "Dell"
+        },
+        "withholdingTax": [],
+        "totalAmount": 10,
+        "totalDiscount": 0,
+        "subTotal": 0,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2020-02-25T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Oil refund",
+            "unitAmount": 10,
+            "quantity": 1,
+            "subTotal": 10,
+            "taxAmount": 0,
+            "totalAmount": 10,
+            "accountRef": {
+              "id": "21481832",
+              "name": "Oil"
+            },
+            "itemRef": {
+              "id": "114817740"
+            },
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2022-09-30T10:29:16Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "id": "1781",
+        "billCreditNoteNumber": "VENDCRED1",
+        "supplierRef": {
+          "id": "749",
+          "supplierName": "Jo's Cheese"
+        },
+        "withholdingTax": [],
+        "totalAmount": 174.6,
+        "totalDiscount": 0,
+        "subTotal": 145.5,
+        "totalTaxAmount": 29.1,
+        "discountPercentage": 0,
+        "remainingCredit": 174.6,
+        "status": "Submitted",
+        "issueDate": "2021-11-02T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "billcredit_test",
+            "unitAmount": 145.5,
+            "quantity": 1,
+            "unitOfMeasurement": "pack",
+            "subTotal": 145.5,
+            "totalAmount": 145.5,
+            "accountRef": {
+              "id": "713",
+              "name": "Inventory Asset"
+            },
+            "createdFromLineRef": {
+              "id": "1432",
+              "dataType": "bills",
+              "lineNumber": "1"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "department-1"
+              },
+              {
+                "id": "location-1"
+              }
+            ],
+            "tracking": {
+              "categoryRefs": [
+                {
+                  "id": "department-1"
+                },
+                {
+                  "id": "location-1"
+                }
+              ],
+              "isBilledTo": "Unknown",
+              "isRebilledTo": "Unknown"
+            }
+          }
+        ],
+        "paymentAllocations": [],
+        "createdFromRefs": [
+          {
+            "id": "1432",
+            "dataType": "bills"
+          }
+        ],
+        "modifiedDate": "2022-09-20T08:16:22Z",
+        "sourceModifiedDate": "2021-11-02T19:58:58",
+        "note": "Codat1"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "6D2C-1197698059",
+        "billCreditNoteNumber": "Return",
+        "supplierRef": {
+          "id": "E0000-933272656",
+          "supplierName": "Timberloft Lumber"
+        },
+        "withholdingTax": [],
+        "totalAmount": 475,
+        "totalDiscount": 0,
+        "subTotal": 475,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 475,
+        "status": "Submitted",
+        "issueDate": "2024-10-30T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Lumber:Rough - Rough lumber",
+            "unitAmount": 475,
+            "quantity": 0,
+            "discountAmount": 0,
+            "subTotal": 475,
+            "taxAmount": 0,
+            "totalAmount": 475,
+            "discountPercentage": 0,
+            "itemRef": {
+              "id": "1C0000-933272656",
+              "name": "Lumber:Rough"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "10000-933272658",
+                "name": "New Construction"
+              }
+            ],
+            "tracking": {
+              "categoryRefs": [
+                {
+                  "id": "10000-933272658",
+                  "name": "New Construction"
+                }
+              ],
+              "isBilledTo": "Unknown",
+              "isRebilledTo": "Unknown"
+            }
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "6D2C-1197698059",
+              "reference": "Return",
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2024-10-30T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 475
+            }
+          }
+        ],
+        "modifiedDate": "2023-04-26T09:12:30Z",
+        "sourceModifiedDate": "2023-12-16T05:06:19",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "19",
+        "billCreditNoteNumber": "19",
+        "supplierRef": {
+          "id": "4",
+          "supplierName": "BILLy elliot"
+        },
+        "withholdingTax": [],
+        "totalAmount": 5,
+        "totalDiscount": 0,
+        "subTotal": 5,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2019-05-13T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "",
+            "unitAmount": 5,
+            "quantity": 1,
+            "subTotal": 5,
+            "taxAmount": 0,
+            "totalAmount": 5,
+            "accountRef": {
+              "id": "16",
+              "name": "Advertising"
+            },
+            "taxRateRef": {
+              "id": "NON",
+              "name": "NON",
+              "effectiveTaxRate": 0
+            },
+            "trackingCategoryRefs": [],
+            "tracking": {
+              "categoryRefs": [],
+              "isBilledTo": "Unknown",
+              "isRebilledTo": "NotApplicable"
+            }
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "20",
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2019-05-13T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 5
+            }
+          }
+        ],
+        "modifiedDate": "2023-01-18T11:02:37Z",
+        "sourceModifiedDate": "2019-05-13T13:14:06Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "424",
+        "billCreditNoteNumber": "424",
+        "supplierRef": {
+          "id": "24",
+          "supplierName": "Brijesh Jain"
+        },
+        "withholdingTax": [],
+        "totalAmount": 69,
+        "totalDiscount": 0,
+        "subTotal": 69,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 69,
+        "status": "Submitted",
+        "issueDate": "2019-06-20T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Refund of iZettle Fees",
+            "unitAmount": 69,
+            "quantity": 1,
+            "subTotal": 69,
+            "taxAmount": 0,
+            "totalAmount": 69,
+            "accountRef": {
+              "id": "30",
+              "name": "Janitorial Expense"
+            },
+            "taxRateRef": {
+              "id": "20_Bills",
+              "name": "5.0% RC CIS Bills",
+              "effectiveTaxRate": 0
+            },
+            "trackingCategoryRefs": [],
+            "tracking": {
+              "categoryRefs": [],
+              "isBilledTo": "Unknown",
+              "isRebilledTo": "NotApplicable"
+            }
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2023-04-26T09:35:58Z",
+        "sourceModifiedDate": "2019-06-20T15:48:50Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 200cloud",
+      "example": {
+        "id": "45391",
+        "billCreditNoteNumber": "Return 1",
+        "supplierRef": {
+          "id": "CON001",
+          "supplierName": "Concept Stationery Supplies"
+        },
+        "withholdingTax": [],
+        "totalAmount": 120,
+        "totalDiscount": 2.5,
+        "subTotal": 100,
+        "totalTaxAmount": 20,
+        "discountPercentage": 2.5,
+        "remainingCredit": 109.5,
+        "status": "Submitted",
+        "issueDate": "2020-07-22T00:00:00Z",
+        "allocatedOnDate": "2020-01-20T00:00:00Z",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Tax Summary - Tax Rate 1",
+            "unitAmount": 0,
+            "quantity": 0,
+            "discountAmount": 0.5,
+            "subTotal": 0,
+            "taxAmount": 20,
+            "totalAmount": 20,
+            "taxRateRef": {
+              "id": "1729",
+              "name": "Standard rate",
+              "effectiveTaxRate": 20
+            },
+            "trackingCategoryRefs": []
+          },
+          {
+            "description": "Goods Summary",
+            "unitAmount": 0,
+            "quantity": 0,
+            "discountAmount": 2.5,
+            "subTotal": 100,
+            "taxAmount": 0,
+            "totalAmount": 100,
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "45391",
+              "note": "ret1",
+              "reference": "Return 1",
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2020-01-20T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": -10.5
+            }
+          }
+        ],
+        "modifiedDate": "2022-10-14T09:35:52Z",
+        "sourceModifiedDate": "2020-02-28T14:23:46Z",
+        "note": "ret1"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "id": "20",
+        "billCreditNoteNumber": "O/BAL",
+        "supplierRef": {
+          "id": "NEW001",
+          "supplierName": "Newtown Builders Ltd"
+        },
+        "withholdingTax": [],
+        "totalAmount": 0.01,
+        "totalDiscount": 0,
+        "subTotal": 0.01,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 0.01,
+        "status": "Submitted",
+        "issueDate": "2021-12-31T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Opening Balance",
+            "unitAmount": 0.01,
+            "quantity": 1,
+            "subTotal": 0.01,
+            "taxAmount": 0,
+            "totalAmount": 0.01,
+            "accountRef": {
+              "id": "9998",
+              "name": "Suspense Account"
+            },
+            "taxRateRef": {
+              "id": "9",
+              "name": "Non-Vatable Tax Code",
+              "effectiveTaxRate": 0
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "department_0",
+                "name": "Default"
+              }
+            ],
+            "tracking": {
+              "categoryRefs": [
+                {
+                  "id": "department_0",
+                  "name": "Default"
+                }
+              ],
+              "isBilledTo": "Unknown",
+              "isRebilledTo": "Unknown"
+            }
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2023-03-30T14:42:37Z",
+        "sourceModifiedDate": "2022-11-25T09:43:54",
+        "metadata": {
+          "isDeleted": false
+        },
+        "note": "Opening Balance"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "id": "b6c6fce9866849b0b44cac99ab7dc579",
+        "billCreditNoteNumber": "Supplier credit note",
+        "supplierRef": {
+          "id": "ec716559789111e8aaa5027d54329956",
+          "supplierName": "Bagels Limited"
+        },
+        "withholdingTax": [],
+        "totalAmount": 10,
+        "totalDiscount": 0,
+        "subTotal": 10,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2018-11-23T00:00:00",
+        "currency": "USD",
+        "currencyRate": 0.776970973,
+        "lineItems": [
+          {
+            "description": "Consulting services",
+            "unitAmount": 10,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 10,
+            "taxAmount": 0,
+            "totalAmount": 10,
+            "accountRef": {
+              "id": "9a995955267a11e797950a57719b2edb",
+              "name": "Cost of sales - goods"
+            },
+            "discountPercentage": 0,
+            "taxRateRef": {
+              "id": "GB_ZERO",
+              "name": "Zero Rated 0.00%",
+              "effectiveTaxRate": 0
+            },
+            "itemRef": {
+              "id": "a87b922b33de11e797950a57719b2edb",
+              "name": "Consulting services"
+            },
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "bf6496aaf0294883b27c423ce8266113",
+              "note": "Supplier refund using credit/debit card",
+              "accountRef": {
+                "id": "9a25937b267a11e797950a57719b2edb",
+                "name": "Current"
+              },
+              "currency": "USD",
+              "currencyRate": 0.771449236,
+              "paidOnDate": "2019-11-19T00:00:00",
+              "totalAmount": -10
+            },
+            "allocation": {
+              "currency": "USD",
+              "currencyRate": 1,
+              "totalAmount": 10
+            }
+          }
+        ],
+        "modifiedDate": "2022-10-24T14:53:32Z",
+        "sourceModifiedDate": "2019-11-19T14:17:32Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "3359",
+        "billCreditNoteNumber": "APADJ0001",
+        "supplierRef": {
+          "id": "3",
+          "supplierName": "ADP"
+        },
+        "withholdingTax": [],
+        "totalAmount": 12,
+        "totalDiscount": 0,
+        "subTotal": 10,
+        "totalTaxAmount": 2,
+        "discountPercentage": 0,
+        "remainingCredit": 12,
+        "status": "Submitted",
+        "issueDate": "2021-09-20T00:00:00",
+        "currency": "USD",
+        "currencyRate": 0.7283,
+        "lineItems": [
+          {
+            "description": "No Description Provided",
+            "unitAmount": 5,
+            "quantity": 1,
+            "subTotal": 5,
+            "taxAmount": 1,
+            "totalAmount": 6,
+            "accountRef": {
+              "id": "197",
+              "name": "Software and Licenses"
+            },
+            "taxRateRef": {
+              "id": "47",
+              "name": "EC Purchase Goods Standard Rate Input",
+              "effectiveTaxRate": 20
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "LOCATION-8",
+                "name": "United Kingdom"
+              },
+              {
+                "id": "SUPPLIER-3",
+                "name": "ADP"
+              }
+            ],
+            "tracking": {
+              "categoryRefs": [
+                {
+                  "id": "LOCATION-8",
+                  "name": "United Kingdom"
+                },
+                {
+                  "id": "SUPPLIER-3",
+                  "name": "ADP"
+                }
+              ],
+              "isBilledTo": "Unknown",
+              "isRebilledTo": "Unknown"
+            }
+          },
+          {
+            "description": "No Description Provided",
+            "unitAmount": 5,
+            "quantity": 1,
+            "subTotal": 5,
+            "taxAmount": 1,
+            "totalAmount": 6,
+            "accountRef": {
+              "id": "197",
+              "name": "Software and Licenses"
+            },
+            "taxRateRef": {
+              "id": "47",
+              "name": "EC Purchase Goods Standard Rate Input",
+              "effectiveTaxRate": 20
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "LOCATION-8",
+                "name": "United Kingdom"
+              },
+              {
+                "id": "SUPPLIER-3",
+                "name": "ADP"
+              }
+            ],
+            "tracking": {
+              "categoryRefs": [
+                {
+                  "id": "LOCATION-8",
+                  "name": "United Kingdom"
+                },
+                {
+                  "id": "SUPPLIER-3",
+                  "name": "ADP"
+                }
+              ],
+              "isBilledTo": "Unknown",
+              "isRebilledTo": "Unknown"
+            }
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2022-10-28T11:10:22Z",
+        "sourceModifiedDate": "2021-09-20T13:50:16",
+        "note": ""
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "ee8bec08-2be8-40ba-acd0-d53d5df11235",
+        "billCreditNoteNumber": "RPT429-1",
+        "supplierRef": {
+          "id": "3a0d40a2-2698-4cf5-b7b2-30133c632ab6",
+          "supplierName": "Swanston Security"
+        },
+        "withholdingTax": [],
+        "totalAmount": 25.44,
+        "totalDiscount": 0,
+        "subTotal": 25.44,
+        "totalTaxAmount": 4.24,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2022-12-12T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Refund as agreed due to window break when guard absent",
+            "unitAmount": 21.2,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 21.2,
+            "taxAmount": 4.24,
+            "totalAmount": 25.44,
+            "accountRef": {
+              "id": "f96c9458-d724-47bf-8f74-a9d5726465ce",
+              "name": "General Expenses"
+            },
+            "discountPercentage": 0,
+            "taxRateRef": {
+              "id": "INPUT2",
+              "name": "20% (VAT on Expenses)",
+              "effectiveTaxRate": 20
+            },
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "ee8bec08-2be8-40ba-acd0-d53d5df11235",
+              "reference": "",
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-12-12T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2022-12-12T00:00:00",
+              "totalAmount": 25.44
+            }
+          }
+        ],
+        "modifiedDate": "2023-03-15T20:36:09Z",
+        "sourceModifiedDate": "2011-04-07T07:26:30",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    }
+  ]
+}

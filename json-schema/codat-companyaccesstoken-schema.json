@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CompanyAccessToken",
+  "title": "Company access token",
+  "description": "Details of the access token provisioned for a company.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/CompanyAccessToken/definitions/accessToken"
+    }
+  ],
+  "definitions": {
+    "accessToken": {
+      "title": "Access token",
+      "type": "object",
+      "properties": {
+        "expiresIn": {
+          "type": "integer",
+          "description": "The number of seconds until the access token expires.",
+          "example": 86400
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "The access token for the company."
+        },
+        "tokenType": {
+          "type": "string",
+          "description": "The type of token.",
+          "example": "Bearer"
+        }
+      },
+      "required": [
+        "expiresIn",
+        "accessToken",
+        "tokenType"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "expiresIn": 86400,
+      "accessToken": "string",
+      "tokenType": "Bearer"
+    }
+  ]
+}

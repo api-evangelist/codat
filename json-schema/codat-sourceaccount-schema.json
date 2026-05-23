@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SourceAccount",
+  "title": "Source account (v1)",
+  "type": "object",
+  "description": "The target bank account in a supported accounting software for ingestion into a bank feed.",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique ID for the bank account."
+    },
+    "accountName": {
+      "type": "string",
+      "nullable": true,
+      "description": "The bank account name."
+    },
+    "accountType": {
+      "type": "string",
+      "nullable": true,
+      "description": "The type of bank account e.g. Credit."
+    },
+    "accountNumber": {
+      "type": "string",
+      "nullable": true,
+      "description": "The account number."
+    },
+    "sortCode": {
+      "type": "string",
+      "nullable": true,
+      "description": "The sort code."
+    },
+    "currency": {
+      "title": "Currency",
+      "x-internal": true,
+      "type": "string",
+      "description": "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system.",
+      "format": "ISO4217",
+      "examples": [
+        "GBP",
+        "USD",
+        "EUR"
+      ]
+    },
+    "balance": {
+      "type": "number",
+      "format": "decimal",
+      "nullable": true,
+      "description": "The latest balance for the bank account."
+    },
+    "modifiedDate": {
+      "$ref": "#/components/schemas/DateTime",
+      "nullable": true,
+      "description": "The last date the bank account was modified."
+    },
+    "status": {
+      "type": "string",
+      "nullable": true,
+      "description": "Status of the source account.",
+      "enum": [
+        "pending",
+        "connected",
+        "connecting",
+        "disconnected",
+        "unknown"
+      ]
+    },
+    "feedStartDate": {
+      "$ref": "#/components/schemas/DateTime",
+      "nullable": true
+    }
+  },
+  "required": [
+    "id"
+  ],
+  "definitions": {
+    "sourceAccountPrototype": {
+      "title": "Source account (v1)",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/components/schemas/SourceAccount/properties/id"
+        },
+        "accountName": {
+          "$ref": "#/components/schemas/SourceAccount/properties/accountName"
+        },
+        "accountType": {
+          "$ref": "#/components/schemas/SourceAccount/properties/accountType"
+        },
+        "accountNumber": {
+          "$ref": "#/components/schemas/SourceAccount/properties/accountNumber"
+        },
+        "sortCode": {
+          "$ref": "#/components/schemas/SourceAccount/properties/sortCode"
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency"
+        },
+        "balance": {
+          "$ref": "#/components/schemas/SourceAccount/properties/balance"
+        },
+        "modifiedDate": {
+          "$ref": "#/components/schemas/SourceAccount/properties/modifiedDate"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "sourceAccounts": {
+      "title": "Source accounts",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SourceAccount"
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": "acc-002",
+      "accountName": "account-081",
+      "sortCode": "123456",
+      "accountType": "Credit",
+      "accountNumber": "12345670",
+      "currency": "GBP",
+      "balance": 99.99,
+      "modifiedDate": "2023-01-09T14:14:14.1057478Z",
+      "status": "pending"
+    },
+    {
+      "id": "acc-003",
+      "accountName": "account-095",
+      "sortCode": "123456",
+      "accountType": "Credit",
+      "accountNumber": "12345671",
+      "currency": "USD",
+      "balance": 0,
+      "modifiedDate": "2023-01-09T14:14:14.1057478Z",
+      "status": "pending"
+    }
+  ]
+}

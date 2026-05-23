@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankFeedAccountMapping",
+  "title": "Bank feed account mapping",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "sourceAccountId": {
+      "type": "string",
+      "description": "Unique ID for the source account"
+    },
+    "targetAccountId": {
+      "type": "string",
+      "nullable": true,
+      "description": "Unique ID for the target account"
+    },
+    "feedStartDate": {
+      "$ref": "#/components/schemas/DateTime",
+      "nullable": true,
+      "description": "The date from which bank transactions can be provided to the platform."
+    }
+  },
+  "required": [
+    "sourceAccountId"
+  ],
+  "examples": [
+    {
+      "sourceAccountId": "acc-002",
+      "targetAccountId": "account-081"
+    }
+  ]
+}

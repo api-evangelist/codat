@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CompanySyncSettings",
+  "title": "Company sync settings",
+  "type": "object",
+  "properties": {
+    "companyId": {
+      "$ref": "#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId"
+    },
+    "settings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SyncSetting"
+      }
+    },
+    "overridesDefaults": {
+      "type": "boolean",
+      "description": "Set to `True` if you want to override the default [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings)."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "operationId": "get-commerce-product-category",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-productCategories/{productId}",
+  "summary": "Get product category",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Lightspeed K Trial",
+      "example": {
+        "id": "647208621834281",
+        "name": "Alcoholic beverages",
+        "ancestorRefs": [],
+        "hasChildren": false,
+        "modifiedDate": "2023-03-02T09:49:11Z"
+      }
+    }
+  ]
+}

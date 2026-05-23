@@ -1,0 +1,5055 @@
+{
+  "operationId": "get-create-update-suppliers-model",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/options/suppliers",
+  "summary": "Get create/update supplier model",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": false
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "The preferred phone number the supplier should be contacted on",
+            "required": false
+          },
+          "defaultCurrency": {
+            "type": "String",
+            "displayName": "Default Currency",
+            "description": "The default currency for transactions recorded against the supplier",
+            "required": false
+          },
+          "registrationNumber": {
+            "type": "String",
+            "displayName": "Registration Number",
+            "description": "The supplier's registration number",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "RegistrationNumber",
+                  "details": "Only for Exact Netherlands, if provided, must be exactly 20 characters in length"
+                }
+              ],
+              "information": []
+            }
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": false
+          },
+          "contactName": {
+            "type": "String",
+            "displayName": "Contact Name",
+            "description": "The name of the main contact for the supplier",
+            "required": false
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Country",
+                      "details": "Must be a 2-letter country code"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": false
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": false
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": false
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": false
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": false
+              }
+            },
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Addresses",
+                  "details": "Only the first address provided will be considered, all other entries will be not be recorded"
+                }
+              ]
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": false
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "The preferred phone number the supplier should be contacted on",
+            "required": false
+          },
+          "defaultCurrency": {
+            "type": "String",
+            "displayName": "Default Currency",
+            "description": "The default currency for transactions recorded against the supplier",
+            "required": false
+          },
+          "registrationNumber": {
+            "type": "String",
+            "displayName": "Registration Number",
+            "description": "The supplier's registration number",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "RegistrationNumber",
+                  "details": "Only for Exact Netherlands, if provided, must be exactly 20 characters in length"
+                }
+              ],
+              "information": []
+            }
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": false
+          },
+          "contactName": {
+            "type": "String",
+            "displayName": "Contact Name",
+            "description": "The name of the main contact for the supplier",
+            "required": false
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Country",
+                      "details": "Must be a 2-letter country code"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": false
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": false
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": false
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": false
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": false
+              }
+            },
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Addresses",
+                  "details": "Only the first address provided will be considered, all other entries will be not be recorded"
+                }
+              ]
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true
+          },
+          "status": {
+            "type": "String",
+            "displayName": "Supplier Status",
+            "description": "The current state of the supplier",
+            "options": [
+              {
+                "value": "Active",
+                "type": "String",
+                "displayName": "Active",
+                "required": false
+              },
+              {
+                "value": "Archived",
+                "type": "String",
+                "displayName": "Archived",
+                "required": false
+              }
+            ],
+            "required": true
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": true
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": false
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": false
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": false
+              },
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "required": false
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": false
+              }
+            },
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Addresses",
+                  "details": "Only one address may be specified"
+                }
+              ]
+            }
+          },
+          "contactName": {
+            "type": "String",
+            "displayName": "Contact Name",
+            "description": "The name of the main contact for the supplier",
+            "required": false
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": false
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": false
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "MYOB AccountRight and Essentials",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "SupplierName",
+                  "details": "Must not have the part after the first name longer than 30 characters."
+                },
+                {
+                  "field": "SupplierName",
+                  "details": "Must not have its first part (i.e. the first name) longer than 20 characters."
+                }
+              ],
+              "information": [
+                {
+                  "field": "SupplierName",
+                  "details": "Must be provided and must contain a First and Last name separated by a ' '(space)."
+                }
+              ]
+            }
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "EmailAddress",
+                  "details": "Must not be longer than 255 characters."
+                }
+              ]
+            }
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "The preferred phone number the supplier should be contacted on",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Phone",
+                  "details": "Must not be longer than 21 characters."
+                }
+              ]
+            }
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "TaxNumber",
+                  "details": "Must not be longer than 19 characters."
+                }
+              ]
+            }
+          },
+          "registrationNumber": {
+            "type": "String",
+            "displayName": "Registration Number",
+            "description": "The supplier's registration number",
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "RegistrationNumber",
+                  "details": "Must not be longer than 14 characters."
+                }
+              ]
+            }
+          },
+          "status": {
+            "type": "String",
+            "displayName": "Supplier Status",
+            "description": "The current state of the supplier",
+            "options": [
+              {
+                "value": "Active",
+                "type": "String",
+                "required": false
+              },
+              {
+                "value": "Unknown",
+                "type": "String",
+                "required": false
+              }
+            ],
+            "required": true,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Status",
+                  "details": "Must be provided."
+                }
+              ]
+            }
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "Addresses.Line1",
+                      "details": "Must not be longer than 127 characters."
+                    }
+                  ]
+                }
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "Addresses.Line2",
+                      "details": "Must not be longer than 127 characters."
+                    }
+                  ]
+                }
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "Addresses.City",
+                      "details": "Must not be longer than 255 characters."
+                    }
+                  ]
+                }
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "Addresses.Region",
+                      "details": "Must not be longer than 255 characters."
+                    }
+                  ]
+                }
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "Addresses.PostalCode",
+                      "details": "Must not be longer than 11 characters."
+                    }
+                  ]
+                }
+              },
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "Addresses.Country",
+                      "details": "Must not be longer than 255 characters."
+                    }
+                  ]
+                }
+              }
+            },
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Addresses",
+                  "details": "Must only have 5 address entries at most."
+                }
+              ],
+              "information": [
+                {
+                  "field": "Addresses",
+                  "details": "Must be provided."
+                }
+              ]
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": false
+          },
+          "defaultCurrency": {
+            "type": "String",
+            "displayName": "Default Currency",
+            "description": "The default currency for transactions recorded against the supplier",
+            "required": false
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "The preferred phone number the supplier should be contacted on",
+            "required": false
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": false
+          },
+          "status": {
+            "type": "String",
+            "displayName": "Supplier Status",
+            "description": "The current state of the supplier",
+            "options": [
+              {
+                "value": "Active",
+                "type": "String",
+                "displayName": "Active",
+                "required": false
+              },
+              {
+                "value": "Archived",
+                "type": "String",
+                "displayName": "Archived",
+                "required": false
+              }
+            ],
+            "required": true
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "type": {
+                "type": "String",
+                "displayName": "Address Type",
+                "description": "The type of the address",
+                "options": [
+                  {
+                    "value": "Billing",
+                    "type": "String",
+                    "displayName": "Billing",
+                    "required": false
+                  },
+                  {
+                    "value": "Delivery",
+                    "type": "String",
+                    "displayName": "Delivery",
+                    "required": false
+                  },
+                  {
+                    "value": "Unknown",
+                    "type": "String",
+                    "displayName": "Unknown",
+                    "required": false
+                  }
+                ],
+                "required": true
+              },
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": false
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": false
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": false
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": false
+              },
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Country",
+                      "details": "Must be a two letter Country ISO code"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": false
+              }
+            },
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Addresses",
+                  "details": "Only one each of Billing and Delivery addresses can be provided"
+                }
+              ],
+              "information": [
+                {
+                  "field": "Addresses",
+                  "details": "Multiple addresses of Unknown type may be provided"
+                }
+              ]
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "SupplierName",
+                  "details": "Max length of 41 characters."
+                }
+              ],
+              "information": []
+            }
+          },
+          "contactName": {
+            "type": "String",
+            "displayName": "Contact Name",
+            "description": "The name of the main contact for the supplier",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "ContactName",
+                  "details": "Max length of 25 characters for first and last names"
+                }
+              ],
+              "information": []
+            }
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "The preferred phone number the supplier should be contacted on",
+            "required": false
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": false
+          },
+          "registrationNumber": {
+            "type": "String",
+            "displayName": "Registration Number",
+            "description": "The supplier's registration number",
+            "required": false
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "TaxNumber",
+                  "details": "Max length of 30 characters."
+                }
+              ],
+              "information": []
+            }
+          },
+          "defaultCurrency": {
+            "type": "String",
+            "displayName": "Default Currency",
+            "description": "The default currency for transactions recorded against the supplier",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "DefaultCurrency",
+                  "details": "Must be a three letter ISO code that matches an existing, active currency in the QuickBooks Desktop company"
+                },
+                {
+                  "field": "DefaultCurrency",
+                  "details": "Can only be set if Multicurrency is enabled within the QuickBooks Desktop company"
+                }
+              ],
+              "information": [
+                {
+                  "field": "DefaultCurrency",
+                  "details": "If not set, will default to the base currency of the QuickBooks Desktop company"
+                }
+              ]
+            }
+          },
+          "status": {
+            "type": "String",
+            "displayName": "Supplier Status",
+            "description": "The current state of the supplier",
+            "options": [
+              {
+                "value": "Active",
+                "type": "String",
+                "displayName": "Active",
+                "required": false
+              },
+              {
+                "value": "Archived",
+                "type": "String",
+                "displayName": "Archived",
+                "required": false
+              }
+            ],
+            "required": true
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Line1",
+                      "details": "Max length of 41 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Line2",
+                      "details": "Max length of 41 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.City",
+                      "details": "Max length of 31 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Region",
+                      "details": "Max length of 21 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Country",
+                      "details": "Max length of 31 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.PostalCode",
+                      "details": "Max length of 13 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "type": {
+                "type": "String",
+                "displayName": "Address Type",
+                "description": "The type of the address",
+                "options": [
+                  {
+                    "value": "Billing",
+                    "type": "String",
+                    "displayName": "Billing Address",
+                    "required": false
+                  },
+                  {
+                    "value": "Delivery",
+                    "type": "String",
+                    "displayName": "Delivery Address",
+                    "required": false
+                  }
+                ],
+                "required": true,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "Addresses.Type",
+                      "details": "Only 1 address each of type(s) Billing/Delivery may be specified."
+                    }
+                  ]
+                }
+              }
+            },
+            "required": false
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "The preferred phone number the supplier should be contacted on",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Phone",
+                  "details": "Country, area, and number are space separated"
+                }
+              ],
+              "information": []
+            }
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": false
+          },
+          "registrationNumber": {
+            "type": "String",
+            "displayName": "Registration Number",
+            "description": "The supplier's registration number",
+            "required": false
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": false
+          },
+          "status": {
+            "type": "String",
+            "displayName": "Supplier Status",
+            "description": "The current state of the supplier",
+            "options": [
+              {
+                "value": "Active",
+                "type": "String",
+                "displayName": "Active",
+                "required": false
+              },
+              {
+                "value": "Archived",
+                "type": "String",
+                "displayName": "Archived",
+                "required": false
+              }
+            ],
+            "required": true
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Line1",
+                      "details": "Max length of 500 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Line2",
+                      "details": "Max length of 500 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.City",
+                      "details": "Max length of 255 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Region",
+                      "details": "Max length of 255 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Country",
+                      "details": "Max length of 50 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.PostalCode",
+                      "details": "Only English alphabet characters are permitted."
+                    },
+                    {
+                      "field": "Addresses.PostalCode",
+                      "details": "Max length of 50 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "type": {
+                "type": "String",
+                "displayName": "Address Type",
+                "description": "The type of the address",
+                "options": [
+                  {
+                    "value": "Billing",
+                    "type": "String",
+                    "displayName": "Billing Address",
+                    "required": false
+                  }
+                ],
+                "required": true
+              }
+            },
+            "required": false
+          },
+          "defaultCurrency": {
+            "type": "String",
+            "displayName": "Default Currency",
+            "description": "The default currency for transactions recorded against the supplier",
+            "required": false
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "The preferred phone number the supplier should be contacted on",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Phone",
+                  "details": "Country, area, and number are space separated"
+                }
+              ],
+              "information": []
+            }
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": false
+          },
+          "registrationNumber": {
+            "type": "String",
+            "displayName": "Registration Number",
+            "description": "The supplier's registration number",
+            "required": false
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": false
+          },
+          "status": {
+            "type": "String",
+            "displayName": "Supplier Status",
+            "description": "The current state of the supplier",
+            "options": [
+              {
+                "value": "Active",
+                "type": "String",
+                "displayName": "Active",
+                "required": false
+              },
+              {
+                "value": "Archived",
+                "type": "String",
+                "displayName": "Archived",
+                "required": false
+              }
+            ],
+            "required": true
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Line1",
+                      "details": "Max length of 500 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Line2",
+                      "details": "Max length of 500 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.City",
+                      "details": "Max length of 255 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Region",
+                      "details": "Max length of 255 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Country",
+                      "details": "Max length of 50 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.PostalCode",
+                      "details": "Only English alphabet characters are permitted."
+                    },
+                    {
+                      "field": "Addresses.PostalCode",
+                      "details": "Max length of 50 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "type": {
+                "type": "String",
+                "displayName": "Address Type",
+                "description": "The type of the address",
+                "options": [
+                  {
+                    "value": "Billing",
+                    "type": "String",
+                    "displayName": "Billing Address",
+                    "required": false
+                  }
+                ],
+                "required": true
+              }
+            },
+            "required": false
+          },
+          "defaultCurrency": {
+            "type": "String",
+            "displayName": "Default Currency",
+            "description": "The default currency for transactions recorded against the supplier",
+            "required": false
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "id": {
+            "type": "String",
+            "displayName": "Id",
+            "description": "ID of the supplier.",
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "id",
+                  "details": "The supplier ID must be unique, contain no spaces and have a maximum of 8 characters."
+                }
+              ],
+              "information": [
+                {
+                  "field": "id",
+                  "details": "The supplier ID must be all Uppercase, if it is not, it will be converted to Uppercase before pushing."
+                }
+              ]
+            }
+          },
+          "supplierName": {
+            "type": "String",
+            "displayName": "Name",
+            "description": "Name of the supplier.",
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "supplierName",
+                  "details": "The supplier name can have a maximum of 60 characters"
+                }
+              ],
+              "information": []
+            }
+          },
+          "contactName": {
+            "type": "String",
+            "displayName": "Contact Name",
+            "description": "The name of the main contact for the supplier.",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "contactName",
+                  "details": "The contact name can have a maximum of 30 characters"
+                }
+              ],
+              "information": []
+            }
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The email address that the supplier may be contacted on.",
+            "required": false
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Telephone",
+            "description": "The telephone number that the supplier may be contacted on.",
+            "required": false
+          },
+          "defaultCurrency": {
+            "type": "String",
+            "displayName": "Default Currency",
+            "description": "If not provided, the currency will default to the company's base currency.",
+            "required": false
+          },
+          "status": {
+            "type": "String",
+            "displayName": "Status",
+            "description": "The status of the supplier.",
+            "options": [
+              {
+                "value": "Active",
+                "type": "String",
+                "displayName": "Active Status",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "Contact addresses for the supplier.",
+            "properties": {
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "Line 1 of the supplier address.",
+                "required": true
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "Line 2 of the supplier address.",
+                "required": false
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The city of the supplier address.",
+                "required": false
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The region of the supplier address.",
+                "required": false
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal code",
+                "description": "Post or Zip code for the address.",
+                "required": false
+              },
+              "type": {
+                "type": "String",
+                "displayName": "Type",
+                "description": "The type of address as it related to the supplier.",
+                "options": [
+                  {
+                    "value": "Unknown",
+                    "type": "String",
+                    "displayName": "Unknown Address",
+                    "required": false
+                  }
+                ],
+                "required": false,
+                "validation": {
+                  "warnings": [],
+                  "information": [
+                    {
+                      "field": "addresses.type",
+                      "details": "If Address type is not specified, it will default to type ''Unknown''"
+                    }
+                  ]
+                }
+              }
+            },
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "addresses",
+                  "details": "Only one address can be included in the Addresses array."
+                }
+              ],
+              "information": []
+            }
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "Legal company registration identifier.",
+            "required": false
+          }
+        },
+        "required": true,
+        "validation": {
+          "warnings": [],
+          "information": [
+            {
+              "details": "Pushing to Sage 50 2015 (v21) or below is not supported. To enable push, please upgrade to at least Sage 50 2016 (v22) and re-sync the company."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true
+          },
+          "contactName": {
+            "type": "String",
+            "displayName": "Contact Name",
+            "description": "The name of the main contact for the supplier",
+            "required": false
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": false
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "The preferred phone number the supplier should be contacted on",
+            "required": false
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": false
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Line1",
+                      "details": "If you're adding an address for this Supplier, you must also include the first line"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": false
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": false
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": false
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": false
+              },
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "options": [
+                  {
+                    "value": "Afghanistan (AF)",
+                    "type": "String",
+                    "displayName": "Afghanistan (AF)",
+                    "required": false
+                  },
+                  {
+                    "value": "Albania (AL)",
+                    "type": "String",
+                    "displayName": "Albania (AL)",
+                    "required": false
+                  },
+                  {
+                    "value": "Algeria (DZ)",
+                    "type": "String",
+                    "displayName": "Algeria (DZ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Andorra (AD)",
+                    "type": "String",
+                    "displayName": "Andorra (AD)",
+                    "required": false
+                  },
+                  {
+                    "value": "Angola (AO)",
+                    "type": "String",
+                    "displayName": "Angola (AO)",
+                    "required": false
+                  },
+                  {
+                    "value": "Argentina (AR)",
+                    "type": "String",
+                    "displayName": "Argentina (AR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Armenia (AM)",
+                    "type": "String",
+                    "displayName": "Armenia (AM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Aruba (AW)",
+                    "type": "String",
+                    "displayName": "Aruba (AW)",
+                    "required": false
+                  },
+                  {
+                    "value": "Australia (AU)",
+                    "type": "String",
+                    "displayName": "Australia (AU)",
+                    "required": false
+                  },
+                  {
+                    "value": "Austria (AT)",
+                    "type": "String",
+                    "displayName": "Austria (AT)",
+                    "required": false
+                  },
+                  {
+                    "value": "Azerbaijan (AZ)",
+                    "type": "String",
+                    "displayName": "Azerbaijan (AZ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Bahamas (BS)",
+                    "type": "String",
+                    "displayName": "Bahamas (BS)",
+                    "required": false
+                  },
+                  {
+                    "value": "Bahrain (BH)",
+                    "type": "String",
+                    "displayName": "Bahrain (BH)",
+                    "required": false
+                  },
+                  {
+                    "value": "Bangladesh (BD)",
+                    "type": "String",
+                    "displayName": "Bangladesh (BD)",
+                    "required": false
+                  },
+                  {
+                    "value": "Barbados (BB)",
+                    "type": "String",
+                    "displayName": "Barbados (BB)",
+                    "required": false
+                  },
+                  {
+                    "value": "Belarus (BY)",
+                    "type": "String",
+                    "displayName": "Belarus (BY)",
+                    "required": false
+                  },
+                  {
+                    "value": "Belgium (BE)",
+                    "type": "String",
+                    "displayName": "Belgium (BE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Belize (BZ)",
+                    "type": "String",
+                    "displayName": "Belize (BZ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Benin (BJ)",
+                    "type": "String",
+                    "displayName": "Benin (BJ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Bermuda (BM)",
+                    "type": "String",
+                    "displayName": "Bermuda (BM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Bhutan (BT)",
+                    "type": "String",
+                    "displayName": "Bhutan (BT)",
+                    "required": false
+                  },
+                  {
+                    "value": "Bolivia (BO)",
+                    "type": "String",
+                    "displayName": "Bolivia (BO)",
+                    "required": false
+                  },
+                  {
+                    "value": "Bosnia and Herzegovina (BA)",
+                    "type": "String",
+                    "displayName": "Bosnia and Herzegovina (BA)",
+                    "required": false
+                  },
+                  {
+                    "value": "Botswana (BW)",
+                    "type": "String",
+                    "displayName": "Botswana (BW)",
+                    "required": false
+                  },
+                  {
+                    "value": "Brazil (BR)",
+                    "type": "String",
+                    "displayName": "Brazil (BR)",
+                    "required": false
+                  },
+                  {
+                    "value": "British Virgin Islands (VG)",
+                    "type": "String",
+                    "displayName": "British Virgin Islands (VG)",
+                    "required": false
+                  },
+                  {
+                    "value": "Brunei Darussalam (BN)",
+                    "type": "String",
+                    "displayName": "Brunei Darussalam (BN)",
+                    "required": false
+                  },
+                  {
+                    "value": "Bulgaria (BG)",
+                    "type": "String",
+                    "displayName": "Bulgaria (BG)",
+                    "required": false
+                  },
+                  {
+                    "value": "Burkina Faso (BF)",
+                    "type": "String",
+                    "displayName": "Burkina Faso (BF)",
+                    "required": false
+                  },
+                  {
+                    "value": "Burundi (BI)",
+                    "type": "String",
+                    "displayName": "Burundi (BI)",
+                    "required": false
+                  },
+                  {
+                    "value": "Cambodia (KH)",
+                    "type": "String",
+                    "displayName": "Cambodia (KH)",
+                    "required": false
+                  },
+                  {
+                    "value": "Cameroon (CM)",
+                    "type": "String",
+                    "displayName": "Cameroon (CM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Canada (CA)",
+                    "type": "String",
+                    "displayName": "Canada (CA)",
+                    "required": false
+                  },
+                  {
+                    "value": "Cape Verde (CV)",
+                    "type": "String",
+                    "displayName": "Cape Verde (CV)",
+                    "required": false
+                  },
+                  {
+                    "value": "Cayman Islands (KY)",
+                    "type": "String",
+                    "displayName": "Cayman Islands (KY)",
+                    "required": false
+                  },
+                  {
+                    "value": "Central African Republic (CF)",
+                    "type": "String",
+                    "displayName": "Central African Republic (CF)",
+                    "required": false
+                  },
+                  {
+                    "value": "Chad (TD)",
+                    "type": "String",
+                    "displayName": "Chad (TD)",
+                    "required": false
+                  },
+                  {
+                    "value": "Chile (CL)",
+                    "type": "String",
+                    "displayName": "Chile (CL)",
+                    "required": false
+                  },
+                  {
+                    "value": "China (CN)",
+                    "type": "String",
+                    "displayName": "China (CN)",
+                    "required": false
+                  },
+                  {
+                    "value": "Colombia (CO)",
+                    "type": "String",
+                    "displayName": "Colombia (CO)",
+                    "required": false
+                  },
+                  {
+                    "value": "Comoros (KM)",
+                    "type": "String",
+                    "displayName": "Comoros (KM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Congo (CG)",
+                    "type": "String",
+                    "displayName": "Congo (CG)",
+                    "required": false
+                  },
+                  {
+                    "value": "Costa Rica (CR)",
+                    "type": "String",
+                    "displayName": "Costa Rica (CR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Croatia (HR)",
+                    "type": "String",
+                    "displayName": "Croatia (HR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Cuba (CU)",
+                    "type": "String",
+                    "displayName": "Cuba (CU)",
+                    "required": false
+                  },
+                  {
+                    "value": "Cura\ufffdao (CW)",
+                    "type": "String",
+                    "displayName": "Cura\ufffdao (CW)",
+                    "required": false
+                  },
+                  {
+                    "value": "Cyprus (CY)",
+                    "type": "String",
+                    "displayName": "Cyprus (CY)",
+                    "required": false
+                  },
+                  {
+                    "value": "Czech Republic (CZ)",
+                    "type": "String",
+                    "displayName": "Czech Republic (CZ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Democratic Republic of the Congo (CD)",
+                    "type": "String",
+                    "displayName": "Democratic Republic of the Congo (CD)",
+                    "required": false
+                  },
+                  {
+                    "value": "Denmark (DK)",
+                    "type": "String",
+                    "displayName": "Denmark (DK)",
+                    "required": false
+                  },
+                  {
+                    "value": "Djibouti (DJ)",
+                    "type": "String",
+                    "displayName": "Djibouti (DJ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Dominica (DM)",
+                    "type": "String",
+                    "displayName": "Dominica (DM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Dominican Republic (DO)",
+                    "type": "String",
+                    "displayName": "Dominican Republic (DO)",
+                    "required": false
+                  },
+                  {
+                    "value": "East Timor (TP)",
+                    "type": "String",
+                    "displayName": "East Timor (TP)",
+                    "required": false
+                  },
+                  {
+                    "value": "Ecuador (EC)",
+                    "type": "String",
+                    "displayName": "Ecuador (EC)",
+                    "required": false
+                  },
+                  {
+                    "value": "Egypt (EG)",
+                    "type": "String",
+                    "displayName": "Egypt (EG)",
+                    "required": false
+                  },
+                  {
+                    "value": "El Salvador (SV)",
+                    "type": "String",
+                    "displayName": "El Salvador (SV)",
+                    "required": false
+                  },
+                  {
+                    "value": "Equatorial Guinea (GQ)",
+                    "type": "String",
+                    "displayName": "Equatorial Guinea (GQ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Eritrea (ER)",
+                    "type": "String",
+                    "displayName": "Eritrea (ER)",
+                    "required": false
+                  },
+                  {
+                    "value": "Estonia (EE)",
+                    "type": "String",
+                    "displayName": "Estonia (EE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Ethiopia (ET)",
+                    "type": "String",
+                    "displayName": "Ethiopia (ET)",
+                    "required": false
+                  },
+                  {
+                    "value": "Falkland Islands (Malvinas) (FK)",
+                    "type": "String",
+                    "displayName": "Falkland Islands (Malvinas) (FK)",
+                    "required": false
+                  },
+                  {
+                    "value": "Federated States of Micronesia (FM)",
+                    "type": "String",
+                    "displayName": "Federated States of Micronesia (FM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Fiji (FJ)",
+                    "type": "String",
+                    "displayName": "Fiji (FJ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Finland (FI)",
+                    "type": "String",
+                    "displayName": "Finland (FI)",
+                    "required": false
+                  },
+                  {
+                    "value": "France (FR)",
+                    "type": "String",
+                    "displayName": "France (FR)",
+                    "required": false
+                  },
+                  {
+                    "value": "French Polynesia (PF)",
+                    "type": "String",
+                    "displayName": "French Polynesia (PF)",
+                    "required": false
+                  },
+                  {
+                    "value": "Gabon (GA)",
+                    "type": "String",
+                    "displayName": "Gabon (GA)",
+                    "required": false
+                  },
+                  {
+                    "value": "Gambia (GM)",
+                    "type": "String",
+                    "displayName": "Gambia (GM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Georgia (GE)",
+                    "type": "String",
+                    "displayName": "Georgia (GE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Germany (DE)",
+                    "type": "String",
+                    "displayName": "Germany (DE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Ghana (GH)",
+                    "type": "String",
+                    "displayName": "Ghana (GH)",
+                    "required": false
+                  },
+                  {
+                    "value": "Gibraltar (GI)",
+                    "type": "String",
+                    "displayName": "Gibraltar (GI)",
+                    "required": false
+                  },
+                  {
+                    "value": "Greece (GR)",
+                    "type": "String",
+                    "displayName": "Greece (GR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Greenland (GL)",
+                    "type": "String",
+                    "displayName": "Greenland (GL)",
+                    "required": false
+                  },
+                  {
+                    "value": "Grenada (GD)",
+                    "type": "String",
+                    "displayName": "Grenada (GD)",
+                    "required": false
+                  },
+                  {
+                    "value": "Guadaloupe (GP)",
+                    "type": "String",
+                    "displayName": "Guadaloupe (GP)",
+                    "required": false
+                  },
+                  {
+                    "value": "Guam (GU)",
+                    "type": "String",
+                    "displayName": "Guam (GU)",
+                    "required": false
+                  },
+                  {
+                    "value": "Guatemala (GT)",
+                    "type": "String",
+                    "displayName": "Guatemala (GT)",
+                    "required": false
+                  },
+                  {
+                    "value": "Guernsey (GG)",
+                    "type": "String",
+                    "displayName": "Guernsey (GG)",
+                    "required": false
+                  },
+                  {
+                    "value": "Guinea (GN)",
+                    "type": "String",
+                    "displayName": "Guinea (GN)",
+                    "required": false
+                  },
+                  {
+                    "value": "Guinea-Bissau (GW)",
+                    "type": "String",
+                    "displayName": "Guinea-Bissau (GW)",
+                    "required": false
+                  },
+                  {
+                    "value": "Guyana (GY)",
+                    "type": "String",
+                    "displayName": "Guyana (GY)",
+                    "required": false
+                  },
+                  {
+                    "value": "Haiti (HT)",
+                    "type": "String",
+                    "displayName": "Haiti (HT)",
+                    "required": false
+                  },
+                  {
+                    "value": "Honduras (HN)",
+                    "type": "String",
+                    "displayName": "Honduras (HN)",
+                    "required": false
+                  },
+                  {
+                    "value": "Hong Kong (HK)",
+                    "type": "String",
+                    "displayName": "Hong Kong (HK)",
+                    "required": false
+                  },
+                  {
+                    "value": "Hungary (HU)",
+                    "type": "String",
+                    "displayName": "Hungary (HU)",
+                    "required": false
+                  },
+                  {
+                    "value": "Iceland (IS)",
+                    "type": "String",
+                    "displayName": "Iceland (IS)",
+                    "required": false
+                  },
+                  {
+                    "value": "India (IN)",
+                    "type": "String",
+                    "displayName": "India (IN)",
+                    "required": false
+                  },
+                  {
+                    "value": "Indonesia (ID)",
+                    "type": "String",
+                    "displayName": "Indonesia (ID)",
+                    "required": false
+                  },
+                  {
+                    "value": "Iran (IR)",
+                    "type": "String",
+                    "displayName": "Iran (IR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Iraq (IQ)",
+                    "type": "String",
+                    "displayName": "Iraq (IQ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Ireland (IE)",
+                    "type": "String",
+                    "displayName": "Ireland (IE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Israel (IL)",
+                    "type": "String",
+                    "displayName": "Israel (IL)",
+                    "required": false
+                  },
+                  {
+                    "value": "Italy (IT)",
+                    "type": "String",
+                    "displayName": "Italy (IT)",
+                    "required": false
+                  },
+                  {
+                    "value": "Ivory Coast (CI)",
+                    "type": "String",
+                    "displayName": "Ivory Coast (CI)",
+                    "required": false
+                  },
+                  {
+                    "value": "Jamaica (JM)",
+                    "type": "String",
+                    "displayName": "Jamaica (JM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Japan (JP)",
+                    "type": "String",
+                    "displayName": "Japan (JP)",
+                    "required": false
+                  },
+                  {
+                    "value": "Jersey (JE)",
+                    "type": "String",
+                    "displayName": "Jersey (JE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Jordan (JO)",
+                    "type": "String",
+                    "displayName": "Jordan (JO)",
+                    "required": false
+                  },
+                  {
+                    "value": "Kazakhstan (KZ)",
+                    "type": "String",
+                    "displayName": "Kazakhstan (KZ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Kenya (KE)",
+                    "type": "String",
+                    "displayName": "Kenya (KE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Kuwait (KW)",
+                    "type": "String",
+                    "displayName": "Kuwait (KW)",
+                    "required": false
+                  },
+                  {
+                    "value": "Kyrgyzstan (KG)",
+                    "type": "String",
+                    "displayName": "Kyrgyzstan (KG)",
+                    "required": false
+                  },
+                  {
+                    "value": "Laos (LA)",
+                    "type": "String",
+                    "displayName": "Laos (LA)",
+                    "required": false
+                  },
+                  {
+                    "value": "Latvia (LV)",
+                    "type": "String",
+                    "displayName": "Latvia (LV)",
+                    "required": false
+                  },
+                  {
+                    "value": "Lebanon (LB)",
+                    "type": "String",
+                    "displayName": "Lebanon (LB)",
+                    "required": false
+                  },
+                  {
+                    "value": "Lesotho (LS)",
+                    "type": "String",
+                    "displayName": "Lesotho (LS)",
+                    "required": false
+                  },
+                  {
+                    "value": "Liberia (LR)",
+                    "type": "String",
+                    "displayName": "Liberia (LR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Libya (LY)",
+                    "type": "String",
+                    "displayName": "Libya (LY)",
+                    "required": false
+                  },
+                  {
+                    "value": "Liechtenstein (LI)",
+                    "type": "String",
+                    "displayName": "Liechtenstein (LI)",
+                    "required": false
+                  },
+                  {
+                    "value": "Lithuania (LT)",
+                    "type": "String",
+                    "displayName": "Lithuania (LT)",
+                    "required": false
+                  },
+                  {
+                    "value": "Luxembourg (LU)",
+                    "type": "String",
+                    "displayName": "Luxembourg (LU)",
+                    "required": false
+                  },
+                  {
+                    "value": "Macau (MO)",
+                    "type": "String",
+                    "displayName": "Macau (MO)",
+                    "required": false
+                  },
+                  {
+                    "value": "Macedonia (MK)",
+                    "type": "String",
+                    "displayName": "Macedonia (MK)",
+                    "required": false
+                  },
+                  {
+                    "value": "Madagascar (MG)",
+                    "type": "String",
+                    "displayName": "Madagascar (MG)",
+                    "required": false
+                  },
+                  {
+                    "value": "Malawi (MW)",
+                    "type": "String",
+                    "displayName": "Malawi (MW)",
+                    "required": false
+                  },
+                  {
+                    "value": "Malaysia (MY)",
+                    "type": "String",
+                    "displayName": "Malaysia (MY)",
+                    "required": false
+                  },
+                  {
+                    "value": "Maldives (MV)",
+                    "type": "String",
+                    "displayName": "Maldives (MV)",
+                    "required": false
+                  },
+                  {
+                    "value": "Mali (ML)",
+                    "type": "String",
+                    "displayName": "Mali (ML)",
+                    "required": false
+                  },
+                  {
+                    "value": "Malta (MT)",
+                    "type": "String",
+                    "displayName": "Malta (MT)",
+                    "required": false
+                  },
+                  {
+                    "value": "Mauritania (MR)",
+                    "type": "String",
+                    "displayName": "Mauritania (MR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Mauritius (MU)",
+                    "type": "String",
+                    "displayName": "Mauritius (MU)",
+                    "required": false
+                  },
+                  {
+                    "value": "Mexico (MX)",
+                    "type": "String",
+                    "displayName": "Mexico (MX)",
+                    "required": false
+                  },
+                  {
+                    "value": "Moldova (MD)",
+                    "type": "String",
+                    "displayName": "Moldova (MD)",
+                    "required": false
+                  },
+                  {
+                    "value": "Monaco (MC)",
+                    "type": "String",
+                    "displayName": "Monaco (MC)",
+                    "required": false
+                  },
+                  {
+                    "value": "Mongolia (MN)",
+                    "type": "String",
+                    "displayName": "Mongolia (MN)",
+                    "required": false
+                  },
+                  {
+                    "value": "Montenegro (ME)",
+                    "type": "String",
+                    "displayName": "Montenegro (ME)",
+                    "required": false
+                  },
+                  {
+                    "value": "Morocco (MA)",
+                    "type": "String",
+                    "displayName": "Morocco (MA)",
+                    "required": false
+                  },
+                  {
+                    "value": "Mozambique (MZ)",
+                    "type": "String",
+                    "displayName": "Mozambique (MZ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Myanmar (MM)",
+                    "type": "String",
+                    "displayName": "Myanmar (MM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Namibia (NA)",
+                    "type": "String",
+                    "displayName": "Namibia (NA)",
+                    "required": false
+                  },
+                  {
+                    "value": "Nepal (NP)",
+                    "type": "String",
+                    "displayName": "Nepal (NP)",
+                    "required": false
+                  },
+                  {
+                    "value": "Netherlands (NL)",
+                    "type": "String",
+                    "displayName": "Netherlands (NL)",
+                    "required": false
+                  },
+                  {
+                    "value": "Netherlands Antilles (AN)",
+                    "type": "String",
+                    "displayName": "Netherlands Antilles (AN)",
+                    "required": false
+                  },
+                  {
+                    "value": "New Caledonia (NC)",
+                    "type": "String",
+                    "displayName": "New Caledonia (NC)",
+                    "required": false
+                  },
+                  {
+                    "value": "New Zealand (NZ)",
+                    "type": "String",
+                    "displayName": "New Zealand (NZ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Nicaragua (NI)",
+                    "type": "String",
+                    "displayName": "Nicaragua (NI)",
+                    "required": false
+                  },
+                  {
+                    "value": "Niger (NE)",
+                    "type": "String",
+                    "displayName": "Niger (NE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Nigeria (NG)",
+                    "type": "String",
+                    "displayName": "Nigeria (NG)",
+                    "required": false
+                  },
+                  {
+                    "value": "North Korea (KP)",
+                    "type": "String",
+                    "displayName": "North Korea (KP)",
+                    "required": false
+                  },
+                  {
+                    "value": "Norway (NO)",
+                    "type": "String",
+                    "displayName": "Norway (NO)",
+                    "required": false
+                  },
+                  {
+                    "value": "Oman (OM)",
+                    "type": "String",
+                    "displayName": "Oman (OM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Pakistan (PK)",
+                    "type": "String",
+                    "displayName": "Pakistan (PK)",
+                    "required": false
+                  },
+                  {
+                    "value": "Panama (PA)",
+                    "type": "String",
+                    "displayName": "Panama (PA)",
+                    "required": false
+                  },
+                  {
+                    "value": "Papua New Guinea (PG)",
+                    "type": "String",
+                    "displayName": "Papua New Guinea (PG)",
+                    "required": false
+                  },
+                  {
+                    "value": "Paraguay (PY)",
+                    "type": "String",
+                    "displayName": "Paraguay (PY)",
+                    "required": false
+                  },
+                  {
+                    "value": "Peru (PE)",
+                    "type": "String",
+                    "displayName": "Peru (PE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Philippines (PH)",
+                    "type": "String",
+                    "displayName": "Philippines (PH)",
+                    "required": false
+                  },
+                  {
+                    "value": "Poland (PL)",
+                    "type": "String",
+                    "displayName": "Poland (PL)",
+                    "required": false
+                  },
+                  {
+                    "value": "Portugal (PT)",
+                    "type": "String",
+                    "displayName": "Portugal (PT)",
+                    "required": false
+                  },
+                  {
+                    "value": "Puerto Rico (PR)",
+                    "type": "String",
+                    "displayName": "Puerto Rico (PR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Qatar (QA)",
+                    "type": "String",
+                    "displayName": "Qatar (QA)",
+                    "required": false
+                  },
+                  {
+                    "value": "Romania (RO)",
+                    "type": "String",
+                    "displayName": "Romania (RO)",
+                    "required": false
+                  },
+                  {
+                    "value": "Russia (RU)",
+                    "type": "String",
+                    "displayName": "Russia (RU)",
+                    "required": false
+                  },
+                  {
+                    "value": "Rwanda (RW)",
+                    "type": "String",
+                    "displayName": "Rwanda (RW)",
+                    "required": false
+                  },
+                  {
+                    "value": "Saint Kitts and Nevis (KN)",
+                    "type": "String",
+                    "displayName": "Saint Kitts and Nevis (KN)",
+                    "required": false
+                  },
+                  {
+                    "value": "Saint Pierre and Miquelon (PM)",
+                    "type": "String",
+                    "displayName": "Saint Pierre and Miquelon (PM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Samoa (WS)",
+                    "type": "String",
+                    "displayName": "Samoa (WS)",
+                    "required": false
+                  },
+                  {
+                    "value": "San Marino (SM)",
+                    "type": "String",
+                    "displayName": "San Marino (SM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Sao Tome and Principe (ST)",
+                    "type": "String",
+                    "displayName": "Sao Tome and Principe (ST)",
+                    "required": false
+                  },
+                  {
+                    "value": "Saudi Arabia (SA)",
+                    "type": "String",
+                    "displayName": "Saudi Arabia (SA)",
+                    "required": false
+                  },
+                  {
+                    "value": "Senegal (SN)",
+                    "type": "String",
+                    "displayName": "Senegal (SN)",
+                    "required": false
+                  },
+                  {
+                    "value": "Serbia (RS)",
+                    "type": "String",
+                    "displayName": "Serbia (RS)",
+                    "required": false
+                  },
+                  {
+                    "value": "Seychelles (SC)",
+                    "type": "String",
+                    "displayName": "Seychelles (SC)",
+                    "required": false
+                  },
+                  {
+                    "value": "Sierra Leone (SL)",
+                    "type": "String",
+                    "displayName": "Sierra Leone (SL)",
+                    "required": false
+                  },
+                  {
+                    "value": "Singapore (SG)",
+                    "type": "String",
+                    "displayName": "Singapore (SG)",
+                    "required": false
+                  },
+                  {
+                    "value": "Slovakia (SK)",
+                    "type": "String",
+                    "displayName": "Slovakia (SK)",
+                    "required": false
+                  },
+                  {
+                    "value": "Slovenia (SI)",
+                    "type": "String",
+                    "displayName": "Slovenia (SI)",
+                    "required": false
+                  },
+                  {
+                    "value": "Solomon Islands (SB)",
+                    "type": "String",
+                    "displayName": "Solomon Islands (SB)",
+                    "required": false
+                  },
+                  {
+                    "value": "Somalia (SO)",
+                    "type": "String",
+                    "displayName": "Somalia (SO)",
+                    "required": false
+                  },
+                  {
+                    "value": "South Africa (ZA)",
+                    "type": "String",
+                    "displayName": "South Africa (ZA)",
+                    "required": false
+                  },
+                  {
+                    "value": "South Korea (KR)",
+                    "type": "String",
+                    "displayName": "South Korea (KR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Spain (ES)",
+                    "type": "String",
+                    "displayName": "Spain (ES)",
+                    "required": false
+                  },
+                  {
+                    "value": "Sri Lanka (LK)",
+                    "type": "String",
+                    "displayName": "Sri Lanka (LK)",
+                    "required": false
+                  },
+                  {
+                    "value": "St. Lucia (LC)",
+                    "type": "String",
+                    "displayName": "St. Lucia (LC)",
+                    "required": false
+                  },
+                  {
+                    "value": "Sudan (SD)",
+                    "type": "String",
+                    "displayName": "Sudan (SD)",
+                    "required": false
+                  },
+                  {
+                    "value": "Surinam (SR)",
+                    "type": "String",
+                    "displayName": "Surinam (SR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Swaziland (SZ)",
+                    "type": "String",
+                    "displayName": "Swaziland (SZ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Sweden (SE)",
+                    "type": "String",
+                    "displayName": "Sweden (SE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Switzerland (CH)",
+                    "type": "String",
+                    "displayName": "Switzerland (CH)",
+                    "required": false
+                  },
+                  {
+                    "value": "Syria (SY)",
+                    "type": "String",
+                    "displayName": "Syria (SY)",
+                    "required": false
+                  },
+                  {
+                    "value": "Taiwan (TW)",
+                    "type": "String",
+                    "displayName": "Taiwan (TW)",
+                    "required": false
+                  },
+                  {
+                    "value": "Tajikistan (TJ)",
+                    "type": "String",
+                    "displayName": "Tajikistan (TJ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Tanzania (TZ)",
+                    "type": "String",
+                    "displayName": "Tanzania (TZ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Thailand (TH)",
+                    "type": "String",
+                    "displayName": "Thailand (TH)",
+                    "required": false
+                  },
+                  {
+                    "value": "Togo (TG)",
+                    "type": "String",
+                    "displayName": "Togo (TG)",
+                    "required": false
+                  },
+                  {
+                    "value": "Tonga (TO)",
+                    "type": "String",
+                    "displayName": "Tonga (TO)",
+                    "required": false
+                  },
+                  {
+                    "value": "Trinidad and Tobago (TT)",
+                    "type": "String",
+                    "displayName": "Trinidad and Tobago (TT)",
+                    "required": false
+                  },
+                  {
+                    "value": "Tunisia (TN)",
+                    "type": "String",
+                    "displayName": "Tunisia (TN)",
+                    "required": false
+                  },
+                  {
+                    "value": "Turkey (TR)",
+                    "type": "String",
+                    "displayName": "Turkey (TR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Turkmenistan (TM)",
+                    "type": "String",
+                    "displayName": "Turkmenistan (TM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Tuvalu (TV)",
+                    "type": "String",
+                    "displayName": "Tuvalu (TV)",
+                    "required": false
+                  },
+                  {
+                    "value": "Uganda (UG)",
+                    "type": "String",
+                    "displayName": "Uganda (UG)",
+                    "required": false
+                  },
+                  {
+                    "value": "Ukraine (UA)",
+                    "type": "String",
+                    "displayName": "Ukraine (UA)",
+                    "required": false
+                  },
+                  {
+                    "value": "United Arab Emirates (AE)",
+                    "type": "String",
+                    "displayName": "United Arab Emirates (AE)",
+                    "required": false
+                  },
+                  {
+                    "value": "United Kingdom (GB)",
+                    "type": "String",
+                    "displayName": "United Kingdom (GB)",
+                    "required": false
+                  },
+                  {
+                    "value": "United States (US)",
+                    "type": "String",
+                    "displayName": "United States (US)",
+                    "required": false
+                  },
+                  {
+                    "value": "Uruguay (UY)",
+                    "type": "String",
+                    "displayName": "Uruguay (UY)",
+                    "required": false
+                  },
+                  {
+                    "value": "Uzbekistan (UZ)",
+                    "type": "String",
+                    "displayName": "Uzbekistan (UZ)",
+                    "required": false
+                  },
+                  {
+                    "value": "Vanuatu (VU)",
+                    "type": "String",
+                    "displayName": "Vanuatu (VU)",
+                    "required": false
+                  },
+                  {
+                    "value": "Venezuela (VE)",
+                    "type": "String",
+                    "displayName": "Venezuela (VE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Vietnam (VN)",
+                    "type": "String",
+                    "displayName": "Vietnam (VN)",
+                    "required": false
+                  },
+                  {
+                    "value": "Virgin Islands U.S. (VI)",
+                    "type": "String",
+                    "displayName": "Virgin Islands U.S. (VI)",
+                    "required": false
+                  },
+                  {
+                    "value": "Western Sahara (EH)",
+                    "type": "String",
+                    "displayName": "Western Sahara (EH)",
+                    "required": false
+                  },
+                  {
+                    "value": "Yemen (YE)",
+                    "type": "String",
+                    "displayName": "Yemen (YE)",
+                    "required": false
+                  },
+                  {
+                    "value": "Zaire (ZR)",
+                    "type": "String",
+                    "displayName": "Zaire (ZR)",
+                    "required": false
+                  },
+                  {
+                    "value": "Zambia (ZM)",
+                    "type": "String",
+                    "displayName": "Zambia (ZM)",
+                    "required": false
+                  },
+                  {
+                    "value": "Zimbabwe (ZW)",
+                    "type": "String",
+                    "displayName": "Zimbabwe (ZW)",
+                    "required": false
+                  }
+                ],
+                "required": false
+              }
+            },
+            "required": false,
+            "validation": {
+              "warnings": [],
+              "information": [
+                {
+                  "field": "Addresses",
+                  "details": "Can contain a maximum of one address"
+                }
+              ]
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "SupplierName",
+                  "details": "Must be between 1 and 100 characters"
+                }
+              ],
+              "information": []
+            }
+          },
+          "contactName": {
+            "type": "String",
+            "displayName": "Contact Name",
+            "description": "The name of the main contact for the supplier",
+            "required": true,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "ContactName",
+                  "details": "Must be between 1 and 200 characters"
+                }
+              ],
+              "information": []
+            }
+          },
+          "status": {
+            "type": "String",
+            "displayName": "Supplier Status",
+            "description": "The current state of the supplier",
+            "options": [
+              {
+                "value": "Active",
+                "type": "String",
+                "displayName": "Active",
+                "required": false
+              },
+              {
+                "value": "Archived",
+                "type": "String",
+                "displayName": "Archived",
+                "required": false
+              }
+            ],
+            "required": true
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "The preferred phone number the supplier should be contacted on",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Phone",
+                  "details": "Must be no greater than 30 characters"
+                }
+              ],
+              "information": []
+            }
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "EmailAddress",
+                  "details": "Must be no greater than 200 characters"
+                }
+              ],
+              "information": []
+            }
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "TaxNumber",
+                  "details": "Must be no greater than 20 characters"
+                }
+              ],
+              "information": []
+            }
+          },
+          "registrationNumber": {
+            "type": "String",
+            "displayName": "Registration Number",
+            "description": "The supplier's registration number",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "RegistrationNumber",
+                  "details": "Must be no greater than 100 characters"
+                }
+              ],
+              "information": []
+            }
+          },
+          "defaultCurrency": {
+            "type": "String",
+            "displayName": "Default Currency",
+            "description": "The default currency for transactions recorded against the supplier",
+            "options": [
+              {
+                "value": "AUD",
+                "type": "String",
+                "displayName": "Australian Dollar",
+                "required": false
+              },
+              {
+                "value": "CAD",
+                "type": "String",
+                "displayName": "Canadian Dollar",
+                "required": false
+              },
+              {
+                "value": "GBP",
+                "type": "String",
+                "displayName": "Pound Sterling",
+                "required": false
+              },
+              {
+                "value": "USD",
+                "type": "String",
+                "displayName": "US Dollar",
+                "required": false
+              },
+              {
+                "value": "ZAR",
+                "type": "String",
+                "displayName": "Rand",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Line1",
+                      "details": "Must be no greater than 200 characters"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Line2",
+                      "details": "Must be no greater than 200 characters"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.City",
+                      "details": "Must be no greater than 80 characters"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Region",
+                      "details": "Must be no greater than 40 characters"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.PostalCode",
+                      "details": "Must be no greater than 30 characters"
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "options": [
+                  {
+                    "value": "United States",
+                    "type": "String",
+                    "displayName": "United States",
+                    "required": false
+                  },
+                  {
+                    "value": "Afghanistan",
+                    "type": "String",
+                    "displayName": "Afghanistan",
+                    "required": false
+                  },
+                  {
+                    "value": "Aland Islands",
+                    "type": "String",
+                    "displayName": "Aland Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Albania",
+                    "type": "String",
+                    "displayName": "Albania",
+                    "required": false
+                  },
+                  {
+                    "value": "Algeria",
+                    "type": "String",
+                    "displayName": "Algeria",
+                    "required": false
+                  },
+                  {
+                    "value": "American Samoa",
+                    "type": "String",
+                    "displayName": "American Samoa",
+                    "required": false
+                  },
+                  {
+                    "value": "Andorra",
+                    "type": "String",
+                    "displayName": "Andorra",
+                    "required": false
+                  },
+                  {
+                    "value": "Angola",
+                    "type": "String",
+                    "displayName": "Angola",
+                    "required": false
+                  },
+                  {
+                    "value": "Anguilla",
+                    "type": "String",
+                    "displayName": "Anguilla",
+                    "required": false
+                  },
+                  {
+                    "value": "Antarctica",
+                    "type": "String",
+                    "displayName": "Antarctica",
+                    "required": false
+                  },
+                  {
+                    "value": "Antigua and Barbuda",
+                    "type": "String",
+                    "displayName": "Antigua and Barbuda",
+                    "required": false
+                  },
+                  {
+                    "value": "Argentina",
+                    "type": "String",
+                    "displayName": "Argentina",
+                    "required": false
+                  },
+                  {
+                    "value": "Armenia",
+                    "type": "String",
+                    "displayName": "Armenia",
+                    "required": false
+                  },
+                  {
+                    "value": "Aruba",
+                    "type": "String",
+                    "displayName": "Aruba",
+                    "required": false
+                  },
+                  {
+                    "value": "Australia",
+                    "type": "String",
+                    "displayName": "Australia",
+                    "required": false
+                  },
+                  {
+                    "value": "Austria",
+                    "type": "String",
+                    "displayName": "Austria",
+                    "required": false
+                  },
+                  {
+                    "value": "Azerbaijan",
+                    "type": "String",
+                    "displayName": "Azerbaijan",
+                    "required": false
+                  },
+                  {
+                    "value": "Bahamas",
+                    "type": "String",
+                    "displayName": "Bahamas",
+                    "required": false
+                  },
+                  {
+                    "value": "Bahrain",
+                    "type": "String",
+                    "displayName": "Bahrain",
+                    "required": false
+                  },
+                  {
+                    "value": "Bangladesh",
+                    "type": "String",
+                    "displayName": "Bangladesh",
+                    "required": false
+                  },
+                  {
+                    "value": "Barbados",
+                    "type": "String",
+                    "displayName": "Barbados",
+                    "required": false
+                  },
+                  {
+                    "value": "Belarus",
+                    "type": "String",
+                    "displayName": "Belarus",
+                    "required": false
+                  },
+                  {
+                    "value": "Belgium",
+                    "type": "String",
+                    "displayName": "Belgium",
+                    "required": false
+                  },
+                  {
+                    "value": "Belize",
+                    "type": "String",
+                    "displayName": "Belize",
+                    "required": false
+                  },
+                  {
+                    "value": "Benin",
+                    "type": "String",
+                    "displayName": "Benin",
+                    "required": false
+                  },
+                  {
+                    "value": "Bermuda",
+                    "type": "String",
+                    "displayName": "Bermuda",
+                    "required": false
+                  },
+                  {
+                    "value": "Bhutan",
+                    "type": "String",
+                    "displayName": "Bhutan",
+                    "required": false
+                  },
+                  {
+                    "value": "Bolivia",
+                    "type": "String",
+                    "displayName": "Bolivia",
+                    "required": false
+                  },
+                  {
+                    "value": "Bonaire, Sint Eustatius and Saba",
+                    "type": "String",
+                    "displayName": "Bonaire, Sint Eustatius and Saba",
+                    "required": false
+                  },
+                  {
+                    "value": "Bosnia and Herzegovina",
+                    "type": "String",
+                    "displayName": "Bosnia and Herzegovina",
+                    "required": false
+                  },
+                  {
+                    "value": "Botswana",
+                    "type": "String",
+                    "displayName": "Botswana",
+                    "required": false
+                  },
+                  {
+                    "value": "Bouvet Island",
+                    "type": "String",
+                    "displayName": "Bouvet Island",
+                    "required": false
+                  },
+                  {
+                    "value": "Brazil",
+                    "type": "String",
+                    "displayName": "Brazil",
+                    "required": false
+                  },
+                  {
+                    "value": "British Indian Ocean Territory",
+                    "type": "String",
+                    "displayName": "British Indian Ocean Territory",
+                    "required": false
+                  },
+                  {
+                    "value": "Brunei Darussalam",
+                    "type": "String",
+                    "displayName": "Brunei Darussalam",
+                    "required": false
+                  },
+                  {
+                    "value": "Bulgaria",
+                    "type": "String",
+                    "displayName": "Bulgaria",
+                    "required": false
+                  },
+                  {
+                    "value": "Burkina Faso",
+                    "type": "String",
+                    "displayName": "Burkina Faso",
+                    "required": false
+                  },
+                  {
+                    "value": "Burundi",
+                    "type": "String",
+                    "displayName": "Burundi",
+                    "required": false
+                  },
+                  {
+                    "value": "Cambodia",
+                    "type": "String",
+                    "displayName": "Cambodia",
+                    "required": false
+                  },
+                  {
+                    "value": "Cameroon",
+                    "type": "String",
+                    "displayName": "Cameroon",
+                    "required": false
+                  },
+                  {
+                    "value": "Canada",
+                    "type": "String",
+                    "displayName": "Canada",
+                    "required": false
+                  },
+                  {
+                    "value": "Cape Verde",
+                    "type": "String",
+                    "displayName": "Cape Verde",
+                    "required": false
+                  },
+                  {
+                    "value": "Cayman Islands",
+                    "type": "String",
+                    "displayName": "Cayman Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Central African Republic",
+                    "type": "String",
+                    "displayName": "Central African Republic",
+                    "required": false
+                  },
+                  {
+                    "value": "Chad",
+                    "type": "String",
+                    "displayName": "Chad",
+                    "required": false
+                  },
+                  {
+                    "value": "Chile",
+                    "type": "String",
+                    "displayName": "Chile",
+                    "required": false
+                  },
+                  {
+                    "value": "China",
+                    "type": "String",
+                    "displayName": "China",
+                    "required": false
+                  },
+                  {
+                    "value": "Christmas Island",
+                    "type": "String",
+                    "displayName": "Christmas Island",
+                    "required": false
+                  },
+                  {
+                    "value": "Cocos (Keeling) Islands",
+                    "type": "String",
+                    "displayName": "Cocos (Keeling) Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Colombia",
+                    "type": "String",
+                    "displayName": "Colombia",
+                    "required": false
+                  },
+                  {
+                    "value": "Comoros",
+                    "type": "String",
+                    "displayName": "Comoros",
+                    "required": false
+                  },
+                  {
+                    "value": "Congo",
+                    "type": "String",
+                    "displayName": "Congo",
+                    "required": false
+                  },
+                  {
+                    "value": "Congo, Democratic Republic",
+                    "type": "String",
+                    "displayName": "Congo, Democratic Republic",
+                    "required": false
+                  },
+                  {
+                    "value": "Cook Islands",
+                    "type": "String",
+                    "displayName": "Cook Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Costa Rica",
+                    "type": "String",
+                    "displayName": "Costa Rica",
+                    "required": false
+                  },
+                  {
+                    "value": "C\ufffdte d'Ivoire",
+                    "type": "String",
+                    "displayName": "C\ufffdte d'Ivoire",
+                    "required": false
+                  },
+                  {
+                    "value": "Croatia",
+                    "type": "String",
+                    "displayName": "Croatia",
+                    "required": false
+                  },
+                  {
+                    "value": "Cuba",
+                    "type": "String",
+                    "displayName": "Cuba",
+                    "required": false
+                  },
+                  {
+                    "value": "Cura\ufffdao",
+                    "type": "String",
+                    "displayName": "Cura\ufffdao",
+                    "required": false
+                  },
+                  {
+                    "value": "Cyprus",
+                    "type": "String",
+                    "displayName": "Cyprus",
+                    "required": false
+                  },
+                  {
+                    "value": "Czech Republic",
+                    "type": "String",
+                    "displayName": "Czech Republic",
+                    "required": false
+                  },
+                  {
+                    "value": "Denmark",
+                    "type": "String",
+                    "displayName": "Denmark",
+                    "required": false
+                  },
+                  {
+                    "value": "Djibouti",
+                    "type": "String",
+                    "displayName": "Djibouti",
+                    "required": false
+                  },
+                  {
+                    "value": "Dominica",
+                    "type": "String",
+                    "displayName": "Dominica",
+                    "required": false
+                  },
+                  {
+                    "value": "Dominican Republic",
+                    "type": "String",
+                    "displayName": "Dominican Republic",
+                    "required": false
+                  },
+                  {
+                    "value": "Ecuador",
+                    "type": "String",
+                    "displayName": "Ecuador",
+                    "required": false
+                  },
+                  {
+                    "value": "Egypt",
+                    "type": "String",
+                    "displayName": "Egypt",
+                    "required": false
+                  },
+                  {
+                    "value": "El Salvador",
+                    "type": "String",
+                    "displayName": "El Salvador",
+                    "required": false
+                  },
+                  {
+                    "value": "Equatorial Guinea",
+                    "type": "String",
+                    "displayName": "Equatorial Guinea",
+                    "required": false
+                  },
+                  {
+                    "value": "Eritrea",
+                    "type": "String",
+                    "displayName": "Eritrea",
+                    "required": false
+                  },
+                  {
+                    "value": "Estonia",
+                    "type": "String",
+                    "displayName": "Estonia",
+                    "required": false
+                  },
+                  {
+                    "value": "Eswatini",
+                    "type": "String",
+                    "displayName": "Eswatini",
+                    "required": false
+                  },
+                  {
+                    "value": "Ethiopia",
+                    "type": "String",
+                    "displayName": "Ethiopia",
+                    "required": false
+                  },
+                  {
+                    "value": "Falkland Islands (Malvinas",
+                    "type": "String",
+                    "displayName": "Falkland Islands (Malvinas",
+                    "required": false
+                  },
+                  {
+                    "value": "Faroe Islands",
+                    "type": "String",
+                    "displayName": "Faroe Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Fiji",
+                    "type": "String",
+                    "displayName": "Fiji",
+                    "required": false
+                  },
+                  {
+                    "value": "Finland",
+                    "type": "String",
+                    "displayName": "Finland",
+                    "required": false
+                  },
+                  {
+                    "value": "France",
+                    "type": "String",
+                    "displayName": "France",
+                    "required": false
+                  },
+                  {
+                    "value": "French Guiana",
+                    "type": "String",
+                    "displayName": "French Guiana",
+                    "required": false
+                  },
+                  {
+                    "value": "French Polynesia",
+                    "type": "String",
+                    "displayName": "French Polynesia",
+                    "required": false
+                  },
+                  {
+                    "value": "French Southern Territories",
+                    "type": "String",
+                    "displayName": "French Southern Territories",
+                    "required": false
+                  },
+                  {
+                    "value": "Gabon",
+                    "type": "String",
+                    "displayName": "Gabon",
+                    "required": false
+                  },
+                  {
+                    "value": "Gambia",
+                    "type": "String",
+                    "displayName": "Gambia",
+                    "required": false
+                  },
+                  {
+                    "value": "Georgia",
+                    "type": "String",
+                    "displayName": "Georgia",
+                    "required": false
+                  },
+                  {
+                    "value": "Germany",
+                    "type": "String",
+                    "displayName": "Germany",
+                    "required": false
+                  },
+                  {
+                    "value": "Ghana",
+                    "type": "String",
+                    "displayName": "Ghana",
+                    "required": false
+                  },
+                  {
+                    "value": "Gibraltar",
+                    "type": "String",
+                    "displayName": "Gibraltar",
+                    "required": false
+                  },
+                  {
+                    "value": "Greece",
+                    "type": "String",
+                    "displayName": "Greece",
+                    "required": false
+                  },
+                  {
+                    "value": "Greenland",
+                    "type": "String",
+                    "displayName": "Greenland",
+                    "required": false
+                  },
+                  {
+                    "value": "Grenada",
+                    "type": "String",
+                    "displayName": "Grenada",
+                    "required": false
+                  },
+                  {
+                    "value": "Guadeloupe",
+                    "type": "String",
+                    "displayName": "Guadeloupe",
+                    "required": false
+                  },
+                  {
+                    "value": "Guam",
+                    "type": "String",
+                    "displayName": "Guam",
+                    "required": false
+                  },
+                  {
+                    "value": "Guatemala",
+                    "type": "String",
+                    "displayName": "Guatemala",
+                    "required": false
+                  },
+                  {
+                    "value": "Guernsey",
+                    "type": "String",
+                    "displayName": "Guernsey",
+                    "required": false
+                  },
+                  {
+                    "value": "Guinea",
+                    "type": "String",
+                    "displayName": "Guinea",
+                    "required": false
+                  },
+                  {
+                    "value": "Guinea-Bissau",
+                    "type": "String",
+                    "displayName": "Guinea-Bissau",
+                    "required": false
+                  },
+                  {
+                    "value": "Guyana",
+                    "type": "String",
+                    "displayName": "Guyana",
+                    "required": false
+                  },
+                  {
+                    "value": "Haiti",
+                    "type": "String",
+                    "displayName": "Haiti",
+                    "required": false
+                  },
+                  {
+                    "value": "Heard Is. & Mcdonald Islands",
+                    "type": "String",
+                    "displayName": "Heard Is. & Mcdonald Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Honduras",
+                    "type": "String",
+                    "displayName": "Honduras",
+                    "required": false
+                  },
+                  {
+                    "value": "Hong Kong",
+                    "type": "String",
+                    "displayName": "Hong Kong",
+                    "required": false
+                  },
+                  {
+                    "value": "Hungary",
+                    "type": "String",
+                    "displayName": "Hungary",
+                    "required": false
+                  },
+                  {
+                    "value": "Iceland",
+                    "type": "String",
+                    "displayName": "Iceland",
+                    "required": false
+                  },
+                  {
+                    "value": "India",
+                    "type": "String",
+                    "displayName": "India",
+                    "required": false
+                  },
+                  {
+                    "value": "Indonesia",
+                    "type": "String",
+                    "displayName": "Indonesia",
+                    "required": false
+                  },
+                  {
+                    "value": "Iran, Islamic Republic of",
+                    "type": "String",
+                    "displayName": "Iran, Islamic Republic of",
+                    "required": false
+                  },
+                  {
+                    "value": "Iraq",
+                    "type": "String",
+                    "displayName": "Iraq",
+                    "required": false
+                  },
+                  {
+                    "value": "Ireland",
+                    "type": "String",
+                    "displayName": "Ireland",
+                    "required": false
+                  },
+                  {
+                    "value": "Isle of Man",
+                    "type": "String",
+                    "displayName": "Isle of Man",
+                    "required": false
+                  },
+                  {
+                    "value": "Israel",
+                    "type": "String",
+                    "displayName": "Israel",
+                    "required": false
+                  },
+                  {
+                    "value": "Italy",
+                    "type": "String",
+                    "displayName": "Italy",
+                    "required": false
+                  },
+                  {
+                    "value": "Jamaica",
+                    "type": "String",
+                    "displayName": "Jamaica",
+                    "required": false
+                  },
+                  {
+                    "value": "Japan",
+                    "type": "String",
+                    "displayName": "Japan",
+                    "required": false
+                  },
+                  {
+                    "value": "Jersey",
+                    "type": "String",
+                    "displayName": "Jersey",
+                    "required": false
+                  },
+                  {
+                    "value": "Jordan",
+                    "type": "String",
+                    "displayName": "Jordan",
+                    "required": false
+                  },
+                  {
+                    "value": "Kazakhstan",
+                    "type": "String",
+                    "displayName": "Kazakhstan",
+                    "required": false
+                  },
+                  {
+                    "value": "Kenya",
+                    "type": "String",
+                    "displayName": "Kenya",
+                    "required": false
+                  },
+                  {
+                    "value": "Kiribati",
+                    "type": "String",
+                    "displayName": "Kiribati",
+                    "required": false
+                  },
+                  {
+                    "value": "Korea, Republic of",
+                    "type": "String",
+                    "displayName": "Korea, Republic of",
+                    "required": false
+                  },
+                  {
+                    "value": "Korea, Demo. People's Rep",
+                    "type": "String",
+                    "displayName": "Korea, Demo. People's Rep",
+                    "required": false
+                  },
+                  {
+                    "value": "Kosovo",
+                    "type": "String",
+                    "displayName": "Kosovo",
+                    "required": false
+                  },
+                  {
+                    "value": "Kuwait",
+                    "type": "String",
+                    "displayName": "Kuwait",
+                    "required": false
+                  },
+                  {
+                    "value": "Kyrgyzstan",
+                    "type": "String",
+                    "displayName": "Kyrgyzstan",
+                    "required": false
+                  },
+                  {
+                    "value": "Lao",
+                    "type": "String",
+                    "displayName": "Lao",
+                    "required": false
+                  },
+                  {
+                    "value": "Latvia",
+                    "type": "String",
+                    "displayName": "Latvia",
+                    "required": false
+                  },
+                  {
+                    "value": "Lebanon",
+                    "type": "String",
+                    "displayName": "Lebanon",
+                    "required": false
+                  },
+                  {
+                    "value": "Lesotho",
+                    "type": "String",
+                    "displayName": "Lesotho",
+                    "required": false
+                  },
+                  {
+                    "value": "Liberia",
+                    "type": "String",
+                    "displayName": "Liberia",
+                    "required": false
+                  },
+                  {
+                    "value": "Libyan Arab Jamahiriya",
+                    "type": "String",
+                    "displayName": "Libyan Arab Jamahiriya",
+                    "required": false
+                  },
+                  {
+                    "value": "Liechtenstein",
+                    "type": "String",
+                    "displayName": "Liechtenstein",
+                    "required": false
+                  },
+                  {
+                    "value": "Lithuania",
+                    "type": "String",
+                    "displayName": "Lithuania",
+                    "required": false
+                  },
+                  {
+                    "value": "Luxembourg",
+                    "type": "String",
+                    "displayName": "Luxembourg",
+                    "required": false
+                  },
+                  {
+                    "value": "Macao",
+                    "type": "String",
+                    "displayName": "Macao",
+                    "required": false
+                  },
+                  {
+                    "value": "Macedonia",
+                    "type": "String",
+                    "displayName": "Macedonia",
+                    "required": false
+                  },
+                  {
+                    "value": "Madagascar",
+                    "type": "String",
+                    "displayName": "Madagascar",
+                    "required": false
+                  },
+                  {
+                    "value": "Malawi",
+                    "type": "String",
+                    "displayName": "Malawi",
+                    "required": false
+                  },
+                  {
+                    "value": "Malaysia",
+                    "type": "String",
+                    "displayName": "Malaysia",
+                    "required": false
+                  },
+                  {
+                    "value": "Maldives",
+                    "type": "String",
+                    "displayName": "Maldives",
+                    "required": false
+                  },
+                  {
+                    "value": "Mali",
+                    "type": "String",
+                    "displayName": "Mali",
+                    "required": false
+                  },
+                  {
+                    "value": "Malta",
+                    "type": "String",
+                    "displayName": "Malta",
+                    "required": false
+                  },
+                  {
+                    "value": "Marshall Islands",
+                    "type": "String",
+                    "displayName": "Marshall Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Martinique",
+                    "type": "String",
+                    "displayName": "Martinique",
+                    "required": false
+                  },
+                  {
+                    "value": "Mauritania",
+                    "type": "String",
+                    "displayName": "Mauritania",
+                    "required": false
+                  },
+                  {
+                    "value": "Mauritius",
+                    "type": "String",
+                    "displayName": "Mauritius",
+                    "required": false
+                  },
+                  {
+                    "value": "Mayotte",
+                    "type": "String",
+                    "displayName": "Mayotte",
+                    "required": false
+                  },
+                  {
+                    "value": "Mexico",
+                    "type": "String",
+                    "displayName": "Mexico",
+                    "required": false
+                  },
+                  {
+                    "value": "Micronesia",
+                    "type": "String",
+                    "displayName": "Micronesia",
+                    "required": false
+                  },
+                  {
+                    "value": "Moldova, Republic of",
+                    "type": "String",
+                    "displayName": "Moldova, Republic of",
+                    "required": false
+                  },
+                  {
+                    "value": "Monaco",
+                    "type": "String",
+                    "displayName": "Monaco",
+                    "required": false
+                  },
+                  {
+                    "value": "Mongolia",
+                    "type": "String",
+                    "displayName": "Mongolia",
+                    "required": false
+                  },
+                  {
+                    "value": "Montenegro",
+                    "type": "String",
+                    "displayName": "Montenegro",
+                    "required": false
+                  },
+                  {
+                    "value": "Montserrat",
+                    "type": "String",
+                    "displayName": "Montserrat",
+                    "required": false
+                  },
+                  {
+                    "value": "Morocco",
+                    "type": "String",
+                    "displayName": "Morocco",
+                    "required": false
+                  },
+                  {
+                    "value": "Mozambique",
+                    "type": "String",
+                    "displayName": "Mozambique",
+                    "required": false
+                  },
+                  {
+                    "value": "Myanmar",
+                    "type": "String",
+                    "displayName": "Myanmar",
+                    "required": false
+                  },
+                  {
+                    "value": "Namibia",
+                    "type": "String",
+                    "displayName": "Namibia",
+                    "required": false
+                  },
+                  {
+                    "value": "Nauru",
+                    "type": "String",
+                    "displayName": "Nauru",
+                    "required": false
+                  },
+                  {
+                    "value": "Nepal",
+                    "type": "String",
+                    "displayName": "Nepal",
+                    "required": false
+                  },
+                  {
+                    "value": "Netherlands",
+                    "type": "String",
+                    "displayName": "Netherlands",
+                    "required": false
+                  },
+                  {
+                    "value": "Netherlands Antilles",
+                    "type": "String",
+                    "displayName": "Netherlands Antilles",
+                    "required": false
+                  },
+                  {
+                    "value": "New Caledonia",
+                    "type": "String",
+                    "displayName": "New Caledonia",
+                    "required": false
+                  },
+                  {
+                    "value": "New Zealand",
+                    "type": "String",
+                    "displayName": "New Zealand",
+                    "required": false
+                  },
+                  {
+                    "value": "Nicaragua",
+                    "type": "String",
+                    "displayName": "Nicaragua",
+                    "required": false
+                  },
+                  {
+                    "value": "Niger",
+                    "type": "String",
+                    "displayName": "Niger",
+                    "required": false
+                  },
+                  {
+                    "value": "Nigeria",
+                    "type": "String",
+                    "displayName": "Nigeria",
+                    "required": false
+                  },
+                  {
+                    "value": "Niue",
+                    "type": "String",
+                    "displayName": "Niue",
+                    "required": false
+                  },
+                  {
+                    "value": "Norfolk Island",
+                    "type": "String",
+                    "displayName": "Norfolk Island",
+                    "required": false
+                  },
+                  {
+                    "value": "Northern Mariana Islands",
+                    "type": "String",
+                    "displayName": "Northern Mariana Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Norway",
+                    "type": "String",
+                    "displayName": "Norway",
+                    "required": false
+                  },
+                  {
+                    "value": "Oman",
+                    "type": "String",
+                    "displayName": "Oman",
+                    "required": false
+                  },
+                  {
+                    "value": "Pakistan",
+                    "type": "String",
+                    "displayName": "Pakistan",
+                    "required": false
+                  },
+                  {
+                    "value": "Palau",
+                    "type": "String",
+                    "displayName": "Palau",
+                    "required": false
+                  },
+                  {
+                    "value": "Palestinian Territory, Occupied",
+                    "type": "String",
+                    "displayName": "Palestinian Territory, Occupied",
+                    "required": false
+                  },
+                  {
+                    "value": "Panama",
+                    "type": "String",
+                    "displayName": "Panama",
+                    "required": false
+                  },
+                  {
+                    "value": "Papua New Guinea",
+                    "type": "String",
+                    "displayName": "Papua New Guinea",
+                    "required": false
+                  },
+                  {
+                    "value": "Paraguay",
+                    "type": "String",
+                    "displayName": "Paraguay",
+                    "required": false
+                  },
+                  {
+                    "value": "Peru",
+                    "type": "String",
+                    "displayName": "Peru",
+                    "required": false
+                  },
+                  {
+                    "value": "Philippines",
+                    "type": "String",
+                    "displayName": "Philippines",
+                    "required": false
+                  },
+                  {
+                    "value": "Pitcairn",
+                    "type": "String",
+                    "displayName": "Pitcairn",
+                    "required": false
+                  },
+                  {
+                    "value": "Poland",
+                    "type": "String",
+                    "displayName": "Poland",
+                    "required": false
+                  },
+                  {
+                    "value": "Portugal",
+                    "type": "String",
+                    "displayName": "Portugal",
+                    "required": false
+                  },
+                  {
+                    "value": "Puerto Rico",
+                    "type": "String",
+                    "displayName": "Puerto Rico",
+                    "required": false
+                  },
+                  {
+                    "value": "Qatar",
+                    "type": "String",
+                    "displayName": "Qatar",
+                    "required": false
+                  },
+                  {
+                    "value": "Reunion",
+                    "type": "String",
+                    "displayName": "Reunion",
+                    "required": false
+                  },
+                  {
+                    "value": "Romania",
+                    "type": "String",
+                    "displayName": "Romania",
+                    "required": false
+                  },
+                  {
+                    "value": "Russian Federation",
+                    "type": "String",
+                    "displayName": "Russian Federation",
+                    "required": false
+                  },
+                  {
+                    "value": "Rwanda",
+                    "type": "String",
+                    "displayName": "Rwanda",
+                    "required": false
+                  },
+                  {
+                    "value": "Saint Barthelemy",
+                    "type": "String",
+                    "displayName": "Saint Barthelemy",
+                    "required": false
+                  },
+                  {
+                    "value": "Saint Helena",
+                    "type": "String",
+                    "displayName": "Saint Helena",
+                    "required": false
+                  },
+                  {
+                    "value": "Saint Kitts and Nevis",
+                    "type": "String",
+                    "displayName": "Saint Kitts and Nevis",
+                    "required": false
+                  },
+                  {
+                    "value": "Saint Lucia",
+                    "type": "String",
+                    "displayName": "Saint Lucia",
+                    "required": false
+                  },
+                  {
+                    "value": "Saint Martin",
+                    "type": "String",
+                    "displayName": "Saint Martin",
+                    "required": false
+                  },
+                  {
+                    "value": "Saint Pierre and Miquelon",
+                    "type": "String",
+                    "displayName": "Saint Pierre and Miquelon",
+                    "required": false
+                  },
+                  {
+                    "value": "Saint Vincent and the Grenadines",
+                    "type": "String",
+                    "displayName": "Saint Vincent and the Grenadines",
+                    "required": false
+                  },
+                  {
+                    "value": "Samoa",
+                    "type": "String",
+                    "displayName": "Samoa",
+                    "required": false
+                  },
+                  {
+                    "value": "San Marino",
+                    "type": "String",
+                    "displayName": "San Marino",
+                    "required": false
+                  },
+                  {
+                    "value": "Sao Tome and Principe",
+                    "type": "String",
+                    "displayName": "Sao Tome and Principe",
+                    "required": false
+                  },
+                  {
+                    "value": "Saudi Arabia",
+                    "type": "String",
+                    "displayName": "Saudi Arabia",
+                    "required": false
+                  },
+                  {
+                    "value": "Senegal",
+                    "type": "String",
+                    "displayName": "Senegal",
+                    "required": false
+                  },
+                  {
+                    "value": "Serbia",
+                    "type": "String",
+                    "displayName": "Serbia",
+                    "required": false
+                  },
+                  {
+                    "value": "Seychelles",
+                    "type": "String",
+                    "displayName": "Seychelles",
+                    "required": false
+                  },
+                  {
+                    "value": "Sierra Leone",
+                    "type": "String",
+                    "displayName": "Sierra Leone",
+                    "required": false
+                  },
+                  {
+                    "value": "Singapore",
+                    "type": "String",
+                    "displayName": "Singapore",
+                    "required": false
+                  },
+                  {
+                    "value": "Sint Maarten",
+                    "type": "String",
+                    "displayName": "Sint Maarten",
+                    "required": false
+                  },
+                  {
+                    "value": "Slovakia",
+                    "type": "String",
+                    "displayName": "Slovakia",
+                    "required": false
+                  },
+                  {
+                    "value": "Slovenia",
+                    "type": "String",
+                    "displayName": "Slovenia",
+                    "required": false
+                  },
+                  {
+                    "value": "Solomon Islands",
+                    "type": "String",
+                    "displayName": "Solomon Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Somalia",
+                    "type": "String",
+                    "displayName": "Somalia",
+                    "required": false
+                  },
+                  {
+                    "value": "South Africa",
+                    "type": "String",
+                    "displayName": "South Africa",
+                    "required": false
+                  },
+                  {
+                    "value": "S. Georgia & S. Sandwich Is",
+                    "type": "String",
+                    "displayName": "S. Georgia & S. Sandwich Is",
+                    "required": false
+                  },
+                  {
+                    "value": "Spain",
+                    "type": "String",
+                    "displayName": "Spain",
+                    "required": false
+                  },
+                  {
+                    "value": "Sri Lanka",
+                    "type": "String",
+                    "displayName": "Sri Lanka",
+                    "required": false
+                  },
+                  {
+                    "value": "Sudan",
+                    "type": "String",
+                    "displayName": "Sudan",
+                    "required": false
+                  },
+                  {
+                    "value": "South Sudan",
+                    "type": "String",
+                    "displayName": "South Sudan",
+                    "required": false
+                  },
+                  {
+                    "value": "Suriname",
+                    "type": "String",
+                    "displayName": "Suriname",
+                    "required": false
+                  },
+                  {
+                    "value": "Svalbard and Jan Mayen",
+                    "type": "String",
+                    "displayName": "Svalbard and Jan Mayen",
+                    "required": false
+                  },
+                  {
+                    "value": "Sweden",
+                    "type": "String",
+                    "displayName": "Sweden",
+                    "required": false
+                  },
+                  {
+                    "value": "Switzerland",
+                    "type": "String",
+                    "displayName": "Switzerland",
+                    "required": false
+                  },
+                  {
+                    "value": "Syrian Arab Republic",
+                    "type": "String",
+                    "displayName": "Syrian Arab Republic",
+                    "required": false
+                  },
+                  {
+                    "value": "Taiwan",
+                    "type": "String",
+                    "displayName": "Taiwan",
+                    "required": false
+                  },
+                  {
+                    "value": "Tajikistan",
+                    "type": "String",
+                    "displayName": "Tajikistan",
+                    "required": false
+                  },
+                  {
+                    "value": "Tanzania, United Republic of",
+                    "type": "String",
+                    "displayName": "Tanzania, United Republic of",
+                    "required": false
+                  },
+                  {
+                    "value": "Thailand",
+                    "type": "String",
+                    "displayName": "Thailand",
+                    "required": false
+                  },
+                  {
+                    "value": "Timor-Leste",
+                    "type": "String",
+                    "displayName": "Timor-Leste",
+                    "required": false
+                  },
+                  {
+                    "value": "Togo",
+                    "type": "String",
+                    "displayName": "Togo",
+                    "required": false
+                  },
+                  {
+                    "value": "Tokelau",
+                    "type": "String",
+                    "displayName": "Tokelau",
+                    "required": false
+                  },
+                  {
+                    "value": "Tonga",
+                    "type": "String",
+                    "displayName": "Tonga",
+                    "required": false
+                  },
+                  {
+                    "value": "Trinidad and Tobago",
+                    "type": "String",
+                    "displayName": "Trinidad and Tobago",
+                    "required": false
+                  },
+                  {
+                    "value": "Tunisia",
+                    "type": "String",
+                    "displayName": "Tunisia",
+                    "required": false
+                  },
+                  {
+                    "value": "Turkey",
+                    "type": "String",
+                    "displayName": "Turkey",
+                    "required": false
+                  },
+                  {
+                    "value": "Turkmenistan",
+                    "type": "String",
+                    "displayName": "Turkmenistan",
+                    "required": false
+                  },
+                  {
+                    "value": "Turks and Caicos Islands",
+                    "type": "String",
+                    "displayName": "Turks and Caicos Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Tuvalu",
+                    "type": "String",
+                    "displayName": "Tuvalu",
+                    "required": false
+                  },
+                  {
+                    "value": "Uganda",
+                    "type": "String",
+                    "displayName": "Uganda",
+                    "required": false
+                  },
+                  {
+                    "value": "Ukraine",
+                    "type": "String",
+                    "displayName": "Ukraine",
+                    "required": false
+                  },
+                  {
+                    "value": "United Arab Emirates",
+                    "type": "String",
+                    "displayName": "United Arab Emirates",
+                    "required": false
+                  },
+                  {
+                    "value": "United Kingdom",
+                    "type": "String",
+                    "displayName": "United Kingdom",
+                    "required": false
+                  },
+                  {
+                    "value": "US Minor Outlying Islands",
+                    "type": "String",
+                    "displayName": "US Minor Outlying Islands",
+                    "required": false
+                  },
+                  {
+                    "value": "Uruguay",
+                    "type": "String",
+                    "displayName": "Uruguay",
+                    "required": false
+                  },
+                  {
+                    "value": "Uzbekistan",
+                    "type": "String",
+                    "displayName": "Uzbekistan",
+                    "required": false
+                  },
+                  {
+                    "value": "Vanuatu",
+                    "type": "String",
+                    "displayName": "Vanuatu",
+                    "required": false
+                  },
+                  {
+                    "value": "Vatican City State",
+                    "type": "String",
+                    "displayName": "Vatican City State",
+                    "required": false
+                  },
+                  {
+                    "value": "Venezuela",
+                    "type": "String",
+                    "displayName": "Venezuela",
+                    "required": false
+                  },
+                  {
+                    "value": "Vietnam",
+                    "type": "String",
+                    "displayName": "Vietnam",
+                    "required": false
+                  },
+                  {
+                    "value": "Virgin Islands, British",
+                    "type": "String",
+                    "displayName": "Virgin Islands, British",
+                    "required": false
+                  },
+                  {
+                    "value": "Virgin Islands, U.S",
+                    "type": "String",
+                    "displayName": "Virgin Islands, U.S",
+                    "required": false
+                  },
+                  {
+                    "value": "Wallis and Futuna",
+                    "type": "String",
+                    "displayName": "Wallis and Futuna",
+                    "required": false
+                  },
+                  {
+                    "value": "Western Sahara",
+                    "type": "String",
+                    "displayName": "Western Sahara",
+                    "required": false
+                  },
+                  {
+                    "value": "Yemen",
+                    "type": "String",
+                    "displayName": "Yemen",
+                    "required": false
+                  },
+                  {
+                    "value": "Zambia",
+                    "type": "String",
+                    "displayName": "Zambia",
+                    "required": false
+                  },
+                  {
+                    "value": "Zimbabwe",
+                    "type": "String",
+                    "displayName": "Zimbabwe",
+                    "required": false
+                  }
+                ],
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "Addresses.Country",
+                      "details": "Required if TaxNumber is supplied"
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "Addresses",
+                  "details": "If supplied, must contain only 1 address"
+                },
+                {
+                  "field": "Addresses",
+                  "details": "If TaxNumber is supplied, an Address with a Country is required"
+                }
+              ],
+              "information": []
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sandbox",
+      "example": {
+        "type": "Object",
+        "displayName": "Supplier",
+        "description": "A Supplier is a person or organisation that provides a product or service",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Supplier Name",
+            "description": "The name for the supplier, typically a company name",
+            "required": true
+          },
+          "contactName": {
+            "type": "String",
+            "displayName": "Contact Name",
+            "description": "The name of the main contact for the supplier",
+            "required": true
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email Address",
+            "description": "The preferred email address the supplier should be contacted on",
+            "required": true
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "The preferred phone number the supplier should be contacted on",
+            "required": true
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "A collection of addresses associated to the supplier",
+            "properties": {
+              "type": {
+                "type": "String",
+                "displayName": "Address Type",
+                "description": "The type of the address",
+                "required": true
+              },
+              "line1": {
+                "type": "String",
+                "displayName": "Line 1",
+                "description": "The first line of the address",
+                "required": true
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Line 2",
+                "description": "The second line of the address",
+                "required": true
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "The third line of the address, or city",
+                "required": true
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "The fourth line of the address, or region",
+                "required": true
+              },
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "The country for the address",
+                "required": true
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal/Zip Code",
+                "description": "The postal (or zip) code for the address",
+                "required": true
+              }
+            },
+            "required": true
+          },
+          "registrationNumber": {
+            "type": "String",
+            "displayName": "Registration Number",
+            "description": "The supplier's registration number",
+            "required": true
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "The supplier's tax number",
+            "required": true
+          },
+          "status": {
+            "type": "String",
+            "displayName": "Supplier Status",
+            "description": "The current state of the supplier",
+            "required": true
+          },
+          "defaultCurrency": {
+            "type": "String",
+            "displayName": "Default Currency",
+            "description": "The default currency for transactions recorded against the supplier",
+            "required": true
+          },
+          "metadata": {
+            "type": "Object",
+            "displayName": "Metadata",
+            "description": "Miscellaneous data about the item",
+            "properties": {
+              "isDeleted": {
+                "type": "Boolean",
+                "displayName": "IsDeleted",
+                "description": "A boolean to indicate whether the object has been deleted",
+                "required": true
+              }
+            },
+            "required": true
+          }
+        },
+        "required": true
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "type": "Object",
+        "displayName": "Suppliers",
+        "description": "An accounts payable contact that supplies good or services, also referred to as a vendor.",
+        "properties": {
+          "supplierName": {
+            "type": "String",
+            "displayName": "Name",
+            "description": "Name of the supplier.",
+            "required": true
+          },
+          "phone": {
+            "type": "String",
+            "displayName": "Phone",
+            "description": "Main contact phone number for the supplier.",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "phone",
+                  "details": "Country, area, and number are space separated"
+                }
+              ],
+              "information": []
+            }
+          },
+          "emailAddress": {
+            "type": "String",
+            "displayName": "Email",
+            "description": "Main contact email for the supplier.",
+            "required": false
+          },
+          "registrationNumber": {
+            "type": "String",
+            "displayName": "Registration Number",
+            "description": "Legal company registration identifier.",
+            "required": false,
+            "validation": {
+              "warnings": [
+                {
+                  "field": "registrationNumber",
+                  "details": "Max length of 50 characters"
+                }
+              ],
+              "information": []
+            }
+          },
+          "taxNumber": {
+            "type": "String",
+            "displayName": "Tax Number",
+            "description": "Legal tax registration identifier.",
+            "required": false
+          },
+          "status": {
+            "type": "String",
+            "displayName": "Status",
+            "description": "Status of the supplier account.",
+            "options": [
+              {
+                "value": "Active",
+                "type": "String",
+                "displayName": "Active",
+                "required": false
+              },
+              {
+                "value": "InActive",
+                "type": "String",
+                "displayName": "Inactive",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "addresses": {
+            "type": "Array",
+            "displayName": "Addresses",
+            "description": "Contact addresses for the supplier.",
+            "properties": {
+              "line1": {
+                "type": "String",
+                "displayName": "Address Line 1",
+                "description": "First line of the address.",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "addresses.line1",
+                      "details": "Max length of 500 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "line2": {
+                "type": "String",
+                "displayName": "Address Line 2",
+                "description": "Second line of the address.",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "addresses.line2",
+                      "details": "Max length of 500 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "city": {
+                "type": "String",
+                "displayName": "City",
+                "description": "Local city for the address.",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "addresses.city",
+                      "details": "Max length of 255 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "region": {
+                "type": "String",
+                "displayName": "Region",
+                "description": "Region the address is located in.",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "addresses.region",
+                      "details": "Max length of 255 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "country": {
+                "type": "String",
+                "displayName": "Country",
+                "description": "Country for the address.",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "addresses.country",
+                      "details": "Max length of 50 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "postalCode": {
+                "type": "String",
+                "displayName": "Postal code",
+                "description": "Post or Zip code for the address.",
+                "required": false,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "addresses.postalCode",
+                      "details": "Only English alphabet characters are permitted."
+                    },
+                    {
+                      "field": "addresses.postalCode",
+                      "details": "Max length of 50 characters."
+                    }
+                  ],
+                  "information": []
+                }
+              },
+              "type": {
+                "type": "String",
+                "displayName": "Type",
+                "description": "The type of address as it related to the supplier.",
+                "options": [
+                  {
+                    "value": "Billing",
+                    "type": "String",
+                    "displayName": "Billing Address",
+                    "required": false
+                  },
+                  {
+                    "value": "Delivery",
+                    "type": "String",
+                    "displayName": "Delivery Address",
+                    "required": false
+                  }
+                ],
+                "required": true,
+                "validation": {
+                  "warnings": [
+                    {
+                      "field": "addresses.type",
+                      "details": "Billing = POBOX, Delivery/Unknown = DELIVERY"
+                    }
+                  ],
+                  "information": []
+                }
+              }
+            },
+            "required": false
+          }
+        },
+        "required": true
+      }
+    }
+  ]
+}

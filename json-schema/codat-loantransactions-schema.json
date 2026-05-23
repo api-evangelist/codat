@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LoanTransactions",
+  "title": "Loan transactions",
+  "type": "object",
+  "properties": {
+    "reportInfo": {
+      "$ref": "#/components/schemas/LoanTransactions/definitions/loanTransactionsReportInfo"
+    },
+    "reportItems": {
+      "type": "array",
+      "description": "Contains object of reporting properties. The loan ref will reference a different object depending on the integration type.",
+      "items": {
+        "$ref": "#/components/schemas/LoanTransactions/definitions/reportItems"
+      }
+    }
+  },
+  "definitions": {
+    "loanTransactionsReportInfo": {
+      "title": "Loan Transactions Report Info",
+      "type": "object",
+      "properties": {
+        "pageNumber": {
+          "type": "integer",
+          "description": "The page number."
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "Queried page size."
+        },
+        "totalResults": {
+          "type": "integer",
+          "description": "The total number of transactions returned."
+        },
+        "reportName": {
+          "type": "string",
+          "description": "The name of the report."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Name of the company queried."
+        },
+        "generatedDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Returns the YYYY-MM-DD datetime of report generation."
+        }
+      }
+    },
+    "loanRef": {
+      "title": "Loan Reference",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the object being referred to."
+        },
+        "dataConnectionId": {
+          "type": "string",
+          "description": "The dataConnectionId the object being referred to is associated with."
+        },
+        "type": {
+          "type": "string",
+          "description": "The object type data is referring to, e.g. Account."
+        }
+      }
+    },
+    "itemRef": {
+      "title": "Item reference",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the object, e.g. the Journal entry."
+        },
+        "dataConnectionId": {
+          "type": "string",
+          "description": "The data connection id being referenced."
+        },
+        "type": {
+          "type": "string",
+          "description": "The data type the loan transaction entry was extracted from."
+        }
+      }
+    },
+    "reportItems": {
+      "type": "object",
+      "properties": {
+        "loanRef": {
+          "$ref": "#/components/schemas/LoanTransactions/definitions/loanRef",
+          "description": "Contains object that contains all the Loan transactions for that integration type."
+        },
+        "itemRef": {
+          "$ref": "#/components/schemas/LoanTransactions/definitions/itemRef",
+          "description": "Contains object of reporting properties. The loan ref will reference a different object depending on the integration type."
+        },
+        "date": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date of that entry type occurred."
+        },
+        "amount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The loan transaction amount."
+        },
+        "loanTransactionType": {
+          "description": "The type of loan transaction.",
+          "type": "string",
+          "enum": [
+            "Investment",
+            "Repayment",
+            "Interest",
+            "AccuredInterest"
+          ]
+        },
+        "lender": {
+          "type": "string",
+          "description": "The name of lender providing the loan."
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "reportInfo": {
+        "pageNumber": 1,
+        "pageSize": 1000,
+        "totalResults": 1,
+        "reportName": "AccountingLoanTransactions",
+        "companyName": "Supermarket store",
+        "generatedDate": "2022-10-23T00:00:00Z"
+      },
+      "reportItems": [
+        {
+          "loanRef": {
+            "id": "332",
+            "dataConnectionId": "ecd2d6be-5194-40a1-838f-5577a4881aaa",
+            "type": "chartOfAccount"
+          },
+          "itemRef": {
+            "id": "755488",
+            "dataConnectionId": "ecd2d6be-5194-40a1-838f-5577a4881aaa",
+            "type": "journalEntry"
+          },
+          "date": "2020-08-02",
+          "amount": -455,
+          "transactionType": "Repayment",
+          "lender": "Barclays Bank"
+        }
+      ]
+    }
+  ]
+}

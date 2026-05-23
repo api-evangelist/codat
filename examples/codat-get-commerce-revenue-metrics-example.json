@@ -1,0 +1,101 @@
+{
+  "operationId": "get-commerce-revenue-metrics",
+  "method": "GET",
+  "path": "/data/companies/{companyId}/connections/{connectionId}/assess/commerceMetrics/revenue",
+  "summary": "Get commerce revenue metrics",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "example": [
+        {
+          "reportInfo": {
+            "name": "revenue",
+            "displayName": "Revenue"
+          },
+          "dimensions": [
+            {
+              "index": 0,
+              "displayName": "Period",
+              "type": "datespan",
+              "items": [
+                {
+                  "index": 0,
+                  "displayName": "Period 0",
+                  "start": "2022-01-01",
+                  "end": "2022-12-31"
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "displayName": "Revenue metrics",
+              "type": "string",
+              "items": [
+                {
+                  "index": 0,
+                  "value": "Revenue"
+                },
+                {
+                  "index": 1,
+                  "value": "Revenue growth"
+                }
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "displayName": "Value",
+              "units": "GBP",
+              "index": 0,
+              "type": "currency"
+            },
+            {
+              "displayName": "Percentage change vs. previous period",
+              "units": "%",
+              "index": 1,
+              "type": "percentage"
+            }
+          ],
+          "reportData": [
+            {
+              "dimension": 0,
+              "dimensionDisplayName": "Period",
+              "item": 0,
+              "itemDisplayName": "Period 0",
+              "components": [
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Revenue metrics",
+                  "item": 0,
+                  "itemDisplayName": "Revenue",
+                  "measures": [
+                    {
+                      "index": 0,
+                      "measureDisplayName": "Value",
+                      "value": 2392.48
+                    }
+                  ]
+                },
+                {
+                  "dimension": 1,
+                  "dimensionDisplayName": "Revenue metrics",
+                  "item": 1,
+                  "itemDisplayName": "Revenue growth",
+                  "measures": [
+                    {
+                      "index": 1,
+                      "measureDisplayName": "Percentage change vs. previous period",
+                      "value": 276.65
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

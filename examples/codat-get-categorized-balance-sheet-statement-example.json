@@ -1,0 +1,457 @@
+{
+  "operationId": "get-categorized-balance-sheet-statement",
+  "method": "GET",
+  "path": "/companies/{companyId}/reports/enhancedBalanceSheet/accounts",
+  "summary": "Get categorized balance sheet statement",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "example": {
+        "reportInfo": {
+          "currency": "GBP",
+          "reportName": "EnhancedBalanceSheetAccounts",
+          "companyName": "Biscuits",
+          "generatedDate": "2023-03-24T16:42:09.2973105Z"
+        },
+        "reportItems": [
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 12973.03,
+            "accountId": "22de1660-d745-4809-a363-16b134607e66",
+            "accountName": "Prepayments",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Asset",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "AccruedDeferredAssets",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "PrepaidExpenses",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 316065.92,
+            "accountId": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+            "accountName": "Business Current Account",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Asset",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Bank",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 65945.07,
+            "accountId": "e5d7612c-1671-47b4-b733-5db48363fcd0",
+            "accountName": "Inventory",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Asset",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Inventory",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 71937.95,
+            "accountId": "1b6266d1-1e44-46c5-8eb5-a8f98e03124e",
+            "accountName": "Accounts Receivable",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Asset",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Receivables",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "AccountsReceivables",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 2180148.56,
+            "accountId": "724ca578-8b5d-4bdb-ad45-e3820eee9de9",
+            "accountName": "Office Equipment",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Asset",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "NonCurrent",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "AccumulatedDepreciationDepletionAmortization",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 1804674.9,
+            "accountId": "be3eb911-034b-42de-95db-0d58ac978b7f",
+            "accountName": "Computer Equipment",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Asset",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "NonCurrent",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "AccumulatedDepreciationDepletionAmortization",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 3417424.16,
+            "accountId": "39225d6f-3722-4508-ac3f-a2f6ec96ad31",
+            "accountName": "Retained Earnings",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Equity",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "RetainedEarnings",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "CapitalIncomeReserve",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 44252.52,
+            "accountId": "78828dd9-6008-4662-b43c-e9d87907fd2b",
+            "accountName": "Current Year Earnings",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Equity",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "ShareCapital",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "CommonStock",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 75835.64,
+            "accountId": "53bf27a7-7497-4c61-9887-dfaad5c6d80a",
+            "accountName": "Accounts Payable",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Liability",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "AccountsPayable",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 208264.65,
+            "accountId": "e2530acd-91c8-48f8-a35f-935dbd7432e2",
+            "accountName": "Accruals",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Liability",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "AccruedLiabilities",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 0,
+            "accountId": "d19852a2-e292-4eb9-a909-9dadb95c0e76",
+            "accountName": "Rounding",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Liability",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Bank",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 25184.57,
+            "accountId": "62060aae-e5a6-4db5-a3bb-6abec6d47959",
+            "accountName": "Credit Card Control Account",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Liability",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Debt",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "CreditCards",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 9650.58,
+            "accountId": "9be6382f-6b33-402d-b448-0db1dbf67a98",
+            "accountName": "Historical Adjustment",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Liability",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Debt",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "LoansPayable",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 2022.41,
+            "accountId": "8636effc-50fb-45ba-8b2b-18336fa29b6b",
+            "accountName": "John Smith",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Liability",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Debt",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "LoansPayable",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 29034.75,
+            "accountId": "3a872b81-d1af-4d31-9bfa-a37280b8f68c",
+            "accountName": "VAT",
+            "accountCategory": {
+              "status": "Confirmed",
+              "levels": [
+                {
+                  "levelName": "Liability",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Personnel",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "PensionPayable",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 1076.55,
+            "accountId": "3b58f7ff-fa16-453a-9931-f020816d76e7",
+            "accountName": "Interest Payables",
+            "accountCategory": {
+              "status": "Confirmed",
+              "levels": [
+                {
+                  "levelName": "Liability",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Current",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "Personnel",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "PensionPayable",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 0,
+            "accountId": "8852a857-aa9d-4706-839f-638e9d6b5a66",
+            "accountName": "Unpaid Expense Claims",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Liability",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "NonCurrent",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "date": "2022-08-31T00:00:00",
+            "balance": 638999.6,
+            "accountId": "55008233-40e7-41ac-84af-2255fa028c2e",
+            "accountName": "Loan",
+            "accountCategory": {
+              "status": "Suggested",
+              "levels": [
+                {
+                  "levelName": "Liability",
+                  "confidence": 99.99
+                },
+                {
+                  "levelName": "NonCurrent",
+                  "confidence": 99.99
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

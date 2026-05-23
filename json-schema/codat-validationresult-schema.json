@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ValidationResult",
+  "title": "Validation result",
+  "type": "object",
+  "properties": {
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ValidationResult/definitions/validationItem"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ValidationResult/definitions/validationItem"
+      }
+    }
+  },
+  "definitions": {
+    "validationItem": {
+      "title": "Validation item",
+      "type": "object",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "The unique identifier of the rule that wasn't met."
+        },
+        "itemId": {
+          "type": "string",
+          "description": "The unique identifier of the item that was validated."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message that describes the validation warning or error."
+        },
+        "validatorName": {
+          "type": "string",
+          "description": "The name of the validator that was used to validate the item."
+        }
+      }
+    }
+  }
+}

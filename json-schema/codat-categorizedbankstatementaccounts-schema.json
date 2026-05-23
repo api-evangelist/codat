@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CategorizedBankStatementAccounts",
+  "title": "Categorized bank statement accounts",
+  "description": "> **Categorization engine**\n>\n> The categorization engine uses machine learning and has been fully trained against Plaid and TrueLayer banking data sources. It is not fully trained against the Basiq banking data source.\n\nThe Enhanced Cash Flow accounts endpoint provides a list of accounts that categorized transactions have been taken from.",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "title": "Account",
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "The ID of the account from the provider.",
+                "type": "string"
+              },
+              "sourceRef": {
+                "$ref": "#/components/schemas/EnhancedCashFlowTransactions/definitions/accounts/properties/sourceRef"
+              },
+              "platformName": {
+                "description": "Name of the banking data source, e.g. \"Plaid\".",
+                "type": "string"
+              },
+              "accountProvider": {
+                "description": "The bank or other financial institution providing the account.",
+                "type": "string"
+              },
+              "accountName": {
+                "description": "The name of the account according to the provider.",
+                "type": "string"
+              },
+              "accountType": {
+                "description": "The type of banking account, e.g. credit or debit.",
+                "type": "string"
+              },
+              "currency": {
+                "$ref": "#/components/schemas/SourceAccount/properties/currency",
+                "description": "The currency code for the bank account."
+              },
+              "currentBalance": {
+                "description": "The balance of the bank account.",
+                "type": "number",
+                "format": "decimal"
+              },
+              "identifiers": {
+                "$ref": "#/components/schemas/BankingAccount/definitions/accountIdentifiers"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/PagingInfo"
+    }
+  ],
+  "example": {
+    "results": [
+      {
+        "sourceRef": {
+          "sourceType": "Banking"
+        },
+        "platformName": "Banking Sandbox",
+        "accountProvider": "Lloyds Bank",
+        "accountName": "Business Savings Account",
+        "accountType": "Debit",
+        "currency": "GBP",
+        "currentBalance": 0
+      },
+      {
+        "sourceRef": {
+          "sourceType": "Banking"
+        },
+        "platformName": "Banking Sandbox",
+        "accountProvider": "Lloyds Bank",
+        "accountName": "Banking - Business Credit Card",
+        "accountType": "Credit",
+        "currency": "GBP",
+        "currentBalance": 0
+      },
+      {
+        "sourceRef": {
+          "sourceType": "Banking"
+        },
+        "platformName": "Banking Sandbox",
+        "accountProvider": "Lloyds Bank",
+        "accountName": "Business Undeposited Funds",
+        "accountType": "Debit",
+        "currency": "GBP",
+        "currentBalance": 0
+      },
+      {
+        "sourceRef": {
+          "sourceType": "Banking"
+        },
+        "platformName": "Banking Sandbox",
+        "accountProvider": "Lloyds Bank",
+        "accountName": "Business Current Account",
+        "accountType": "Debit",
+        "currency": "GBP",
+        "currentBalance": 0
+      }
+    ],
+    "pageNumber": 1,
+    "pageSize": 10,
+    "totalResults": 15,
+    "_links": {
+      "self": {
+        "href": "/companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts"
+      },
+      "current": {
+        "href": "/companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts?page=1&pageSize=10"
+      },
+      "next": {
+        "href": "/companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts?page=2&pageSize=10"
+      }
+    }
+  }
+}

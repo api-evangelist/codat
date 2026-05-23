@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateConnectionStatus",
+  "title": "Update connection",
+  "x-internal": true,
+  "type": "object",
+  "properties": {
+    "status": {
+      "$ref": "#/components/schemas/Connection/definitions/dataConnectionStatus",
+      "description": "The current authorization status of the data connection.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}

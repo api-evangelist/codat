@@ -1,0 +1,64 @@
+{
+  "operationId": "create-api-key",
+  "method": "POST",
+  "path": "/apiKeys",
+  "summary": "Create API key",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Create API key with name",
+      "example": {
+        "name": "azure-invoice-finance-processor"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "API key details",
+      "example": {
+        "id": "0498e921-9b53-4396-a412-4f2f5983b0a2",
+        "apiKey": "ztHQGvnC4XN2CgUhaDWEG4ySLUJqWjp7zkbZkGHd",
+        "createdDate": "2022-04-11T13:49:37Z"
+      }
+    },
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "API key details with name",
+      "example": {
+        "id": "0498e921-9b53-4396-a412-4f2f5983b0a2",
+        "name": "azure-invoice-finance-processor",
+        "apiKey": "ztHQGvnC4XN2CgUhaDWEG4ySLUJqWjp7zkbZkGHd",
+        "createdDate": "2022-04-11T13:49:37Z"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "Max length for name reached",
+      "example": {
+        "statusCode": 400,
+        "service": "PublicApi",
+        "error": "Max string length (50) for `name` reached.",
+        "correlationId": "bc997528a9d7abb9161ef45f05d38599",
+        "canBeRetried": "Unknown",
+        "detailedErrorCode": 0
+      }
+    },
+    {
+      "status": "409",
+      "contentType": "application/json",
+      "name": "Max length for name reached",
+      "example": {
+        "statusCode": 400,
+        "service": "PublicApi",
+        "error": "Maximum number of API keys reached. To create a new API key, delete an unused key and try again.",
+        "correlationId": "bc997528a9d7abb9161ef45f05d38599",
+        "canBeRetried": "Unknown",
+        "detailedErrorCode": 0
+      }
+    }
+  ]
+}

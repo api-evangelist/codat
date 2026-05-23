@@ -1,0 +1,425 @@
+{
+  "operationId": "list-commerce-payments",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-payments",
+  "summary": "List payments",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "BigCommerce",
+      "example": {
+        "results": [
+          {
+            "id": "103_1_1_refund",
+            "amount": -64,
+            "currency": "GBP",
+            "type": "Unknown",
+            "status": "Paid",
+            "paymentProvider": "bigpaypay",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2022-06-15T17:13:13Z",
+            "modifiedDate": "2023-04-11T10:33:52Z"
+          },
+          {
+            "id": "105_2_2_refund",
+            "amount": -33.95,
+            "currency": "GBP",
+            "type": "Unknown",
+            "status": "Paid",
+            "paymentProvider": "bigpaypay",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2022-06-24T13:57:01Z",
+            "modifiedDate": "2023-04-11T10:33:52Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 20,
+        "_links": {
+          "current": {
+            "href": "/companies/d1ebcf6d-f7f9-4841-8a06-fec12c492a48/connections/7c0a21e8-938a-40a4-b0f7-5ab5d46804b0/data/commerce-payments?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d1ebcf6d-f7f9-4841-8a06-fec12c492a48/connections/7c0a21e8-938a-40a4-b0f7-5ab5d46804b0/data/commerce-payments"
+          },
+          "next": {
+            "href": "/companies/d1ebcf6d-f7f9-4841-8a06-fec12c492a48/connections/7c0a21e8-938a-40a4-b0f7-5ab5d46804b0/data/commerce-payments?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clover",
+      "example": {
+        "results": [
+          {
+            "id": "01J7HV88GT6B8",
+            "amount": 1000,
+            "currency": "USD",
+            "paymentMethodRef": {
+              "id": "BR5M17TG091SP",
+              "name": "Credit Card"
+            },
+            "type": "Card",
+            "status": "Paid",
+            "paymentProvider": "clover",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2021-05-24T10:35:08Z",
+            "modifiedDate": "2023-01-09T11:01:02Z",
+            "sourceModifiedDate": "2021-05-24T10:35:08Z"
+          },
+          {
+            "id": "0A8ZMPG40Q9AM",
+            "amount": 1000,
+            "currency": "USD",
+            "paymentMethodRef": {
+              "id": "BR5M17TG091SP",
+              "name": "Credit Card"
+            },
+            "type": "Card",
+            "status": "Paid",
+            "paymentProvider": "clover",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2021-05-24T10:35:31Z",
+            "modifiedDate": "2023-01-09T11:01:02Z",
+            "sourceModifiedDate": "2021-05-24T10:35:31Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 77,
+        "_links": {
+          "current": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-payments?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-payments"
+          },
+          "next": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-payments?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Lightspeed K Trial",
+      "example": {
+        "results": [
+          {
+            "id": "1_A62084.1_2023-01-05T03:34:50.296Z",
+            "amount": 0,
+            "currency": "AUD",
+            "paymentMethodRef": {
+              "id": "0"
+            },
+            "type": "Unknown",
+            "status": "Paid",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2023-01-05T03:34:50Z",
+            "modifiedDate": "2023-03-02T09:50:43Z"
+          },
+          {
+            "id": "R61465.1_1_A61465.1_2022-12-09T02:27:46.273Z",
+            "amount": 5,
+            "currency": "AUD",
+            "paymentMethodRef": {
+              "id": "647208621834714",
+              "name": "LSPay - Mary"
+            },
+            "type": "Unknown",
+            "status": "Paid",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2022-12-09T02:27:46Z",
+            "modifiedDate": "2023-03-02T09:50:43Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 26,
+        "_links": {
+          "current": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-payments?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-payments"
+          },
+          "next": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-payments?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie",
+      "example": {
+        "results": [
+          {
+            "id": "re_Azhe8TzfUK",
+            "amount": -20,
+            "currency": "EUR",
+            "type": "OnlineCard",
+            "status": "Paid",
+            "paymentProvider": "mollie",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2022-01-17T16:00:46",
+            "modifiedDate": "2022-03-17T16:15:23Z"
+          },
+          {
+            "id": "re_NPKEJhQveu",
+            "amount": -60,
+            "currency": "EUR",
+            "type": "OnlineCard",
+            "status": "Paid",
+            "paymentProvider": "mollie",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2022-01-17T16:00:05",
+            "modifiedDate": "2022-03-17T16:15:23Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 16,
+        "_links": {
+          "current": {
+            "href": "/companies/65fe5864-16d7-41f4-8823-87ae1cf3a283/connections/1dbbf0ab-a27a-45b0-982a-ae0d8985affc/data/commerce-payments?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/65fe5864-16d7-41f4-8823-87ae1cf3a283/connections/1dbbf0ab-a27a-45b0-982a-ae0d8985affc/data/commerce-payments"
+          },
+          "next": {
+            "href": "/companies/65fe5864-16d7-41f4-8823-87ae1cf3a283/connections/1dbbf0ab-a27a-45b0-982a-ae0d8985affc/data/commerce-payments?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "PrestaShop",
+      "example": {
+        "results": [
+          {
+            "id": "1",
+            "amount": 20.9,
+            "currency": "USD",
+            "type": "Unknown",
+            "status": "Paid",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2021-09-08T01:52:55",
+            "modifiedDate": "2022-01-26T15:09:42Z"
+          },
+          {
+            "id": "2",
+            "amount": 20.9,
+            "currency": "USD",
+            "type": "Unknown",
+            "status": "Paid",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2021-09-08T01:53:28",
+            "modifiedDate": "2022-01-26T15:09:42Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 5,
+        "_links": {
+          "current": {
+            "href": "/companies/2bf78e61-58ca-421a-a430-5dfa59cf15b0/connections/30774c1f-fdcd-491e-9e60-47e316b3ab9b/data/commerce-payments?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/2bf78e61-58ca-421a-a430-5dfa59cf15b0/connections/30774c1f-fdcd-491e-9e60-47e316b3ab9b/data/commerce-payments"
+          },
+          "next": {
+            "href": "/companies/2bf78e61-58ca-421a-a430-5dfa59cf15b0/connections/30774c1f-fdcd-491e-9e60-47e316b3ab9b/data/commerce-payments?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "results": [
+          {
+            "id": "4630233579678",
+            "amount": 600,
+            "currency": "GBP",
+            "type": "OnlineCard",
+            "status": "Failed",
+            "paymentProvider": "Shopify Payments",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2021-03-19T13:17:49Z",
+            "modifiedDate": "2023-02-10T15:18:24Z",
+            "sourceModifiedDate": "2021-03-19T13:17:49Z"
+          },
+          {
+            "id": "4630234497182",
+            "amount": 600,
+            "currency": "GBP",
+            "type": "OnlineCard",
+            "status": "Paid",
+            "paymentProvider": "Shopify Payments",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2021-03-19T13:18:29Z",
+            "modifiedDate": "2023-02-10T15:18:24Z",
+            "sourceModifiedDate": "2021-03-19T13:18:29Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 46,
+        "_links": {
+          "current": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-payments?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-payments"
+          },
+          "next": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-payments?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "SumUp",
+      "example": {
+        "results": [
+          {
+            "id": "07efcdd0-7f61-4d82-957f-52e8f0bd3f89",
+            "amount": 200,
+            "currency": "GBP",
+            "type": "OnlineCard",
+            "status": "Cancelled",
+            "paymentProvider": "sumup",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2021-03-30T12:20:40Z",
+            "modifiedDate": "2022-03-17T16:13:46Z"
+          },
+          {
+            "id": "46d36a64-ea48-4e37-9340-3548cbf3ca2f",
+            "amount": 15,
+            "currency": "GBP",
+            "type": "Cash",
+            "status": "Paid",
+            "paymentProvider": "sumup",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2021-03-26T21:09:59Z",
+            "modifiedDate": "2022-03-17T16:13:46Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 6,
+        "_links": {
+          "current": {
+            "href": "/companies/d9e78460-7ee5-4a34-a3f4-9652a5946b1f/connections/60959ebe-8491-4368-bf0a-f715c3ce2e53/data/commerce-payments?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d9e78460-7ee5-4a34-a3f4-9652a5946b1f/connections/60959ebe-8491-4368-bf0a-f715c3ce2e53/data/commerce-payments"
+          },
+          "next": {
+            "href": "/companies/d9e78460-7ee5-4a34-a3f4-9652a5946b1f/connections/60959ebe-8491-4368-bf0a-f715c3ce2e53/data/commerce-payments?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "WooCommerce",
+      "example": {
+        "results": [
+          {
+            "id": "33",
+            "amount": 0,
+            "currency": "GBP",
+            "type": "Unknown",
+            "status": "Paid",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2021-03-11T09:07:00Z",
+            "modifiedDate": "2021-07-13T16:19:00Z"
+          },
+          {
+            "id": "35",
+            "amount": 30,
+            "currency": "GBP",
+            "type": "Unknown",
+            "status": "Paid",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2021-03-11T09:08:56Z",
+            "modifiedDate": "2021-07-13T16:19:00Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 5,
+        "_links": {
+          "current": {
+            "href": "/companies/010c6f53-8fc8-40ab-9ed5-41191cf9c6b5/connections/7545ca2e-5f58-4f98-8af2-3b2c38bb8074/data/commerce-payments?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/010c6f53-8fc8-40ab-9ed5-41191cf9c6b5/connections/7545ca2e-5f58-4f98-8af2-3b2c38bb8074/data/commerce-payments"
+          },
+          "next": {
+            "href": "/companies/010c6f53-8fc8-40ab-9ed5-41191cf9c6b5/connections/7545ca2e-5f58-4f98-8af2-3b2c38bb8074/data/commerce-payments?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zettle",
+      "example": {
+        "results": [
+          {
+            "id": "09b94cfc-2d98-11eb-8021-0e1b9dcbeca1",
+            "amount": 25,
+            "currency": "GBP",
+            "type": "Paypal",
+            "status": "Unknown",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2020-11-23T14:28:04Z",
+            "modifiedDate": "2021-10-27T15:22:37Z"
+          },
+          {
+            "id": "226580d6-2d98-11eb-a35c-fed5e63de507",
+            "amount": 58.5,
+            "currency": "GBP",
+            "type": "Paypal",
+            "status": "Unknown",
+            "dueDate": "0001-01-01T00:00:00",
+            "createdDate": "2020-11-23T14:28:47Z",
+            "modifiedDate": "2021-10-27T15:22:37Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 8,
+        "_links": {
+          "current": {
+            "href": "/companies/9d448ad0-4508-47fc-bd3b-6950493151f1/connections/c7baa8da-3302-464b-8aa1-edcd4c900902/data/commerce-payments?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/9d448ad0-4508-47fc-bd3b-6950493151f1/connections/c7baa8da-3302-464b-8aa1-edcd4c900902/data/commerce-payments"
+          },
+          "next": {
+            "href": "/companies/9d448ad0-4508-47fc-bd3b-6950493151f1/connections/c7baa8da-3302-464b-8aa1-edcd4c900902/data/commerce-payments?page=2&pageSize=2"
+          }
+        }
+      }
+    }
+  ]
+}

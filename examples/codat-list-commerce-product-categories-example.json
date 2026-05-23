@@ -1,0 +1,46 @@
+{
+  "operationId": "list-commerce-product-categories",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-productCategories",
+  "summary": "List product categories",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Lightspeed K Trial",
+      "example": {
+        "results": [
+          {
+            "id": "647208621834281",
+            "name": "Alcoholic beverages",
+            "ancestorRefs": [],
+            "hasChildren": false,
+            "modifiedDate": "2023-03-02T09:49:11Z"
+          },
+          {
+            "id": "647208621834282",
+            "name": "NA beverages",
+            "ancestorRefs": [],
+            "hasChildren": false,
+            "modifiedDate": "2023-03-02T09:49:11Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 8,
+        "_links": {
+          "current": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-productCategories?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-productCategories"
+          },
+          "next": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-productCategories?page=2&pageSize=2"
+          }
+        }
+      }
+    }
+  ]
+}

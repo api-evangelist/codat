@@ -1,0 +1,101 @@
+{
+  "operationId": "configure-supplemental-data",
+  "method": "PUT",
+  "path": "/integrations/{platformKey}/dataTypes/{dataType}/supplementalDataConfig",
+  "summary": "Configure",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Xero - Accounts",
+      "example": {
+        "yourKeyNameForAccounts": {
+          "dataSource": "/Accounts",
+          "pullData": {
+            "yourNameForTaxType": "TaxType",
+            "yourNameForSystemAccount": "SystemAccount"
+          }
+        }
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Xero - Invoices",
+      "example": {
+        "yourKeyNameForInvoices": {
+          "dataSource": "/Invoices",
+          "pullData": {
+            "yourNameForExpectedPaymentDate": "ExpectedPaymentDate",
+            "yourNameForHasAttachments": "HasAttachments"
+          }
+        }
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Xero - Items",
+      "example": {
+        "yourKeyNameForItems": {
+          "dataSource": "/Items",
+          "pullData": {
+            "yourNameForQuantityOnHand": "QuantityOnHand",
+            "yourNameForTotalCostPool": "TotalCostPool"
+          }
+        }
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Xero - Contacts",
+      "example": {
+        "yourKeyNameForContacts": {
+          "dataSource": "/Contacts",
+          "pullData": {
+            "yourNameForBankAccounts": "BankAccountDetails"
+          }
+        }
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Xero - Tax rates",
+      "example": {
+        "yourKeyNameForTaxRates": {
+          "dataSource": "/TaxRates",
+          "pullData": {
+            "yourNameForCanApplyToLiabilities": "CanApplyToLiabilities",
+            "yourNameForCanApplyToAssets": "CanApplyToAssets",
+            "yourNameForCanApplyToEquity": "CanApplyToEquity",
+            "yourNameForCanApplyToExpenses": "CanApplyToExpenses",
+            "yourNameForCanApplyToRevenue": "CanApplyToRevenue"
+          }
+        }
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "QBO - Customers",
+      "example": {
+        "yourKeyNameForCustomers": {
+          "dataSource": "/Customer",
+          "pullData": {
+            "yourNameForSalesTermRef": "SalesTermRef.value",
+            "yourNameForParentRef": "ParentRef.value"
+          }
+        }
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "QBO - Invoices",
+      "example": {
+        "yourKeyNameForInvoices": {
+          "dataSource": "/Invoice",
+          "pullData": {
+            "yourNameForSalesTermRef": "SalesTermRef.value"
+          }
+        }
+      }
+    }
+  ],
+  "responseExamples": []
+}

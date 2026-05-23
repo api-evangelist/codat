@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Connection",
+  "title": "Connection",
+  "description": "\ufeffA connection represents a [company's](https://docs.codat.io/bank-feeds-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "#/components/parameters/connectionId/schema"
+    },
+    "integrationId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "fd321cb6-7963-4506-b873-e99593a45e30",
+      "description": "A Codat ID representing the integration."
+    },
+    "integrationKey": {
+      "type": "string",
+      "description": "A unique four-character ID that identifies the platform of the company's data connection. This ensures continuity if the platform changes its name in the future."
+    },
+    "sourceId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "35b92968-9851-4095-ad60-395c95cbcba4",
+      "description": "A source-specific ID used to distinguish between different sources originating from the same data connection. In general, a data connection is a single data source. However, for TrueLayer, `sourceId` is associated with a specific bank and has a many-to-one relationship with the `integrationId`."
+    },
+    "sourceType": {
+      "title": "Source Type",
+      "description": "The type of platform of the connection.",
+      "type": "string",
+      "enum": [
+        "Accounting",
+        "Banking",
+        "BankFeed",
+        "Commerce",
+        "Expense",
+        "Other",
+        "Unknown"
+      ],
+      "example": "Accounting"
+    },
+    "platformName": {
+      "type": "string",
+      "description": "Name of integration connected to company."
+    },
+    "linkUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "The link URL your customers can use to authorize access to their business application.",
+      "example": "https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/2e2eb431-c1fa-4dc9-93fa-d29781c12bcd/start"
+    },
+    "status": {
+      "$ref": "#/components/schemas/Connection/definitions/dataConnectionStatus"
+    },
+    "lastSync": {
+      "$ref": "#/components/schemas/DateTime",
+      "nullable": true
+    },
+    "created": {
+      "$ref": "#/components/schemas/DateTime"
+    },
+    "dataConnectionErrors": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/Connection/definitions/dataConnectionError"
+      }
+    },
+    "connectionInfo": {
+      "type": "object",
+      "nullable": true,
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "integrationId",
+    "integrationKey",
+    "sourceId",
+    "platformName",
+    "linkUrl",
+    "status",
+    "created",
+    "sourceType"
+  ],
+  "definitions": {
+    "dataConnectionStatus": {
+      "title": "Data connection status",
+      "description": "The current authorization status of the data connection.",
+      "type": "string",
+      "enum": [
+        "PendingAuth",
+        "Linked",
+        "Unlinked",
+        "Deauthorized"
+      ]
+    },
+    "dataConnectionError": {
+      "title": "Data connection error",
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "description": "The HTTP status code returned by the source platform when the error occurred."
+        },
+        "statusText": {
+          "type": "string",
+          "description": "A non-numeric status code/text returned by the source platform when the error occurred."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "A message about a error returned by Codat."
+        },
+        "erroredOnUtc": {
+          "$ref": "#/components/schemas/DateTime"
+        },
+        "status": {
+          "title": "Error status",
+          "description": "The current status of a transient error. Null statuses indicate that the error is not transient.",
+          "type": "string",
+          "nullable": true,
+          "enum": [
+            "Active",
+            "Resolved"
+          ]
+        },
+        "resolvedOnUtc": {
+          "description": "The datetime in Utc that the error was resolved.",
+          "nullable": true,
+          "$ref": "#/components/schemas/DateTime"
+        }
+      }
+    },
+    "dataConnectionSourceType": {
+      "title": "Source Type",
+      "description": "The type of platform of the connection.",
+      "type": "string",
+      "enum": [
+        "Accounting",
+        "Banking",
+        "BankFeed",
+        "Commerce",
+        "Expense",
+        "Other",
+        "Unknown"
+      ],
+      "example": "Accounting"
+    }
+  },
+  "example": {
+    "id": "ee2eb431-c0fa-4dc9-93fa-d29781c12bcd",
+    "integrationId": "bf083d72-62c7-493e-aec9-81b4dbba7e2c",
+    "integrationKey": "dfxm",
+    "sourceId": "bdd831ce-eebd-4896-89a7-20e5ee8989ee",
+    "platformName": "Basiq",
+    "linkUrl": "https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start",
+    "status": "Linked",
+    "lastSync": "2022-10-27T10:22:43.6464237Z",
+    "created": "2022-10-27T09:53:29Z",
+    "sourceType": "Banking"
+  }
+}

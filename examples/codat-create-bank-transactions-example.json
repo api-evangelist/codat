@@ -1,0 +1,153 @@
+{
+  "operationId": "create-bank-transactions",
+  "method": "POST",
+  "path": "/companies/{companyId}/connections/{connectionId}/push/bankAccounts/{accountId}/bankTransactions",
+  "summary": "Create bank transactions",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "accountId": "49cd5a42-b311-4750-9361-52e2ed1d4653",
+        "transactions": [
+          {
+            "id": "716422529",
+            "date": "2023-08-22T10:21:00",
+            "description": "Repayment of Credit Card",
+            "counterparty": "Bank of Example",
+            "reference": "Ref-12345",
+            "reconciled": true,
+            "amount": 100,
+            "balance": 100,
+            "transactionType": "Credit"
+          },
+          {
+            "id": "716422530",
+            "date": "2023-08-22T10:22:00",
+            "description": "Amazon Purchase",
+            "counterparty": "Amazon",
+            "reference": "Ref-12346",
+            "reconciled": false,
+            "amount": -100,
+            "balance": 0,
+            "transactionType": "Debit"
+          },
+          {
+            "id": "716422531",
+            "date": "2023-08-22T10:23:00",
+            "description": "Office Supplies",
+            "counterparty": "Office Mart",
+            "reference": "Ref-12347",
+            "reconciled": false,
+            "amount": -60,
+            "balance": -60,
+            "transactionType": "Debit"
+          }
+        ]
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "QuickBooks Online Bank Feeds",
+      "example": {
+        "accountId": "49cd5a42-b311-4750-9361-52e2ed1d4653",
+        "transactions": [
+          {
+            "id": "716422529",
+            "date": "2023-08-22T10:21:00",
+            "description": "Repayment of Credit Card",
+            "amount": 100,
+            "balance": 100,
+            "transactionType": "Credit"
+          },
+          {
+            "id": "716422530",
+            "date": "2023-08-22T10:22:00",
+            "description": "Amazon Purchase",
+            "amount": -100,
+            "balance": 0,
+            "transactionType": "Debit"
+          },
+          {
+            "id": "716422531",
+            "date": "2023-08-22T10:23:00",
+            "description": "Office Supplies",
+            "amount": -60,
+            "balance": -60,
+            "transactionType": "Debit"
+          }
+        ]
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "accountId": "49cd5a42-b311-4750-9361-52e2ed1d4653",
+        "transactions": [
+          {
+            "id": "716422529",
+            "date": "2023-08-22T10:21:00",
+            "description": "Repayment of Credit Card",
+            "amount": 100,
+            "transactionType": "Credit"
+          },
+          {
+            "id": "716422530",
+            "date": "2023-08-22T10:22:00",
+            "description": "Amazon Purchase",
+            "amount": -100,
+            "transactionType": "Debit"
+          },
+          {
+            "id": "716422531",
+            "date": "2023-08-22T10:23:00",
+            "description": "Office Supplies",
+            "amount": -60,
+            "transactionType": "Debit"
+          }
+        ]
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Sage",
+      "example": {
+        "accountId": "49cd5a42-b311-4750-9361-52e2ed1d4653",
+        "transactions": [
+          {
+            "id": "716422529",
+            "date": "2023-08-22T10:21:00",
+            "description": "Repayment of Credit Card",
+            "counterparty": "Bank of Example",
+            "reference": "Ref-12345",
+            "amount": 100,
+            "balance": 100,
+            "transactionType": "Credit"
+          },
+          {
+            "id": "716422530",
+            "date": "2023-08-22T10:22:00",
+            "description": "Amazon Purchase",
+            "counterparty": "Amazon",
+            "reference": "Ref-12346",
+            "amount": -100,
+            "balance": 0,
+            "transactionType": "Debit"
+          },
+          {
+            "id": "716422531",
+            "date": "2023-08-22T10:23:00",
+            "description": "Office Supplies",
+            "counterparty": "Office Mart",
+            "reference": "Ref-12347",
+            "amount": -60,
+            "balance": -60,
+            "transactionType": "Debit"
+          }
+        ]
+      }
+    }
+  ],
+  "responseExamples": []
+}

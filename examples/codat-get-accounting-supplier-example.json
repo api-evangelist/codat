@@ -1,0 +1,442 @@
+{
+  "operationId": "get-accounting-supplier",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/suppliers/{supplierId}",
+  "summary": "Get supplier",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "id": "owQ2Gqgj9f",
+        "supplierName": "Abshire - Kshlerin",
+        "contactName": "Faye Hansen",
+        "emailAddress": "hello@Abshire-Kshlerin.info",
+        "phone": "01338 858162",
+        "addresses": [
+          {
+            "type": "Delivery",
+            "line1": "Suite 431",
+            "line2": "289 Giles Lake",
+            "city": "Cesarmouth",
+            "region": "Northern Ireland",
+            "country": "United Kingdom",
+            "postalCode": "BG40 9GP"
+          }
+        ],
+        "registrationNumber": "VYL1XZXR",
+        "taxNumber": "1396267523.0914588",
+        "status": "Active",
+        "modifiedDate": "2023-04-26T12:38:17Z",
+        "sourceModifiedDate": "1660-11-28T23:18:00",
+        "defaultCurrency": "GBP",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "78623f13-931e-eb11-bbf8-0022481b3585",
+        "supplierName": "",
+        "contactName": "",
+        "emailAddress": "",
+        "phone": "",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "",
+            "line2": "",
+            "city": "",
+            "region": "",
+            "country": "GB",
+            "postalCode": ""
+          }
+        ],
+        "taxNumber": "",
+        "status": "Active",
+        "modifiedDate": "2023-03-27T14:21:12Z",
+        "sourceModifiedDate": "2020-11-04T11:44:22Z",
+        "defaultCurrency": "GBP",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "id": "3150917c-1d92-4d77-9018-31b5c4758ca9",
+        "supplierName": "Abe",
+        "contactName": "Kelly's Contact Name",
+        "emailAddress": "sales@kellysupplies.com",
+        "phone": "07999 999999",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "Unit 51",
+            "city": "Bakersfield",
+            "region": "California",
+            "country": "US",
+            "postalCode": "933081"
+          }
+        ],
+        "registrationNumber": "8409314368",
+        "status": "Active",
+        "modifiedDate": "2022-10-26T13:32:05Z",
+        "sourceModifiedDate": "2022-07-15T12:01:15Z",
+        "defaultCurrency": "EUR"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "id": "0185fea2-0298-445b-909a-0db685118a9e",
+        "supplierName": "a",
+        "addresses": [
+          {
+            "type": "Billing",
+            "country": "GB"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2022-10-26T13:33:13Z",
+        "sourceModifiedDate": "2017-08-02T10:58:54Z",
+        "defaultCurrency": "GBP"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "id": "11526230",
+        "supplierName": "-",
+        "contactName": "Test 1",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "1 Place House",
+            "line2": "",
+            "city": "London",
+            "country": "United Kingdom",
+            "postalCode": "WC1X 1AH"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2023-04-25T14:19:08Z",
+        "sourceModifiedDate": "2023-04-17T06:02:46",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "id": "api vendor",
+        "supplierName": "api vendor",
+        "addresses": [],
+        "status": "Active",
+        "modifiedDate": "2023-03-24T16:07:25Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "KashFlow",
+      "example": {
+        "id": "6202387",
+        "supplierName": "Dell",
+        "contactName": "",
+        "emailAddress": "",
+        "phone": "",
+        "addresses": [],
+        "taxNumber": "",
+        "status": "Unknown",
+        "modifiedDate": "2022-09-30T10:29:15Z",
+        "sourceModifiedDate": "2017-05-09T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "id": "779",
+        "supplierName": "Test Vendor",
+        "contactName": "Test Vendor",
+        "emailAddress": "",
+        "phone": "",
+        "addresses": [],
+        "status": "Active",
+        "modifiedDate": "2023-01-30T14:47:02Z",
+        "sourceModifiedDate": "2022-02-04T14:24:43",
+        "defaultCurrency": "GBP"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "A60000-1197760912",
+        "supplierName": "A Cheung Limited",
+        "contactName": "Angela Cheung",
+        "emailAddress": "AC@CheungLimited.com",
+        "phone": "510 555 5723",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "A Cheung Limited, Angela Cheung",
+            "line2": "3818 Bear Rd. West",
+            "city": "Berkeley",
+            "region": "CA",
+            "postalCode": "94688"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2023-04-26T09:09:03Z",
+        "sourceModifiedDate": "2023-12-16T05:06:44",
+        "defaultCurrency": "GBP",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "41",
+        "supplierName": "AI Support",
+        "contactName": "AI Support",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "test",
+            "region": "string",
+            "country": "Djibouti"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2023-01-18T11:02:36Z",
+        "sourceModifiedDate": "2022-12-07T10:48:18Z",
+        "defaultCurrency": "GBP"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "129",
+        "supplierName": "Ally Johnson",
+        "contactName": "Miss Smith",
+        "phone": "0728 38474",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "100 London Road",
+            "line2": "Angel",
+            "city": "London",
+            "region": "Greater London",
+            "country": "England",
+            "postalCode": "EC1M"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2023-04-26T09:35:55Z",
+        "sourceModifiedDate": "2023-04-13T01:51:08Z",
+        "defaultCurrency": "GBP",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 200cloud",
+      "example": {
+        "id": "776",
+        "supplierName": "Aaren",
+        "contactName": "",
+        "emailAddress": "",
+        "phone": "",
+        "addresses": [
+          {
+            "type": "Unknown",
+            "line1": "",
+            "line2": "",
+            "city": "",
+            "region": "",
+            "country": "Great Britain",
+            "postalCode": ""
+          }
+        ],
+        "taxNumber": "",
+        "status": "Archived",
+        "modifiedDate": "2022-10-14T09:35:58Z",
+        "defaultCurrency": "GBP",
+        "metadata": {
+          "isDeleted": true
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "id": "CON001",
+        "supplierName": "Concept Stationery Supplies",
+        "contactName": "Mark Ramsay",
+        "emailAddress": "newbusinessadvice@sage.com",
+        "phone": "0191 643 4343",
+        "addresses": [
+          {
+            "type": "Delivery",
+            "line1": "66 New Street",
+            "line2": "Ridgeway",
+            "city": "Newcastle Upon Tyne",
+            "region": "",
+            "country": "GB",
+            "postalCode": "NE1 4GF"
+          },
+          {
+            "type": "Unknown",
+            "line1": "66 New Street",
+            "line2": "Ridgeway",
+            "city": "Newcastle upon Tyne",
+            "region": "",
+            "country": "GB",
+            "postalCode": "NE1 4GF"
+          }
+        ],
+        "taxNumber": "GB988 3453 23",
+        "status": "Active",
+        "modifiedDate": "2023-03-30T14:42:38Z",
+        "sourceModifiedDate": "2022-11-25T09:43:54Z",
+        "defaultCurrency": "GBP",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "id": "65179671e9ef424caff8b9006cd111c8",
+        "supplierName": "5555 Abdul's Test Name",
+        "contactName": "Main Contact",
+        "addresses": [
+          {
+            "type": "Billing",
+            "country": "United Kingdom (GB)"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2022-10-24T14:52:54Z",
+        "sourceModifiedDate": "2020-02-25T17:23:33Z",
+        "defaultCurrency": "GBP"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "3",
+        "supplierName": "ADP",
+        "contactName": "Jones, William",
+        "phone": "214-760-9491",
+        "addresses": [
+          {
+            "type": "Unknown",
+            "line1": "208 S Akard St",
+            "line2": "",
+            "city": "Dallas",
+            "region": "TX",
+            "country": "United States",
+            "postalCode": "75265"
+          }
+        ],
+        "registrationNumber": "",
+        "taxNumber": "85-3678274",
+        "status": "Active",
+        "modifiedDate": "2023-04-04T16:32:20Z",
+        "sourceModifiedDate": "2023-02-16T09:48:27",
+        "defaultCurrency": "USD",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Wave",
+      "example": {
+        "id": "QnVzaW5lc3M6ZTI0OGQyZDctMWE5Ni00YTk4LWFkOTEtMDdlMGYyMmNhNmE2O1ZlbmRvcjo2NjA0Nzk0",
+        "supplierName": "Computer Shop",
+        "contactName": "",
+        "emailAddress": "",
+        "addresses": [],
+        "status": "Active",
+        "modifiedDate": "2022-11-16T18:15:24Z",
+        "sourceModifiedDate": "2020-04-07T13:28:02Z",
+        "defaultCurrency": "GBP"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "e4c9d0e2-c285-4e85-b579-6d28b180c730",
+        "supplierName": "24 Locks",
+        "emailAddress": "",
+        "addresses": [],
+        "status": "Active",
+        "modifiedDate": "2023-03-15T20:36:09Z",
+        "sourceModifiedDate": "2023-02-17T18:03:42",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zoho Books",
+      "example": {
+        "id": "104957000001494001",
+        "supplierName": "Acme Corporation",
+        "emailAddress": "",
+        "addresses": [],
+        "status": "Active",
+        "modifiedDate": "2022-10-03T08:40:37Z",
+        "sourceModifiedDate": "2022-09-16T13:09:56",
+        "defaultCurrency": "GBP"
+      }
+    }
+  ]
+}

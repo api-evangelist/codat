@@ -1,0 +1,29 @@
+{
+  "operationId": "list-api-keys",
+  "method": "GET",
+  "path": "/apiKeys",
+  "summary": "List API keys",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Example",
+      "example": {
+        "results": [
+          {
+            "id": "0498e921-9b53-4396-a412-4f2f5983b0a2",
+            "apiKey": "ztHQGvnC4XN2CgUhaDWEG4ySLUJqWjp7zkbZkGHd",
+            "createdDate": "2022-04-11T13:49:37Z"
+          },
+          {
+            "id": "c438836a-61fe-443f-8a19-24cc18be21e4",
+            "name": "azure-invoice-finance-processor",
+            "apiKey": "ztHQGvnC4XN2CgUhaDWEG4ySLUJqWjp7zkbZkGHd",
+            "createdDate": "2022-04-23T09:43:48Z"
+          }
+        ]
+      }
+    }
+  ]
+}

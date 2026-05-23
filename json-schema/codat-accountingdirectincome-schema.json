@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingDirectIncome",
+  "title": "Accounting: Direct income",
+  "description": "> **Language tip:**  Direct incomes may also be referred to as **Receive transactions**, **Receive money transactions**, **Sales receipts**, or **Cash sales** in various accounting software.\n\n## Overview\n\nDirect incomes are incomes received directly from the business' operations. For example, cash sales of items to a customer, referral commissions, and service fee refunds are considered direct incomes made at the point of sale.\n\nDirect incomes include: \n\n- Selling an item directly to a contact, and receiving payment at the point of the sale.\n- Refunding an item sold at the point of sale in cash to a contact.\n\nDirect incomes is a child data type of [account transactions](https://docs.codat.io/lending-api#/schemas/AccountTransaction).\n",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the direct income, unique for the company."
+        },
+        "reference": {
+          "type": "string",
+          "nullable": true,
+          "description": "User-friendly reference for the direct income."
+        },
+        "note": {
+          "type": "string",
+          "nullable": true,
+          "description": "An optional note on the direct income that can be used to assign the direct income with a reference ID in your application."
+        },
+        "contactRef": {
+          "$ref": "#/components/schemas/AccountingJournalEntry/definitions/journalLine/properties/contactRef",
+          "description": "A customer or supplier associated with the direct income."
+        },
+        "issueDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date of the direct income as recorded in the accounting software."
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "The currency of the direct income."
+        },
+        "currencyRate": {
+          "$ref": "#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate"
+        },
+        "lineItems": {
+          "type": "array",
+          "description": "An array of line items.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingDirectIncome/definitions/directIncomeLineItem"
+          }
+        },
+        "paymentAllocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AccountingPaymentAllocation"
+          }
+        },
+        "subTotal": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The total amount of the direct incomes, excluding any taxes."
+        },
+        "taxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The total amount of tax on the direct incomes."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The amount of the direct incomes, inclusive of tax."
+        },
+        "metadata": {
+          "$ref": "#/components/schemas/Metadata"
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "required": [
+    "issueDate",
+    "currency",
+    "lineItems",
+    "paymentAllocations",
+    "subTotal",
+    "taxAmount",
+    "totalAmount"
+  ],
+  "definitions": {
+    "directIncomeLineItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A user-friendly name of the goods or services."
+        },
+        "unitAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The price of each unit of goods or services.\nNote: If the platform does not provide this information, the unit amount will be mapped to the total amount."
+        },
+        "quantity": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The number of units of goods or services received.\n\nNote: If the platform does not provide this information, the quantity will be mapped as 1."
+        },
+        "discountAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Discount amount for the line before tax."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Discount percentage for the line before tax."
+        },
+        "subTotal": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "The amount of the line, inclusive of discounts, but exclusive of tax."
+        },
+        "taxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "The amount of tax for the line.\nNote: If the platform does not provide this information, the quantity will be mapped as 0.00."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "The total amount of the line, including tax."
+        },
+        "accountRef": {
+          "$ref": "#/components/schemas/AccountingAccount/definitions/accountRef",
+          "description": "Reference to the account to which the line item is linked."
+        },
+        "taxRateRef": {
+          "$ref": "#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/taxRateRef",
+          "description": "Reference to the tax rate to which the line item is linked."
+        },
+        "itemRef": {
+          "$ref": "#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/itemRef",
+          "description": "Reference to the product, service type, or inventory item to which the direct cost is linked."
+        },
+        "trackingCategoryRefs": {
+          "type": "array",
+          "nullable": true,
+          "description": "An array of categories against which this direct cost is tracked.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingTrackingCategory/definitions/trackingCategoryRef"
+          }
+        }
+      },
+      "required": [
+        "unitAmount",
+        "quantity"
+      ]
+    }
+  }
+}

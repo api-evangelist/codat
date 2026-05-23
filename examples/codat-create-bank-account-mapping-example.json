@@ -1,0 +1,17 @@
+{
+  "operationId": "create-bank-account-mapping",
+  "method": "POST",
+  "path": "/companies/{companyId}/connections/{connectionId}/bankFeedAccounts/mapping",
+  "summary": "Create bank feed account mapping",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Example",
+      "example": {
+        "sourceAccountId": "acc-002",
+        "targetAccountId": "account-081"
+      }
+    }
+  ],
+  "responseExamples": []
+}

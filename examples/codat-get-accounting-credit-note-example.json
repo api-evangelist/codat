@@ -1,0 +1,1113 @@
+{
+  "operationId": "get-accounting-credit-note",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/creditNotes/{creditNoteId}",
+  "summary": "Get credit note",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "e6e5ec0f-1c60-eb11-89fa-00224800a9c7",
+        "creditNoteNumber": "104001",
+        "customerRef": {
+          "id": "8ddfa6bf-0c60-eb11-89fa-00224800af18",
+          "companyName": "Abdi Company"
+        },
+        "withholdingTax": [],
+        "totalAmount": 105,
+        "totalDiscount": 0,
+        "subTotal": 100,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 5,
+        "discountPercentage": 0,
+        "remainingCredit": 80,
+        "status": "PartiallyPaid",
+        "issueDate": "2021-01-25T00:00:00",
+        "currency": "GBP",
+        "lineItems": [
+          {
+            "description": "Invoice No. 103221:",
+            "unitAmount": 0,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 0,
+            "taxAmount": 0,
+            "totalAmount": 0,
+            "accountRef": {
+              "id": "NullId"
+            },
+            "discountPercentage": 0,
+            "taxRateRef": {
+              "id": "cc81fea8-2917-ed11-90eb-002248009df3",
+              "name": "",
+              "effectiveTaxRate": 0
+            },
+            "trackingCategoryRefs": [],
+            "isDirectIncome": false
+          },
+          {
+            "description": "Linda Martin",
+            "unitAmount": 100,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 100,
+            "taxAmount": 5,
+            "totalAmount": 105,
+            "accountRef": {
+              "id": "161217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Income, Services"
+            },
+            "discountPercentage": 0,
+            "taxRateRef": {
+              "id": "61bc0fb9-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Setup for DOMESTIC / REDUCED",
+              "effectiveTaxRate": 5
+            },
+            "itemRef": {
+              "id": "RESC-331317b3-89d1-ea11-bbaa-000d3a2b9185-DOMESTIC-DOMESTIC",
+              "name": "Linda Martin / General Business Posting Group: 'DOMESTIC' / VAT Business Posting Group: 'DOMESTIC'"
+            },
+            "trackingCategoryRefs": [],
+            "isDirectIncome": false
+          },
+          {
+            "description": "Credit memo for partially paid inv",
+            "unitAmount": 0,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 0,
+            "taxAmount": 0,
+            "totalAmount": 0,
+            "accountRef": {
+              "id": "NullId"
+            },
+            "discountPercentage": 0,
+            "taxRateRef": {
+              "id": "cc81fea8-2917-ed11-90eb-002248009df3",
+              "name": "",
+              "effectiveTaxRate": 0
+            },
+            "trackingCategoryRefs": [],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "62e5046d-1c60-eb11-89fa-00224800a9c7",
+              "note": "Credit Memo 1001",
+              "reference": "Document No: 104001",
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2021-01-25T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2021-01-25T00:00:00",
+              "totalAmount": 25
+            }
+          }
+        ],
+        "modifiedDate": "2023-03-27T14:21:25Z",
+        "sourceModifiedDate": "2021-01-26T21:21:18Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "id": "21952211",
+        "creditNoteNumber": "004",
+        "customerRef": {
+          "id": "6162023",
+          "companyName": "Alderley plc"
+        },
+        "withholdingTax": [],
+        "totalAmount": 165,
+        "totalDiscount": 0,
+        "subTotal": 165,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2017-10-18T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Reverse 6546",
+            "unitAmount": 110,
+            "quantity": 1.5,
+            "subTotal": 165,
+            "taxAmount": 0,
+            "totalAmount": 165,
+            "trackingCategoryRefs": [],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "270764400",
+              "note": "\ufffd165.00 - Credit Note refund against 004",
+              "currency": "GBP",
+              "paidOnDate": "2020-12-23T00:00:00",
+              "totalAmount": -165
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 165
+            }
+          }
+        ],
+        "modifiedDate": "2023-04-25T14:19:09Z",
+        "sourceModifiedDate": "2020-12-23T16:39:23Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "id": "33407",
+        "creditNoteNumber": "0000065",
+        "customerRef": {
+          "id": "511657",
+          "companyName": "Bob's Stationary"
+        },
+        "withholdingTax": [],
+        "totalAmount": 150,
+        "totalDiscount": 0,
+        "subTotal": 150,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Submitted",
+        "issueDate": "2020-07-31T00:00:00",
+        "currency": "GBP",
+        "lineItems": [
+          {
+            "description": "Test Di",
+            "unitAmount": 150,
+            "quantity": 1,
+            "subTotal": 150,
+            "taxAmount": 0,
+            "totalAmount": 150,
+            "trackingCategoryRefs": [],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "2054019",
+              "note": "Free $150 voucher",
+              "currency": "GBP",
+              "paidOnDate": "2020-07-31T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 150
+            }
+          }
+        ],
+        "modifiedDate": "2023-03-24T16:07:23Z",
+        "note": "Free $150 voucher",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "KashFlow",
+      "example": {
+        "id": "85322315",
+        "creditNoteNumber": "4",
+        "customerRef": {
+          "id": "69946501",
+          "companyName": "Peter Lord"
+        },
+        "withholdingTax": [],
+        "totalAmount": 100,
+        "totalDiscount": 0,
+        "subTotal": 0,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2017-05-09T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "youm",
+            "unitAmount": 100,
+            "quantity": -1,
+            "subTotal": -100,
+            "taxAmount": 0,
+            "totalAmount": 100,
+            "accountRef": {
+              "id": "21481817",
+              "name": "Sale of goods"
+            },
+            "itemRef": {
+              "id": "158667064"
+            },
+            "trackingCategoryRefs": [],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "86870120",
+              "note": "Applying Credit Note",
+              "currency": "GBP",
+              "paidOnDate": "2017-05-09T00:00:00",
+              "totalAmount": -100
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 100
+            }
+          }
+        ],
+        "modifiedDate": "2022-09-30T10:29:16Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "id": "8827",
+        "creditNoteNumber": "CM27",
+        "customerRef": {
+          "id": "417",
+          "companyName": "10 Breww Ltd"
+        },
+        "withholdingTax": [],
+        "totalAmount": 26,
+        "totalDiscount": 0,
+        "subTotal": 26,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 26,
+        "status": "Submitted",
+        "issueDate": "2021-04-09T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Andy Test Item",
+            "unitAmount": 2,
+            "quantity": 3,
+            "subTotal": 6,
+            "totalAmount": 6,
+            "accountRef": {
+              "id": "54",
+              "name": "Sales"
+            },
+            "itemRef": {
+              "id": "143",
+              "name": "Andy Test Item"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "classification-2"
+              },
+              {
+                "id": "department-1"
+              },
+              {
+                "id": "location-1"
+              }
+            ],
+            "isDirectIncome": false
+          },
+          {
+            "description": "Non-Recurring Services - EC",
+            "unitAmount": 4,
+            "quantity": 5,
+            "subTotal": 20,
+            "totalAmount": 20,
+            "accountRef": {
+              "id": "54",
+              "name": "Sales"
+            },
+            "itemRef": {
+              "id": "28",
+              "name": "Non-Recurring Services - EC"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "classification-2"
+              },
+              {
+                "id": "department-1"
+              },
+              {
+                "id": "location-1"
+              }
+            ],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2022-09-20T08:15:31Z",
+        "sourceModifiedDate": "2022-02-25T10:58:10"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "96C-933372931",
+        "creditNoteNumber": "4002",
+        "customerRef": {
+          "id": "150000-933272658",
+          "companyName": "Abercrombie, Kristy"
+        },
+        "withholdingTax": [],
+        "totalAmount": 711.15,
+        "totalDiscount": 0,
+        "subTotal": 660,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 51.15,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2024-12-01T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Whirlpool tub\nBilled and paid for 2 tubs, should have been for only 1 tub",
+            "unitAmount": 660,
+            "quantity": 1,
+            "subTotal": 660,
+            "taxAmount": 0,
+            "totalAmount": 660,
+            "accountRef": {
+              "id": "40000-933270541",
+              "name": "Accounts Receivable"
+            },
+            "taxRateRef": {
+              "id": "10000-999022286",
+              "name": "Taxable Sales"
+            },
+            "itemRef": {
+              "id": "1E0000-933272656",
+              "name": "Plumb Fixtrs"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "40000-933272658",
+                "name": "Remodel"
+              }
+            ],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "969-933372844",
+              "accountRef": {
+                "id": "20000-933270541",
+                "name": "Checking"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2024-12-01T00:00:00",
+              "totalAmount": -711.15
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 711.15
+            }
+          }
+        ],
+        "modifiedDate": "2023-04-26T09:07:38Z",
+        "sourceModifiedDate": "2023-12-16T05:04:05",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "85",
+        "creditNoteNumber": "3122019_6",
+        "customerRef": {
+          "id": "3",
+          "companyName": "Information Sharing Technology"
+        },
+        "withholdingTax": [],
+        "totalAmount": 13.53,
+        "totalDiscount": 0,
+        "subTotal": 13.53,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2019-12-03T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Refunds with payment type of Cash",
+            "unitAmount": 13.53,
+            "quantity": 1,
+            "subTotal": 13.53,
+            "taxAmount": 0,
+            "totalAmount": 13.53,
+            "accountRef": {
+              "id": "1",
+              "name": "Sales"
+            },
+            "taxRateRef": {
+              "id": "8_Invoices",
+              "name": "Exempt Invoices",
+              "effectiveTaxRate": 0
+            },
+            "itemRef": {
+              "id": "1",
+              "name": "Sales"
+            },
+            "trackingCategoryRefs": [],
+            "isDirectIncome": true
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "85",
+              "note": "",
+              "accountRef": {
+                "id": "63",
+                "name": "Business Bank Account"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2019-12-03T00:00:00",
+              "totalAmount": -13.53
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2019-12-03T00:00:00",
+              "totalAmount": 13.53
+            }
+          }
+        ],
+        "modifiedDate": "2023-01-18T11:02:55Z",
+        "sourceModifiedDate": "2019-12-10T19:00:36Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "185",
+        "creditNoteNumber": "1015",
+        "customerRef": {
+          "id": "16",
+          "companyName": "Jordan Burgess"
+        },
+        "withholdingTax": [],
+        "totalAmount": 1800,
+        "totalDiscount": 0,
+        "subTotal": 1500,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 300,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2017-02-15T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Employee training off site",
+            "unitAmount": 1500,
+            "quantity": 1,
+            "subTotal": 1500,
+            "taxAmount": 300,
+            "totalAmount": 1800,
+            "accountRef": {
+              "id": "44",
+              "name": "Sales"
+            },
+            "taxRateRef": {
+              "id": "3_Invoices",
+              "name": "20.0% S Invoices",
+              "effectiveTaxRate": 20
+            },
+            "itemRef": {
+              "id": "5",
+              "name": "Employee Training"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "DEPARTMENT_1",
+                "name": "London"
+              }
+            ],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "192",
+              "note": "Created by QB Online to link credits to charges.",
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2017-09-08T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 1800
+            }
+          }
+        ],
+        "modifiedDate": "2023-04-26T09:36:03Z",
+        "sourceModifiedDate": "2017-09-08T12:52:27Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 200cloud",
+      "example": {
+        "id": "45891",
+        "creditNoteNumber": "return 1a",
+        "customerRef": {
+          "id": "A1D001",
+          "companyName": "A1 Design Services"
+        },
+        "withholdingTax": [],
+        "totalAmount": 378,
+        "totalDiscount": 9.46,
+        "subTotal": 315,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 63,
+        "discountPercentage": 2.5,
+        "remainingCredit": 378,
+        "status": "Submitted",
+        "issueDate": "2020-07-22T00:00:00Z",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Tax Summary - Standard rate",
+            "unitAmount": 0,
+            "quantity": 0,
+            "discountAmount": 1.58,
+            "subTotal": 0,
+            "taxAmount": 63,
+            "totalAmount": 63,
+            "taxRateRef": {
+              "id": "1"
+            },
+            "trackingCategoryRefs": [],
+            "isDirectIncome": false
+          },
+          {
+            "description": "Goods Summary",
+            "unitAmount": 0,
+            "quantity": 0,
+            "discountAmount": 9.46,
+            "subTotal": 315,
+            "taxAmount": 0,
+            "totalAmount": 315,
+            "trackingCategoryRefs": [],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2022-10-14T09:35:55Z",
+        "sourceModifiedDate": "2020-02-28T14:23:46Z",
+        "note": "black"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "id": "INV-17",
+        "creditNoteNumber": "17",
+        "customerRef": {
+          "id": "KIN001",
+          "companyName": "Kinghorn & French"
+        },
+        "withholdingTax": [],
+        "totalAmount": 832.84,
+        "totalDiscount": 0,
+        "subTotal": 711.45,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 121.39,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2021-02-02T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "PC Combo Pack 4",
+            "unitAmount": 832.84,
+            "quantity": 1,
+            "subTotal": 711.45,
+            "taxAmount": 121.39,
+            "totalAmount": 832.84,
+            "accountRef": {
+              "id": "4000",
+              "name": "Sales North"
+            },
+            "taxRateRef": {
+              "id": "1",
+              "name": "Standard rate",
+              "effectiveTaxRate": 20
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "department_1",
+                "name": "Sales"
+              }
+            ],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "336",
+              "note": "Sales credit inv-17 linked to sales invoice inv-45.",
+              "accountRef": {
+                "id": ""
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-02-02T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 35.27
+            }
+          },
+          {
+            "payment": {
+              "id": "336",
+              "note": "Sales credit inv-17 linked to sales invoice inv-45.",
+              "accountRef": {
+                "id": ""
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-02-02T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 344.89
+            }
+          },
+          {
+            "payment": {
+              "id": "336",
+              "note": "Sales credit inv-17 linked to sales invoice inv-45.",
+              "accountRef": {
+                "id": ""
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-02-02T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 158.25
+            }
+          },
+          {
+            "payment": {
+              "id": "336",
+              "note": "Sales credit inv-17 linked to sales invoice inv-45.",
+              "accountRef": {
+                "id": ""
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-02-02T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 157.25
+            }
+          },
+          {
+            "payment": {
+              "id": "336",
+              "note": "Sales credit inv-17 linked to sales invoice inv-45.",
+              "accountRef": {
+                "id": ""
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-02-02T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 73.49
+            }
+          },
+          {
+            "payment": {
+              "id": "336",
+              "note": "Sales credit inv-17 linked to sales invoice inv-45.",
+              "accountRef": {
+                "id": ""
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-02-02T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 63.69
+            }
+          }
+        ],
+        "modifiedDate": "2023-03-30T14:42:43Z",
+        "sourceModifiedDate": "2022-11-25T09:43:54",
+        "note": "PC Combo Pack 4",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "id": "c1a0176c33de11e797950a57719b2edb",
+        "creditNoteNumber": "SCN-1",
+        "customerRef": {
+          "id": "f4ff85ba33dd11e797950a57719b2edb",
+          "companyName": "Widgets Limited"
+        },
+        "withholdingTax": [],
+        "totalAmount": 1080,
+        "totalDiscount": 0,
+        "subTotal": 900,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 180,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2017-05-08T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Consulting services",
+            "unitAmount": 900,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 900,
+            "taxAmount": 180,
+            "totalAmount": 1080,
+            "accountRef": {
+              "id": "9a994b92267a11e797950a57719b2edb",
+              "name": "Sales Type A"
+            },
+            "discountPercentage": 0,
+            "taxRateRef": {
+              "id": "GB_STANDARD",
+              "name": "Standard 20.00%",
+              "effectiveTaxRate": 20
+            },
+            "itemRef": {
+              "id": "a87b922b33de11e797950a57719b2edb",
+              "name": "Consulting services"
+            },
+            "trackingCategoryRefs": [],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "d39f7a5733de11e797950a57719b2edb",
+              "note": "Customer refund using credit/debit card",
+              "accountRef": {
+                "id": "9a25937b267a11e797950a57719b2edb",
+                "name": "Current"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2017-05-08T00:00:00",
+              "totalAmount": -1080
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "totalAmount": 1080
+            }
+          }
+        ],
+        "modifiedDate": "2022-10-24T14:55:35Z",
+        "sourceModifiedDate": "2017-05-08T11:09:38Z",
+        "note": ""
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "5018",
+        "creditNoteNumber": "IN0545",
+        "customerRef": {
+          "id": "53",
+          "companyName": "Pacificorp"
+        },
+        "withholdingTax": [],
+        "totalAmount": 575,
+        "totalDiscount": 0,
+        "subTotal": 500,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 75,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2022-03-16T00:00:00",
+        "allocatedOnDate": "2022-03-16T00:00:00",
+        "currency": "ZAR",
+        "lineItems": [
+          {
+            "description": "No Description Provided",
+            "unitAmount": 500,
+            "quantity": 1,
+            "subTotal": 500,
+            "taxAmount": 75,
+            "totalAmount": 575,
+            "accountRef": {
+              "id": "2",
+              "name": "Accounts Receivable"
+            },
+            "taxRateRef": {
+              "id": "27",
+              "name": "Standard Rate Output",
+              "effectiveTaxRate": 15
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "DEPARTMENT-2",
+                "name": "Services"
+              },
+              {
+                "id": "CUSTOMER-53",
+                "name": "Pacificorp"
+              },
+              {
+                "id": "LOCATION-10",
+                "name": "South Africa"
+              }
+            ],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": "2023-02-23T14:21:40Z",
+        "sourceModifiedDate": "2022-03-16T12:27:43Z",
+        "note": "",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "47fb825b-3c43-4284-905f-c6d97acc6b37",
+        "creditNoteNumber": "CN-0025",
+        "customerRef": {
+          "id": "af0091a9-82ef-4cac-9fd6-22c095ac6a58",
+          "companyName": "Hamilton Smith Ltd"
+        },
+        "withholdingTax": [],
+        "totalAmount": 541.25,
+        "totalDiscount": 0,
+        "subTotal": 451.04,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 90.21,
+        "discountPercentage": 0,
+        "remainingCredit": 0,
+        "status": "Paid",
+        "issueDate": "2022-11-20T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "FULL CREDIT of INV-0016 due to duplication of invoice INV-0012. Please accept our apologies.",
+            "unitAmount": 0,
+            "quantity": 0,
+            "discountAmount": 0,
+            "subTotal": 0,
+            "taxAmount": 0,
+            "totalAmount": 0,
+            "discountPercentage": 0,
+            "trackingCategoryRefs": [],
+            "isDirectIncome": false
+          },
+          {
+            "description": "Desktop/network support via email & phone.Per month fixed fee for minimum 20 hours/month.",
+            "unitAmount": 451.04,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 451.04,
+            "taxAmount": 90.21,
+            "totalAmount": 541.25,
+            "accountRef": {
+              "id": "c563b607-fb0e-4d06-9ddb-76fdeef20ae3",
+              "name": "Sales"
+            },
+            "discountPercentage": 0,
+            "taxRateRef": {
+              "id": "OUTPUT2",
+              "name": "20% (VAT on Income)",
+              "effectiveTaxRate": 20
+            },
+            "itemRef": {
+              "id": "f8fb7e00-5e5d-466c-aef0-15861f73d04f",
+              "name": "Desktop/network support via email & phone"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "34b9b859-07a9-451a-b4d3-effc9946634a",
+                "name": "North"
+              }
+            ],
+            "isDirectIncome": false
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "47fb825b-3c43-4284-905f-c6d97acc6b37",
+              "reference": "Monthly Support",
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-11-20T00:00:00",
+              "totalAmount": 0
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2022-11-20T00:00:00",
+              "totalAmount": 541.25
+            }
+          }
+        ],
+        "modifiedDate": "2023-03-15T20:35:09Z",
+        "sourceModifiedDate": "2011-04-07T00:34:38",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zoho Books",
+      "example": {
+        "id": "104957000000129002",
+        "creditNoteNumber": "CN-00001",
+        "customerRef": {
+          "id": "104957000000037097",
+          "companyName": "Test Company"
+        },
+        "withholdingTax": [],
+        "totalAmount": 9001,
+        "totalDiscount": 0,
+        "subTotal": 0,
+        "additionalTaxAmount": 0,
+        "additionalTaxPercentage": 0,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 9001,
+        "status": "Draft",
+        "issueDate": "2020-04-28T18:16:22",
+        "currency": "GBP",
+        "lineItems": [],
+        "paymentAllocations": [],
+        "modifiedDate": "2022-10-03T08:40:43Z",
+        "sourceModifiedDate": "2020-04-28T18:16:22"
+      }
+    }
+  ]
+}

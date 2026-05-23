@@ -1,0 +1,158 @@
+{
+  "operationId": "get-commerce-payment",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-payments/{paymentId}",
+  "summary": "Get payment",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "BigCommerce",
+      "example": {
+        "id": "103_1_1_refund",
+        "amount": -64,
+        "currency": "GBP",
+        "type": "Unknown",
+        "status": "Paid",
+        "paymentProvider": "bigpaypay",
+        "dueDate": "0001-01-01T00:00:00",
+        "createdDate": "2022-06-15T17:13:13Z",
+        "modifiedDate": "2023-04-11T10:33:52Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clover",
+      "example": {
+        "id": "01J7HV88GT6B8",
+        "amount": 1000,
+        "currency": "USD",
+        "paymentMethodRef": {
+          "id": "BR5M17TG091SP",
+          "name": "Credit Card"
+        },
+        "type": "Card",
+        "status": "Paid",
+        "paymentProvider": "clover",
+        "dueDate": "0001-01-01T00:00:00",
+        "createdDate": "2021-05-24T10:35:08Z",
+        "modifiedDate": "2023-01-09T11:01:02Z",
+        "sourceModifiedDate": "2021-05-24T10:35:08Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Lightspeed K Trial",
+      "example": {
+        "id": "1_A62084.1_2023-01-05T03:34:50.296Z",
+        "amount": 0,
+        "currency": "AUD",
+        "paymentMethodRef": {
+          "id": "0"
+        },
+        "type": "Unknown",
+        "status": "Paid",
+        "dueDate": "0001-01-01T00:00:00",
+        "createdDate": "2023-01-05T03:34:50Z",
+        "modifiedDate": "2023-03-02T09:50:43Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Mollie",
+      "example": {
+        "id": "re_Azhe8TzfUK",
+        "amount": -20,
+        "currency": "EUR",
+        "type": "OnlineCard",
+        "status": "Paid",
+        "paymentProvider": "mollie",
+        "dueDate": "0001-01-01T00:00:00",
+        "createdDate": "2022-01-17T16:00:46",
+        "modifiedDate": "2022-03-17T16:15:23Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "PrestaShop",
+      "example": {
+        "id": "1",
+        "amount": 20.9,
+        "currency": "USD",
+        "type": "Unknown",
+        "status": "Paid",
+        "dueDate": "0001-01-01T00:00:00",
+        "createdDate": "2021-09-08T01:52:55",
+        "modifiedDate": "2022-01-26T15:09:42Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "id": "4630233579678",
+        "amount": 600,
+        "currency": "GBP",
+        "type": "OnlineCard",
+        "status": "Failed",
+        "paymentProvider": "Shopify Payments",
+        "dueDate": "0001-01-01T00:00:00",
+        "createdDate": "2021-03-19T13:17:49Z",
+        "modifiedDate": "2023-02-10T15:18:24Z",
+        "sourceModifiedDate": "2021-03-19T13:17:49Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "SumUp",
+      "example": {
+        "id": "07efcdd0-7f61-4d82-957f-52e8f0bd3f89",
+        "amount": 200,
+        "currency": "GBP",
+        "type": "OnlineCard",
+        "status": "Cancelled",
+        "paymentProvider": "sumup",
+        "dueDate": "0001-01-01T00:00:00",
+        "createdDate": "2021-03-30T12:20:40Z",
+        "modifiedDate": "2022-03-17T16:13:46Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "WooCommerce",
+      "example": {
+        "id": "33",
+        "amount": 0,
+        "currency": "GBP",
+        "type": "Unknown",
+        "status": "Paid",
+        "dueDate": "0001-01-01T00:00:00",
+        "createdDate": "2021-03-11T09:07:00Z",
+        "modifiedDate": "2021-07-13T16:19:00Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zettle",
+      "example": {
+        "id": "09b94cfc-2d98-11eb-8021-0e1b9dcbeca1",
+        "amount": 25,
+        "currency": "GBP",
+        "type": "Paypal",
+        "status": "Unknown",
+        "dueDate": "0001-01-01T00:00:00",
+        "createdDate": "2020-11-23T14:28:04Z",
+        "modifiedDate": "2021-10-27T15:22:37Z"
+      }
+    }
+  ]
+}

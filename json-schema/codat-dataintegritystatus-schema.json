@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataIntegrityStatus",
+  "title": "Data integrity status",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/DataIntegritySummary/definitions/dataIntegrityType"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "statusInfo": {
+          "$ref": "#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityStatusInfo"
+        },
+        "connectionIds": {
+          "$ref": "#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityConnectionId"
+        },
+        "amounts": {
+          "$ref": "#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityAmounts"
+        },
+        "dates": {
+          "$ref": "#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityDates"
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "dataIntegrityStatusInfo": {
+      "type": "object",
+      "properties": {
+        "lastMatched": {
+          "type": "string",
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date the matching algorithm last ran against the company\u2019s data type specified.",
+          "readOnly": true
+        },
+        "currentStatus": {
+          "$ref": "#/components/schemas/DataIntegrityStatus/definitions/integrityStatus"
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Detailed explanation supporting the status value."
+        }
+      }
+    },
+    "dataIntegrityConnectionId": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "array",
+          "description": "An array of strings. The connection IDs for the type specified in the url.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "array",
+          "description": "An array of strings. The connection IDs for the type being matched to.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "dataIntegrityAmounts": {
+      "type": "object",
+      "description": "Only returned for transactions. For accounts, there is nothing returned.",
+      "properties": {
+        "min": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Lowest value of transaction set."
+        },
+        "max": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Highest value of transaction set."
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency"
+        }
+      }
+    },
+    "dataIntegrityDates": {
+      "type": "object",
+      "description": "Only returned for transactions. For accounts, there is nothing returned.",
+      "properties": {
+        "minDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Earliest date of transaction set.",
+          "readOnly": true
+        },
+        "maxDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Latest date of transaction set.",
+          "readOnly": true
+        },
+        "minOverlappingDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Earliest date where transactions exist in both accounting and banking platforms.",
+          "readOnly": true
+        },
+        "maxOverlappingDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Latest date where transactions exist in both account and banking platforms.",
+          "readOnly": true
+        }
+      }
+    },
+    "integrityStatus": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "DoesNotExist",
+        "Error",
+        "Complete"
+      ],
+      "description": "The current status of the most recently run matching algorithm."
+    }
+  },
+  "examples": [
+    {
+      "type": "string",
+      "statusInfo": {
+        "lastMatched": "2021-10-24T14:15:22Z",
+        "currentStatus": "Unknown",
+        "statusMessage": "string"
+      },
+      "connectionIds": {
+        "source": [
+          "d5a8d1b2-b38a-4e44-8641-548ad43be6bb",
+          "da8c9f39-8af9-4a98-964b-f1e207942837"
+        ],
+        "target": [
+          "3d7ce25a-c107-44bc-8e0c-36c10bdd14e0",
+          "a5300eac-01fa-4a77-b5b0-ea0b86a3be69"
+        ]
+      },
+      "amounts": {
+        "min": 130,
+        "max": 2450,
+        "currency": "GBP"
+      },
+      "dates": {
+        "minDate": "2021-09-17T12:09:33.441Z",
+        "maxDate": "2021-12-16T12:12:53.441Z",
+        "minOverlappingDate": "2021-09-30T12:09:13.441Z",
+        "maxOverlappingDate": "2021-11-27T12:19:33.441Z"
+      }
+    }
+  ]
+}

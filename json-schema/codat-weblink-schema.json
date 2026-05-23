@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WebLink",
+  "title": "Weblink",
+  "description": "Weblink associated with the company.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "description": "The type of the weblink.",
+      "type": "string",
+      "enum": [
+        "Website",
+        "Social",
+        "Unknown"
+      ]
+    },
+    "url": {
+      "description": "The full URL for the weblink.",
+      "type": "string",
+      "format": "url"
+    }
+  },
+  "example": {
+    "type": "Website",
+    "url": "https://codat.io"
+  }
+}

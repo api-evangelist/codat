@@ -1,0 +1,84 @@
+{
+  "operationId": "list-banking-transaction-categories",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/banking-transactionCategories",
+  "summary": "List transaction categories",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Basiq",
+      "example": {
+        "results": [
+          {
+            "id": "bank-fee",
+            "name": "Bank Fee",
+            "hasChildren": false,
+            "status": "Active",
+            "modifiedDate": "2022-10-28T07:14:46"
+          },
+          {
+            "id": "cash-withdrawal",
+            "name": "Cash Withdrawal",
+            "hasChildren": false,
+            "status": "Active",
+            "modifiedDate": "2022-10-28T07:14:46"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 9,
+        "_links": {
+          "current": {
+            "href": "/companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactionCategories?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactionCategories"
+          },
+          "next": {
+            "href": "/companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactionCategories?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Plaid",
+      "example": {
+        "results": [
+          {
+            "id": "BANK_FEES",
+            "name": "BANK_FEES",
+            "hasChildren": true,
+            "status": "Active",
+            "modifiedDate": "2022-10-27T10:50:17"
+          },
+          {
+            "id": "BANK_FEES.BANK_FEES_ATM_FEES",
+            "name": "BANK_FEES_ATM_FEES",
+            "parentId": "BANK_FEES",
+            "hasChildren": false,
+            "status": "Active",
+            "modifiedDate": "2022-10-27T10:50:17"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 120,
+        "_links": {
+          "current": {
+            "href": "/companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactionCategories?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactionCategories"
+          },
+          "next": {
+            "href": "/companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactionCategories?page=2&pageSize=2"
+          }
+        }
+      }
+    }
+  ]
+}

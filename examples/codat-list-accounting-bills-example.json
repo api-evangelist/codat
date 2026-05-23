@@ -1,0 +1,3148 @@
+{
+  "operationId": "list-accounting-bills",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/bills",
+  "summary": "List bills",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "results": [
+          {
+            "id": "81539597-e681-40c9-a4dd-ec2fffcde572",
+            "reference": "b465a2c9-3212-4620-889b-6328ba148215",
+            "supplierRef": {
+              "id": "8GeHBdBZiZ",
+              "supplierName": "DuBuque, Goyette and Franecki"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2022-04-29T00:00:00",
+            "dueDate": "2022-05-06T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Grease Trap",
+                "unitAmount": 2781.94,
+                "quantity": 5,
+                "discountAmount": 0,
+                "subTotal": 13909.7,
+                "taxAmount": 1390.97,
+                "totalAmount": 15300.67,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "22aee6bd-4767-48c4-8a13-fdf85b91fc80",
+                  "name": "600 Litre Grease Trap"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Grease Trap",
+                "unitAmount": 1371.39,
+                "quantity": 5,
+                "discountAmount": 0,
+                "subTotal": 6856.95,
+                "taxAmount": 685.7,
+                "totalAmount": 7542.65,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "9409d23d-1011-432e-98a4-591fcd8d5404",
+                  "name": "300 Litre Grease Trap"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Grease Trap",
+                "unitAmount": 1371.39,
+                "quantity": 6,
+                "discountAmount": 0,
+                "subTotal": 8228.34,
+                "taxAmount": 822.83,
+                "totalAmount": 9051.17,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "9409d23d-1011-432e-98a4-591fcd8d5404",
+                  "name": "300 Litre Grease Trap"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Grease Trap",
+                "unitAmount": 2781.94,
+                "quantity": 3,
+                "discountAmount": 0,
+                "subTotal": 8345.82,
+                "taxAmount": 834.58,
+                "totalAmount": 9180.4,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "22aee6bd-4767-48c4-8a13-fdf85b91fc80",
+                  "name": "600 Litre Grease Trap"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Underground - Trapped Road Gully 450mm x 450mm",
+                "unitAmount": 402.89,
+                "quantity": 8,
+                "discountAmount": 0,
+                "subTotal": 3223.12,
+                "taxAmount": 322.31,
+                "totalAmount": 3545.43,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "3abf0883-03f7-44c6-bc15-1372522d25e1",
+                  "name": "Heavy Duty Hinged Gully Grating"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Underground - Drain Bottle Gullies 90 degree Rectangular",
+                "unitAmount": 95.08,
+                "quantity": 7,
+                "discountAmount": 0,
+                "subTotal": 665.56,
+                "taxAmount": 66.56,
+                "totalAmount": 732.12,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "6",
+                  "name": "Back Inlet Roddable Gully 90\ufffd Outlet Rectangular Grid"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Underground - Drain Bottle Gullies 90 degree Rectangular",
+                "unitAmount": 95.08,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 95.08,
+                "taxAmount": 9.51,
+                "totalAmount": 104.59,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "6",
+                  "name": "Back Inlet Roddable Gully 90\ufffd Outlet Rectangular Grid"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Grease Trap",
+                "unitAmount": 1371.39,
+                "quantity": 2,
+                "discountAmount": 0,
+                "subTotal": 2742.78,
+                "taxAmount": 274.28,
+                "totalAmount": 3017.06,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "9409d23d-1011-432e-98a4-591fcd8d5404",
+                  "name": "300 Litre Grease Trap"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Grease Trap",
+                "unitAmount": 2781.94,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 2781.94,
+                "taxAmount": 278.19,
+                "totalAmount": 3060.13,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "22aee6bd-4767-48c4-8a13-fdf85b91fc80",
+                  "name": "600 Litre Grease Trap"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Underground - Drain Bottle Gullies 90 degree Rectangular",
+                "unitAmount": 95.08,
+                "quantity": 7,
+                "discountAmount": 0,
+                "subTotal": 665.56,
+                "taxAmount": 66.56,
+                "totalAmount": 732.12,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "6",
+                  "name": "Back Inlet Roddable Gully 90\ufffd Outlet Rectangular Grid"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Grease Trap",
+                "unitAmount": 1251.89,
+                "quantity": 4,
+                "discountAmount": 0,
+                "subTotal": 5007.56,
+                "taxAmount": 500.76,
+                "totalAmount": 5508.32,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "51077072-d5c3-463b-9cb4-7da2e11886f9",
+                  "name": "150 Litre Grease Trap"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Grease Trap",
+                "unitAmount": 1371.39,
+                "quantity": 9,
+                "discountAmount": 0,
+                "subTotal": 12342.51,
+                "taxAmount": 1234.25,
+                "totalAmount": 13576.76,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "9409d23d-1011-432e-98a4-591fcd8d5404",
+                  "name": "300 Litre Grease Trap"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 64864.92,
+            "taxAmount": 6486.5,
+            "totalAmount": 71351.42,
+            "amountDue": 0,
+            "modifiedDate": "2023-04-26T12:38:16Z",
+            "sourceModifiedDate": "2023-02-14T17:09:02",
+            "note": "Bill with 12 line items, totaling 71351.42",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "dcb18480-8b69-44d8-aa26-268b6a80d170",
+                  "note": "Bill Payment against bill 81539597-e681-40c9-a4dd-ec2fffcde572",
+                  "accountRef": {
+                    "id": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+                    "name": "Business Current Account"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-05-06T00:00:00",
+                  "totalAmount": 71351.42
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2022-05-06T00:00:00",
+                  "totalAmount": -71351.42
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "acc1dc9d-a21a-41b8-953e-73da4afab6e6",
+            "reference": "d88e83b8-a5cc-4578-815d-afa263df4beb",
+            "supplierRef": {
+              "id": "7GObELDcsE",
+              "supplierName": "Lakin, Schmeler and Kihn"
+            },
+            "purchaseOrderRefs": [
+              {
+                "id": "7f07b584-bebe-450f-aa9e-1d7aed630b66",
+                "purchaseOrderNumber": "ee9b8e00-49a2-4d83-bc33-e2eee59a1c36"
+              }
+            ],
+            "issueDate": "2022-04-30T00:00:00",
+            "dueDate": "2022-05-15T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Underground - Drain Bottle Gullies 90 degree Rectangular",
+                "unitAmount": 95.08,
+                "quantity": 4,
+                "discountAmount": 0,
+                "subTotal": 380.32,
+                "taxAmount": 38.03,
+                "totalAmount": 418.35,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Sales"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "6",
+                  "name": "Back Inlet Roddable Gully 90\ufffd Outlet Rectangular Grid"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 380.32,
+            "taxAmount": 38.03,
+            "totalAmount": 418.35,
+            "amountDue": 0,
+            "modifiedDate": "2023-04-26T12:38:16Z",
+            "sourceModifiedDate": "2023-04-14T01:56:02",
+            "note": "Bill for purchase order ee9b8e00-49a2-4d83-bc33-e2eee59a1c36",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "a4fa017a-3911-4eb0-aaf9-b002c446c8c3",
+                  "note": "Bill Payment against bill acc1dc9d-a21a-41b8-953e-73da4afab6e6",
+                  "accountRef": {
+                    "id": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+                    "name": "Business Current Account"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-05-15T00:00:00",
+                  "totalAmount": 418.35
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2022-05-15T00:00:00",
+                  "totalAmount": -418.35
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 183,
+        "_links": {
+          "current": {
+            "href": "/companies/354a121b-855f-4d25-90ad-0905b498c1c0/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/354a121b-855f-4d25-90ad-0905b498c1c0/data/bills"
+          },
+          "next": {
+            "href": "/companies/354a121b-855f-4d25-90ad-0905b498c1c0/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "results": [
+          {
+            "id": "4019ee2b-d05a-ed11-8c34-000d3a0d28a2-108276",
+            "reference": "108276",
+            "supplierRef": {
+              "id": "c01217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "supplierName": "First Up Consultants"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2019-01-01T00:00:00",
+            "dueDate": "2019-01-01T00:00:00",
+            "currency": "GBP",
+            "lineItems": [
+              {
+                "description": "ATHENS Desk",
+                "unitAmount": 506.6,
+                "quantity": 4,
+                "discountAmount": 202.64,
+                "subTotal": 1823.76,
+                "taxAmount": 364.75,
+                "totalAmount": 2188.51,
+                "discountPercentage": 10,
+                "accountRef": {
+                  "id": "6a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                  "name": "Inventory"
+                },
+                "taxRateRef": {
+                  "id": "63bc0fb9-89d1-ea11-bbaa-000d3a2b9185",
+                  "name": "Setup for DOMESTIC / STANDARD",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "ITEM-c81217b3-89d1-ea11-bbaa-000d3a2b9185-DOMESTIC-DOMESTIC",
+                  "name": "ATHENS Desk / General Business Posting Group: 'DOMESTIC' / VAT Business Posting Group: 'DOMESTIC'"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Open",
+            "subTotal": 1823.76,
+            "taxAmount": 364.75,
+            "totalAmount": 2188.51,
+            "amountDue": 2188.51,
+            "modifiedDate": "2023-03-27T14:21:25Z",
+            "sourceModifiedDate": "2022-11-02T17:02:48Z",
+            "note": "129148",
+            "paymentAllocations": [],
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "b9cb06bf-89d1-ea11-bbaa-000d3a2b9185-108001",
+            "reference": "108001",
+            "supplierRef": {
+              "id": "c01217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "supplierName": "First Up Consultants"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2019-01-01T00:00:00",
+            "dueDate": "2019-01-01T00:00:00",
+            "currency": "GBP",
+            "lineItems": [
+              {
+                "description": "ATHENS Desk",
+                "unitAmount": 506.6,
+                "quantity": 4,
+                "discountAmount": 0,
+                "subTotal": 2026.4,
+                "taxAmount": 405.28,
+                "totalAmount": 2431.68,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "6a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+                  "name": "Inventory"
+                },
+                "taxRateRef": {
+                  "id": "63bc0fb9-89d1-ea11-bbaa-000d3a2b9185",
+                  "name": "Setup for DOMESTIC / STANDARD",
+                  "effectiveTaxRate": 10
+                },
+                "itemRef": {
+                  "id": "ITEM-c81217b3-89d1-ea11-bbaa-000d3a2b9185-DOMESTIC-DOMESTIC",
+                  "name": "ATHENS Desk / General Business Posting Group: 'DOMESTIC' / VAT Business Posting Group: 'DOMESTIC'"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 2026.4,
+            "taxAmount": 405.28,
+            "totalAmount": 2431.68,
+            "amountDue": 0,
+            "modifiedDate": "2023-03-27T14:21:25Z",
+            "sourceModifiedDate": "2022-05-17T16:29:02Z",
+            "note": "107001",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "57377f05-8ad1-ea11-bbaa-000d3a2b9185",
+                  "note": "Invoice 107001",
+                  "reference": "108001",
+                  "accountRef": {
+                    "id": "621217b3-89d1-ea11-bbaa-000d3a2b9185",
+                    "name": "Petty Cash"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2019-01-01T00:00:00",
+                  "totalAmount": 2431.68
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2019-01-01T00:00:00",
+                  "totalAmount": -2431.68
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 294,
+        "_links": {
+          "current": {
+            "href": "/companies/d6849caf-c146-41be-8335-b73346e3bd84/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d6849caf-c146-41be-8335-b73346e3bd84/data/bills"
+          },
+          "next": {
+            "href": "/companies/d6849caf-c146-41be-8335-b73346e3bd84/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "results": [
+          {
+            "id": "1c55118b-793e-4437-9c13-4f554b9ca989",
+            "reference": "19600006",
+            "supplierRef": {
+              "id": "5e6f49b9-6489-4b82-83e7-291d308919bb",
+              "supplierName": "Mickey Mouse"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2019-12-16T00:00:00Z",
+            "dueDate": "2019-11-09T00:00:00Z",
+            "currency": "EUR",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Cheesecake",
+                "unitAmount": 10,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 10,
+                "taxAmount": 2.1,
+                "totalAmount": 12.1,
+                "accountRef": {
+                  "id": "5f139759-b554-4314-862e-b9d88e5b2e1b",
+                  "name": "Af te dragen loonheffing"
+                },
+                "taxRateRef": {
+                  "id": "84277189-ad16-456c-b501-ca31f0a483cc",
+                  "name": "BTW prive gebruik",
+                  "effectiveTaxRate": 21
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 10,
+            "taxAmount": 2.1,
+            "totalAmount": 12.1,
+            "amountDue": 0,
+            "modifiedDate": "2022-10-26T13:32:18Z",
+            "sourceModifiedDate": "2020-01-03T15:06:02Z",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "d9a2980b-2a43-46f2-9c7f-413d925b3cdd",
+                  "reference": "20200032",
+                  "accountRef": {
+                    "id": "d79d65bd-1d7d-4f55-95d3-76b3a7b7b823",
+                    "name": "Bank 1"
+                  },
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "paidOnDate": "2021-03-22T00:00:00",
+                  "totalAmount": 12.1
+                },
+                "allocation": {
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "totalAmount": -12.1
+                }
+              }
+            ]
+          },
+          {
+            "id": "ec0c61a1-deb6-4496-b9ee-feb29b16019c",
+            "reference": "19600008",
+            "supplierRef": {
+              "id": "fc189bfa-f083-438c-bf09-379a0631d4a1",
+              "supplierName": "Mickey Mouse"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2019-12-16T00:00:00Z",
+            "dueDate": "2019-11-09T00:00:00Z",
+            "currency": "EUR",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Cheesecake",
+                "unitAmount": 10,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 10,
+                "taxAmount": 2.1,
+                "totalAmount": 12.1,
+                "accountRef": {
+                  "id": "5f139759-b554-4314-862e-b9d88e5b2e1b",
+                  "name": "Af te dragen loonheffing"
+                },
+                "taxRateRef": {
+                  "id": "84277189-ad16-456c-b501-ca31f0a483cc",
+                  "name": "BTW prive gebruik",
+                  "effectiveTaxRate": 21
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Open",
+            "subTotal": 10,
+            "taxAmount": 2.1,
+            "totalAmount": 12.1,
+            "amountDue": 12.1,
+            "modifiedDate": "2022-10-26T13:32:18Z",
+            "sourceModifiedDate": "2020-01-03T15:06:39Z",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "ef5d140b-16da-4fd2-a0c8-d5bfb89a13ee",
+                  "reference": "19900056",
+                  "accountRef": {
+                    "id": "a2d51b6f-677d-4bbf-ad0c-b45fd6231546",
+                    "name": "Activa herwaarderingen"
+                  },
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "paidOnDate": "2019-11-07T00:00:00",
+                  "totalAmount": 0.21
+                },
+                "allocation": {
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "totalAmount": -0.21
+                }
+              },
+              {
+                "payment": {
+                  "id": "b69e7ad4-2b90-4a5f-a8a0-67418ac95531",
+                  "reference": "19900053",
+                  "accountRef": {
+                    "id": "a2d51b6f-677d-4bbf-ad0c-b45fd6231546",
+                    "name": "Activa herwaarderingen"
+                  },
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "paidOnDate": "2019-11-07T00:00:00",
+                  "totalAmount": 0.2
+                },
+                "allocation": {
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "totalAmount": -0.2
+                }
+              },
+              {
+                "payment": {
+                  "id": "6ccd1256-6073-4bfc-8d88-700417685e72",
+                  "reference": "21200028",
+                  "accountRef": {
+                    "id": "d79d65bd-1d7d-4f55-95d3-76b3a7b7b823",
+                    "name": "Bank 1"
+                  },
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "paidOnDate": "2021-10-05T00:00:00",
+                  "totalAmount": 12.1
+                },
+                "allocation": {
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "totalAmount": -12.1
+                }
+              },
+              {
+                "payment": {
+                  "id": "69a8533b-3e59-4d2d-9bca-bc37bc0f7984",
+                  "reference": "19900055",
+                  "accountRef": {
+                    "id": "a2d51b6f-677d-4bbf-ad0c-b45fd6231546",
+                    "name": "Activa herwaarderingen"
+                  },
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "paidOnDate": "2019-11-07T00:00:00",
+                  "totalAmount": 0.21
+                },
+                "allocation": {
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "totalAmount": -0.21
+                }
+              },
+              {
+                "payment": {
+                  "id": "2dae3548-ff11-4ad8-886c-eb5cb7965024",
+                  "reference": "19900054",
+                  "accountRef": {
+                    "id": "a2d51b6f-677d-4bbf-ad0c-b45fd6231546",
+                    "name": "Activa herwaarderingen"
+                  },
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "paidOnDate": "2019-11-07T00:00:00",
+                  "totalAmount": 0.21
+                },
+                "allocation": {
+                  "currency": "EUR",
+                  "currencyRate": 1,
+                  "totalAmount": -0.21
+                }
+              }
+            ]
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 80,
+        "_links": {
+          "current": {
+            "href": "/companies/b83b1923-4db6-45a8-a779-b4e320c15979/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/b83b1923-4db6-45a8-a779-b4e320c15979/data/bills"
+          },
+          "next": {
+            "href": "/companies/b83b1923-4db6-45a8-a779-b4e320c15979/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "results": [
+          {
+            "id": "e7a45898-2db3-424c-acb9-a51647740f26",
+            "reference": "17600002",
+            "supplierRef": {
+              "id": "a7cad20d-44db-442b-ac1f-90475802d6fb",
+              "supplierName": "Pencils Pencils Pencils"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2017-09-26T00:00:00Z",
+            "dueDate": "2017-10-26T00:00:00Z",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Stationery",
+                "unitAmount": 400,
+                "quantity": 2,
+                "discountAmount": 0,
+                "subTotal": 800,
+                "taxAmount": 160,
+                "totalAmount": 960,
+                "accountRef": {
+                  "id": "e5e9e994-0f14-4614-b162-7b5593b21276",
+                  "name": "Finished Goods Stock"
+                },
+                "taxRateRef": {
+                  "id": "63cd143a-66ab-4320-8a6d-ab6be85ed048",
+                  "name": "UK purchases standard rate \ufffd Excluding",
+                  "effectiveTaxRate": 20
+                },
+                "itemRef": {
+                  "id": "001"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 800,
+            "taxAmount": 160,
+            "totalAmount": 960,
+            "amountDue": 0,
+            "modifiedDate": "2022-10-26T13:33:20Z",
+            "sourceModifiedDate": "2019-01-11T14:18:17Z",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "7a5f621b-739f-4ed8-b738-2aae3ef886ac",
+                  "reference": "17200006",
+                  "accountRef": {
+                    "id": "4a4e34b5-7f62-4b64-a44a-073398b14b41",
+                    "name": "Bank"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2017-10-11T00:00:00",
+                  "totalAmount": 123
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -123
+                }
+              }
+            ]
+          },
+          {
+            "id": "064fbab9-9b4d-4e83-b2df-0f4ce12bc2bf",
+            "reference": "19600001",
+            "supplierRef": {
+              "id": "a4d5d739-c979-4819-b0ce-666db1ec3a7d",
+              "supplierName": "Exact Software (UK) Ltd \ufffd Exact Online"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2019-01-11T00:00:00Z",
+            "dueDate": "2019-02-10T00:00:00Z",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Basket balls",
+                "unitAmount": 20,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 20,
+                "taxAmount": 0,
+                "totalAmount": 20,
+                "accountRef": {
+                  "id": "885ff551-664d-451b-995b-cb114c9877d0",
+                  "name": "Unallocated Cash"
+                },
+                "itemRef": {
+                  "id": "23"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 20,
+            "taxAmount": 0,
+            "totalAmount": 20,
+            "amountDue": 0,
+            "modifiedDate": "2022-10-26T13:33:20Z",
+            "sourceModifiedDate": "2019-01-11T12:03:31Z",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "d871f677-c2df-4069-bda0-c6804a46b71b",
+                  "reference": "19200001",
+                  "accountRef": {
+                    "id": "4a4e34b5-7f62-4b64-a44a-073398b14b41",
+                    "name": "Bank"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2019-02-10T00:00:00",
+                  "totalAmount": 20
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -20
+                }
+              }
+            ]
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 83,
+        "_links": {
+          "current": {
+            "href": "/companies/d95030cd-22b2-482b-9c7b-2980dcc2b1ce/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d95030cd-22b2-482b-9c7b-2980dcc2b1ce/data/bills"
+          },
+          "next": {
+            "href": "/companies/d95030cd-22b2-482b-9c7b-2980dcc2b1ce/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "results": [
+          {
+            "id": "16609552",
+            "reference": "MATT - U",
+            "supplierRef": {
+              "id": "7169654",
+              "supplierName": "The Eagle"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2014-08-21T00:00:00",
+            "dueDate": "2018-09-20T00:00:00",
+            "currency": "GBP",
+            "lineItems": [
+              {
+                "unitAmount": 125,
+                "quantity": 1,
+                "taxAmount": 25,
+                "totalAmount": 150,
+                "accountRef": {
+                  "id": "285",
+                  "name": "Accommodation and Meals"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Open",
+            "subTotal": 125,
+            "taxAmount": 25,
+            "totalAmount": 150,
+            "amountDue": 150,
+            "modifiedDate": "2023-04-25T14:19:10Z",
+            "sourceModifiedDate": "2020-11-11T12:48:55Z",
+            "paymentAllocations": [],
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "16609589",
+            "reference": "MATT - U",
+            "supplierRef": {
+              "id": "7169654",
+              "supplierName": "The Eagle"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2014-08-21T00:00:00",
+            "dueDate": "2018-09-20T00:00:00",
+            "currency": "GBP",
+            "lineItems": [
+              {
+                "unitAmount": 125,
+                "quantity": 1,
+                "taxAmount": 25,
+                "totalAmount": 150,
+                "accountRef": {
+                  "id": "285",
+                  "name": "Accommodation and Meals"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Open",
+            "subTotal": 125,
+            "taxAmount": 25,
+            "totalAmount": 150,
+            "amountDue": 150,
+            "modifiedDate": "2023-04-25T14:19:10Z",
+            "sourceModifiedDate": "2020-11-11T12:50:41Z",
+            "paymentAllocations": [],
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 137,
+        "_links": {
+          "current": {
+            "href": "/companies/071ad738-68f3-4561-afd0-69bab9df0803/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/071ad738-68f3-4561-afd0-69bab9df0803/data/bills"
+          },
+          "next": {
+            "href": "/companies/071ad738-68f3-4561-afd0-69bab9df0803/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "results": [
+          {
+            "id": "27",
+            "supplierRef": {
+              "id": "87"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2021-04-26T00:00:00",
+            "dueDate": "2021-05-26T00:00:00",
+            "currency": "USD",
+            "lineItems": [
+              {
+                "description": "Grocery",
+                "unitAmount": 50,
+                "quantity": 1,
+                "subTotal": 50,
+                "taxAmount": 0,
+                "totalAmount": 50,
+                "accountRef": {
+                  "id": "3384197",
+                  "name": "Advertising"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Open",
+            "subTotal": 50,
+            "taxAmount": 0,
+            "totalAmount": 50,
+            "amountDue": 50,
+            "modifiedDate": "2023-03-24T16:07:23Z",
+            "sourceModifiedDate": "2021-04-26T19:34:22",
+            "paymentAllocations": [],
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "29",
+            "supplierRef": {
+              "id": "89"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2021-04-28T00:00:00",
+            "dueDate": "2021-05-28T00:00:00",
+            "currency": "GBP",
+            "lineItems": [
+              {
+                "description": "Advertising refund",
+                "unitAmount": 10,
+                "quantity": 1,
+                "subTotal": 10,
+                "taxAmount": 0,
+                "totalAmount": 10,
+                "accountRef": {
+                  "id": "3384197",
+                  "name": "Advertising"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 10,
+            "taxAmount": 0,
+            "totalAmount": 10,
+            "amountDue": 0,
+            "modifiedDate": "2023-03-24T16:07:23Z",
+            "sourceModifiedDate": "2021-08-18T13:52:33",
+            "paymentAllocations": [],
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 16,
+        "_links": {
+          "current": {
+            "href": "/companies/3691c49e-0db4-4172-b3ab-e4084c365013/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/3691c49e-0db4-4172-b3ab-e4084c365013/data/bills"
+          },
+          "next": {
+            "href": "/companies/3691c49e-0db4-4172-b3ab-e4084c365013/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "KashFlow",
+      "example": {
+        "results": [
+          {
+            "id": "97615244",
+            "reference": "25",
+            "supplierRef": {
+              "id": "9272052",
+              "supplierName": "Supplier man"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2000-01-01T00:00:00",
+            "dueDate": "2000-01-01T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "",
+                "unitAmount": 8.33,
+                "quantity": 1,
+                "subTotal": 8.33,
+                "taxAmount": 1.67,
+                "totalAmount": 10,
+                "accountRef": {
+                  "id": "21481884",
+                  "name": "Computer equipment cost"
+                },
+                "itemRef": {
+                  "id": "122990246"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 8.33,
+            "taxAmount": 1.67,
+            "totalAmount": 10,
+            "amountDue": 0,
+            "modifiedDate": "2022-09-30T10:29:15Z",
+            "paymentAllocations": []
+          },
+          {
+            "id": "76144089",
+            "reference": "1",
+            "supplierRef": {
+              "id": "6202387",
+              "supplierName": "Dell"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2019-01-28T00:00:00",
+            "dueDate": "2019-02-27T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "",
+                "unitAmount": 120,
+                "quantity": 5,
+                "subTotal": 600,
+                "taxAmount": 0,
+                "totalAmount": 600,
+                "accountRef": {
+                  "id": "21481820",
+                  "name": "Materials purchased"
+                },
+                "itemRef": {
+                  "id": "95293985"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 600,
+            "taxAmount": 0,
+            "totalAmount": 600,
+            "amountDue": 0,
+            "modifiedDate": "2022-09-30T10:29:15Z",
+            "paymentAllocations": []
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 19,
+        "_links": {
+          "current": {
+            "href": "/companies/3a707a99-89da-4b16-a5d6-595333a16352/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/3a707a99-89da-4b16-a5d6-595333a16352/data/bills"
+          },
+          "next": {
+            "href": "/companies/3a707a99-89da-4b16-a5d6-595333a16352/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "results": [
+          {
+            "id": "7",
+            "supplierRef": {
+              "id": "724",
+              "supplierName": "Vendor A.A.A"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2021-03-26T00:00:00",
+            "dueDate": "2021-03-26T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "unitAmount": 120,
+                "quantity": 1,
+                "unitOfMeasurement": "litre",
+                "subTotal": 120,
+                "totalAmount": 120,
+                "accountRef": {
+                  "id": "716",
+                  "name": "Inventory In Transit"
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "location-4",
+                    "name": "Europe"
+                  }
+                ],
+                "tracking": {
+                  "categoryRefs": [
+                    {
+                      "id": "location-4",
+                      "name": "Europe"
+                    }
+                  ],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "Unknown"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "PartiallyPaid",
+            "subTotal": 120,
+            "taxAmount": 24,
+            "totalAmount": 144,
+            "amountDue": 24,
+            "modifiedDate": "2023-01-30T14:47:34Z",
+            "sourceModifiedDate": "2022-07-05T13:38:10",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "112",
+                  "reference": "Bill Payment #1",
+                  "accountRef": {
+                    "id": "825",
+                    "name": "Codat Europe Bank"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2021-03-26T00:00:00",
+                  "totalAmount": 120
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -120
+                }
+              }
+            ]
+          },
+          {
+            "id": "165372",
+            "supplierRef": {
+              "id": "724",
+              "supplierName": "Vendor A.A.A"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2022-07-15T00:00:00",
+            "dueDate": "2022-07-15T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "unitAmount": 555.78,
+                "quantity": 1,
+                "subTotal": 555.78,
+                "totalAmount": 555.78,
+                "accountRef": {
+                  "id": "844",
+                  "name": "Asset account test 2"
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "location-4",
+                    "name": "Europe"
+                  }
+                ],
+                "tracking": {
+                  "categoryRefs": [
+                    {
+                      "id": "location-4",
+                      "name": "Europe"
+                    }
+                  ],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "Unknown"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "PartiallyPaid",
+            "subTotal": 555.78,
+            "taxAmount": 0,
+            "totalAmount": 555.78,
+            "amountDue": 500,
+            "modifiedDate": "2023-01-30T14:47:34Z",
+            "sourceModifiedDate": "2022-07-15T11:35:47",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "165373",
+                  "reference": "Bill Payment #2",
+                  "accountRef": {
+                    "id": "825",
+                    "name": "Codat Europe Bank"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-07-15T00:00:00",
+                  "totalAmount": 555.78
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -55.78
+                }
+              }
+            ]
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 3,
+        "_links": {
+          "current": {
+            "href": "/companies/d5074b08-6a34-4b06-a742-236edf5dc4f1/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d5074b08-6a34-4b06-a742-236edf5dc4f1/data/bills"
+          },
+          "next": {
+            "href": "/companies/d5074b08-6a34-4b06-a742-236edf5dc4f1/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "results": [
+          {
+            "id": "3691-1071520776",
+            "reference": "3847498",
+            "supplierRef": {
+              "id": "B0000-933272656",
+              "supplierName": "Patton Hardware Supplies"
+            },
+            "purchaseOrderRefs": [
+              {
+                "id": "3684-1071520443",
+                "purchaseOrderNumber": "6225"
+              }
+            ],
+            "issueDate": "2022-12-02T00:00:00",
+            "dueDate": "2024-01-01T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Cabinets:Light Pine - Light pine kitchen cabinet wall unit \n#CLD- 1235-p",
+                "unitAmount": 1500,
+                "quantity": 5,
+                "discountAmount": 0,
+                "subTotal": 7500,
+                "taxAmount": 0,
+                "totalAmount": 7500,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "C0000-933270541",
+                  "name": "Accounts Payable"
+                },
+                "itemRef": {
+                  "id": "110000-933272656",
+                  "name": "Cabinets:Light Pine"
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "10000-933272658",
+                    "name": "New Construction"
+                  }
+                ],
+                "tracking": {
+                  "categoryRefs": [
+                    {
+                      "id": "10000-933272658",
+                      "name": "New Construction"
+                    }
+                  ],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "Unknown"
+                },
+                "isDirectCost": false
+              },
+              {
+                "description": "Hardware:Doorknobs Std - Doorknobs Part # DK 3704",
+                "unitAmount": 27,
+                "quantity": 100,
+                "discountAmount": 0,
+                "subTotal": 2700,
+                "taxAmount": 0,
+                "totalAmount": 2700,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "C0000-933270541",
+                  "name": "Accounts Payable"
+                },
+                "itemRef": {
+                  "id": "130000-933272656",
+                  "name": "Hardware:Doorknobs Std"
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "10000-933272658",
+                    "name": "New Construction"
+                  }
+                ],
+                "tracking": {
+                  "categoryRefs": [
+                    {
+                      "id": "10000-933272658",
+                      "name": "New Construction"
+                    }
+                  ],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "Unknown"
+                },
+                "isDirectCost": false
+              },
+              {
+                "description": "Hardware:Lk Doorknobs - Locking interior doorknobs  Part # DK415",
+                "unitAmount": 34.95,
+                "quantity": 100,
+                "discountAmount": 0,
+                "subTotal": 3495,
+                "taxAmount": 0,
+                "totalAmount": 3495,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "C0000-933270541",
+                  "name": "Accounts Payable"
+                },
+                "itemRef": {
+                  "id": "140000-933272656",
+                  "name": "Hardware:Lk Doorknobs"
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "10000-933272658",
+                    "name": "New Construction"
+                  }
+                ],
+                "tracking": {
+                  "categoryRefs": [
+                    {
+                      "id": "10000-933272658",
+                      "name": "New Construction"
+                    }
+                  ],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "Unknown"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 13695,
+            "taxAmount": 0,
+            "totalAmount": 13695,
+            "amountDue": 0,
+            "modifiedDate": "2023-04-26T09:06:42Z",
+            "sourceModifiedDate": "2023-12-16T05:06:30",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "9E4C-1182131999",
+                  "reference": "115",
+                  "accountRef": {
+                    "id": "20000-933270541",
+                    "name": "Checking"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2023-01-31T00:00:00",
+                  "totalAmount": 13759
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -8695
+                }
+              },
+              {
+                "payment": {
+                  "id": "36AD-1071520917",
+                  "note": "RC 93",
+                  "reference": "484",
+                  "accountRef": {
+                    "id": "20000-933270541",
+                    "name": "Checking"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2024-12-05T00:00:00",
+                  "totalAmount": 5325
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5000
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "5CAB-1197713763",
+            "reference": "8374892",
+            "supplierRef": {
+              "id": "30000-933272656",
+              "supplierName": "C. U. Electric"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2022-12-15T00:00:00",
+            "dueDate": "2024-01-14T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "unitAmount": 532,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 532,
+                "taxAmount": 0,
+                "totalAmount": 532,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "490000-933270542",
+                  "name": "Gas and Electric"
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "80000007-1197713802",
+                    "name": "Overhead"
+                  }
+                ],
+                "tracking": {
+                  "categoryRefs": [
+                    {
+                      "id": "80000007-1197713802",
+                      "name": "Overhead"
+                    }
+                  ],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "Unknown"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 532,
+            "taxAmount": 0,
+            "totalAmount": 532,
+            "amountDue": 0,
+            "modifiedDate": "2023-04-26T09:06:42Z",
+            "sourceModifiedDate": "2023-12-16T05:06:30",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "9E42-1182131999",
+                  "reference": "113",
+                  "accountRef": {
+                    "id": "20000-933270541",
+                    "name": "Checking"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2023-01-31T00:00:00",
+                  "totalAmount": 532
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -532
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 239,
+        "_links": {
+          "current": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/bills"
+          },
+          "next": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "results": [
+          {
+            "id": "18",
+            "reference": "12",
+            "supplierRef": {
+              "id": "4",
+              "supplierName": "BILLy elliot"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2019-05-13T00:00:00",
+            "dueDate": "2019-05-13T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "unitAmount": 5,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 5,
+                "taxAmount": 0,
+                "totalAmount": 5,
+                "accountRef": {
+                  "id": "16",
+                  "name": "Advertising"
+                },
+                "taxRateRef": {
+                  "id": "NON",
+                  "name": "NON",
+                  "effectiveTaxRate": 0
+                },
+                "trackingCategoryRefs": [],
+                "tracking": {
+                  "categoryRefs": [],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "NotApplicable"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 5,
+            "taxAmount": 0,
+            "totalAmount": 5,
+            "amountDue": 0,
+            "modifiedDate": "2023-01-18T11:02:41Z",
+            "sourceModifiedDate": "2022-05-26T10:34:10Z",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "20",
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2019-05-13T00:00:00",
+                  "totalAmount": 0
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5
+                }
+              }
+            ]
+          },
+          {
+            "id": "22",
+            "reference": "12",
+            "supplierRef": {
+              "id": "4",
+              "supplierName": "BILLy elliot"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2019-05-13T00:00:00",
+            "dueDate": "2019-05-13T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "unitAmount": 5,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 5,
+                "taxAmount": 0,
+                "totalAmount": 5,
+                "accountRef": {
+                  "id": "16",
+                  "name": "Advertising"
+                },
+                "taxRateRef": {
+                  "id": "NON",
+                  "name": "NON",
+                  "effectiveTaxRate": 0
+                },
+                "trackingCategoryRefs": [],
+                "tracking": {
+                  "categoryRefs": [],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "NotApplicable"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 5,
+            "taxAmount": 0,
+            "totalAmount": 5,
+            "amountDue": 0,
+            "modifiedDate": "2023-01-18T11:02:41Z",
+            "sourceModifiedDate": "2020-03-23T10:44:06Z",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "678",
+                  "note": "payment note test",
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2020-03-23T00:00:00",
+                  "totalAmount": 0
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5
+                }
+              }
+            ]
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 147,
+        "_links": {
+          "current": {
+            "href": "/companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/data/bills"
+          },
+          "next": {
+            "href": "/companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "results": [
+          {
+            "id": "157",
+            "supplierRef": {
+              "id": "57",
+              "supplierName": "Hall's Promo Items"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2016-01-06T00:00:00",
+            "dueDate": "2016-01-16T00:00:00",
+            "currency": "HKD",
+            "currencyRate": 0.081142,
+            "lineItems": [
+              {
+                "description": "Water bottles -- generic",
+                "unitAmount": 66.1717023,
+                "quantity": 100,
+                "discountAmount": 0,
+                "subTotal": 6617.17,
+                "taxAmount": 1323.43,
+                "totalAmount": 7940.6,
+                "taxRateRef": {
+                  "id": "3_Bills",
+                  "name": "20.0% S Bills",
+                  "effectiveTaxRate": 20
+                },
+                "itemRef": {
+                  "id": "19",
+                  "name": "Water Bottles"
+                },
+                "trackingCategoryRefs": [],
+                "tracking": {
+                  "categoryRefs": [],
+                  "customerRef": {
+                    "id": "55",
+                    "companyName": "Oxon Insurance - Holiday Party"
+                  },
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "NotApplicable"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 6617.17,
+            "taxAmount": 1323.43,
+            "totalAmount": 7940.6,
+            "amountDue": 0,
+            "modifiedDate": "2023-04-26T09:35:58Z",
+            "sourceModifiedDate": "2023-01-26T11:20:45Z",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "158",
+                  "reference": "1067",
+                  "accountRef": {
+                    "id": "81",
+                    "name": "Current"
+                  },
+                  "currency": "HKD",
+                  "currencyRate": 0.078807,
+                  "paidOnDate": "2016-01-23T00:00:00",
+                  "totalAmount": 7940.6
+                },
+                "allocation": {
+                  "currency": "HKD",
+                  "currencyRate": 1,
+                  "totalAmount": -7940.6
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "28",
+            "supplierRef": {
+              "id": "57",
+              "supplierName": "Hall's Promo Items"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2016-01-06T00:00:00",
+            "dueDate": "2016-01-06T00:00:00",
+            "currency": "HKD",
+            "currencyRate": 0.081142,
+            "lineItems": [
+              {
+                "description": "promotional items -- misc engraved items",
+                "unitAmount": 8.25,
+                "quantity": 75,
+                "discountAmount": 0,
+                "subTotal": 618.75,
+                "taxAmount": 123.75,
+                "totalAmount": 742.5,
+                "taxRateRef": {
+                  "id": "3_Bills",
+                  "name": "20.0% S Bills",
+                  "effectiveTaxRate": 20
+                },
+                "itemRef": {
+                  "id": "12",
+                  "name": "Misc"
+                },
+                "trackingCategoryRefs": [],
+                "tracking": {
+                  "categoryRefs": [],
+                  "customerRef": {
+                    "id": "59",
+                    "companyName": "Ecker Holiday event"
+                  },
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "NotApplicable"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 618.75,
+            "taxAmount": 123.75,
+            "totalAmount": 742.5,
+            "amountDue": 0,
+            "modifiedDate": "2023-04-26T09:35:58Z",
+            "sourceModifiedDate": "2016-09-13T21:19:49Z",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "159",
+                  "reference": "1068",
+                  "accountRef": {
+                    "id": "81",
+                    "name": "Current"
+                  },
+                  "currency": "HKD",
+                  "currencyRate": 0.078807,
+                  "paidOnDate": "2016-01-23T00:00:00",
+                  "totalAmount": 742.5
+                },
+                "allocation": {
+                  "currency": "HKD",
+                  "currencyRate": 1,
+                  "totalAmount": -742.5
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 711,
+        "_links": {
+          "current": {
+            "href": "/companies/5a7f3597-36e1-4216-86fe-289ad36088a6/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/5a7f3597-36e1-4216-86fe-289ad36088a6/data/bills"
+          },
+          "next": {
+            "href": "/companies/5a7f3597-36e1-4216-86fe-289ad36088a6/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 200cloud",
+      "example": {
+        "results": [
+          {
+            "id": "45121",
+            "reference": "Order no 1",
+            "supplierRef": {
+              "id": "CON001",
+              "supplierName": "Concept Stationery Supplies"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2020-07-22T00:00:00Z",
+            "dueDate": "2020-02-15T00:00:00Z",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Tax Summary - Tax Rate 1",
+                "unitAmount": 0,
+                "quantity": 0,
+                "discountAmount": 0.5,
+                "subTotal": 0,
+                "taxAmount": 20,
+                "totalAmount": 20,
+                "taxRateRef": {
+                  "id": "1729",
+                  "name": "Standard rate",
+                  "effectiveTaxRate": 20
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Goods Summary",
+                "unitAmount": 0,
+                "quantity": 0,
+                "discountAmount": 2.5,
+                "subTotal": 100,
+                "taxAmount": 0,
+                "totalAmount": 100,
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Open",
+            "subTotal": 100,
+            "taxAmount": 20,
+            "totalAmount": 120,
+            "amountDue": 120,
+            "modifiedDate": "2022-10-14T09:36:01Z",
+            "sourceModifiedDate": "2020-02-28T14:23:46Z",
+            "note": "No1",
+            "paymentAllocations": []
+          },
+          {
+            "id": "45131",
+            "reference": "Order 2",
+            "supplierRef": {
+              "id": "CON001",
+              "supplierName": "Concept Stationery Supplies"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2020-07-22T00:00:00Z",
+            "dueDate": "2020-03-01T00:00:00Z",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Tax Summary - Tax Rate 1",
+                "unitAmount": 0,
+                "quantity": 0,
+                "discountAmount": 0,
+                "subTotal": 0,
+                "taxAmount": 31.6,
+                "totalAmount": 31.6,
+                "taxRateRef": {
+                  "id": "1729",
+                  "name": "Standard rate",
+                  "effectiveTaxRate": 20
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Goods Summary",
+                "unitAmount": 0,
+                "quantity": 0,
+                "discountAmount": 0,
+                "subTotal": 158,
+                "taxAmount": 0,
+                "totalAmount": 158,
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "PartiallyPaid",
+            "subTotal": 158,
+            "taxAmount": 31.6,
+            "totalAmount": 189.6,
+            "amountDue": 179.1,
+            "modifiedDate": "2022-10-14T09:36:01Z",
+            "sourceModifiedDate": "2020-02-28T14:23:46Z",
+            "note": "No2",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "45391",
+                  "note": "ret1",
+                  "reference": "Return 1",
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2020-01-20T00:00:00",
+                  "totalAmount": 0
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": 10.5
+                }
+              }
+            ]
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 162,
+        "_links": {
+          "current": {
+            "href": "/companies/93c21e2d-049c-4d24-b41b-57e61c30b69e/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/93c21e2d-049c-4d24-b41b-57e61c30b69e/data/bills"
+          },
+          "next": {
+            "href": "/companies/93c21e2d-049c-4d24-b41b-57e61c30b69e/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "results": [
+          {
+            "id": "92",
+            "reference": "2569",
+            "supplierRef": {
+              "id": "THO001",
+              "supplierName": "Thompsons Electricals"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2021-01-01T00:00:00",
+            "dueDate": "2022-01-31T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Goods",
+                "unitAmount": 5875,
+                "quantity": 1,
+                "subTotal": 5000,
+                "taxAmount": 875,
+                "totalAmount": 5875,
+                "accountRef": {
+                  "id": "5000",
+                  "name": "Materials Purchased"
+                },
+                "taxRateRef": {
+                  "id": "1",
+                  "name": "Standard rate",
+                  "effectiveTaxRate": 20
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "department_7",
+                    "name": "Workshop"
+                  }
+                ],
+                "tracking": {
+                  "categoryRefs": [
+                    {
+                      "id": "department_7",
+                      "name": "Workshop"
+                    }
+                  ],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "Unknown"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 5000,
+            "taxAmount": 875,
+            "totalAmount": 5875,
+            "amountDue": 0,
+            "modifiedDate": "2023-03-30T14:42:44Z",
+            "sourceModifiedDate": "2022-11-25T09:43:54",
+            "note": "Goods",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "260",
+                  "note": "Purchase payment 260 linked to, purchase invoice 11, purchase invoice 18, purchase invoice 92, purchase invoice 93.",
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-01-29T00:00:00",
+                  "totalAmount": 7141.98
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5875
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "93",
+            "reference": "2570",
+            "supplierRef": {
+              "id": "THO001",
+              "supplierName": "Thompsons Electricals"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2021-01-15T00:00:00",
+            "dueDate": "2022-02-14T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Goods",
+                "unitAmount": 1175,
+                "quantity": 1,
+                "subTotal": 1000,
+                "taxAmount": 175,
+                "totalAmount": 1175,
+                "accountRef": {
+                  "id": "5000",
+                  "name": "Materials Purchased"
+                },
+                "taxRateRef": {
+                  "id": "1",
+                  "name": "Standard rate",
+                  "effectiveTaxRate": 20
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "department_7",
+                    "name": "Workshop"
+                  }
+                ],
+                "tracking": {
+                  "categoryRefs": [
+                    {
+                      "id": "department_7",
+                      "name": "Workshop"
+                    }
+                  ],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "Unknown"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 1000,
+            "taxAmount": 175,
+            "totalAmount": 1175,
+            "amountDue": 0,
+            "modifiedDate": "2023-03-30T14:42:44Z",
+            "sourceModifiedDate": "2022-11-25T09:43:54",
+            "note": "Goods",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "260",
+                  "note": "Purchase payment 260 linked to, purchase invoice 11, purchase invoice 18, purchase invoice 92, purchase invoice 93.",
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-01-29T00:00:00",
+                  "totalAmount": 7141.98
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -1175
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 95,
+        "_links": {
+          "current": {
+            "href": "/companies/cf5f2a47-2990-4221-bae6-0c19c86ac304/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/cf5f2a47-2990-4221-bae6-0c19c86ac304/data/bills"
+          },
+          "next": {
+            "href": "/companies/cf5f2a47-2990-4221-bae6-0c19c86ac304/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "results": [
+          {
+            "id": "15a7a15773b011e8aaa5027d54329956",
+            "reference": "19/06/2018 - 435.60",
+            "supplierRef": {
+              "id": "ca430e0d156011e8b45c025132dab352",
+              "supplierName": "Test Supplier"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2018-06-19T00:00:00",
+            "dueDate": "2018-07-19T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Consulting services",
+                "unitAmount": 11,
+                "quantity": 33,
+                "subTotal": 363,
+                "taxAmount": 72.6,
+                "totalAmount": 435.6,
+                "accountRef": {
+                  "id": "9a995955267a11e797950a57719b2edb",
+                  "name": "Cost of sales - goods"
+                },
+                "taxRateRef": {
+                  "id": "GB_STANDARD",
+                  "name": "Standard 20.00%",
+                  "effectiveTaxRate": 20
+                },
+                "itemRef": {
+                  "id": "a87b922b33de11e797950a57719b2edb",
+                  "name": "Consulting services"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "PartiallyPaid",
+            "subTotal": 363,
+            "taxAmount": 72.6,
+            "totalAmount": 435.6,
+            "amountDue": 405.6,
+            "modifiedDate": "2022-10-24T14:56:08Z",
+            "sourceModifiedDate": "2020-02-05T15:19:28Z",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "f11134e299cb4456be096265136a7770",
+                  "note": "Supplier payment using credit/debit card - string",
+                  "accountRef": {
+                    "id": "92b80ba619d34cafbedd0eb2e69a82f7",
+                    "name": "ozzbtdynvoblhytjolxaiohrtrhtpvndiqncpjtcjzwcddpvzl"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2020-02-05T00:00:00",
+                  "totalAmount": 5
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5
+                }
+              },
+              {
+                "payment": {
+                  "id": "e3e35dcda09642ca8880fc603b0a98e9",
+                  "note": "Supplier payment using credit/debit card - string",
+                  "accountRef": {
+                    "id": "92b80ba619d34cafbedd0eb2e69a82f7",
+                    "name": "ozzbtdynvoblhytjolxaiohrtrhtpvndiqncpjtcjzwcddpvzl"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2020-02-05T00:00:00",
+                  "totalAmount": 5
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5
+                }
+              },
+              {
+                "payment": {
+                  "id": "d9b643b9d6e149f4b443cbc6f22fe1dd",
+                  "note": "Supplier payment using credit/debit card - string",
+                  "accountRef": {
+                    "id": "92b80ba619d34cafbedd0eb2e69a82f7",
+                    "name": "ozzbtdynvoblhytjolxaiohrtrhtpvndiqncpjtcjzwcddpvzl"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2020-02-05T00:00:00",
+                  "totalAmount": 5
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5
+                }
+              },
+              {
+                "payment": {
+                  "id": "cbff2fed2f1641b7bee59f5dd68d29a1",
+                  "note": "Supplier payment using credit/debit card - string",
+                  "accountRef": {
+                    "id": "92b80ba619d34cafbedd0eb2e69a82f7",
+                    "name": "ozzbtdynvoblhytjolxaiohrtrhtpvndiqncpjtcjzwcddpvzl"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2020-02-05T00:00:00",
+                  "totalAmount": 5
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5
+                }
+              },
+              {
+                "payment": {
+                  "id": "3c3ed62353cf4d148352a14027738dbe",
+                  "note": "Supplier payment using credit/debit card - string",
+                  "accountRef": {
+                    "id": "92b80ba619d34cafbedd0eb2e69a82f7",
+                    "name": "ozzbtdynvoblhytjolxaiohrtrhtpvndiqncpjtcjzwcddpvzl"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2020-02-05T00:00:00",
+                  "totalAmount": 5
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5
+                }
+              },
+              {
+                "payment": {
+                  "id": "332e402b9d4b4614af82594d186f5f29",
+                  "note": "Supplier payment using credit/debit card - string",
+                  "accountRef": {
+                    "id": "92b80ba619d34cafbedd0eb2e69a82f7",
+                    "name": "ozzbtdynvoblhytjolxaiohrtrhtpvndiqncpjtcjzwcddpvzl"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2020-02-05T00:00:00",
+                  "totalAmount": 5
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5
+                }
+              }
+            ]
+          },
+          {
+            "id": "09034445789211e8aaa5027d54329956",
+            "reference": "25/06/2018 - 1,000.00",
+            "supplierRef": {
+              "id": "ec716559789111e8aaa5027d54329956",
+              "supplierName": "Bagels Limited"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2018-06-25T00:00:00",
+            "dueDate": "2018-07-25T00:00:00",
+            "currency": "USD",
+            "currencyRate": 0.752601305,
+            "lineItems": [
+              {
+                "description": "Bagels",
+                "unitAmount": 1000,
+                "quantity": 1,
+                "subTotal": 1000,
+                "taxAmount": 0,
+                "totalAmount": 1000,
+                "accountRef": {
+                  "id": "9a995955267a11e797950a57719b2edb",
+                  "name": "Cost of sales - goods"
+                },
+                "taxRateRef": {
+                  "id": "GB_ZERO",
+                  "name": "Zero Rated 0.00%",
+                  "effectiveTaxRate": 0
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 1000,
+            "taxAmount": 0,
+            "totalAmount": 1000,
+            "amountDue": 0,
+            "modifiedDate": "2022-10-24T14:56:08Z",
+            "sourceModifiedDate": "2022-02-22T13:48:56Z",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "66d010243e3441ba89a793446eb9c74b",
+                  "note": "Supplier payment using credit/debit card - Test note",
+                  "accountRef": {
+                    "id": "9a25937b267a11e797950a57719b2edb",
+                    "name": "Current"
+                  },
+                  "currency": "USD",
+                  "currencyRate": 0.734679838,
+                  "paidOnDate": "2022-02-16T00:00:00",
+                  "totalAmount": 1000
+                },
+                "allocation": {
+                  "currency": "USD",
+                  "currencyRate": 1,
+                  "totalAmount": -1000
+                }
+              }
+            ]
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 4658,
+        "_links": {
+          "current": {
+            "href": "/companies/390083e2-351b-407c-a3be-55081c36c182/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/390083e2-351b-407c-a3be-55081c36c182/data/bills"
+          },
+          "next": {
+            "href": "/companies/390083e2-351b-407c-a3be-55081c36c182/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "results": [
+          {
+            "id": "4470",
+            "reference": "test",
+            "supplierRef": {
+              "id": "3",
+              "supplierName": "ADP"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2021-10-19T00:00:00",
+            "dueDate": "2021-10-29T00:00:00",
+            "currency": "GBP",
+            "lineItems": [
+              {
+                "unitAmount": 25,
+                "quantity": 1,
+                "subTotal": 25,
+                "taxAmount": 0,
+                "totalAmount": 25,
+                "accountRef": {
+                  "id": "3",
+                  "name": "Accounts Payable"
+                },
+                "taxRateRef": {
+                  "id": "82",
+                  "name": "UK Purchase Goods Zero Rate",
+                  "effectiveTaxRate": 0
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "DEPARTMENT-3",
+                    "name": "Admin"
+                  },
+                  {
+                    "id": "LOCATION-11",
+                    "name": "Codat Test Entity"
+                  }
+                ],
+                "tracking": {
+                  "categoryRefs": [
+                    {
+                      "id": "DEPARTMENT-3",
+                      "name": "Admin"
+                    },
+                    {
+                      "id": "LOCATION-11",
+                      "name": "Codat Test Entity"
+                    }
+                  ],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "Unknown"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 25,
+            "taxAmount": 0,
+            "totalAmount": 25,
+            "amountDue": 0,
+            "modifiedDate": "2023-04-04T16:31:37Z",
+            "sourceModifiedDate": "2022-02-23T12:06:58",
+            "note": "",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "4471",
+                  "note": "",
+                  "accountRef": {
+                    "id": "353",
+                    "name": "Current Account"
+                  },
+                  "currency": "GBP",
+                  "paidOnDate": "2022-01-06T00:00:00",
+                  "totalAmount": 20
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -20
+                }
+              },
+              {
+                "payment": {
+                  "id": "4472",
+                  "note": "",
+                  "accountRef": {
+                    "id": "353",
+                    "name": "Current Account"
+                  },
+                  "currency": "GBP",
+                  "paidOnDate": "2022-01-06T00:00:00",
+                  "totalAmount": 5
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -5
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "4705",
+            "reference": "JohnAndRob",
+            "supplierRef": {
+              "id": "8",
+              "supplierName": "Worldwide Commercial"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2022-02-04T00:00:00",
+            "dueDate": "2022-02-19T00:00:00",
+            "currency": "USD",
+            "currencyRate": 14,
+            "lineItems": [
+              {
+                "description": "Some text for a description",
+                "unitAmount": 10,
+                "quantity": 1,
+                "subTotal": 10,
+                "taxAmount": 0,
+                "totalAmount": 10,
+                "accountRef": {
+                  "id": "3",
+                  "name": "Accounts Payable"
+                },
+                "taxRateRef": {
+                  "id": "49",
+                  "name": "EC Purchase Goods Zero Rate",
+                  "effectiveTaxRate": 0
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "DEPARTMENT-3",
+                    "name": "Admin"
+                  },
+                  {
+                    "id": "LOCATION-11",
+                    "name": "Codat Test Entity"
+                  }
+                ],
+                "tracking": {
+                  "categoryRefs": [
+                    {
+                      "id": "DEPARTMENT-3",
+                      "name": "Admin"
+                    },
+                    {
+                      "id": "LOCATION-11",
+                      "name": "Codat Test Entity"
+                    }
+                  ],
+                  "isBilledTo": "Unknown",
+                  "isRebilledTo": "Unknown"
+                },
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Open",
+            "subTotal": 10,
+            "taxAmount": 0,
+            "totalAmount": 10,
+            "amountDue": 10,
+            "modifiedDate": "2023-04-04T16:31:37Z",
+            "sourceModifiedDate": "2022-04-22T12:24:59",
+            "note": "Some note on my bill",
+            "paymentAllocations": [],
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 17,
+        "_links": {
+          "current": {
+            "href": "/companies/df02b289-cb16-4964-ac4d-9fd60b04538e/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/df02b289-cb16-4964-ac4d-9fd60b04538e/data/bills"
+          },
+          "next": {
+            "href": "/companies/df02b289-cb16-4964-ac4d-9fd60b04538e/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "results": [
+          {
+            "id": "3945273c-cc04-479f-a4b5-1e3dc7a55ed1",
+            "reference": "",
+            "supplierRef": {
+              "id": "1262c350-fe0f-40ec-aeff-41c95b4a45af",
+              "supplierName": "DIISR - Small Business Services"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2021-11-19T00:00:00",
+            "dueDate": "2021-12-20T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Half day training - Microsoft Office",
+                "unitAmount": 1800,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 1800,
+                "taxAmount": 360,
+                "totalAmount": 2160,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "46f9461e-788b-4906-8b74-d1ea17f6dc10",
+                  "name": "Consulting"
+                },
+                "taxRateRef": {
+                  "id": "INPUT2",
+                  "name": "20% (VAT on Expenses)",
+                  "effectiveTaxRate": 20
+                },
+                "itemRef": {
+                  "id": "489558f5-27b7-4f37-ad9f-d84611c2e2ab",
+                  "name": "Half day training - Microsoft Office"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Desktop/network support via email & phone.Per month fixed fee for minimum 20 hours/month.",
+                "unitAmount": 4000,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 4000,
+                "taxAmount": 800,
+                "totalAmount": 4800,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "f96c9458-d724-47bf-8f74-a9d5726465ce",
+                  "name": "General Expenses"
+                },
+                "taxRateRef": {
+                  "id": "INPUT2",
+                  "name": "20% (VAT on Expenses)",
+                  "effectiveTaxRate": 20
+                },
+                "itemRef": {
+                  "id": "f8fb7e00-5e5d-466c-aef0-15861f73d04f",
+                  "name": "Desktop/network support via email & phone"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Stationery charges",
+                "unitAmount": 32,
+                "quantity": 8,
+                "discountAmount": 0,
+                "subTotal": 256,
+                "taxAmount": 51.2,
+                "totalAmount": 307.2,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "cba6527d-f102-4538-b421-e483233e9d5a",
+                  "name": "Printing & Stationery"
+                },
+                "taxRateRef": {
+                  "id": "INPUT2",
+                  "name": "20% (VAT on Expenses)",
+                  "effectiveTaxRate": 20
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 6056,
+            "taxAmount": 1211.2,
+            "totalAmount": 7267.2,
+            "amountDue": 0,
+            "modifiedDate": "2023-03-15T20:36:09Z",
+            "sourceModifiedDate": "2021-01-02T21:07:23",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "74004690-82a1-4810-aaca-6ce575af94b4",
+                  "accountRef": {
+                    "id": "bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4",
+                    "name": "Business Bank Account"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2021-12-20T00:00:00",
+                  "totalAmount": 7267.2
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -7267.2
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "09aa506f-cb81-4cd3-a1ea-6a0b91804d5a",
+            "reference": "",
+            "supplierRef": {
+              "id": "1262c350-fe0f-40ec-aeff-41c95b4a45af",
+              "supplierName": "DIISR - Small Business Services"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2022-01-17T00:00:00",
+            "dueDate": "2022-02-17T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Half day training - Microsoft Office",
+                "unitAmount": 1800,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 1800,
+                "taxAmount": 360,
+                "totalAmount": 2160,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "46f9461e-788b-4906-8b74-d1ea17f6dc10",
+                  "name": "Consulting"
+                },
+                "taxRateRef": {
+                  "id": "INPUT2",
+                  "name": "20% (VAT on Expenses)",
+                  "effectiveTaxRate": 20
+                },
+                "itemRef": {
+                  "id": "489558f5-27b7-4f37-ad9f-d84611c2e2ab",
+                  "name": "Half day training - Microsoft Office"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Desktop/network support via email & phone.Per month fixed fee for minimum 20 hours/month.",
+                "unitAmount": 4000,
+                "quantity": 1,
+                "discountAmount": 0,
+                "subTotal": 4000,
+                "taxAmount": 800,
+                "totalAmount": 4800,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "f96c9458-d724-47bf-8f74-a9d5726465ce",
+                  "name": "General Expenses"
+                },
+                "taxRateRef": {
+                  "id": "INPUT2",
+                  "name": "20% (VAT on Expenses)",
+                  "effectiveTaxRate": 20
+                },
+                "itemRef": {
+                  "id": "f8fb7e00-5e5d-466c-aef0-15861f73d04f",
+                  "name": "Desktop/network support via email & phone"
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              },
+              {
+                "description": "Stationery charges",
+                "unitAmount": 32,
+                "quantity": 8,
+                "discountAmount": 0,
+                "subTotal": 256,
+                "taxAmount": 51.2,
+                "totalAmount": 307.2,
+                "discountPercentage": 0,
+                "accountRef": {
+                  "id": "cba6527d-f102-4538-b421-e483233e9d5a",
+                  "name": "Printing & Stationery"
+                },
+                "taxRateRef": {
+                  "id": "INPUT2",
+                  "name": "20% (VAT on Expenses)",
+                  "effectiveTaxRate": 20
+                },
+                "trackingCategoryRefs": [],
+                "isDirectCost": false
+              }
+            ],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 6056,
+            "taxAmount": 1211.2,
+            "totalAmount": 7267.2,
+            "amountDue": 0,
+            "modifiedDate": "2023-03-15T20:36:09Z",
+            "sourceModifiedDate": "2021-01-02T21:06:22",
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "f2062172-b444-4c8b-b797-9f4c7a4244c7",
+                  "accountRef": {
+                    "id": "bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4",
+                    "name": "Business Bank Account"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-02-17T00:00:00",
+                  "totalAmount": 7267.2
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "totalAmount": -7267.2
+                }
+              }
+            ],
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 44,
+        "_links": {
+          "current": {
+            "href": "/companies/5ced9667-a310-443a-a711-958d36377141/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/5ced9667-a310-443a-a711-958d36377141/data/bills"
+          },
+          "next": {
+            "href": "/companies/5ced9667-a310-443a-a711-958d36377141/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zoho Books",
+      "example": {
+        "results": [
+          {
+            "id": "104957000000152027",
+            "reference": "1",
+            "supplierRef": {
+              "id": "104957000000152001",
+              "supplierName": "Mr. P N"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2020-06-23T00:00:00",
+            "dueDate": "2020-06-23T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 0,
+            "taxAmount": 0,
+            "totalAmount": 10,
+            "amountDue": 0,
+            "modifiedDate": "2022-10-03T08:40:37Z",
+            "sourceModifiedDate": "2020-06-23T13:47:17",
+            "paymentAllocations": []
+          },
+          {
+            "id": "104957000000152067",
+            "reference": "2",
+            "supplierRef": {
+              "id": "104957000000152001",
+              "supplierName": "Mr. P N"
+            },
+            "purchaseOrderRefs": [],
+            "issueDate": "2020-06-23T00:00:00",
+            "dueDate": "2020-06-23T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [],
+            "withholdingTax": [],
+            "status": "Paid",
+            "subTotal": 0,
+            "taxAmount": 0,
+            "totalAmount": 12,
+            "amountDue": 0,
+            "modifiedDate": "2022-10-03T08:40:37Z",
+            "sourceModifiedDate": "2020-11-04T13:07:23",
+            "paymentAllocations": []
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 36,
+        "_links": {
+          "current": {
+            "href": "/companies/d0b68840-db50-4bc3-b88c-96e225333fea/data/bills?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d0b68840-db50-4bc3-b88c-96e225333fea/data/bills"
+          },
+          "next": {
+            "href": "/companies/d0b68840-db50-4bc3-b88c-96e225333fea/data/bills?page=2&pageSize=2"
+          }
+        }
+      }
+    }
+  ]
+}

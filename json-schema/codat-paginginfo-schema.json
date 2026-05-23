@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PagingInfo",
+  "title": "Pagination information",
+  "type": "object",
+  "x-internal": true,
+  "properties": {
+    "pageNumber": {
+      "type": "integer",
+      "description": "Current page number."
+    },
+    "pageSize": {
+      "type": "integer",
+      "description": "Number of items to return in results array.",
+      "maximum": 2000
+    },
+    "totalResults": {
+      "type": "integer",
+      "description": "Total number of items."
+    },
+    "_links": {
+      "$ref": "#/components/schemas/PagingInfo/definitions/links"
+    }
+  },
+  "definitions": {
+    "links": {
+      "title": "Hal Links",
+      "type": "object",
+      "required": [
+        "self",
+        "current"
+      ],
+      "properties": {
+        "self": {
+          "$ref": "#/components/schemas/PagingInfo/definitions/halRef"
+        },
+        "current": {
+          "$ref": "#/components/schemas/PagingInfo/definitions/halRef"
+        },
+        "next": {
+          "$ref": "#/components/schemas/PagingInfo/definitions/halRef"
+        },
+        "previous": {
+          "$ref": "#/components/schemas/PagingInfo/definitions/halRef"
+        }
+      },
+      "examples": [
+        {
+          "self": {
+            "href": "/companies"
+          },
+          "current": {
+            "href": "/companies?page=1&pageSize=10"
+          }
+        }
+      ]
+    },
+    "halRef": {
+      "title": "Hypertext reference",
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "Uri hypertext reference."
+        }
+      }
+    }
+  },
+  "required": [
+    "pageNumber",
+    "pageSize",
+    "totalResults",
+    "_links"
+  ],
+  "examples": [
+    {
+      "pageNumber": 1,
+      "pageSize": 10,
+      "totalResults": 1,
+      "_links": {
+        "self": {
+          "href": "/companies/{id}/data/{dataType}"
+        },
+        "current": {
+          "href": "/companies/{id}/data/{dataType}?page=1&pageSize=10"
+        }
+      }
+    }
+  ]
+}

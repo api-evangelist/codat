@@ -1,0 +1,617 @@
+{
+  "operationId": "get-accounting-cash-flow-statement",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/financials/cashFlowStatement",
+  "summary": "Get cash flow statement",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2021-02-01T00:00:00",
+            "toDate": "2021-02-28T00:00:00",
+            "cashReceipts": {
+              "accountId": "cashReceipts",
+              "name": "Cash Receipts",
+              "value": 18377.72,
+              "items": [
+                {
+                  "accountId": "1b6266d1-1e44-46c5-8eb5-a8f98e03124e",
+                  "name": "Accounts Receivable",
+                  "value": 11417.63,
+                  "items": []
+                },
+                {
+                  "accountId": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Income",
+                  "value": 6960.09,
+                  "items": []
+                },
+                {
+                  "accountId": "68794a8f-b22d-4520-b97b-025b7cb10f94",
+                  "name": "Other Income",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "cashPayments": {
+              "accountId": "cashPayments",
+              "name": "Cash Payments",
+              "value": 12377.81,
+              "items": [
+                {
+                  "accountId": "53bf27a7-7497-4c61-9887-dfaad5c6d80a",
+                  "name": "Accounts Payable",
+                  "value": 7479.21,
+                  "items": []
+                },
+                {
+                  "accountId": "7403e960-5b72-42ff-abf4-c870ad8910bd",
+                  "name": "Cost of Sales",
+                  "value": 700,
+                  "items": []
+                },
+                {
+                  "accountId": "e6f7e297-59d6-4bd5-9353-478ee9b39685",
+                  "name": "Expenses",
+                  "value": 4198.6,
+                  "items": []
+                },
+                {
+                  "accountId": "b5e801e8-8dbc-4390-ac99-3b0fff54a89f",
+                  "name": "Other Expenses",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            }
+          },
+          {
+            "fromDate": "2021-01-01T00:00:00",
+            "toDate": "2021-01-31T00:00:00",
+            "cashReceipts": {
+              "accountId": "cashReceipts",
+              "name": "Cash Receipts",
+              "value": 14508.56,
+              "items": [
+                {
+                  "accountId": "1b6266d1-1e44-46c5-8eb5-a8f98e03124e",
+                  "name": "Accounts Receivable",
+                  "value": 3055.53,
+                  "items": []
+                },
+                {
+                  "accountId": "72df89d2-512b-4455-af51-a6b563733842",
+                  "name": "Income",
+                  "value": 11453.03,
+                  "items": []
+                },
+                {
+                  "accountId": "68794a8f-b22d-4520-b97b-025b7cb10f94",
+                  "name": "Other Income",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "cashPayments": {
+              "accountId": "cashPayments",
+              "name": "Cash Payments",
+              "value": 18902.85,
+              "items": [
+                {
+                  "accountId": "53bf27a7-7497-4c61-9887-dfaad5c6d80a",
+                  "name": "Accounts Payable",
+                  "value": 9673.66,
+                  "items": []
+                },
+                {
+                  "accountId": "7403e960-5b72-42ff-abf4-c870ad8910bd",
+                  "name": "Cost of Sales",
+                  "value": 1250,
+                  "items": []
+                },
+                {
+                  "accountId": "e6f7e297-59d6-4bd5-9353-478ee9b39685",
+                  "name": "Expenses",
+                  "value": 7979.19,
+                  "items": []
+                },
+                {
+                  "accountId": "b5e801e8-8dbc-4390-ac99-3b0fff54a89f",
+                  "name": "Other Expenses",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            }
+          }
+        ],
+        "reportBasis": "Cash",
+        "reportInput": "Direct",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2021-02-28T00:00:00",
+        "earliestAvailableMonth": "2019-03-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-04-01T00:00:00",
+            "toDate": "2023-04-30T00:00:00",
+            "cashReceipts": {
+              "accountId": "CashReceipts",
+              "name": "CashReceipts",
+              "value": 0,
+              "items": []
+            },
+            "cashPayments": {
+              "accountId": "CashPayments",
+              "name": "CashPayments",
+              "value": 0,
+              "items": []
+            }
+          },
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T00:00:00",
+            "cashReceipts": {
+              "accountId": "CashReceipts",
+              "name": "CashReceipts",
+              "value": 0,
+              "items": []
+            },
+            "cashPayments": {
+              "accountId": "CashPayments",
+              "name": "CashPayments",
+              "value": 0,
+              "items": []
+            }
+          }
+        ],
+        "reportBasis": "Cash",
+        "reportInput": "Indirect",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-04-30T00:00:00",
+        "earliestAvailableMonth": "2021-05-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-04-01T00:00:00",
+            "toDate": "2023-04-30T00:00:00",
+            "cashReceipts": {
+              "accountId": "cashReceipts",
+              "name": "Cash Receipts",
+              "value": 754.59,
+              "items": [
+                {
+                  "accountId": "income",
+                  "name": "Income",
+                  "value": 729.59,
+                  "items": []
+                },
+                {
+                  "accountId": "accountsReceivable",
+                  "name": "Accounts Receivable",
+                  "value": 25,
+                  "items": []
+                }
+              ]
+            },
+            "cashPayments": {
+              "accountId": "cashPayments",
+              "name": "Cash Payments",
+              "value": -987.94,
+              "items": [
+                {
+                  "accountId": "costOfSales",
+                  "name": "Cost of Sales",
+                  "value": 24.06,
+                  "items": []
+                },
+                {
+                  "accountId": "expenses",
+                  "name": "Expenses",
+                  "value": -1012,
+                  "items": []
+                }
+              ]
+            }
+          },
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T00:00:00",
+            "cashReceipts": {
+              "accountId": "cashReceipts",
+              "name": "Cash Receipts",
+              "value": 1776.25,
+              "items": [
+                {
+                  "accountId": "income",
+                  "name": "Income",
+                  "value": 1652.12,
+                  "items": []
+                },
+                {
+                  "accountId": "accountsReceivable",
+                  "name": "Accounts Receivable",
+                  "value": 124.13,
+                  "items": []
+                }
+              ]
+            },
+            "cashPayments": {
+              "accountId": "cashPayments",
+              "name": "Cash Payments",
+              "value": 2494.43,
+              "items": [
+                {
+                  "accountId": "costOfSales",
+                  "name": "Cost of Sales",
+                  "value": 2562,
+                  "items": []
+                },
+                {
+                  "accountId": "accountsPayable",
+                  "name": "Accounts Payable",
+                  "value": 38.02,
+                  "items": []
+                },
+                {
+                  "accountId": "expenses",
+                  "name": "Expenses",
+                  "value": -105.59,
+                  "items": []
+                }
+              ]
+            }
+          }
+        ],
+        "reportBasis": "Cash",
+        "reportInput": "Direct",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-04-30T00:00:00",
+        "earliestAvailableMonth": "2021-05-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-01-01T00:00:00",
+            "toDate": "2023-01-31T00:00:00",
+            "cashReceipts": {
+              "accountId": "cashReceipts",
+              "name": "Cash Receipts",
+              "value": 0,
+              "items": []
+            },
+            "cashPayments": {
+              "accountId": "cashPayments",
+              "name": "Cash Payments",
+              "value": 4300,
+              "items": [
+                {
+                  "accountId": "expenses",
+                  "name": "Expenses",
+                  "value": 4300,
+                  "items": []
+                }
+              ]
+            }
+          },
+          {
+            "fromDate": "2022-12-01T00:00:00",
+            "toDate": "2022-12-31T00:00:00",
+            "cashReceipts": {
+              "accountId": "cashReceipts",
+              "name": "Cash Receipts",
+              "value": 0,
+              "items": []
+            },
+            "cashPayments": {
+              "accountId": "cashPayments",
+              "name": "Cash Payments",
+              "value": 10,
+              "items": [
+                {
+                  "accountId": "expenses",
+                  "name": "Expenses",
+                  "value": 10,
+                  "items": []
+                }
+              ]
+            }
+          }
+        ],
+        "reportBasis": "Cash",
+        "reportInput": "Direct",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-01-31T00:00:00",
+        "earliestAvailableMonth": "2021-02-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2023-03-01T00:00:00",
+            "toDate": "2023-03-31T23:59:59.9999999",
+            "cashReceipts": {
+              "accountId": "cashReceipt",
+              "name": "Cash Receipts",
+              "value": 0,
+              "items": []
+            },
+            "cashPayments": {
+              "accountId": "cashPayment",
+              "name": "Cash Payments",
+              "value": 0,
+              "items": []
+            }
+          },
+          {
+            "fromDate": "2023-02-01T00:00:00",
+            "toDate": "2023-02-28T23:59:59.9999999",
+            "cashReceipts": {
+              "accountId": "cashReceipt",
+              "name": "Cash Receipts",
+              "value": 0,
+              "items": []
+            },
+            "cashPayments": {
+              "accountId": "cashPayment",
+              "name": "Cash Payments",
+              "value": 0,
+              "items": []
+            }
+          }
+        ],
+        "reportBasis": "Cash",
+        "reportInput": "Direct",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2023-03-31T00:00:00",
+        "earliestAvailableMonth": "2021-04-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zoho Books",
+      "example": {
+        "reports": [
+          {
+            "fromDate": "2022-10-01T00:00:00",
+            "toDate": "2022-10-31T00:00:00",
+            "cashReceipts": {
+              "accountId": "receipts",
+              "name": "Cash Receipts",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "income",
+                  "name": "Net Income",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000352",
+                  "name": "Accounts Receivable",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000358",
+                  "name": "Advance Tax",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000618001",
+                  "name": "Creadit Card - BA Company",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000183010",
+                  "name": "Credit Card",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000460",
+                  "name": "Employee Reimbursements",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000033015",
+                  "name": "Input VAT",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000511",
+                  "name": "Inventory Asset",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000033017",
+                  "name": "Output VAT",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000032010",
+                  "name": "Prepaid Expenses",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000006001",
+                  "name": "Tag Adjustments",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000085001",
+                  "name": "Test stock account",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000501",
+                  "name": "Unearned Revenue",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "cashPayments": {
+              "accountId": "payments",
+              "name": "Cash Payments",
+              "value": 0,
+              "items": [
+                {
+                  "accountId": "104957000000000361",
+                  "name": "Accounts Payable",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            }
+          },
+          {
+            "fromDate": "2022-09-01T00:00:00",
+            "toDate": "2022-09-30T00:00:00",
+            "cashReceipts": {
+              "accountId": "receipts",
+              "name": "Cash Receipts",
+              "value": -5,
+              "items": [
+                {
+                  "accountId": "income",
+                  "name": "Net Income",
+                  "value": -35,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000352",
+                  "name": "Accounts Receivable",
+                  "value": 30,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000358",
+                  "name": "Advance Tax",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000618001",
+                  "name": "Creadit Card - BA Company",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000183010",
+                  "name": "Credit Card",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000460",
+                  "name": "Employee Reimbursements",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000511",
+                  "name": "Inventory Asset",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000033017",
+                  "name": "Output VAT",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000032010",
+                  "name": "Prepaid Expenses",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000006001",
+                  "name": "Tag Adjustments",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000085001",
+                  "name": "Test stock account",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000000501",
+                  "name": "Unearned Revenue",
+                  "value": 0,
+                  "items": []
+                }
+              ]
+            },
+            "cashPayments": {
+              "accountId": "payments",
+              "name": "Cash Payments",
+              "value": 7,
+              "items": [
+                {
+                  "accountId": "104957000000000361",
+                  "name": "Accounts Payable",
+                  "value": 0,
+                  "items": []
+                },
+                {
+                  "accountId": "104957000000033015",
+                  "name": "Input VAT",
+                  "value": 7,
+                  "items": []
+                }
+              ]
+            }
+          }
+        ],
+        "reportBasis": "Accrual",
+        "reportInput": "Indirect",
+        "currency": "GBP",
+        "mostRecentAvailableMonth": "2022-10-31T00:00:00",
+        "earliestAvailableMonth": "2019-11-01T00:00:00"
+      }
+    }
+  ]
+}

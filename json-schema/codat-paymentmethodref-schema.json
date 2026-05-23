@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PaymentMethodRef",
+  "title": "Payment method reference",
+  "type": "object",
+  "description": "The payment method the record is linked to in the accounting or commerce software.",
+  "properties": {
+    "id": {
+      "description": "The unique identifier of the location being referenced.",
+      "type": "string"
+    },
+    "name": {
+      "description": "Name of the location being referenced.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id"
+  ],
+  "example": {
+    "id": "EILBDVJVNUAGVKRQ",
+    "name": "AliPay"
+  }
+}

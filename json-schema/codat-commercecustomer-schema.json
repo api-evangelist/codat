@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommerceCustomer",
+  "title": "Commerce: Customer",
+  "description": "When a customer places an order with the connected commerce store their details are added to the Customers dataset. You can use the data from the Customers endpoints to calculate key metrics, such as customer churn.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "customerName": {
+          "type": "string",
+          "description": "Name of the customer",
+          "example": "Fred Smith"
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "Email address of the customer",
+          "example": "fred.smith@myCompany.com"
+        },
+        "phone": {
+          "$ref": "#/components/schemas/PhoneNumber/properties/number"
+        },
+        "defaultCurrency": {
+          "allOf": [
+            {
+              "description": "Default currency of any transactional data for the customer, \nfor example, orders or payments\n"
+            },
+            {
+              "$ref": "#/components/schemas/SourceAccount/properties/currency"
+            }
+          ]
+        },
+        "addresses": {
+          "type": "array",
+          "description": "Addresses of the customer",
+          "items": {
+            "$ref": "#/components/schemas/CommerceAddress"
+          }
+        },
+        "note": {
+          "type": "string",
+          "description": "Any additional information about the customer"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/2"
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "definitions": {
+    "commerceCustomerRef": {
+      "type": "object",
+      "description": "Reference to the customer that placed the order.",
+      "properties": {
+        "id": {
+          "description": "The unique identitifer of the customer being referenced",
+          "type": "string",
+          "examples": [
+            "13d946f0-c5d5-42bc-b092-97ece17923ab",
+            "9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2",
+            7110701885,
+            "EILBDVJVNUAGVKRQ"
+          ]
+        },
+        "name": {
+          "description": "Name of the customer being referenced.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "customers": [
+        {
+          "id": "15",
+          "customerName": "Daffy Duck",
+          "emailAddress": "d.duck@warnerbros.com",
+          "defaultCurrency": "GBP",
+          "phone": "(877) 492-8687",
+          "addresses": [
+            {
+              "type": "billing",
+              "line1": "301 Duck Pond",
+              "line2": "28 Green Street",
+              "city": "London",
+              "region": "England",
+              "country": "United Kingdom",
+              "postalCode": "WX1X 0BE"
+            },
+            {
+              "type": "delivery",
+              "line1": "Bread Street",
+              "line2": "Bird Avenue",
+              "city": "Paris",
+              "region": "France",
+              "country": "France",
+              "postalCode": "WDF 123"
+            }
+          ],
+          "note": "Regular customer",
+          "createdDate": "0001-01-01T00:00:00",
+          "modifiedDate": null,
+          "sourceModifiedDate": "2020-09-15T23:52:28"
+        },
+        {
+          "id": "18",
+          "customerName": "Tasmanian Devil",
+          "emailAddress": "t.devil@warnerbros.com",
+          "defaultCurrency": "GBP",
+          "phone": "+1-202-555-0181",
+          "addresses": [
+            {
+              "type": "billing",
+              "line1": "101 Fire Rooms",
+              "line2": "Engine Street",
+              "city": "London",
+              "region": "England",
+              "country": "United Kingdom",
+              "postalCode": "WC1X 0BE"
+            }
+          ],
+          "note": "Handle with care",
+          "createdDate": "0001-01-01T00:00:00",
+          "modifiedDate": null,
+          "sourceModifiedDate": "2020-04-16T02:41:52"
+        },
+        {
+          "id": "a99f5e0c-a4db-452f-8d2c-8fd15482b384",
+          "customerName": "Bugs Bunny",
+          "emailAddress": "b.bunny@warnerbros.com",
+          "defaultCurrency": "GBP",
+          "phone": "",
+          "addresses": [
+            {
+              "type": "billing",
+              "line1": "301 Carrot Street",
+              "line2": "Orange Town",
+              "city": "Yorkshire",
+              "region": "England",
+              "country": "United Kingdom",
+              "postalCode": "WF1X 0BE"
+            },
+            {
+              "type": "delivery",
+              "line1": "424 Field Street",
+              "line2": "The Meadow",
+              "city": "Paris",
+              "region": "France",
+              "country": "France",
+              "postalCode": "WDF 123"
+            }
+          ],
+          "note": "Regular customer",
+          "createdDate": "0001-01-01T00:00:00",
+          "modifiedDate": null,
+          "sourceModifiedDate": "2020-08-12T14:37:37"
+        }
+      ]
+    }
+  ]
+}

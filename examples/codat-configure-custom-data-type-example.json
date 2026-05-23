@@ -1,0 +1,162 @@
+{
+  "operationId": "configure-custom-data-type",
+  "method": "PUT",
+  "path": "/integrations/{platformKey}/dataTypes/custom/{customDataIdentifier}",
+  "summary": "Configure custom data type",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "dataSource": "api/purchaseOrders",
+        "requiredData": {
+          "currency": "$[*].currencyCode",
+          "number": "$[*].number",
+          "date": "$[*].orderDate",
+          "totalexvat": "$[*].totalAmountExcludingTax",
+          "totaltax": "$[*].totalTaxAmount",
+          "vendor": "$[*].number"
+        },
+        "keyBy": [
+          "$[*].id"
+        ],
+        "sourceModifiedDate": [
+          "$[*].lastModifiedDateTime"
+        ]
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Xero Simple Record",
+      "example": {
+        "dataSource": "/api.xro/2.0/Accounts",
+        "requiredData": {
+          "code": "$.Code",
+          "accountId": "$.AccountID",
+          "type": "$.Type",
+          "SysAcc": "$.SystemAccount"
+        },
+        "keyBy": [
+          "$.AccountID"
+        ]
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Xero Mapping Arrays",
+      "example": {
+        "dataSource": "/api.xro/2.0/Invoices",
+        "requiredData": {
+          "invNumber": "$.InvoiceNumber",
+          "type": "$.Type",
+          "InvoiceID": "$.InvoiceID",
+          "lines": "$.LineItems[*]"
+        },
+        "keyBy": [
+          "$.InvoiceID"
+        ],
+        "sourceModifiedDate": [
+          "$.UpdatedDateUTC"
+        ]
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "dataSource": "/query?query=select * from Account",
+        "requiredData": {
+          "id": "$.Id",
+          "Currentbal": "$.CurrentBalance",
+          "SubAcc": "$.SubAccount"
+        },
+        "keyBy": [
+          "$.Id"
+        ],
+        "sourceModifiedDate": [
+          "$.time"
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "dataSource": "api/purchaseOrders",
+        "requiredData": {
+          "currency": "$[*].currencyCode",
+          "number": "$[*].number",
+          "date": "$[*].orderDate",
+          "totalexvat": "$[*].totalAmountExcludingTax",
+          "totaltax": "$[*].totalTaxAmount",
+          "vendor": "$[*].number"
+        },
+        "keyBy": [
+          "$[*].id"
+        ],
+        "sourceModifiedDate": [
+          "$[*].lastModifiedDateTime"
+        ]
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero Simple Record",
+      "example": {
+        "dataSource": "/api.xro/2.0/Accounts",
+        "requiredData": {
+          "code": "$.Code",
+          "accountId": "$.AccountID",
+          "type": "$.Type",
+          "SysAcc": "$.SystemAccount"
+        },
+        "keyBy": [
+          "$.AccountID"
+        ]
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero Mapping Arrays",
+      "example": {
+        "dataSource": "/api.xro/2.0/Invoices",
+        "requiredData": {
+          "invNumber": "$.InvoiceNumber",
+          "type": "$.Type",
+          "InvoiceID": "$.InvoiceID",
+          "lines": "$.LineItems[*]"
+        },
+        "keyBy": [
+          "$.InvoiceID"
+        ],
+        "sourceModifiedDate": [
+          "$.UpdatedDateUTC"
+        ]
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "dataSource": "/query?query=select * from Account",
+        "requiredData": {
+          "id": "$.Id",
+          "Currentbal": "$.CurrentBalance",
+          "SubAcc": "$.SubAccount"
+        },
+        "keyBy": [
+          "$.Id"
+        ],
+        "sourceModifiedDate": [
+          "$.time"
+        ]
+      }
+    }
+  ]
+}

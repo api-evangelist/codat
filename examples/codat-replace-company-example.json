@@ -1,0 +1,24 @@
+{
+  "operationId": "replace-company",
+  "method": "PUT",
+  "path": "/companies/{companyId}",
+  "summary": "Replace company",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "Update name",
+      "example": {
+        "name": "New Name"
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Update description",
+      "example": {
+        "name": "Same name",
+        "description": "Additional documents required"
+      }
+    }
+  ],
+  "responseExamples": []
+}

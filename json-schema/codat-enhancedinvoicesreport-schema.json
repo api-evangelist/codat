@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EnhancedInvoicesReport",
+  "title": "Enhanced invoices report",
+  "description": "The enhanced invoices report takes the key elements of the Invoices report verifying those marked as paid in the accounting software have actually been paid by matching with the bank statement.",
+  "type": "object",
+  "properties": {
+    "reportInfo": {
+      "$ref": "#/components/schemas/EnhancedInvoicesReport/definitions/reportInfo"
+    },
+    "reportItems": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EnhancedInvoicesReport/definitions/enhancedInvoiceReportItem"
+      }
+    }
+  },
+  "definitions": {
+    "lendingCustomerRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string",
+          "description": "`id` from the Customers data type."
+        },
+        "customerName": {
+          "type": "string",
+          "nullable": true,
+          "description": "`customerName` from the Customer data type."
+        }
+      }
+    },
+    "payment": {
+      "title": "Enhanced invoice payment item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the invoice, which may be a GUID but it may be something else depending on the accounting software."
+        },
+        "date": {
+          "$ref": "#/components/schemas/DateTime"
+        },
+        "paymentType": {
+          "type": "string",
+          "description": "The type of payment."
+        },
+        "amount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Payment amount."
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency"
+        },
+        "currencyRate": {
+          "$ref": "#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate"
+        },
+        "bankingTransactionRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/EnhancedInvoicesReport/definitions/bankingTransactionRef"
+          }
+        }
+      }
+    },
+    "bankingTransactionRef": {
+      "title": "Banking transaction reference",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the bank transaction."
+        },
+        "dataConnectionId": {
+          "type": "string",
+          "description": "Unique identifier of the bank transaction's connection."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Unique identifier of the bank transaction's account."
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Name given to account."
+        },
+        "date": {
+          "$ref": "#/components/schemas/DateTime"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description given to bank transaction."
+        },
+        "amount": {
+          "type": "number",
+          "description": "Bank transaction amount.",
+          "format": "decimal"
+        }
+      }
+    },
+    "invoiceStatus": {
+      "$ref": "#/components/schemas/AccountingInvoice/definitions/invoiceStatus"
+    },
+    "enhancedInvoiceReportItem": {
+      "title": "Enhanced invoice report item",
+      "type": "object",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "ID of the invoice, which may be a GUID but it may be something else depending on the accounting software."
+            },
+            "invoiceNumber": {
+              "type": "string",
+              "description": "Invoice number."
+            },
+            "customerRef": {
+              "$ref": "#/components/schemas/EnhancedInvoicesReport/definitions/lendingCustomerRef"
+            },
+            "issueDate": {
+              "$ref": "#/components/schemas/DateTime"
+            },
+            "dueDate": {
+              "$ref": "#/components/schemas/DateTime"
+            },
+            "status": {
+              "$ref": "#/components/schemas/AccountingInvoice/definitions/invoiceStatus"
+            },
+            "currency": {
+              "$ref": "#/components/schemas/SourceAccount/properties/currency"
+            },
+            "totalAmount": {
+              "type": "number",
+              "format": "decimal",
+              "description": "Invoice's total amount."
+            },
+            "amountDue": {
+              "type": "number",
+              "format": "decimal",
+              "description": "Invoice's total amount due."
+            },
+            "payments": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/EnhancedInvoicesReport/definitions/payment"
+              }
+            },
+            "paidOnDate": {
+              "$ref": "#/components/schemas/DateTime"
+            }
+          }
+        },
+        {
+          "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+        }
+      ]
+    },
+    "reportInfo": {
+      "title": "Report information",
+      "type": "object",
+      "description": "Report additional information, which is specific to Lending reports.",
+      "properties": {
+        "pageNumber": {
+          "type": "integer",
+          "description": "The number of the page queried."
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "The number of transactions returned per page."
+        },
+        "totalResults": {
+          "type": "integer",
+          "description": "The total number of transactions available for a company for the period specified in the query string."
+        },
+        "reportName": {
+          "type": "string",
+          "description": "Name of the report."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The name of the company being queried."
+        },
+        "generatedDate": {
+          "type": "string",
+          "description": "Date the report was generated."
+        }
+      },
+      "examples": [
+        {
+          "Example 1": {
+            "value": {
+              "pageNumber": 0,
+              "pageSize": 0,
+              "totalResults": 0,
+              "reportName": "string",
+              "companyName": "string",
+              "generatedDate": "2023-01-26T07:36:40.487Z"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

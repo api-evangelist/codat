@@ -1,0 +1,30 @@
+{
+  "operationId": "get-profile-syncSettings",
+  "method": "GET",
+  "path": "/profile/syncSettings",
+  "summary": "Get sync settings",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Example",
+      "example": {
+        "clientId": "367f7975-267b-439b-90c6-a6040ee680f3",
+        "settings": [
+          {
+            "dataType": "invoices",
+            "fetchOnFirstLink": true,
+            "syncSchedule": 24,
+            "syncOrder": 0,
+            "syncFromUtc": "2020-01-01T12:00:00.000Z",
+            "syncFromWindow": 24,
+            "monthsToSync": 24,
+            "isLocked": true
+          }
+        ],
+        "overridesDefaults": true
+      }
+    }
+  ]
+}

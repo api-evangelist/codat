@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingProfitAndLossReport",
+  "title": "Accounting: Profit and loss report",
+  "description": "> **Language tip:** Profit and loss statement is also referred to as **income statement** under US GAAP (Generally Accepted Accounting Principles).\n\n## Overview\n\nThe purpose of a profit and loss report is to present the financial performance of a company over a specified time period.\n\nA profit and loss report shows a company's total income and expenses for a specified period of time and whether a profit or loss has been made.\n\n> **Profit and loss or balance sheet?**  \n> Profit and loss reports summarise the total revenue, expenses, and profit or loss over a specified time period. A balance sheet report presents all assets, liability, and equity for a given date.\n\n\n**Structure of this report**  \nThis report will reflect the structure and line descriptions that the business has set in their own accounting software.\n\n**History**  \nBy default, Codat pulls (up to) 24 months of profit and loss history for a company. You can adjust this to fetch more history, where available, by updating the `monthsToSync` value for `profitAndLoss` on the [data type settings endpoint](https://docs.codat.io/lending-api#/operations/post-profile-syncSettings).\n\n**Want to pull this in a standardised structure?**  \nOur [Enhanced Financials](https://docs.codat.io/lending/features/financial-statements-overview) endpoints provide the same report under standardized headings, allowing you to pull it in the same format for all of your business customers.",
+  "type": "object",
+  "properties": {
+    "reports": {
+      "type": "array",
+      "description": "An array of profit and loss reports.",
+      "items": {
+        "$ref": "#/components/schemas/AccountingProfitAndLossReport/definitions/profitAndLossReport"
+      }
+    },
+    "reportBasis": {
+      "$ref": "#/components/schemas/AccountingProfitAndLossReport/definitions/reportBasis"
+    },
+    "currency": {
+      "type": "string",
+      "description": "Base currency of the company in which the profit and loss report is presented."
+    },
+    "mostRecentAvailableMonth": {
+      "$ref": "#/components/schemas/DateTime",
+      "description": "Most recent available monthly report data."
+    },
+    "earliestAvailableMonth": {
+      "$ref": "#/components/schemas/DateTime",
+      "description": "Earliest available monthly report data."
+    }
+  },
+  "required": [
+    "reports",
+    "reportBasis"
+  ],
+  "definitions": {
+    "reportBasis": {
+      "enum": [
+        "Unknown",
+        "Accrual",
+        "Cash"
+      ],
+      "type": "string",
+      "description": "The basis of a report."
+    },
+    "profitAndLossReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fromDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Date from which the report data begins."
+        },
+        "toDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Date on which the report data ends."
+        },
+        "income": {
+          "$ref": "#/components/schemas/ReportLine",
+          "description": "ReportLine items for income in the given date range."
+        },
+        "costOfSales": {
+          "$ref": "#/components/schemas/ReportLine",
+          "description": "ReportLine items for cost of sales in the given date range."
+        },
+        "grossProfit": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Gross profit of the company in the given date range."
+        },
+        "expenses": {
+          "$ref": "#/components/schemas/ReportLine",
+          "description": "ReportLine items for expenses in the given date range."
+        },
+        "netOperatingProfit": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Net operating profit of the company in the given date range."
+        },
+        "otherExpenses": {
+          "$ref": "#/components/schemas/ReportLine",
+          "description": "ReportLine items for other expenses in the given date range."
+        },
+        "otherIncome": {
+          "$ref": "#/components/schemas/ReportLine",
+          "description": "ReportLine items for other income in the given date range."
+        },
+        "netOtherIncome": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Net other income of the company in the given date range."
+        },
+        "netProfit": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Net profit of the company in the given date range."
+        }
+      },
+      "required": [
+        "grossProfit",
+        "netOperatingProfit",
+        "netOtherIncome",
+        "netProfit"
+      ]
+    }
+  }
+}

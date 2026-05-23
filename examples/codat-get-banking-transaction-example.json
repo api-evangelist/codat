@@ -1,0 +1,49 @@
+{
+  "operationId": "get-banking-transaction",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/banking-transactions/{transactionId}",
+  "summary": "Get bank transaction",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Basiq",
+      "example": {
+        "id": "00017a94-c681-448d-ba8d-585a81b4128f",
+        "accountId": "feb76128-7650-4b02-a323-e1606146be0c",
+        "description": "RENTALCARTOLLPH131865 PARRAMATTA  AU Card xx0399 Value Date: 25/07/2019",
+        "amount": -14.26,
+        "currency": "AUD",
+        "postedDate": "2019-07-31T00:00:00Z",
+        "code": "Unknown",
+        "merchantName": "",
+        "transactionCategoryRef": {
+          "id": "payment",
+          "name": "Payment"
+        },
+        "modifiedDate": "2022-10-28T07:15:10Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Plaid",
+      "example": {
+        "id": "1514wvMMajumgG7xWA1Bt8o15xP5k3fmeo9Bg_EC6E0DC820E1F9D1A2300BF4A5B80513",
+        "accountId": "3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB",
+        "description": "CREDIT CARD 3333 PAYMENT *//",
+        "amount": -25,
+        "currency": "CAD",
+        "postedDate": "2021-05-10T00:00:00",
+        "authorizedDate": "2021-05-09T00:00:00",
+        "code": "Unknown",
+        "transactionCategoryRef": {
+          "id": "TRANSFER_OUT.TRANSFER_OUT_ACCOUNT_TRANSFER",
+          "name": "TRANSFER_OUT_ACCOUNT_TRANSFER"
+        },
+        "modifiedDate": "2022-10-27T10:50:25Z"
+      }
+    }
+  ]
+}

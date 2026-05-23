@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingBankTransaction",
+  "title": "Accounting: Bank account transaction",
+  "description": "> **Accessing Bank Accounts through Banking API**\n> \n> This datatype was originally used for accessing bank account data both in accounting integrations and open banking aggregators. \n>\n> To view bank account data through the Banking API, please refer to the new [Banking: Transaction](https://docs.codat.io/lending-api#/operations/list-transactions) data type.\n\n## Overview\n\nTransactional banking data for a specific company and account.\n\nBank transactions include the:\n* Amount of the transaction.\n* Current account balance.\n* Transaction type, for example, credit, debit, or transfer.",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the bank transaction, unique to the company in the accounting software."
+        },
+        "accountId": {
+          "type": "string",
+          "nullable": true,
+          "description": "Unique identifier to the `accountId` the bank transactions originates from."
+        },
+        "clearedOnDate": {
+          "$ref": "#/components/schemas/DateTime"
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "Description of the bank transaction."
+        },
+        "reconciled": {
+          "type": "boolean",
+          "description": "`True` if the bank transaction has been [reconciled](https://www.xero.com/uk/guides/what-is-bank-reconciliation/) in the accounting software."
+        },
+        "amount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The amount transacted in the bank transaction."
+        },
+        "balance": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The remaining balance in the account with ID `accountId`."
+        },
+        "transactionType": {
+          "$ref": "#/components/schemas/AccountingBankTransaction/definitions/bankTransactionType"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "definitions": {
+    "bankTransactionType": {
+      "title": "Bank transaction type",
+      "description": "Type of transaction for the bank statement line.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Credit",
+        "Debit",
+        "Int",
+        "Div",
+        "Fee",
+        "SerChg",
+        "Dep",
+        "Atm",
+        "Pos",
+        "Xfer",
+        "Check",
+        "Payment",
+        "Cash",
+        "DirectDep",
+        "DirectDebit",
+        "RepeatPmt",
+        "Other"
+      ]
+    }
+  }
+}

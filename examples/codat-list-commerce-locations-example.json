@@ -1,0 +1,139 @@
+{
+  "operationId": "list-commerce-locations",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/commerce-locations",
+  "summary": "List locations",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clover",
+      "example": {
+        "results": [
+          {
+            "id": "GA3WP1ZC3ZFK1",
+            "name": "Codat",
+            "address": {
+              "type": "Inventory",
+              "line1": "301 Ink Rooms, 28 Easton Street",
+              "city": "London",
+              "region": "London",
+              "country": "GB",
+              "postalCode": "WC1X 0BE"
+            },
+            "modifiedDate": "2023-01-09T11:01:03Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 1,
+        "_links": {
+          "current": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-locations?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/aae80eb3-1f56-41ca-a171-a59f9ee03b26/connections/4a5b633b-cd86-4715-a22b-62be98c4bcc5/data/commerce-locations"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Lightspeed K Trial",
+      "example": {
+        "results": [
+          {
+            "id": "647208621834538",
+            "name": "QA Shared - New Test Site",
+            "address": {
+              "type": "Unknown",
+              "country": "AU"
+            },
+            "modifiedDate": "2023-03-02T09:48:48Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 1,
+        "_links": {
+          "current": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-locations?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/36e3213b-02f6-4264-96ce-6dd53ea69e57/connections/278ba962-466a-452b-92b0-4bdee3a23463/data/commerce-locations"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Shopify",
+      "example": {
+        "results": [
+          {
+            "id": "61375348894",
+            "name": "301 Ink Rooms, 28 Easton St",
+            "address": {
+              "type": "Inventory",
+              "line1": "301 Ink Rooms, 28 Easton St",
+              "city": "London",
+              "region": "London",
+              "country": "GB",
+              "postalCode": "WC1X 0BE"
+            },
+            "modifiedDate": "2023-02-10T15:18:25Z",
+            "sourceModifiedDate": "2021-03-19T10:06:06"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 1,
+        "_links": {
+          "current": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-locations?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/0bc1cc44-c6d2-4537-9591-b1ad6b5e3c94/connections/d38fa6d3-d712-4cf6-9d9d-f03bacd87595/data/commerce-locations"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Square",
+      "example": {
+        "results": [
+          {
+            "id": "D8DVHD1G6NT2J",
+            "name": "Codat Limited",
+            "address": {
+              "type": "Inventory",
+              "line1": "301 Ink Rooms",
+              "line2": "28 Easton Street",
+              "city": "London",
+              "country": "GB",
+              "postalCode": "WC1X0BE"
+            },
+            "modifiedDate": "2022-08-02T10:27:32Z",
+            "sourceModifiedDate": "2020-01-17T14:07:30Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 1,
+        "_links": {
+          "current": {
+            "href": "/companies/d779fc82-a098-4107-a9fc-c2a1dda3d522/connections/9b098b74-3770-4dad-9001-4c283a39f1e5/data/commerce-locations?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d779fc82-a098-4107-a9fc-c2a1dda3d522/connections/9b098b74-3770-4dad-9001-4c283a39f1e5/data/commerce-locations"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ClientRateLimitWebhook",
+  "title": "Client rate limit webhook",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "743ec94a-8aa4-44bb-8bd4-e1855ee0e74b",
+      "description": "Unique identifier of the event."
+    },
+    "eventType": {
+      "type": "string",
+      "description": "The type of event.",
+      "examples": [
+        "client.rateLimit.reset",
+        "client.rateLimit.reached"
+      ]
+    },
+    "generatedDate": {
+      "$ref": "#/components/schemas/DateTime",
+      "description": "The date time in UTC the event was generated in Codat."
+    },
+    "payload": {
+      "$ref": "#/components/schemas/ClientRateLimitWebhook/definitions/clientRateLimitWebhookPayload"
+    }
+  },
+  "definitions": {
+    "clientRateLimitWebhookPayload": {
+      "title": "Client rate limit webhook payload",
+      "type": "object",
+      "properties": {
+        "dailyQuota": {
+          "type": "integer",
+          "description": "The number of available requests per day."
+        },
+        "quotaRemaining": {
+          "type": "integer",
+          "description": "Total number of requests remaining for your client."
+        },
+        "expiryDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date time in UTC when your daily quota is reset."
+        }
+      }
+    }
+  }
+}

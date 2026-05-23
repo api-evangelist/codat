@@ -1,0 +1,1470 @@
+{
+  "operationId": "list-accounting-direct-costs",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/directCosts",
+  "summary": "List direct costs",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "results": [
+          {
+            "id": "994ad234-ca05-466e-8e6a-117783b38cf6",
+            "reference": "005b7b62-dc9f-42d2-85a2-4a2cefc6bab2",
+            "note": "Direct Cost with 1 line items, totaling 242.20",
+            "contactRef": {
+              "id": "D4Q4iYwHou",
+              "dataType": "suppliers"
+            },
+            "issueDate": "2022-04-27T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Underground - Drain Saddle Branches 160mm x 110mm x 87 \ufffd",
+                "accountRef": {
+                  "id": "7403e960-5b72-42ff-abf4-c870ad8910bd",
+                  "name": "Purchases"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "unitAmount": 220.18,
+                "quantity": 1,
+                "discountAmount": 0,
+                "discountPercentage": 0,
+                "subTotal": 220.18,
+                "taxAmount": 22.02,
+                "totalAmount": 242.2,
+                "itemRef": {
+                  "id": "2",
+                  "name": "Solvent Weld Branch 160mm x 110mm x 87 \ufffd"
+                },
+                "trackingCategoryRefs": []
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "994ad234-ca05-466e-8e6a-117783b38cf6",
+                  "note": "Payment for direct cost 994ad234-ca05-466e-8e6a-117783b38cf6",
+                  "reference": "Direct Cost 994ad234-ca05-466e-8e6a-117783b38cf6",
+                  "accountRef": {
+                    "id": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+                    "name": "Business Current Account"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-04-27T00:00:00",
+                  "totalAmount": 242.2
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2022-04-27T00:00:00",
+                  "totalAmount": -242.2
+                }
+              }
+            ],
+            "subTotal": 220.18,
+            "taxAmount": 22.02,
+            "totalAmount": 242.2,
+            "modifiedDate": "2023-04-26T12:38:18Z",
+            "sourceModifiedDate": "2022-09-18T20:59:02",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "735b5f9b-9e58-4f8f-8a9d-083de599986c",
+            "reference": "7d011ce8-89ae-43e7-a2ed-cf028534ccdc",
+            "note": "Direct Cost with 4 line items, totaling 13684.57",
+            "contactRef": {
+              "id": "d3tf43eghS",
+              "dataType": "suppliers"
+            },
+            "issueDate": "2022-05-02T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Underground - Drain Yard Gully",
+                "accountRef": {
+                  "id": "7403e960-5b72-42ff-abf4-c870ad8910bd",
+                  "name": "Purchases"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "unitAmount": 148.88,
+                "quantity": 5,
+                "discountAmount": 73.62,
+                "discountPercentage": 9.89,
+                "subTotal": 670.78,
+                "taxAmount": 67.08,
+                "totalAmount": 737.86,
+                "itemRef": {
+                  "id": "00491160-6ee5-4d76-9f34-998f00687481",
+                  "name": "Aluminium Silt Bucket"
+                },
+                "trackingCategoryRefs": []
+              },
+              {
+                "description": "Underground - Drain Bottle Gullies 90 degree Rectangular",
+                "accountRef": {
+                  "id": "7403e960-5b72-42ff-abf4-c870ad8910bd",
+                  "name": "Purchases"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "unitAmount": 82.68,
+                "quantity": 3,
+                "discountAmount": 0,
+                "discountPercentage": 0,
+                "subTotal": 248.04,
+                "taxAmount": 24.8,
+                "totalAmount": 272.84,
+                "itemRef": {
+                  "id": "6",
+                  "name": "Back Inlet Roddable Gully 90\ufffd Outlet Rectangular Grid"
+                },
+                "trackingCategoryRefs": []
+              },
+              {
+                "description": "Grease Trap",
+                "accountRef": {
+                  "id": "7403e960-5b72-42ff-abf4-c870ad8910bd",
+                  "name": "Purchases"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "unitAmount": 1192.51,
+                "quantity": 8,
+                "discountAmount": 0,
+                "discountPercentage": 0,
+                "subTotal": 9540.08,
+                "taxAmount": 954.01,
+                "totalAmount": 10494.09,
+                "itemRef": {
+                  "id": "9409d23d-1011-432e-98a4-591fcd8d5404",
+                  "name": "300 Litre Grease Trap"
+                },
+                "trackingCategoryRefs": []
+              },
+              {
+                "description": "Underground - Drain Saddle Branches 160mm x 110mm x 87 \ufffd",
+                "accountRef": {
+                  "id": "7403e960-5b72-42ff-abf4-c870ad8910bd",
+                  "name": "Purchases"
+                },
+                "taxRateRef": {
+                  "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+                  "name": "Sales Tax (10%)",
+                  "effectiveTaxRate": 10
+                },
+                "unitAmount": 220.18,
+                "quantity": 9,
+                "discountAmount": 0,
+                "discountPercentage": 0,
+                "subTotal": 1981.62,
+                "taxAmount": 198.16,
+                "totalAmount": 2179.78,
+                "itemRef": {
+                  "id": "2",
+                  "name": "Solvent Weld Branch 160mm x 110mm x 87 \ufffd"
+                },
+                "trackingCategoryRefs": [
+                  {
+                    "id": "costcode_1",
+                    "name": "Green Concrete"
+                  }
+                ]
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "735b5f9b-9e58-4f8f-8a9d-083de599986c",
+                  "note": "Payment for direct cost 735b5f9b-9e58-4f8f-8a9d-083de599986c",
+                  "reference": "Direct Cost 735b5f9b-9e58-4f8f-8a9d-083de599986c",
+                  "accountRef": {
+                    "id": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+                    "name": "Business Current Account"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-05-02T00:00:00",
+                  "totalAmount": 13684.57
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2022-05-02T00:00:00",
+                  "totalAmount": -13684.57
+                }
+              }
+            ],
+            "subTotal": 12440.52,
+            "taxAmount": 1244.05,
+            "totalAmount": 13684.57,
+            "modifiedDate": "2023-04-26T12:38:18Z",
+            "sourceModifiedDate": "2022-10-13T07:15:02",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 90,
+        "_links": {
+          "current": {
+            "href": "/companies/354a121b-855f-4d25-90ad-0905b498c1c0/connections/57b731ba-1d45-4386-ba58-2a1ca0234624/data/directCosts?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/354a121b-855f-4d25-90ad-0905b498c1c0/connections/57b731ba-1d45-4386-ba58-2a1ca0234624/data/directCosts"
+          },
+          "next": {
+            "href": "/companies/354a121b-855f-4d25-90ad-0905b498c1c0/connections/57b731ba-1d45-4386-ba58-2a1ca0234624/data/directCosts?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "results": [
+          {
+            "id": "6ab3e391-97d7-ec11-8e7e-000d3a0cfe40",
+            "reference": "INS000090",
+            "note": "3931",
+            "issueDate": "2022-05-21T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "test expenses 2",
+                "accountRef": {
+                  "id": "30"
+                },
+                "taxRateRef": {
+                  "id": "cc81fea8-2917-ed11-90eb-002248009df3",
+                  "name": "",
+                  "effectiveTaxRate": 0
+                },
+                "unitAmount": 17.89,
+                "quantity": -1,
+                "subTotal": -17.89,
+                "taxAmount": 0,
+                "totalAmount": -17.89,
+                "trackingCategoryRefs": []
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "6ab3e391-97d7-ec11-8e7e-000d3a0cfe40",
+                  "accountRef": {
+                    "id": "TEST"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-05-21T00:00:00",
+                  "totalAmount": -17.89
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2022-05-21T00:00:00",
+                  "totalAmount": -17.89
+                }
+              }
+            ],
+            "subTotal": -17.89,
+            "taxAmount": 0,
+            "totalAmount": -17.89,
+            "modifiedDate": "2023-03-27T14:21:25Z",
+            "sourceModifiedDate": "2022-05-19T17:17:33Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "b832f518-88d7-ec11-8e7e-000d3a0cfe40",
+            "reference": "INS000050",
+            "note": "3915",
+            "issueDate": "2022-05-23T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Utilities Expense",
+                "accountRef": {
+                  "id": "31300"
+                },
+                "taxRateRef": {
+                  "id": "cc81fea8-2917-ed11-90eb-002248009df3",
+                  "name": "",
+                  "effectiveTaxRate": 0
+                },
+                "unitAmount": 14.76,
+                "quantity": 1,
+                "subTotal": 14.76,
+                "taxAmount": 0,
+                "totalAmount": 14.76,
+                "trackingCategoryRefs": []
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "b832f518-88d7-ec11-8e7e-000d3a0cfe40",
+                  "accountRef": {
+                    "id": "TEST"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-05-23T00:00:00",
+                  "totalAmount": 14.76
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2022-05-23T00:00:00",
+                  "totalAmount": 14.76
+                }
+              }
+            ],
+            "subTotal": 14.76,
+            "taxAmount": 0,
+            "totalAmount": 14.76,
+            "modifiedDate": "2023-03-27T14:21:25Z",
+            "sourceModifiedDate": "2022-05-19T15:26:48Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 67,
+        "_links": {
+          "current": {
+            "href": "/companies/d6849caf-c146-41be-8335-b73346e3bd84/connections/60acb117-5cf5-4745-b069-491551da4066/data/directCosts?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d6849caf-c146-41be-8335-b73346e3bd84/connections/60acb117-5cf5-4745-b069-491551da4066/data/directCosts"
+          },
+          "next": {
+            "href": "/companies/d6849caf-c146-41be-8335-b73346e3bd84/connections/60acb117-5cf5-4745-b069-491551da4066/data/directCosts?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "results": [
+          {
+            "id": "190325254",
+            "note": "Atomic Software Limite Wellington,Nzl",
+            "issueDate": "2017-11-23T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Atomic Software Limite Wellington,Nzl",
+                "accountRef": {
+                  "id": "285",
+                  "name": "Accommodation and Meals"
+                },
+                "unitAmount": 11.92,
+                "quantity": 1,
+                "subTotal": 11.92,
+                "taxAmount": 2.38,
+                "totalAmount": 14.3,
+                "trackingCategoryRefs": []
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "190325254",
+                  "note": "Atomic Software Limite Wellington,Nzl",
+                  "accountRef": {
+                    "id": "750-1",
+                    "name": "Bank Account: Business Current Account"
+                  },
+                  "currency": "GBP",
+                  "paidOnDate": "2017-11-23T00:00:00",
+                  "totalAmount": 14.3
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "allocatedOnDate": "2017-11-23T00:00:00",
+                  "totalAmount": 14.3
+                }
+              }
+            ],
+            "subTotal": 11.92,
+            "taxAmount": 2.38,
+            "totalAmount": 14.3,
+            "modifiedDate": "2023-04-25T14:20:36Z",
+            "sourceModifiedDate": "2019-11-22T14:31:14Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "348108455",
+            "note": "Atomic Software Limite Wellington,Nzl",
+            "issueDate": "2017-11-23T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Atomic Software Limite Wellington,Nzl",
+                "accountRef": {
+                  "id": "285",
+                  "name": "Accommodation and Meals"
+                },
+                "unitAmount": 11.92,
+                "quantity": 1,
+                "subTotal": 11.92,
+                "taxAmount": 2.38,
+                "totalAmount": 14.3,
+                "trackingCategoryRefs": []
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "348108455",
+                  "note": "Atomic Software Limite Wellington,Nzl",
+                  "accountRef": {
+                    "id": "750-1",
+                    "name": "Bank Account: Business Current Account"
+                  },
+                  "currency": "GBP",
+                  "paidOnDate": "2017-11-23T00:00:00",
+                  "totalAmount": 14.3
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "allocatedOnDate": "2017-11-23T00:00:00",
+                  "totalAmount": 14.3
+                }
+              }
+            ],
+            "subTotal": 11.92,
+            "taxAmount": 2.38,
+            "totalAmount": 14.3,
+            "modifiedDate": "2023-04-25T14:20:36Z",
+            "sourceModifiedDate": "2022-10-24T12:35:29Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 456,
+        "_links": {
+          "current": {
+            "href": "/companies/071ad738-68f3-4561-afd0-69bab9df0803/connections/4fd7c69f-ecc1-45f5-83f2-42ed3391e386/data/directCosts?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/071ad738-68f3-4561-afd0-69bab9df0803/connections/4fd7c69f-ecc1-45f5-83f2-42ed3391e386/data/directCosts"
+          },
+          "next": {
+            "href": "/companies/071ad738-68f3-4561-afd0-69bab9df0803/connections/4fd7c69f-ecc1-45f5-83f2-42ed3391e386/data/directCosts?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "results": [
+          {
+            "id": "29870062",
+            "reference": "Food to keep me working",
+            "note": "Food to keep me working",
+            "contactRef": {
+              "id": "Sainsburys",
+              "dataType": "suppliers"
+            },
+            "issueDate": "2019-02-12T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Food to keep me working",
+                "accountRef": {
+                  "id": "3361426",
+                  "name": "Meals & Entertainment"
+                },
+                "unitAmount": 10,
+                "quantity": 1,
+                "subTotal": 10,
+                "taxAmount": 0,
+                "totalAmount": 10,
+                "trackingCategoryRefs": [
+                  {
+                    "id": "4370503",
+                    "name": "Meals & Entertainment"
+                  }
+                ]
+              }
+            ],
+            "paymentAllocations": [],
+            "subTotal": 10,
+            "taxAmount": 0,
+            "totalAmount": 10,
+            "modifiedDate": "2023-03-24T16:07:23Z",
+            "sourceModifiedDate": "2021-10-28T15:21:46",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "107509561",
+            "reference": "Buying pencils",
+            "note": "Buying pencils",
+            "contactRef": {
+              "id": "Pencils Wholesale",
+              "dataType": "suppliers"
+            },
+            "issueDate": "2020-01-27T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Buying pencils",
+                "accountRef": {
+                  "id": "3380551",
+                  "name": "Supplies"
+                },
+                "unitAmount": 43.48,
+                "quantity": 1,
+                "subTotal": 43.48,
+                "taxAmount": 6.52,
+                "totalAmount": 50,
+                "trackingCategoryRefs": [
+                  {
+                    "id": "5397997",
+                    "name": "Supplies"
+                  }
+                ]
+              }
+            ],
+            "paymentAllocations": [],
+            "subTotal": 43.48,
+            "taxAmount": 6.52,
+            "totalAmount": 50,
+            "modifiedDate": "2023-03-24T16:07:23Z",
+            "sourceModifiedDate": "2021-10-28T15:21:47",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 73,
+        "_links": {
+          "current": {
+            "href": "/companies/3691c49e-0db4-4172-b3ab-e4084c365013/connections/100d8da9-91b1-495c-ae2e-2219c244acae/data/directCosts?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/3691c49e-0db4-4172-b3ab-e4084c365013/connections/100d8da9-91b1-495c-ae2e-2219c244acae/data/directCosts"
+          },
+          "next": {
+            "href": "/companies/3691c49e-0db4-4172-b3ab-e4084c365013/connections/100d8da9-91b1-495c-ae2e-2219c244acae/data/directCosts?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "results": [
+          {
+            "id": "D7B-933784104",
+            "reference": "93",
+            "contactRef": {
+              "id": "360000-933272659",
+              "dataType": "suppliers"
+            },
+            "issueDate": "2022-12-01T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "accountRef": {
+                  "id": "3C0000-933270542",
+                  "name": "Rent"
+                },
+                "unitAmount": 1200,
+                "quantity": 1,
+                "subTotal": 1200,
+                "totalAmount": 1200,
+                "trackingCategoryRefs": [
+                  {
+                    "id": "80000007-1197713802",
+                    "name": "Overhead"
+                  }
+                ],
+                "tracking": {
+                  "recordRefs": [
+                    {
+                      "id": "80000007-1197713802",
+                      "dataType": "trackingCategories"
+                    },
+                    {
+                      "id": "800000B0-1197755238",
+                      "dataType": "customers"
+                    }
+                  ]
+                }
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "D7B-933784104",
+                  "accountRef": {
+                    "id": "20000-933270541",
+                    "name": "Checking"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-12-01T00:00:00",
+                  "totalAmount": 1200
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2022-12-01T00:00:00",
+                  "totalAmount": 1200
+                }
+              }
+            ],
+            "subTotal": 1200,
+            "taxAmount": 0,
+            "totalAmount": 1200,
+            "modifiedDate": "2023-04-26T09:13:57Z",
+            "sourceModifiedDate": "2023-12-16T05:04:10",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "DFA-933785132",
+            "reference": "95",
+            "contactRef": {
+              "id": "320000-933272659",
+              "dataType": "suppliers"
+            },
+            "issueDate": "2022-12-05T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "accountRef": {
+                  "id": "280000-933270542",
+                  "name": "Freight & Delivery"
+                },
+                "unitAmount": 35,
+                "quantity": 1,
+                "subTotal": 35,
+                "totalAmount": 35,
+                "trackingCategoryRefs": [
+                  {
+                    "id": "40000-933272658",
+                    "name": "Remodel"
+                  }
+                ],
+                "tracking": {
+                  "recordRefs": [
+                    {
+                      "id": "40000-933272658",
+                      "dataType": "trackingCategories"
+                    },
+                    {
+                      "id": "1E0000-933272658",
+                      "dataType": "customers"
+                    }
+                  ]
+                }
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "DFA-933785132",
+                  "accountRef": {
+                    "id": "20000-933270541",
+                    "name": "Checking"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-12-05T00:00:00",
+                  "totalAmount": 35
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2022-12-05T00:00:00",
+                  "totalAmount": 35
+                }
+              }
+            ],
+            "subTotal": 35,
+            "taxAmount": 0,
+            "totalAmount": 35,
+            "modifiedDate": "2023-04-26T09:13:57Z",
+            "sourceModifiedDate": "2023-12-16T05:04:11",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 250,
+        "_links": {
+          "current": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/connections/2c26b4da-97d4-4ba9-baad-1e18b49b96ac/data/directCosts?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/connections/2c26b4da-97d4-4ba9-baad-1e18b49b96ac/data/directCosts"
+          },
+          "next": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/connections/2c26b4da-97d4-4ba9-baad-1e18b49b96ac/data/directCosts?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "results": [
+          {
+            "id": "PUR-85",
+            "note": "Opening Balance from Bank",
+            "issueDate": "2015-08-12T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "accountRef": {
+                  "id": "55",
+                  "name": "Opening Balance Equity"
+                },
+                "taxRateRef": {
+                  "id": "NON",
+                  "name": "NON",
+                  "effectiveTaxRate": 0
+                },
+                "unitAmount": 3831.8,
+                "quantity": 1,
+                "subTotal": 3831.8,
+                "taxAmount": 0,
+                "totalAmount": 3831.8,
+                "trackingCategoryRefs": [],
+                "tracking": {
+                  "recordRefs": []
+                }
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "85",
+                  "reference": "Opening Balance from Bank",
+                  "accountRef": {
+                    "id": "57",
+                    "name": "Visa Credit Card"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2015-08-12T00:00:00",
+                  "totalAmount": 3831.8
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2015-08-12T00:00:00",
+                  "totalAmount": -3831.8
+                }
+              }
+            ],
+            "subTotal": 3831.8,
+            "taxAmount": 0,
+            "totalAmount": 3831.8,
+            "modifiedDate": "2023-04-26T09:36:40Z",
+            "sourceModifiedDate": "2016-09-12T18:13:07Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "PUR-3617",
+            "reference": "2001",
+            "contactRef": {
+              "id": "27",
+              "dataType": "suppliers"
+            },
+            "issueDate": "2015-11-27T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Insurance - general liability",
+                "accountRef": {
+                  "id": "22",
+                  "name": "Insurance Expense-General Liability Insurance"
+                },
+                "taxRateRef": {
+                  "id": "3_Bills",
+                  "name": "20.0% S Bills",
+                  "effectiveTaxRate": 20
+                },
+                "unitAmount": 750,
+                "quantity": 1,
+                "subTotal": 750,
+                "taxAmount": 150,
+                "totalAmount": 900,
+                "trackingCategoryRefs": [],
+                "tracking": {
+                  "recordRefs": []
+                }
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "3617",
+                  "note": "2001",
+                  "accountRef": {
+                    "id": "81",
+                    "name": "Current"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2015-11-27T00:00:00",
+                  "totalAmount": 900
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2015-11-27T00:00:00",
+                  "totalAmount": -900
+                }
+              }
+            ],
+            "subTotal": 750,
+            "taxAmount": 150,
+            "totalAmount": 900,
+            "modifiedDate": "2023-04-26T09:36:40Z",
+            "sourceModifiedDate": "2022-08-19T10:19:56Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 4460,
+        "_links": {
+          "current": {
+            "href": "/companies/5a7f3597-36e1-4216-86fe-289ad36088a6/connections/1f9f6013-f8a5-4278-8a47-3ab7fdb6c24c/data/directCosts?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/5a7f3597-36e1-4216-86fe-289ad36088a6/connections/1f9f6013-f8a5-4278-8a47-3ab7fdb6c24c/data/directCosts"
+          },
+          "next": {
+            "href": "/companies/5a7f3597-36e1-4216-86fe-289ad36088a6/connections/1f9f6013-f8a5-4278-8a47-3ab7fdb6c24c/data/directCosts?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "results": [
+          {
+            "id": "PUR-15",
+            "note": "Payment to Google",
+            "issueDate": "2018-09-21T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Payment to Google",
+                "accountRef": {
+                  "id": "37",
+                  "name": "Computer equipment accumulated depreciation brought forward"
+                },
+                "taxRateRef": {
+                  "id": "NON",
+                  "name": "NON",
+                  "effectiveTaxRate": 0
+                },
+                "unitAmount": 1.59,
+                "quantity": 1,
+                "subTotal": 1.59,
+                "taxAmount": 0,
+                "totalAmount": 1.59,
+                "trackingCategoryRefs": []
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "15",
+                  "reference": "Payment to Google",
+                  "accountRef": {
+                    "id": "61",
+                    "name": "Dave PP Current"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2018-09-21T00:00:00",
+                  "totalAmount": 1.59
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2018-09-21T00:00:00",
+                  "totalAmount": -1.59
+                }
+              }
+            ],
+            "subTotal": 1.59,
+            "taxAmount": 0,
+            "totalAmount": 1.59,
+            "modifiedDate": "2023-01-18T11:02:59Z",
+            "sourceModifiedDate": "2018-12-17T14:56:44Z"
+          },
+          {
+            "id": "PUR-9303",
+            "note": "Payment to Google",
+            "contactRef": {
+              "id": "4",
+              "dataType": "suppliers"
+            },
+            "issueDate": "2018-09-21T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Payment to Google",
+                "accountRef": {
+                  "id": "37",
+                  "name": "Computer equipment accumulated depreciation brought forward"
+                },
+                "taxRateRef": {
+                  "id": "NON",
+                  "name": "NON",
+                  "effectiveTaxRate": 0
+                },
+                "unitAmount": 1.59,
+                "quantity": 1,
+                "subTotal": 1.59,
+                "taxAmount": 0,
+                "totalAmount": 1.59,
+                "trackingCategoryRefs": []
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "9303",
+                  "reference": "Payment to Google",
+                  "accountRef": {
+                    "id": "61",
+                    "name": "Dave PP Current"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2018-09-21T00:00:00",
+                  "totalAmount": 1.59
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2018-09-21T00:00:00",
+                  "totalAmount": -1.59
+                }
+              }
+            ],
+            "subTotal": 1.59,
+            "taxAmount": 0,
+            "totalAmount": 1.59,
+            "modifiedDate": "2023-01-18T11:02:59Z",
+            "sourceModifiedDate": "2022-07-11T10:32:16Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 2176,
+        "_links": {
+          "current": {
+            "href": "/companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/connections/9e28a776-f4be-425b-8a3d-ad49956de2c9/data/directCosts?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/connections/9e28a776-f4be-425b-8a3d-ad49956de2c9/data/directCosts"
+          },
+          "next": {
+            "href": "/companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/connections/9e28a776-f4be-425b-8a3d-ad49956de2c9/data/directCosts?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "results": [
+          {
+            "id": "73",
+            "reference": "DD/STO",
+            "issueDate": "2021-01-29T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Electrcity Direct Debit",
+                "accountRef": {
+                  "id": "7200",
+                  "name": "Electricity"
+                },
+                "taxRateRef": {
+                  "id": "3"
+                },
+                "unitAmount": 150,
+                "quantity": 1,
+                "subTotal": 150,
+                "taxAmount": 12,
+                "totalAmount": 162,
+                "trackingCategoryRefs": [
+                  {
+                    "id": "department_0",
+                    "name": "Default"
+                  }
+                ]
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "73",
+                  "reference": "DD/STO",
+                  "accountRef": {
+                    "id": "1200",
+                    "name": "Bank Current Account"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2021-01-29T00:00:00",
+                  "totalAmount": 162
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2021-01-29T00:00:00",
+                  "totalAmount": 162
+                }
+              }
+            ],
+            "subTotal": 150,
+            "taxAmount": 12,
+            "totalAmount": 162,
+            "modifiedDate": "2023-03-30T14:42:35Z",
+            "sourceModifiedDate": "2022-11-25T09:43:54",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "52",
+            "reference": "568953",
+            "issueDate": "2021-01-30T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Vat Payment Quater End 3112.96",
+                "accountRef": {
+                  "id": "2202",
+                  "name": "VAT Liability"
+                },
+                "taxRateRef": {
+                  "id": "9",
+                  "name": "Non-Vatable Tax Code",
+                  "effectiveTaxRate": 0
+                },
+                "unitAmount": 1497.58,
+                "quantity": 1,
+                "subTotal": 1497.58,
+                "taxAmount": 0,
+                "totalAmount": 1497.58,
+                "trackingCategoryRefs": [
+                  {
+                    "id": "department_0",
+                    "name": "Default"
+                  }
+                ]
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "52",
+                  "reference": "568953",
+                  "accountRef": {
+                    "id": "1200",
+                    "name": "Bank Current Account"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2021-01-30T00:00:00",
+                  "totalAmount": 1497.58
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2021-01-30T00:00:00",
+                  "totalAmount": 1497.58
+                }
+              }
+            ],
+            "subTotal": 1497.58,
+            "taxAmount": 0,
+            "totalAmount": 1497.58,
+            "modifiedDate": "2023-03-30T14:42:35Z",
+            "sourceModifiedDate": "2022-11-25T09:43:54",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 106,
+        "_links": {
+          "current": {
+            "href": "/companies/cf5f2a47-2990-4221-bae6-0c19c86ac304/connections/8ee4910f-4fc1-47e6-89b1-5931fb33d8f7/data/directCosts?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/cf5f2a47-2990-4221-bae6-0c19c86ac304/connections/8ee4910f-4fc1-47e6-89b1-5931fb33d8f7/data/directCosts"
+          },
+          "next": {
+            "href": "/companies/cf5f2a47-2990-4221-bae6-0c19c86ac304/connections/8ee4910f-4fc1-47e6-89b1-5931fb33d8f7/data/directCosts?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "results": [
+          {
+            "id": "CCTRANSACTION:4355",
+            "reference": "",
+            "note": "Test 1",
+            "issueDate": "2020-01-20T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "accountRef": {
+                  "id": "195",
+                  "name": "Insurance"
+                },
+                "taxRateRef": {
+                  "id": "62018"
+                },
+                "unitAmount": 9.99,
+                "quantity": 1,
+                "subTotal": 9.99,
+                "taxAmount": 2,
+                "totalAmount": 11.99,
+                "trackingCategoryRefs": [
+                  {
+                    "id": "LOCATION-8",
+                    "name": "United Kingdom"
+                  }
+                ]
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "4355",
+                  "note": "",
+                  "reference": "",
+                  "accountRef": {
+                    "id": "348",
+                    "name": "CMRR Renewal"
+                  },
+                  "currency": "GBP",
+                  "paidOnDate": "2020-01-20T00:00:00",
+                  "totalAmount": 11.99
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "allocatedOnDate": "2020-01-20T00:00:00",
+                  "totalAmount": 11.99
+                }
+              }
+            ],
+            "subTotal": 9.99,
+            "taxAmount": 2,
+            "totalAmount": 11.99,
+            "modifiedDate": "2022-10-28T11:10:28Z",
+            "sourceModifiedDate": "2022-08-22T09:26:42"
+          },
+          {
+            "id": "CCTRANSACTION:4356",
+            "reference": "",
+            "note": "Test 1",
+            "issueDate": "2020-01-20T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "accountRef": {
+                  "id": "195",
+                  "name": "Insurance"
+                },
+                "taxRateRef": {
+                  "id": "62022"
+                },
+                "unitAmount": 9.99,
+                "quantity": 1,
+                "subTotal": 9.99,
+                "taxAmount": 2,
+                "totalAmount": 11.99,
+                "trackingCategoryRefs": [
+                  {
+                    "id": "LOCATION-8",
+                    "name": "United Kingdom"
+                  }
+                ]
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "4356",
+                  "note": "",
+                  "reference": "",
+                  "accountRef": {
+                    "id": "348",
+                    "name": "CMRR Renewal"
+                  },
+                  "currency": "GBP",
+                  "paidOnDate": "2020-01-20T00:00:00",
+                  "totalAmount": 11.99
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "allocatedOnDate": "2020-01-20T00:00:00",
+                  "totalAmount": 11.99
+                }
+              }
+            ],
+            "subTotal": 9.99,
+            "taxAmount": 2,
+            "totalAmount": 11.99,
+            "modifiedDate": "2022-10-28T11:10:28Z",
+            "sourceModifiedDate": "2022-02-17T23:26:16"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 57,
+        "_links": {
+          "current": {
+            "href": "/companies/71ca2b28-8e86-41e7-8c55-f681042b11a0/connections/be80adfc-1157-4db4-9170-f8bcbbc051ba/data/directCosts?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/71ca2b28-8e86-41e7-8c55-f681042b11a0/connections/be80adfc-1157-4db4-9170-f8bcbbc051ba/data/directCosts"
+          },
+          "next": {
+            "href": "/companies/71ca2b28-8e86-41e7-8c55-f681042b11a0/connections/be80adfc-1157-4db4-9170-f8bcbbc051ba/data/directCosts?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "results": [
+          {
+            "id": "dc1bb034-7bbf-4e84-b418-b7f4aee59d72",
+            "reference": "",
+            "contactRef": {
+              "id": "737982b0-2811-44c9-bdb3-3b26a3a6ef8c",
+              "dataType": "suppliers"
+            },
+            "issueDate": "2022-11-22T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Bank fee",
+                "accountRef": {
+                  "id": "2c410b86-de57-49d1-b540-4e8ce824979c",
+                  "name": "Bank Fees"
+                },
+                "unitAmount": 15,
+                "quantity": 1,
+                "subTotal": 15,
+                "taxAmount": 0,
+                "totalAmount": 15,
+                "trackingCategoryRefs": []
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "dc1bb034-7bbf-4e84-b418-b7f4aee59d72",
+                  "accountRef": {
+                    "id": "bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4",
+                    "name": "Business Bank Account"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-11-22T00:00:00",
+                  "totalAmount": 15
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2022-11-22T00:00:00",
+                  "totalAmount": 15
+                }
+              }
+            ],
+            "subTotal": 15,
+            "taxAmount": 0,
+            "totalAmount": 15,
+            "modifiedDate": "2023-03-15T20:36:09Z",
+            "sourceModifiedDate": "2021-01-03T21:43:46",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "521c2396-7f74-404c-9cca-31115296b808",
+            "reference": "Eft",
+            "contactRef": {
+              "id": "74ea95ea-6e1e-435d-9c30-0dff8ae1bd80",
+              "dataType": "suppliers"
+            },
+            "issueDate": "2022-11-23T00:00:00",
+            "currency": "GBP",
+            "currencyRate": 1,
+            "lineItems": [
+              {
+                "description": "Misc stationery",
+                "accountRef": {
+                  "id": "cba6527d-f102-4538-b421-e483233e9d5a",
+                  "name": "Printing & Stationery"
+                },
+                "taxRateRef": {
+                  "id": "INPUT2",
+                  "name": "20% (VAT on Expenses)",
+                  "effectiveTaxRate": 20
+                },
+                "unitAmount": 18.09,
+                "quantity": 1,
+                "subTotal": 18.09,
+                "taxAmount": 3.62,
+                "totalAmount": 21.71,
+                "trackingCategoryRefs": []
+              }
+            ],
+            "paymentAllocations": [
+              {
+                "payment": {
+                  "id": "521c2396-7f74-404c-9cca-31115296b808",
+                  "accountRef": {
+                    "id": "bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4",
+                    "name": "Business Bank Account"
+                  },
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "paidOnDate": "2022-11-23T00:00:00",
+                  "totalAmount": 21.71
+                },
+                "allocation": {
+                  "currency": "GBP",
+                  "currencyRate": 1,
+                  "allocatedOnDate": "2022-11-23T00:00:00",
+                  "totalAmount": 21.71
+                }
+              }
+            ],
+            "subTotal": 18.09,
+            "taxAmount": 3.62,
+            "totalAmount": 21.71,
+            "modifiedDate": "2023-03-15T20:36:09Z",
+            "sourceModifiedDate": "2021-01-03T21:43:51",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 15,
+        "_links": {
+          "current": {
+            "href": "/companies/5ced9667-a310-443a-a711-958d36377141/connections/6a4bcf97-e46a-465c-abf6-c42cec8e48c0/data/directCosts?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/5ced9667-a310-443a-a711-958d36377141/connections/6a4bcf97-e46a-465c-abf6-c42cec8e48c0/data/directCosts"
+          },
+          "next": {
+            "href": "/companies/5ced9667-a310-443a-a711-958d36377141/connections/6a4bcf97-e46a-465c-abf6-c42cec8e48c0/data/directCosts?page=2&pageSize=2"
+          }
+        }
+      }
+    }
+  ]
+}

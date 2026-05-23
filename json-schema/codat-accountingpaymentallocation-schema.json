@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingPaymentAllocation",
+  "title": "Accounting: Payment allocation",
+  "type": "object",
+  "properties": {
+    "payment": {
+      "$ref": "#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment"
+    },
+    "allocation": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "The currency of the transaction."
+        },
+        "currencyRate": {
+          "$ref": "#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate"
+        },
+        "allocatedOnDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date the payment was allocated."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The total amount that has been allocated."
+        }
+      }
+    }
+  },
+  "required": [
+    "payment",
+    "allocation"
+  ],
+  "definitions": {
+    "paymentAllocationPayment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the allocated payment."
+        },
+        "note": {
+          "type": "string",
+          "nullable": true,
+          "description": "Notes attached to the allocated payment."
+        },
+        "reference": {
+          "type": "string",
+          "nullable": true,
+          "description": "Reference to the allocated payment."
+        },
+        "accountRef": {
+          "$ref": "#/components/schemas/AccountingAccount/definitions/accountRef",
+          "description": "The account that the allocated payment is made from or to."
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "Currency the payment has been made in."
+        },
+        "currencyRate": {
+          "title": "Currency rate",
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Rate to convert the total amount of the payment into the base currency for the company at the time of the payment.\n\nCurrency rates in Codat are implemented as the multiple of foreign currency units to each base currency unit.  \n\nIt is not possible to perform the currency conversion with two or more non-base currencies participating in the transaction. For example, if a company's base currency is USD, and it has a bill issued in EUR, then the bill payment must happen in USD or EUR.\n\nWhere the currency rate is provided by the underlying accounting software, it will be available from Codat with the same precision (up to a maximum of 9 decimal places). \n\nFor accounting software which do not provide an explicit currency rate, it is calculated as `baseCurrency / foreignCurrency` and will be returned to 9 decimal places.\n\n## Examples with base currency of GBP\n\n| Foreign Currency | Foreign Amount | Currency Rate | Base Currency Amount (GBP) |\n| :--------------- | :------------- | :------------ | :------------------------- |\n| **USD**          | $20            | 0.781         | \u00a315.62                     |\n| **EUR**          | \u20ac20            | 0.885         | \u00a317.70                     |\n| **RUB**          | \u20bd20            | 0.011         | \u00a30.22                      |\n\n## Examples with base currency of USD\n\n| Foreign Currency | Foreign Amount | Currency Rate | Base Currency Amount (USD) |\n| :--------------- | :------------- | :------------ | :------------------------- |\n| **GBP**          | \u00a320            | 1.277         | $25.54                     |\n| **EUR**          | \u20ac20            | 1.134         | $22.68                     |\n| **RUB**          | \u20bd20            | 0.015         | $0.30                      |\n\n\n### Integration-specific details\n\n| Integration       | Scenario                                        | System behavior                                                                                                                                                      |\n|-------------------|-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| QuickBooks Online | Transaction currency differs from base currency | If currency rate value is left `null`, a rate of 1 will be used by QBO by default. To override this, specify a currencyRate in the request body.  |"
+        },
+        "paidOnDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date the payment was paid."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Total amount that was paid."
+        }
+      }
+    }
+  }
+}

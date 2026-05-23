@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CompanyInformation",
+  "title": "Company information",
+  "description": "Information about the company from the underlying accounting software.",
+  "type": "object",
+  "properties": {
+    "companyName": {
+      "type": "string",
+      "nullable": false,
+      "description": "Name of the linked company."
+    },
+    "baseCurrency": {
+      "type": "string",
+      "nullable": false,
+      "description": "Currency set in the accounting software of the linked company."
+    },
+    "planType": {
+      "type": "string",
+      "nullable": true,
+      "description": "Accounting software subscription type such as Trial, Demo, Standard."
+    },
+    "multicurrencyEnabled": {
+      "type": "boolean",
+      "description": "Boolean showing if the organisation has multicurrency enabled."
+    },
+    "currencies": {
+      "type": "array",
+      "nullable": true,
+      "description": "Array of enabled currencies for the linked company.",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

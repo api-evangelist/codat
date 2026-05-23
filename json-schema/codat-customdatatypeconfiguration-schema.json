@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomDataTypeConfiguration",
+  "title": "Custom data type configuration",
+  "type": "object",
+  "description": "Client's configuration details for a specific custom data type and platform pair.",
+  "properties": {
+    "dataSource": {
+      "type": "string",
+      "description": "Underlying endpoint of the source platform that will serve as a data source for the custom data type. This value is not validated by Codat."
+    },
+    "requiredData": {
+      "type": "object",
+      "description": "Properties required to be fetched from the underlying platform for the custom data type that is being configured. This value is not validated by Codat.",
+      "additionalProperties": {
+        "type": "string",
+        "description": "The client's defined name for the property with the value being the source system's property name which the mapping is targeting."
+      }
+    },
+    "keyBy": {
+      "type": "array",
+      "description": "An array of properties from the source system that can be used to uniquely identify the records returned for the custom data type. This value is not validated by Codat.",
+      "items": {
+        "type": "string"
+      },
+      "minLength": 1
+    },
+    "sourceModifiedDate": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      },
+      "description": "Property in the source platform nominated by the client that defines the date when a record was last modified there. This value is not validated by Codat."
+    }
+  },
+  "examples": [
+    {
+      "dataSource": "api/purchaseOrders?$filter=currencyCode eq 'NOK'",
+      "requiredData": {
+        "currencyCode": "$[*].currencyCode",
+        "id": "$[*].id",
+        "number": "$[*].number",
+        "orderDate": "$[*].orderDate",
+        "totalAmountExcludingTax": "$[*].totalAmountExcludingTax",
+        "totalTaxAmount": "$[*].totalTaxAmount",
+        "vendorName": "$[*].number"
+      },
+      "keyBy": [
+        "$[*].id"
+      ],
+      "sourceModifiedDate": [
+        "$[*].lastModifiedDateTime"
+      ]
+    }
+  ]
+}

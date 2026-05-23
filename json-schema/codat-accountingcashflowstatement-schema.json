@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingCashFlowStatement",
+  "title": "Accounting: Cash flow statement",
+  "description": "> **Operating activities only**  \n> \n> Currently, the cash flow statement shows cash that flows into and out of the company from operating activities *only*. Operating activities generate cash from the sale of goods or services.\n\n## Overview\n\nA cash flow statement is a financial report that records all cash that is received or spent by a company during a given period. It gives you a clearer picture of the company\u2019s performance, and their ability to pay creditors and finance growth.\n\n> **Cash flow statement or balance sheet?**\n> \n> Look at the cash flow statement to understand a company's ability to pay its bills. Although the balance sheet may show healthy earnings at a specific point in time, the cash flow statement allows you to see whether the company is meeting its financial commitments, such as paying creditors or its employees.",
+  "type": "object",
+  "properties": {
+    "reports": {
+      "description": "Array of cash flow statements.",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AccountingCashFlowStatement/definitions/cashFlowStatement"
+      }
+    },
+    "reportBasis": {
+      "$ref": "#/components/schemas/AccountingCashFlowStatement/definitions/reportBasis"
+    },
+    "reportInput": {
+      "$ref": "#/components/schemas/AccountingCashFlowStatement/definitions/reportInput"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/SourceAccount/properties/currency",
+      "description": "Currency of all values in the cash flow statement."
+    },
+    "mostRecentAvailableMonth": {
+      "$ref": "#/components/schemas/DateTime",
+      "nullable": true
+    },
+    "earliestAvailableMonth": {
+      "$ref": "#/components/schemas/DateTime",
+      "nullable": true
+    }
+  },
+  "required": [
+    "reports",
+    "reportBasis",
+    "reportInput"
+  ],
+  "definitions": {
+    "reportBasis": {
+      "title": "Report basis",
+      "description": "Accounting method used when aggregating the report data. In this case, `Cash`.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Accrual",
+        "Cash"
+      ]
+    },
+    "reportInput": {
+      "description": "Accounting method used to prepare the cash flow statement.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Indirect",
+        "Direct"
+      ]
+    },
+    "cashFlowStatement": {
+      "title": "Cash flow statement",
+      "type": "object",
+      "properties": {
+        "fromDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Start date for the reporting period."
+        },
+        "toDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "End date for the reporting period."
+        },
+        "cashReceipts": {
+          "$ref": "#/components/schemas/ReportLine",
+          "description": "ReportLines for cash receipts from the sale of goods."
+        },
+        "cashPayments": {
+          "$ref": "#/components/schemas/ReportLine",
+          "description": "ReportLines for cash payments to suppliers for the purchase of goods or services."
+        }
+      }
+    }
+  }
+}

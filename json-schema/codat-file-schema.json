@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/File",
+  "title": "File",
+  "type": "object",
+  "properties": {
+    "fileName": {
+      "type": "string",
+      "nullable": true,
+      "description": "The file's name."
+    },
+    "displayName": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional display name for the file."
+    },
+    "sourceType": {
+      "type": "string",
+      "nullable": true,
+      "description": "The source of the file uploaded."
+    },
+    "uploaded": {
+      "$ref": "#/components/schemas/DateTime"
+    }
+  },
+  "additionalProperties": false
+}

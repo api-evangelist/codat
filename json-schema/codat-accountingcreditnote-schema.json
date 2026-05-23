@@ -1,0 +1,279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingCreditNote",
+  "title": "Accounting: Credit note",
+  "description": "## Overview\n\nThink of a credit note as a voucher issued to a customer. It is a reduction that can be applied against one or multiple invoices. A credit note can either reduce the amount owed or cancel out an invoice entirely.\n\nIn the Codat system a credit note is issued to a [customer's](https://docs.codat.io/lending-api#/schemas/Customer) accounts receivable. \n\nIt contains details of:\n* The amount of credit remaining and its status.\n* Payment allocations against the payments type, in this case an invoice.\n* Which customers the credit notes have been issued to.",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the credit note, unique to the company in the accounting software."
+        },
+        "creditNoteNumber": {
+          "type": "string",
+          "nullable": true,
+          "description": "Friendly reference for the credit note."
+        },
+        "customerRef": {
+          "$ref": "#/components/schemas/AccountingCustomer/definitions/accountingCustomerRef",
+          "description": "Reference to the customer the credit note has been issued to."
+        },
+        "withholdingTax": {
+          "type": "array",
+          "nullable": true,
+          "items": {
+            "$ref": "#/components/schemas/AccountingBill/allOf/0/properties/withholdingTax/items"
+          }
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Total amount of credit that has been applied to the customer's accounts receivable"
+        },
+        "totalDiscount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Any discounts applied to the credit note amount."
+        },
+        "subTotal": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Value of the credit note, including discounts and excluding tax."
+        },
+        "additionalTaxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Additional tax amount applied to credit note."
+        },
+        "additionalTaxPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Percentage rate of any additional tax applied to the credit note."
+        },
+        "totalTaxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Any tax applied to the credit note amount."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Percentage rate (from 0 to 100) of discounts applied to the credit note."
+        },
+        "remainingCredit": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Unused balance of totalAmount originally raised."
+        },
+        "status": {
+          "$ref": "#/components/schemas/AccountingCreditNote/definitions/creditNoteStatus",
+          "description": "Current state of the credit note."
+        },
+        "issueDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Date of the credit note as recorded in the accounting system."
+        },
+        "allocatedOnDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Date on which the credit note was fully allocated."
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "Currency of the credit note."
+        },
+        "currencyRate": {
+          "$ref": "#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate"
+        },
+        "lineItems": {
+          "type": "array",
+          "nullable": true,
+          "items": {
+            "$ref": "#/components/schemas/AccountingCreditNote/definitions/creditNoteLineItem"
+          }
+        },
+        "paymentAllocations": {
+          "type": "array",
+          "nullable": true,
+          "description": "An array of payment allocations.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingPaymentAllocation"
+          }
+        },
+        "note": {
+          "type": "string",
+          "nullable": true,
+          "description": "Any additional information about the credit note. Where possible, Codat links to a data field in the accounting software that is publicly available. This means that the contents of the note field are included when a credit note is emailed from the accounting software to the customer."
+        },
+        "metadata": {
+          "$ref": "#/components/schemas/Metadata"
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "required": [
+    "totalAmount",
+    "totalDiscount",
+    "subTotal",
+    "totalTaxAmount",
+    "discountPercentage",
+    "remainingCredit",
+    "status"
+  ],
+  "definitions": {
+    "creditNoteStatus": {
+      "title": "Credit note status",
+      "description": "Current state of the credit note.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Draft",
+        "Submitted",
+        "Paid",
+        "Void",
+        "PartiallyPaid"
+      ]
+    },
+    "creditNoteLineItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "Friendly name of each line item. For example, the goods or service for which credit has been issued."
+        },
+        "unitAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Unit price of the goods or service."
+        },
+        "quantity": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Number of units of the goods or service for which credit has been issued."
+        },
+        "discountAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Value of any discounts applied."
+        },
+        "subTotal": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Amount of credit associated with the line item, including discounts but excluding tax."
+        },
+        "taxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Amount of tax associated with the line item."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Total amount of the line item, including discounts and tax."
+        },
+        "accountRef": {
+          "$ref": "#/components/schemas/AccountingAccount/definitions/accountRef",
+          "description": "Reference to the account to which the line item is linked."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Percentage rate of any discount applied to the line item."
+        },
+        "taxRateRef": {
+          "$ref": "#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/taxRateRef",
+          "description": "Reference to the tax rate to which the line item is linked."
+        },
+        "itemRef": {
+          "$ref": "#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/itemRef",
+          "description": "Reference to the item the line is linked to."
+        },
+        "trackingCategoryRefs": {
+          "type": "array",
+          "nullable": true,
+          "deprecated": true,
+          "description": "Reference to the tracking categories to which the line item is linked.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingTrackingCategory/definitions/trackingCategoryRef"
+          }
+        },
+        "tracking": {
+          "$ref": "#/components/schemas/AccountsReceivableTracking"
+        },
+        "isDirectIncome": {
+          "type": "boolean",
+          "description": "The credit note is a direct income if `True`."
+        }
+      },
+      "required": [
+        "unitAmount",
+        "quantity"
+      ]
+    }
+  },
+  "examples": [
+    [
+      {
+        "id": "0316bd24-8a01-4a3a-a0e5-a73f14ebcbec",
+        "creditNoteNumber": "5239277",
+        "customerRef": {
+          "id": "b5511228-b9ef-4713-91b1-ad2cf60eadb1",
+          "companyName": "Tool Hire Company"
+        },
+        "totalAmount": 550,
+        "totalDiscount": 0,
+        "subTotal": 0,
+        "totalTaxAmount": 0,
+        "discountPercentage": 0,
+        "remainingCredit": 550,
+        "status": "Submitted",
+        "issueDate": "2018-03-28T21:28:58.249Z",
+        "allocatedOnDate": null,
+        "note": "More information available on request.",
+        "currency": "USD",
+        "currencyRate": null,
+        "lineItems": [
+          {
+            "description": "Anvil10000Lb",
+            "unitAmount": 50,
+            "quantity": 10,
+            "discountAmount": 0,
+            "subTotal": 500,
+            "taxAmount": 50,
+            "totalAmount": 550,
+            "accountRef": {
+              "id": "3f267b10-757d-44c0-bef9-20f70cc8fbe3",
+              "name": null
+            },
+            "discountPercentage": null,
+            "taxRateRef": {
+              "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+              "name": null
+            },
+            "itemRef": {
+              "id": "1",
+              "name": null
+            }
+          }
+        ],
+        "paymentAllocations": [],
+        "modifiedDate": null,
+        "sourceModifiedDate": null
+      }
+    ]
+  ]
+}

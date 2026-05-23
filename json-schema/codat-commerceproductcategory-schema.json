@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommerceProductCategory",
+  "title": "Commerce: Product category",
+  "description": "Product categories are used to classify a group of products together, either by type (e.g. \"Furniture\"), or sometimes by tax profile.",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "\"102\"",
+          "description": "The unique identifier of the product category"
+        },
+        "name": {
+          "type": "string",
+          "example": "Entertainment",
+          "description": "The name of the product category"
+        },
+        "ancestorRefs": {
+          "type": "array",
+          "description": "A collection of parent product categories implicitly ordered with the immediate parent last in the list.",
+          "items": {
+            "$ref": "#/components/schemas/CommerceRecordRef"
+          }
+        },
+        "hasChildren": {
+          "type": "boolean",
+          "description": "A boolean indicating whether there are other product categories beneath this one in the hierarchy."
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "examples": [
+    {
+      "productCategories": [
+        {
+          "id": "100",
+          "name": "Entertainment",
+          "ancestorRefs": [],
+          "hasChildren": true,
+          "modifiedDate": "2022-01-01T12:00:00Z",
+          "sourceModifiedDate": "2021-10-01T12:53:21Z"
+        },
+        {
+          "id": "101",
+          "name": "Cinema",
+          "ancestorRefs": [
+            {
+              "id": "100",
+              "name": "Entertainment"
+            }
+          ],
+          "hasChildren": true,
+          "modifiedDate": "2022-01-01T12:00:00Z",
+          "sourceModifiedDate": "2021-10-01T12:55:02Z"
+        },
+        {
+          "id": "102",
+          "name": "Movie",
+          "ancestorRefs": [
+            {
+              "id": "100",
+              "name": "Entertainment"
+            },
+            {
+              "id": "101",
+              "name": "Cinema"
+            }
+          ],
+          "hasChildren": false,
+          "modifiedDate": "2022-01-01T12:00:00Z",
+          "sourceModifiedDate": "2021-12-25T12:00:00Z"
+        }
+      ]
+    }
+  ]
+}

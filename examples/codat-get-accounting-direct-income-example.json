@@ -1,0 +1,541 @@
+{
+  "operationId": "get-accounting-direct-income",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/directIncomes/{directIncomeId}",
+  "summary": "Get direct income",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "id": "38e8c917-0afc-4583-8ffe-1b53ad601197",
+        "reference": "3cb8ced3-3ecb-4974-ada5-8290b0ec3355",
+        "note": "Direct Income with 1 line items, totaling 188.33",
+        "contactRef": {
+          "id": "51f03576-f6b0-40d5-9fba-81a490411c03",
+          "dataType": "customers"
+        },
+        "issueDate": "2022-04-19T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Underground - Drain Yard Gully",
+            "accountRef": {
+              "id": "72df89d2-512b-4455-af51-a6b563733842",
+              "name": "Sales"
+            },
+            "taxRateRef": {
+              "id": "6c88aff3-7cb9-4980-a3d3-443e72e02498",
+              "name": "Sales Tax (10%)",
+              "effectiveTaxRate": 10
+            },
+            "unitAmount": 171.21,
+            "quantity": 1,
+            "discountAmount": 0,
+            "discountPercentage": 0,
+            "subTotal": 171.21,
+            "taxAmount": 17.12,
+            "totalAmount": 188.33,
+            "itemRef": {
+              "id": "00491160-6ee5-4d76-9f34-998f00687481",
+              "name": "Aluminium Silt Bucket"
+            },
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "38e8c917-0afc-4583-8ffe-1b53ad601197",
+              "note": "Payment for direct income 38e8c917-0afc-4583-8ffe-1b53ad601197",
+              "reference": "Direct Income 38e8c917-0afc-4583-8ffe-1b53ad601197",
+              "accountRef": {
+                "id": "ff8fdc4c-2aad-4ec1-9430-6bd201832eb3",
+                "name": "Undeposited Funds"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2022-04-19T00:00:00",
+              "totalAmount": 188.33
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2022-04-19T00:00:00",
+              "totalAmount": -188.33
+            }
+          }
+        ],
+        "subTotal": 171.21,
+        "taxAmount": 17.12,
+        "totalAmount": 188.33,
+        "modifiedDate": "2023-04-26T12:38:18Z",
+        "sourceModifiedDate": "2022-05-13T01:06:00",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "8be30162-feec-ec11-82f9-000d3a8746a9",
+        "reference": "B1234",
+        "note": "4006",
+        "issueDate": "2022-06-18T00:00:00",
+        "currency": "USD",
+        "currencyRate": 0.648364486,
+        "lineItems": [
+          {
+            "description": "Interest Income",
+            "accountRef": {
+              "id": "221217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Interest Income"
+            },
+            "taxRateRef": {
+              "id": "63bc0fb9-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Setup for DOMESTIC / STANDARD",
+              "effectiveTaxRate": 10
+            },
+            "unitAmount": 7.13,
+            "quantity": 1,
+            "subTotal": 7.13,
+            "taxAmount": 1.43,
+            "totalAmount": 8.56,
+            "trackingCategoryRefs": [
+              {
+                "id": "adbc0fb9-89d1-ea11-bbaa-000d3a2b9185",
+                "name": "ADM-Administration"
+              }
+            ]
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "8be30162-feec-ec11-82f9-000d3a8746a9",
+              "accountRef": {
+                "id": "8277672c-b8e6-ec11-82f8-0022481a77f0",
+                "name": "B020-BoA"
+              },
+              "currency": "USD",
+              "currencyRate": 0.6483644859813084,
+              "paidOnDate": "2022-06-18T00:00:00",
+              "totalAmount": 8.56
+            },
+            "allocation": {
+              "currency": "USD",
+              "currencyRate": 0.6483644859813084,
+              "allocatedOnDate": "2022-06-18T00:00:00",
+              "totalAmount": 8.56
+            }
+          }
+        ],
+        "subTotal": 7.13,
+        "taxAmount": 1.43,
+        "totalAmount": 8.56,
+        "modifiedDate": "2023-03-27T14:21:25Z",
+        "sourceModifiedDate": "2022-06-15T22:56:26Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "id": "344673327",
+        "note": "Test Transaction 2",
+        "issueDate": "2017-11-01T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Test Transaction 2",
+            "accountRef": {
+              "id": "001",
+              "name": "Sales"
+            },
+            "unitAmount": 10.5,
+            "quantity": 1,
+            "subTotal": 10.5,
+            "taxAmount": 0,
+            "totalAmount": 10.5,
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "344673327",
+              "note": "Test Transaction 2",
+              "accountRef": {
+                "id": "750-1",
+                "name": "Bank Account: Business Current Account"
+              },
+              "currency": "GBP",
+              "paidOnDate": "2017-11-01T00:00:00",
+              "totalAmount": 10.5
+            },
+            "allocation": {
+              "currency": "GBP",
+              "allocatedOnDate": "2017-11-01T00:00:00",
+              "totalAmount": 10.5
+            }
+          }
+        ],
+        "subTotal": 10.5,
+        "taxAmount": 0,
+        "totalAmount": 10.5,
+        "modifiedDate": "2023-04-25T14:20:36Z",
+        "sourceModifiedDate": "2022-10-06T10:38:24Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "9B87-1181931723",
+        "reference": "9C08-1181931827",
+        "contactRef": {
+          "id": "280000-933272658",
+          "dataType": "customers"
+        },
+        "issueDate": "2023-01-15T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "accountRef": {
+              "id": "80000-933270541",
+              "name": "Undeposited Funds"
+            },
+            "unitAmount": 1228.18,
+            "quantity": 1,
+            "subTotal": 1228.18,
+            "taxAmount": 0,
+            "totalAmount": 1228.18,
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "9B87-1181931723",
+              "accountRef": {
+                "id": "20000-933270541",
+                "name": "Checking"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2023-01-15T00:00:00",
+              "totalAmount": 1228.18
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2023-01-15T00:00:00",
+              "totalAmount": 1228.18
+            }
+          }
+        ],
+        "subTotal": 1228.18,
+        "taxAmount": 0,
+        "totalAmount": 1228.18,
+        "modifiedDate": "2023-04-26T09:14:12Z",
+        "sourceModifiedDate": "2023-12-16T05:06:23",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "5-1",
+        "contactRef": {
+          "id": "52",
+          "dataType": "suppliers"
+        },
+        "issueDate": "2015-11-24T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "contribution to start business",
+            "accountRef": {
+              "id": "61",
+              "name": "Owner's Equity - Contributions"
+            },
+            "taxRateRef": {
+              "id": "2_Invoices",
+              "name": "Exempt Invoices",
+              "effectiveTaxRate": 0
+            },
+            "unitAmount": 10000,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 10000,
+            "taxAmount": 0,
+            "totalAmount": 10000,
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "5-1",
+              "accountRef": {
+                "id": "81",
+                "name": "Current"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2015-11-24T00:00:00",
+              "totalAmount": 10000
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2015-11-24T00:00:00",
+              "totalAmount": -10000
+            }
+          }
+        ],
+        "subTotal": 10000,
+        "taxAmount": 0,
+        "totalAmount": 10000,
+        "modifiedDate": "2023-04-26T09:36:04Z",
+        "sourceModifiedDate": "2016-09-12T15:26:26Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "1",
+        "note": "Opening Balance from Bank",
+        "issueDate": "2018-09-21T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "accountRef": {
+              "id": "53",
+              "name": "Retained profit balance forward account"
+            },
+            "unitAmount": 170.23,
+            "quantity": 1,
+            "discountAmount": 0,
+            "subTotal": 170.23,
+            "taxAmount": 0,
+            "totalAmount": 170.23,
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "1",
+              "accountRef": {
+                "id": "61",
+                "name": "Dave PP Current"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2018-09-21T00:00:00",
+              "totalAmount": 170.23
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2018-09-21T00:00:00",
+              "totalAmount": -170.23
+            }
+          }
+        ],
+        "subTotal": 170.23,
+        "taxAmount": 0,
+        "totalAmount": 170.23,
+        "modifiedDate": "2023-01-18T11:02:50Z",
+        "sourceModifiedDate": "2018-12-17T14:56:20Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "4973",
+        "reference": "dt test contact",
+        "note": "dt header description",
+        "issueDate": "2022-03-15T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Dt test line1",
+            "accountRef": {
+              "id": "151",
+              "name": "Cash"
+            },
+            "taxRateRef": {
+              "id": "99",
+              "name": "UK Sale Goods Standard Rate",
+              "effectiveTaxRate": 20
+            },
+            "unitAmount": 125,
+            "quantity": 1,
+            "subTotal": 125,
+            "taxAmount": 25,
+            "totalAmount": 150,
+            "trackingCategoryRefs": [
+              {
+                "id": "DEPARTMENT-1",
+                "name": "Sales"
+              },
+              {
+                "id": "LOCATION-8",
+                "name": "United Kingdom"
+              }
+            ]
+          },
+          {
+            "description": "dt test line 2",
+            "accountRef": {
+              "id": "152",
+              "name": "Cash Equivalents"
+            },
+            "taxRateRef": {
+              "id": "99",
+              "name": "UK Sale Goods Standard Rate",
+              "effectiveTaxRate": 20
+            },
+            "unitAmount": 166.67,
+            "quantity": 1,
+            "subTotal": 166.67,
+            "taxAmount": 33.33,
+            "totalAmount": 200,
+            "trackingCategoryRefs": [
+              {
+                "id": "DEPARTMENT-2",
+                "name": "Services"
+              },
+              {
+                "id": "LOCATION-8",
+                "name": "United Kingdom"
+              }
+            ]
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "4973",
+              "note": "dt header description",
+              "accountRef": {
+                "id": "289",
+                "name": "Checking 5 - Bank Of England"
+              },
+              "currency": "GBP",
+              "paidOnDate": "2022-03-15T00:00:00",
+              "totalAmount": 350
+            },
+            "allocation": {
+              "currency": "GBP",
+              "allocatedOnDate": "2022-03-15T00:00:00",
+              "totalAmount": 350
+            }
+          }
+        ],
+        "subTotal": 291.67,
+        "taxAmount": 58.33,
+        "totalAmount": 350,
+        "modifiedDate": "2022-10-28T11:10:26Z",
+        "sourceModifiedDate": "2022-03-15T12:45:58Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "3a1be853-5964-4afe-ad6a-fb89cbaf6606",
+        "reference": "Sub 098801",
+        "contactRef": {
+          "id": "bc446de5-971e-48b5-8efd-1745149844ef",
+          "dataType": "customers"
+        },
+        "issueDate": "2023-02-14T00:00:00",
+        "currency": "GBP",
+        "currencyRate": 1,
+        "lineItems": [
+          {
+            "description": "Long-term subscriber discount - refund on sub",
+            "accountRef": {
+              "id": "a40f43e2-c7b0-4187-919a-04ccdc14a630",
+              "name": "Subscriptions"
+            },
+            "taxRateRef": {
+              "id": "EXEMPTINPUT",
+              "name": "Exempt Expenses",
+              "effectiveTaxRate": 0
+            },
+            "unitAmount": 35,
+            "quantity": 1,
+            "subTotal": 35,
+            "taxAmount": 0,
+            "totalAmount": 35,
+            "trackingCategoryRefs": []
+          }
+        ],
+        "paymentAllocations": [
+          {
+            "payment": {
+              "id": "3a1be853-5964-4afe-ad6a-fb89cbaf6606",
+              "accountRef": {
+                "id": "bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4",
+                "name": "Business Bank Account"
+              },
+              "currency": "GBP",
+              "currencyRate": 1,
+              "paidOnDate": "2023-02-14T00:00:00",
+              "totalAmount": 35
+            },
+            "allocation": {
+              "currency": "GBP",
+              "currencyRate": 1,
+              "allocatedOnDate": "2023-02-14T00:00:00",
+              "totalAmount": 35
+            }
+          }
+        ],
+        "subTotal": 35,
+        "taxAmount": 0,
+        "totalAmount": 35,
+        "modifiedDate": "2023-03-15T20:36:09Z",
+        "sourceModifiedDate": "2011-04-11T00:45:38",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    }
+  ]
+}

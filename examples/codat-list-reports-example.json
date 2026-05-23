@@ -1,0 +1,60 @@
+{
+  "operationId": "list-reports",
+  "method": "GET",
+  "path": "/companies/{companyId}/reports",
+  "summary": "List reports",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "example": {
+        "pageNumber": 1,
+        "pageSize": 4,
+        "totalResults": 15,
+        "_links": {
+          "self": {
+            "href": "/companies/0f591937-4ea9-48c4-847a-fe65fb24bb41/reports"
+          },
+          "current": {
+            "href": "/companies/0f591937-4ea9-48c4-847a-fe65fb24bb41/reports?page=1&pageSize=4"
+          },
+          "next": {
+            "href": "/companies/0f591937-4ea9-48c4-847a-fe65fb24bb41/reports?page=2&pageSize=4"
+          }
+        },
+        "results": [
+          {
+            "id": "c0d52c82-777f-4309-81a0-d935aea0562b",
+            "status": "InProgress",
+            "type": "categorizedBankStatement",
+            "requested": "2024-10-15T07:00:00Z",
+            "updated": "2024-10-15T15:31:45Z"
+          },
+          {
+            "id": "79ef0451-edbd-4108-82ff-0b991444f1ec",
+            "status": "Complete",
+            "type": "categorizedBankStatement",
+            "requested": "2024-09-10T05:50:00Z",
+            "updated": "2024-09-11T14:37:12Z"
+          },
+          {
+            "id": "ae125b45-ed37-4bb4-bb4a-d55383fd56b2",
+            "status": "Complete",
+            "type": "categorizedBankStatement",
+            "requested": "2024-09-06T07:47:10Z",
+            "updated": "2024-09-20T14:42:15Z"
+          },
+          {
+            "id": "ebfaf90c-31fe-407f-a016-bc2b3e60894a",
+            "status": "Error",
+            "type": "categorizedBankStatement",
+            "requested": "2024-07-15T04:45:14Z",
+            "updated": "2024-07-15T17:41:45Z",
+            "errorMessage": "Failed to generate the report because...."
+          }
+        ]
+      }
+    }
+  ]
+}

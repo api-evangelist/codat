@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SourceAccountWebhook",
+  "title": "Source account status changed webhook",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "ba29118f-5406-4e59-b05c-ba307ca38d01",
+      "description": "Unique identifier of the event."
+    },
+    "eventType": {
+      "type": "string",
+      "description": "The type of event.",
+      "examples": [
+        "bankFeeds.sourceAccount.connected",
+        "bankFeeds.sourceAccount.disconnected"
+      ]
+    },
+    "generatedDate": {
+      "$ref": "#/components/schemas/DateTime",
+      "description": "The date time in UTC the event was generated in Codat."
+    },
+    "payload": {
+      "$ref": "#/components/schemas/SourceAccountWebhook/definitions/sourceAccountWebhookPayload"
+    }
+  },
+  "definitions": {
+    "sourceAccountWebhookPayload": {
+      "title": "Payload",
+      "type": "object",
+      "properties": {
+        "referenceCompany": {
+          "$ref": "#/components/schemas/Company/definitions/companyReference"
+        },
+        "companyId": {
+          "$ref": "#/components/parameters/companyId/schema",
+          "deprecated": true
+        },
+        "connectionId": {
+          "$ref": "#/components/parameters/connectionId/schema"
+        },
+        "sourceAccount": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/SourceAccountV2"
+            },
+            {
+              "$ref": "#/components/schemas/SourceAccount"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

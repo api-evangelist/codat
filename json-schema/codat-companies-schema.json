@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Companies",
+  "title": "Companies",
+  "x-internal": true,
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Company"
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "title": "Pagination information",
+      "x-internal": true,
+      "properties": {
+        "pageNumber": {
+          "type": "integer",
+          "description": "Current page number."
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "Number of items to return in results array.",
+          "maximum": 2000
+        },
+        "totalResults": {
+          "type": "integer",
+          "description": "Total number of items."
+        },
+        "_links": {
+          "$ref": "#/components/schemas/Companies/allOf/1/definitions/links"
+        }
+      },
+      "definitions": {
+        "links": {
+          "title": "Hal Links",
+          "type": "object",
+          "required": [
+            "self",
+            "current"
+          ],
+          "properties": {
+            "self": {
+              "$ref": "#/components/schemas/Companies/allOf/1/definitions/halRef"
+            },
+            "current": {
+              "$ref": "#/components/schemas/Companies/allOf/1/definitions/halRef"
+            },
+            "next": {
+              "$ref": "#/components/schemas/Companies/allOf/1/definitions/halRef"
+            },
+            "previous": {
+              "$ref": "#/components/schemas/Companies/allOf/1/definitions/halRef"
+            }
+          },
+          "examples": [
+            {
+              "self": {
+                "href": "/companies"
+              },
+              "current": {
+                "href": "/companies?page=1&pageSize=10"
+              }
+            }
+          ]
+        },
+        "halRef": {
+          "title": "Hypertext reference",
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri-reference",
+              "description": "Uri hypertext reference."
+            }
+          }
+        }
+      },
+      "required": [
+        "pageNumber",
+        "pageSize",
+        "totalResults",
+        "_links"
+      ],
+      "examples": [
+        {
+          "pageNumber": 1,
+          "pageSize": 10,
+          "totalResults": 1,
+          "_links": {
+            "self": {
+              "href": "/companies/{id}/data/{dataType}"
+            },
+            "current": {
+              "href": "/companies/{id}/data/{dataType}?page=1&pageSize=10"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

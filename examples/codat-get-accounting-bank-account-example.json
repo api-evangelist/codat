@@ -1,0 +1,230 @@
+{
+  "operationId": "get-accounting-bank-account",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/bankAccounts/{accountId}",
+  "summary": "Get bank account",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "c9a41bc7-6e5b-ed11-8c34-0022481b8b5b",
+        "accountName": "55",
+        "accountType": "Unknown",
+        "nominalCode": "10500",
+        "sortCode": "",
+        "accountNumber": "",
+        "iBan": "",
+        "currency": "GBP",
+        "balance": -352.03,
+        "modifiedDate": "2023-03-27T14:21:10Z",
+        "sourceModifiedDate": "2023-02-07T00:00:00",
+        "overdraftLimit": 0,
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "id": "738783",
+        "accountName": "\\w3fw",
+        "accountType": "Debit",
+        "sortCode": "236972",
+        "accountNumber": "A06268209",
+        "currency": "GBP",
+        "balance": -10484.65,
+        "availableBalance": -10484.65,
+        "modifiedDate": "2023-04-25T14:19:12Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "KashFlow",
+      "example": {
+        "id": "765768",
+        "accountName": "16th Account",
+        "accountType": "Unknown",
+        "nominalCode": "70700",
+        "currency": "GBP",
+        "balance": 326,
+        "availableBalance": 326,
+        "modifiedDate": "2022-09-30T10:29:16Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "20000-933270541",
+        "accountName": "Checking",
+        "accountType": "Unknown",
+        "nominalCode": "10100",
+        "currency": "GBP",
+        "balance": 46954.1,
+        "availableBalance": 46954.1,
+        "modifiedDate": "2023-04-26T09:12:37Z",
+        "sourceModifiedDate": "2023-12-16T05:06:45",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "id": "1200",
+        "accountName": "Bank Current Account",
+        "accountType": "Unknown",
+        "nominalCode": "1200",
+        "sortCode": "23-34-34",
+        "accountNumber": "003234234",
+        "iBan": "",
+        "currency": "GBP",
+        "balance": -20091.04,
+        "availableBalance": -20091.04,
+        "modifiedDate": "2023-03-30T14:42:37Z",
+        "sourceModifiedDate": "2022-11-25T09:25:48",
+        "overdraftLimit": 120000,
+        "institution": "Lloyds Bank PLC",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "id": "154d05abe9f24c4babe0f6a741dec1b9",
+        "accountName": "Abdi Internet Bank",
+        "accountType": "Unknown",
+        "nominalCode": "1560",
+        "sortCode": "010101",
+        "accountNumber": "11111",
+        "currency": "GBP",
+        "balance": 49.61,
+        "availableBalance": 49.61,
+        "modifiedDate": "2022-10-24T14:52:53Z",
+        "sourceModifiedDate": "2020-01-27T10:53:26Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4",
+        "accountName": "Business Bank Account",
+        "accountType": "Debit",
+        "sortCode": "990404",
+        "accountNumber": "987654321",
+        "currency": "GBP",
+        "balance": 6681.79,
+        "modifiedDate": "2023-03-15T20:36:09Z",
+        "sourceModifiedDate": "2023-03-15T20:35:07",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zoho Books",
+      "example": {
+        "id": "104957000000060010",
+        "accountName": "Abdi Test",
+        "accountType": "Unknown",
+        "sortCode": "112233",
+        "accountNumber": "xxxx5678",
+        "currency": "GBP",
+        "balance": 69858.44,
+        "modifiedDate": "2022-10-03T08:40:38Z",
+        "institution": "Test Bank"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "id": "825",
+        "accountName": "Codat Europe Bank",
+        "accountType": "Debit",
+        "nominalCode": "111111122222111",
+        "currency": "GBP",
+        "balance": 558.22,
+        "modifiedDate": "2023-05-02T13:24:36Z",
+        "sourceModifiedDate": "2022-07-15T11:34:02",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "164",
+        "accountName": "00",
+        "accountType": "Debit",
+        "nominalCode": "123567",
+        "currency": "GBP",
+        "balance": 0,
+        "availableBalance": 0,
+        "modifiedDate": "2023-04-26T09:35:57Z",
+        "sourceModifiedDate": "2022-07-20T14:11:28Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "202",
+        "accountName": "\\aa",
+        "accountType": "Debit",
+        "currency": "GBP",
+        "balance": 123,
+        "availableBalance": 123,
+        "modifiedDate": "2023-01-18T11:02:37Z",
+        "sourceModifiedDate": "2022-11-11T14:15:13Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "CREDITCARD:55",
+        "accountName": "CoT Credit Card",
+        "accountType": "Credit",
+        "nominalCode": "10021",
+        "currency": "GBP",
+        "modifiedDate": "2023-04-04T16:31:46Z",
+        "sourceModifiedDate": "2023-03-27T14:11:48",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    }
+  ]
+}

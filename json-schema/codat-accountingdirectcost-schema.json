@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingDirectCost",
+  "title": "Accounting: Direct cost",
+  "description": "> **Language tip:** Direct costs may also be referred to as **Spend transactions**, **Spend money transactions**, or **Payments** in various accounting software.\n\n## Overview\n\nDirect costs are money that leave the business without impacting Accounts Payable, and refunds associated with such transactions.\n\nDirect costs include:\n  * Purchasing an item and paying it off at the point of the purchase\n  * Receiving cash from a refunded item if the refund is made by the supplier\n\nDirect costs is a child data type of [account transactions](https://docs.codat.io/lending-api#/schemas/AccountTransaction).",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the direct cost, unique for the company."
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/AccountingDirectCost/definitions/directCostPrototype"
+    },
+    {
+      "properties": {
+        "metadata": {
+          "$ref": "#/components/schemas/Metadata"
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "definitions": {
+    "directCostPrototype": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": "string",
+          "nullable": true,
+          "description": "User-friendly reference for the direct cost."
+        },
+        "note": {
+          "type": "string",
+          "nullable": true,
+          "description": "A note attached to the direct cost."
+        },
+        "contactRef": {
+          "$ref": "#/components/schemas/AccountingJournalEntry/definitions/journalLine/properties/contactRef",
+          "description": "A customer or supplier associated with the direct cost."
+        },
+        "issueDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Date of the direct cost as recorded in the accounting software.Date of the direct cost as recorded in the accounting software."
+        },
+        "currency": {
+          "$ref": "#/components/schemas/SourceAccount/properties/currency",
+          "description": "Currency of the direct cost."
+        },
+        "currencyRate": {
+          "$ref": "#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate"
+        },
+        "lineItems": {
+          "type": "array",
+          "description": "An array of line items.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingDirectCost/definitions/directCostLineItem"
+          }
+        },
+        "paymentAllocations": {
+          "type": "array",
+          "description": "An array of payment allocations.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingPaymentAllocation"
+          }
+        },
+        "subTotal": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The total amount of the direct costs, excluding any taxes."
+        },
+        "taxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The total amount of tax on the direct costs."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The amount of the direct costs, inclusive of tax."
+        },
+        "supplementalData": {
+          "$ref": "#/components/schemas/SupplementalData"
+        }
+      },
+      "required": [
+        "issueDate",
+        "currency",
+        "lineItems",
+        "paymentAllocations",
+        "subTotal",
+        "taxAmount",
+        "totalAmount"
+      ]
+    },
+    "directCostLineItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "Friendly name of the goods or services."
+        },
+        "unitAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Price of each unit of goods or services.\nNote: If the platform does not provide this information, the unit amount will be mapped to the total amount."
+        },
+        "quantity": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Number of units of goods or services received.\n\nNote: If the platform does not provide this information, the quantity will be mapped as 1."
+        },
+        "discountAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Discount amount for the line before tax."
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Discount percentage for the line before tax."
+        },
+        "subTotal": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Amount of the line, inclusive of discounts but exclusive of tax."
+        },
+        "taxAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Amount of tax for the line."
+        },
+        "totalAmount": {
+          "type": "number",
+          "format": "decimal",
+          "nullable": true,
+          "description": "Total amount of the line, including tax."
+        },
+        "accountRef": {
+          "$ref": "#/components/schemas/AccountingAccount/definitions/accountRef",
+          "description": "Reference to the account to which the line item is linked."
+        },
+        "taxRateRef": {
+          "$ref": "#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/taxRateRef",
+          "description": "Reference to the tax rate to which the the line item is linked."
+        },
+        "itemRef": {
+          "$ref": "#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/itemRef",
+          "description": "Reference to the product, service type, or inventory item to which the direct cost is linked."
+        },
+        "trackingCategoryRefs": {
+          "type": "array",
+          "nullable": true,
+          "deprecated": true,
+          "description": "Collection of categories against which this direct cost is tracked.",
+          "items": {
+            "$ref": "#/components/schemas/AccountingTrackingCategory/definitions/trackingCategoryRef"
+          }
+        },
+        "tracking": {
+          "$ref": "#/components/schemas/AccountingDirectCost/definitions/tracking"
+        }
+      },
+      "required": [
+        "unitAmount",
+        "quantity"
+      ]
+    },
+    "tracking": {
+      "title": "Invoiceable tracking",
+      "required": [
+        "recordRefs"
+      ],
+      "type": "object",
+      "properties": {
+        "recordRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AccountingJournalEntry/definitions/journalLine/properties/tracking/definitions/trackingRecordRef"
+          }
+        },
+        "invoiceTo": {
+          "$ref": "#/components/schemas/AccountingRecordRef"
+        }
+      },
+      "additionalProperties": false
+    },
+    "invoiceTo": {
+      "type": "object",
+      "title": "Invoice to",
+      "description": "Links to the customer the direct cost is associated.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "'id' of the underlying record or data type."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Name of underlying data type.",
+          "enum": [
+            "customers"
+          ],
+          "example": "customers"
+        }
+      }
+    }
+  }
+}

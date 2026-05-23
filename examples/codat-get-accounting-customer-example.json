@@ -1,0 +1,783 @@
+{
+  "operationId": "get-accounting-customer",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/customers/{customerId}",
+  "summary": "Get customer",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "id": "c8180244-74ac-40cf-a5df-6d83661c44d7",
+        "customerName": "Arjun Kuvalis",
+        "contactName": "Werner Langworth",
+        "emailAddress": "Arjun34@hotmail.com",
+        "defaultCurrency": "GBP",
+        "phone": "014605 64820",
+        "addresses": [
+          {
+            "type": "Delivery",
+            "line1": "Suite 214",
+            "line2": "8439 Lueilwitz Passage",
+            "city": "Fernandohaven",
+            "region": "Northern Ireland",
+            "country": "United Kingdom",
+            "postalCode": "JG04 7PV"
+          },
+          {
+            "type": "Delivery",
+            "line1": "Suite 096",
+            "line2": "864 Halie Course",
+            "city": "Juliochester",
+            "region": "England",
+            "country": "United Kingdom",
+            "postalCode": "DZ8 4BF"
+          },
+          {
+            "type": "Delivery",
+            "line1": "Suite 001",
+            "line2": "416 Stokes Fords",
+            "city": "Naderborough",
+            "region": "Wales",
+            "country": "United Kingdom",
+            "postalCode": "XG25 0XX"
+          }
+        ],
+        "contacts": [
+          {
+            "name": "Werner Langworth",
+            "email": "Werner_Langworth@hotmail.com",
+            "phone": [],
+            "address": {
+              "type": "Delivery",
+              "line1": "Apt. 145",
+              "line2": "317 Williamson Freeway",
+              "city": "Hortenseville",
+              "region": "Scotland",
+              "country": "United Kingdom",
+              "postalCode": "CV4 2HR"
+            },
+            "status": "Active"
+          },
+          {
+            "name": "Belle Glover",
+            "email": "Belle51@yahoo.com",
+            "phone": [],
+            "address": {
+              "type": "Delivery",
+              "line1": "Suite 075",
+              "line2": "9921 Dickens Walk",
+              "city": "South Ali",
+              "region": "Scotland",
+              "country": "United Kingdom",
+              "postalCode": "TI04 4OO"
+            },
+            "status": "Active"
+          }
+        ],
+        "registrationNumber": "NI7JEJVM",
+        "taxNumber": "7505220209.583549",
+        "status": "Active",
+        "modifiedDate": "2023-04-26T12:38:16Z",
+        "sourceModifiedDate": "2022-07-03T01:27:00",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "0e2f7751-7696-ed11-bff5-6045bd0d2ad6",
+        "customerName": "",
+        "contactName": "",
+        "emailAddress": "",
+        "defaultCurrency": "GBP",
+        "phone": "",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "",
+            "line2": "",
+            "city": "",
+            "region": "",
+            "country": "",
+            "postalCode": ""
+          }
+        ],
+        "contacts": [
+          {
+            "name": "",
+            "email": "",
+            "phone": [],
+            "address": {
+              "type": "Billing",
+              "line1": "",
+              "line2": "",
+              "city": "",
+              "region": "",
+              "country": "",
+              "postalCode": ""
+            },
+            "status": "Active"
+          }
+        ],
+        "taxNumber": "",
+        "status": "Active",
+        "modifiedDate": "2023-03-27T14:21:25Z",
+        "sourceModifiedDate": "2023-01-17T14:50:54Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "id": "555f8251-c65a-433a-a813-5dbe04321d1e",
+        "customerName": "Ab Netherlands",
+        "defaultCurrency": "EUR",
+        "addresses": [
+          {
+            "type": "Billing",
+            "country": "NL"
+          }
+        ],
+        "contacts": [],
+        "status": "Active",
+        "modifiedDate": "2022-10-26T13:32:05Z",
+        "sourceModifiedDate": "2021-06-14T15:26:37Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "id": "5f20075a-a28e-434d-81a6-2db0dc170e87",
+        "customerName": "Abdi 99",
+        "emailAddress": "email@codat.io",
+        "defaultCurrency": "GBP",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "Ink Rooms",
+            "city": "London",
+            "country": "GB",
+            "postalCode": "WC1X 0BE"
+          }
+        ],
+        "contacts": [],
+        "registrationNumber": "123456789",
+        "taxNumber": "GB339 0727 47",
+        "status": "Active",
+        "modifiedDate": "2022-10-26T13:33:08Z",
+        "sourceModifiedDate": "2020-02-26T11:23:50Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "id": "11526230",
+        "customerName": "-",
+        "contactName": "Test 1",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "1 Place House",
+            "line2": "",
+            "city": "London",
+            "country": "United Kingdom",
+            "postalCode": "WC1X 1AH"
+          }
+        ],
+        "contacts": [
+          {
+            "name": "Test 1",
+            "phone": [],
+            "address": {
+              "type": "Billing",
+              "line1": "1 Place House",
+              "line2": "",
+              "city": "London",
+              "country": "United Kingdom",
+              "postalCode": "WC1X 1AH"
+            },
+            "status": "Unknown"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2023-04-25T14:19:12Z",
+        "sourceModifiedDate": "2023-04-17T06:02:46Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "id": "634509",
+        "customerName": "A test customer 14 (updated)",
+        "contactName": "test person name",
+        "emailAddress": "test14@example.com",
+        "defaultCurrency": "GBP",
+        "phone": "01876 541245",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "Line 1",
+            "line2": "Line 2",
+            "city": "Some city",
+            "region": "A region",
+            "country": "Country 1",
+            "postalCode": "SW1 2JQ"
+          }
+        ],
+        "contacts": [
+          {
+            "name": "test person1",
+            "email": "test14A@example.com",
+            "phone": [
+              {
+                "number": "24681012",
+                "type": "Primary"
+              },
+              {
+                "number": "121086420",
+                "type": "Unknown"
+              }
+            ],
+            "status": "Active"
+          },
+          {
+            "name": "test person2",
+            "email": "test14B@example.com",
+            "phone": [
+              {
+                "number": "123456789",
+                "type": "Primary"
+              },
+              {
+                "number": "987654321",
+                "type": "Unknown"
+              }
+            ],
+            "status": "Active"
+          },
+          {
+            "name": "test person name",
+            "email": "test14@example.com",
+            "phone": [
+              {
+                "number": "01876 541245",
+                "type": "Unknown"
+              }
+            ],
+            "status": "Active"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2023-03-24T16:07:23Z",
+        "sourceModifiedDate": "2022-05-18T09:23:56",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "KashFlow",
+      "example": {
+        "id": "92227673",
+        "customerName": "Chekko Customer Test 01",
+        "contactName": "",
+        "emailAddress": "",
+        "phone": "",
+        "addresses": [],
+        "contacts": [
+          {
+            "name": "",
+            "email": "",
+            "phone": [],
+            "status": "Active"
+          }
+        ],
+        "taxNumber": "",
+        "status": "Active",
+        "modifiedDate": "2022-09-30T10:29:15Z",
+        "sourceModifiedDate": "0001-01-01T00:00:00"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "id": "773",
+        "customerName": "119 Test Customer",
+        "contactName": "Mr Test  Customer",
+        "defaultCurrency": "GBP",
+        "addresses": [],
+        "contacts": [],
+        "status": "Active",
+        "modifiedDate": "2023-01-30T14:48:02Z",
+        "sourceModifiedDate": "2022-01-11T12:28:49"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "150000-933272658",
+        "customerName": "Abercrombie, Kristy",
+        "contactName": "Kristy Abercrombie",
+        "emailAddress": "kristy@samplename.com",
+        "defaultCurrency": "GBP",
+        "phone": "415-555-6579",
+        "addresses": [
+          {
+            "type": "Delivery",
+            "line1": "Kristy Abercrombie",
+            "line2": "5647 Cypress Hill Rd",
+            "city": "Bayshore",
+            "region": "CA",
+            "postalCode": "94326"
+          },
+          {
+            "type": "Billing",
+            "line1": "Kristy Abercrombie",
+            "line2": "5647 Cypress Hill Rd",
+            "city": "Bayshore",
+            "region": "CA",
+            "postalCode": "94326"
+          }
+        ],
+        "contacts": [
+          {
+            "name": "Abercrombie, Kristy",
+            "email": "kristy@samplename.com",
+            "phone": [
+              {
+                "number": "415-555-6579",
+                "type": "Primary"
+              }
+            ],
+            "status": "Active"
+          },
+          {
+            "name": "Kristy Abercrombie",
+            "phone": [],
+            "status": "Active"
+          },
+          {
+            "name": "Steve Darcangelo",
+            "phone": [],
+            "status": "Active"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2023-04-26T09:07:55Z",
+        "sourceModifiedDate": "2023-12-16T05:06:42",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "9",
+        "customerName": "Abe",
+        "contactName": "Abraham's Company",
+        "emailAddress": "ab@email.com",
+        "defaultCurrency": "GBP",
+        "addresses": [],
+        "contacts": [
+          {
+            "name": "Abe",
+            "email": "ab@email.com",
+            "phone": [
+              {
+                "number": "01111111111",
+                "type": "Mobile"
+              }
+            ],
+            "status": "Active"
+          }
+        ],
+        "registrationNumber": "XXXX9900001",
+        "taxNumber": "XXXX9900001",
+        "status": "Active",
+        "modifiedDate": "2023-01-18T11:02:35Z",
+        "sourceModifiedDate": "2022-12-08T15:42:59Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "66",
+        "customerName": "Abercrombie International Group",
+        "contactName": "Kristy Abercrombie",
+        "defaultCurrency": "GBP",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "123 Main St",
+            "city": "New York, NY"
+          }
+        ],
+        "contacts": [
+          {
+            "name": "Abercrombie International Group (deleted)",
+            "phone": [],
+            "address": {
+              "type": "Billing",
+              "line1": "123 Main St",
+              "city": "New York, NY"
+            },
+            "status": "Archived"
+          }
+        ],
+        "status": "Archived",
+        "modifiedDate": "2023-04-26T09:35:56Z",
+        "sourceModifiedDate": "2016-09-12T18:53:19Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 200cloud",
+      "example": {
+        "id": "A1D001",
+        "customerName": "A1 Design Services",
+        "contactName": "Lee Dalkin",
+        "emailAddress": "newbusinessadvice@sage.com",
+        "defaultCurrency": "GBP",
+        "phone": "01742 876 234",
+        "addresses": [
+          {
+            "type": "Delivery",
+            "line1": "67a Station Road",
+            "line2": "",
+            "city": "Blackpool",
+            "region": "Lancashire",
+            "country": "",
+            "postalCode": "BP12 7HT"
+          },
+          {
+            "type": "Delivery",
+            "line1": "23a Union Street",
+            "line2": "",
+            "city": "Manchester",
+            "region": "",
+            "country": "",
+            "postalCode": "M2 6JK"
+          },
+          {
+            "type": "Billing",
+            "line1": "67a Station Road",
+            "line2": "",
+            "city": "Blackpool",
+            "region": "Lancashire",
+            "country": "Great Britain",
+            "postalCode": "BP12 7HT"
+          }
+        ],
+        "contacts": [
+          {
+            "name": "Lee Dalkin",
+            "email": "newbusinessadvice@sage.com",
+            "phone": [
+              {
+                "number": "01742 876 234",
+                "type": "Landline"
+              },
+              {
+                "number": "01742 876 235",
+                "type": "Landline"
+              },
+              {
+                "number": "01742 876 236",
+                "type": "Fax"
+              }
+            ],
+            "status": "Active"
+          },
+          {
+            "name": "Malcolm Leverret",
+            "email": "",
+            "phone": [],
+            "status": "Active"
+          },
+          {
+            "name": "Jim Thomas",
+            "email": "Jim@a1designservices.co.uk",
+            "phone": [
+              {
+                "number": "01742 876 234",
+                "type": "Landline"
+              },
+              {
+                "number": "01742 876 235",
+                "type": "Fax"
+              }
+            ],
+            "status": "Active"
+          },
+          {
+            "name": "Jullian Plawsworth",
+            "email": "Jullian@a1designservices.co.uk",
+            "phone": [
+              {
+                "number": "0151 349 3939",
+                "type": "Landline"
+              },
+              {
+                "number": "0151 349 3940",
+                "type": "Fax"
+              }
+            ],
+            "status": "Active"
+          }
+        ],
+        "registrationNumber": "",
+        "taxNumber": "GB238 3839 38",
+        "status": "Active",
+        "modifiedDate": "2022-10-14T09:35:53Z",
+        "sourceModifiedDate": "2022-04-27T15:17:36Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "id": "A1D001",
+        "customerName": "A1 Design Services",
+        "contactName": "Ian Cairns",
+        "emailAddress": "newbusinessadvice@sage.com",
+        "defaultCurrency": "GBP",
+        "phone": "01742 876 234",
+        "addresses": [
+          {
+            "type": "Delivery",
+            "line1": "67a Station Road",
+            "line2": "",
+            "city": "Blackpool",
+            "region": "Lancashire",
+            "country": "GB",
+            "postalCode": "BP12 7HT"
+          },
+          {
+            "type": "Delivery",
+            "line1": "23a Union Street",
+            "line2": "",
+            "city": "Manchester",
+            "region": "",
+            "country": "GB",
+            "postalCode": "M2 6JK"
+          },
+          {
+            "type": "Unknown",
+            "line1": "67a Station Road",
+            "line2": "",
+            "city": "Blackpool",
+            "region": "Lancashire",
+            "country": "GB",
+            "postalCode": "BP12 7HT"
+          }
+        ],
+        "contacts": [],
+        "taxNumber": "GB238 3839 38",
+        "status": "Active",
+        "modifiedDate": "2023-03-30T14:42:41Z",
+        "sourceModifiedDate": "2022-11-25T09:43:54Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "id": "260f6a3f94a243738f2d5e08496a41a8",
+        "customerName": "100 test name",
+        "contactName": "Main Contact",
+        "emailAddress": "email@codat.io",
+        "defaultCurrency": "GBP",
+        "phone": "contact phone number",
+        "addresses": [
+          {
+            "type": "Billing",
+            "line1": "Aruba Address line 1",
+            "line2": "Aruba Address line 2",
+            "city": "Aruba City",
+            "region": "Aruba Province",
+            "country": "Aruba (AW)",
+            "postalCode": "Aruba Post"
+          }
+        ],
+        "contacts": [
+          {
+            "phone": [
+              {
+                "number": "contact mobile number",
+                "type": "Mobile"
+              },
+              {
+                "number": "contact fax number",
+                "type": "Fax"
+              }
+            ],
+            "status": "Unknown"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2022-10-24T14:52:54Z",
+        "sourceModifiedDate": "2021-05-10T16:31:51Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "188",
+        "customerName": "33Across",
+        "contactName": "Yuna Conn",
+        "defaultCurrency": "USD",
+        "phone": "520-393-4468",
+        "addresses": [
+          {
+            "type": "Unknown",
+            "line1": "155 Westend Point",
+            "line2": "",
+            "city": "Albuquerque",
+            "region": "NM",
+            "country": "United States",
+            "postalCode": "87140"
+          }
+        ],
+        "contacts": [
+          {
+            "name": "Conn, Yuna",
+            "phone": [
+              {
+                "number": "520-393-4468",
+                "type": "Primary"
+              }
+            ],
+            "address": {
+              "type": "Unknown",
+              "line1": "155 Westend Point",
+              "line2": "",
+              "city": "Albuquerque",
+              "region": "NM",
+              "country": "United States",
+              "postalCode": "87140"
+            },
+            "status": "Unknown"
+          }
+        ],
+        "taxNumber": "",
+        "status": "Active",
+        "modifiedDate": "2023-04-04T16:32:21Z",
+        "sourceModifiedDate": "2022-09-06T12:58:27",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Wave",
+      "example": {
+        "id": "QnVzaW5lc3M6ZTI0OGQyZDctMWE5Ni00YTk4LWFkOTEtMDdlMGYyMmNhNmE2O0N1c3RvbWVyOjMyMzkzNTA4",
+        "customerName": "ABC Textiles",
+        "contactName": "",
+        "emailAddress": "c.taylor@codat.io",
+        "defaultCurrency": "USD",
+        "addresses": [],
+        "contacts": [],
+        "status": "Active",
+        "modifiedDate": "2022-11-16T18:15:30Z",
+        "sourceModifiedDate": "2019-10-17T07:59:04Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "e4c9d0e2-c285-4e85-b579-6d28b180c730",
+        "customerName": "24 Locks",
+        "emailAddress": "",
+        "addresses": [],
+        "contacts": [],
+        "status": "Active",
+        "modifiedDate": "2023-03-15T20:35:10Z",
+        "sourceModifiedDate": "2023-02-17T18:03:42",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zoho Books",
+      "example": {
+        "id": "104957000000032105",
+        "customerName": "A B",
+        "contactName": "Contact (First Name) Contact (Last Name)",
+        "emailAddress": "contactperson@whateveryouwantidontcare12345.com",
+        "defaultCurrency": "GBP",
+        "phone": "Work Phone",
+        "addresses": [],
+        "contacts": [
+          {
+            "name": "Contact (First Name) Contact (Last Name)",
+            "email": "contactperson@whateveryouwantidontcare12345.com",
+            "phone": [
+              {
+                "number": "Work Phone",
+                "type": "Landline"
+              },
+              {
+                "number": "Mobile",
+                "type": "Mobile"
+              }
+            ],
+            "status": "Active"
+          }
+        ],
+        "status": "Active",
+        "modifiedDate": "2022-10-03T08:40:37Z",
+        "sourceModifiedDate": "2022-06-09T14:36:47"
+      }
+    }
+  ]
+}

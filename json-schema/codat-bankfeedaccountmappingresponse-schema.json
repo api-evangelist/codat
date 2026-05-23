@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankFeedAccountMappingResponse",
+  "title": "Bank feed account mapping response",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "sourceAccountId": {
+      "type": "string",
+      "description": "Unique ID for the source account."
+    },
+    "targetAccountId": {
+      "type": "string",
+      "nullable": true,
+      "description": "Unique ID for the target account."
+    },
+    "status": {
+      "type": "string",
+      "nullable": true,
+      "description": "Status of the POST request."
+    },
+    "error": {
+      "type": "string",
+      "nullable": true,
+      "description": "Error returned during the post request"
+    }
+  },
+  "examples": [
+    {
+      "sourceAccountId": "acc-002",
+      "targetAccountId": "account-081",
+      "status": "Failed",
+      "error": "A feed connection already exists to this account"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingAttachment",
+  "title": "Accounting: Attachment",
+  "description": "The Codat API supports pulling and pushing of file attachments for invoices, bills, direct costs, and direct incomes.\n\n> **Retrieving attachments**\n> \n> If a company is authorized, you can query the Codat API to read, download, and upload attachments without requiring a fresh sync of data.\n\nUnlike other data types, Codat doesn't support [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings) for attachments.\n\nNote that different integrations have different requirements to file size and extension of attachments.\n\n| Integration       | File size | File extension                                                                                                                                               |\n|-------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Xero              | 4 MB      | 7Z, BMP, CSV, DOC, DOCX, EML, GIF, JPEG, JPG, KEYNOTE, MSG, NUMBERS, ODF,   ODS, ODT, PAGES, PDF, PNG, PPT, PPTX, RAR, RTF, TIF, TIFF, TXT, XLS, XLSX,   ZIP |\n| QuickBooks Online | 100 MB    | AI, CSV, DOC, DOCX, EPS, GIF, JPEG, JPG, ODS, PAGES, PDF, PNG, RTF, TIF,   TXT, XLS, XLSX, XML                                                               |\n| NetSuite          | 100 MB    | BMP, CSV, XLS, XLSX, JSON, PDF, PJPG, PJPEG, PNG, TXT, SVG, TIF, TIFF,   DOC, DOCX, ZIP                                                                      |\n| Dynamics 365 Business Central          | 350 MB    | Dynamics do not explicitly outline which file types are supported but they do state <a className=\"external\" href=\"https://learn.microsoft.com/en-gb/dynamics365/business-central/ui-how-add-link-to-record#to-attach-a-file-to-a-purchase-invoice\" target=\"_blank\">here</a> that \"You can attach any type of file, such as text, image, or video files\".                                                                   |\n",
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the attachment, unique for the company in the accounting software."
+        },
+        "name": {
+          "type": "string",
+          "nullable": true,
+          "description": "Name of the attachment file."
+        },
+        "contentType": {
+          "type": "string",
+          "nullable": true,
+          "description": "File type of the attachment. This is represented by appending the file type to the [IETF standard file naming requirements](https://tools.ietf.org/html/rfc6838). For example, for a jpeg file the output is **image/jpeg**.\n\nSupported file types vary per platform. "
+        },
+        "dateCreated": {
+          "$ref": "#/components/schemas/DateTime"
+        },
+        "fileSize": {
+          "type": "integer",
+          "format": "int32",
+          "nullable": true,
+          "description": "File size in bytes. For example, if this reads **46153**, then the file size is 46kb."
+        },
+        "includeWhenSent": {
+          "type": "boolean",
+          "description": "If `true`, then the attachment is included with the associated invoice, bill or direct costs when it is printed, emailed, or sent to a customer, if the underlying accounting software allows this."
+        }
+      }
+    },
+    {
+      "$ref": "#/components/schemas/CommerceOrder/allOf/3"
+    }
+  ],
+  "examples": [],
+  "definitions": {
+    "attachments": {
+      "title": "Attachments",
+      "type": "object",
+      "properties": {
+        "attachments": {
+          "description": "An array of attachments related to the record.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AccountingAttachment"
+          },
+          "nullable": true
+        }
+      }
+    }
+  }
+}

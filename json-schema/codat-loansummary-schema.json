@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LoanSummary",
+  "title": "Loan summary",
+  "type": "object",
+  "properties": {
+    "reportInfo": {
+      "$ref": "#/components/schemas/LoanSummary/definitions/loanSummaryReportInfo"
+    },
+    "reportItems": {
+      "type": "array",
+      "description": "Returns a summary of all loan activity for that integration type",
+      "items": {
+        "$ref": "#/components/schemas/LoanSummary/definitions/loanSummaryReportItem"
+      }
+    }
+  },
+  "definitions": {
+    "loanSummaryReportInfo": {
+      "title": "Loan Summary Report Info",
+      "type": "object",
+      "properties": {
+        "reportName": {
+          "type": "string",
+          "description": "The name of the report."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Name of the company queried."
+        },
+        "generatedDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "Returns the YYYY-MM-DD datetime of report generation.  urns the YYYY-MM-DD datetime of report generation."
+        }
+      }
+    },
+    "loanRef": {
+      "title": "Loan Reference",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the object being referred to."
+        },
+        "dataConnectionId": {
+          "type": "string",
+          "description": "The dataConnectionId the object being referred to is associated with.",
+          "x-stoplight": {
+            "id": "vrnhmgrfndjhh"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "The object type data is referring to, e.g. Account."
+        }
+      }
+    },
+    "loanSummaryRecordRef": {
+      "title": "Item reference",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the object being referred to."
+        },
+        "dataConnectionId": {
+          "type": "string",
+          "description": "The dataConnectionId the object being referred to is associated with."
+        },
+        "integrationType": {
+          "$ref": "#/components/schemas/LoanSummary/definitions/loanSummaryIntegrationType"
+        },
+        "recordRefType": {
+          "$ref": "#/components/schemas/LoanSummary/definitions/loanSummaryRecordRefType"
+        }
+      }
+    },
+    "loanSummaryReportItem": {
+      "type": "object",
+      "properties": {
+        "recordRef": {
+          "$ref": "#/components/schemas/LoanSummary/definitions/loanSummaryRecordRef",
+          "description": "Contains object that contains a summary of all loan transactions for that integration type."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the object being referred to. E.g. the account."
+        },
+        "startDate": {
+          "$ref": "#/components/schemas/DateTime",
+          "description": "The date of the earliest loan transaction."
+        },
+        "totalDrawdowns": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The total loan drawdowns."
+        },
+        "totalRepayments": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The total loan repayments which includes capital plus any interest."
+        },
+        "balance": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The loan outstanding balance.  This may not equal totalDrawdowns - totalRepayments due to interest which has been accrued."
+        },
+        "lender": {
+          "type": "string",
+          "description": "The name of lender providing the loan."
+        }
+      }
+    },
+    "loanSummaryIntegrationType": {
+      "title": "Integration type",
+      "type": "string",
+      "enum": [
+        "Accounting",
+        "Banking",
+        "Commerce"
+      ],
+      "description": "The integration type begin referred to."
+    },
+    "loanSummaryRecordRefType": {
+      "title": "Record reference type",
+      "type": "string",
+      "enum": [
+        "accounts",
+        "banking-accounts",
+        "commerce-transactions"
+      ],
+      "description": "The datatype being referred to."
+    }
+  },
+  "examples": [
+    {
+      "reportInfo": {
+        "reportName": "LoanSummaryReport",
+        "companyName": "The Coffee shop",
+        "generatedDate": "2022-10-23T00:00:00Z"
+      },
+      "reportItems": [
+        {
+          "recordRef": {
+            "id": "string",
+            "dataConnectionId": "DE34E8E3-089F-4DF4-89E9-F7C43618FCAAA",
+            "integrationType": "Accounting",
+            "recordRefType": "accounts"
+          },
+          "description": "string",
+          "startDate": "2021-01-01",
+          "totalInvestments": 100000,
+          "totalRepayments": 83481.72,
+          "balance": 42513.18,
+          "lender": "Barclays Bank"
+        }
+      ]
+    }
+  ]
+}

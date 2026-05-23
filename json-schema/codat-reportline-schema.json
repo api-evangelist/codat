@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReportLine",
+  "title": "Accounting: Report line",
+  "x-internal": true,
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "type": "string",
+      "nullable": true,
+      "description": "Identifier for the account, unique for the company in the accounting software."
+    },
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "Name of the report line item."
+    },
+    "value": {
+      "type": "number",
+      "format": "decimal",
+      "description": "Numerical value of the line item."
+    },
+    "items": {
+      "type": "array",
+      "nullable": true,
+      "description": "An array of ReportLine items.",
+      "items": {
+        "$ref": "#/components/schemas/ReportLine"
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}

@@ -1,0 +1,680 @@
+{
+  "operationId": "get-accounting-payment",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/payments/{paymentId}",
+  "summary": "Get payment",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "id": "7ba4fc1b-e248-49ba-8bf8-0813d7f203a8",
+        "customerRef": {
+          "id": "a82042f1-a005-4ca5-bfd3-5bc237123aa5",
+          "companyName": "Keara Leffler"
+        },
+        "accountRef": {
+          "id": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+          "name": "Business Current Account"
+        },
+        "totalAmount": 3669.52,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2022-04-25T13:04:02",
+        "note": "Payment against invoice ac3ac4dd-defe-4f9c-b7bb-2c3fe726a9d1",
+        "lines": [
+          {
+            "amount": 3669.52,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "ac3ac4dd-defe-4f9c-b7bb-2c3fe726a9d1",
+                "amount": -3669.52,
+                "currencyRate": 1
+              }
+            ],
+            "allocatedOnDate": "2022-04-25T13:04:02"
+          }
+        ],
+        "modifiedDate": "2023-04-26T12:38:17Z",
+        "sourceModifiedDate": "2022-04-25T13:04:02",
+        "reference": "ac3ac4dd-defe-4f9c-b7bb-2c3fe726a9d1",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "e0299ced-89d1-ea11-bbaa-000d3a2b9185",
+        "customerRef": {
+          "id": "b61217b3-89d1-ea11-bbaa-000d3a2b9185",
+          "companyName": "Trey Researches"
+        },
+        "accountRef": {
+          "id": "621217b3-89d1-ea11-bbaa-000d3a2b9185",
+          "name": "Petty Cash"
+        },
+        "totalAmount": 128.16,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2019-01-15T00:00:00",
+        "note": "Invoice 102001",
+        "lines": [
+          {
+            "amount": 128.16,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "18c906bf-89d1-ea11-bbaa-000d3a2b9185",
+                "amount": -128.16,
+                "currencyRate": 1
+              }
+            ],
+            "allocatedOnDate": "2019-01-15T00:00:00"
+          }
+        ],
+        "modifiedDate": "2023-03-27T14:21:27Z",
+        "sourceModifiedDate": "0001-01-01T00:00:00Z",
+        "reference": "Document No: 103001",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "id": "090f5d9f-d1ce-4a61-985f-d3915618b64a_c3bf08a3-4d51-4859-acbb-5075f9484f87",
+        "customerRef": {
+          "id": "c3bf08a3-4d51-4859-acbb-5075f9484f87",
+          "companyName": "Mr Abe"
+        },
+        "accountRef": {
+          "id": "35717508-0696-4481-a32c-2835f0ed8b4e",
+          "name": "Test GL account 2"
+        },
+        "totalAmount": 229.08,
+        "currency": "EUR",
+        "currencyRate": 1,
+        "date": "2019-11-26T00:00:00Z",
+        "lines": [
+          {
+            "amount": 229.08,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "f010d4df-13ea-45d1-8525-785164df7dd9",
+                "amount": -229.08,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-10-26T13:36:13Z",
+        "sourceModifiedDate": "2019-11-26T12:31:46Z",
+        "reference": "19230011"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "id": "14b7d656-07ee-4d70-aafa-61c0030c08ad_7e566728-a7f3-4860-a7f5-381664673287",
+        "customerRef": {
+          "id": "7e566728-a7f3-4860-a7f5-381664673287",
+          "companyName": "Customer A"
+        },
+        "accountRef": {
+          "id": "4a4e34b5-7f62-4b64-a44a-073398b14b41",
+          "name": "Bank"
+        },
+        "totalAmount": 1,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2020-01-02T00:00:00Z",
+        "lines": [
+          {
+            "amount": 1,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "6220ed43-1fec-4e17-a88f-c7ee5b949e76",
+                "amount": -1,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-10-26T13:35:14Z",
+        "sourceModifiedDate": "2020-01-02T10:08:27Z",
+        "reference": "20200002"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "id": "135234099",
+        "customerRef": {
+          "id": "6162049",
+          "companyName": "Wintershall Holding GmbH"
+        },
+        "totalAmount": 100,
+        "currency": "GBP",
+        "date": "2017-11-23T00:00:00",
+        "note": "CODAT LTD ref: NOV TOPUP OTHER \ufffd100.00 - Invoice receipt against 015",
+        "lines": [
+          {
+            "amount": 100,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "21973931",
+                "amount": -100,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-04-25T14:21:37Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "id": "765831",
+        "customerRef": {
+          "id": "113070"
+        },
+        "totalAmount": 1,
+        "currency": "GBP",
+        "date": "2018-09-11T00:00:00",
+        "note": "Overpayment: invoice #0000003, some test",
+        "lines": [
+          {
+            "amount": 1,
+            "links": [
+              {
+                "type": "PaymentOnAccount",
+                "id": "113070",
+                "amount": -1,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-03-24T16:07:24Z",
+        "sourceModifiedDate": "2018-09-11T06:58:46",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "KashFlow",
+      "example": {
+        "id": "139214921",
+        "customerRef": {
+          "id": "85743294",
+          "companyName": "Parent customer"
+        },
+        "totalAmount": 1.2,
+        "currency": "GBP",
+        "date": "2010-04-07T00:00:00",
+        "note": "",
+        "lines": [
+          {
+            "amount": 1.2,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "137055108",
+                "amount": -1.2,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-09-30T10:29:15Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "id": "8828",
+        "customerRef": {
+          "id": "417",
+          "companyName": "10 Breww Ltd"
+        },
+        "totalAmount": 0,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2021-04-09T00:00:00",
+        "lines": [
+          {
+            "amount": 0,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "8530",
+                "amount": -16,
+                "currencyRate": 1
+              },
+              {
+                "type": "CreditNote",
+                "id": "8828",
+                "amount": 16,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-09-20T08:18:33Z",
+        "sourceModifiedDate": "2022-02-25T10:58:37",
+        "reference": "Credit Memo #CM28"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "6915-1197775450",
+        "customerRef": {
+          "id": "220000-933272658",
+          "companyName": "Melton, Johnny"
+        },
+        "accountRef": {
+          "id": "80000-933270541",
+          "name": "Undeposited Funds"
+        },
+        "totalAmount": 14488.64,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2023-01-10T00:00:00",
+        "note": "Check - 80000-933270541",
+        "lines": [
+          {
+            "amount": 14488.64,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "469E-1071530054",
+                "amount": -14488.64,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-04-26T09:08:36Z",
+        "sourceModifiedDate": "2023-12-16T05:06:11",
+        "reference": "19650",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "710",
+        "customerRef": {
+          "id": "9",
+          "companyName": "Abe"
+        },
+        "accountRef": {
+          "id": "56",
+          "name": "Undeposited Funds"
+        },
+        "totalAmount": 95.2,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2018-10-05T00:00:00",
+        "note": "Sarah's Test",
+        "lines": [
+          {
+            "amount": 95.2,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "688",
+                "amount": -95.2,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-01-18T11:03:14Z",
+        "sourceModifiedDate": "2020-08-14T09:59:29Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "25",
+        "customerRef": {
+          "id": "55",
+          "companyName": "Oxon Insurance - Holiday Party"
+        },
+        "accountRef": {
+          "id": "81",
+          "name": "Current"
+        },
+        "totalAmount": 10800,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2016-02-12T00:00:00",
+        "note": "",
+        "lines": [
+          {
+            "amount": 10800,
+            "links": [
+              {
+                "type": "PaymentOnAccount",
+                "id": "55",
+                "amount": -10800,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-04-26T09:36:50Z",
+        "sourceModifiedDate": "2022-02-03T12:09:35Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 200cloud",
+      "example": {
+        "id": "29684",
+        "customerRef": {
+          "id": "STE001",
+          "companyName": "Stevenson & Smith"
+        },
+        "totalAmount": 500,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2019-01-30T00:00:00Z",
+        "note": "Payment on Account",
+        "lines": [
+          {
+            "amount": 12.5,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "29676",
+                "amount": -12.5,
+                "currencyRate": 1
+              }
+            ]
+          },
+          {
+            "amount": 487.5,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "29851",
+                "amount": -487.5,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-10-14T09:36:05Z",
+        "sourceModifiedDate": "2020-02-28T14:23:46Z",
+        "reference": "5897532"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "id": "53",
+        "customerRef": {
+          "id": "STE001",
+          "companyName": "Stevenson & Smith"
+        },
+        "accountRef": {
+          "id": "1200",
+          "name": "Bank Current Account"
+        },
+        "totalAmount": 500,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2021-01-30T00:00:00",
+        "note": "Sales receipt on account 53 linked to sales invoice tx-3, sales invoice inv-31.",
+        "lines": [
+          {
+            "amount": 12.5,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "TX-3",
+                "amount": -12.5,
+                "currencyRate": 1
+              }
+            ]
+          },
+          {
+            "amount": 245.34,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "INV-31",
+                "amount": -245.34,
+                "currencyRate": 1
+              }
+            ]
+          },
+          {
+            "amount": 126.9,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "INV-31",
+                "amount": -126.9,
+                "currencyRate": 1
+              }
+            ]
+          },
+          {
+            "amount": 115.26,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "INV-31",
+                "amount": -115.26,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-03-30T14:42:39Z",
+        "sourceModifiedDate": "2022-11-25T09:43:54",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "id": "d39f7a5733de11e797950a57719b2edb",
+        "customerRef": {
+          "id": "f4ff85ba33dd11e797950a57719b2edb",
+          "companyName": "Widgets Limited"
+        },
+        "accountRef": {
+          "id": "9a25937b267a11e797950a57719b2edb",
+          "name": "Current"
+        },
+        "totalAmount": -1080,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2017-05-08T00:00:00",
+        "note": "Customer refund using credit/debit card",
+        "lines": [
+          {
+            "amount": -1080,
+            "links": [
+              {
+                "type": "CreditNote",
+                "id": "c1a0176c33de11e797950a57719b2edb",
+                "amount": 1080,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-10-24T14:55:39Z",
+        "sourceModifiedDate": "2017-05-08T11:09:38Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "2918",
+        "customerRef": {
+          "id": "12",
+          "companyName": "MK Manufacturing"
+        },
+        "accountRef": {
+          "id": "353",
+          "name": "Current Account"
+        },
+        "paymentMethodRef": {
+          "id": "1",
+          "name": "Printed Check"
+        },
+        "totalAmount": 120,
+        "currency": "GBP",
+        "date": "2021-04-22T00:00:00",
+        "note": "",
+        "lines": [
+          {
+            "amount": 120,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "2916",
+                "amount": -120,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-04-04T16:32:02Z",
+        "sourceModifiedDate": "2021-04-22T11:01:11Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "65b746c8-9a5d-4a95-8096-d2316fcff592",
+        "customerRef": {
+          "id": "afd4093b-c655-4847-8ee2-10a4f2c3eae3",
+          "companyName": "Maddox Publishing Group"
+        },
+        "accountRef": {
+          "id": "bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4",
+          "name": "Business Bank Account"
+        },
+        "totalAmount": 4200,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2022-02-17T00:00:00",
+        "lines": [
+          {
+            "amount": 4200,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "321bfed3-2da2-4969-9358-4de97821181b",
+                "amount": -4200,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2023-03-15T20:37:08Z",
+        "sourceModifiedDate": "2021-01-02T22:50:58",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Zoho Books",
+      "example": {
+        "id": "104957000000070175",
+        "customerRef": {
+          "id": "104957000000037097",
+          "companyName": "Test Company"
+        },
+        "accountRef": {
+          "id": "104957000000060010",
+          "name": "Abdi Test"
+        },
+        "totalAmount": 9001,
+        "currency": "GBP",
+        "currencyRate": 1,
+        "date": "2020-02-06T00:00:00",
+        "note": "Cheque deposit",
+        "lines": [
+          {
+            "amount": 9001,
+            "links": [
+              {
+                "type": "Invoice",
+                "id": "104957000000038052",
+                "amount": -9001,
+                "currencyRate": 1
+              }
+            ]
+          }
+        ],
+        "modifiedDate": "2022-10-03T08:41:17Z",
+        "reference": "4"
+      }
+    }
+  ]
+}

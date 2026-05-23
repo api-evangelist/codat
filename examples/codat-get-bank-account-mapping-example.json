@@ -1,0 +1,44 @@
+{
+  "operationId": "get-bank-account-mapping",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/bankFeedAccounts/mapping",
+  "summary": "List bank feed accounts",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Example",
+      "example": [
+        {
+          "sourceAccountId": "account-001",
+          "status": "pending",
+          "targetAccountOptions": [
+            {
+              "name": "Money Bank account",
+              "id": "d21e25d6-98c5-4bfb-b469-105833bea3c8",
+              "accountNumber": "789",
+              "sortCode": "123456"
+            },
+            {
+              "name": "Bank of Dave account",
+              "id": "d06ff4b2-e4f2-4681-9841-014bd008cdab",
+              "accountNumber": "99887766",
+              "sortCode": "998866"
+            },
+            {
+              "name": "LuxLend account",
+              "id": "c8f252fc-84f3-4a8b-ace8-ae99f41a81ae",
+              "accountNumber": "123456789",
+              "sortCode": "123456"
+            }
+          ],
+          "sourceAccountName": "account-001",
+          "sourceAccountNumber": "12345670",
+          "sourceBalance": 99.99,
+          "sourceCurrency": "GBP"
+        }
+      ]
+    }
+  ]
+}

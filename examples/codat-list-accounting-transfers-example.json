@@ -1,0 +1,789 @@
+{
+  "operationId": "list-accounting-transfers",
+  "method": "GET",
+  "path": "/companies/{companyId}/connections/{connectionId}/data/transfers",
+  "summary": "List transfers",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "results": [
+          {
+            "id": "0bd2f801-6f02-44d6-a2ab-5431553d16f9",
+            "description": "depositing 16531.08 into Current Account",
+            "contactRef": {
+              "id": "e4baf949-cb1d-4341-8452-200a93baa3fa",
+              "dataType": "customers"
+            },
+            "date": "2022-04-25T07:20:00",
+            "from": {
+              "accountRef": {
+                "id": "ff8fdc4c-2aad-4ec1-9430-6bd201832eb3",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 16531.08,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 16531.08,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [
+              {
+                "id": "fc253cca-0dfe-46e8-b75f-c7fb3db760b2",
+                "dataType": "directIncomes"
+              }
+            ],
+            "modifiedDate": "2023-04-26T12:38:18",
+            "sourceModifiedDate": "2022-04-25T07:20:00",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "78373000-29e1-4ef4-a2e6-9b573ed656e4",
+            "description": "depositing 188.33 into Current Account",
+            "contactRef": {
+              "id": "51f03576-f6b0-40d5-9fba-81a490411c03",
+              "dataType": "customers"
+            },
+            "date": "2022-04-25T07:20:00",
+            "from": {
+              "accountRef": {
+                "id": "ff8fdc4c-2aad-4ec1-9430-6bd201832eb3",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 188.33,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "dbcaf288-2b39-4b95-8ab3-42202ab15918",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 188.33,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [
+              {
+                "id": "38e8c917-0afc-4583-8ffe-1b53ad601197",
+                "dataType": "directIncomes"
+              }
+            ],
+            "modifiedDate": "2023-04-26T12:38:18",
+            "sourceModifiedDate": "2022-04-25T07:20:00",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 357,
+        "_links": {
+          "current": {
+            "href": "/companies/354a121b-855f-4d25-90ad-0905b498c1c0/connections/57b731ba-1d45-4386-ba58-2a1ca0234624/data/transfers?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/354a121b-855f-4d25-90ad-0905b498c1c0/connections/57b731ba-1d45-4386-ba58-2a1ca0234624/data/transfers"
+          },
+          "next": {
+            "href": "/companies/354a121b-855f-4d25-90ad-0905b498c1c0/connections/57b731ba-1d45-4386-ba58-2a1ca0234624/data/transfers?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "results": [
+          {
+            "id": "G00001",
+            "date": "2020-11-26T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "cf1417b3-89d1-ea11-bbaa-000d3a2b9185",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 20,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "ce1417b3-89d1-ea11-bbaa-000d3a2b9185",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 20,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-03-27T14:21:26",
+            "sourceModifiedDate": "2020-11-26T12:16:44Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "TST-001",
+            "date": "2022-10-25T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "8277672c-b8e6-ec11-82f8-0022481a77f0",
+                "dataType": "bankAccounts"
+              },
+              "currency": "USD",
+              "amount": 3.6,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "8982e7d8-cb19-eb11-bbf9-0022481ad2f4",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 2.34,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-03-27T14:21:26",
+            "sourceModifiedDate": "2022-10-25T15:47:48Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 10,
+        "_links": {
+          "current": {
+            "href": "/companies/d6849caf-c146-41be-8335-b73346e3bd84/connections/60acb117-5cf5-4745-b069-491551da4066/data/transfers?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/d6849caf-c146-41be-8335-b73346e3bd84/connections/60acb117-5cf5-4745-b069-491551da4066/data/transfers"
+          },
+          "next": {
+            "href": "/companies/d6849caf-c146-41be-8335-b73346e3bd84/connections/60acb117-5cf5-4745-b069-491551da4066/data/transfers?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreeAgent",
+      "example": {
+        "results": [
+          {
+            "id": "307335275",
+            "description": "Transfer from Savings Account to Freeagent Test12",
+            "date": "2018-06-14T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "532100",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 0.69,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "708504",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 0.69,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "761"
+              }
+            ],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-04-25T14:21:36",
+            "sourceModifiedDate": "2022-03-23T15:55:58Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "308682395",
+            "description": "Transfer from Business Current Account to Nic Test11",
+            "date": "2019-12-23T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "469976",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 250,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "691393",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 250,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "761"
+              }
+            ],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-04-25T14:21:36",
+            "sourceModifiedDate": "2022-03-31T16:09:27Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 99,
+        "_links": {
+          "current": {
+            "href": "/companies/071ad738-68f3-4561-afd0-69bab9df0803/connections/4fd7c69f-ecc1-45f5-83f2-42ed3391e386/data/transfers?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/071ad738-68f3-4561-afd0-69bab9df0803/connections/4fd7c69f-ecc1-45f5-83f2-42ed3391e386/data/transfers"
+          },
+          "next": {
+            "href": "/companies/071ad738-68f3-4561-afd0-69bab9df0803/connections/4fd7c69f-ecc1-45f5-83f2-42ed3391e386/data/transfers?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "results": [
+          {
+            "id": "2-1",
+            "contactRef": {
+              "id": "417",
+              "dataType": "customers"
+            },
+            "date": "2021-03-10T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "122",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 90,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "513",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 90,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "location-1"
+              }
+            ],
+            "depositedRecordRefs": [
+              {
+                "id": "428",
+                "dataType": "payments"
+              }
+            ],
+            "modifiedDate": "2022-09-20T08:16:26",
+            "sourceModifiedDate": "2022-04-28T13:36:47"
+          },
+          {
+            "id": "2-11822",
+            "contactRef": {
+              "id": "417",
+              "dataType": "customers"
+            },
+            "date": "2022-04-28T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "513",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 1200,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "122",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 1200,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "location-1"
+              }
+            ],
+            "depositedRecordRefs": [
+              {
+                "id": "7526",
+                "dataType": "payments"
+              }
+            ],
+            "modifiedDate": "2022-09-20T08:16:26",
+            "sourceModifiedDate": "2022-04-28T14:14:33"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 47,
+        "_links": {
+          "current": {
+            "href": "/companies/973341cc-ca0a-4a88-88de-e5954157818b/connections/5f07dcfb-23c0-49e6-895c-4498ea728ff3/data/transfers?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/973341cc-ca0a-4a88-88de-e5954157818b/connections/5f07dcfb-23c0-49e6-895c-4498ea728ff3/data/transfers"
+          },
+          "next": {
+            "href": "/companies/973341cc-ca0a-4a88-88de-e5954157818b/connections/5f07dcfb-23c0-49e6-895c-4498ea728ff3/data/transfers?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "results": [
+          {
+            "id": "4B1-933288922",
+            "description": "Funds Transfer",
+            "date": "2024-10-14T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "30000-933270541",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 15000,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "20000-933270541",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 15000,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-04-26T09:13:45",
+            "sourceModifiedDate": "2023-12-16T05:03:58",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "C2A-933780606",
+            "description": "Funds Transfer",
+            "date": "2024-11-25T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "20000-933270541",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 42300,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "30000-933270541",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 42300,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-04-26T09:13:45",
+            "sourceModifiedDate": "2023-12-16T05:04:07",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 4,
+        "_links": {
+          "current": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/connections/2c26b4da-97d4-4ba9-baad-1e18b49b96ac/data/transfers?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/connections/2c26b4da-97d4-4ba9-baad-1e18b49b96ac/data/transfers"
+          },
+          "next": {
+            "href": "/companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/connections/2c26b4da-97d4-4ba9-baad-1e18b49b96ac/data/transfers?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "results": [
+          {
+            "id": "646",
+            "date": "2020-08-21T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "102",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 73.41,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "108",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 73.41,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-04-26T09:36:33",
+            "sourceModifiedDate": "2020-08-26T11:41:20Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "678",
+            "date": "2020-08-22T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "124",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 66.66,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "109",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 66.66,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-04-26T09:36:33",
+            "sourceModifiedDate": "2020-08-29T00:01:20Z",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 442,
+        "_links": {
+          "current": {
+            "href": "/companies/5a7f3597-36e1-4216-86fe-289ad36088a6/connections/1f9f6013-f8a5-4278-8a47-3ab7fdb6c24c/data/transfers?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/5a7f3597-36e1-4216-86fe-289ad36088a6/connections/1f9f6013-f8a5-4278-8a47-3ab7fdb6c24c/data/transfers"
+          },
+          "next": {
+            "href": "/companies/5a7f3597-36e1-4216-86fe-289ad36088a6/connections/1f9f6013-f8a5-4278-8a47-3ab7fdb6c24c/data/transfers?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "results": [
+          {
+            "id": "1881",
+            "date": "2020-08-29T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "60",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 86.19,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "61",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 86.19,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-01-18T11:03:00",
+            "sourceModifiedDate": "2020-09-03T11:19:54Z"
+          },
+          {
+            "id": "1885",
+            "date": "2020-09-02T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "60",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 45.73,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "61",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 45.73,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-01-18T11:03:00",
+            "sourceModifiedDate": "2020-09-03T11:23:44Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 18,
+        "_links": {
+          "current": {
+            "href": "/companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/connections/9e28a776-f4be-425b-8a3d-ad49956de2c9/data/transfers?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/connections/9e28a776-f4be-425b-8a3d-ad49956de2c9/data/transfers"
+          },
+          "next": {
+            "href": "/companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/connections/9e28a776-f4be-425b-8a3d-ad49956de2c9/data/transfers?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "results": [
+          {
+            "id": "434bce57215a11e8b45c025132dab352",
+            "description": "Some cheque",
+            "date": "2018-03-06T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "9a3f0ed6267a11e797950a57719b2edb",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 1000,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "9a2c3770267a11e797950a57719b2edb",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 1000,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2022-10-24T14:54:11",
+            "sourceModifiedDate": "2018-03-06T16:20:19Z"
+          },
+          {
+            "id": "73d909a4215a11e8b45c025132dab352",
+            "description": "Some cash",
+            "date": "2018-03-06T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "9a3f0ed6267a11e797950a57719b2edb",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 465,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "9a2c3770267a11e797950a57719b2edb",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 465,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2022-10-24T14:54:11",
+            "sourceModifiedDate": "2018-03-06T16:21:40Z"
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 646,
+        "_links": {
+          "current": {
+            "href": "/companies/390083e2-351b-407c-a3be-55081c36c182/connections/37916fb7-b4b8-4a78-8872-1751e20ee0cd/data/transfers?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/390083e2-351b-407c-a3be-55081c36c182/connections/37916fb7-b4b8-4a78-8872-1751e20ee0cd/data/transfers"
+          },
+          "next": {
+            "href": "/companies/390083e2-351b-407c-a3be-55081c36c182/connections/37916fb7-b4b8-4a78-8872-1751e20ee0cd/data/transfers?page=2&pageSize=2"
+          }
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "results": [
+          {
+            "id": "4844",
+            "description": "Description",
+            "date": "2022-03-10T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "CHECKINGACCOUNT:12",
+                "dataType": "bankAccounts"
+              },
+              "currency": "ZAR",
+              "amount": 418.27,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "CHECKINGACCOUNT:9",
+                "dataType": "bankAccounts"
+              },
+              "currency": "CAD",
+              "amount": 35.45,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "LOCATION-10",
+                "name": "South Africa"
+              }
+            ],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-02-23T14:18:48",
+            "sourceModifiedDate": "2022-03-10T12:38:23",
+            "metadata": {
+              "isDeleted": false
+            }
+          },
+          {
+            "id": "18828",
+            "description": "From bank account '700_CHK'  to bank account 'Test Savings Account'",
+            "date": "2022-10-05T00:00:00",
+            "from": {
+              "accountRef": {
+                "id": "CHECKINGACCOUNT:12",
+                "dataType": "bankAccounts"
+              },
+              "currency": "ZAR",
+              "amount": 4040.62,
+              "status": "Unknown"
+            },
+            "to": {
+              "accountRef": {
+                "id": "SAVINGSACCOUNT:17",
+                "dataType": "bankAccounts"
+              },
+              "currency": "GBP",
+              "amount": 200,
+              "status": "Unknown"
+            },
+            "trackingCategoryRefs": [
+              {
+                "id": "LOCATION-10",
+                "name": "South Africa"
+              }
+            ],
+            "depositedRecordRefs": [],
+            "modifiedDate": "2023-02-23T14:18:48",
+            "sourceModifiedDate": "2022-10-05T15:28:15",
+            "metadata": {
+              "isDeleted": false
+            }
+          }
+        ],
+        "pageNumber": 1,
+        "pageSize": 2,
+        "totalResults": 2,
+        "_links": {
+          "current": {
+            "href": "/companies/b53cfc9f-1a00-4a20-936f-34e8efbe07c5/connections/d891700f-d906-4e57-998a-0cf03d2a05d3/data/transfers?page=1&pageSize=2"
+          },
+          "self": {
+            "href": "/companies/b53cfc9f-1a00-4a20-936f-34e8efbe07c5/connections/d891700f-d906-4e57-998a-0cf03d2a05d3/data/transfers"
+          }
+        }
+      }
+    }
+  ]
+}

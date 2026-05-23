@@ -1,0 +1,832 @@
+{
+  "operationId": "get-accounting-journal-entry",
+  "method": "GET",
+  "path": "/companies/{companyId}/data/journalEntries/{journalEntryId}",
+  "summary": "Get journal entry",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Clear Books",
+      "example": {
+        "id": "770c89bb-3d6a-449a-9243-739378b4cd7d",
+        "postedOn": "2022-04-19T00:00:00",
+        "createdOn": "2022-04-19T00:00:00",
+        "journalRef": {
+          "id": "90bb7784-083b-4bcb-a534-b30756cee65d",
+          "name": "General Journal"
+        },
+        "journalLines": [
+          {
+            "description": "",
+            "netAmount": 32095.91,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "ff8fdc4c-2aad-4ec1-9430-6bd201832eb3",
+              "name": "Undeposited Funds"
+            }
+          },
+          {
+            "description": "Tax for direct income c31a3778-e3ea-4d01-9281-dd2f291c8cb8",
+            "netAmount": -2917.81,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "3a872b81-d1af-4d31-9bfa-a37280b8f68c",
+              "name": "VAT"
+            }
+          },
+          {
+            "description": "",
+            "netAmount": -29178.09,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "72df89d2-512b-4455-af51-a6b563733842",
+              "name": "Sales"
+            }
+          }
+        ],
+        "modifiedDate": "2023-04-26T12:38:18Z",
+        "recordRef": {
+          "id": "c31a3778-e3ea-4d01-9281-dd2f291c8cb8",
+          "dataType": "directIncomes"
+        },
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Dynamics 365 Business Central",
+      "example": {
+        "id": "START",
+        "postedOn": "2018-12-31T00:00:00",
+        "createdOn": "2018-12-31T00:00:00",
+        "journalRef": {
+          "id": "4caabc3e-3d64-ed11-8c34-000d3a870cba",
+          "name": "DEFAULT"
+        },
+        "journalLines": [
+          {
+            "description": "Opening Entry",
+            "netAmount": -69723.14,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "ac1217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Retained Earnings"
+            }
+          },
+          {
+            "description": "Opening Entry",
+            "netAmount": -20000,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "aa1217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Share Capital"
+            }
+          },
+          {
+            "description": "Opening Entry",
+            "netAmount": -2329.42,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "8a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Accounts Payable"
+            }
+          },
+          {
+            "description": "Opening Entry",
+            "netAmount": 3499,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "6e1217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Accumulated Depreciation"
+            }
+          },
+          {
+            "description": "Opening Entry",
+            "netAmount": 5498,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "6c1217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Equipment"
+            }
+          },
+          {
+            "description": "Opening Entry",
+            "netAmount": 28547.16,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "6a1217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Inventory"
+            }
+          },
+          {
+            "description": "Opening Entry",
+            "netAmount": 31638.4,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "641217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Accounts Receivable"
+            }
+          },
+          {
+            "description": "Opening Entry",
+            "netAmount": 2870,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "641217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Accounts Receivable"
+            }
+          },
+          {
+            "description": "Opening Entry",
+            "netAmount": 20000,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "621217b3-89d1-ea11-bbaa-000d3a2b9185",
+              "name": "Petty Cash"
+            }
+          }
+        ],
+        "modifiedDate": "2023-03-27T14:21:31Z",
+        "sourceModifiedDate": "2020-07-29T10:56:12Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (Netherlands)",
+      "example": {
+        "id": "00002c0a-8061-4ad2-84fa-c879eea880a7",
+        "createdOn": "2022-01-11T14:18:54",
+        "updatedOn": "2022-01-11T14:18:54",
+        "journalRef": {
+          "id": "55ff34a3-0857-4202-b7ec-a399cfc26a4e",
+          "name": "Memoriaal"
+        },
+        "journalLines": [
+          {
+            "description": "1 transactions of type CARD_PAYMENT_FEE_REFUND",
+            "netAmount": -6.94,
+            "currency": "EUR",
+            "accountRef": {
+              "id": "e0217fbf-8963-4134-80ef-929d5de8612d",
+              "name": "Kosten 13e maand"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "1 transactions of type CARD_PAYMENT_FEE_REFUND",
+            "netAmount": 6.94,
+            "currency": "EUR",
+            "accountRef": {
+              "id": "0166c96b-adf2-4667-a755-87e67c741f41",
+              "name": "Resultaat verkoop activa"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          }
+        ],
+        "modifiedDate": "2022-10-26T13:37:10Z",
+        "sourceModifiedDate": "2022-01-11T14:18:54Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Exact (UK)",
+      "example": {
+        "id": "0008ef00-c5f8-4f97-bce9-5094b2f569dd",
+        "createdOn": "2020-07-03T10:51:46",
+        "updatedOn": "2020-07-03T10:51:46",
+        "journalRef": {
+          "id": "ed5068ff-cb0e-4edd-9777-36ac94a5d6f0",
+          "name": "Sales journal"
+        },
+        "journalLines": [
+          {
+            "netAmount": -9.1,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "45ae4323-c93b-48b1-8393-db54254e4e6c",
+              "name": "VAT To Pay"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "6 service charges with 0.0% vat",
+            "netAmount": -11.21,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "43acd218-6a95-445f-994c-660273e0ced9",
+              "name": "Sales"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "28.0 items with VatPercentage of 0.0",
+            "netAmount": -308.61,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "43acd218-6a95-445f-994c-660273e0ced9",
+              "name": "Sales"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "Gratuity",
+            "netAmount": -25.87,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "febc52c4-a1ed-4000-b51a-76f9f525445d",
+              "name": "Salary Control Account"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "netAmount": -47.14,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "45ae4323-c93b-48b1-8393-db54254e4e6c",
+              "name": "VAT To Pay"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "19.0 items with VatPercentage of 20.0",
+            "netAmount": -235.72,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "43acd218-6a95-445f-994c-660273e0ced9",
+              "name": "Sales"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "13.0 items with VatPercentage of 5.0",
+            "netAmount": -182.06,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "43acd218-6a95-445f-994c-660273e0ced9",
+              "name": "Sales"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "1.0 gift cards",
+            "netAmount": -1,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "febc52c4-a1ed-4000-b51a-76f9f525445d",
+              "name": "Salary Control Account"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "netAmount": 820.71,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "cf9572e7-8afa-4339-9113-af32a66d9df9",
+              "name": "Trade Debtors"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          }
+        ],
+        "modifiedDate": "2022-10-26T13:35:45Z",
+        "sourceModifiedDate": "2020-07-03T10:51:46Z",
+        "recordRef": {
+          "id": "0008ef00-c5f8-4f97-bce9-5094b2f569dd",
+          "dataType": "invoices"
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "FreshBooks",
+      "example": {
+        "id": "24389149",
+        "postedOn": "1987-10-01T00:00:00",
+        "createdOn": "1987-10-01T00:00:00",
+        "updatedOn": "1987-10-01T00:00:00",
+        "journalLines": [
+          {
+            "description": "",
+            "netAmount": 222.88,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "128611",
+              "name": "Accounts Receivable"
+            }
+          },
+          {
+            "description": "Creative Writing Editorial",
+            "netAmount": -222.88,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "128613",
+              "name": "Sales"
+            }
+          },
+          {
+            "description": "",
+            "netAmount": 0,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "128613",
+              "name": "Sales"
+            }
+          }
+        ],
+        "modifiedDate": "2023-03-24T16:07:38Z",
+        "sourceModifiedDate": "1987-10-01T00:00:00",
+        "recordRef": {
+          "id": "2596455",
+          "dataType": "invoices"
+        },
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Oracle NetSuite",
+      "example": {
+        "id": "112",
+        "postedOn": "2021-03-26T00:00:00",
+        "createdOn": "2021-03-26T10:31:05",
+        "updatedOn": "2021-03-26T10:31:06",
+        "journalLines": [
+          {
+            "netAmount": -120,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "825",
+              "name": "Codat Europe Bank"
+            },
+            "tracking": {
+              "recordRefs": [
+                {
+                  "id": "location-4",
+                  "dataType": "trackingCategories"
+                },
+                {
+                  "id": "724",
+                  "dataType": "suppliers"
+                }
+              ]
+            }
+          },
+          {
+            "netAmount": 120,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "111",
+              "name": "Accounts Payable"
+            },
+            "tracking": {
+              "recordRefs": [
+                {
+                  "id": "location-4",
+                  "dataType": "trackingCategories"
+                },
+                {
+                  "id": "724",
+                  "dataType": "suppliers"
+                }
+              ]
+            }
+          }
+        ],
+        "modifiedDate": "2023-01-30T14:49:07Z",
+        "sourceModifiedDate": "2021-03-26T10:31:06",
+        "recordRef": {
+          "id": "112",
+          "dataType": "billPayments"
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Desktop",
+      "example": {
+        "id": "2453-1071526256",
+        "postedOn": "2022-11-28T00:00:00",
+        "createdOn": "2022-11-28T00:00:00",
+        "journalLines": [
+          {
+            "description": "",
+            "netAmount": 431.95,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "40000-933270541",
+              "name": "Accounts Receivable"
+            }
+          },
+          {
+            "description": "Foundation slab - prep and pouring",
+            "netAmount": -167.5,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "190000-933270541",
+              "name": "Labor Income"
+            }
+          },
+          {
+            "description": "CA sales tax, San Domingo County",
+            "netAmount": -18.45,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "100000-933270541",
+              "name": "Sales Tax Payable"
+            }
+          },
+          {
+            "description": "Rough lumber",
+            "netAmount": -48,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "1A0000-933270542",
+              "name": "Materials Income"
+            }
+          },
+          {
+            "description": "Trim lumber",
+            "netAmount": -38,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "1A0000-933270542",
+              "name": "Materials Income"
+            }
+          },
+          {
+            "description": "Window",
+            "netAmount": -50,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "1A0000-933270542",
+              "name": "Materials Income"
+            }
+          },
+          {
+            "description": "Flooring",
+            "netAmount": -50,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "1A0000-933270542",
+              "name": "Materials Income"
+            }
+          },
+          {
+            "description": "Window",
+            "netAmount": -60,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "1A0000-933270542",
+              "name": "Materials Income"
+            }
+          }
+        ],
+        "modifiedDate": "2023-04-26T09:11:56Z",
+        "sourceModifiedDate": "2023-12-16T05:04:21",
+        "recordRef": {
+          "id": "2453-1071526256",
+          "dataType": "invoices"
+        },
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online",
+      "example": {
+        "id": "1",
+        "postedOn": "2018-09-21T00:00:00",
+        "createdOn": "2018-09-21T00:00:00",
+        "journalLines": [
+          {
+            "description": "Opening Balance from Bank",
+            "netAmount": 170.23,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "61",
+              "name": "Dave PP Current"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "",
+            "netAmount": -170.23,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "53",
+              "name": "Retained profit balance forward account"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          }
+        ],
+        "modifiedDate": "2023-01-18T11:03:25Z",
+        "sourceModifiedDate": "2018-12-17T14:56:20Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "QuickBooks Online Sandbox",
+      "example": {
+        "id": "12",
+        "postedOn": "2015-02-23T00:00:00",
+        "createdOn": "2015-02-23T00:00:00",
+        "journalLines": [
+          {
+            "description": "Opening stock for Guest Book",
+            "netAmount": 0,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "55",
+              "name": "Opening Balance Equity"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "Opening stock for Guest Book",
+            "netAmount": 0,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "65",
+              "name": "Stock Asset"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "Opening stock for Guest Book",
+            "netAmount": 250,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "65",
+              "name": "Stock Asset"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          },
+          {
+            "description": "Opening stock for Guest Book",
+            "netAmount": -250,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "55",
+              "name": "Opening Balance Equity"
+            },
+            "tracking": {
+              "recordRefs": []
+            }
+          }
+        ],
+        "modifiedDate": "2023-04-26T09:36:42Z",
+        "sourceModifiedDate": "2016-09-12T16:02:02Z",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage 50 (UK)",
+      "example": {
+        "id": "88",
+        "description": "Opening Stock",
+        "postedOn": "2021-01-01T00:00:00",
+        "createdOn": "2010-04-27T17:16:57",
+        "journalLines": [
+          {
+            "description": "Opening Stock",
+            "netAmount": -40710,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "1001",
+              "name": "Stock"
+            }
+          },
+          {
+            "description": "Opening Stock",
+            "netAmount": 40710,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "5200",
+              "name": "Opening Stock"
+            }
+          }
+        ],
+        "modifiedDate": "2023-03-30T14:42:38Z",
+        "sourceModifiedDate": "2022-11-25T09:43:54",
+        "recordRef": {
+          "id": "88",
+          "dataType": "journalEntries"
+        },
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Business Cloud Accounting",
+      "example": {
+        "id": "b0489c4b33de11e797950a57719b2edb",
+        "postedOn": "2017-05-08T11:08:39",
+        "createdOn": "2017-05-08T11:08:39",
+        "updatedOn": "2017-05-08T11:08:39",
+        "journalLines": [
+          {
+            "description": "Consulting services",
+            "netAmount": 1440,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "9a9931b4267a11e797950a57719b2edb",
+              "name": "VAT on Sales - Holding Account"
+            }
+          },
+          {
+            "description": "Consulting services",
+            "netAmount": 7200,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "9a994b92267a11e797950a57719b2edb",
+              "name": "Sales Type A"
+            }
+          },
+          {
+            "netAmount": -8640,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "9a991c56267a11e797950a57719b2edb",
+              "name": "Trade Debtors"
+            }
+          }
+        ],
+        "modifiedDate": "2022-10-24T15:31:26Z",
+        "sourceModifiedDate": "2017-05-08T11:08:39Z"
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sage Intacct",
+      "example": {
+        "id": "262177",
+        "description": "Invoices - 1100: 2021/04/22 03:44:26:7042 Batch Summary Entry",
+        "postedOn": "2021-04-22T00:00:00",
+        "createdOn": "2021-04-22T10:44:27",
+        "updatedOn": "2021-04-22T10:44:27",
+        "journalRef": {
+          "id": "1",
+          "name": "Accounts Receivable Journal"
+        },
+        "journalLines": [
+          {
+            "description": "",
+            "netAmount": -100,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "176",
+              "name": "Revenue - Services"
+            }
+          },
+          {
+            "description": "",
+            "netAmount": -20,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "306",
+              "name": "Sales Tax Payable"
+            }
+          },
+          {
+            "description": "",
+            "netAmount": 120,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "2",
+              "name": "Accounts Receivable"
+            }
+          }
+        ],
+        "modifiedDate": "2023-04-04T16:31:37Z",
+        "sourceModifiedDate": "2021-04-22T10:44:27",
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Xero",
+      "example": {
+        "id": "033d79c7-565b-419a-9e1b-33ab58efcf3d",
+        "postedOn": "2021-11-19T00:00:00",
+        "createdOn": "2023-02-17T21:07:12",
+        "journalLines": [
+          {
+            "description": "",
+            "netAmount": -7267.2,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "e0faa299-ca0d-4b0a-9e32-0dfabdf9179a",
+              "name": "Accounts Payable"
+            }
+          },
+          {
+            "description": "Half day training - Microsoft Office",
+            "netAmount": 1800,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "46f9461e-788b-4906-8b74-d1ea17f6dc10",
+              "name": "Consulting"
+            }
+          },
+          {
+            "description": "Desktop/network support via email & phone.Per month fixed fee for minimum 20 hours/month.",
+            "netAmount": 4000,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "f96c9458-d724-47bf-8f74-a9d5726465ce",
+              "name": "General Expenses"
+            }
+          },
+          {
+            "description": "Stationery charges",
+            "netAmount": 256,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "cba6527d-f102-4538-b421-e483233e9d5a",
+              "name": "Printing & Stationery"
+            }
+          },
+          {
+            "description": "",
+            "netAmount": 1211.2,
+            "currency": "GBP",
+            "accountRef": {
+              "id": "b12f79b9-a082-4b8b-971e-d321292943c7",
+              "name": "VAT"
+            }
+          }
+        ],
+        "modifiedDate": "2023-03-15T20:37:09Z",
+        "sourceModifiedDate": "2023-02-17T21:07:12",
+        "recordRef": {
+          "id": "3945273c-cc04-479f-a4b5-1e3dc7a55ed1",
+          "dataType": "bills"
+        },
+        "metadata": {
+          "isDeleted": false
+        }
+      }
+    }
+  ]
+}
