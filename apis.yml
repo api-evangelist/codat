@@ -277,6 +277,8 @@ common:
   url: https://github.com/codatio/client-sdk-go
 - type: Java SDK
   url: https://github.com/codatio/client-sdk-java
+- type: LLMsTxt
+  url: https://codat.io/llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
