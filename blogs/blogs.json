@@ -2,12 +2,20 @@
   "repo": "codat",
   "feeds": [
     {
-      "source": "https://codat.io/blog/",
+      "source": "https://codat.io/feed/",
       "feed_url": "https://codat.io/feed/",
-      "title": "Codat",
-      "saved": 0
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://github.com/codatio",
+      "feed_url": "https://github.com/codatio",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-05-17T20:20:35Z",
+  "fetched": "2026-06-01T23:35:02Z",
   "post_count": 0
 }
