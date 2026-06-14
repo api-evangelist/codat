@@ -1,0 +1,1563 @@
+"""
+Codat GraphQL Schema
+Codat is a unified API platform providing standardized access to SMB financial data
+from 30+ accounting, banking, commerce, and ERP systems.
+Source: https://docs.codat.io/reference/
+"""
+
+# ─────────────────────────────────────────────
+# Scalars
+# ─────────────────────────────────────────────
+
+scalar DateTime
+scalar Date
+scalar Decimal
+scalar JSON
+
+# ─────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────
+
+enum ConnectionStatus {
+  PendingAuth
+  Linked
+  Unlinked
+  Deauthorized
+}
+
+enum DataTypeStatus {
+  Unknown
+  FetchError
+  Processing
+  ValidationError
+  AuthError
+  Complete
+  NotSupported
+}
+
+enum PullOperationStatus {
+  Initial
+  Processing
+  Complete
+  FetchError
+  AuthError
+  ValidationError
+}
+
+enum AccountType {
+  Asset
+  Liability
+  Equity
+  Income
+  Expense
+  Unknown
+}
+
+enum BillStatus {
+  Open
+  PartiallyPaid
+  Paid
+  Void
+  Draft
+  Unknown
+}
+
+enum InvoiceStatus {
+  Draft
+  Submitted
+  PartiallyPaid
+  Paid
+  Void
+  Unknown
+}
+
+enum PaymentStatus {
+  Unknown
+  Unreconciled
+  Reconciled
+  Void
+}
+
+enum OrderStatus {
+  Unknown
+  Open
+  Closed
+  Deleted
+}
+
+enum DisputeStatus {
+  Won
+  Lost
+  Accepted
+  Processing
+  ChargeRefunded
+  EvidenceRequired
+  InquiryEvidenceRequired
+  InquiryProcessing
+  InquiryClosedBankWon
+  WaitingThirdParty
+  Unknown
+}
+
+# ─────────────────────────────────────────────
+# Platform & Core Types
+# ─────────────────────────────────────────────
+
+"""A business entity registered in Codat."""
+type Company {
+  id: ID!
+  name: String!
+  description: String
+  redirect: String
+  lastSync: DateTime
+  created: DateTime!
+  createdByUserName: String
+  connections: [Connection!]!
+  dataConnections: [Connection!]!
+}
+
+"""A link between a Company and a source platform."""
+type Connection {
+  id: ID!
+  companyId: ID!
+  integrationId: ID!
+  integrationKey: String!
+  sourceId: ID!
+  sourceType: String!
+  platformName: String!
+  status: ConnectionStatus!
+  created: DateTime!
+  lastSync: DateTime
+  dataStatus: [DataStatus!]!
+}
+
+"""Represents an asynchronous data pull request."""
+type PullOperation {
+  id: ID!
+  companyId: ID!
+  connectionId: ID!
+  dataType: String!
+  status: PullOperationStatus!
+  requested: DateTime!
+  completed: DateTime
+  progress: Int
+  errorMessage: String
+}
+
+"""The sync status of a particular data type for a Connection."""
+type DataStatus {
+  dataType: String!
+  lastSuccessfulSync: DateTime
+  currentStatus: DataTypeStatus!
+  latestSuccessfulSyncId: ID
+  latestSyncId: ID
+}
+
+"""A dataset (collection of pulled records) for a given data type."""
+type Dataset {
+  id: ID!
+  companyId: ID!
+  connectionId: ID!
+  dataType: String!
+  status: PullOperationStatus!
+  requested: DateTime!
+  completed: DateTime
+}
+
+"""A supported third-party integration platform."""
+type Integration {
+  id: ID!
+  key: String!
+  name: String!
+  logoUrl: String
+  sourceId: ID!
+  enabled: Boolean!
+  supportedEnvironments: [String!]!
+  datatypeFeatures: JSON
+}
+
+"""An event notification webhook endpoint."""
+type Webhook {
+  id: ID!
+  companyId: ID
+  type: String!
+  url: String!
+  notifiers: WebhookNotifiers
+  createdDate: DateTime
+}
+
+type WebhookNotifiers {
+  emails: [String!]
+  webhook: String
+}
+
+"""Configuration settings at company, connection, or platform level."""
+type Setting {
+  key: String!
+  value: String
+  description: String
+}
+
+# ─────────────────────────────────────────────
+# Accounting — Master Data
+# ─────────────────────────────────────────────
+
+"""A chart-of-accounts entry representing a general ledger account."""
+type AccountingAccount {
+  id: ID!
+  name: String!
+  nominalCode: String
+  description: String
+  fullyQualifiedCategory: String
+  fullyQualifiedName: String
+  currency: String
+  currentBalance: Decimal
+  type: AccountType!
+  status: String
+  isBankAccount: Boolean
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+  validDatatypeLinks: [ValidDatatypeLink!]
+}
+
+type ValidDatatypeLink {
+  property: String
+  links: [String!]
+}
+
+"""A raw transaction record from a bank account in accounting software."""
+type AccountTransaction {
+  id: ID!
+  transactionId: String
+  note: String
+  bankAccountRef: Reference
+  date: DateTime
+  status: String
+  currency: String
+  currencyRate: Decimal
+  lines: [AccountTransactionLine!]
+  totalAmount: Decimal
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type AccountTransactionLine {
+  description: String
+  recordRef: Reference
+  accountingAccountRef: Reference
+  amount: Decimal!
+}
+
+# ─────────────────────────────────────────────
+# Accounting — Bills & Payables
+# ─────────────────────────────────────────────
+
+"""A supplier invoice representing money owed by the company."""
+type Bill {
+  id: ID!
+  reference: String
+  supplierRef: Reference
+  purchaseOrderRefs: [Reference!]
+  issueDate: Date
+  dueDate: Date
+  currency: String
+  currencyRate: Decimal
+  lineItems: [BillLineItem!]
+  withholdingTax: [WithholdingTax!]
+  status: BillStatus!
+  subTotal: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  amountDue: Decimal
+  note: String
+  paymentAllocations: [PaymentAllocation!]
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type BillLineItem {
+  description: String
+  unitAmount: Decimal
+  quantity: Decimal
+  discountAmount: Decimal
+  subTotal: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  accountRef: Reference
+  taxRateRef: Reference
+  itemRef: Reference
+  trackingCategoryRefs: [Reference!]
+}
+
+"""A credit issued against a Bill."""
+type BillCreditNote {
+  id: ID!
+  billCreditNoteNumber: String
+  supplierRef: Reference
+  currency: String
+  currencyRate: Decimal
+  lineItems: [BillLineItem!]
+  status: String
+  subTotal: Decimal
+  totalDiscount: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  remainingCredit: Decimal
+  issueDate: Date
+  allocatedOnDate: Date
+  note: String
+  paymentAllocations: [PaymentAllocation!]
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A payment applied against one or more Bills."""
+type BillPayment {
+  id: ID!
+  supplierRef: Reference
+  accountRef: Reference
+  currency: String
+  currencyRate: Decimal
+  date: DateTime
+  note: String
+  lines: [BillPaymentLine!]
+  totalAmount: Decimal
+  reference: String
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type BillPaymentLine {
+  amount: Decimal!
+  links: [BillPaymentLineLink!]
+}
+
+type BillPaymentLineLink {
+  type: String!
+  id: ID
+  amount: Decimal
+  currencyRate: Decimal
+}
+
+"""A purchase order placed with a supplier."""
+type PurchaseOrder {
+  id: ID!
+  purchaseOrderNumber: String
+  issueDate: Date
+  expectedDeliveryDate: Date
+  deliveryDate: Date
+  currency: String
+  currencyRate: Decimal
+  supplierRef: Reference
+  shipTo: ShippingAddress
+  paymentDueDate: Date
+  status: String
+  lineItems: [PurchaseOrderLineItem!]
+  subTotal: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  note: String
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type PurchaseOrderLineItem {
+  description: String
+  unitAmount: Decimal
+  quantity: Decimal
+  discountAmount: Decimal
+  subTotal: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  accountRef: Reference
+  taxRateRef: Reference
+  itemRef: Reference
+  trackingCategoryRefs: [Reference!]
+}
+
+type ShippingAddress {
+  type: String
+  line1: String
+  line2: String
+  city: String
+  region: String
+  country: String
+  postalCode: String
+}
+
+# ─────────────────────────────────────────────
+# Accounting — Invoices & Receivables
+# ─────────────────────────────────────────────
+
+"""A sales invoice issued to a customer."""
+type Invoice {
+  id: ID!
+  invoiceNumber: String
+  customerRef: Reference
+  issueDate: Date
+  dueDate: Date
+  paidOnDate: Date
+  currency: String
+  currencyRate: Decimal
+  lineItems: [InvoiceLineItem!]!
+  withholdingTax: [WithholdingTax!]
+  status: InvoiceStatus!
+  subTotal: Decimal
+  totalDiscount: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  totalTaxAmount: Decimal
+  amountDue: Decimal
+  note: String
+  discountPercentage: Decimal
+  salesOrderRefs: [Reference!]
+  paymentAllocations: [PaymentAllocation!]
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A line item within an Invoice."""
+type InvoiceLineItem {
+  description: String
+  unitAmount: Decimal
+  quantity: Decimal
+  discountAmount: Decimal
+  discountPercentage: Decimal
+  subTotal: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  accountRef: Reference
+  taxRateRef: Reference
+  itemRef: Reference
+  trackingCategoryRefs: [Reference!]
+}
+
+"""A credit document issued to a customer."""
+type CreditNote {
+  id: ID!
+  creditNoteNumber: String
+  customerRef: Reference
+  currency: String
+  currencyRate: Decimal
+  lineItems: [InvoiceLineItem!]
+  status: String
+  subTotal: Decimal
+  totalDiscount: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  remainingCredit: Decimal
+  issueDate: Date
+  allocatedOnDate: Date
+  note: String
+  paymentAllocations: [PaymentAllocation!]
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A customer payment applied against invoices."""
+type Payment {
+  id: ID!
+  customerRef: Reference
+  accountRef: Reference
+  currency: String
+  currencyRate: Decimal
+  date: DateTime
+  note: String
+  lines: [PaymentLine!]
+  totalAmount: Decimal
+  reference: String
+  status: PaymentStatus
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type PaymentLine {
+  amount: Decimal!
+  links: [PaymentLineLink!]
+}
+
+type PaymentLineLink {
+  type: String!
+  id: ID
+  amount: Decimal
+  currencyRate: Decimal
+}
+
+"""A sales order representing a customer order before invoicing."""
+type SalesOrder {
+  id: ID!
+  salesOrderNumber: String
+  customerRef: Reference
+  currency: String
+  currencyRate: Decimal
+  issueDate: Date
+  expectedDeliveryDate: Date
+  shipTo: ShippingAddress
+  status: String
+  lineItems: [SalesOrderLineItem!]
+  subTotal: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  note: String
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type SalesOrderLineItem {
+  description: String
+  unitAmount: Decimal
+  quantity: Decimal
+  discountAmount: Decimal
+  subTotal: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  accountRef: Reference
+  taxRateRef: Reference
+  itemRef: Reference
+}
+
+"""A payment reversal, issued to a customer or from a supplier."""
+type Refund {
+  id: ID!
+  date: DateTime
+  reference: String
+  currency: String
+  currencyRate: Decimal
+  lines: [RefundLine!]
+  note: String
+  totalAmount: Decimal
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type RefundLine {
+  amount: Decimal!
+  description: String
+  accountRef: Reference
+}
+
+"""A direct cost not associated with a bill."""
+type DirectCost {
+  id: ID!
+  reference: String
+  note: String
+  contactRef: Reference
+  issueDate: Date
+  currency: String
+  currencyRate: Decimal
+  lineItems: [DirectCostLineItem!]!
+  paymentAllocations: [PaymentAllocation!]!
+  taxAmount: Decimal
+  totalAmount: Decimal
+  subTotal: Decimal
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type DirectCostLineItem {
+  description: String
+  unitAmount: Decimal
+  quantity: Decimal
+  discountAmount: Decimal
+  subTotal: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  accountRef: Reference
+  taxRateRef: Reference
+  itemRef: Reference
+  trackingCategoryRefs: [Reference!]
+}
+
+"""Income received directly, not via an invoice."""
+type DirectIncome {
+  id: ID!
+  reference: String
+  note: String
+  contactRef: Reference
+  issueDate: Date
+  currency: String
+  currencyRate: Decimal
+  lineItems: [DirectIncomeLineItem!]!
+  paymentAllocations: [PaymentAllocation!]!
+  taxAmount: Decimal
+  totalAmount: Decimal
+  subTotal: Decimal
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type DirectIncomeLineItem {
+  description: String
+  unitAmount: Decimal
+  quantity: Decimal
+  discountAmount: Decimal
+  subTotal: Decimal
+  taxAmount: Decimal
+  totalAmount: Decimal
+  accountRef: Reference
+  taxRateRef: Reference
+  itemRef: Reference
+  trackingCategoryRefs: [Reference!]
+}
+
+"""A movement of funds between two accounts."""
+type Transfer {
+  id: ID!
+  date: DateTime
+  description: String
+  from: TransferAccount
+  to: TransferAccount
+  depositedRecordRefs: [Reference!]
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type TransferAccount {
+  accountRef: Reference
+  currency: String
+  amount: Decimal
+}
+
+# ─────────────────────────────────────────────
+# Accounting — Master Data Types
+# ─────────────────────────────────────────────
+
+"""A person or organization that purchases from the company."""
+type Customer {
+  id: ID!
+  customerName: String
+  contactName: String
+  emailAddress: String
+  phone: String
+  addresses: [Address!]
+  contacts: [Contact!]
+  registrationNumber: String
+  taxNumber: String
+  status: String
+  currency: String
+  defaultCurrency: String
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A person or organization providing goods or services to the company."""
+type Supplier {
+  id: ID!
+  supplierName: String
+  contactName: String
+  emailAddress: String
+  phone: String
+  addresses: [Address!]
+  registrationNumber: String
+  taxNumber: String
+  status: String
+  defaultCurrency: String
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A product or service that can appear on invoices or bills."""
+type Item {
+  id: ID!
+  name: String
+  code: String
+  itemStatus: String
+  type: String
+  isBillItem: Boolean
+  isInvoiceItem: Boolean
+  billItem: ItemDetails
+  invoiceItem: ItemDetails
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type ItemDetails {
+  description: String
+  unitPrice: Decimal
+  accountRef: Reference
+  taxRateRef: Reference
+}
+
+"""A tax code and rate used in accounting transactions."""
+type TaxRate {
+  id: ID!
+  name: String!
+  code: String
+  effectiveTaxRate: Decimal
+  totalTaxRate: Decimal
+  components: [TaxRateComponent!]
+  status: String
+  validDatatypeLinks: [ValidDatatypeLink!]
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type TaxRateComponent {
+  name: String
+  rate: Decimal
+  isCompound: Boolean
+}
+
+"""A dimension for categorizing transactions for reporting."""
+type TrackingCategory {
+  id: ID!
+  name: String!
+  status: String
+  parentId: ID
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+# ─────────────────────────────────────────────
+# Accounting — Journals
+# ─────────────────────────────────────────────
+
+"""A named journal used to group journal entries."""
+type Journal {
+  id: ID!
+  name: String
+  journalCode: String
+  type: String
+  parentId: ID
+  status: String
+  createdOn: DateTime
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A double-entry bookkeeping record."""
+type JournalEntry {
+  id: ID!
+  description: String
+  postedOn: DateTime
+  createdOn: DateTime
+  updatedOn: DateTime
+  journalRef: Reference
+  journalLines: [JournalLine!]!
+  recordRef: Reference
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type JournalLine {
+  description: String
+  netAmount: Decimal!
+  currency: String
+  accountRef: Reference
+  trackingCategoryRefs: [Reference!]
+  tracking: TrackingRef
+}
+
+type TrackingRef {
+  recordRefs: [Reference!]
+  invoiceTo: Reference
+}
+
+# ─────────────────────────────────────────────
+# Accounting — Reports
+# ─────────────────────────────────────────────
+
+"""A monetary value with currency and period context."""
+type Balance {
+  value: Decimal!
+  currency: String
+  date: Date
+}
+
+"""A balance sheet financial statement."""
+type BalanceSheet {
+  currency: String!
+  date: Date!
+  netAssets: Decimal
+  assets: ReportSection
+  liabilities: ReportSection
+  equity: ReportSection
+}
+
+"""A profit and loss financial statement."""
+type ProfitAndLoss {
+  currency: String!
+  fromDate: Date!
+  toDate: Date!
+  income: ReportSection
+  costOfSales: ReportSection
+  grossProfit: Decimal
+  otherExpenses: ReportSection
+  otherIncome: ReportSection
+  netOtherIncome: Decimal
+  expenses: ReportSection
+  netProfit: Decimal
+}
+
+"""A cash flow statement."""
+type CashFlow {
+  currency: String!
+  fromDate: Date!
+  toDate: Date!
+  operating: ReportSection
+  investing: ReportSection
+  financing: ReportSection
+  netCashMovement: Decimal
+  cashAtBeginningOfPeriod: Decimal
+  cashAtEndOfPeriod: Decimal
+}
+
+type ReportSection {
+  name: String
+  value: Decimal
+  items: [ReportItem!]
+}
+
+type ReportItem {
+  name: String
+  value: Decimal
+  items: [ReportItem!]
+}
+
+"""A generic financial report wrapper."""
+type Report {
+  id: ID!
+  type: String!
+  title: String
+  generatedDate: DateTime
+  currency: String
+  data: JSON
+}
+
+# ─────────────────────────────────────────────
+# Banking Types
+# ─────────────────────────────────────────────
+
+"""A bank account linked to a company."""
+type BankAccount {
+  id: ID!
+  accountName: String
+  accountType: String
+  nominalCode: String
+  sortCode: String
+  accountNumber: String
+  iBan: String
+  currency: String
+  balance: Decimal
+  availableBalance: Decimal
+  institution: String
+  overdraftLimit: Decimal
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A transaction from a linked bank account."""
+type BankTransaction {
+  id: ID!
+  accountId: ID!
+  date: DateTime
+  description: String
+  reconciled: Boolean
+  amount: Decimal!
+  balance: Decimal
+  transactionType: String
+  counterparty: String
+  reference: String
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A bank feed stream configuration pushing transactions to accounting software."""
+type BankFeed {
+  id: ID!
+  accountName: String!
+  accountType: String
+  accountNumber: String
+  sortCode: String
+  currency: String!
+  balance: Decimal
+  feedStartDate: Date
+  status: String
+  modifiedDate: DateTime
+}
+
+# ─────────────────────────────────────────────
+# Commerce Types
+# ─────────────────────────────────────────────
+
+"""A customer on a commerce platform."""
+type CommerceCustomer {
+  id: ID!
+  customerName: String
+  emailAddress: String
+  phone: String
+  defaultCurrency: String
+  addresses: [Address!]
+  note: String
+  createdDate: DateTime
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A sales order or transaction on a commerce platform."""
+type Order {
+  id: ID!
+  orderNumber: String
+  customerRef: Reference
+  locationRef: Reference
+  currency: String
+  currencyRate: Decimal
+  closedDate: DateTime
+  totalAmount: Decimal
+  totalRefund: Decimal
+  totalTaxAmount: Decimal
+  totalDiscount: Decimal
+  totalGratuity: Decimal
+  status: OrderStatus!
+  lineItems: [OrderLineItem!]
+  payments: [OrderPayment!]
+  serviceCharges: [ServiceCharge!]
+  createdDate: DateTime
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type OrderLineItem {
+  id: ID!
+  quantity: Decimal
+  unitPrice: Decimal
+  taxPercentage: Decimal
+  totalAmount: Decimal
+  totalTaxAmount: Decimal
+  discountAllocations: [DiscountAllocation!]
+  productRef: Reference
+  productVariantRef: Reference
+}
+
+type OrderPayment {
+  id: ID!
+  amount: Decimal
+  currency: String
+  type: String
+  status: String
+  paymentProvider: String
+  dueDate: DateTime
+  createdDate: DateTime
+  modifiedDate: DateTime
+}
+
+type ServiceCharge {
+  description: String
+  totalAmount: Decimal
+  taxAmount: Decimal
+  taxPercentage: Decimal
+  type: String
+  quantity: Int
+}
+
+type DiscountAllocation {
+  name: String
+  totalAmount: Decimal
+}
+
+"""A product listed on a commerce platform."""
+type Product {
+  id: ID!
+  name: String!
+  description: String
+  isGiftCard: Boolean
+  status: String
+  variants: [ProductVariant!]
+  categorization: String
+  createdDate: DateTime
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A variant of a Product (e.g., size, color)."""
+type ProductVariant {
+  id: ID!
+  name: String
+  sku: String
+  barcode: String
+  description: String
+  unitOfMeasure: String
+  vatPercentage: Decimal
+  prices: [Price!]
+  inventory: Inventory
+  shippingRequired: Boolean
+  createdDate: DateTime
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+type Price {
+  value: Decimal!
+  currency: String!
+}
+
+type Inventory {
+  quantity: Decimal
+}
+
+"""A physical or virtual merchant location."""
+type Location {
+  id: ID!
+  name: String
+  address: Address
+  totalIncome: Decimal
+  currency: String
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A chargeback or payment dispute on a commerce platform."""
+type Dispute {
+  id: ID!
+  orderRef: Reference
+  paymentRef: Reference
+  currency: String
+  percentageFee: Decimal
+  amount: Decimal
+  dueDate: DateTime
+  reason: String
+  status: DisputeStatus!
+  createdDate: DateTime
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A hosted payment link for collecting payments."""
+type PaymentLink {
+  id: ID!
+  status: String
+  amount: Decimal
+  currency: String
+  url: String
+  createdDate: DateTime
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""A payment transaction recorded on a commerce platform."""
+type CommercePayment {
+  id: ID!
+  amount: Decimal!
+  currency: String
+  type: String
+  status: String
+  note: String
+  dueDate: DateTime
+  createdDate: DateTime
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""An analytics report from a commerce platform."""
+type CommerceReport {
+  id: ID!
+  type: String!
+  fromDate: Date!
+  toDate: Date!
+  currency: String
+  data: JSON
+}
+
+# ─────────────────────────────────────────────
+# Lending Types
+# ─────────────────────────────────────────────
+
+"""An aggregated credit and financial profile for lending decisions."""
+type FinancialProfile {
+  companyId: ID!
+  currency: String
+  accountingStartDate: Date
+  accountingEndDate: Date
+  bankingStartDate: Date
+  bankingEndDate: Date
+  summary: JSON
+}
+
+"""An aging summary of outstanding customer invoices."""
+type AccountsReceivable {
+  companyId: ID!
+  currency: String
+  current: Decimal
+  days1To30: Decimal
+  days31To60: Decimal
+  days61To90: Decimal
+  days91Plus: Decimal
+  total: Decimal
+  generatedDate: DateTime
+}
+
+"""An aging summary of outstanding supplier bills."""
+type AccountsPayable {
+  companyId: ID!
+  currency: String
+  current: Decimal
+  days1To30: Decimal
+  days31To60: Decimal
+  days61To90: Decimal
+  days91Plus: Decimal
+  total: Decimal
+  generatedDate: DateTime
+}
+
+"""An invoice enriched with lending categorization signals."""
+type EnhancedInvoice {
+  id: ID!
+  invoiceId: ID!
+  currency: String
+  totalAmount: Decimal
+  amountDue: Decimal
+  issueDate: Date
+  dueDate: Date
+  status: InvoiceStatus
+  customerName: String
+  contactEmail: String
+  contactName: String
+  lines: [EnhancedInvoiceLine!]
+}
+
+type EnhancedInvoiceLine {
+  description: String
+  accountRef: Reference
+  invoiceLineCategory: String
+  invoiceLineCategoryConfidence: Decimal
+}
+
+"""A cash flow statement enhanced with categorized transaction data."""
+type EnhancedCashFlow {
+  currency: String
+  fromDate: Date
+  toDate: Date
+  data: [EnhancedCashFlowTransaction!]
+}
+
+type EnhancedCashFlowTransaction {
+  date: DateTime
+  amount: Decimal
+  description: String
+  transactionCategory: String
+  transactionCategoryConfidence: Decimal
+  accountName: String
+  merchantName: String
+}
+
+"""A loan draw-down or repayment in accounting software."""
+type LoanTransaction {
+  id: ID!
+  date: DateTime
+  currency: String
+  amount: Decimal
+  loanType: String
+  accountRef: Reference
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+# ─────────────────────────────────────────────
+# Expenses Types
+# ─────────────────────────────────────────────
+
+"""A categorized expense synced from a corporate card or expense platform."""
+type Expense {
+  id: ID!
+  issueDate: Date!
+  currency: String!
+  currencyRate: Decimal
+  type: String
+  merchantName: String
+  notes: String
+  lines: [ExpenseLine!]!
+}
+
+"""An individual expense line item."""
+type ExpenseLine {
+  netAmount: Decimal!
+  taxAmount: Decimal
+  taxRateRef: Reference
+  accountRef: Reference!
+  trackingCategoryRefs: [Reference!]
+}
+
+"""A receipt or document attached to a transaction."""
+type Attachment {
+  id: ID!
+  name: String
+  fileSize: Int
+  mimeType: String
+  includeWhenSent: Boolean
+  dateCreated: DateTime
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+# ─────────────────────────────────────────────
+# Payroll Types
+# ─────────────────────────────────────────────
+
+"""A journal entry created from payroll data."""
+type PayrollJournalEntry {
+  id: ID!
+  description: String
+  postedOn: DateTime
+  journalRef: Reference
+  journalLines: [JournalLine!]!
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+"""An employee record used in payroll journal mapping."""
+type Employee {
+  id: ID!
+  name: String
+  email: String
+  designation: String
+  startDate: Date
+  finishDate: Date
+  status: String
+  address: Address
+  modifiedDate: DateTime
+  sourceModifiedDate: DateTime
+}
+
+# ─────────────────────────────────────────────
+# Shared / Supporting Types
+# ─────────────────────────────────────────────
+
+"""A reference to a related record."""
+type Reference {
+  id: ID!
+  name: String
+}
+
+type Address {
+  type: String
+  line1: String
+  line2: String
+  city: String
+  region: String
+  country: String
+  postalCode: String
+}
+
+type Contact {
+  name: String
+  email: String
+  phone: String
+  status: String
+  address: Address
+  modifiedDate: DateTime
+}
+
+type PaymentAllocation {
+  payment: PaymentRef!
+  allocation: AllocationDetail!
+}
+
+type PaymentRef {
+  id: ID
+  reference: String
+  accountRef: Reference
+  currency: String
+  currencyRate: Decimal
+  paidOnDate: DateTime
+  totalAmount: Decimal
+  note: String
+}
+
+type AllocationDetail {
+  currencyRate: Decimal
+  allocatedOnDate: DateTime
+  totalAmount: Decimal
+}
+
+type WithholdingTax {
+  name: String!
+  amount: Decimal!
+}
+
+# ─────────────────────────────────────────────
+# Input Types
+# ─────────────────────────────────────────────
+
+input BillPaymentInput {
+  supplierRef: ReferenceInput!
+  accountRef: ReferenceInput!
+  currency: String!
+  currencyRate: Decimal
+  date: DateTime!
+  note: String
+  lines: [BillPaymentLineInput!]!
+  totalAmount: Decimal
+  reference: String
+}
+
+input BillPaymentLineInput {
+  amount: Decimal!
+  links: [BillPaymentLineLinkInput!]
+}
+
+input BillPaymentLineLinkInput {
+  type: String!
+  id: ID
+  amount: Decimal
+  currencyRate: Decimal
+}
+
+input ExpenseInput {
+  issueDate: Date!
+  currency: String!
+  currencyRate: Decimal
+  type: String
+  merchantName: String
+  notes: String
+  lines: [ExpenseLineInput!]!
+}
+
+input ExpenseLineInput {
+  netAmount: Decimal!
+  taxAmount: Decimal
+  taxRateRef: ReferenceInput
+  accountRef: ReferenceInput!
+  trackingCategoryRefs: [ReferenceInput!]
+}
+
+input JournalEntryInput {
+  description: String
+  postedOn: DateTime
+  journalRef: ReferenceInput
+  journalLines: [JournalLineInput!]!
+}
+
+input JournalLineInput {
+  description: String
+  netAmount: Decimal!
+  currency: String
+  accountRef: ReferenceInput
+  trackingCategoryRefs: [ReferenceInput!]
+}
+
+input BankFeedInput {
+  accountName: String!
+  accountType: String
+  accountNumber: String
+  sortCode: String
+  currency: String!
+  balance: Decimal
+  feedStartDate: Date
+}
+
+input ReferenceInput {
+  id: ID!
+  name: String
+}
+
+# ─────────────────────────────────────────────
+# Pagination
+# ─────────────────────────────────────────────
+
+type PageInfo {
+  pageNumber: Int!
+  pageSize: Int!
+  totalResults: Int!
+  hasMore: Boolean!
+}
+
+type CompanyConnection {
+  results: [Company!]!
+  pageInfo: PageInfo!
+}
+
+type IntegrationConnection {
+  results: [Integration!]!
+  pageInfo: PageInfo!
+}
+
+# ─────────────────────────────────────────────
+# Root Types
+# ─────────────────────────────────────────────
+
+type Query {
+  """Fetch a single company by ID."""
+  company(id: ID!): Company
+
+  """List all companies with pagination."""
+  companies(page: Int, pageSize: Int, query: String): CompanyConnection!
+
+  """Fetch a specific data connection for a company."""
+  connection(companyId: ID!, connectionId: ID!): Connection
+
+  """List all connections for a company."""
+  connections(companyId: ID!): [Connection!]!
+
+  """List available integrations."""
+  integrations(page: Int, pageSize: Int, sourceType: String): IntegrationConnection!
+
+  """Get the status of a pull operation."""
+  pullOperation(companyId: ID!, datasetId: ID!): PullOperation
+
+  """List pull operations for a company."""
+  pullOperations(companyId: ID!, page: Int, pageSize: Int): [PullOperation!]!
+
+  """Get sync status for all data types on a connection."""
+  dataStatus(companyId: ID!, connectionId: ID!): [DataStatus!]!
+
+  """List general ledger accounts."""
+  accountingAccounts(companyId: ID!, connectionId: ID!): [AccountingAccount!]!
+
+  """List account transactions."""
+  accountTransactions(companyId: ID!, connectionId: ID!, accountId: ID!): [AccountTransaction!]!
+
+  """List bills for a company."""
+  bills(companyId: ID!, connectionId: ID!): [Bill!]!
+
+  """Get a single bill."""
+  bill(companyId: ID!, connectionId: ID!, billId: ID!): Bill
+
+  """List bill credit notes."""
+  billCreditNotes(companyId: ID!, connectionId: ID!): [BillCreditNote!]!
+
+  """List bill payments."""
+  billPayments(companyId: ID!, connectionId: ID!): [BillPayment!]!
+
+  """List purchase orders."""
+  purchaseOrders(companyId: ID!, connectionId: ID!): [PurchaseOrder!]!
+
+  """List invoices for a company."""
+  invoices(companyId: ID!, connectionId: ID!): [Invoice!]!
+
+  """Get a single invoice."""
+  invoice(companyId: ID!, connectionId: ID!, invoiceId: ID!): Invoice
+
+  """List credit notes."""
+  creditNotes(companyId: ID!, connectionId: ID!): [CreditNote!]!
+
+  """List customer payments."""
+  payments(companyId: ID!, connectionId: ID!): [Payment!]!
+
+  """List sales orders."""
+  salesOrders(companyId: ID!, connectionId: ID!): [SalesOrder!]!
+
+  """List direct costs."""
+  directCosts(companyId: ID!, connectionId: ID!): [DirectCost!]!
+
+  """List direct income records."""
+  directIncomes(companyId: ID!, connectionId: ID!): [DirectIncome!]!
+
+  """List transfers."""
+  transfers(companyId: ID!, connectionId: ID!): [Transfer!]!
+
+  """List customers."""
+  customers(companyId: ID!, connectionId: ID!): [Customer!]!
+
+  """Get a single customer."""
+  customer(companyId: ID!, connectionId: ID!, customerId: ID!): Customer
+
+  """List suppliers."""
+  suppliers(companyId: ID!, connectionId: ID!): [Supplier!]!
+
+  """Get a single supplier."""
+  supplier(companyId: ID!, connectionId: ID!, supplierId: ID!): Supplier
+
+  """List items (products/services)."""
+  items(companyId: ID!, connectionId: ID!): [Item!]!
+
+  """List tax rates."""
+  taxRates(companyId: ID!, connectionId: ID!): [TaxRate!]!
+
+  """List tracking categories."""
+  trackingCategories(companyId: ID!, connectionId: ID!): [TrackingCategory!]!
+
+  """List journals."""
+  journals(companyId: ID!, connectionId: ID!): [Journal!]!
+
+  """List journal entries."""
+  journalEntries(companyId: ID!, connectionId: ID!): [JournalEntry!]!
+
+  """Fetch a balance sheet report."""
+  balanceSheet(companyId: ID!, connectionId: ID!, date: Date!): BalanceSheet
+
+  """Fetch a profit and loss report."""
+  profitAndLoss(companyId: ID!, connectionId: ID!, periodLength: Int!, periodsToCompare: Int!): ProfitAndLoss
+
+  """Fetch a cash flow statement."""
+  cashFlow(companyId: ID!, connectionId: ID!, periodLength: Int!, periodsToCompare: Int!): CashFlow
+
+  """List bank accounts."""
+  bankAccounts(companyId: ID!, connectionId: ID!): [BankAccount!]!
+
+  """List bank transactions for an account."""
+  bankTransactions(companyId: ID!, connectionId: ID!, accountId: ID!): [BankTransaction!]!
+
+  """List bank feed configurations."""
+  bankFeeds(companyId: ID!, connectionId: ID!): [BankFeed!]!
+
+  """List commerce customers."""
+  commerceCustomers(companyId: ID!, connectionId: ID!): [CommerceCustomer!]!
+
+  """List commerce orders."""
+  orders(companyId: ID!, connectionId: ID!): [Order!]!
+
+  """Get a single commerce order."""
+  order(companyId: ID!, connectionId: ID!, orderId: ID!): Order
+
+  """List commerce products."""
+  products(companyId: ID!, connectionId: ID!): [Product!]!
+
+  """List commerce locations."""
+  locations(companyId: ID!, connectionId: ID!): [Location!]!
+
+  """List payment disputes."""
+  disputes(companyId: ID!, connectionId: ID!): [Dispute!]!
+
+  """List commerce payments."""
+  commercePayments(companyId: ID!, connectionId: ID!): [CommercePayment!]!
+
+  """List expenses."""
+  expenses(companyId: ID!, connectionId: ID!): [Expense!]!
+
+  """Get financial profile for lending."""
+  financialProfile(companyId: ID!): FinancialProfile
+
+  """Get enhanced cash flow data."""
+  enhancedCashFlow(companyId: ID!): EnhancedCashFlow
+
+  """List webhooks."""
+  webhooks: [Webhook!]!
+
+  """List settings."""
+  settings(companyId: ID!): [Setting!]!
+}
+
+type Mutation {
+  """Register a new company in Codat."""
+  createCompany(name: String!, description: String): Company!
+
+  """Remove a company and all its data connections."""
+  deleteCompany(id: ID!): Boolean!
+
+  """Create a new data connection for a company."""
+  createConnection(companyId: ID!, platformKey: String!): Connection!
+
+  """Remove a data connection."""
+  deleteConnection(companyId: ID!, connectionId: ID!): Boolean!
+
+  """Trigger a data pull for a specific data type."""
+  queuePullOperation(companyId: ID!, connectionId: ID!, dataType: String!): PullOperation!
+
+  """Register a new webhook endpoint."""
+  createWebhook(url: String!, type: String!, companyId: ID): Webhook!
+
+  """Remove a webhook registration."""
+  deleteWebhook(id: ID!): Boolean!
+
+  """Post a bill payment to accounting software."""
+  createBillPayment(companyId: ID!, connectionId: ID!, input: BillPaymentInput!): BillPayment!
+
+  """Sync an expense record to accounting software."""
+  createExpense(companyId: ID!, connectionId: ID!, input: ExpenseInput!): Expense!
+
+  """Post a journal entry to accounting software."""
+  createJournalEntry(companyId: ID!, connectionId: ID!, input: JournalEntryInput!): JournalEntry!
+
+  """Configure a bank feed to push transactions to accounting software."""
+  createBankFeed(companyId: ID!, connectionId: ID!, input: BankFeedInput!): BankFeed!
+}
