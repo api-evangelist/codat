@@ -1,0 +1,1024 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bank Feeds",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              },
+              {
+                "name": "tags",
+                "value": "region=uk && team=invoice-finance",
+                "type": "query",
+                "description": "Filter companies by tags using the \"equals\" (=), \"not equals\" (!=), and \"contains\" (~) operators with [Codat’s query language](https://docs.codat.io/using-the-api/querying)."
+              }
+            ]
+          },
+          "docs": "﻿The *List companies* endpoint returns a list of [companies](https://docs.codat.io/bank-feeds-api#/schemas/Company) associated to your instances.\n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank accounts, and "
+        },
+        {
+          "info": {
+            "name": "Create company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿Use the *Create company* endpoint to create a new [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) that represents your customer in Codat. \n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank acc"
+        },
+        {
+          "info": {
+            "name": "Get company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "﻿The *Get company* endpoint returns a single company for a given `companyId`.\n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank accounts, and a connection to Zettle for POS data.\n"
+        },
+        {
+          "info": {
+            "name": "Replace company",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codat.io/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿Use the *Replace company* endpoint to replace the existing name, description, and tags of the company. Calling the endpoint will replace existing values even if new values haven't been defined in the payload.\n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources, such as one connection to Xero for accou"
+        },
+        {
+          "info": {
+            "name": "Update company",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.codat.io/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿Use the *Update company* endpoint to update the name, description, or tags of the company.\n\nThe *Update company* endpoint doesn't have any required fields. If any of the fields provided are `null` or not provided, they won't be included in the update.  \n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data."
+        },
+        {
+          "info": {
+            "name": "Delete a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.codat.io/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "﻿The *Delete company* endpoint permanently deletes a [company](https://docs.codat.io/bank-feeds-api#/schemas/Company), its [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) and any cached data. This operation is irreversible.\n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources, su"
+        },
+        {
+          "info": {
+            "name": "Get company access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/accessToken",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "Use the _Get company access token_ endpoint to return an access token for the specified company ID. The token is valid for one day. \n\nThe token is required by Codat's embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to verify the identity of the user and improve the reliability of data provided by them."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              }
+            ]
+          },
+          "docs": "﻿List the connections for a company."
+        },
+        {
+          "info": {
+            "name": "Create connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿Creates a connection for the company by providing a valid `platformKey`. \n\nUse the [List Integrations](https://docs.codat.io/platform-api#/operations/list-integrations) endpoint to access valid platform keys. "
+        },
+        {
+          "info": {
+            "name": "Get connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ]
+          },
+          "docs": "﻿Returns a specific connection for a company when valid identifiers are provided. If the identifiers are for a deleted company and/or connection, a not found response is returned."
+        },
+        {
+          "info": {
+            "name": "Unlink connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿This allows you to deauthorize a connection, without deleting it from Codat. This means you can still view any data that has previously been pulled into Codat, and also lets you re-authorize in future if your customer wishes to resume sharing their data."
+        },
+        {
+          "info": {
+            "name": "Delete connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ]
+          },
+          "docs": "﻿Revoke and remove a connection from a company.\nThis operation is not reversible. The end user would need to reauthorize a new data connection if you wish to view new data for this company."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bank accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List bank accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/data/bankAccounts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              }
+            ]
+          },
+          "docs": "The *List bank accounts* endpoint returns a list of [bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) for a given company's connection.\n\n[Bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) are financial accounts maintained by a bank or other financial institution.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/bank-feeds-api#/operations/refresh-company-data).\n    "
+        },
+        {
+          "info": {
+            "name": "Get create/update bank account model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/options/bankAccounts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ]
+          },
+          "docs": "The *Get create/update bank account model* endpoint returns the expected data for the request payload when creating and updating a [bank account](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) for a given company and integration.\r\n\r\n[Bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) are financial accounts maintained by a bank or other financial institution.\r\n\r\n**Integration-specific behavior**\r\n\r\nSee the *response examples* for integration-specific indicative "
+        },
+        {
+          "info": {
+            "name": "Create bank account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/push/bankAccounts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "timeoutInMinutes",
+                "value": "",
+                "type": "query",
+                "description": "Time limit for the push operation to complete before it is timed out."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The *Create bank account* endpoint creates a new [bank account](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) for a given company's connection.\r\n\r\n[Bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) are financial accounts maintained by a bank or other financial institution.\r\n\r\n**Integration-specific behavior**\r\n\r\nRequired data may vary by integration. To see what data to post, first call [Get create/update bank account model](https://docs.codat.io/bank-feeds-a"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Source accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create source accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/connectionInfo/bankFeedAccounts/batch",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The _Batch create source accounts_ endpoint allows you to create multiple representations of your SMB's bank accounts within Codat's domain. The company can then map the source account to an existing or new target account in their accounting software.\n\n> ### Versioning\n> If you are integrating the Bank Feeds solution with Codat after August 1, 2024, please use the v2 version of the API, as detailed in the schema below. For integrations completed before August 1, 2024, select the v1 version from "
+        },
+        {
+          "info": {
+            "name": "List source accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/connectionInfo/bankFeedAccounts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ]
+          },
+          "docs": "﻿The _List source accounts_ endpoint returns a list of [source accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankFeedAccount) for a given company's connection.\n\n[Source accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankFeedAccount) are the bank's bank account within Codat's domain from which transactions are synced into the accounting platform.\n\n> ### Versioning\n> If you are integrating the Bank Feeds solution with Codat after August 1, 2024, please use the v2 version of the "
+        },
+        {
+          "info": {
+            "name": "Create single source account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/connectionInfo/bankFeedAccounts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The _Create Source Account_ endpoint allows you to create a representation of a bank account within Codat's domain. The company can then map the source account to an existing or new target account in their accounting software.\n\n> ### Versioning\n> If you are integrating the Bank Feeds solution with Codat after August 1, 2024, please use the v2 version of the API, as detailed in the schema below. For integrations completed before August 1, 2024, select the v1 version from the schema dropdown below"
+        },
+        {
+          "info": {
+            "name": "Update source account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/connectionInfo/bankFeedAccounts/:accountId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for an account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿The _Update source account_ endpoint updates a single source account for a single data connection connected to a single company.\n\n### Tips and pitfalls\n\n* This endpoint makes it possible to update the `accountName`, `status`, and `balance` fields.\n    * The `status` field can only be updated to 'disconnected'.\n    * The `balance` field can only be updated on accounts that are **not** 'connected'.\n* Updates made here apply exclusively to source accounts and will not affect target accounts in the"
+        },
+        {
+          "info": {
+            "name": "Delete source account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/connectionInfo/bankFeedAccounts/:accountId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for an account."
+              }
+            ]
+          },
+          "docs": "The _Delete source account_ endpoint enables you to remove a source account.\n\nRemoving a source account will also remove any mapping between the source bank feed bank accounts and the target bankfeed bank account.\n"
+        },
+        {
+          "info": {
+            "name": "Generate source account credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/connectionInfo/bankFeedAccounts/credentials",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿The _Generate bank account credentials_ endpoint can be used to generate credentials for QuickBooks Online to authenticate the Bank Feed in the QBO portal. Each time this endpoint is called, a new set of credentials will be generated.\n\nThe old credentials will still be valid until the revoke credentials endpoint is used, which will revoke all credentials associated to the data connection.\n\n> **For QuickBooks Online only**\n>\n> Only call this endpoint when onboarding SMBs that use  QuickBooks Onl"
+        },
+        {
+          "info": {
+            "name": "Delete all source account credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/connectionInfo/bankFeedAccounts/credentials",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ]
+          },
+          "docs": "The _Delete Bank Account Credentials_ endpoint serves as a comprehensive mechanism for revoking all existing authorization credentials that a company employs to establish its Bank Feed connection.\n\nIn cases where multiple credential sets have been generated, a single API call to this endpoint revokes all of them."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account mapping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List bank feed accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/bankFeedAccounts/mapping",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ]
+          },
+          "docs": "﻿The *List bank accounts* endpoint returns information about a source bank account and any current or potential target mapping accounts.\n\nA bank feed account mapping is a specified link between the source account (provided by the Codat user) and the target account (the end user's account in the underlying software).\n\n> **For custom builds only**\n> \n> Only use this endpoint if you are building your own account management UI."
+        },
+        {
+          "info": {
+            "name": "Create bank feed account mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/bankFeedAccounts/mapping",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿The *Create bank account mapping* endpoint creates a new mapping between a source bank account and a potential account in the accounting software (target account).\n\nA bank feed account mapping is a specified link between the source account (provided by the Codat user) and the target account (the end user's account in the underlying software).\n\nTo find valid target account options, first call the [List bank feed account mappings](https://docs.codat.io//bank-feeds-api#/operations/get-bank-account"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Company information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get company information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/bankFeeds/info",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ]
+          },
+          "docs": "Use the *Get company information* endpoint to return information about the company available from the underlying accounting software.\n\n### Supported Integrations\n| Integration           | Supported |\n|-----------------------|-----------|\n| Oracle NetSuite       | Yes       |\n| Xero                  | Yes       |\n| Exact                 | No        |\n| FreeAgent             | No        |\n| Sage                  | No        |\n| QuickBooks Online     | No        |"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create bank transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/push/bankAccounts/:accountId/bankTransactions",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for an account."
+              },
+              {
+                "name": "timeoutInMinutes",
+                "value": "",
+                "type": "query",
+                "description": "Time limit for the push operation to complete before it is timed out."
+              },
+              {
+                "name": "allowSyncOnPushComplete",
+                "value": "",
+                "type": "query",
+                "description": "Allow a sync upon push completion."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿The *Create bank transactions* endpoint creates new [bank transactions](https://docs.codat.io/bank-feeds-api#/schemas/BankTransactions) for a given company's connection.\n\n[Bank transactions](https://docs.codat.io/bank-feeds-api#/schemas/BankTransactions) are records of monetary amounts that have moved in and out of an SMB's bank account.\n\n**Integration-specific behavior**\n\nThe required properties may vary based on the integration. For detailed requirements specific to each accounting software, "
+        },
+        {
+          "info": {
+            "name": "Get create bank transactions model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/options/bankAccounts/:accountId/bankTransactions",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for an account."
+              }
+            ]
+          },
+          "docs": "The *Get create bank account transactions model* endpoint returns the expected data for the request payload when creating [bank account transactions](https://docs.codat.io/bank-feeds-api#/schemas/BankTransactions) for a given company and integration.\n\n[Bank account transactions](https://docs.codat.io/bank-feeds-api#/schemas/BankTransactions) are records of money that has moved in and out of an SMB's bank account.\n\n**Integration-specific behavior**\n\nSee the *response examples* for integration-spe"
+        },
+        {
+          "info": {
+            "name": "Get create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/push/:pushOperationKey",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "pushOperationKey",
+                "value": "",
+                "type": "path",
+                "description": "Push operation key."
+              }
+            ]
+          },
+          "docs": "The **Get create operation** endpoint returns a specific [write operation](/using-the-api/push) identified by the `pushOperationKey` that was performed on the company.\n\nWrite operations are actions that send requests to Codat, enabling the creation, updating, deletion of records, or uploading attachments in the connected accounting software.\n\nFor bank feeds, your push operations will only relate to the `bankTransactions` data type."
+        },
+        {
+          "info": {
+            "name": "List create operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/push",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              }
+            ]
+          },
+          "docs": "The **List create operations** endpoint returns a list of [write operations](/using-the-api/push) performed on the company.\n\nWrite operations are actions that send requests to Codat, enabling the creation, updating, deletion of records, or uploading attachments in the connected accounting software. \n\nFor bank feeds, use this endpoint to view write operations related to the `bankTransactions` data type."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Managed bank feeds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/bankFeedAccounts/:sourceAccountId/managedBankFeeds/syncs/:syncId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "sourceAccountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the source bank account."
+              },
+              {
+                "name": "syncId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the sync."
+              }
+            ]
+          },
+          "docs": "The _Get sync_ endpoint returns the [sync status](https://docs.codat.io/bank-feeds-api#/schemas/SyncStatusResult) for a given 'syncId'. \n\nA sync is a single execution that fetches bank transactions from a connected bank account and records them in the company's accounting software."
+        },
+        {
+          "info": {
+            "name": "Get latest sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/bankFeedAccounts/:sourceAccountId/managedBankFeeds/syncs/latest",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "sourceAccountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the source bank account."
+              }
+            ]
+          },
+          "docs": "The _Get latest sync_ endpoint returns the status for a given source account's [most recent sync](https://docs.codat.io/bank-feeds-api#/schemas/SyncStatusResult). \n\nA sync is a single execution that fetches bank transactions from a connected bank account and records them in the company's accounting software."
+        },
+        {
+          "info": {
+            "name": "Run ad-hoc sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/bankFeedAccounts/:sourceAccountId/managedBankFeeds/syncs",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "sourceAccountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the source bank account."
+              }
+            ]
+          },
+          "docs": "The _Run ad-hoc sync_ endpoint immediately runs a sync with a fetch period from the last successful sync to the execution time of the new sync.\n\nA sync is a single execution that fetches bank transactions from a connected bank account and records them in the company's accounting software.\n\nUse either the [_Get latest sync_](https://docs.codat.io/bank-feeds-api#/operations/get-latest-managed-bank-feed-sync) endpoint or the [_Get sync_](https://docs.codat.io/bank-feeds-api#/operations/fetch-manage"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

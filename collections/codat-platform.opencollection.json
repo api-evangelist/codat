@@ -1,0 +1,1304 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Platform API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              },
+              {
+                "name": "tags",
+                "value": "region=uk && team=invoice-finance",
+                "type": "query",
+                "description": "Filter companies by tags using the \"equals\" (=), \"not equals\" (!=), and \"contains\" (~) operators with [Codat’s query language](https://docs.codat.io/using-the-api/querying)."
+              }
+            ]
+          },
+          "docs": "﻿The *List companies* endpoint returns a list of [companies](https://docs.codat.io/platform-api#/schemas/Company) associated to your instances.\n\nA [company](https://docs.codat.io/platform-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/platform-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank accounts, and a conn"
+        },
+        {
+          "info": {
+            "name": "Create company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿Use the *Create company* endpoint to create a new [company](https://docs.codat.io/platform-api#/schemas/Company) that represents your customer in Codat. \n\nA [company](https://docs.codat.io/platform-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/platform-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank accounts,"
+        },
+        {
+          "info": {
+            "name": "Get company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "﻿The *Get company* endpoint returns a single company for a given `companyId`.\n\nA [company](https://docs.codat.io/platform-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/platform-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank accounts, and a connection to Zettle for POS data.\n"
+        },
+        {
+          "info": {
+            "name": "Replace company",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codat.io/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿Use the *Replace company* endpoint to replace the existing name, description, and tags of the company. Calling the endpoint will replace existing values even if new values haven't been defined in the payload.\n\nA [company](https://docs.codat.io/platform-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/platform-api#/schemas/Connection) to different data sources, such as one connection to Xero for accountin"
+        },
+        {
+          "info": {
+            "name": "Update company",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.codat.io/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿Use the *Update company* endpoint to update the name, description, or tags of the company.\n\nThe *Update company* endpoint doesn't have any required fields. If any of the fields provided are `null` or not provided, they won't be included in the update.  \n\nA [company](https://docs.codat.io/platform-api#/schemas/Company) represents a business sharing access to their data."
+        },
+        {
+          "info": {
+            "name": "Delete a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.codat.io/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "﻿The *Delete company* endpoint permanently deletes a [company](https://docs.codat.io/platform-api#/schemas/Company), its [connections](https://docs.codat.io/platform-api#/schemas/Connection) and any cached data. This operation is irreversible.\n\nA [company](https://docs.codat.io/platform-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/platform-api#/schemas/Connection) to different data sources, such as on"
+        },
+        {
+          "info": {
+            "name": "Add product",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codat.io/companies/:companyId/products/:productIdentifier",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "productIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable product identifier for a product."
+              }
+            ]
+          },
+          "docs": "Use the *Add product* endpoint to enable a product for the company specified by `companyId`.\n\n> Note: This feature is currently in alpha and available only to participants in the development program."
+        },
+        {
+          "info": {
+            "name": "Remove product",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.codat.io/companies/:companyId/products/:productIdentifier",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "productIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable product identifier for a product."
+              }
+            ]
+          },
+          "docs": "Use the *Remove product* endpoint to disable a product for the company specified by `companyId`.\n\n> Note: This feature is currently in alpha and available only to participants in the development program."
+        },
+        {
+          "info": {
+            "name": "Refresh product data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/products/:productIdentifier/refresh",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "productIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable product identifier for a product."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use the **Refresh product data** endpoint to manually refresh data for a custom product for a specific company.\n\n### Tips and traps\n\n- This endpoint only supports refreshing data for **custom products** and can't be used for Codat's standard solutions. Refer to [individual solutions' documentation](https://docs.codat.io/) instead.\n- If a data sync is already in progress for a custom product, the refresh request will return a `Bad request (400)` response.\n- If a company has multiple custom produc"
+        },
+        {
+          "info": {
+            "name": "Get company access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/accessToken",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "Use the _Get company access token_ endpoint to return an access token for the specified company ID. The token is valid for one day. \n\nThe token is required by Codat's embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to verify the identity of the user and improve the reliability of data provided by them."
+        },
+        {
+          "info": {
+            "name": "Get company sync settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/syncSettings",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "Retrieve the [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings) for a specific company. This includes how often data types should be queued to be updated, and how much history should be fetched."
+        },
+        {
+          "info": {
+            "name": "Set company sync settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/syncSettings",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the sync settings for a specific company."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              }
+            ]
+          },
+          "docs": "﻿List the connections for a company."
+        },
+        {
+          "info": {
+            "name": "Create connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿Creates a connection for the company by providing a valid `platformKey`. \n\nUse the [List Integrations](https://docs.codat.io/platform-api#/operations/list-integrations) endpoint to access valid platform keys. "
+        },
+        {
+          "info": {
+            "name": "Get connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ]
+          },
+          "docs": "﻿Returns a specific connection for a company when valid identifiers are provided. If the identifiers are for a deleted company and/or connection, a not found response is returned."
+        },
+        {
+          "info": {
+            "name": "Unlink connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿This allows you to deauthorize a connection, without deleting it from Codat. This means you can still view any data that has previously been pulled into Codat, and also lets you re-authorize in future if your customer wishes to resume sharing their data."
+        },
+        {
+          "info": {
+            "name": "Delete connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ]
+          },
+          "docs": "﻿Revoke and remove a connection from a company.\nThis operation is not reversible. The end user would need to reauthorize a new data connection if you wish to view new data for this company."
+        },
+        {
+          "info": {
+            "name": "Update authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/authorization",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update data connection's authorization."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connection management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get access token (old)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connectionManagement/accessToken",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "﻿The new [Get company access token](https://docs.codat.io/platform-api#/operations/get-company-access-token) endpoint replaces this endpoint and includes additional functionality."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get CORS settings (old)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/connectionManagement/corsSettings"
+          },
+          "docs": "﻿The *Get CORS settings* endpoint returns the allowed origins (i.e. your domains) you want to allow cross-origin resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)) with Codat. \n\nEnabling CORS with Codat is required by our embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to access Codat's API endpoints."
+        },
+        {
+          "info": {
+            "name": "Set CORS settings (old)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/connectionManagement/corsSettings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿The *Set CORS settings* endpoint allows you to register allowed origins (i.e. your domains) for use in cross-origin resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)).\n \nEnabling CORS with Codat is required by our embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to access Codat's API endpoints. "
+        },
+        {
+          "info": {
+            "name": "Get CORS settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/corsSettings"
+          },
+          "docs": "﻿The *Get CORS settings* endpoint returns the allowed origins (i.e. your domains) you want to allow cross-origin resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)) with Codat. \n\nEnabling CORS with Codat is required by our embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to access Codat's API endpoints."
+        },
+        {
+          "info": {
+            "name": "Set CORS settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/corsSettings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿The *Set CORS settings* endpoint allows you to register allowed origins (i.e. your domains) for use in cross-origin resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)).\n \nEnabling CORS with Codat is required by our embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to access Codat's API endpoints."
+        },
+        {
+          "info": {
+            "name": "Get profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/profile"
+          },
+          "docs": "Fetch your Codat profile."
+        },
+        {
+          "info": {
+            "name": "Update profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codat.io/profile",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update your Codat profile"
+        },
+        {
+          "info": {
+            "name": "Get sync settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/profile/syncSettings"
+          },
+          "docs": "Retrieve the [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings) for your client. This includes how often data types should be queued to be updated, and how much history should be fetched."
+        },
+        {
+          "info": {
+            "name": "Update all sync settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/profile/syncSettings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update sync settings for all data types."
+        },
+        {
+          "info": {
+            "name": "List API keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/apiKeys"
+          },
+          "docs": "Use the *List API keys* endpoint to return a list of all API keys that currently exist for your client. This includes keys created via the Portal UI or the *Create API keys* endpoint.\n\n[API keys](https://docs.codat.io/platform-api#/schemas/apiKeys) are tokens used to control access to the API. Include this token in the `Authorization` header parameter when making API calls, following the word \"Basic\" and a space with your API key.\n\nYou can [read more](https://docs.codat.io/using-the-api/authenti"
+        },
+        {
+          "info": {
+            "name": "Create API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/apiKeys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use the *Create API keys* endpoint to generate a new API key for your client.\n\n[API keys](https://docs.codat.io/platform-api#/schemas/apiKeys) are tokens used to control access to the API. Include this token in the `Authorization` header parameter when making API calls, following the word \"Basic\" and a space with your API key.\n\nYou can [read more](https://docs.codat.io/using-the-api/authentication) about authentication at Codat and managing API keys via the Portal UI or API.\n\n### Tips and pitfal"
+        },
+        {
+          "info": {
+            "name": "Delete API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.codat.io/apiKeys/:apiKeyId",
+            "params": [
+              {
+                "name": "apiKeyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for api key."
+              }
+            ]
+          },
+          "docs": "Use the *Delete API keys* endpoint to delete an existing API key, providing its valid `id` as a parameter. Note that this operation is not reversible.\n\n[API keys](https://docs.codat.io/platform-api#/schemas/apiKeys) are tokens used to control access to the API. Include this token in the `Authorization` header parameter when making API calls, following the word \"Basic\" and a space with your API key.\n\nYou can [read more](https://docs.codat.io/using-the-api/authentication) about authentication at C"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Refresh data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Refresh all data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/data/all",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "Refreshes all data types with `fetch on first link` set to `true` for a given company.\n\nThis is an asynchronous operation, and will bring updated data into Codat from the linked integration for you to view.\n\n[Read more](https://docs.codat.io/core-concepts/data-type-settings) about data type settings and `fetch on first link`."
+        },
+        {
+          "info": {
+            "name": "Refresh data type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/data/queue/:dataType",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "dataType",
+                "value": "",
+                "type": "path",
+                "description": "The key of a Codat data type."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "query",
+                "description": "Optionally, provide a data connection id to only queue pull operations on that connection."
+              }
+            ]
+          },
+          "docs": "Refreshes a given data type for a given company.\n\nThis is an asynchronous operation, and will bring updated data into Codat from the linked integration for you to view."
+        },
+        {
+          "info": {
+            "name": "Get data status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/dataStatus",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              }
+            ]
+          },
+          "docs": "Get the state of each data type for a company"
+        },
+        {
+          "info": {
+            "name": "List pull operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/data/history",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              }
+            ]
+          },
+          "docs": "Gets the pull operation history (datasets) for a given company."
+        },
+        {
+          "info": {
+            "name": "Get pull operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/data/history/:datasetId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the dataset that completed its sync."
+              }
+            ]
+          },
+          "docs": "Retrieve information about a single dataset or pull operation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook consumers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/webhooks"
+          },
+          "docs": "﻿Use the *List webhook consumers* endpoint to return a list of all webhook consumers that currently exist for your client.\n\n[Webhook consumer](https://docs.codat.io/platform-api#/schemas/WebhookConsumer) is an HTTP endpoint that you configure to subscribe to specific events. See our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview)."
+        },
+        {
+          "info": {
+            "name": "Create webhook consumer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "﻿Use the *Create webhook consumer* endpoint to create a new webhook consumer that will listen to messages we send you.\n\n[Webhook consumer](https://docs.codat.io/platform-api#/schemas/WebhookConsumer) is an HTTP endpoint that you configure to subscribe to specific events. See our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview).\n\n### Tips and traps\n- The number of webhook consumers you can create is limited to 50. If you have reach"
+        },
+        {
+          "info": {
+            "name": "Delete webhook consumer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.codat.io/webhooks/:webhookId",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the webhook consumer."
+              }
+            ]
+          },
+          "docs": "﻿Use the *Delete webhook consumer* endpoint to delete an existing webhoook consumer, providing its valid `id` as a parameter.\n\n[Webhook consumer](https://docs.codat.io/platform-api#/schemas/WebhookConsumer) is an HTTP endpoint that you configure to subscribe to specific events. See our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview)."
+        },
+        {
+          "info": {
+            "name": "Rotate Zapier key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/webhooks/integrationKeys/zapier"
+          },
+          "docs": "﻿The *Rotate Zapier key* endpoint returns the Zapier integration key needed to configure Zaps triggered by Codat's webhooks. \n\nIf a key has already been created, calling this will revoke that existing key.\n\nThe key changes each time this endpoint is called. If you are already using our Zapier integration and called this endpoint again, you need to reauthenticate using the latest integration key returned in the response.\n\nOur Zapier integration makes it simple for you to set up and receive user n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/integrations",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              }
+            ]
+          },
+          "docs": "List your available integrations"
+        },
+        {
+          "info": {
+            "name": "Get integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/integrations/:platformKey",
+            "params": [
+              {
+                "name": "platformKey",
+                "value": "",
+                "type": "path",
+                "description": "A unique 4-letter key to represent a platform in each integration."
+              }
+            ]
+          },
+          "docs": "Get single integration, by platformKey"
+        },
+        {
+          "info": {
+            "name": "Get branding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/integrations/:platformKey/branding",
+            "params": [
+              {
+                "name": "platformKey",
+                "value": "",
+                "type": "path",
+                "description": "A unique 4-letter key to represent a platform in each integration."
+              }
+            ]
+          },
+          "docs": "Get branding for platform."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Read data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get validation results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/sync/:datasetId/validation",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the dataset that completed its sync."
+              }
+            ]
+          },
+          "docs": "Use the **Get validation results** endpoint to review warnings and errors encountered during the data type validation phase.\n\nThe validation result [schema](https://docs.codat.io/platform-api#/schemas/ValidationResult) contains two message arrays:\n\n- **`warnings`** array lists potential issues with the data type that may require attention but don't block usage.\n- **`errors`** array contains critical issues that must be resolved before the data type can be used."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Push data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get push options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/options/:dataType",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "dataType",
+                "value": "",
+                "type": "path",
+                "description": "The key of a Codat data type."
+              }
+            ]
+          },
+          "docs": "This is the generic documentation for creation and updating of data. See the equivalent endpoint for a given data type for more specific information. \n\nBefore pushing data into accounting software, it is often necessary to collect some details from the user as to how they would like the data to be inserted. This includes names and amounts on transactional entities, but also factors such as categorisation of entities, which is often handled differently between different accounting software. A goo"
+        },
+        {
+          "info": {
+            "name": "List push operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/push",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              }
+            ]
+          },
+          "docs": "The **List push operations** endpoint returns a list of [push operations](/using-the-api/push) performed on the company.\n\nWrite operations are actions that send requests to Codat, enabling the creation, updating, deletion of records, or uploading attachments in the connected accounting software."
+        },
+        {
+          "info": {
+            "name": "Get push operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/push/:pushOperationKey",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "pushOperationKey",
+                "value": "",
+                "type": "path",
+                "description": "Push operation key."
+              }
+            ]
+          },
+          "docs": "The **Get push operation** endpoint returns a specific [push operation](/using-the-api/push) identified by the `pushOperationKey` that was performed on the company.\n\nWrite operations are actions that send requests to Codat, enabling the creation, updating, deletion of records, or uploading attachments in the connected accounting software."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Supplemental data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/integrations/:platformKey/dataTypes/:dataType/supplementalDataConfig",
+            "params": [
+              {
+                "name": "platformKey",
+                "value": "",
+                "type": "path",
+                "description": "A unique 4-letter key to represent a platform in each integration."
+              },
+              {
+                "name": "dataType",
+                "value": "",
+                "type": "path",
+                "description": "Supported supplemental data data type."
+              }
+            ]
+          },
+          "docs": "The *Get configuration* endpoint returns supplemental data configuration previously created for each integration and data type combination.\n\n[Supplemental data](https://docs.codat.io/using-the-api/supplemental-data/overview) is additional data you can include in Codat's standard data types."
+        },
+        {
+          "info": {
+            "name": "Configure",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codat.io/integrations/:platformKey/dataTypes/:dataType/supplementalDataConfig",
+            "params": [
+              {
+                "name": "platformKey",
+                "value": "",
+                "type": "path",
+                "description": "A unique 4-letter key to represent a platform in each integration."
+              },
+              {
+                "name": "dataType",
+                "value": "",
+                "type": "path",
+                "description": "Supported supplemental data data type."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The *Configure* endpoint allows you to maintain or change configuration required to return supplemental data for each integration and data type combination.\n\n[Supplemental data](https://docs.codat.io/using-the-api/supplemental-data/overview) is additional data you can include in Codat's standard data types.\n\n**Integration-specific behavior**\nSee the *examples* for integration-specific frequently requested properties."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Custom data type",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get custom data configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/integrations/:platformKey/dataTypes/custom/:customDataIdentifier",
+            "params": [
+              {
+                "name": "platformKey",
+                "value": "",
+                "type": "path",
+                "description": "A unique 4-letter key to represent a platform in each integration."
+              },
+              {
+                "name": "customDataIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a custom data type."
+              }
+            ]
+          },
+          "docs": "The *Get custom data configuration* endpoint returns existing configuration details for the specified custom data type and integration pair you previously configured.\n\nA [custom data type](https://docs.codat.io/using-the-api/custom-data) is an additional data type you can create that is not included in Codat's standardized data model."
+        },
+        {
+          "info": {
+            "name": "Configure custom data type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codat.io/integrations/:platformKey/dataTypes/custom/:customDataIdentifier",
+            "params": [
+              {
+                "name": "platformKey",
+                "value": "",
+                "type": "path",
+                "description": "A unique 4-letter key to represent a platform in each integration."
+              },
+              {
+                "name": "customDataIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a custom data type."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The *Configure custom data type* endpoint allows you to maintain or change the configuration required to return a custom data type for a specific integration. \n\nA [custom data type](https://docs.codat.io/using-the-api/custom-data) is an additional data type you can create that is not included in Codat's standardized data model.\n\n### Tips and traps\n\n- You can only configure a single custom data type for a single platform at a time. Use the endpoint multiple times if you need to configure it for m"
+        },
+        {
+          "info": {
+            "name": "Refresh custom data type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/data/queue/custom/:customDataIdentifier",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "customDataIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a custom data type."
+              }
+            ]
+          },
+          "docs": "The *Refresh custom data type* endpoint refreshes the specified custom data type for a given company. This is an asynchronous operation that will sync updated data from the linked integration into Codat for you to view."
+        },
+        {
+          "info": {
+            "name": "List custom data type records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/data/custom/:customDataIdentifier",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "customDataIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a custom data type."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              }
+            ]
+          },
+          "docs": "The *List custom data type records* endpoint returns a paginated list of records pulled for the specified custom data type you previously configured.\n\nA [custom data type](https://docs.codat.io/using-the-api/custom-data) is an additional data type you can create that is not included in Codat's standardized data model.s endpoint returns a paginated list of records whose schema is defined [Configure custom data type](https://docs.codat.io/platform-api#/operations/configure-custom-data-type)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
