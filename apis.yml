@@ -200,7 +200,7 @@ common:
   url: https://docs.codat.io/updates
 - type: StatusPage
   url: https://status.codat.io
-- type: SignUp
+- type: Signup
   url: https://codat.io/start-building/
 - type: About
   url: https://codat.io/about/
@@ -216,7 +216,7 @@ common:
   url: https://github.com/codatio/client-sdk-go
 - type: Java SDK
   url: https://github.com/codatio/client-sdk-java
-- type: LLMsTxt
+- type: LlmsText
   url: https://codat.io/llms.txt
 maintainers:
 - FN: Kin Lane
