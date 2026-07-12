@@ -180,6 +180,10 @@ apis:
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
 common:
+- type: DomainSecurity
+  url: security/codat-domain-security.yml
+- type: Authentication
+  url: authentication/codat-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/codat-limited
 - type: Portal
