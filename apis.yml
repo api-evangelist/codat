@@ -180,6 +180,8 @@ apis:
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
 common:
+- type: AgenticAccess
+  url: agentic-access/codat-agentic-access.yml
 - type: DomainSecurity
   url: security/codat-domain-security.yml
 - type: Authentication
