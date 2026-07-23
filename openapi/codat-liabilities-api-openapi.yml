@@ -1,0 +1,718 @@
+openapi: 3.1.0
+info:
+  title: Bank Feeds Account mapping Liabilities API
+  version: 3.0.0
+  contact:
+    email: support@codat.io
+    name: Codat
+  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
+
+
+    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
+
+
+    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
+
+
+    ---
+
+    <!-- Start Codat Tags Table -->
+
+    ## Endpoints
+
+
+    | Endpoints | Description |
+
+    | :- |:- |
+
+    | Companies | Create and manage your SMB users'' companies. |
+
+    | Connections | Create new and manage existing data connections for a company. |
+
+    | Source accounts | Provide and manage lists of source bank accounts. |
+
+    | Account mapping | Extra functionality for building an account management UI. |
+
+    | Company information | Get detailed information about a company from the underlying platform. |
+
+    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
+
+    <!-- End Codat Tags Table -->'
+  termsOfService: https://www.codat.io/legals/
+servers:
+- description: Production
+  url: https://api.codat.io
+security:
+- auth_header: []
+tags:
+- name: Liabilities
+  description: Debt and other liabilities.
+paths:
+  /companies/{companyId}/reports/liabilities/loans/transactions:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - schema:
+        type: string
+        enum:
+        - banking
+        - commerce
+        - accounting
+      in: query
+      name: sourceType
+      description: Data source type.
+      required: true
+    post:
+      summary: Generate loan transactions report
+      description: 'The _Generate loan transactions_ endpoint requests the generation of the Loan Transactions report.
+
+
+        Learn more about Codat''s liabilities feature [here](https://docs.codat.io/lending/features/liabilities-overview).
+
+
+        Make sure you have [synced a company](https://docs.codat.io/lending-api#/operations/refresh-company-data) recently before calling the endpoint.
+
+        '
+      tags:
+      - Liabilities
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      operationId: generate-loan-transactions
+      x-speakeasy-name-override: generate-loan-transactions
+    get:
+      summary: List loan transactions
+      description: 'The *List loan transactions* endpoint returns all [loan transactions](https://docs.codat.io/lending-api#/schemas/LoanTransactions) identified from a company''s accounting, banking, and commerce integrations.
+
+
+        This detail gives analysts a better idea of the loan obligations a company may have.
+
+
+        Make sure you have [synced a company](https://docs.codat.io/lending-api#/operations/refresh-company-data) recently before calling the endpoint.
+
+        '
+      tags:
+      - Liabilities
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanTransactions'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      operationId: list-loan-transactions
+      x-speakeasy-name-override: list-loan-transactions
+  /companies/{companyId}/reports/liabilities/loans:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - schema:
+        type: string
+        enum:
+        - banking
+        - commerce
+        - accounting
+      in: query
+      name: sourceType
+      description: Data source type.
+      required: true
+    post:
+      summary: Generate loan summaries report
+      description: 'The _Generate loan summaries_ endpoint requests the generation of the Loan Summaries report.
+
+
+        Learn more about Codat''s liabilities feature [here](https://docs.codat.io/lending/features/liabilities-overview).
+
+
+        Make sure you have [synced a company](https://docs.codat.io/lending-api#/operations/refresh-company-data) recently before calling the endpoint.
+
+        '
+      tags:
+      - Liabilities
+      responses:
+        '202':
+          description: Accepted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      operationId: generate-loan-summary
+      x-speakeasy-name-override: generate-loan-summary
+    get:
+      summary: Get loan summaries
+      description: 'The *Get loan summaries* endpoint returns a summary by integration type of all loans identified from a company''s accounting, banking, and commerce integrations.
+
+
+        The endpoint returns a list of a company''s [loan summaries](https://docs.codat.io/lending-api#/schemas/LoanSummary) for each valid data connection.
+
+
+        Make sure you have [synced a company](https://docs.codat.io/lending-api#/operations/refresh-company-data) recently before calling the endpoint.
+
+        '
+      tags:
+      - Liabilities
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      operationId: get-loan-summary
+      x-speakeasy-name-override: get-loan-summary
+components:
+  schemas:
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    LoanTransactions:
+      title: Loan transactions
+      type: object
+      properties:
+        reportInfo:
+          $ref: '#/components/schemas/LoanTransactions/definitions/loanTransactionsReportInfo'
+        reportItems:
+          type: array
+          description: Contains object of reporting properties. The loan ref will reference a different object depending on the integration type.
+          items:
+            $ref: '#/components/schemas/LoanTransactions/definitions/reportItems'
+      definitions:
+        loanTransactionsReportInfo:
+          title: Loan Transactions Report Info
+          type: object
+          properties:
+            pageNumber:
+              type: integer
+              description: The page number.
+            pageSize:
+              type: integer
+              description: Queried page size.
+            totalResults:
+              type: integer
+              description: The total number of transactions returned.
+            reportName:
+              type: string
+              description: The name of the report.
+            companyName:
+              type: string
+              description: Name of the company queried.
+            generatedDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Returns the YYYY-MM-DD datetime of report generation.
+        loanRef:
+          title: Loan Reference
+          type: object
+          properties:
+            id:
+              type: string
+              description: The id of the object being referred to.
+            dataConnectionId:
+              type: string
+              description: The dataConnectionId the object being referred to is associated with.
+            type:
+              type: string
+              description: The object type data is referring to, e.g. Account.
+        itemRef:
+          title: Item reference
+          type: object
+          properties:
+            id:
+              type: string
+              description: The id of the object, e.g. the Journal entry.
+            dataConnectionId:
+              type: string
+              description: The data connection id being referenced.
+            type:
+              type: string
+              description: The data type the loan transaction entry was extracted from.
+        reportItems:
+          type: object
+          properties:
+            loanRef:
+              $ref: '#/components/schemas/LoanTransactions/definitions/loanRef'
+              description: Contains object that contains all the Loan transactions for that integration type.
+            itemRef:
+              $ref: '#/components/schemas/LoanTransactions/definitions/itemRef'
+              description: Contains object of reporting properties. The loan ref will reference a different object depending on the integration type.
+            date:
+              $ref: '#/components/schemas/DateTime'
+              description: The date of that entry type occurred.
+            amount:
+              type: number
+              format: decimal
+              description: The loan transaction amount.
+            loanTransactionType:
+              description: The type of loan transaction.
+              type: string
+              enum:
+              - Investment
+              - Repayment
+              - Interest
+              - AccuredInterest
+            lender:
+              type: string
+              description: The name of lender providing the loan.
+      examples:
+      - reportInfo:
+          pageNumber: 1
+          pageSize: 1000
+          totalResults: 1
+          reportName: AccountingLoanTransactions
+          companyName: Supermarket store
+          generatedDate: '2022-10-23T00:00:00Z'
+        reportItems:
+        - loanRef:
+            id: '332'
+            dataConnectionId: ecd2d6be-5194-40a1-838f-5577a4881aaa
+            type: chartOfAccount
+          itemRef:
+            id: '755488'
+            dataConnectionId: ecd2d6be-5194-40a1-838f-5577a4881aaa
+            type: journalEntry
+          date: '2020-08-02'
+          amount: -455
+          transactionType: Repayment
+          lender: Barclays Bank
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    LoanSummary:
+      title: Loan summary
+      type: object
+      properties:
+        reportInfo:
+          $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryReportInfo'
+        reportItems:
+          type: array
+          description: Returns a summary of all loan activity for that integration type
+          items:
+            $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryReportItem'
+      definitions:
+        loanSummaryReportInfo:
+          title: Loan Summary Report Info
+          type: object
+          properties:
+            reportName:
+              type: string
+              description: The name of the report.
+            companyName:
+              type: string
+              description: Name of the company queried.
+            generatedDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Returns the YYYY-MM-DD datetime of report generation.  urns the YYYY-MM-DD datetime of report generation.
+        loanRef:
+          title: Loan Reference
+          type: object
+          properties:
+            id:
+              type: string
+              description: The id of the object being referred to.
+            dataConnectionId:
+              type: string
+              description: The dataConnectionId the object being referred to is associated with.
+              x-stoplight:
+                id: vrnhmgrfndjhh
+            type:
+              type: string
+              description: The object type data is referring to, e.g. Account.
+        loanSummaryRecordRef:
+          title: Item reference
+          type: object
+          properties:
+            id:
+              type: string
+              description: The id of the object being referred to.
+            dataConnectionId:
+              type: string
+              description: The dataConnectionId the object being referred to is associated with.
+            integrationType:
+              $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryIntegrationType'
+            recordRefType:
+              $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryRecordRefType'
+        loanSummaryReportItem:
+          type: object
+          properties:
+            recordRef:
+              $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryRecordRef'
+              description: Contains object that contains a summary of all loan transactions for that integration type.
+            description:
+              type: string
+              description: The description of the object being referred to. E.g. the account.
+            startDate:
+              $ref: '#/components/schemas/DateTime'
+              description: The date of the earliest loan transaction.
+            totalDrawdowns:
+              type: number
+              format: decimal
+              description: The total loan drawdowns.
+            totalRepayments:
+              type: number
+              format: decimal
+              description: The total loan repayments which includes capital plus any interest.
+            balance:
+              type: number
+              format: decimal
+              description: The loan outstanding balance.  This may not equal totalDrawdowns - totalRepayments due to interest which has been accrued.
+            lender:
+              type: string
+              description: The name of lender providing the loan.
+        loanSummaryIntegrationType:
+          title: Integration type
+          type: string
+          enum:
+          - Accounting
+          - Banking
+          - Commerce
+          description: The integration type begin referred to.
+        loanSummaryRecordRefType:
+          title: Record reference type
+          type: string
+          enum:
+          - accounts
+          - banking-accounts
+          - commerce-transactions
+          description: The datatype being referred to.
+      examples:
+      - reportInfo:
+          reportName: LoanSummaryReport
+          companyName: The Coffee shop
+          generatedDate: '2022-10-23T00:00:00Z'
+        reportItems:
+        - recordRef:
+            id: string
+            dataConnectionId: DE34E8E3-089F-4DF4-89E9-F7C43618FCAAA
+            integrationType: Accounting
+            recordRefType: accounts
+          description: string
+          startDate: '2021-01-01'
+          totalInvestments: 100000
+          totalRepayments: 83481.72
+          balance: 42513.18
+          lender: Barclays Bank
+  responses:
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Data connection not found:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+  securitySchemes:
+    auth_header:
+      name: Authorization
+      description: The word "Basic" followed by a space and your API key. [API keys](https://docs.codat.io/platform-api#/schemas/ApiKeyDetails) are tokens used to control access to the API. You can get an API key via [the Codat Portal](https://app.codat.io/developers/api-keys), via [the API](https://docs.codat.io/platform-api#/operations/list-api-keys), or [read more](https://docs.codat.io/using-the-api/authentication) about authentication at Codat.
+      type: apiKey
+      in: header
+      x-speakeasy-example: Basic BASE_64_ENCODED(API_KEY)
+x-speakeasy-retries:
+  strategy: backoff
+  backoff:
+    initialInterval: 500
+    maxInterval: 60000
+    maxElapsedTime: 3600000
+    exponent: 1.5
+  statusCodes:
+  - 408
+  - 429
+  - 5XX
+  retryConnectionErrors: true
+x-speakeasy-name-override:
+- operationId: ^list-.*?
+  methodNameOverride: list
+- operationId: ^list-.*?-attachments
+  methodNameOverride: list-attachments
+- operationId: ^get-.*?
+  methodNameOverride: get
+- operationId: ^get-create-.*?-model
+  methodNameOverride: get-create-model
+- operationId: ^get-create-update.*?-model
+  methodNameOverride: get-create-update-model
+- operationId: ^get-.*?-attachment
+  methodNameOverride: get-attachment
+- operationId: ^update-.*?
+  methodNameOverride: update
+- operationId: ^create-.*?
+  methodNameOverride: create
+- operationId: ^delete-.*?
+  methodNameOverride: delete
+- operationId: ^delete-.*?-attachment
+  methodNameOverride: delete-attachment
+- operationId: ^download-.*?-attachment
+  methodNameOverride: download-attachment
+- operationId: ^upload-.*?-attachment
+  methodNameOverride: upload-attachment
+x-codat-docs-path: bank-feeds-api
+x-codat-keep-docs-paths-local: true
+x-codat-speakeasy-pagination:
+  type: offsetLimit
+  inputs:
+  - name: page
+    in: parameters
+    type: page
+  outputs:
+    results: $.results

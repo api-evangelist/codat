@@ -1,0 +1,1685 @@
+openapi: 3.1.0
+info:
+  title: Bank Feeds Account mapping Companies API
+  version: 3.0.0
+  contact:
+    email: support@codat.io
+    name: Codat
+  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
+
+
+    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
+
+
+    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
+
+
+    ---
+
+    <!-- Start Codat Tags Table -->
+
+    ## Endpoints
+
+
+    | Endpoints | Description |
+
+    | :- |:- |
+
+    | Companies | Create and manage your SMB users'' companies. |
+
+    | Connections | Create new and manage existing data connections for a company. |
+
+    | Source accounts | Provide and manage lists of source bank accounts. |
+
+    | Account mapping | Extra functionality for building an account management UI. |
+
+    | Company information | Get detailed information about a company from the underlying platform. |
+
+    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
+
+    <!-- End Codat Tags Table -->'
+  termsOfService: https://www.codat.io/legals/
+servers:
+- description: Production
+  url: https://api.codat.io
+security:
+- auth_header: []
+tags:
+- name: Companies
+  description: Create and manage your SMB users' companies.
+paths:
+  /companies:
+    post:
+      summary: Create company
+      tags:
+      - Companies
+      operationId: create-company
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              x-speakeasy-usage-example: true
+              schema:
+                $ref: '#/components/schemas/Company'
+              examples:
+                With no description:
+                  value:
+                    id: ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                    name: Technicalium
+                    description: ''
+                    platform: ''
+                    redirect: https://link.codat.io/company/ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                    dataConnections: []
+                    created: '2022-11-10T10:45:18.1950523Z'
+                    createdByUserName: Dan Tzabar
+                    products:
+                    - spend-insights
+                    referenceSubsidiaryCompanies: []
+                With a description:
+                  value:
+                    id: ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                    name: Technicalium
+                    description: Technology services, including web and app design and development
+                    platform: ''
+                    redirect: https://link.codat.io/company/ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                    dataConnections: []
+                    created: '2022-11-10T10:45:18.1950523Z'
+                    createdByUserName: Dan Tzabar
+                    products:
+                    - spend-insights
+                    referenceSubsidiaryCompanies: []
+                With a tag:
+                  value:
+                    id: ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                    name: Technicalium
+                    description: ''
+                    platform: ''
+                    redirect: https://link.codat.io/company/ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                    dataConnections: []
+                    created: '2022-11-10T10:45:18.1950523Z'
+                    createdByUserName: Dan Tzabar
+                    products:
+                    - spend-insights
+                    tags:
+                      region: us
+                    referenceSubsidiaryCompanies: []
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      description: "\uFEFFUse the *Create company* endpoint to create a new [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) that represents your customer in Codat. \n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank accounts, and a connection to Zettle for POS data.\n\nIf forbidden characters (see `name` pattern) are present in the request, a company will be created with the forbidden characters removed. For example, `Company (Codat[1])` with be created as `Company Codat1`."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyRequestBody'
+            examples:
+              With no description:
+                value:
+                  name: Technicalium
+              With a description:
+                value:
+                  name: Technicalium
+                  description: Technology services, including web and app design and development
+    get:
+      summary: List companies
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Companies'
+              examples:
+                One company:
+                  value:
+                    results:
+                    - id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                      name: My Test Company
+                      description: My Test Company make testing software
+                      platform: ''
+                      redirect: https://link.codat.io/company/3fa85f64-5717-4562-b3fc-2c963f66afa6
+                      lastSync: '2022-01-01T12:30:00.000Z'
+                      dataConnections:
+                      - id: 51baa045-4836-4317-a42e-3542e991e581
+                        integrationId: 1c312d69-e638-46d4-ad31-72e6c3ba8390
+                        integrationKey: vjms
+                        sourceId: 396c3158-5dd7-481b-a7c4-a795ca31792b
+                        platformName: Pandle
+                        linkUrl: https://link-api.codat.io/companies/3fa85f64-5717-4562-b3fc-2c963f66afa6/connections/51baa045-4836-4317-a42e-3542e991e581/start
+                        status: Linked
+                        lastSync: '2022-01-01T12:30:00.000Z'
+                        created: '2022-01-01T11:30:00Z'
+                        sourceType: Accounting
+                      created: '2022-01-01T11:30:00Z'
+                      createdByUserName: Mike Smith
+                      products:
+                      - spend-insights
+                      - lending
+                      - expenses-v1
+                      - commerce
+                      referenceSubsidiaryCompanies: []
+                    pageNumber: 1
+                    pageSize: 100
+                    totalResults: 1
+                    _links:
+                      current:
+                        href: /companies?page=1&pageSize=100
+                      self:
+                        href: /companies
+                List of Companies:
+                  value:
+                    results:
+                    - id: d1568dde-adf6-11ed-afa1-0242ac120002
+                      name: Technicalium
+                      description: Technology services, including web and app design and development
+                      platform: ''
+                      redirect: https://link.codat.io/company/d1568dde-adf6-11ed-afa1-0242ac120002
+                      lastSync: '2022-01-01T12:30:00.000Z'
+                      dataConnections:
+                      - id: 51baa045-4836-4317-a42e-3542e991e581
+                        integrationId: 1c312d69-e638-46d4-ad31-72e6c3ba8390
+                        integrationKey: vjms
+                        sourceId: 396c3158-5dd7-481b-a7c4-a795ca31792b
+                        platformName: Pandle
+                        linkUrl: https://link-api.codat.io/companies/d1568dde-adf6-11ed-afa1-0242ac120002/connections/51baa045-4836-4317-a42e-3542e991e581/start
+                        status: Linked
+                        lastSync: '2022-01-01T12:30:00.000Z'
+                        created: '2022-01-01T11:30:00Z'
+                        sourceType: Accounting
+                      created: '2022-01-01T11:30:00Z'
+                      createdByUserName: Joe Bloggs
+                      products:
+                      - spend-insights
+                      - lending
+                      - payables-v2
+                      referenceSubsidiaryCompanies: []
+                    - id: ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                      name: Toft stores
+                      redirect: https://link.codat.io/company/ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                      dataConnections: []
+                      created: '2022-11-10T10:45:18Z'
+                      createdByUserName: Dan Tzabar
+                      products:
+                      - spend-insights
+                      referenceSubsidiaryCompanies:
+                      - id: c8d3af58-7011-47ce-b3f2-89faf300ef6d
+                        name: Toft stores UK
+                        links:
+                          portal: https://app.codat.io/companies/c8d3af58-7011-47ce-b3f2-89faf300ef6d/summary
+                      - id: db94eddc-9212-4568-9b5c-3eab0e325913
+                        name: Toft stores US
+                        links:
+                          portal: https://app.codat.io/companies/db94eddc-9212-4568-9b5c-3eab0e325913/summary
+                    - id: c8d3af58-7011-47ce-b3f2-89faf300ef6d
+                      name: Toft stores UK
+                      redirect: https://link.codat.io/company/c8d3af58-7011-47ce-b3f2-89faf300ef6d
+                      dataConnections:
+                      - id: d5ab61b7-1ad0-46fd-9f9f-b6761047941e
+                        integrationId: cc750323-5a47-4f28-8d8e-30fbbf2ce137
+                        integrationKey: akxx
+                        sourceId: 9815b998-024d-4415-a40b-89903b2cad6f
+                        platformName: Oracle NetSuite
+                        linkUrl: https://link-api.codat.io/companies/c8d3af58-7011-47ce-b3f2-89faf300ef6d/connections/d5ab61b7-1ad0-46fd-9f9f-b6761047941e/start
+                        status: Linked
+                        lastSync: '2022-01-01T12:30:00.000Z'
+                        created: '2022-01-01T11:30:00Z'
+                        sourceType: Accounting
+                      created: '2022-11-10T10:45:18Z'
+                      createdByUserName: Dan Tzabar
+                      products:
+                      - lending
+                      - spend-insights
+                      - payables
+                      referenceParentCompany:
+                        id: ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                        name: Toft stores
+                        links:
+                          portal: https://app.codat.io/companies/ab12c58d-a678-4ebf-a159-ae99e1807bd0/summary
+                      referenceSubsidiaryCompanies: []
+                    - id: db94eddc-9212-4568-9b5c-3eab0e325913
+                      name: Toft stores US
+                      redirect: https://link.codat.io/company/db94eddc-9212-4568-9b5c-3eab0e325913
+                      dataConnections:
+                      - id: 1e5c8c9e-27fd-4ba9-9a2a-d02ba65bc2fb
+                        integrationId: cc750323-5a47-4f28-8d8e-30fbbf2ce137
+                        integrationKey: akxx
+                        sourceId: 9815b998-024d-4415-a40b-89903b2cad6f
+                        platformName: Oracle NetSuite
+                        linkUrl: https://link-api.codat.io/companies/db94eddc-9212-4568-9b5c-3eab0e325913/connections/1e5c8c9e-27fd-4ba9-9a2a-d02ba65bc2fb/start
+                        status: Linked
+                        lastSync: '2022-01-01T12:30:00.000Z'
+                        created: '2022-01-01T11:30:00Z'
+                        sourceType: Accounting
+                      created: '2022-11-10T10:45:18Z'
+                      createdByUserName: Dan Tzabar
+                      products:
+                      - spend-insights
+                      referenceParentCompany:
+                        id: ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                        name: Toft stores
+                        links:
+                          portal: https://app.codat.io/companies/ab12c58d-a678-4ebf-a159-ae99e1807bd0/summary
+                      referenceSubsidiaryCompanies: []
+                    pageNumber: 1
+                    pageSize: 100
+                    totalResults: 3
+                    _links:
+                      current:
+                        href: /companies?page=1&pageSize=100
+                      self:
+                        href: /companies
+        '400':
+          $ref: '#/components/responses/Malformed-Query'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      operationId: list-companies
+      description: "\uFEFFThe *List companies* endpoint returns a list of [companies](https://docs.codat.io/bank-feeds-api#/schemas/Company) associated to your instances.\n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank accounts, and a connection to Zettle for POS data.\n\n## Filter by tags\n\nThe *List companies* endpoint supports the filtering of companies using [tags](https://docs.codat.io/using-the-api/managing-companies#add-metadata-to-a-company). It supports the following operators with [Codat’s query language](https://docs.codat.io/using-the-api/querying):\n\n- equals (`=`)\n- not equals (`!=`)\n- contains (`~`)\n\nFor example, you can use the querying to filter companies tagged with a specific foreign key, region, or owning team: \n- Foreign key: `uid = {yourCustomerId}`\n- Region: `region != uk`\n- Owning team and region: `region = uk && owningTeam = invoice-finance`"
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/orderBy'
+      - name: tags
+        in: query
+        schema:
+          type: string
+        example: region=uk && team=invoice-finance
+        description: Filter companies by tags using the "equals" (=), "not equals" (!=), and "contains" (~) operators with [Codat’s query language](https://docs.codat.io/using-the-api/querying).
+  /companies/{companyId}:
+    get:
+      summary: Get company
+      operationId: get-company
+      description: "\uFEFFThe *Get company* endpoint returns a single company for a given `companyId`.\n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank accounts, and a connection to Zettle for POS data.\n"
+      parameters:
+      - $ref: '#/components/parameters/companyId'
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+              examples:
+                Simple company:
+                  value:
+                    id: ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                    name: Toft stores holdings
+                    description: ''
+                    platform: ''
+                    redirect: https://link.codat.io/company/ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                    dataConnections: []
+                    created: '2022-11-10T10:45:18Z'
+                    createdByUserName: Dan Tzabar
+                    products:
+                    - spend-insights
+                    - lending
+                    - expenses-v1
+                    - commerce
+                    referenceSubsidiaryCompanies: []
+                Parent multi-entity company:
+                  value:
+                    id: ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                    name: Toft stores
+                    description: ''
+                    platform: ''
+                    redirect: https://link.codat.io/company/ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                    dataConnections: []
+                    created: '2022-11-10T10:45:18Z'
+                    createdByUserName: Dan Tzabar
+                    products:
+                    - spend-insights
+                    - lending
+                    - expenses-v1
+                    - commerce
+                    referenceSubsidiaryCompanies:
+                    - id: c8d3af58-7011-47ce-b3f2-89faf300ef6d
+                      name: Toft stores UK
+                      links:
+                        portal: https://app.codat.io/companies/c8d3af58-7011-47ce-b3f2-89faf300ef6d/summary
+                    - id: db94eddc-9212-4568-9b5c-3eab0e325913
+                      name: Toft stores US
+                      links:
+                        portal: https://app.codat.io/companies/db94eddc-9212-4568-9b5c-3eab0e325913/summary
+                Subsidiary multi-entity company:
+                  value:
+                    id: c8d3af58-7011-47ce-b3f2-89faf300ef6d
+                    name: Toft stores UK
+                    description: ''
+                    platform: ''
+                    redirect: https://link.codat.io/company/c8d3af58-7011-47ce-b3f2-89faf300ef6d
+                    dataConnections:
+                    - id: d5ab61b7-1ad0-46fd-9f9f-b6761047941e
+                      integrationId: cc750323-5a47-4f28-8d8e-30fbbf2ce137
+                      integrationKey: akxx
+                      sourceId: 9815b998-024d-4415-a40b-89903b2cad6f
+                      platformName: Oracle NetSuite
+                      linkUrl: https://link-api.codat.io/companies/c8d3af58-7011-47ce-b3f2-89faf300ef6d/connections/d5ab61b7-1ad0-46fd-9f9f-b6761047941e/start
+                      status: Linked
+                      lastSync: '2022-01-01T12:30:00.000Z'
+                      created: '2022-01-01T11:30:00Z'
+                      sourceType: Accounting
+                    created: '2022-11-10T10:45:18Z'
+                    createdByUserName: Dan Tzabar
+                    products:
+                    - spend-insights
+                    - lending
+                    - expenses-v1
+                    - commerce
+                    referenceParentCompany:
+                      id: ab12c58d-a678-4ebf-a159-ae99e1807bd0
+                      name: Toft stores
+                      links:
+                        portal: https://app.codat.io/companies/ab12c58d-a678-4ebf-a159-ae99e1807bd0/summary
+                    referenceSubsidiaryCompanies: []
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+    delete:
+      summary: Delete a company
+      operationId: delete-company
+      parameters:
+      - $ref: '#/components/parameters/companyId'
+      description: "\uFEFFThe *Delete company* endpoint permanently deletes a [company](https://docs.codat.io/bank-feeds-api#/schemas/Company), its [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) and any cached data. This operation is irreversible.\n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank accounts, and a connection to Zettle for POS data.\n"
+      tags:
+      - Companies
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+    put:
+      summary: Replace company
+      description: "\uFEFFUse the *Replace company* endpoint to replace the existing name, description, and tags of the company. Calling the endpoint will replace existing values even if new values haven't been defined in the payload.\n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data.\nEach company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources, such as one connection to Xero for accounting data, two connections to Plaid for two bank accounts, and a connection to Zettle for POS data."
+      operationId: replace-company
+      x-speakeasy-name-override: replace
+      parameters:
+      - $ref: '#/components/parameters/companyId'
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyRequestBody'
+            examples:
+              Update name:
+                value:
+                  name: New Name
+              Update description:
+                value:
+                  name: Same name
+                  description: Additional documents required
+    patch:
+      summary: Update company
+      description: "\uFEFFUse the *Update company* endpoint to update the name, description, or tags of the company.\n\nThe *Update company* endpoint doesn't have any required fields. If any of the fields provided are `null` or not provided, they won't be included in the update.  \n\nA [company](https://docs.codat.io/bank-feeds-api#/schemas/Company) represents a business sharing access to their data."
+      operationId: update-company
+      parameters:
+      - $ref: '#/components/parameters/companyId'
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyUpdateRequest'
+            examples:
+              Update tags:
+                value:
+                  tags:
+                    refrence: new reference
+              Update name:
+                value:
+                  name: New Name
+  /companies/{companyId}/accessToken:
+    get:
+      summary: Get company access token
+      operationId: get-company-access-token
+      x-speakeasy-name-override: get-access-token
+      description: "Use the _Get company access token_ endpoint to return an access token for the specified company ID. The token is valid for one day. \n\nThe token is required by Codat's embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to verify the identity of the user and improve the reliability of data provided by them."
+      parameters:
+      - $ref: '#/components/parameters/companyId'
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyAccessToken'
+              examples:
+                Simple company:
+                  value:
+                    expiresIn: 86400
+                    accessToken: string
+                    tokenType: Bearer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/products/{productIdentifier}:
+    parameters:
+    - $ref: '#/components/parameters/companyId_2'
+    - $ref: '#/components/parameters/productIdentifier'
+    put:
+      summary: Add product
+      operationId: add-product
+      x-speakeasy-name-override: add-product
+      description: 'Use the *Add product* endpoint to enable a product for the company specified by `companyId`.
+
+
+        > Note: This feature is currently in alpha and available only to participants in the development program.'
+      tags:
+      - Companies
+      responses:
+        '204':
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+    delete:
+      summary: Remove product
+      operationId: remove-product
+      x-speakeasy-name-override: remove-product
+      description: 'Use the *Remove product* endpoint to disable a product for the company specified by `companyId`.
+
+
+        > Note: This feature is currently in alpha and available only to participants in the development program.'
+      tags:
+      - Companies
+      responses:
+        '204':
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/products/{productIdentifier}/refresh:
+    parameters:
+    - $ref: '#/components/parameters/companyId_2'
+    - $ref: '#/components/parameters/productIdentifier'
+    post:
+      summary: Refresh product data
+      operationId: refresh-product-data
+      x-speakeasy-name-override: refresh-product-data
+      description: "Use the **Refresh product data** endpoint to manually refresh data for a custom product for a specific company.\n\n### Tips and traps\n\n- This endpoint only supports refreshing data for **custom products** and can't be used for Codat's standard solutions. Refer to [individual solutions' documentation](https://docs.codat.io/) instead.\n- If a data sync is already in progress for a custom product, the refresh request will return a `Bad request (400)` response.\n- If a company has multiple custom products enabled, you can refresh data for each product individually.\n - Optionally include a request body with `dataTypes` to refresh only selected data types for the specified product. If omitted, the product's scheduled refresh is triggered as usual.\n - When specifying `dataTypes`, each value must be a valid data type supported by the product. Invalid values will result in a `Bad request (400)` response listing valid options."
+      tags:
+      - Companies
+      requestBody:
+        required: false
+        description: Optionally specify one or more data types to refresh for the given custom product. If omitted, the product's scheduled refresh is triggered as usual. When provided, each data type must be valid for the specified product.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dataTypes:
+                  type: array
+                  description: One or more data types to refresh for the product.
+                  items:
+                    type: string
+              additionalProperties: false
+            examples:
+              Filter specific data types:
+                value:
+                  dataTypes:
+                  - invoices
+                  - payments
+      responses:
+        '202':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+              examples:
+                Standard product not supported:
+                  value:
+                    statusCode: 400
+                    service: PublicApi
+                    error: Bank Feeds doesn't support data refreshing. For more information, refer to your solution’s documentation [here](https://docs.codat.io).
+                    correlationId: bc997528a9d7abb9161ef45f05d38599
+                    canBeRetried: Unknown
+                    detailedErrorCode: 0
+                Read in progress:
+                  value:
+                    statusCode: 400
+                    service: PublicApi
+                    error: Data cannot be refreshed while a read operation is in progress. Allow the read to complete before attempting to refresh.
+                    correlationId: bc997528a9d7abb9161ef45f05d38599
+                    canBeRetried: Unknown
+                    detailedErrorCode: 0
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/syncSettings:
+    parameters:
+    - $ref: '#/components/parameters/companyId_2'
+    get:
+      summary: Get company sync settings
+      tags:
+      - Companies
+      operationId: get-company-syncSettings
+      x-speakeasy-name-override: get-company-sync-settings
+      description: Retrieve the [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings) for a specific company. This includes how often data types should be queued to be updated, and how much history should be fetched.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanySyncSettings'
+              examples:
+                Example:
+                  value:
+                    companyId: 8a210b68-6988-11ed-a1eb-0242ac120002
+                    settings:
+                    - dataType: invoices
+                      fetchOnFirstLink: true
+                      syncSchedule: 24
+                      syncOrder: 0
+                      syncFromUtc: '2020-01-01T12:00:00.000Z'
+                      syncFromWindow: 24
+                      monthsToSync: 24
+                      isLocked: true
+                    overridesDefaults: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+    post:
+      summary: Set company sync settings
+      description: Set the sync settings for a specific company.
+      tags:
+      - Companies
+      operationId: set-company-syncSettings
+      x-speakeasy-name-override: set-company-sync-settings
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Bad-Request'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - properties:
+                  companyId:
+                    type: string
+                    format: uuid
+                    example: 8a210b68-6988-11ed-a1eb-0242ac120002
+                    description: Unique identifier for your SMB in Codat.
+                  settings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SyncSetting'
+                  overridesDefaults:
+                    type: boolean
+                    default: true
+                    description: Set to `True` if you want to override default [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings).
+                required:
+                - companyId
+                - settings
+                - overridesDefaults
+              type: object
+        description: 'Include a `syncSetting` object for each data type.
+
+          `syncFromWindow`, `syncFromUTC` & `monthsToSync` only need to be included if you wish to set a value for them.'
+components:
+  responses:
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Bad-Request:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Data connection not found:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  schemas:
+    Companies:
+      title: Companies
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Company'
+      - type: object
+        title: Pagination information
+        x-internal: true
+        properties:
+          pageNumber:
+            type: integer
+            description: Current page number.
+          pageSize:
+            type: integer
+            description: Number of items to return in results array.
+            maximum: 2000
+          totalResults:
+            type: integer
+            description: Total number of items.
+          _links:
+            $ref: '#/components/schemas/Companies/allOf/1/definitions/links'
+        definitions:
+          links:
+            title: Hal Links
+            type: object
+            required:
+            - self
+            - current
+            properties:
+              self:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+              current:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+              next:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+              previous:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+            examples:
+            - self:
+                href: /companies
+              current:
+                href: /companies?page=1&pageSize=10
+          halRef:
+            title: Hypertext reference
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri-reference
+                description: Uri hypertext reference.
+        required:
+        - pageNumber
+        - pageSize
+        - totalResults
+        - _links
+        examples:
+        - pageNumber: 1
+          pageSize: 10
+          totalResults: 1
+          _links:
+            self:
+              href: /companies/{id}/data/{dataType}
+            current:
+              href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    Company:
+      title: Company
+      description: "\uFEFFIn Codat, a company represents a business sharing access to their data. Each company can have multiple [connections](https://docs.codat.io/bank-feeds-api#/schemas/Connection) to different data sources such as one connection to [Xero](https://docs.codat.io/integrations/accounting/xero/accounting-xero) for accounting data, two connections to [Plaid](https://docs.codat.io/integrations/banking/plaid/banking-plaid) for two bank accounts and a connection to [Zettle](https://docs.codat.io/integrations/commerce/zettle/commerce-zettle) for POS data.\n\nTypically each company is one of your customers.\n\nWhen you create a company, you can specify a `name` and we will automatically generate a unique `id` for the company. You can also add a `description` to store any additional information about the company."
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Company/definitions/companyDetails'
+      - type: object
+        properties:
+          dataConnections:
+            type: array
+            items:
+              $ref: '#/components/schemas/Connection'
+      definitions:
+        companyDetails:
+          title: Company details
+          type: object
+          properties:
+            id:
+              $ref: '#/components/parameters/companyId/schema'
+            name:
+              type: string
+              description: The name of the company
+              example: Codat Ltd.
+            description:
+              $ref: '#/components/schemas/CompanyRequestBody/properties/description'
+              nullable: true
+            redirect:
+              type: string
+              format: uri
+              description: The `redirect` [Link URL](https://docs.codat.io/auth-flow/authorize-hosted-link) enabling the customer to start their auth flow journey for the company.
+              example: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
+            lastSync:
+              $ref: '#/components/schemas/DateTime'
+              nullable: true
+            created:
+              $ref: '#/components/schemas/DateTime'
+            createdByUserName:
+              type: string
+              description: Name of user that created the company in Codat.
+              nullable: true
+            products:
+              type: array
+              items:
+                type: string
+              description: An array of products that are currently enabled for the company.
+            tags:
+              title: Tags
+              type: object
+              maxProperties: 10
+              propertyNames:
+                pattern: ^.{1,27}$
+              additionalProperties:
+                type: string
+                maxLength: 100
+              description: A collection of user-defined key-value pairs that store custom metadata against the company.
+            referenceParentCompany:
+              $ref: '#/components/schemas/Company/definitions/companyReference'
+              nullable: true
+              description: The parent entity or controlling organization of this company. Null if the company has no parent.
+            referenceSubsidiaryCompanies:
+              type: array
+              nullable: false
+              description: A list of subsidiary companies owned or controlled by this entity. Empty if the company has no children.
+              minItems: 0
+              items:
+                $ref: '#/components/schemas/Company/definitions/companyReference'
+          required:
+          - id
+          - name
+          - redirect
+        companyReference:
+          title: Company reference
+          type: object
+          properties:
+            id:
+              $ref: '#/components/parameters/companyId/schema'
+            name:
+              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/name'
+            description:
+              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/description'
+            links:
+              type: object
+              description: A collection of links for the company.
+              properties:
+                portal:
+                  type: string
+                  format: uri
+                  description: Link to the company page in the portal.
+            tags:
+              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
+      examples:
+      - id: 0498e921-9b53-4396-a412-4f2f5983b0a2
+        name: string
+        redirect: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
+        lastSync: '2022-01-01T12:00:00.000Z'
+        created: '2022-01-01T12:00:00.000Z'
+        createdByUserName: string
+        tags:
+          region: us
+          uid: f6b0c253-16c7-4da1-a0c5-9c871e9c9d6c
+        dataConnections:
+        - id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
+          integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
+          integrationKey: dfxm
+          sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
+          platformName: Basiq
+          linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
+          status: Linked
+          lastSync: '2022-10-27T10:22:43.6464237Z'
+          created: '2022-10-27T09:53:29Z'
+          sourceType: Banking
+        products:
+        - spend-insights
+        - lending
+    SyncSetting:
+      title: SyncSetting
+      description: Describes how often, and how much history, should be fetched for the given data type when a pull operation is queued.
+      examples:
+      - dataType: invoices
+        fetchOnFirstLink: true
+        syncSchedule: 24
+        syncOrder: 0
+        syncFromUtc: '2020-01-01T12:00:00.000Z'
+        syncFromWindow: 24
+        monthsToSync: 24
+        isLocked: true
+      type: object
+      properties:
+        dataType:
+          $ref: '#/components/schemas/DataStatus/properties/dataType'
+        fetchOnFirstLink:
+          type: boolean
+          description: Whether this data type should be queued after a company has authorized a connection.
+        syncSchedule:
+          type: integer
+          example: 24
+          description: Number of hours after which this data type should be refreshed.
+        syncOrder:
+          type: integer
+          description: The sync in which data types are queued for a sync.
+        syncFromUtc:
+          $ref: '#/components/schemas/DateTime'
+          description: Date from which data should be fetched. Set this *or* `syncFromWindow`.
+        syncFromWindow:
+          type: integer
+          example: 24
+          description: Number of months of data to be fetched. Set this *or* `syncFromUTC`.
+        monthsToSync:
+          type: integer
+          example: 24
+          description: Months of data to fetch, for report data types (`balanceSheet` & `profitAndLoss`) only.
+        isLocked:
+          type: boolean
+          description: '`True` if the [sync setting](https://docs.codat.io/knowledge-base/advanced-sync-settings) is locked.'
+      required:
+      - dataType
+      - fetchOnFirstLink
+      - syncSchedule
+      - syncOrder
+    DataStatus:
+      title: Data status
+      description: Describes the state of data in the Codat cache for a company and data type
+      type: object
+      required:
+      - dataType
+      - currentStatus
+      properties:
+        dataType:
+          title: Data types
+          x-internal: true
+          type: string
+          description: Available data types
+          enum:
+          - accountTransactions
+          - balanceSheet
+          - bankAccounts
+          - bankTransactions
+          - billCreditNotes
+          - billPayments
+          - bills
+          - cashFlowStatement
+          - chartOfAccounts
+          - company
+          - creditNotes
+          - customers
+          - directCosts
+          - directIncomes
+          - invoices
+          - itemReceipts
+          - items
+          - journalEntries
+          - journals
+          - paymentMethods
+          - payments
+          - profitAndLoss
+          - purchaseOrders
+          - salesOrders
+          - suppliers
+          - taxRates
+          - trackingCategories
+          - transfers
+          - banking-accountBalances
+          - banking-accounts
+          - banking-transactionCategories
+          - banking-transactions
+          - commerce-companyInfo
+          - commerce-customers
+          - commerce-disputes
+          - commerce-locations
+          - commerce-orders
+          - commerce-paymentMethods
+          - commerce-payments
+          - commerce-productCategories
+          - commerce-products
+          - commerce-taxComponents
+          - commerce-transactions
+          example: invoices
+        lastSuccessfulSync:
+          $ref: '#/components/schemas/DateTime'
+        currentStatus:
+          $ref: '#/components/schemas/PullOperation/properties/status'
+        latestSyncId:
+          type: string
+          description: Unique identifier for most recent sync of data type.
+          format: uuid
+          example: ad474a37-2003-478e-baee-9af9f1ec2fe3
+        latestSuccessfulSyncId:
+          type: string
+          description: Unique identifier for the most recent successful sync of data type.
+          format: uuid
+          example: 8220fc90-55b6-47bc-9417-48ac6ea93101
+      examples:
+      - dataType: string
+        lastSuccessfulSync: '2022-01-01T13:00:00.000Z'
+        currentStatus: string
+        latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
+        latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    Connection:
+      title: Connection
+      description: "\uFEFFA connection represents a [company's](https://docs.codat.io/bank-feeds-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
+      type: object
+      properties:
+        id:
+          $ref: '#/components/parameters/connectionId/schema'
+        integrationId:
+          type: string
+          format: uuid
+          example: fd321cb6-7963-4506-b873-e99593a45e30
+          description: A Codat ID representing the integration.
+        integrationKey:
+          type: string
+          description: A unique four-character ID that identifies the platform of the company's data connection. This ensures continuity if the platform changes its name in the future.
+        sourceId:
+          type: string
+          format: uuid
+          example: 35b92968-9851-4095-ad60-395c95cbcba4
+          description: A source-specific ID used to distinguish between different sources originating from the same data connection. In general, a data connection is a single data source. However, for TrueLayer, `sourceId` is associated with a specific bank and has a many-to-one relationship with the `integrationId`.
+        sourceType:
+          title: Source Type
+          description: The type of platform of the connection.
+          type: string
+          enum:
+          - Accounting
+          - Banking
+          - BankFeed
+          - Commerce
+          - Expense
+          - Other
+          - Unknown
+          example: Accounting
+        platformName:
+          type: string
+          description: Name of integration connected to company.
+        linkUrl:
+          type: string
+          format: uri
+          description: The link URL your customers can use to authorize access to their business application.
+          example: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/2e2eb431-c1fa-4dc9-93fa-d29781c12bcd/start
+        status:
+          $ref: '#/components/schemas/Connection/definitions/dataConnectionStatus'
+        lastSync:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+        created:
+          $ref: '#/components/schemas/DateTime'
+        dataConnectionErrors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Connection/definitions/dataConnectionError'
+        connectionInfo:
+          type: object
+          nullable: true
+          additionalProperties: true
+      additionalProperties: false
+      required:
+      - id
+      - integrationId
+      - integrationKey
+      - sourceId
+      - platformName
+      - linkUrl
+      - status
+      - created
+      - sourceType
+      definitions:
+        dataConnectionStatus:
+          title: Data connection status
+          description: The current authorization status of the data connection.
+          type: string
+          enum:
+          - PendingAuth
+          - Linked
+          - Unlinked
+          - Deauthorized
+        dataConnectionError:
+          title: Data connection error
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: The HTTP status code returned by the source platform when the error occurred.
+            statusText:
+              type: string
+              description: A non-numeric status code/text returned by the source platform when the error occurred.
+            errorMessage:
+              type: string
+              description: A message about a error returned by Codat.
+            erroredOnUtc:
+              $ref: '#/components/schemas/DateTime'
+            status:
+              title: Error status
+              description: The current status of a transient error. Null statuses indicate that the error is not transient.
+              type: string
+              nullable: true
+              enum:
+              - Active
+              - Resolved
+            resolvedOnUtc:
+              description: The datetime in Utc that the error was resolved.
+              nullable: true
+              $ref: '#/components/schemas/DateTime'
+        dataConnectionSourceType:
+          title: Source Type
+          description: The type of platform of the connection.
+          type: string
+          enum:
+          - Accounting
+          - Banking
+          - BankFeed
+          - Commerce
+          - Expense
+          - Other
+          - Unknown
+          example: Accounting
+      example:
+        id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
+        integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
+        integrationKey: dfxm
+        sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
+        platformName: Basiq
+        linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
+        status: Linked
+        lastSync: '2022-10-27T10:22:43.6464237Z'
+        created: '2022-10-27T09:53:29Z'
+        sourceType: Banking
+    CompanyRequestBody:
+      title: Create company request
+      x-internal: true
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of company being connected.
+          pattern: ^[A-Za-z0-9\s\-',&@.,?!\s]+$
+          minLength: 1
+          example: Bank of Dave
+        description:
+          type: string
+          example: Requested early access to the new financing scheme.
+          description: Additional information about the company. This can be used to store foreign IDs, references, etc.
+        tags:
+          $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
+      required:
+      - name
+    CompanySyncSettings:
+      title: Company sync settings
+      type: object
+      properties:
+        companyId:
+          $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
+        settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyncSetting'
+        overridesDefaults:
+          type: boolean
+          description: Set to `True` if you want to override the default [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings).
+    CompanyAccessToken:
+      title: Company access token
+      description: Details of the access token provisioned for a company.
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CompanyAccessToken/definitions/accessToken'
+      definitions:
+        accessToken:
+          title: Access token
+          type: object
+          properties:
+            expiresIn:
+              type: integer
+              description: The number of seconds until the access token expires.
+              example: 86400
+            accessToken:
+              type: string
+              description: The access token for the company.
+            tokenType:
+              type: string
+              description: The type of token.
+              example: Bearer
+          required:
+          - expiresIn
+          - accessToken
+          - tokenType
+      examples:
+      - expiresIn: 86400
+        accessToken: string
+        tokenType: Bearer
+    CompanyUpdateRequest:
+      title: Update company request
+      x-internal: true
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of company being connected.
+          pattern: ^[A-Za-z0-9\s\-',&@.,?!\s]+$
+          minLength: 1
+          example: Bank of Dave
+        description:
+          $ref: '#/components/schemas/CompanyRequestBody/properties/description'
+        tags:
+          $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    productIdentifier:
+      name: productIdentifier
+      in: path
+      required: true
+      schema:
+        type: string
+        examples:
+        - bank-feeds
+        - lending
+        - payables
+        - expenses
+      description: Human-readable product identifier for a product.
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    companyId_2:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
+      description: Unique identifier for a company.
+  securitySchemes:
+    auth_header:
+      name: Authorization
+      description: The word "Basic" followed by a space and your API key. [API keys](https://docs.codat.io/platform-api#/schemas/ApiKeyDetails) are tokens used to control access to the API. You can get an API key via [the Codat Portal](https://app.codat.io/developers/api-keys), via [the API](https://docs.codat.io/platform-api#/operations/list-api-keys), or [read more](https://docs.codat.io/using-the-api/authentication) about authentication at Codat.
+      type: apiKey
+      in: header
+      x-speakeasy-example: Basic BASE_64_ENCODED(API_KEY)
+x-speakeasy-retries:
+  strategy: backoff
+  backoff:
+    initialInterval: 500
+    maxInterval: 60000
+    maxElapsedTime: 3600000
+    exponent: 1.5
+  statusCodes:
+  - 408
+  - 429
+  - 5XX
+  retryConnectionErrors: true
+x-speakeasy-name-override:
+- operationId: ^list-.*?
+  methodNameOverride: list
+- operationId: ^list-.*?-attachments
+  methodNameOverride: list-attachments
+- operationId: ^get-.*?
+  methodNameOverride: get
+- operationId: ^get-create-.*?-model
+  methodNameOverride: get-create-model
+- operationId: ^get-create-update.*?-model
+  methodNameOverride: get-create-update-model
+- operationId: ^get-.*?-attachment
+  methodNameOverride: get-attachment
+- operationId: ^update-.*?
+  methodNameOverride: update
+- operationId: ^create-.*?
+  methodNameOverride: create
+- operationId: ^delete-.*?
+  methodNameOverride: delete
+- operationId: ^delete-.*?-attachment
+  methodNameOverride: delete-attachment
+- operationId: ^download-.*?-attachment
+  methodNameOverride: download-attachment
+- operationId: ^upload-.*?-attachment
+  methodNameOverride: upload-attachment
+x-codat-docs-path: bank-feeds-api
+x-codat-keep-docs-paths-local: true
+x-codat-speakeasy-pagination:
+  type: offsetLimit
+  inputs:
+  - name: page
+    in: parameters
+    type: page
+  outputs:
+    results: $.results

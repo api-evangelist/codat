@@ -1,0 +1,2447 @@
+openapi: 3.1.0
+info:
+  title: Bank Feeds Account mapping Bank accounts API
+  version: 3.0.0
+  contact:
+    email: support@codat.io
+    name: Codat
+  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
+
+
+    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
+
+
+    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
+
+
+    ---
+
+    <!-- Start Codat Tags Table -->
+
+    ## Endpoints
+
+
+    | Endpoints | Description |
+
+    | :- |:- |
+
+    | Companies | Create and manage your SMB users'' companies. |
+
+    | Connections | Create new and manage existing data connections for a company. |
+
+    | Source accounts | Provide and manage lists of source bank accounts. |
+
+    | Account mapping | Extra functionality for building an account management UI. |
+
+    | Company information | Get detailed information about a company from the underlying platform. |
+
+    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
+
+    <!-- End Codat Tags Table -->'
+  termsOfService: https://www.codat.io/legals/
+servers:
+- description: Production
+  url: https://api.codat.io
+security:
+- auth_header: []
+tags:
+- name: Bank accounts
+  description: Access bank accounts in an SMBs accounting software.
+paths:
+  /companies/{companyId}/connections/{connectionId}/data/bankAccounts:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    get:
+      x-internal: true
+      tags:
+      - Bank accounts
+      summary: List bank accounts
+      operationId: list-bank-accounts
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/orderBy'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccounts'
+              examples:
+                Dynamics 365 Business Central:
+                  value:
+                    results:
+                    - id: c9a41bc7-6e5b-ed11-8c34-0022481b8b5b
+                      accountName: '55'
+                      accountType: Unknown
+                      nominalCode: '10500'
+                      sortCode: ''
+                      accountNumber: ''
+                      iBan: ''
+                      currency: GBP
+                      balance: -352.03
+                      modifiedDate: '2023-03-27T14:21:10Z'
+                      sourceModifiedDate: '2023-02-07T00:00:00'
+                      overdraftLimit: 0
+                      metadata:
+                        isDeleted: false
+                    - id: 47020f80-60e6-ec11-82f8-0022481a77f0
+                      accountName: '555'
+                      accountType: Unknown
+                      nominalCode: '40300'
+                      sortCode: ''
+                      accountNumber: ''
+                      iBan: ''
+                      currency: PLN
+                      balance: 661.79
+                      modifiedDate: '2023-03-27T14:21:10Z'
+                      sourceModifiedDate: '2022-06-07T00:00:00'
+                      overdraftLimit: 0
+                      metadata:
+                        isDeleted: false
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 28
+                    _links:
+                      current:
+                        href: /companies/d6849caf-c146-41be-8335-b73346e3bd84/connections/60acb117-5cf5-4745-b069-491551da4066/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/d6849caf-c146-41be-8335-b73346e3bd84/connections/60acb117-5cf5-4745-b069-491551da4066/data/bankAccounts
+                      next:
+                        href: /companies/d6849caf-c146-41be-8335-b73346e3bd84/connections/60acb117-5cf5-4745-b069-491551da4066/data/bankAccounts?page=2&pageSize=2
+                FreeAgent:
+                  value:
+                    results:
+                    - id: '738783'
+                      accountName: \w3fw
+                      accountType: Debit
+                      sortCode: '236972'
+                      accountNumber: A06268209
+                      currency: GBP
+                      balance: -10484.65
+                      availableBalance: -10484.65
+                      modifiedDate: '2023-04-25T14:19:12Z'
+                      metadata:
+                        isDeleted: false
+                    - id: '738778'
+                      accountName: 2e2bna45hy\
+                      accountType: Debit
+                      sortCode: '236972'
+                      accountNumber: D01825250
+                      currency: GBP
+                      balance: -114.4
+                      availableBalance: -114.4
+                      modifiedDate: '2023-04-25T14:19:12Z'
+                      metadata:
+                        isDeleted: false
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 82
+                    _links:
+                      current:
+                        href: /companies/071ad738-68f3-4561-afd0-69bab9df0803/connections/4fd7c69f-ecc1-45f5-83f2-42ed3391e386/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/071ad738-68f3-4561-afd0-69bab9df0803/connections/4fd7c69f-ecc1-45f5-83f2-42ed3391e386/data/bankAccounts
+                      next:
+                        href: /companies/071ad738-68f3-4561-afd0-69bab9df0803/connections/4fd7c69f-ecc1-45f5-83f2-42ed3391e386/data/bankAccounts?page=2&pageSize=2
+                KashFlow:
+                  value:
+                    results:
+                    - id: '765768'
+                      accountName: 16th Account
+                      accountType: Unknown
+                      nominalCode: '70700'
+                      currency: GBP
+                      balance: 326
+                      availableBalance: 326
+                      modifiedDate: '2022-09-30T10:29:16Z'
+                    - id: '765766'
+                      accountName: 1a1a
+                      accountType: Unknown
+                      nominalCode: '70600'
+                      currency: GBP
+                      balance: 0
+                      availableBalance: 0
+                      modifiedDate: '2022-09-30T10:29:16Z'
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 56
+                    _links:
+                      current:
+                        href: /companies/3a707a99-89da-4b16-a5d6-595333a16352/connections/ecab4f64-1a04-4c53-a343-bfd879f41f67/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/3a707a99-89da-4b16-a5d6-595333a16352/connections/ecab4f64-1a04-4c53-a343-bfd879f41f67/data/bankAccounts
+                      next:
+                        href: /companies/3a707a99-89da-4b16-a5d6-595333a16352/connections/ecab4f64-1a04-4c53-a343-bfd879f41f67/data/bankAccounts?page=2&pageSize=2
+                Oracle NetSuite:
+                  value:
+                    results:
+                    - id: '825'
+                      accountName: Codat Europe Bank
+                      accountType: Debit
+                      nominalCode: '111111122222111'
+                      currency: GBP
+                      balance: 558.22
+                      modifiedDate: '2023-05-02T13:24:36Z'
+                      sourceModifiedDate: '2022-07-15T11:34:02'
+                      metadata:
+                        isDeleted: false
+                    - id: '826'
+                      accountName: Codat Europe Bank USD
+                      accountType: Debit
+                      nominalCode: '1133221133'
+                      currency: USD
+                      modifiedDate: '2023-05-02T13:24:36Z'
+                      sourceModifiedDate: '2021-03-26T10:31:40'
+                      metadata:
+                        isDeleted: false
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 4
+                    _links:
+                      current:
+                        href: /companies/d5074b08-6a34-4b06-a742-236edf5dc4f1/connections/79f8313e-210a-4dc8-b69f-ba7e5004dda7/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/d5074b08-6a34-4b06-a742-236edf5dc4f1/connections/79f8313e-210a-4dc8-b69f-ba7e5004dda7/data/bankAccounts
+                      next:
+                        href: /companies/d5074b08-6a34-4b06-a742-236edf5dc4f1/connections/79f8313e-210a-4dc8-b69f-ba7e5004dda7/data/bankAccounts?page=2&pageSize=2
+                QuickBooks Desktop:
+                  value:
+                    results:
+                    - id: 20000-933270541
+                      accountName: Checking
+                      accountType: Unknown
+                      nominalCode: '10100'
+                      currency: GBP
+                      balance: 46954.1
+                      availableBalance: 46954.1
+                      modifiedDate: '2023-04-26T09:12:37Z'
+                      sourceModifiedDate: '2023-12-16T05:06:45'
+                      metadata:
+                        isDeleted: false
+                    - id: 550001-1071509830
+                      accountName: Petty Cash
+                      accountType: Unknown
+                      nominalCode: '10400'
+                      currency: GBP
+                      balance: 500
+                      availableBalance: 500
+                      modifiedDate: '2023-04-26T09:12:37Z'
+                      sourceModifiedDate: '2023-12-16T05:06:45'
+                      metadata:
+                        isDeleted: false
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 3
+                    _links:
+                      current:
+                        href: /companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/connections/2c26b4da-97d4-4ba9-baad-1e18b49b96ac/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/connections/2c26b4da-97d4-4ba9-baad-1e18b49b96ac/data/bankAccounts
+                      next:
+                        href: /companies/fc72ba08-af13-4474-b28a-01dcfa6cfb51/connections/2c26b4da-97d4-4ba9-baad-1e18b49b96ac/data/bankAccounts?page=2&pageSize=2
+                QuickBooks Online Sandbox:
+                  value:
+                    results:
+                    - id: '164'
+                      accountName: '00'
+                      accountType: Debit
+                      nominalCode: '123567'
+                      currency: GBP
+                      balance: 0
+                      availableBalance: 0
+                      modifiedDate: '2023-04-26T09:35:57Z'
+                      sourceModifiedDate: '2022-07-20T14:11:28Z'
+                      metadata:
+                        isDeleted: false
+                    - id: '163'
+                      accountName: '11'
+                      accountType: Debit
+                      currency: GBP
+                      balance: 0
+                      availableBalance: 0
+                      modifiedDate: '2023-04-26T09:35:57Z'
+                      sourceModifiedDate: '2022-07-20T14:11:28Z'
+                      metadata:
+                        isDeleted: false
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 57
+                    _links:
+                      current:
+                        href: /companies/5a7f3597-36e1-4216-86fe-289ad36088a6/connections/1f9f6013-f8a5-4278-8a47-3ab7fdb6c24c/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/5a7f3597-36e1-4216-86fe-289ad36088a6/connections/1f9f6013-f8a5-4278-8a47-3ab7fdb6c24c/data/bankAccounts
+                      next:
+                        href: /companies/5a7f3597-36e1-4216-86fe-289ad36088a6/connections/1f9f6013-f8a5-4278-8a47-3ab7fdb6c24c/data/bankAccounts?page=2&pageSize=2
+                QuickBooks Online:
+                  value:
+                    results:
+                    - id: '202'
+                      accountName: \aa
+                      accountType: Debit
+                      currency: GBP
+                      balance: 123
+                      availableBalance: 123
+                      modifiedDate: '2023-01-18T11:02:37Z'
+                      sourceModifiedDate: '2022-11-11T14:15:13Z'
+                    - id: '193'
+                      accountName: 1 year ago
+                      accountType: Debit
+                      currency: GBP
+                      balance: 5300.02
+                      availableBalance: 5300.02
+                      modifiedDate: '2023-01-18T11:02:37Z'
+                      sourceModifiedDate: '2023-01-18T06:05:12Z'
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 140
+                    _links:
+                      current:
+                        href: /companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/connections/9e28a776-f4be-425b-8a3d-ad49956de2c9/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/connections/9e28a776-f4be-425b-8a3d-ad49956de2c9/data/bankAccounts
+                      next:
+                        href: /companies/10818b5e-6e6a-4ed4-a1c5-3e3efe626e87/connections/9e28a776-f4be-425b-8a3d-ad49956de2c9/data/bankAccounts?page=2&pageSize=2
+                Sage 50 (UK):
+                  value:
+                    results:
+                    - id: '1200'
+                      accountName: Bank Current Account
+                      accountType: Unknown
+                      nominalCode: '1200'
+                      sortCode: 23-34-34
+                      accountNumber: '003234234'
+                      iBan: ''
+                      currency: GBP
+                      balance: -20091.04
+                      availableBalance: -20091.04
+                      modifiedDate: '2023-03-30T14:42:37Z'
+                      sourceModifiedDate: '2022-11-25T09:25:48'
+                      overdraftLimit: 120000
+                      institution: Lloyds Bank PLC
+                      metadata:
+                        isDeleted: false
+                    - id: '1210'
+                      accountName: Bank Deposit Account
+                      accountType: Unknown
+                      nominalCode: '1210'
+                      sortCode: 45-45-45
+                      accountNumber: 9/00474345
+                      iBan: ''
+                      currency: GBP
+                      balance: 3510
+                      availableBalance: 3510
+                      modifiedDate: '2023-03-30T14:42:37Z'
+                      sourceModifiedDate: '2022-11-25T09:25:48'
+                      overdraftLimit: 0
+                      institution: Halifax Building Society
+                      metadata:
+                        isDeleted: false
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 6
+                    _links:
+                      current:
+                        href: /companies/cf5f2a47-2990-4221-bae6-0c19c86ac304/connections/8ee4910f-4fc1-47e6-89b1-5931fb33d8f7/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/cf5f2a47-2990-4221-bae6-0c19c86ac304/connections/8ee4910f-4fc1-47e6-89b1-5931fb33d8f7/data/bankAccounts
+                      next:
+                        href: /companies/cf5f2a47-2990-4221-bae6-0c19c86ac304/connections/8ee4910f-4fc1-47e6-89b1-5931fb33d8f7/data/bankAccounts?page=2&pageSize=2
+                Sage Business Cloud Accounting:
+                  value:
+                    results:
+                    - id: 154d05abe9f24c4babe0f6a741dec1b9
+                      accountName: Abdi Internet Bank
+                      accountType: Unknown
+                      nominalCode: '1560'
+                      sortCode: '010101'
+                      accountNumber: '11111'
+                      currency: GBP
+                      balance: 49.61
+                      availableBalance: 49.61
+                      modifiedDate: '2022-10-24T14:52:53Z'
+                      sourceModifiedDate: '2020-01-27T10:53:26Z'
+                    - id: 565ce07212bc492c8c2d04f43f9f67e3
+                      accountName: Abdi Live Test
+                      accountType: Unknown
+                      nominalCode: '147852'
+                      sortCode: '123456'
+                      accountNumber: '1234567'
+                      currency: GBP
+                      balance: -225830.75
+                      availableBalance: -225830.75
+                      modifiedDate: '2022-10-24T14:52:53Z'
+                      sourceModifiedDate: '2020-01-28T14:00:20Z'
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 45
+                    _links:
+                      current:
+                        href: /companies/390083e2-351b-407c-a3be-55081c36c182/connections/37916fb7-b4b8-4a78-8872-1751e20ee0cd/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/390083e2-351b-407c-a3be-55081c36c182/connections/37916fb7-b4b8-4a78-8872-1751e20ee0cd/data/bankAccounts
+                      next:
+                        href: /companies/390083e2-351b-407c-a3be-55081c36c182/connections/37916fb7-b4b8-4a78-8872-1751e20ee0cd/data/bankAccounts?page=2&pageSize=2
+                Sage Intacct:
+                  value:
+                    results:
+                    - id: CREDITCARD:55
+                      accountName: CoT Credit Card
+                      accountType: Credit
+                      nominalCode: '10021'
+                      currency: GBP
+                      modifiedDate: '2023-04-04T16:31:46Z'
+                      sourceModifiedDate: '2023-03-27T14:11:48'
+                      metadata:
+                        isDeleted: false
+                    - id: CREDITCARD:58
+                      accountName: Cot Credit Card 2
+                      accountType: Credit
+                      nominalCode: '11112'
+                      currency: GBP
+                      modifiedDate: '2023-04-04T16:31:46Z'
+                      sourceModifiedDate: '2023-03-27T14:15:11'
+                      metadata:
+                        isDeleted: false
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 14
+                    _links:
+                      current:
+                        href: /companies/df02b289-cb16-4964-ac4d-9fd60b04538e/connections/8f457d9c-1142-4241-a07e-71d1ee2e3052/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/df02b289-cb16-4964-ac4d-9fd60b04538e/connections/8f457d9c-1142-4241-a07e-71d1ee2e3052/data/bankAccounts
+                      next:
+                        href: /companies/df02b289-cb16-4964-ac4d-9fd60b04538e/connections/8f457d9c-1142-4241-a07e-71d1ee2e3052/data/bankAccounts?page=2&pageSize=2
+                Xero:
+                  value:
+                    results:
+                    - id: bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4
+                      accountName: Business Bank Account
+                      accountType: Debit
+                      sortCode: '990404'
+                      accountNumber: '987654321'
+                      currency: GBP
+                      balance: 6681.79
+                      modifiedDate: '2023-03-15T20:36:09Z'
+                      sourceModifiedDate: '2023-03-15T20:35:07'
+                      metadata:
+                        isDeleted: false
+                    - id: a8d6fb1a-8c5d-4683-90ce-bf9d28fc62ba
+                      accountName: Business Savings Account
+                      accountType: Debit
+                      sortCode: '890303'
+                      accountNumber: '876543210'
+                      currency: GBP
+                      balance: 0
+                      modifiedDate: '2023-03-15T20:36:09Z'
+                      sourceModifiedDate: '2023-03-15T20:36:06'
+                      metadata:
+                        isDeleted: false
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 2
+                    _links:
+                      current:
+                        href: /companies/5ced9667-a310-443a-a711-958d36377141/connections/6a4bcf97-e46a-465c-abf6-c42cec8e48c0/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/5ced9667-a310-443a-a711-958d36377141/connections/6a4bcf97-e46a-465c-abf6-c42cec8e48c0/data/bankAccounts
+                Zoho Books:
+                  value:
+                    results:
+                    - id: '104957000000060010'
+                      accountName: Abdi Test
+                      accountType: Unknown
+                      sortCode: '112233'
+                      accountNumber: xxxx5678
+                      currency: GBP
+                      balance: 69858.44
+                      modifiedDate: '2022-10-03T08:40:38Z'
+                      institution: Test Bank
+                    - id: '104957000000065002'
+                      accountName: Abdi Test 2
+                      accountType: Unknown
+                      sortCode: ''
+                      accountNumber: ''
+                      currency: AED
+                      balance: 98.03
+                      modifiedDate: '2022-10-03T08:40:38Z'
+                      institution: ''
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 4
+                    _links:
+                      current:
+                        href: /companies/d0b68840-db50-4bc3-b88c-96e225333fea/connections/a2324b8e-60e9-451d-8eb1-0fdc8e8224df/data/bankAccounts?page=1&pageSize=2
+                      self:
+                        href: /companies/d0b68840-db50-4bc3-b88c-96e225333fea/connections/a2324b8e-60e9-451d-8eb1-0fdc8e8224df/data/bankAccounts
+                      next:
+                        href: /companies/d0b68840-db50-4bc3-b88c-96e225333fea/connections/a2324b8e-60e9-451d-8eb1-0fdc8e8224df/data/bankAccounts?page=2&pageSize=2
+        '400':
+          $ref: '#/components/responses/Malformed-Query'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      description: "The *List bank accounts* endpoint returns a list of [bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) for a given company's connection.\n\n[Bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) are financial accounts maintained by a bank or other financial institution.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/bank-feeds-api#/operations/refresh-company-data).\n    "
+  /companies/{companyId}/connections/{connectionId}/options/bankAccounts:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    get:
+      summary: Get create/update bank account model
+      x-internal: true
+      tags:
+      - Bank accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PushOption'
+              examples:
+                Dynamics 365 Business Central:
+                  value:
+                    type: Object
+                    displayName: Bank Account
+                    description: An account that bank transactions may be recorded against
+                    properties:
+                      accountName:
+                        type: String
+                        displayName: Name
+                        description: The name of the bank account in the originating system
+                        required: true
+                        validation:
+                          warnings: []
+                          information:
+                          - field: AccountName
+                            details: Needs to be of the format '{No.}-{Name}'
+                      currency:
+                        type: String
+                        displayName: Currency
+                        description: The currency of the bank account
+                        required: true
+                      accountNumber:
+                        type: String
+                        displayName: Account Number
+                        description: The account number for the bank account
+                        required: false
+                      nominalCode:
+                        type: String
+                        displayName: Nominal Code
+                        description: The external reference given to each nominal account for a business
+                        required: false
+                        validation:
+                          warnings: []
+                          information:
+                          - field: NominalCode
+                            details: Bank Account Posting Group with Nominal Account must exist
+                      sortCode:
+                        type: String
+                        displayName: Sort Code
+                        description: The sort code for the bank account
+                        required: false
+                        validation:
+                          warnings: []
+                          information:
+                          - field: SortCode
+                            details: Must have a length between 0 and 20 characters
+                      iBan:
+                        type: String
+                        displayName: IBAN
+                        description: The international bank account number of the account. Often used when making or receiving international payments
+                        required: false
+                      overdraftLimit:
+                        type: Number
+                        displayName: Overdraft Limit
+                        description: The pre-arranged overdraft limit of the account
+                        required: false
+                        validation:
+                          warnings: []
+                          information:
+                          - field: OverdraftLimit
+                            details: Default value is 0
+                    required: true
+                Exact (Netherlands):
+                  value:
+                    type: Object
+                    displayName: Bank Account
+                    description: An account that bank transactions may be recorded against
+                    properties:
+                      accountName:
+                        type: String
+                        displayName: Name
+                        description: The name of the bank account in the originating system
+                        required: true
+                      accountNumber:
+                        type: String
+                        displayName: Account Number
+                        description: The account number for the bank account
+                        required: true
+                        validation:
+                          warnings:
+                          - field: AccountNumber
+                            details: Should not exceed the maximum length of 14 characters if the specified currency is GBP.
+                          information: []
+                      sortCode:
+                        type: String
+                        displayName: Sort Code
+                        description: The sort code for the bank account
+                        required: false
+                        validation:
+                          warnings:
+                          - field: SortCode
+                            details: Must be 6 characters long if the specified currency is GBP.
+                          - field: SortCode
+                            details: Must be provided if the specified currency is GBP.
+                          information: []
+                      currency:
+                        type: String
+                        displayName: Currency
+                        description: The currency of the bank account
+                        required: false
+                      nominalCode:
+                        type: String
+                        displayName: Nominal Code
+                        description: The external reference given to each nominal account for a business
+                        required: false
+                    required: true
+                Exact (UK):
+                  value:
+                    type: Object
+                    displayName: Bank Account
+                    description: An account that bank transactions may be recorded against
+                    properties:
+                      accountName:
+                        type: String
+                        displayName: Name
+                        description: The name of the bank account in the originating system
+                        required: true
+                      accountNumber:
+                        type: String
+                        displayName: Account Number
+                        description: The account number for the bank account
+                        required: true
+                        validation:
+                          warnings:
+                          - field: AccountNumber
+                            details: Should not exceed the maximum length of 14 characters if the specified currency is GBP.
+                          information: []
+                      sortCode:
+                        type: String
+                        displayName: Sort Code
+                        description: The sort code for the bank account
+                        required: false
+                        validation:
+                          warnings:
+                          - field: SortCode
+                            details: Must be 6 characters long if the specified currency is GBP.
+                          - field: SortCode
+                            details: Must be provided if the specified currency is GBP.
+                          information: []
+                      currency:
+                        type: String
+                        displayName: Currency
+                        description: The currency of the bank account
+                        required: false
+                      nominalCode:
+                        type: String
+                        displayName: Nominal Code
+                        description: The external reference given to each nominal account for a business
+                        required: false
+                    required: true
+                FreeAgent:
+                  value:
+                    type: Object
+                    displayName: Bank Account
+                    description: An account that bank transactions may be recorded against
+                    properties:
+                      accountName:
+                        type: String
+                        displayName: Name
+                        description: The name of the bank account in the originating system
+                        required: true
+                      sortCode:
+                        type: String
+                        displayName: Sort Code
+                        description: The sort code for the bank account
+                        required: false
+                        validation:
+                          warnings:
+                          - field: SortCode
+                            details: Must have a length between 0 and 8 characters
+                          information: []
+                      accountNumber:
+                        type: String
+                        displayName: Account Number
+                        description: The account number for the bank account
+                        required: false
+                      iBan:
+                        type: String
+                        displayName: IBAN
+                        description: The international bank account number of the account. Often used when making or receiving international payments
+                        required: false
+                      currency:
+                        type: String
+                        displayName: Currency
+                        description: The currency of the bank account
+                        options:
+                        - value: AED
+                          type: String
+                          displayName: AED
+                          required: false
+                        - value: AMD
+                          type: String
+                          displayName: AMD
+                          required: false
+                        - value: AOA
+                          type: String
+                          displayName: AOA
+                          required: false
+                        - value: ARS
+                          type: String
+                          displayName: ARS
+                          required: false
+                        - value: AUD
+                          type: String
+                          displayName: AUD
+                          required: false
+                        - value: AWG
+                          type: String
+                          displayName: AWG
+                          required: false
+                        - value: AZN
+                          type: String
+                          displayName: AZN
+                          required: false
+                        - value: BBD
+                          type: String
+                          displayName: BBD
+                          required: false
+                        - value: BDT
+                          type: String
+                          displayName: BDT
+                          required: false
+                        - value: BGN
+                          type: String
+                          displayName: BGN
+                          required: false
+                        - value: BRL
+                          type: String
+                          displayName: BRL
+                          required: false
+                        - value: BWP
+                          type: String
+                          displayName: BWP
+                          required: false
+                        - value: CAD
+                          type: String
+                          displayName: CAD
+                          required: false
+                        - value: CHF
+                          type: String
+                          displayName: CHF
+                          required: false
+                        - value: CLP
+                          type: String
+                          displayName: CLP
+                          required: false
+                        - value: CNY
+                          type: String
+                          displayName: CNY
+                          required: false
+                        - value: COP
+                          type: String
+                          displayName: COP
+                          required: false
+                        - value: CRC
+                          type: String
+                          displayName: CRC
+                          required: false
+                        - value: CUC
+                          type: String
+                          displayName: CUC
+                          required: false
+                        - value: CUP
+                          type: String
+                          displayName: CUP
+                          required: false
+                        - value: CZK
+                          type: String
+                          displayName: CZK
+                          required: false
+                        - value: DKK
+                          type: String
+                          displayName: DKK
+                          required: false
+                        - value: DOP
+                          type: String
+                          displayName: DOP
+                          required: false
+                        - value: EGP
+                          type: String
+                          displayName: EGP
+                          required: false
+                        - value: EUR
+                          type: String
+                          displayName: EUR
+                          required: false
+                        - value: FJD
+                          type: String
+                          displayName: FJD
+                          required: false
+                        - value: GBP
+                          type: String
+                          displayName: GBP
+                          required: false
+                        - value: GEL
+                          type: String
+                          displayName: GEL
+                          required: false
+                        - value: GHS
+                          type: String
+                          displayName: GHS
+                          required: false
+                        - value: GTQ
+                          type: String
+                          displayName: GTQ
+                          required: false
+                        - value: GYD
+                          type: String
+                          displayName: GYD
+                          required: false
+                        - value: HKD
+                          type: String
+                          displayName: HKD
+                          required: false
+                        - value: HNL
+                          type: String
+                          displayName: HNL
+                          required: false
+                        - value: HRK
+                          type: String
+                          displayName: HRK
+                          required: false
+                        - value: HUF
+                          type: String
+                          displayName: HUF
+                          required: false
+                        - value: IDR
+                          type: String
+                          displayName: IDR
+                          required: false
+                        - value: ILS
+                          type: String
+                          displayName: ILS
+                          required: false
+                        - value: INR
+                          type: String
+                          displayName: INR
+                          required: false
+                        - value: ISK
+                          type: String
+                          displayName: ISK
+                          required: false
+                        - value: JMD
+                          type: String
+                          displayName: JMD
+                          required: false
+                        - value: JPY
+                          type: String
+                          displayName: JPY
+                          required: false
+                        - value: KES
+                          type: String
+                          displayName: KES
+                          required: false
+                        - value: KRW
+                          type: String
+                          displayName: KRW
+                          required: false
+                        - value: KWD
+                          type: String
+                          displayName: KWD
+                          required: false
+                        - value: KYD
+                          type: String
+                          displayName: KYD
+                          required: false
+                        - value: KZT
+                          type: String
+                          displayName: KZT
+                          required: false
+                        - value: LAK
+                          type: String
+                          displayName: LAK
+                          required: false
+                        - value: LBP
+                          type: String
+                          displayName: LBP
+                          required: false
+                        - value: LKR
+                          type: String
+                          displayName: LKR
+                          required: false
+                        - value: LTL
+                          type: String
+                          displayName: LTL
+                          required: false
+                        - value: LVL
+                          type: String
+                          displayName: LVL
+                          required: false
+                        - value: MAD
+                          type: String
+                          displayName: MAD
+                          required: false
+                        - value: MDL
+                          type: String
+                          displayName: MDL
+                          required: false
+                        - value: MGA
+                          type: String
+                          displayName: MGA
+                          required: false
+                        - value: MUR
+                          type: String
+                          displayName: MUR
+                          required: false
+                        - value: MVR
+                          type: String
+                          displayName: MVR
+                          required: false
+                        - value: MWK
+                          type: String
+                          displayName: MWK
+                          required: false
+                        - value: MXN
+                          type: String
+                          displayName: MXN
+                          required: false
+                        - value: MYR
+                          type: String
+                          displayName: MYR
+                          required: false
+                        - value: MZN
+                          type: String
+                          displayName: MZN
+                          required: false
+                        - value: NAD
+                          type: String
+                          displayName: NAD
+                          required: false
+                        - value: NGN
+                          type: String
+                          displayName: NGN
+                          required: false
+                        - value: NOK
+                          type: String
+                          displayName: NOK
+                          required: false
+                        - value: NPR
+                          type: String
+                          displayName: NPR
+                          required: false
+                        - value: NZD
+                          type: String
+                          displayName: NZD
+                          required: false
+                        - value: OMR
+                          type: String
+                          displayName: OMR
+                          required: false
+                        - value: PEN
+                          type: String
+                          displayName: PEN
+                          required: false
+                        - value: PHP
+                          type: String
+                          displayName: PHP
+                          required: false
+                        - value: PKR
+                          type: String
+                          displayName: PKR
+                          required: false
+                        - value: PLN
+                          type: String
+                          displayName: PLN
+                          required: false
+                        - value: QAR
+                          type: String
+                          displayName: QAR
+                          required: false
+                        - value: RON
+                          type: String
+                          displayName: RON
+                          required: false
+                        - value: RSD
+                          type: String
+                          displayName: RSD
+                          required: false
+                        - value: RUB
+                          type: String
+                          displayName: RUB
+                          required: false
+                        - value: RWF
+                          type: String
+                          displayName: RWF
+                          required: false
+                        - value: SAR
+                          type: String
+                          displayName: SAR
+                          required: false
+                        - value: SCR
+                          type: String
+                          displayName: SCR
+                          required: false
+                        - value: SEK
+                          type: String
+                          displayName: SEK
+                          required: false
+                        - value: SGD
+                          type: String
+                          displayName: SGD
+                          required: false
+                        - value: THB
+                          type: String
+                          displayName: THB
+                          required: false
+                        - value: TND
+                          type: String
+                          displayName: TND
+                          required: false
+                        - value: TRY
+                          type: String
+                          displayName: TRY
+                          required: false
+                        - value: TTD
+                          type: String
+                          displayName: TTD
+                          required: false
+                        - value: TWD
+                          type: String
+                          displayName: TWD
+                          required: false
+                        - value: TZS
+                          type: String
+                          displayName: TZS
+                          required: false
+                        - value: UAH
+                          type: String
+                          displayName: UAH
+                          required: false
+                        - value: UGX
+                          type: String
+                          displayName: UGX
+                          required: false
+                        - value: USD
+                          type: String
+                          displayName: USD
+                          required: false
+                        - value: UYU
+                          type: String
+                          displayName: UYU
+                          required: false
+                        - value: VEF
+                          type: String
+                          displayName: VEF
+                          required: false
+                        - value: VND
+                          type: String
+                          displayName: VND
+                          required: false
+                        - value: VUV
+                          type: String
+                          displayName: VUV
+                          required: false
+                        - value: XAF
+                          type: String
+                          displayName: XAF
+                          required: false
+                        - value: XCD
+                          type: String
+                          displayName: XCD
+                          required: false
+                        - value: XOF
+                          type: String
+                          displayName: XOF
+                          required: false
+                        - value: ZAR
+                          type: String
+                          displayName: ZAR
+                          required: false
+                        - value: ZMK
+                          type: String
+                          displayName: ZMK
+                          required: false
+                        required: true
+                      balance:
+                        type: Number
+                        displayName: Balance
+                        description: The balance of the bank account
+                        required: false
+                        validation:
+                          warnings: []
+                          information:
+                          - field: Balance
+                            details: The opening balance, in the account currency
+                      institution:
+                        type: String
+                        displayName: Institution
+                        description: The institution of the bank account
+                        required: false
+                    required: true
+                KashFlow:
+                  value:
+                    type: Object
+                    displayName: Bank Account
+                    description: An account that bank transactions may be recorded against
+                    properties:
+                      accountName:
+                        type: String
+                        displayName: Account Name
+                        description: Name of the bank account as it appears in Kashflow.
+                        required: true
+                      balance:
+                        type: Number
+                        displayName: Balance
+                        description: The opening balance, in the account currency.
+                        required: false
+                      currency:
+                        type: String
+                        displayName: Currency
+                        description: The currency of the bank account.
+                        required: true
+                    required: true
+                QuickBooks Desktop:
+                  value:
+                    type: Object
+                    displayName: Bank Account
+                    description: An account that bank transactions may be recorded against
+                    properties:
+                      nominalCode:
+                        type: String
+                        displayName: Nominal Code
+                        description: The external reference given to each nominal account for a business
+                        required: true
+                        validation:
+                          warnings:
+                          - field: NominalCode
+                            details: Max length of 7 characters.
+                          information: []
+                      accountName:
+                        type: String
+                        displayName: Name
+                        description: The name of the bank account in the originating system
+                        required: true
+                        validation:
+                          warnings:
+                          - field: AccountName
+                            details: Max length of 31 characters.
+                          information: []
+                      currency:
+                        type: String
+                        displayName: Currency
+                        description: The currency of the bank account
+                        required: false
+                        validation:
+                          warnings:
+                          - field: Currency
+                            details: The currency must match the base currency of the QuickBooks Desktop company unless the FullyQualifiedCategory is 'Asset.AccountsReceivable','Liability.AccountsPayable' or 'Liability.CreditCard'
+                          - field: Currency
+                            details: Must be a three letter ISO code that matches an existing active currency in the QuickBooks Desktop company
+                          - field: Currency
+                            details: Can only be set if the QuickBooks Desktop company has Multicurrency enabled.
+                          information:
+                          - field: Currency
+                            details: If not set, will default to the base currency of the QuickBooks Desktop company
+                      balance:
+                        type: Number
+                        displayName: Balance
+                        description: The balance of the bank account
+                        required: false
+                    required: true
+                QuickBooks Online Sandbox:
+                  value:
+                    type: Object
+                    displayName: Bank Account
+                    description: An account that bank transactions may be recorded against
+                    properties:
+                      accountName:
+                        type: String
+                        displayName: Account Name
+                        description: Name of account as it appears in the chart of accounts or general ledger.
+                        required: true
+                      accountNumber:
+                        type: String
+                        displayName: Account Number
+                        description: User-defined account number to help the user in identifying the account within the chart-of-accounts and in deciding what should be posted to the account.
+                        required: true
+                      currency:
+                        type: String
+                        displayName: Currency
+                        description: Currency of the bank account.
+                        required: true
+                    required: true
+                Sage Business Cloud Accounting:
+                  value:
+                    type: Object
+                    displayName: Bank Account
+                    description: An account that bank transactions may be recorded against
+                    properties:
+                      accountName:
+                        type: String
+                        displayName: Name
+                        description: The name of the bank account in the originating system
+                        required: true
+                        validation:
+                          warnings: []
+                          information:
+                          - field: AccountName
+                            details: Must be provided.
+                          - field: AccountName
+                            details: Should not be longer than 50 characters.
+                      currency:
+                        type: String
+                        displayName: Currency
+                        description: The currency of the bank account
+                        required: true
+                        validation:
+                          warnings: []
+                          information:
+                          - field: Currency
+                            details: Must be provided.
+                          - field: Currency
+                            details: Must match the company's base currency.
+                      sortCode:
+                        type: String
+                        displayName: Sort Code
+                        description: The sort code for the bank account
+                        required: false
+                        validation:
+                          warnings: []
+                          information:
+                          - field: SortCode
+                            details: Should be a 6 digit number.
+                      accountNumber:
+                        type: String
+                        displayName: Account Number
+                        description: The account number for the bank account
+                        required: false
+                        validation:
+                          warnings: []
+                          information:
+                          - field: AccountNumber
+                            details: Should not be longer than 25 characters.
+                      iBan:
+                        type: String
+                        displayName: IBAN
+                        description: The international bank account number of the account. Often used when making or receiving international payments
+                        required: false
+                        validation:
+                          warnings: []
+                          information:
+                          - field: IBan
+                            details: Should be in the international bank account number format.
+                      nominalCode:
+                        type: String
+                        displayName: Nominal Code
+                        description: The external reference given to each nominal account for a business
+                        required: false
+                        validation:
+                          warnings: []
+                          information:
+                          - field: NominalCode
+                            details: Should be a number between 1 and 99999999.
+                    required: true
+                Sandbox:
+                  value:
+                    type: Object
+                    displayName: Bank Account
+                    description: An account that bank transactions may be recorded against
+                    properties:
+                      accountName:
+                        type: String
+                        displayName: Name
+                        description: The name of the bank account in the originating system
+                        required: true
+                      accountType:
+                        type: String
+                        displayName: Account Type
+                        description: The type of account
+                        required: true
+                      nominalCode:
+                        type: String
+                        displayName: Nominal Code
+                        description: The external reference given to each nominal account for a business
+                        required: true
+                      sortCode:
+                        type: String
+                        displayName: Sort Code
+                        description: The sort code for the bank account
+                        required: true
+                      accountNumber:
+                        type: String
+                        displayName: Account Number
+                        description: The account number for the bank account
+                        required: true
+                      iBan:
+                        type: String
+                        displayName: IBAN
+                        description: The international bank account number of the account. Often used when making or receiving international payments
+                        required: true
+                      currency:
+                        type: String
+                        displayName: Currency
+                        description: The currency of the bank account
+                        required: true
+                      balance:
+                        type: Number
+                        displayName: Balance
+                        description: The balance of the bank account
+                        required: true
+                      availableBalance:
+                        type: Number
+                        displayName: Available Balance
+                        description: The available balance of the bank account
+                        required: true
+                      overdraftLimit:
+                        type: Number
+                        displayName: Overdraft Limit
+                        description: The pre-arranged overdraft limit of the account
+                        required: true
+                      institution:
+                        type: String
+                        displayName: Institution
+                        description: The institution of the bank account
+                        required: true
+                      metadata:
+                        type: Object
+                        displayName: Metadata
+                        description: Miscellaneous data about the item
+                        properties:
+                          isDeleted:
+                            type: Boolean
+                            displayName: IsDeleted
+                            description: A boolean to indicate whether the object has been deleted
+                            required: true
+                        required: true
+                    required: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      operationId: get-create-bankAccounts-model
+      description: "The *Get create/update bank account model* endpoint returns the expected data for the request payload when creating and updating a [bank account](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) for a given company and integration.\r\n\r\n[Bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) are financial accounts maintained by a bank or other financial institution.\r\n\r\n**Integration-specific behavior**\r\n\r\nSee the *response examples* for integration-specific indicative models.\r\n"
+  /companies/{companyId}/connections/{connectionId}/push/bankAccounts:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    post:
+      x-internal: true
+      tags:
+      - Bank accounts
+      summary: Create bank account
+      parameters:
+      - $ref: '#/components/parameters/timeoutInMinutes'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BankAccounts/allOf/0/properties/results/items/definitions/bankAccountPrototype'
+            examples: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccounts/allOf/0/properties/results/items/definitions/bankAccountCreateResponse'
+              examples: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      description: "The *Create bank account* endpoint creates a new [bank account](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) for a given company's connection.\r\n\r\n[Bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) are financial accounts maintained by a bank or other financial institution.\r\n\r\n**Integration-specific behavior**\r\n\r\nRequired data may vary by integration. To see what data to post, first call [Get create/update bank account model](https://docs.codat.io/bank-feeds-api#/operations/get-create-update-bankAccounts-model)."
+      operationId: create-bank-account
+components:
+  schemas:
+    PushOption:
+      title: Push option
+      x-internal: true
+      required:
+      - displayName
+      - required
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/PushOption/definitions/pushOptionType'
+        displayName:
+          $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/displayName'
+        description:
+          $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/description'
+        required:
+          $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/required'
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty'
+          nullable: true
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/PushOption/definitions/pushOptionChoice'
+          nullable: true
+        validation:
+          $ref: '#/components/schemas/PushOption/definitions/pushValidationInfo'
+          nullable: true
+      definitions:
+        pushOptionProperty:
+          title: Push Option Property
+          required:
+          - description
+          - displayName
+          - required
+          - type
+          type: object
+          properties:
+            type:
+              $ref: '#/components/schemas/PushOption/definitions/pushOptionType'
+            displayName:
+              minLength: 1
+              type: string
+              description: The property's display name.
+            description:
+              type: string
+              description: A description of the property.
+            required:
+              type: boolean
+              description: The property is required if `True`.
+            properties:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty'
+              nullable: true
+            options:
+              type: array
+              items:
+                $ref: '#/components/schemas/PushOption/definitions/pushOptionChoice'
+              nullable: true
+            validation:
+              $ref: '#/components/schemas/PushOption/definitions/pushValidationInfo'
+        pushValidationInfo:
+          title: Push validation info
+          type: object
+          properties:
+            warnings:
+              type: array
+              items:
+                $ref: '#/components/schemas/PushOption/definitions/pushFieldValidation'
+              nullable: true
+            information:
+              type: array
+              items:
+                $ref: '#/components/schemas/PushOption/definitions/pushFieldValidation'
+              nullable: true
+          additionalProperties: false
+        pushFieldValidation:
+          title: Push field validation
+          required:
+          - details
+          type: object
+          properties:
+            field:
+              type: string
+              description: Field name that resulted in the validation issue.
+            details:
+              minLength: 1
+              type: string
+              description: Details on the validation issue.
+            ref:
+              type: string
+              format: uri
+              nullable: true
+              description: Unique reference identifier for the validation issue.
+          additionalProperties: false
+        pushOptionType:
+          title: Option Type
+          description: The option type.
+          enum:
+          - Array
+          - Object
+          - String
+          - Number
+          - Boolean
+          - DateTime
+          - File
+          - MultiPart
+          type: string
+        pushOptionChoice:
+          title: Push Option Choice
+          type: object
+          properties:
+            value:
+              type: string
+              minLength: 1
+              description: Allowed value for field.
+            type:
+              $ref: '#/components/schemas/PushOption/definitions/pushOptionType'
+            displayName:
+              $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/displayName'
+            description:
+              $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/description'
+            required:
+              $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/required'
+    Companies:
+      title: Companies
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Company'
+      - type: object
+        title: Pagination information
+        x-internal: true
+        properties:
+          pageNumber:
+            type: integer
+            description: Current page number.
+          pageSize:
+            type: integer
+            description: Number of items to return in results array.
+            maximum: 2000
+          totalResults:
+            type: integer
+            description: Total number of items.
+          _links:
+            $ref: '#/components/schemas/Companies/allOf/1/definitions/links'
+        definitions:
+          links:
+            title: Hal Links
+            type: object
+            required:
+            - self
+            - current
+            properties:
+              self:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+              current:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+              next:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+              previous:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+            examples:
+            - self:
+                href: /companies
+              current:
+                href: /companies?page=1&pageSize=10
+          halRef:
+            title: Hypertext reference
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri-reference
+                description: Uri hypertext reference.
+        required:
+        - pageNumber
+        - pageSize
+        - totalResults
+        - _links
+        examples:
+        - pageNumber: 1
+          pageSize: 10
+          totalResults: 1
+          _links:
+            self:
+              href: /companies/{id}/data/{dataType}
+            current:
+              href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    PushOperation:
+      title: Push operation
+      type: object
+      x-internal: true
+      properties:
+        changes:
+          type: array
+          nullable: true
+          description: 'Contains a single entry that communicates which record has changed and the manner in which it changed. '
+          items:
+            $ref: '#/components/schemas/PushOperation/definitions/pushOperationChange'
+        dataType:
+          $ref: '#/components/schemas/DataType'
+          description: The type of data being pushed, eg invoices, customers.
+        companyId:
+          $ref: '#/components/parameters/companyId/schema'
+        pushOperationKey:
+          type: string
+          format: uuid
+          description: A unique identifier generated by Codat to represent this single push operation. This identifier can be used to track the status of the push, and should be persisted.
+        dataConnectionKey:
+          $ref: '#/components/parameters/connectionId/schema'
+        requestedOnUtc:
+          $ref: '#/components/schemas/DateTime'
+          description: The datetime when the push was requested.
+        completedOnUtc:
+          $ref: '#/components/schemas/DateTime'
+          description: The datetime when the push was completed, null if Pending.
+        timeoutInMinutes:
+          type: integer
+          format: int32
+          nullable: true
+          description: Number of minutes the push operation must complete within before it times out.
+        timeoutInSeconds:
+          type: integer
+          format: int32
+          nullable: true
+          deprecated: true
+          description: Number of seconds the push operation must complete within before it times out.
+        status:
+          $ref: '#/components/schemas/PushOperation/definitions/pushOperationStatus'
+        errorMessage:
+          type: string
+          nullable: true
+          description: A message about the error.
+        validation:
+          $ref: '#/components/schemas/PushOperation/definitions/validation'
+        statusCode:
+          type: integer
+          description: Push status code.
+      required:
+      - companyId
+      - pushOperationKey
+      - dataConnectionKey
+      - requestedOnUtc
+      - status
+      - statusCode
+      definitions:
+        validation:
+          type: object
+          title: Validation
+          description: A human-readable object describing validation decisions Codat has made when pushing data into the platform. If a push has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/PushOperation/definitions/validationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/PushOperation/definitions/validationItem'
+        validationItem:
+          title: Validation item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+          additionalProperties: false
+        pushChangeType:
+          title: Push change type
+          description: Type of change being applied to record in third party platform.
+          type: string
+          enum:
+          - Unknown
+          - Created
+          - Modified
+          - Deleted
+          - AttachmentUploaded
+        pushOperationRef:
+          title: Push operation reference
+          x-internal: true
+          type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier for a push operation.
+            dataType:
+              $ref: '#/components/schemas/DataType'
+              nullable: true
+          additionalProperties: false
+        pushOperationStatus:
+          title: Push operation status
+          type: string
+          enum:
+          - Pending
+          - Failed
+          - Success
+          - TimedOut
+          description: The current status of the push operation.
+        pushOperationChange:
+          type: object
+          properties:
+            type:
+              $ref: '#/components/schemas/PushOperation/definitions/pushChangeType'
+            recordRef:
+              $ref: '#/components/schemas/PushOperation/definitions/pushOperationRef'
+            attachmentId:
+              type: string
+              description: Unique identifier for the attachment created otherwise null.
+              nullable: true
+    BankAccounts:
+      x-internal: true
+      title: 'Accounting: Bank accounts'
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              title: 'Accounting: Bank account'
+              description: "> **Accessing Bank Accounts through Banking API**\n> \n> This datatype was originally used for accessing bank account data both in accounting integrations and open banking aggregators. \n> \n> To view bank account data through the Banking API, please refer to the new [Banking: Account](https://docs.codat.io/bank-feeds-api#/schemas/Account) data type.\n\n## Overview\n\nA list of bank accounts associated with a company and a specific data connection.\n\nBank accounts data includes:\n* The name and ID of the account in the accounting software.\n* The currency and balance of the account.\n* The sort code and account number."
+              type: object
+              allOf:
+              - properties:
+                  id:
+                    type: string
+                    description: Identifier for the account, unique for the company in the accounting software.
+              - $ref: '#/components/schemas/BankAccounts/allOf/0/properties/results/items/definitions/bankAccountPrototype'
+              - properties:
+                  metadata:
+                    title: Metadata
+                    type: object
+                    x-internal: true
+                    properties:
+                      isDeleted:
+                        type: boolean
+                        description: Indicates whether the record has been deleted in the third-party system this record originated from.
+                        nullable: true
+                  supplementalData:
+                    title: Supplemental data
+                    type: object
+                    x-internal: true
+                    description: "Supplemental data is additional data you can include in our standard data types. \n\nIt is referenced as a configured dynamic key value pair that is unique to the accounting software. [Learn more](https://docs.codat.io/using-the-api/supplemental-data/overview) about supplemental data."
+                    properties:
+                      content:
+                        type: object
+                        additionalProperties:
+                          type: object
+                          additionalProperties: true
+                        nullable: true
+              - title: Modified dates
+                x-internal: true
+                allOf:
+                - title: ModifiedDate
+                  x-internal: true
+                  type: object
+                  properties:
+                    modifiedDate:
+                      allOf:
+                      - $ref: '#/components/schemas/DateTime'
+                      - description: 'The date when the record was last fetched from the accounting software, commerce software, or open banking provider and updated in Codat’s data cache.
+
+
+                          Use it to identify and retrieve records that have changed since your last fetch. For example, filtering `modifiedDate` to today will provide new records updated in Codat today.
+
+
+                          This date is populated for all data types except for attachments, balance sheets, company information, and profit & loss reports ([read more](https://docs.codat.io/using-the-api/modified-dates#modified-date)).
+
+
+                          In Codat''s data model, dates and times are represented using the <a class="external" href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601 standard</a>.'
+                - title: Source Modified Date
+                  x-internal: true
+                  type: object
+                  nullable: true
+                  properties:
+                    sourceModifiedDate:
+                      allOf:
+                      - $ref: '#/components/schemas/DateTime'
+                      - description: "The date when a record was last modified in the accounting software, usually by the business or a business process. For example, when payments are made against an invoice. \n\nIt is not populated ([read more](https://docs.codat.io/using-the-api/modified-dates#source-modified-date)) when:\n  - Pulling attachments\n  - The accounting software does not provide modification dates for a data type\n  - A record has been deleted from the source platform and Codat doesn't have a record of when the deletion occurred\n  - A record has been voided. For certain platforms that soft delete records, `isDeleted` metadata is used to identify void records\n\nIn Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>."
+              definitions:
+                bankAccountPrototype:
+                  title: Bank account prototype
+                  type: object
+                  properties:
+                    accountName:
+                      type: string
+                      nullable: true
+                      description: Name of the bank account in the accounting software.
+                    accountType:
+                      title: Bank Account Type
+                      x-internal: true
+                      enum:
+                      - Unknown
+                      - Credit
+                      - Debit
+                      type: string
+                      description: "The type of transactions and balances on the account.  \nFor Credit accounts, positive balances are liabilities, and positive transactions **reduce** liabilities.  \nFor Debit accounts, positive balances are assets, and positive transactions **increase** assets."
+                    nominalCode:
+                      type: string
+                      nullable: true
+                      description: Code used to identify each nominal account for a business.
+                    sortCode:
+                      type: string
+                      nullable: true
+                      description: 'Sort code for the bank account.
+
+
+                        Xero integrations
+
+                        The sort code is only displayed when the currency = GBP and the sort code and account number sum to 14 digits. For non-GBP accounts, this field is not populated.'
+                    accountNumber:
+                      type: string
+                      nullable: true
+                      description: 'Account number for the bank account.
+
+
+                        Xero integrations
+
+                        Only a UK account number shows for bank accounts with GBP currency and a combined total of sort code and account number that equals 14 digits, For non-GBP accounts, the full bank account number is populated.
+
+
+                        FreeAgent integrations
+
+                        For Credit accounts, only the last four digits are required. For other types, the field is optional.'
+                    iBan:
+                      type: string
+                      nullable: true
+                      description: International bank account number of the account. Often used when making or receiving international payments.
+                    currency:
+                      $ref: '#/components/schemas/SourceAccount/properties/currency'
+                      description: Base currency of the bank account.
+                    balance:
+                      type: number
+                      format: decimal
+                      nullable: true
+                      description: Balance of the bank account.
+                    institution:
+                      type: string
+                      nullable: true
+                      description: The institution of the bank account.
+                    availableBalance:
+                      type: number
+                      format: decimal
+                      nullable: true
+                      description: Total available balance of the bank account as reported by the underlying data source. This may take into account overdrafts or pending transactions for example.
+                    overdraftLimit:
+                      type: number
+                      format: decimal
+                      nullable: true
+                      description: 'Pre-arranged overdraft limit of the account.
+
+
+                        The value is always positive. For example, an overdraftLimit of `1000` means that the balance of the account can go down to `-1000`.'
+                    status:
+                      $ref: '#/components/schemas/BankAccounts/allOf/0/properties/results/items/definitions/bankAccountStatus'
+                bankAccountCreateResponse:
+                  title: Create bank account response
+                  allOf:
+                  - properties:
+                      data:
+                        allOf:
+                        - $ref: '#/components/schemas/BankAccounts/allOf/0/properties/results/items'
+                        - deprecated: true
+                  - $ref: '#/components/schemas/PushOperation'
+                bankAccountRef:
+                  title: Bank account reference
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Bank account 'id' for the account transaction.
+                    name:
+                      type: string
+                      description: bank account 'name' for the account transaction.
+                  description: Links to the Account transactions data type.
+                bankAccounts:
+                  title: 'Accounting: Bank accounts'
+                  allOf:
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/BankAccounts/allOf/0/properties/results/items'
+                  - $ref: '#/components/schemas/Companies/allOf/1'
+                bankAccountStatus:
+                  title: Account status
+                  enum:
+                  - Unknown
+                  - Active
+                  - Archived
+                  - Pending
+                  type: string
+                  description: Status of the bank account.
+                  example: Active
+      - $ref: '#/components/schemas/Companies/allOf/1'
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    SourceAccount:
+      title: Source account (v1)
+      type: object
+      description: The target bank account in a supported accounting software for ingestion into a bank feed.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Unique ID for the bank account.
+        accountName:
+          type: string
+          nullable: true
+          description: The bank account name.
+        accountType:
+          type: string
+          nullable: true
+          description: The type of bank account e.g. Credit.
+        accountNumber:
+          type: string
+          nullable: true
+          description: The account number.
+        sortCode:
+          type: string
+          nullable: true
+          description: The sort code.
+        currency:
+          title: Currency
+          x-internal: true
+          type: string
+          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
+          format: ISO4217
+          examples:
+          - GBP
+          - USD
+          - EUR
+        balance:
+          type: number
+          format: decimal
+          nullable: true
+          description: The latest balance for the bank account.
+        modifiedDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: The last date the bank account was modified.
+        status:
+          type: string
+          nullable: true
+          description: Status of the source account.
+          enum:
+          - pending
+          - connected
+          - connecting
+          - disconnected
+          - unknown
+        feedStartDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+      required:
+      - id
+      definitions:
+        sourceAccountPrototype:
+          title: Source account (v1)
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/SourceAccount/properties/id'
+            accountName:
+              $ref: '#/components/schemas/SourceAccount/properties/accountName'
+            accountType:
+              $ref: '#/components/schemas/SourceAccount/properties/accountType'
+            accountNumber:
+              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
+            sortCode:
+              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            balance:
+              $ref: '#/components/schemas/SourceAccount/properties/balance'
+            modifiedDate:
+              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
+          required:
+          - id
+        sourceAccounts:
+          title: Source accounts
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAccount'
+      examples:
+      - id: acc-002
+        accountName: account-081
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345670'
+        currency: GBP
+        balance: 99.99
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+      - id: acc-003
+        accountName: account-095
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345671'
+        currency: USD
+        balance: 0
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+    DataType:
+      title: Data types
+      x-internal: true
+      type: string
+      description: Available data types
+      enum:
+      - accountTransactions
+      - balanceSheet
+      - bankAccounts
+      - bankTransactions
+      - billCreditNotes
+      - billPayments
+      - bills
+      - cashFlowStatement
+      - chartOfAccounts
+      - company
+      - creditNotes
+      - customers
+      - directCosts
+      - directIncomes
+      - invoices
+      - itemReceipts
+      - items
+      - journalEntries
+      - journals
+      - paymentMethods
+      - payments
+      - profitAndLoss
+      - purchaseOrders
+      - salesOrders
+      - suppliers
+      - taxRates
+      - trackingCategories
+      - transfers
+      - banking-accountBalances
+      - banking-accounts
+      - banking-transactionCategories
+      - banking-transactions
+      - commerce-companyInfo
+      - commerce-customers
+      - commerce-disputes
+      - commerce-locations
+      - commerce-orders
+      - commerce-paymentMethods
+      - commerce-payments
+      - commerce-productCategories
+      - commerce-products
+      - commerce-taxComponents
+      - commerce-transactions
+      example: invoices
+  parameters:
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    timeoutInMinutes:
+      name: timeoutInMinutes
+      in: query
+      schema:
+        type: integer
+        format: int32
+      description: Time limit for the push operation to complete before it is timed out.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+  responses:
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Conflict:
+      description: The data type's dataset has not been requested or is still syncing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 409
+                service: PublicApi
+                error: The data set has not been requested.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Data connection not found:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  securitySchemes:
+    auth_header:
+      name: Authorization
+      description: The word "Basic" followed by a space and your API key. [API keys](https://docs.codat.io/platform-api#/schemas/ApiKeyDetails) are tokens used to control access to the API. You can get an API key via [the Codat Portal](https://app.codat.io/developers/api-keys), via [the API](https://docs.codat.io/platform-api#/operations/list-api-keys), or [read more](https://docs.codat.io/using-the-api/authentication) about authentication at Codat.
+      type: apiKey
+      in: header
+      x-speakeasy-example: Basic BASE_64_ENCODED(API_KEY)
+x-speakeasy-retries:
+  strategy: backoff
+  backoff:
+    initialInterval: 500
+    maxInterval: 60000
+    maxElapsedTime: 3600000
+    exponent: 1.5
+  statusCodes:
+  - 408
+  - 429
+  - 5XX
+  retryConnectionErrors: true
+x-speakeasy-name-override:
+- operationId: ^list-.*?
+  methodNameOverride: list
+- operationId: ^list-.*?-attachments
+  methodNameOverride: list-attachments
+- operationId: ^get-.*?
+  methodNameOverride: get
+- operationId: ^get-create-.*?-model
+  methodNameOverride: get-create-model
+- operationId: ^get-create-update.*?-model
+  methodNameOverride: get-create-update-model
+- operationId: ^get-.*?-attachment
+  methodNameOverride: get-attachment
+- operationId: ^update-.*?
+  methodNameOverride: update
+- operationId: ^create-.*?
+  methodNameOverride: create
+- operationId: ^delete-.*?
+  methodNameOverride: delete
+- operationId: ^delete-.*?-attachment
+  methodNameOverride: delete-attachment
+- operationId: ^download-.*?-attachment
+  methodNameOverride: download-attachment
+- operationId: ^upload-.*?-attachment
+  methodNameOverride: upload-attachment
+x-codat-docs-path: bank-feeds-api
+x-codat-keep-docs-paths-local: true
+x-codat-speakeasy-pagination:
+  type: offsetLimit
+  inputs:
+  - name: page
+    in: parameters
+    type: page
+  outputs:
+    results: $.results

@@ -1,0 +1,3602 @@
+openapi: 3.1.0
+info:
+  title: Bank Feeds Account mapping Bank statements API
+  version: 3.0.0
+  contact:
+    email: support@codat.io
+    name: Codat
+  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
+
+
+    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
+
+
+    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
+
+
+    ---
+
+    <!-- Start Codat Tags Table -->
+
+    ## Endpoints
+
+
+    | Endpoints | Description |
+
+    | :- |:- |
+
+    | Companies | Create and manage your SMB users'' companies. |
+
+    | Connections | Create new and manage existing data connections for a company. |
+
+    | Source accounts | Provide and manage lists of source bank accounts. |
+
+    | Account mapping | Extra functionality for building an account management UI. |
+
+    | Company information | Get detailed information about a company from the underlying platform. |
+
+    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
+
+    <!-- End Codat Tags Table -->'
+  termsOfService: https://www.codat.io/legals/
+servers:
+- description: Production
+  url: https://api.codat.io
+security:
+- auth_header: []
+tags:
+- name: Bank statements
+  description: Retrieve banking data from linked bank accounts.
+paths:
+  /companies/{companyId}/reports/enhancedCashFlow/transactions:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    get:
+      summary: Get categorized bank statement
+      operationId: get-categorized-bank-statement
+      x-speakeasy-group: banking.categorized-statement
+      description: "\uFEFF> **Categorization engine**\n>\n> The categorization engine uses machine learning and has been fully trained against Plaid and TrueLayer banking data sources. It is not fully trained against the Basiq banking data source.\n\nThe _Get categorized bank statement_ endpoint provides a fully categorized list of banking transactions for a company. Accounts and transaction data are obtained from the company's banking data sources."
+      tags:
+      - Bank statements
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedCashFlowTransactions'
+              examples:
+                Categorized bank statement:
+                  $ref: '#/components/examples/EnhancedCashflowExample'
+        '400':
+          $ref: '#/components/responses/Malformed-Query'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/query'
+  /companies/{companyId}/connections/{connectionId}/data/banking-accountBalances:
+    get:
+      tags:
+      - Bank statements
+      summary: List account balances
+      operationId: list-banking-account-balances
+      x-speakeasy-group: banking.account-balances
+      description: "The *List account balances* endpoint returns a list of [account balances](https://docs.codat.io/lending-api#/schemas/AccountBalance) for a given company's connection.\n\n[Account balances](https://docs.codat.io/lending-api#/schemas/AccountBalance) are balances for a bank account, including end-of-day batch balance or running balances per transaction.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      parameters:
+      - $ref: '#/components/parameters/companyId'
+      - $ref: '#/components/parameters/connectionId'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/orderBy'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankingAccountBalances'
+              examples:
+                Basiq:
+                  value:
+                    results:
+                    - accountId: 4811e776-6187-48d9-afee-635fb0d89d93
+                      balance:
+                        current: 11389.85
+                      date: '2017-12-31T00:00:00Z'
+                      modifiedDate: '2022-10-28T07:15:07Z'
+                    - accountId: 4811e776-6187-48d9-afee-635fb0d89d93
+                      balance:
+                        current: 8002.09
+                      date: '2018-01-01T00:00:00Z'
+                      modifiedDate: '2022-10-28T07:15:07Z'
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 3103
+                    _links:
+                      current:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-accountBalances?page=1&pageSize=2
+                      self:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-accountBalances
+                      next:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-accountBalances?page=2&pageSize=2
+                Plaid:
+                  value:
+                    results:
+                    - accountId: 3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB
+                      balance:
+                        current: 205.78
+                      date: '2022-10-13T00:00:00'
+                      modifiedDate: '2022-10-27T10:50:16Z'
+                    - accountId: 3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB
+                      balance:
+                        current: 205.78
+                      date: '2022-10-14T00:00:00'
+                      modifiedDate: '2022-10-27T10:50:16Z'
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 14
+                    _links:
+                      current:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-accountBalances?page=1&pageSize=2
+                      self:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-accountBalances
+                      next:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-accountBalances?page=2&pageSize=2
+        '400':
+          $ref: '#/components/responses/Malformed-Query'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/connections/{connectionId}/data/banking-accounts:
+    get:
+      tags:
+      - Bank statements
+      summary: List accounts
+      operationId: list-banking-accounts
+      x-speakeasy-group: banking.accounts
+      description: "The *List accounts* endpoint returns a list of [accounts](https://docs.codat.io/lending-api#/schemas/Account) for a given company's connection.\n\n[Accounts](https://docs.codat.io/lending-api#/schemas/Account) are financial accounts maintained by a bank or other financial institution.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      parameters:
+      - $ref: '#/components/parameters/companyId'
+      - $ref: '#/components/parameters/connectionId'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/orderBy'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankingAccounts'
+              examples:
+                Basiq:
+                  value:
+                    results:
+                    - id: 4811e776-6187-48d9-afee-635fb0d89d93
+                      name: Hooli Saver
+                      holder: david smith
+                      type: Debit
+                      balance:
+                        available: 2932.85
+                        current: 2932.85
+                      identifiers:
+                        type: Account
+                        number: '14293919644182'
+                        bankCode: 416-982
+                      currency: AUD
+                      institution:
+                        id: AU00000
+                        name: Hooli Bank
+                      modifiedDate: '2022-10-28T07:14:48Z'
+                      sourceModifiedDate: '2022-10-27T13:00:00Z'
+                      accountName: Hooli Saver
+                      accountHolder: david smith
+                      accountType: Debit
+                      accountNumbers:
+                        type: Account
+                        number: '14293919644182'
+                        bankCode: 416-982
+                    - id: 736d90a5-f836-4ae0-a161-1e8056f39701
+                      name: Standard Variable Rate Home Loan
+                      holder: david smith
+                      type: Credit
+                      balance:
+                        available: 6940.31
+                        current: 6940.31
+                      identifiers:
+                        type: Loan
+                        number: '14293919644183'
+                        bankCode: 416-982
+                      currency: AUD
+                      institution:
+                        id: AU00000
+                        name: Hooli Bank
+                      modifiedDate: '2022-10-28T07:14:48Z'
+                      sourceModifiedDate: '2022-10-27T13:00:00Z'
+                      accountName: Standard Variable Rate Home Loan
+                      accountHolder: david smith
+                      accountType: Credit
+                      accountNumbers:
+                        type: Loan
+                        number: '14293919644183'
+                        bankCode: 416-982
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 4
+                    _links:
+                      current:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-accounts?page=1&pageSize=2
+                      self:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-accounts
+                      next:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-accounts?page=2&pageSize=2
+                Plaid:
+                  value:
+                    results:
+                    - id: 3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB
+                      name: Plaid Silver Standard 0.1% Interest Saving
+                      informalName: Plaid Saving
+                      type: Debit
+                      balance:
+                        available: 200
+                        current: 210
+                      identifiers:
+                        type: Depository
+                        number: '1111222233331111'
+                        bankCode: '00021'
+                        maskedAccountNumber: '1111'
+                      currency: CAD
+                      institution:
+                        id: ins_100533
+                        name: American Express (CA)
+                      modifiedDate: '2022-10-27T10:50:16Z'
+                      accountName: Plaid Silver Standard 0.1% Interest Saving
+                      accountType: Debit
+                      accountNumbers:
+                        type: Depository
+                        number: '1111222233331111'
+                        bankCode: '00021'
+                        maskedAccountNumber: '1111'
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 1
+                    _links:
+                      current:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-accounts?page=1&pageSize=2
+                      self:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-accounts
+        '400':
+          $ref: '#/components/responses/Malformed-Query'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/connections/{connectionId}/data/banking-accounts/{accountId}:
+    get:
+      tags:
+      - Bank statements
+      summary: Get account
+      operationId: get-banking-account
+      x-speakeasy-group: banking.accounts
+      description: 'The *Get account* endpoint returns a single account for a given accountId.
+
+
+        [Accounts](https://docs.codat.io/lending-api#/schemas/Account) are financial accounts maintained by a bank or other financial institution.
+
+
+        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).'
+      parameters:
+      - $ref: '#/components/parameters/companyId'
+      - $ref: '#/components/parameters/connectionId'
+      - $ref: '#/components/parameters/accountingAccountId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankingAccount'
+              examples:
+                Basiq:
+                  value:
+                    id: 4811e776-6187-48d9-afee-635fb0d89d93
+                    name: Hooli Saver
+                    holder: david smith
+                    type: Debit
+                    balance:
+                      available: 2932.85
+                      current: 2932.85
+                    identifiers:
+                      type: Account
+                      number: '14293919644182'
+                      bankCode: 416-982
+                    currency: AUD
+                    institution:
+                      id: AU00000
+                      name: Hooli Bank
+                    modifiedDate: '2022-10-28T07:14:48Z'
+                    sourceModifiedDate: '2022-10-27T13:00:00Z'
+                    accountName: Hooli Saver
+                    accountHolder: david smith
+                    accountType: Debit
+                    accountNumbers:
+                      type: Account
+                      number: '14293919644182'
+                      bankCode: 416-982
+                Plaid:
+                  value:
+                    id: 3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB
+                    name: Plaid Silver Standard 0.1% Interest Saving
+                    informalName: Plaid Saving
+                    type: Debit
+                    balance:
+                      available: 200
+                      current: 210
+                    identifiers:
+                      type: Depository
+                      number: '1111222233331111'
+                      bankCode: '00021'
+                      maskedAccountNumber: '1111'
+                    currency: CAD
+                    institution:
+                      id: ins_100533
+                      name: American Express (CA)
+                    modifiedDate: '2022-10-27T10:50:16Z'
+                    accountName: Plaid Silver Standard 0.1% Interest Saving
+                    accountType: Debit
+                    accountNumbers:
+                      type: Depository
+                      number: '1111222233331111'
+                      bankCode: '00021'
+                      maskedAccountNumber: '1111'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/connections/{connectionId}/data/banking-transactions:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    get:
+      tags:
+      - Bank statements
+      operationId: list-banking-transactions
+      x-speakeasy-group: banking.transactions
+      summary: List transactions
+      description: "The *List transactions* endpoint returns a list of [transactions](https://docs.codat.io/lending-api#/schemas/Transaction) for a given company's connection.\n\n[Transactions](https://docs.codat.io/lending-api#/schemas/Transaction) provide an immutable source of up-to-date information on income and expenditure.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/orderBy'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              x-speakeasy-usage-example: true
+              schema:
+                $ref: '#/components/schemas/BankingTransactions'
+              examples:
+                Basiq:
+                  value:
+                    results:
+                    - id: 00017a94-c681-448d-ba8d-585a81b4128f
+                      accountId: feb76128-7650-4b02-a323-e1606146be0c
+                      description: 'RENTALCARTOLLPH131865 PARRAMATTA  AU Card xx0399 Value Date: 25/07/2019'
+                      amount: -14.26
+                      currency: AUD
+                      postedDate: '2019-07-31T00:00:00Z'
+                      code: Unknown
+                      merchantName: ''
+                      transactionCategoryRef:
+                        id: payment
+                        name: Payment
+                      modifiedDate: '2022-10-28T07:15:10Z'
+                    - id: 0023c431-35c8-41f5-b75e-9239413cde7e
+                      accountId: 4811e776-6187-48d9-afee-635fb0d89d93
+                      description: Transfer from xx9263 CommBank app Shop
+                      amount: 191
+                      currency: AUD
+                      postedDate: '2018-07-31T00:00:00Z'
+                      code: Unknown
+                      merchantName: ''
+                      transactionCategoryRef:
+                        id: transfer
+                        name: Transfer
+                      modifiedDate: '2022-10-28T07:15:10Z'
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 3319
+                    _links:
+                      current:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactions?page=1&pageSize=2
+                      self:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactions
+                      next:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactions?page=2&pageSize=2
+                Plaid:
+                  value:
+                    results:
+                    - id: 1514wvMMajumgG7xWA1Bt8o15xP5k3fmeo9Bg_EC6E0DC820E1F9D1A2300BF4A5B80513
+                      accountId: 3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB
+                      description: CREDIT CARD 3333 PAYMENT *//
+                      amount: -25
+                      currency: CAD
+                      postedDate: '2021-05-10T00:00:00'
+                      authorizedDate: '2021-05-09T00:00:00'
+                      code: Unknown
+                      transactionCategoryRef:
+                        id: TRANSFER_OUT.TRANSFER_OUT_ACCOUNT_TRANSFER
+                        name: TRANSFER_OUT_ACCOUNT_TRANSFER
+                      modifiedDate: '2022-10-27T10:50:25Z'
+                    - id: 1514wvMMajumgG7xWA1Bt8oDLxlpm3i3zraD7_6DB63D1DACF6F5824C80F8BE2E066DB5
+                      accountId: 3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB
+                      description: CREDIT CARD 3333 PAYMENT *//
+                      amount: -25
+                      currency: CAD
+                      postedDate: '2022-10-02T00:00:00'
+                      authorizedDate: '2022-10-01T00:00:00'
+                      code: Unknown
+                      transactionCategoryRef:
+                        id: TRANSFER_OUT.TRANSFER_OUT_ACCOUNT_TRANSFER
+                        name: TRANSFER_OUT_ACCOUNT_TRANSFER
+                      modifiedDate: '2022-10-27T10:50:25Z'
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 49
+                    _links:
+                      current:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactions?page=1&pageSize=2
+                      self:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactions
+                      next:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactions?page=2&pageSize=2
+        '400':
+          $ref: '#/components/responses/Malformed-Query'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/connections/{connectionId}/data/banking-transactions/{transactionId}:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    - schema:
+        type: string
+      name: transactionId
+      in: path
+      required: true
+      description: The unique identifier for a transaction
+    get:
+      summary: Get bank transaction
+      tags:
+      - Bank statements
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankingTransaction'
+              examples:
+                Basiq:
+                  value:
+                    id: 00017a94-c681-448d-ba8d-585a81b4128f
+                    accountId: feb76128-7650-4b02-a323-e1606146be0c
+                    description: 'RENTALCARTOLLPH131865 PARRAMATTA  AU Card xx0399 Value Date: 25/07/2019'
+                    amount: -14.26
+                    currency: AUD
+                    postedDate: '2019-07-31T00:00:00Z'
+                    code: Unknown
+                    merchantName: ''
+                    transactionCategoryRef:
+                      id: payment
+                      name: Payment
+                    modifiedDate: '2022-10-28T07:15:10Z'
+                Plaid:
+                  value:
+                    id: 1514wvMMajumgG7xWA1Bt8o15xP5k3fmeo9Bg_EC6E0DC820E1F9D1A2300BF4A5B80513
+                    accountId: 3opGv6XXNeHPEgNVbQpyCr8MAKQ3noC8Qz1zB
+                    description: CREDIT CARD 3333 PAYMENT *//
+                    amount: -25
+                    currency: CAD
+                    postedDate: '2021-05-10T00:00:00'
+                    authorizedDate: '2021-05-09T00:00:00'
+                    code: Unknown
+                    transactionCategoryRef:
+                      id: TRANSFER_OUT.TRANSFER_OUT_ACCOUNT_TRANSFER
+                      name: TRANSFER_OUT_ACCOUNT_TRANSFER
+                    modifiedDate: '2022-10-27T10:50:25Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      description: 'The *Get transaction* endpoint returns a single transaction for a given transactionId.
+
+
+        [Transactions](https://docs.codat.io/lending-api#/schemas/Transaction) provide an immutable source of up-to-date information on income and expenditure.
+
+
+        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
+
+        '
+      operationId: get-banking-transaction
+      x-speakeasy-group: banking.transactions
+  /companies/{companyId}/connections/{connectionId}/data/banking-transactionCategories:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    get:
+      tags:
+      - Bank statements
+      operationId: list-banking-transaction-categories
+      x-speakeasy-group: banking.transaction-categories
+      summary: List transaction categories
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/orderBy'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankingTransactionCategories'
+              examples:
+                Basiq:
+                  value:
+                    results:
+                    - id: bank-fee
+                      name: Bank Fee
+                      hasChildren: false
+                      status: Active
+                      modifiedDate: '2022-10-28T07:14:46'
+                    - id: cash-withdrawal
+                      name: Cash Withdrawal
+                      hasChildren: false
+                      status: Active
+                      modifiedDate: '2022-10-28T07:14:46'
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 9
+                    _links:
+                      current:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactionCategories?page=1&pageSize=2
+                      self:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactionCategories
+                      next:
+                        href: /companies/17129e41-5389-4f10-ac06-e0a37e47d177/connections/b4703906-e631-46f1-9acc-7e237acdc64d/data/banking-transactionCategories?page=2&pageSize=2
+                Plaid:
+                  value:
+                    results:
+                    - id: BANK_FEES
+                      name: BANK_FEES
+                      hasChildren: true
+                      status: Active
+                      modifiedDate: '2022-10-27T10:50:17'
+                    - id: BANK_FEES.BANK_FEES_ATM_FEES
+                      name: BANK_FEES_ATM_FEES
+                      parentId: BANK_FEES
+                      hasChildren: false
+                      status: Active
+                      modifiedDate: '2022-10-27T10:50:17'
+                    pageNumber: 1
+                    pageSize: 2
+                    totalResults: 120
+                    _links:
+                      current:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactionCategories?page=1&pageSize=2
+                      self:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactionCategories
+                      next:
+                        href: /companies/efc2d985-cdb3-4724-8be3-c7310f7ead6c/connections/6c44dc44-e1b1-4578-800f-0bdefb658db7/data/banking-transactionCategories?page=2&pageSize=2
+        '400':
+          $ref: '#/components/responses/Malformed-Query'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      description: "The *List transaction categories* endpoint returns a list of [transaction categories](https://docs.codat.io/lending-api#/schemas/TransactionCategory) for a given company's connection.\n\n[Transaction categories](https://docs.codat.io/lending-api#/schemas/TransactionCategory) are associated with a transaction to provide greater contextual meaning to transaction activity.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+  /companies/{companyId}/connections/{connectionId}/data/banking-transactionCategories/{transactionCategoryId}:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    - schema:
+        type: string
+      name: transactionCategoryId
+      in: path
+      required: true
+      description: The unique identifier for a banking transaction category
+    get:
+      tags:
+      - Bank statements
+      operationId: get-banking-transaction-category
+      x-speakeasy-group: banking.transaction-categories
+      summary: Get transaction category
+      description: 'The *Get transaction category* endpoint returns a single transaction category for a given transactionCategoryId.
+
+
+        [Transaction categories](https://docs.codat.io/lending-api#/schemas/TransactionCategory) are associated with a transaction to provide greater contextual meaning to transaction activity.
+
+
+        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
+
+        '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankingTransactionCategory'
+              examples:
+                Basiq:
+                  value:
+                    id: bank-fee
+                    name: Bank Fee
+                    hasChildren: false
+                    status: Active
+                    modifiedDate: '2022-10-28T07:14:46'
+                Plaid:
+                  value:
+                    id: BANK_FEES
+                    name: BANK_FEES
+                    hasChildren: true
+                    status: Active
+                    modifiedDate: '2022-10-27T10:50:17'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/connections/{connectionId}/bankStatements/upload/configuration:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    get:
+      tags:
+      - Bank statements
+      summary: Get upload configuration
+      description: 'Use the *Get upload configuration* endpoint to view the existing bank statement upload configuration for the specified data connection.
+
+
+        With this configuration, you set the source of the data you plan to upload, the ID of the account in third-party banking platform, and a provider ID, if required. This lets us determine the expected format of the data and any source-specific requirements.
+
+
+        When you use the [*Upload data*](https://docs.codat.io/lending-api#/operations/upload-bank-statement-data) endpoint next, you must upload the data for the account you configured. '
+      operationId: get-bank-statement-upload-configuration
+      x-speakeasy-name-override: get-upload-configuration
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankStatementUploadConfiguration'
+              examples:
+                Codat:
+                  $ref: '#/components/examples/CodatBankStatementUploadConfiguration'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+    post:
+      tags:
+      - Bank statements
+      summary: Set upload configuration
+      description: "Use the *Set upload configuration* endpoint to create bank statement upload configuration for the specified data connection. \n\nWith this configuration, you set the source of the data you plan to upload, the ID of the account in third-party banking platform, and a provider ID, if required. This lets us determine the expected format of the data and any source-specific requirements.\n\nEach data connection can only have one configuration for each company and external account ID combination. You will receive a Bad Request response if you try to set it again. "
+      operationId: set-bank-statement-upload-configuration
+      x-speakeasy-name-override: set-upload-configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BankStatementUploadConfiguration'
+            examples:
+              Codat:
+                $ref: '#/components/examples/CodatBankStatementUploadConfiguration'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankStatementUploadConfiguration'
+              examples:
+                Codat:
+                  $ref: '#/components/examples/CodatBankStatementUploadConfiguration'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/connections/{connectionId}/bankStatements/upload/startSession:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    post:
+      tags:
+      - Bank statements
+      summary: Start upload session
+      description: "Use the *Start upload session* endpoint to initiate a bank statement upload session for a given company.\n\nA session is a one-time process that enables you to upload bank statements to Codat. It will time out after 90 minutes if no data is uploaded. \n\nYou can only have one active session per data type at a time. You can complete or cancel a session using the [*End upload session*](https://docs.codat.io/lending-api#/operations/end-bank-statement-upload-session) endpoint."
+      operationId: start-bank-statement-upload-session
+      x-speakeasy-name-override: start-upload-session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartUploadSessionRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PullOperation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/connections/{connectionId}/bankStatements/upload/dataset/{datasetId}/upload:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    - $ref: '#/components/parameters/datasetId'
+    - $ref: '#/components/parameters/path'
+    post:
+      tags:
+      - Bank statements
+      summary: Upload data
+      description: 'During an active session, use the **Upload data* endpoint to uploads a page of bank accounts or bank transactions data to the session.
+
+
+        Make sure you created configuration for the account using the [*Set upload configuration*](https://docs.codat.io/lending-api#/operations/set-bank-statement-upload-configuration) endpoint before attempting an upload. '
+      operationId: upload-bank-statement-data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/BankingAccount'
+              - $ref: '#/components/schemas/BankingTransactions'
+              - $ref: '#/components/schemas/ThirdPartySchema'
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/connections/{connectionId}/bankStatements/upload/dataset/{datasetId}/endSession:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    - $ref: '#/components/parameters/datasetId'
+    post:
+      tags:
+      - Bank statements
+      summary: End upload session
+      description: 'Use the *End upload session* endpoint to finalize a bank statement upload session. Include a `status` in the request body to indicate if you want to cancel the processing of the dataset or trigger the ingestion and enrichment of the data.
+
+
+        A session is a one-time process that enables you to upload bank statements to Codat. It will time out after 90 minutes if no data is uploaded.'
+      operationId: end-bank-statement-upload-session
+      x-speakeasy-name-override: end-upload-session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndUploadSessionRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/reports/categorizedBankStatement/{reportId}/transactions:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/reportId'
+    - $ref: '#/components/parameters/maxAge'
+    - $ref: '#/components/parameters/page'
+    - $ref: '#/components/parameters/pageSize'
+    - $ref: '#/components/parameters/query'
+    - $ref: '#/components/parameters/orderBy'
+    get:
+      tags:
+      - Bank statements
+      summary: Get categorized bank statement transactions
+      description: 'The *Get categorized bank statement transactions* endpoint returns fully categorized bank transactions for a company. Transaction data is obtained from the company''s connected bank accounts.
+
+
+        Before using it, you must call the [Generate report](https://docs.codat.io/lending-api#/operations/generate-report) endpoint of type `categorizedBankStatement`.'
+      operationId: get-categorized-bank-statement-transactions
+      x-speakeasy-name-override: get-categorized-bank-statement-transactions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategorizedBankStatementTransactions'
+              example:
+                pageNumber: 1
+                pageSize: 100
+                totalResults: 2194
+                _links:
+                  self:
+                    href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions
+                  current:
+                    href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=1&pageSize=100
+                  next:
+                    href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=2&pageSize=100
+                results:
+                - sourceRef:
+                    sourceType: Banking
+                  accountRef:
+                    id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+                    name: Business Current Account
+                  id: ab5e07a0-5578-4d91-8421-2dc72713b74f
+                  date: '2022-11-08T00:00:00'
+                  description: Payment m86SDGpQr3
+                  amount: -6905.44
+                  currency: GBP
+                  transactionCategory:
+                    confidence: 52.53
+                    levels:
+                    - Expense
+                    - Operating
+                    confidences:
+                    - 56
+                    - 52.53
+                  platformName: Shopify
+                  counterpartyNames:
+                  - Shopify
+                  modifiedDate: '2022-11-08T12:00:00'
+                  isRecurring: true
+                - sourceRef:
+                    sourceType: Banking
+                  accountRef:
+                    id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+                    name: Business Current Account
+                  id: 9846bbed-46d3-472c-a848-1ce8ebea7213
+                  date: '2022-11-08T00:00:00'
+                  description: Payment from customer a5c68c7b-6825-46de-bf63-6ad23ef506a4
+                  amount: 4332.84
+                  currency: GBP
+                  transactionCategory:
+                    confidence: 88
+                    levels:
+                    - Expense
+                    confidences:
+                    - 88
+                  platformName: Amazon
+                  counterpartyNames:
+                  - Amazon
+                  - Amazon Marketplace
+                  modifiedDate: '2022-11-08T12:00:00'
+                  isRecurring: false
+                - sourceRef:
+                    sourceType: Banking
+                  accountRef:
+                    id: 809b9470-c9fa-4257-bc9f-06a1dc7b0cbc
+                    name: Business Undeposited Funds
+                  id: 94b213fb-d742-435e-90f1-bfe723a076d5
+                  date: '2022-11-08T00:00:00'
+                  description: Payment from customer a5c68c7b-6825-46de-bf63-6ad23ef506a4
+                  amount: 4034.3
+                  currency: GBP
+                  transactionCategory:
+                    confidence: 61.08
+                    levels:
+                    - Income
+                    - Revenue
+                    confidences:
+                    - 65
+                    - 61.08
+                  platformName: Shopify
+                  counterpartyNames: []
+                  modifiedDate: '2022-11-08T12:00:00'
+                  isRecurring: null
+                - sourceRef:
+                    sourceType: Banking
+                  accountRef:
+                    id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+                    name: Business Current Account
+                  id: cfceb7ff-eaa2-45b6-aca7-fa0e0b439161
+                  date: '2022-11-08T00:00:00'
+                  description: Payment to supplier 78792d13-90a0-4ea2-8e07-81c3c893997e
+                  amount: -313.76
+                  currency: GBP
+                  transactionCategory:
+                    confidence: 40.98
+                    levels:
+                    - Expense
+                    - CostOfSales
+                    confidences:
+                    - 40.98
+                    - 99.9
+                  platformName: Amazon
+                  counterpartyNames: []
+                  modifiedDate: '2022-11-08T12:00:00'
+                  isRecurring: true
+                - sourceRef:
+                    sourceType: Banking
+                  accountRef:
+                    id: 809b9470-c9fa-4257-bc9f-06a1dc7b0cbc
+                    name: Business Undeposited Funds
+                  id: ba814f14-0fe3-41d0-9308-57f40642ac75
+                  date: '2022-11-08T00:00:00'
+                  description: Payment to supplier 46d2e1fb-b4e9-469c-814a-21ff8105a26e
+                  amount: -614.4
+                  currency: GBP
+                  transactionCategory:
+                    confidence: 55.84
+                    levels:
+                    - Income
+                    - Revenue
+                    confidences:
+                    - 55.84
+                    - 75.5
+                  platformName: Zettle
+                  counterpartyNames: []
+                  modifiedDate: '2022-11-08T12:00:00'
+                  isRecurring: false
+                - sourceRef:
+                    sourceType: Banking
+                  accountRef:
+                    id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+                    name: Business Current Account
+                  id: e67cc30e-fd5c-4eea-8365-ec40dfdd3ef6
+                  date: '2022-11-08T00:00:00'
+                  description: Payment from customer a5c68c7b-6825-46de-bf63-6ad23ef506a4
+                  amount: 5199.62
+                  currency: GBP
+                  transactionCategory:
+                    confidence: 57.85
+                    levels:
+                    - Expense
+                    confidences:
+                    - 57.85
+                  platformName: Amazon
+                  counterpartyNames: []
+                  modifiedDate: '2022-11-08T12:00:00'
+                  isRecurring: null
+                - sourceRef:
+                    sourceType: Banking
+                  accountRef:
+                    id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+                    name: Business Current Account
+                  id: e0f08a0b-3575-4dde-98c4-3c854028d2d2
+                  date: '2022-11-08T00:00:00'
+                  description: Payment to supplier 18ac18dc-945b-4083-9013-e8a100b999fa
+                  amount: -21420.94
+                  currency: GBP
+                  transactionCategory:
+                    confidence: 70.58
+                    levels:
+                    - Expense
+                    - Operating
+                    confidences:
+                    - 70.58
+                    - 100
+                  platformName: Amazon
+                  counterpartyNames: []
+                  modifiedDate: '2022-11-08T12:00:00'
+                  isRecurring: true
+                - sourceRef:
+                    sourceType: Banking
+                  accountRef:
+                    id: 809b9470-c9fa-4257-bc9f-06a1dc7b0cbc
+                    name: Business Undeposited Funds
+                  id: 4b70d379-8284-4f44-bb37-c7935df950cc
+                  date: '2022-11-08T00:00:00'
+                  description: Payment to supplier 630a3f16-5f01-4986-ae6b-82333ec49449
+                  amount: -30924.22
+                  currency: GBP
+                  transactionCategory:
+                    confidence: 48.26
+                    levels:
+                    - Income
+                    confidences:
+                    - 48.26
+                  platformName: DoorDash
+                  counterpartyNames: []
+                  modifiedDate: '2022-11-08T12:00:00'
+                  isRecurring: false
+                - sourceRef:
+                    sourceType: Banking
+                  accountRef:
+                    id: 809b9470-c9fa-4257-bc9f-06a1dc7b0cbc
+                    name: Business Undeposited Funds
+                  id: 76b73373-9345-472e-8edf-5be849d797fe
+                  date: '2022-11-08T00:00:00'
+                  description: Payment to supplier bQATU4eSb9
+                  amount: -568.78
+                  currency: GBP
+                  transactionCategory:
+                    confidence: 65.21
+                    levels:
+                    - Income
+                    - Revenue
+                    confidences:
+                    - 65.21
+                    - 100
+                  platformName: Uber
+                  counterpartyNames:
+                  - Uber
+                  modifiedDate: '2022-11-08T12:00:00'
+                  isRecurring: true
+                - sourceRef:
+                    sourceType: Banking
+                  accountRef:
+                    id: 809b9470-c9fa-4257-bc9f-06a1dc7b0cbc
+                    name: Business Undeposited Funds
+                  id: ee92fd6f-e0f7-4391-85fd-4b50921b973f
+                  date: '2022-11-08T00:00:00'
+                  description: Payment to supplier 9c37eb21-579a-4886-8296-3a853076b7bd
+                  amount: -13050.79
+                  currency: GBP
+                  transactionCategory:
+                    confidence: 92.33
+                    levels:
+                    - Income
+                    - Revenue
+                    confidences:
+                    - 92.33
+                    - 92.33
+                  platformName: DoorDash
+                  counterpartyNames:
+                  - DoorDash
+                  modifiedDate: '2022-11-08T12:00:00'
+                  isRecurring: false
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/reports/categorizedBankStatement/{reportId}/accounts:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/reportId'
+    - $ref: '#/components/parameters/maxAge'
+    - $ref: '#/components/parameters/page'
+    - $ref: '#/components/parameters/pageSize'
+    - $ref: '#/components/parameters/query'
+    - $ref: '#/components/parameters/orderBy'
+    get:
+      tags:
+      - Bank statements
+      summary: List categorized bank statement accounts
+      description: "The *Get categorized bank statement accounts* endpoint returns a list of bank accounts associated with categorized transactions for a company. \n\nBefore using it, you must call the [Generate report](https://docs.codat.io/lending-api#/operations/generate-report) endpoint of type `categorizedBankStatement`."
+      operationId: list-categorized-bank-statement-accounts
+      x-speakeasy-name-override: list-categorized-bank-statement-accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategorizedBankStatementAccounts'
+              example:
+                pageNumber: 1
+                pageSize: 10
+                totalResults: 15
+                _links:
+                  self:
+                    href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions
+                  current:
+                    href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=1&pageSize=10
+                  next:
+                    href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=2&pageSize=10
+                results:
+                - sourceRef:
+                    sourceType: Banking
+                  platformName: Banking Sandbox
+                  accountProvider: Lloyds Bank
+                  accountName: Business Savings Account
+                  accountType: Debit
+                  currency: GBP
+                  currentBalance: 0
+                - sourceRef:
+                    sourceType: Banking
+                  platformName: Banking Sandbox
+                  accountProvider: Lloyds Bank
+                  accountName: Banking - Business Credit Card
+                  accountType: Credit
+                  currency: GBP
+                  currentBalance: 0
+                - sourceRef:
+                    sourceType: Banking
+                  platformName: Banking Sandbox
+                  accountProvider: Lloyds Bank
+                  accountName: Business Undeposited Funds
+                  accountType: Debit
+                  currency: GBP
+                  currentBalance: 0
+                - sourceRef:
+                    sourceType: Banking
+                  platformName: Banking Sandbox
+                  accountProvider: Lloyds Bank
+                  accountName: Business Current Account
+                  accountType: Debit
+                  currency: GBP
+                  currentBalance: 0
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/reports/categorizedBankStatement/{reportId}/excel:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/reportId'
+    - $ref: '#/components/parameters/maxAge'
+    get:
+      tags:
+      - Bank statements
+      summary: Download categorized bank statement Excel
+      description: "Use the *Download categorized bank statement Excel* endpoint to download the categorized bank statement Excel file. \n\nBefore using it, you must call the [Generate report](https://docs.codat.io/lending-api#/operations/generate-report) endpoint of type `categorizedBankStatement`."
+      operationId: download-categorized-bank-statement-excel
+      x-speakeasy-name-override: download-categorized-bank-statement-excel
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+components:
+  schemas:
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    EnhancedCashFlowTransactions:
+      title: Enhanced cash flow transactions
+      description: '> **Categorization engine**
+
+        >
+
+        > The categorization engine uses machine learning and has been fully trained against Plaid and TrueLayer banking data sources. It is not fully trained against the Basiq banking data source.
+
+
+        The Enhanced Cash Flow Transactions endpoint provides a fully categorized list of banking transactions for a company. Accounts and transaction data are obtained from the company''s banking data sources.'
+      type: object
+      properties:
+        reportInfo:
+          $ref: '#/components/schemas/EnhancedInvoicesReport/definitions/reportInfo'
+        dataSources:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/dataSource'
+        reportItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/enhancedCashFlowItem'
+      definitions:
+        dataSource:
+          type: object
+          properties:
+            accounts:
+              description: 'An array containing bank account data for each connected banking data source that have the following data types enabled: `banking-accounts`, `banking-transactions`.'
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/accounts'
+        accounts:
+          title: Accounts
+          type: object
+          properties:
+            sourceRef:
+              title: Report source reference
+              description: A source reference containing the `sourceType` object "Banking".
+              type: object
+              properties:
+                sourceType:
+                  description: The data source type.
+                  type: string
+              examples:
+              - Example:
+                  value:
+                    sourceRef:
+                      sourceType: Banking
+            platformName:
+              description: Name of the banking data source, e.g. "Plaid".
+              type: string
+            accountProvider:
+              description: The bank or other financial institution providing the account.
+              type: string
+            accountName:
+              description: The name of the account according to the provider.
+              type: string
+            accountType:
+              description: The type of banking account, e.g. credit or debit.
+              type: string
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+              description: The currency code for the bank account.
+            currentBalance:
+              description: The balance of the bank account.
+              type: number
+              format: decimal
+        enhancedCashFlowItem:
+          type: object
+          properties:
+            transactions:
+              description: An array of transaction data.
+              type: array
+              items:
+                title: Cash flow transaction
+                type: object
+                properties:
+                  id:
+                    description: The unique identifier of the bank transaction.
+                    type: string
+                  date:
+                    description: The date the bank transaction was posted.
+                    $ref: '#/components/schemas/DateTime'
+                  description:
+                    description: The description of the bank transaction.
+                    type: string
+                  amount:
+                    description: The bank transaction amount.
+                    type: number
+                    format: decimal
+                  currency:
+                    $ref: '#/components/schemas/SourceAccount/properties/currency'
+                    description: The currency code for bank transaction.
+                  transactionCategory:
+                    description: Contains an array of category levels.
+                    $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/enhancedCashFlowItem/properties/transactions/items/definitions/transactionCategory'
+                  platformName:
+                    description: Returns the payment processor responsible for the transaction.
+                    type: string
+                  counterpartyNames:
+                    description: An array of counterparty names involved in the transaction.
+                    type: array
+                    items:
+                      type: string
+                  sourceRef:
+                    $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/accounts/properties/sourceRef'
+                  accountRef:
+                    $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/enhancedCashFlowItem/properties/transactions/items/definitions/accountRef'
+                  modifiedDate:
+                    description: The date the bank transaction was last modified.
+                    $ref: '#/components/schemas/DateTime'
+                  isRecurring:
+                    description: Indicates if the transaction is classified as recurring by Codat's categorization engine.
+                    type: boolean
+                    nullable: true
+                definitions:
+                  accountRef:
+                    title: Account reference
+                    description: An account reference containing the account id and name.
+                    type: object
+                    properties:
+                      id:
+                        description: The id of the account.
+                        type: string
+                      name:
+                        description: The name of the account.
+                        type: string
+                    examples:
+                    - Example:
+                        value:
+                          accountRef:
+                            id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+                            name: Business Current Account
+                  transactionCategory:
+                    title: Transaction category
+                    type: object
+                    properties:
+                      confidence:
+                        description: Returns the aggregate confidence of the suggested category for the transaction. The value is between 0 and 100.
+                        type: number
+                        format: decimal
+                      confidences:
+                        description: An ordered array of category level confidences where each element is the confidence of the corresponding item in the `levels` array.
+                        type: array
+                        items:
+                          type: number
+                          format: decimal
+                      levels:
+                        description: The suggested category is an ordered array of category levels where each element (or level) is a subcategory of the previous element (or level).
+                        type: array
+                        items:
+                          type: string
+                    examples:
+                    - Example:
+                        value:
+                          transactionCategory:
+                            confidence: 92.7
+                            levels:
+                            - Asset
+                            - Current
+                            - Bank
+                            - BankTransfers
+                            - ShareholderTransfers
+                            confidences:
+                            - 92.7
+                            - 95
+                            - 96
+                            - 97.5
+                            - 100
+      examples:
+      - reportInfo:
+          pageNumber: 1
+          pageSize: 100
+          totalResults: 2401
+          reportName: Cash Flow transactions report
+          companyName: Example Company
+          generatedDate: '2023-01-25T22:36:05.125Z'
+        dataSources:
+        - accounts:
+          - sourceRef:
+              sourceType: Banking
+            id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+            platformName: Plaid
+            accountProvider: Bank of Sandbox
+            accountName: Business Current Account
+            accountType: Debit
+            currency: USD
+            currentBalance: 1000
+            identifiers:
+            - type: Debit
+              subType: Current
+              number: 12345678
+              bankCode: 123456
+              iban: US123456789
+              bic: US123456789
+              maskedAccountNumber: 1234
+          - sourceRef:
+              sourceType: Banking
+            id: 12345678-1234-1234-1234-123456789012
+            platformName: Plaid
+            accountProvider: Bank of Sandbox
+            accountName: Business Saving Account
+            accountType: Debit
+            currency: USD
+            currentBalance: 5321
+            identifiers:
+            - type: Debit
+              subType: Saving
+              number: 87654321
+              bankCode: 654321
+              iban: US987654321
+              bic: US987654321
+              maskedAccountNumber: 4321
+        reportItems:
+        - transactions:
+          - sourceRef:
+              sourceType: Banking
+          - accountRef:
+              id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+              name: Business Current Account
+            id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+            date: '2023-01-25'
+            description: Payment to supplier
+            amount: 100
+            currency: USD
+            transactionCategory:
+              confidence: 92.7
+              levels:
+              - Asset
+              - Current
+              - Bank
+              confidences:
+              - 92.7
+              - 95
+              - 96
+            platformName: Plaid
+            counterpartyNames:
+            - Counterparty
+            modifiedDate: '2023-01-25T22:36:05.125Z'
+          - sourceRef:
+              sourceType: Banking
+          - accountRef:
+              id: 12345678-1234-1234-1234-123456789012
+              name: Business Saving Account
+            id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+            date: '2023-01-25'
+            description: Payment to supplier
+            amount: 100
+            currency: USD
+            transactionCategory: null
+            confidence: 92.7
+            levels:
+            - Expense
+            - Operating
+            confidences:
+            - 92.7
+            - 95
+            platformName: Plaid
+            counterpartyNames: []
+            modifiedDate: '2023-01-25T22:36:05.125Z'
+    ThirdPartySchema:
+      title: Third-party schema
+      description: The format should be identical to the file format receieved from the third-party banking source (e.g. Plaid or TrueLayer).
+      type: object
+      x-speakeasy-type-override: any
+    PagingInfo:
+      type: object
+      title: Pagination information
+      x-internal: true
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number.
+        pageSize:
+          type: integer
+          description: Number of items to return in results array.
+          maximum: 2000
+        totalResults:
+          type: integer
+          description: Total number of items.
+        _links:
+          $ref: '#/components/schemas/PagingInfo/definitions/links'
+      definitions:
+        links:
+          title: Hal Links
+          type: object
+          required:
+          - self
+          - current
+          properties:
+            self:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            current:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            next:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            previous:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+          examples:
+          - self:
+              href: /companies
+            current:
+              href: /companies?page=1&pageSize=10
+        halRef:
+          title: Hypertext reference
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri-reference
+              description: Uri hypertext reference.
+      required:
+      - pageNumber
+      - pageSize
+      - totalResults
+      - _links
+      examples:
+      - pageNumber: 1
+        pageSize: 10
+        totalResults: 1
+        _links:
+          self:
+            href: /companies/{id}/data/{dataType}
+          current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+    CategorizedBankStatementTransactions:
+      title: Categorized bank statement transactions
+      description: '> **Categorization engine**
+
+        >
+
+        > The categorization engine uses machine learning and has been fully trained against Plaid and TrueLayer banking data sources. It is not fully trained against the Basiq banking data source.
+
+
+        The Enhanced Cash Flow Transactions endpoint provides a fully categorized list of banking transactions for a company. Accounts and transaction data are obtained from the company''s banking data sources.'
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/enhancedCashFlowItem/properties/transactions/items'
+      - $ref: '#/components/schemas/PagingInfo'
+      example:
+        results:
+        - sourceRef:
+            sourceType: Banking
+        - accountRef:
+            id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+            name: Business Current Account
+          id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+          date: '2023-01-25'
+          description: Payment to supplier
+          amount: 100
+          currency: USD
+          transactionCategory:
+            confidence: 92.7
+            levels:
+            - Asset
+            - Current
+            - Bank
+            confidences:
+            - 92.7
+            - 95
+            - 96
+          platformName: Plaid
+          counterpartyNames:
+          - Counterparty
+          modifiedDate: '2023-01-25T22:36:05.125Z'
+          isRecurring: true
+        - sourceRef:
+            sourceType: Banking
+        - accountRef:
+            id: 12345678-1234-1234-1234-123456789012
+            name: Business Saving Account
+          id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+          date: '2023-01-25'
+          description: Payment to supplier
+          amount: 100
+          currency: USD
+          transactionCategory:
+            confidence: 92.7
+            levels:
+            - Expense
+            - Operating
+            confidences:
+            - 92.7
+            - 95
+          platformName: Plaid
+          counterpartyNames: []
+          modifiedDate: '2023-01-25T22:36:05.125Z'
+          isRecurring: false
+        pageNumber: 1
+        pageSize: 100
+        totalResults: 2401
+        _links:
+          self:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions
+          current:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=1&pageSize=100
+          next:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=2&pageSize=100
+    BankingAccounts:
+      title: 'Banking: Bank accounts'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/BankingAccount'
+      - $ref: '#/components/schemas/PagingInfo'
+    BankingAccountBalance:
+      title: 'Banking: Account balance'
+      description: "The Banking Account Balances data type provides a list of balances for a bank account including end-of-day batch balance or running balances per transaction.\n\nResponses are paged, so you should provide `page` and `pageSize` query parameters in your request.\n\n> **How often should I pull Account Balances?**\n>\n> Because these balances are closing balances, we recommend you pull Account Balance no more frequently than daily. If you require a live intraday balance, this can be found for each account on the [Account](https://docs.codat.io/lending-api#/schemas/Account) data type.\n> \n> Whilst you can choose to sync hourly, this may incur usage charges from Plaid or TrueLayer."
+      type: object
+      allOf:
+      - type: object
+        properties:
+          accountId:
+            minLength: 1
+            type: string
+            description: The unique identifier of the account.
+          balance:
+            $ref: '#/components/schemas/BankingAccountBalance/definitions/accountBalanceAmounts'
+          date:
+            $ref: '#/components/schemas/DateTime'
+            description: Date of the balance.
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      required:
+      - accountId
+      - balance
+      - date
+      definitions:
+        accountBalanceAmounts:
+          title: Account Balance Amounts
+          x-internal: true
+          type: object
+          properties:
+            available:
+              type: number
+              format: decimal
+              nullable: true
+              description: The balance available in the account, including any pending transactions. This doesn't include additional funds available from any overdrafts.
+            current:
+              type: number
+              format: decimal
+              description: The balance of the account only including cleared transactions.
+            limit:
+              type: number
+              format: decimal
+              nullable: true
+              description: The minimum allowed balance for the account. For example, a $100.00 overdraft would show as a limit of `-100.00`.
+          additionalProperties: false
+          description: Depending on the data provided by the underlying bank, not all balances are always available.
+      examples:
+      - accountBalances:
+        - accountId: cce404db-27f7-4286-95db-622b53596cf4
+          balance:
+            available: 714374.48
+            current: 714374.57
+            limit: 5000
+          date: '2021-03-18T00:00:00'
+        - accountId: cce404db-27f7-4286-95db-622b53596cf4
+          balance:
+            available: 714374.48
+            current: 714374.57
+            limit: 5000
+          date: '2021-03-19T00:00:00'
+        - accountId: cce404db-27f7-4286-95db-622b53596cf4
+          balance:
+            available: 714195.66
+            current: 714204.39
+            limit: 5000
+          date: '2021-03-22T00:00:00'
+        - accountId: 2f593774-1075-4805-a552-84eecc7eb264
+          balance:
+            available: -644945.42
+            current: -644925.84
+            limit: 0
+          date: '2022-03-09T00:00:00'
+    BankingTransactionCategory:
+      title: 'Banking: Transaction category'
+      description: 'The Banking Transaction Categories data type provides a list of hierarchical categories associated with a transaction for greater contextual meaning to transaction activity.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.'
+      type: object
+      allOf:
+      - type: object
+        description: Status of the bank transaction category.
+        properties:
+          id:
+            minLength: 1
+            type: string
+            description: The unique identifier of the bank transaction category.
+          name:
+            minLength: 1
+            type: string
+            description: The name of the bank transaction category.
+          parentId:
+            type: string
+            nullable: true
+            description: The unique identifier of the parent bank transaction category.
+          hasChildren:
+            type: boolean
+            description: A Boolean indicating whether there are other bank transaction categories beneath this one in the hierarchy.
+          status:
+            $ref: '#/components/schemas/BankingTransactionCategory/definitions/transactionCategoryStatus'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      required:
+      - id
+      - name
+      definitions:
+        transactionCategoryRef:
+          type: object
+          x-internal: true
+          description: An object of bank transaction category reference data.
+          properties:
+            id:
+              minLength: 1
+              type: string
+              description: The unique category reference id for the bank transaction.
+            name:
+              type: string
+              nullable: true
+              description: The category name reference for the bank transaction.
+          required:
+          - id
+        transactionCategoryStatus:
+          type: string
+          description: The status of the transaction category.
+          x-internal: true
+          enum:
+          - Unknown
+          - Active
+          - Archived
+      examples:
+      - id: auto-and-transport
+        name: Auto & Transport
+        hasChildren: true
+        status: Active
+        modifiedDate: '2022-05-23T16:32:50'
+        sourceModifiedDate: '2021-04-24T07:59:10'
+    BankingAccount:
+      title: 'Banking: Bank account'
+      description: 'This data type provides a list of all the SMB''s bank accounts, with rich data like balances, account numbers, and institutions holding the accounts.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.'
+      type: object
+      allOf:
+      - type: object
+        properties:
+          id:
+            minLength: 1
+            type: string
+            description: The ID of the account from the provider.
+          name:
+            minLength: 1
+            type: string
+            description: The name of the account according to the provider.
+          informalName:
+            type: string
+            nullable: true
+            description: The friendly name of the account, chosen by the holder. This may not have been set by the account holder and therefore is not always available.
+          holder:
+            type: string
+            nullable: true
+            description: The name of the person or company who holds the account.
+          type:
+            $ref: '#/components/schemas/AccountingBankAccountType'
+          balance:
+            $ref: '#/components/schemas/BankingAccountBalance/definitions/accountBalanceAmounts'
+            description: An object containing bank balance data.
+          identifiers:
+            $ref: '#/components/schemas/BankingAccount/definitions/accountIdentifiers'
+          currency:
+            minLength: 1
+            type: string
+            description: The currency code for the account.
+          institution:
+            $ref: '#/components/schemas/BankingAccount/definitions/accountInstitution'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      required:
+      - id
+      - name
+      - type
+      - balance
+      - identifiers
+      - currency
+      - institution
+      definitions:
+        accountIdentifiers:
+          title: Account Identifiers
+          description: An object containing bank account identification information.
+          type: object
+          x-internal: true
+          additionalProperties: false
+          properties:
+            type:
+              $ref: '#/components/schemas/BankingAccount/definitions/accountIdentifierType'
+            subtype:
+              type: string
+              nullable: true
+              description: Detailed account category
+            number:
+              type: string
+              nullable: true
+              description: The account number for the account. When combined with the`bankCode`, this is usually enough to uniquely identify an account within a jurisdiction.
+            bankCode:
+              type: string
+              nullable: true
+              description: 'The local (usually national) routing number for the account.
+
+
+                This is known by different names in different countries:
+
+                * BSB code (Australia)
+
+                * routing number (Canada, USA)
+
+                * sort code (UK)'
+            iban:
+              type: string
+              nullable: true
+              description: The international bank account number (IBAN) for the account, if known.
+            bic:
+              type: string
+              nullable: true
+              description: The ISO 9362 code (commonly called SWIFT code, SWIFT-BIC or BIC) for the account.
+            maskedAccountNumber:
+              type: string
+              nullable: true
+              description: A portion of the actual account `number` to help account identification where number is tokenised (Plaid only)
+          required:
+          - type
+        accountIdentifierType:
+          type: string
+          x-internal: true
+          description: Type of account
+          enum:
+          - Account
+          - Card
+          - Credit
+          - Depository
+          - Investment
+          - Loan
+          - Other
+        accountInstitution:
+          title: Account Institution
+          description: The bank or other financial institution providing the account.
+          x-internal: true
+          type: object
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: The institution's ID, according to the provider.
+            name:
+              type: string
+              description: The institution's name, according to the underlying provider.
+      examples:
+      - results:
+        - id: 1703194f-7805-4da8-bac0-2ba5da4a4216
+          name: Business Current Account
+          informalName: Codat
+          holder: Codat Ltd
+          type: Debit
+          balance:
+            available: -459987.97
+            current: -459964.9
+            limit: 5000
+          identifiers:
+            type: Depository
+            subtype: checking
+            number: '46762629'
+            bankCode: 009911
+            iban: GB29 LOYD 4773 2346 7626 29
+            bic: LOYDGB21006
+            maskedAccountNumber: LOYDGB21006
+          currency: GBP
+          institution:
+            id: lloyds-bank
+            name: Lloyds Bank
+          modifiedDate: '2022-05-23T16:32:50Z'
+          sourceModifiedDate: '2021-08-14T05:04:12'
+    StartUploadSessionRequest:
+      title: Upload session start request
+      type: object
+      properties:
+        dataType:
+          type: string
+          enum:
+          - banking-accounts
+          - banking-transactions
+          description: A key for a Codat data type.
+    EnhancedInvoicesReport:
+      title: Enhanced invoices report
+      description: The enhanced invoices report takes the key elements of the Invoices report verifying those marked as paid in the accounting software have actually been paid by matching with the bank statement.
+      type: object
+      properties:
+        reportInfo:
+          $ref: '#/components/schemas/EnhancedInvoicesReport/definitions/reportInfo'
+        reportItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedInvoicesReport/definitions/enhancedInvoiceReportItem'
+      definitions:
+        lendingCustomerRef:
+          type: object
+          properties:
+            id:
+              minLength: 1
+              type: string
+              description: '`id` from the Customers data type.'
+            customerName:
+              type: string
+              nullable: true
+              description: '`customerName` from the Customer data type.'
+        payment:
+          title: Enhanced invoice payment item
+          type: object
+          properties:
+            id:
+              type: string
+              description: ID of the invoice, which may be a GUID but it may be something else depending on the accounting software.
+            date:
+              $ref: '#/components/schemas/DateTime'
+            paymentType:
+              type: string
+              description: The type of payment.
+            amount:
+              type: number
+              format: decimal
+              description: Payment amount.
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            currencyRate:
+              $ref: '#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate'
+            bankingTransactionRefs:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedInvoicesReport/definitions/bankingTransactionRef'
+        bankingTransactionRef:
+          title: Banking transaction reference
+          type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier for the bank transaction.
+            dataConnectionId:
+              type: string
+              description: Unique identifier of the bank transaction's connection.
+            accountId:
+              type: string
+              description: Unique identifier of the bank transaction's account.
+            accountName:
+              type: string
+              description: Name given to account.
+            date:
+              $ref: '#/components/schemas/DateTime'
+            description:
+              type: string
+              description: Description given to bank transaction.
+            amount:
+              type: number
+              description: Bank transaction amount.
+              format: decimal
+        invoiceStatus:
+          $ref: '#/components/schemas/AccountingInvoice/definitions/invoiceStatus'
+        enhancedInvoiceReportItem:
+          title: Enhanced invoice report item
+          type: object
+          allOf:
+          - type: object
+            properties:
+              id:
+                type: string
+                description: ID of the invoice, which may be a GUID but it may be something else depending on the accounting software.
+              invoiceNumber:
+                type: string
+                description: Invoice number.
+              customerRef:
+                $ref: '#/components/schemas/EnhancedInvoicesReport/definitions/lendingCustomerRef'
+              issueDate:
+                $ref: '#/components/schemas/DateTime'
+              dueDate:
+                $ref: '#/components/schemas/DateTime'
+              status:
+                $ref: '#/components/schemas/AccountingInvoice/definitions/invoiceStatus'
+              currency:
+                $ref: '#/components/schemas/SourceAccount/properties/currency'
+              totalAmount:
+                type: number
+                format: decimal
+                description: Invoice's total amount.
+              amountDue:
+                type: number
+                format: decimal
+                description: Invoice's total amount due.
+              payments:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnhancedInvoicesReport/definitions/payment'
+              paidOnDate:
+                $ref: '#/components/schemas/DateTime'
+          - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+        reportInfo:
+          title: Report information
+          type: object
+          description: Report additional information, which is specific to Lending reports.
+          properties:
+            pageNumber:
+              type: integer
+              description: The number of the page queried.
+            pageSize:
+              type: integer
+              description: The number of transactions returned per page.
+            totalResults:
+              type: integer
+              description: The total number of transactions available for a company for the period specified in the query string.
+            reportName:
+              type: string
+              description: Name of the report.
+            companyName:
+              type: string
+              description: The name of the company being queried.
+            generatedDate:
+              type: string
+              description: Date the report was generated.
+          examples:
+          - Example 1:
+              value:
+                pageNumber: 0
+                pageSize: 0
+                totalResults: 0
+                reportName: string
+                companyName: string
+                generatedDate: '2023-01-26T07:36:40.487Z'
+    EndUploadSessionRequest:
+      title: End upload session request
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Cancel
+          - Process
+          description: An indicator to cancel the dataset processing or trigger ingestion and enrichment of data.
+    BankingAccountBalances:
+      title: 'Banking: Account balances'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/BankingAccountBalance'
+      - $ref: '#/components/schemas/PagingInfo'
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    BankingTransaction:
+      title: 'Banking: Transaction'
+      description: 'The Banking Transactions data type provides an immutable source of up-to-date information on income and expenditure.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.'
+      type: object
+      allOf:
+      - type: object
+        properties:
+          id:
+            minLength: 1
+            type: string
+            description: The unique identifier of the bank transaction.
+          accountId:
+            minLength: 1
+            type: string
+            description: The unique identifier of the bank account.
+          description:
+            type: string
+            nullable: true
+            description: The description of the bank transaction.
+          amount:
+            type: number
+            format: decimal
+            description: The amount of the bank transaction.
+          currency:
+            minLength: 1
+            type: string
+            description: The currency of the bank transaction.
+          postedDate:
+            $ref: '#/components/schemas/DateTime'
+            description: The date the bank transaction was cleared.
+          authorizedDate:
+            $ref: '#/components/schemas/DateTime'
+            description: The date the bank transaction was authorized.
+          code:
+            $ref: '#/components/schemas/BankingTransaction/definitions/transactionCode'
+          merchantName:
+            type: string
+            nullable: true
+            description: The name of the merchant.
+          transactionCategoryRef:
+            $ref: '#/components/schemas/BankingTransactionCategory/definitions/transactionCategoryRef'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      required:
+      - id
+      - accountId
+      - currency
+      definitions:
+        transactionCode:
+          type: string
+          x-internal: true
+          description: Code to identify the underlying transaction.
+          enum:
+          - Unknown
+          - Fee
+          - Payment
+          - Cash
+          - Transfer
+          - Interest
+          - Cashback
+          - Cheque
+          - DirectDebit
+          - Purchase
+          - StandingOrder
+          - Adjustment
+          - Credit
+          - Other
+          - NotSupported
+      examples:
+      - id: 0130b5bb-1419-40f6-8a27-7362d0381229
+        accountId: 1703194f-7805-4da8-bac0-2ba5da4a4216
+        description: Payments for direct income ce149943-c157-43fc-aac7-42a716b655b6
+        amount: 5062.39
+        currency: GBP
+        postedDate: '2021-07-06T00:00:00'
+        authorizedDate: '2021-07-06T00:00:00'
+        merchantName: New Look
+        transactionCategoryRef:
+          id: health-and-fitness-sports
+        modifiedDate: '2022-05-23T16:32:50Z'
+        sourceModifiedDate: '2021-06-28T10:48:12'
+    CategorizedBankStatementAccounts:
+      title: Categorized bank statement accounts
+      description: '> **Categorization engine**
+
+        >
+
+        > The categorization engine uses machine learning and has been fully trained against Plaid and TrueLayer banking data sources. It is not fully trained against the Basiq banking data source.
+
+
+        The Enhanced Cash Flow accounts endpoint provides a list of accounts that categorized transactions have been taken from.'
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              title: Account
+              type: object
+              properties:
+                id:
+                  description: The ID of the account from the provider.
+                  type: string
+                sourceRef:
+                  $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/accounts/properties/sourceRef'
+                platformName:
+                  description: Name of the banking data source, e.g. "Plaid".
+                  type: string
+                accountProvider:
+                  description: The bank or other financial institution providing the account.
+                  type: string
+                accountName:
+                  description: The name of the account according to the provider.
+                  type: string
+                accountType:
+                  description: The type of banking account, e.g. credit or debit.
+                  type: string
+                currency:
+                  $ref: '#/components/schemas/SourceAccount/properties/currency'
+                  description: The currency code for the bank account.
+                currentBalance:
+                  description: The balance of the bank account.
+                  type: number
+                  format: decimal
+                identifiers:
+                  $ref: '#/components/schemas/BankingAccount/definitions/accountIdentifiers'
+      - $ref: '#/components/schemas/PagingInfo'
+      example:
+        results:
+        - sourceRef:
+            sourceType: Banking
+          platformName: Banking Sandbox
+          accountProvider: Lloyds Bank
+          accountName: Business Savings Account
+          accountType: Debit
+          currency: GBP
+          currentBalance: 0
+        - sourceRef:
+            sourceType: Banking
+          platformName: Banking Sandbox
+          accountProvider: Lloyds Bank
+          accountName: Banking - Business Credit Card
+          accountType: Credit
+          currency: GBP
+          currentBalance: 0
+        - sourceRef:
+            sourceType: Banking
+          platformName: Banking Sandbox
+          accountProvider: Lloyds Bank
+          accountName: Business Undeposited Funds
+          accountType: Debit
+          currency: GBP
+          currentBalance: 0
+        - sourceRef:
+            sourceType: Banking
+          platformName: Banking Sandbox
+          accountProvider: Lloyds Bank
+          accountName: Business Current Account
+          accountType: Debit
+          currency: GBP
+          currentBalance: 0
+        pageNumber: 1
+        pageSize: 10
+        totalResults: 15
+        _links:
+          self:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts
+          current:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts?page=1&pageSize=10
+          next:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts?page=2&pageSize=10
+    BankingTransactionCategories:
+      title: 'Banking: Transaction categories'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/BankingTransactionCategory'
+      - $ref: '#/components/schemas/PagingInfo'
+    BankingTransactions:
+      title: 'Banking: Transactions'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/BankingTransaction'
+      - $ref: '#/components/schemas/PagingInfo'
+    PullOperation:
+      title: Pull operation
+      description: 'Information about a queued, in progress or completed pull operation.
+
+        *Formally called `dataset`*'
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the pull operation.
+          example: 943accd0-4247-42d8-865b-363c8629e1da
+        companyId:
+          type: string
+          format: uuid
+          description: Unique identifier of the company associated to this pull operation.
+          example: 22ece347-e5f6-4896-95e0-35a4c7f17023
+        connectionId:
+          type: string
+          format: uuid
+          description: Unique identifier of the connection associated to this pull operation.
+          example: 50830828-7d39-4367-b0eb-5ddb2de5faa5
+        dataType:
+          title: Data types
+          x-internal: true
+          type: string
+          description: The data type you are requesting in a pull operation.
+        status:
+          title: Dataset status
+          type: string
+          description: The current status of the dataset.
+          enum:
+          - Initial
+          - Queued
+          - Fetching
+          - MapQueued
+          - Mapping
+          - Complete
+          - FetchError
+          - MapError
+          - InternalError
+          - ProcessingQueued
+          - Processing
+          - ProcessingError
+          - ValidationQueued
+          - Validating
+          - ValidationError
+          - AuthError
+          - Cancelled
+          - NotSupported
+          - RateLimitError
+          - PermissionsError
+          - PrerequisiteNotMet
+        statusDescription:
+          type: string
+          nullable: true
+          description: Additional information about the dataset status.
+          example: Paused until 2022-10-23T00:00:00.000Z
+        errorMessage:
+          type: string
+          nullable: true
+          description: A message about a transient or persistent error returned by Codat or the source platform.
+        requested:
+          $ref: '#/components/schemas/DateTime'
+        completed:
+          $ref: '#/components/schemas/DateTime'
+        progress:
+          type: integer
+          description: An integer signifying the progress of the pull operation.
+        isCompleted:
+          type: boolean
+          description: '`True` if the pull operation is completed successfully. The `isCompleted` property is not queryable. To filter failed pull operations, query by `status!=Complete&&status!=NotSupported` instead.'
+        isErrored:
+          type: boolean
+          description: '`True` if the pull operation entered an error state.'
+      required:
+      - id
+      - companyId
+      - connectionId
+      - dataType
+      - status
+      - requested
+      - progress
+      - isCompleted
+      - isErrored
+      examples:
+      - id: 97d60846-f07a-4d42-b5a0-0bdcc6ebf56b
+        companyId: 4645bd78-8988-45bc-ac9e-67ba5df6e4e5
+        connectionId: 51baa045-4836-4317-a42e-3542e991e581
+        dataType: invoices
+        status: Initial
+        statusDescription: Paused until 2022-10-23T00:00:00.000Z
+        requested: '2022-11-14T11:18:37.2798351Z'
+        progress: 10
+        isCompleted: false
+        isErrored: false
+    SourceAccount:
+      title: Source account (v1)
+      type: object
+      description: The target bank account in a supported accounting software for ingestion into a bank feed.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Unique ID for the bank account.
+        accountName:
+          type: string
+          nullable: true
+          description: The bank account name.
+        accountType:
+          type: string
+          nullable: true
+          description: The type of bank account e.g. Credit.
+        accountNumber:
+          type: string
+          nullable: true
+          description: The account number.
+        sortCode:
+          type: string
+          nullable: true
+          description: The sort code.
+        currency:
+          title: Currency
+          x-internal: true
+          type: string
+          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
+          format: ISO4217
+          examples:
+          - GBP
+          - USD
+          - EUR
+        balance:
+          type: number
+          format: decimal
+          nullable: true
+          description: The latest balance for the bank account.
+        modifiedDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: The last date the bank account was modified.
+        status:
+          type: string
+          nullable: true
+          description: Status of the source account.
+          enum:
+          - pending
+          - connected
+          - connecting
+          - disconnected
+          - unknown
+        feedStartDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+      required:
+      - id
+      definitions:
+        sourceAccountPrototype:
+          title: Source account (v1)
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/SourceAccount/properties/id'
+            accountName:
+              $ref: '#/components/schemas/SourceAccount/properties/accountName'
+            accountType:
+              $ref: '#/components/schemas/SourceAccount/properties/accountType'
+            accountNumber:
+              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
+            sortCode:
+              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            balance:
+              $ref: '#/components/schemas/SourceAccount/properties/balance'
+            modifiedDate:
+              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
+          required:
+          - id
+        sourceAccounts:
+          title: Source accounts
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAccount'
+      examples:
+      - id: acc-002
+        accountName: account-081
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345670'
+        currency: GBP
+        balance: 99.99
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+      - id: acc-003
+        accountName: account-095
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345671'
+        currency: USD
+        balance: 0
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+    AccountingBankAccountType:
+      title: Bank Account Type
+      x-internal: true
+      enum:
+      - Unknown
+      - Credit
+      - Debit
+      type: string
+      description: "The type of transactions and balances on the account.  \nFor Credit accounts, positive balances are liabilities, and positive transactions **reduce** liabilities.  \nFor Debit accounts, positive balances are assets, and positive transactions **increase** assets."
+    BankStatementUploadConfiguration:
+      title: Banking data upload settings
+      description: Configuration settings for uploading banking data to Codat
+      additionalProperties: false
+      type: object
+      properties:
+        source:
+          type: string
+          enum:
+          - codat
+          description: The source of the banking data that determines its format
+        accountId:
+          type: string
+          description: The ID of the account in the third-party platform
+        providerId:
+          type: string
+          description: TrueLayer provider ID (only required if source is TrueLayer)
+    CommerceOrder:
+      title: 'Commerce: Order'
+      description: 'Orders contain the transaction details for all products sold by the company, and include details of any payments, service charges, or refunds related to each order. You can use data from the Orders endpoints to calculate key metrics, such as gross sales values and monthly recurring revenue (MRR).
+
+        '
+      allOf:
+      - type: object
+        x-stoplight:
+          id: 516bf0ecc4907
+        required:
+        - id
+        properties:
+          id:
+            type: string
+            description: A unique, persistent identifier for this record
+            examples:
+            - 13d946f0-c5d5-42bc-b092-97ece17923ab
+            - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+            - 7110701885
+            - EILBDVJVNUAGVKRQ
+            x-codat-validation:
+            - validator: UniqueWithinConnection
+      - properties:
+          orderNumber:
+            type: string
+            description: Friendly reference for the order in the commerce or point of sale platform.
+          country:
+            description: "The Codat country property is returned as it was provided in the underlying platform by the company without any formatting on our part.\n\nDepending on the platform the value of this property will either be an <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\"_blank\">ISO 3166</a> code (2-alpha or 3-alpha) or free-form text returned as a string name in our model. \n\nFor POST operations against platforms that demand a specific format for the country code, we have documented accepted values in the [options](https://docs.codat.io/lending-api#/operations/get-companies-companyId-connections-connectionId-push) endpoint."
+            type: string
+            format: ISO3166 Alpha-3
+            examples:
+            - GBR
+            - USA
+            - ABW
+          currency:
+            allOf:
+            - $ref: '#/components/schemas/SourceAccount/properties/currency'
+            - description: Currency in which the order was placed.
+          closedDate:
+            $ref: '#/components/schemas/DateTime'
+            description: Date on which order was closed after the product was shipped, paid for, and any refund period had elapsed.
+          totalAmount:
+            description: Total amount of the order, including discounts, refunds, and tax, but excluding gratuities.
+            type: number
+            format: decimal
+          totalRefund:
+            description: Total amount of any refunds issued on the order, including discounts and tax, but excluding gratuities. This is always negative.
+            type: number
+            format: decimal
+          totalTaxAmount:
+            description: Total amount of tax applied to the order.
+            type: number
+            format: decimal
+          totalDiscount:
+            description: Total amount of any discounts applied to the order, excluding tax. This is typically positive (for discounts which decrease the amount of the order), but can also be negative (for discounts which increase the amount of the order).
+            type: number
+            format: decimal
+          totalGratuity:
+            description: Extra amount added to the order.
+            type: number
+            format: decimal
+          orderLineItems:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceOrder/definitions/orderLineItem'
+          payments:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommercePayment/definitions/paymentRef'
+          serviceCharges:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceOrder/definitions/serviceCharge'
+          locationRef:
+            $ref: '#/components/schemas/CommerceLocation/definitions/locationRef'
+          customerRef:
+            $ref: '#/components/schemas/CommerceCustomer/definitions/commerceCustomerRef'
+          supplementalData:
+            $ref: '#/components/schemas/SupplementalData'
+      - title: Created date
+        type: object
+        x-internal: true
+        properties:
+          createdDate:
+            $ref: '#/components/schemas/DateTime'
+            description: The date the entity was created.
+      - title: Modified dates
+        x-internal: true
+        allOf:
+        - title: ModifiedDate
+          x-internal: true
+          type: object
+          properties:
+            modifiedDate:
+              allOf:
+              - $ref: '#/components/schemas/DateTime'
+              - description: 'The date when the record was last fetched from the accounting software, commerce software, or open banking provider and updated in Codat’s data cache.
+
+
+                  Use it to identify and retrieve records that have changed since your last fetch. For example, filtering `modifiedDate` to today will provide new records updated in Codat today.
+
+
+                  This date is populated for all data types except for attachments, balance sheets, company information, and profit & loss reports ([read more](https://docs.codat.io/using-the-api/modified-dates#modified-date)).
+
+
+                  In Codat''s data model, dates and times are represented using the <a class="external" href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601 standard</a>.'
+        - title: Source Modified Date
+          x-internal: true
+          type: object
+          nullable: true
+          properties:
+            sourceModifiedDate:
+              allOf:
+              - $ref: '#/components/schemas/DateTime'
+              - description: "The date when a record was last modified in the accounting software, usually by the business or a business process. For example, when payments are made against an invoice. \n\nIt is not populated ([read more](https://docs.codat.io/using-the-api/modified-dates#source-modified-date)) when:\n  - Pulling attachments\n  - The accounting software does not provide modification dates for a data type\n  - A record has been deleted from the source platform and Codat doesn't have a record of when the deletion occurred\n  - A record has been voided. For certain platforms that soft delete records, `isDeleted` metadata is used to identify void records\n\nIn Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>."
+      definitions:
+        orderLineItem:
+          allOf:
+          - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+          - type: object
+            properties:
+              quantity:
+                type: number
+                format: decimal
+                description: 'Number of units of the product sold.
+
+                  For refunds, quantity is negative.
+
+                  '
+              taxPercentage:
+                type: number
+                format: decimal
+                description: Percentage rate (from 0 to 100) of any sales tax applied to the unit price.
+                examples:
+                - 0
+                - 12.5
+                - '45.00'
+              totalAmount:
+                type: number
+                format: decimal
+                description: Total amount of the line item, including discounts and tax.
+              totalTaxAmount:
+                type: number
+                format: decimal
+                description: Total amount of tax applied to the line item, factoring in any discounts.
+              unitPrice:
+                type: number
+                format: decimal
+                description: Price per unit of goods or services, excluding discounts and tax.
+              taxes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommerceTaxComponent/definitions/taxComponentAllocation'
+                description: Taxes breakdown as applied to order lines.
+              productRef:
+                $ref: '#/components/schemas/CommerceProduct/definitions/productRef'
+              productVariantRef:
+                $ref: '#/components/schemas/CommerceProduct/definitions/productVariantRef'
+              discountAllocations:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommerceOrder/definitions/orderDiscountAllocation'
+        serviceCharge:
+          type: object
+          properties:
+            description:
+              description: Service charges for this order.
+              type: string
+              example: A service charge
+            totalAmount:
+              description: Total amount of the service charge, including tax.
+              type: number
+              format: decimal
+              examples:
+              - 0
+              - 12.5
+              - 45
+            taxPercentage:
+              description: Percentage rate (from 0 to 100) of any tax applied to the service charge.
+              type: number
+              format: decimal
+              examples:
+              - 0
+              - 12.5
+              - 45
+            taxAmount:
+              description: Amount of the service charge that is tax.
+              type: number
+              format: decimal
+              examples:
+              - 0
+              - 12.5
+              - 45
+            taxes:
+              description: Taxes breakdown as applied to service charges.
+              type: array
+              items:
+                $ref: '#/components/schemas/CommerceTaxComponent/definitions/taxComponentAllocation'
+            quantity:
+              description: The number of times the charge is charged.
+              type: integer
+              examples:
+              - 1
+              - 12
+              - 45
+            type:
+              $ref: '#/components/schemas/CommerceOrder/definitions/serviceChargeType'
+        serviceChargeType:
+          description: The type of the service charge.
+          type: string
+          enum:
+          - Generic
+          - Shipping
+          - Overpayment
+          - Unknown
+          example: Overpayment
+        orderDiscountAllocation:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the discount in the commerce or point of sale platform.
+              example: Promotional Discount
+            totalAmount:
+              type: number
+              format: decimal
+              description: Total amount of discount applied, excluding tax. This is typically positive (for discounts which decrease the amount of the order line), but can also be negative (for discounts which increase the amount of the order line).
+              example: 15.25
+      examples:
+      - id: 01e63721-1205-478e-8503-9d8bf8a93f44
+        orderNumber: '99123956'
+        country: CAN
+        currency: CAD
+        createdDate: '2021-03-28T03:00:14'
+        totalAmount: 12
+        totalRefund: 0
+        totalTaxAmount: 2
+        totalDiscount: 0
+        totalGratuity: 1
+        orderLineItems:
+        - id: 116113a6-54d3-4624-ba73-26a77a5ffd51
+          quantity: 1
+          taxPercentage: 20
+          totalAmount: 12
+          totalTaxAmount: 2
+          unitPrice: 10
+          taxes:
+          - taxComponentRef:
+              id: '72'
+              name: Sales Tax
+            taxAmount: ''
+          - taxComponentRef:
+              id: '72'
+              name: City Tax
+            taxAmount: ''
+          productRef:
+            id: ac186646-41f2-4280-afea-1012c59459ab
+            name: Intelligent Concrete Salad
+          productVariantRef:
+            id: f9ca9de5-9e31-460d-ac81-368f4e7c8fc0
+            name: Small Incredible Wooden Soap
+          discountAllocations: []
+        payments:
+        - id: defdceb6-83a3-4b7d-a74e-e9ef947d5f48
+          amount: 12
+          currency: CAD
+          type: Paypal
+          status: Unknown
+          dueDate: '2021-04-04T03:00:14'
+          createdDate: '2021-03-28T03:00:14'
+          modifiedDate: '2022-02-02T11:02:45'
+        serviceCharges:
+        - description: Service Charge
+          totalAmount: 1.2
+          taxPercentage: 20
+          taxAmount: 0.2
+          taxes:
+          - taxComponentRef:
+              id: '72'
+              name: Service Tax
+            taxAmount: ''
+          quantity: 1
+          type: Generic
+        locationRef:
+          id: 47bbffc7-c045-4b0f-a3bb-ecf1f669edfa
+        customerRef:
+          id: 2634d180-7205-43f0-a73d-84af6443a005
+          name: Emmy Roberts
+        modifiedDate: '2022-02-02T11:02:45Z'
+        sourceModifiedDate: '2021-03-28T03:00:14'
+      type: object
+  parameters:
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    reportId:
+      name: reportId
+      description: Unique identifier for a report, use either the Id of the report or `latest` for the most recently generate report.
+      in: path
+      required: true
+      schema:
+        oneOf:
+        - type: string
+          title: ID
+          format: uuid
+          example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        - type: string
+          title: Latest
+          enum:
+          - latest
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    datasetId:
+      name: datasetId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        description: Unique identifier for the dataset that completed its sync.
+      description: Unique identifier for the dataset that completed its sync.
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    path:
+      name: path
+      description: The endpoint path of the third-party banking service that the request body originates from. Only required if the source is not `codat`.
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - auth/get
+    accountingAccountId:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        examples:
+        - 13d946f0-c5d5-42bc-b092-97ece17923ab
+        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+        - 7110701885
+        - EILBDVJVNUAGVKRQ
+      description: Unique identifier for an account.
+    maxAge:
+      description: The maximum age of report to fetch.
+      name: maxAge
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/DateTime'
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+  responses:
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Conflict:
+      description: The data type's dataset has not been requested or is still syncing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 409
+                service: PublicApi
+                error: The data set has not been requested.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Data connection not found:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  examples:
+    EnhancedCashflowExample:
+      value:
+        reportInfo:
+          pageNumber: 1
+          pageSize: 10
+          totalResults: 2194
+          reportName: Cash flow transactions report
+          companyName: test
+          generatedDate: '2023-03-24T16:44:17.5302732Z'
+        dataSources:
+        - accounts:
+          - sourceRef:
+              sourceType: Banking
+            platformName: Banking Sandbox
+            accountProvider: Lloyds Bank
+            accountName: Business Savings Account
+            accountType: Debit
+            currency: GBP
+            currentBalance: 0
+          - sourceRef:
+              sourceType: Banking
+            platformName: Banking Sandbox
+            accountProvider: Lloyds Bank
+            accountName: Banking - Business Credit Card
+            accountType: Credit
+            currency: GBP
+            currentBalance: 0
+          - sourceRef:
+              sourceType: Banking
+            platformName: Banking Sandbox
+            accountProvider: Lloyds Bank
+            accountName: Business Undeposited Funds
+            accountType: Debit
+            currency: GBP
+            currentBalance: 0
+          - sourceRef:
+              sourceType: Banking
+            platformName: Banking Sandbox
+            accountProvider: Lloyds Bank
+            accountName: Business Current Account
+            accountType: Debit
+            currency: GBP
+            currentBalance: 0
+        reportItems:
+        - transactions:
+          - sourceRef:
+              sourceType: Banking
+            accountRef:
+              id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+              name: Business Current Account
+            id: ab5e07a0-5578-4d91-8421-2dc72713b74f
+            date: '2022-11-08T00:00:00'
+            description: Payment m86SDGpQr3
+            amount: -6905.44
+            currency: GBP
+            transactionCategory:
+              confidence: 52.53
+              levels:
+              - Expense
+              - Operating
+              confidences:
+              - 56
+              - 52.53
+            platformName: Shopify
+            counterpartyNames:
+            - Shopify
+            modifiedDate: '2022-11-08T12:00:00'
+          - sourceRef:
+              sourceType: Banking
+            accountRef:
+              id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+              name: Business Current Account
+            id: 9846bbed-46d3-472c-a848-1ce8ebea7213
+            date: '2022-11-08T00:00:00'
+            description: Payment from customer a5c68c7b-6825-46de-bf63-6ad23ef506a4
+            amount: 4332.84
+            currency: GBP
+            transactionCategory:
+              confidence: 88
+              levels:
+              - Expense
+              confidences:
+              - 88
+            platformName: Amazon
+            counterpartyNames:
+            - Amazon
+            - Amazon Marketplace
+            modifiedDate: '2022-11-08T12:00:00'
+          - sourceRef:
+              sourceType: Banking
+            accountRef:
+              id: 809b9470-c9fa-4257-bc9f-06a1dc7b0cbc
+              name: Business Undeposited Funds
+            id: 94b213fb-d742-435e-90f1-bfe723a076d5
+            date: '2022-11-08T00:00:00'
+            description: Payment from customer a5c68c7b-6825-46de-bf63-6ad23ef506a4
+            amount: 4034.3
+            currency: GBP
+            transactionCategory:
+              confidence: 61.08
+              levels:
+              - Income
+              - Revenue
+              confidences:
+              - 65
+              - 61.08
+            platformName: Shopify
+            counterpartyNames: []
+            modifiedDate: '2022-11-08T12:00:00'
+          - sourceRef:
+              sourceType: Banking
+            accountRef:
+              id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+              name: Business Current Account
+            id: cfceb7ff-eaa2-45b6-aca7-fa0e0b439161
+            date: '2022-11-08T00:00:00'
+            description: Payment to supplier 78792d13-90a0-4ea2-8e07-81c3c893997e
+            amount: -313.76
+            currency: GBP
+            transactionCategory:
+              confidence: 40.98
+              levels:
+              - Expense
+              - CostOfSales
+              confidences:
+              - 40.98
+              - 99.9
+            platformName: Amazon
+            counterpartyNames: []
+            modifiedDate: '2022-11-08T12:00:00'
+          - sourceRef:
+              sourceType: Banking
+            accountRef:
+              id: 809b9470-c9fa-4257-bc9f-06a1dc7b0cbc
+              name: Business Undeposited Funds
+            id: ba814f14-0fe3-41d0-9308-57f40642ac75
+            date: '2022-11-08T00:00:00'
+            description: Payment to supplier 46d2e1fb-b4e9-469c-814a-21ff8105a26e
+            amount: -614.4
+            currency: GBP
+            transactionCategory:
+              confidence: 55.84
+              levels:
+              - Income
+              - Revenue
+              confidences:
+              - 55.84
+              - 75.5
+            platformName: Zettle
+            counterpartyNames: []
+            modifiedDate: '2022-11-08T12:00:00'
+          - sourceRef:
+              sourceType: Banking
+            accountRef:
+              id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+              name: Business Current Account
+            id: e67cc30e-fd5c-4eea-8365-ec40dfdd3ef6
+            date: '2022-11-08T00:00:00'
+            description: Payment from customer a5c68c7b-6825-46de-bf63-6ad23ef506a4
+            amount: 5199.62
+            currency: GBP
+            transactionCategory:
+              confidence: 57.85
+              levels:
+              - Expense
+              confidences:
+              - 57.85
+            platformName: Amazon
+            counterpartyNames: []
+            modifiedDate: '2022-11-08T12:00:00'
+          - sourceRef:
+              sourceType: Banking
+            accountRef:
+              id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+              name: Business Current Account
+            id: e0f08a0b-3575-4dde-98c4-3c854028d2d2
+            date: '2022-11-08T00:00:00'
+            description: Payment to supplier 18ac18dc-945b-4083-9013-e8a100b999fa
+            amount: -21420.94
+            currency: GBP
+            transactionCategory:
+              confidence: 70.58
+              levels:
+              - Expense
+              - Operating
+              confidences:
+              - 70.58
+              - 100
+            platformName: Amazon
+            counterpartyNames: []
+            modifiedDate: '2022-11-08T12:00:00'
+          - sourceRef:
+              sourceType: Banking
+            accountRef:
+              id: 809b9470-c9fa-4257-bc9f-06a1dc7b0cbc
+              name: Business Undeposited Funds
+            id: 4b70d379-8284-4f44-bb37-c7935df950cc
+            date: '2022-11-08T00:00:00'
+            description: Payment to supplier 630a3f16-5f01-4986-ae6b-82333ec49449
+            amount: -30924.22
+            currency: GBP
+            transactionCategory:
+              confidence: 48.26
+              levels:
+              - Income
+              confidences:
+              - 48.26
+            platformName: DoorDash
+            counterpartyNames: []
+            modifiedDate: '2022-11-08T12:00:00'
+          - sourceRef:
+              sourceType: Banking
+            accountRef:
+              id: 809b9470-c9fa-4257-bc9f-06a1dc7b0cbc
+              name: Business Undeposited Funds
+            id: 76b73373-9345-472e-8edf-5be849d797fe
+            date: '2022-11-08T00:00:00'
+            description: Payment to supplier bQATU4eSb9
+            amount: -568.78
+            currency: GBP
+            transactionCategory:
+              confidence: 65.21
+              levels:
+              - Income
+              - Revenue
+              confidences:
+              - 65.21
+              - 100
+            platformName: Uber
+            counterpartyNames:
+            - Uber
+            modifiedDate: '2022-11-08T12:00:00'
+          - sourceRef:
+              sourceType: Banking
+            accountRef:
+              id: 809b9470-c9fa-4257-bc9f-06a1dc7b0cbc
+              name: Business Undeposited Funds
+            id: ee92fd6f-e0f7-4391-85fd-4b50921b973f
+            date: '2022-11-08T00:00:00'
+            description: Payment to supplier 9c37eb21-579a-4886-8296-3a853076b7bd
+            amount: -13050.79
+            currency: GBP
+            transactionCategory:
+              confidence: 92.33
+              levels:
+              - Income
+              - Revenue
+              confidences:
+              - 92.33
+              - 92.33
+            platformName: DoorDash
+            counterpartyNames:
+            - DoorDash
+            modifiedDate: '2022-11-08T12:00:00'
+    CodatBankStatementUploadConfiguration:
+      value:
+        source: codat
+        accountId: abc123-ABC
+      summary: Settings for uploading codat data
+  securitySchemes:
+    auth_header:
+      name: Authorization
+      description: The word "Basic" followed by a space and your API key. [API keys](https://docs.codat.io/platform-api#/schemas/ApiKeyDetails) are tokens used to control access to the API. You can get an API key via [the Codat Portal](https://app.codat.io/developers/api-keys), via [the API](https://docs.codat.io/platform-api#/operations/list-api-keys), or [read more](https://docs.codat.io/using-the-api/authentication) about authentication at Codat.
+      type: apiKey
+      in: header
+      x-speakeasy-example: Basic BASE_64_ENCODED(API_KEY)
+x-speakeasy-retries:
+  strategy: backoff
+  backoff:
+    initialInterval: 500
+    maxInterval: 60000
+    maxElapsedTime: 3600000
+    exponent: 1.5
+  statusCodes:
+  - 408
+  - 429
+  - 5XX
+  retryConnectionErrors: true
+x-speakeasy-name-override:
+- operationId: ^list-.*?
+  methodNameOverride: list
+- operationId: ^list-.*?-attachments
+  methodNameOverride: list-attachments
+- operationId: ^get-.*?
+  methodNameOverride: get
+- operationId: ^get-create-.*?-model
+  methodNameOverride: get-create-model
+- operationId: ^get-create-update.*?-model
+  methodNameOverride: get-create-update-model
+- operationId: ^get-.*?-attachment
+  methodNameOverride: get-attachment
+- operationId: ^update-.*?
+  methodNameOverride: update
+- operationId: ^create-.*?
+  methodNameOverride: create
+- operationId: ^delete-.*?
+  methodNameOverride: delete
+- operationId: ^delete-.*?-attachment
+  methodNameOverride: delete-attachment
+- operationId: ^download-.*?-attachment
+  methodNameOverride: download-attachment
+- operationId: ^upload-.*?-attachment
+  methodNameOverride: upload-attachment
+x-codat-docs-path: bank-feeds-api
+x-codat-keep-docs-paths-local: true
+x-codat-speakeasy-pagination:
+  type: offsetLimit
+  inputs:
+  - name: page
+    in: parameters
+    type: page
+  outputs:
+    results: $.results

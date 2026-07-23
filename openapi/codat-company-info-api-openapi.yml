@@ -1,0 +1,1200 @@
+openapi: 3.1.0
+info:
+  title: Bank Feeds Account mapping Company info API
+  version: 3.0.0
+  contact:
+    email: support@codat.io
+    name: Codat
+  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
+
+
+    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
+
+
+    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
+
+
+    ---
+
+    <!-- Start Codat Tags Table -->
+
+    ## Endpoints
+
+
+    | Endpoints | Description |
+
+    | :- |:- |
+
+    | Companies | Create and manage your SMB users'' companies. |
+
+    | Connections | Create new and manage existing data connections for a company. |
+
+    | Source accounts | Provide and manage lists of source bank accounts. |
+
+    | Account mapping | Extra functionality for building an account management UI. |
+
+    | Company information | Get detailed information about a company from the underlying platform. |
+
+    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
+
+    <!-- End Codat Tags Table -->'
+  termsOfService: https://www.codat.io/legals/
+servers:
+- description: Production
+  url: https://api.codat.io
+security:
+- auth_header: []
+tags:
+- name: Company info
+  description: View company information fetched from the source platform.
+paths:
+  /companies/{companyId}/data/info:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    get:
+      summary: Get company accounting profile
+      description: Gets the latest basic info for a company.
+      operationId: get-accounting-profile
+      x-speakeasy-name-override: get-accounting-profile
+      tags:
+      - Company info
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountingCompanyInfo'
+              examples:
+                Example 1:
+                  value:
+                    companyName: Codat
+                    accountingPlatformRef: 1700060034_ETD
+                    companyLegalName: Codat Ltd
+                    addresses:
+                    - type: Billing
+                      line1: 301 Ink Rooms
+                      line2: 28 Easton Street
+                      city: London
+                      region: England
+                      country: United Kingdom
+                      postalCode: WC1X 0BE
+                    - type: Delivery
+                      line1: 28 Easton Street
+                      city: London
+                      country: UK
+                      postalCode: WC1X 0BE
+                    phoneNumbers:
+                    - number: 02012 345678
+                      type: Landline
+                    - number: 07123 456789
+                      type: Mobile
+                    - number: 02012 345678
+                      type: Fax
+                    webLinks:
+                    - type: Website
+                      url: https://www.codat.io/
+                    - type: Social
+                      url: https://www.linkedin.com/company/codat-limited/
+                    registrationNumber: '5590111724'
+                    taxNumber: '74111622555799035846'
+                    financialYearStartDate: '2023-04-01T00:00:00'
+                    baseCurrency: GBP
+                    sourceUrls:
+                      Api: https://api.codat.io
+                    createdDate: '2020-03-09T15:19:26'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+  /companies/{companyId}/connections/{connectionId}/data/commerce-info:
+    parameters:
+    - $ref: '#/components/parameters/companyId'
+    - $ref: '#/components/parameters/connectionId'
+    get:
+      summary: Get company commerce profile
+      tags:
+      - Company info
+      operationId: get-commerce-profile
+      x-speakeasy-name-override: get-commerce-profile
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommerceCompanyInfo'
+              examples:
+                Example 1:
+                  value:
+                    companyName: Codat
+                    companyLegalName: Codat Ltd
+                    addresses:
+                    - type: Billing
+                      line1: 301 Ink Rooms
+                      line2: 28 Easton Street
+                      city: London
+                      region: England
+                      country: United Kingdom
+                      postalCode: WC1X 0BE
+                    - type: Delivery
+                      line1: 28 Easton Street
+                      city: London
+                      country: UK
+                      postalCode: WC1X 0BE
+                    phoneNumbers:
+                    - number: 02012 345678
+                      type: Landline
+                    - number: 07123 456789
+                      type: Mobile
+                    - number: 02012 345678
+                      type: Fax
+                    webLinks:
+                    - type: Website
+                      url: https://www.codat.io/
+                    - type: Social
+                      url: https://www.linkedin.com/company/codat-limited/
+                    registrationNumber: '5590111724'
+                    baseCurrency: GBP
+                    accountBalances:
+                    - available: 20053.23
+                      pending: 2034.23
+                      reserved: 517.23
+                      currency: GBP
+                    sourceUrls:
+                      Api: https://api.codat.io
+                    createdDate: '2019-03-07T16:50:49'
+                    modifiedDate: '2022-03-10T15:42:13'
+                    sourceModifiedDate: '2021-06-10T01:48:49'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/Payment-Required'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not-Found'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/Too-Many-Requests'
+        '500':
+          $ref: '#/components/responses/Internal-Server-Error'
+        '503':
+          $ref: '#/components/responses/Service-Unavailable'
+      description: 'Retrieve information about the company, as seen in the commerce
+
+        platform.
+
+
+        This may include information like addresses, tax registration details and
+
+        social media or website information."'
+components:
+  schemas:
+    CommerceCompanyInfo:
+      title: 'Commerce: Company profile'
+      description: "In the Codat system, company profile includes standard commercial details about \na linked company, such as their address, phone number, and company registration.\n"
+      type: object
+      allOf:
+      - type: object
+        properties:
+          companyName:
+            type: string
+            description: The name of the company
+            example: Codat
+          commercePlatformRef:
+            type: string
+            description: Identifier or reference for the company in the commerce software
+          companyLegalName:
+            type: string
+            description: The full legal name of the company
+            example: Codat Limited
+          addresses:
+            type: array
+            description: Addresses associated with the company
+            items:
+              $ref: '#/components/schemas/CommerceAddress'
+          phoneNumbers:
+            type: array
+            description: Phone numbers associated with the company
+            items:
+              $ref: '#/components/schemas/PhoneNumber'
+          webLinks:
+            description: Weblinks associated with the company
+            type: array
+            items:
+              $ref: '#/components/schemas/WebLink'
+          registrationNumber:
+            description: The registration number of the company
+            type: string
+            examples:
+            - 10480375
+          baseCurrency:
+            $ref: '#/components/schemas/SourceAccount/properties/currency'
+          accountBalances:
+            description: The available and current cash balances for the company's accounts
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceCompanyInfo/definitions/accountBalance'
+          sourceUrls:
+            description: URL addresses for the originating system. For example, potential use cases include 'deeplinking' to the originating system
+            type: object
+            additionalProperties:
+              type: string
+            example:
+              url1: https://connect.sandbox.com/v2/customers
+              url2: https://connect.sandbox.com/v2/disputes
+      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      definitions:
+        accountBalance:
+          title: Account Balance
+          type: object
+          x-internal: true
+          properties:
+            available:
+              description: The account's current balance
+              type: number
+              format: decimal
+            pending:
+              description: Funds that are not yet available in the balance
+              type: number
+              format: decimal
+            reserved:
+              description: Funds reserved as holdings
+              format: decimal
+            currency:
+              description: The currency of the account
+              allOf:
+              - $ref: '#/components/schemas/SourceAccount/properties/currency'
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    WebLink:
+      title: Weblink
+      description: Weblink associated with the company.
+      type: object
+      properties:
+        type:
+          description: The type of the weblink.
+          type: string
+          enum:
+          - Website
+          - Social
+          - Unknown
+        url:
+          description: The full URL for the weblink.
+          type: string
+          format: url
+      example:
+        type: Website
+        url: https://codat.io
+    SupplementalData:
+      title: Supplemental data
+      type: object
+      x-internal: true
+      description: "Supplemental data is additional data you can include in our standard data types. \n\nIt is referenced as a configured dynamic key value pair that is unique to the accounting software. [Learn more](https://docs.codat.io/using-the-api/supplemental-data/overview) about supplemental data."
+      properties:
+        content:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: true
+          nullable: true
+    CommerceAddress:
+      title: 'Commerce: Address'
+      x-internal: true
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CommerceAddress/definitions/commerceAddressType'
+        line1:
+          description: The first line of the address
+          type: string
+        line2:
+          description: The second line of the address
+          type: string
+        city:
+          description: The third line of the address, or city
+          type: string
+        region:
+          description: The fourth line of the address, or region
+          type: string
+        country:
+          description: The country for the address
+          type: string
+        postalCode:
+          description: The postal (or zip) code for the address
+          type: string
+      definitions:
+        commerceAddressType:
+          description: The type of the address
+          type: string
+          enum:
+          - Billing
+          - Delivery
+          - Order
+          - Inventory
+          - Unknown
+    AccountingCompanyInfo:
+      title: 'Accounting: Company information'
+      description: "Company info provides standard details about a linked company such as their address, phone number, and company registration.\n\n> **Company information or companies?**\n> \n> Company information is standard information that is held in the accounting software about a company. `Companies` is an endpoint that lists businesses in the Codat system that have linked and shared their data sources."
+      type: object
+      properties:
+        companyName:
+          type: string
+          nullable: true
+          description: Name of the linked company.
+        accountingPlatformRef:
+          type: string
+          nullable: true
+          description: Identifier or reference for the company in the accounting software.
+        companyLegalName:
+          type: string
+          nullable: true
+          description: Registered legal name of the linked company.
+        addresses:
+          type: array
+          nullable: true
+          description: An array of Addresses.
+          items:
+            $ref: '#/components/schemas/AccountingAddress'
+        phoneNumbers:
+          type: array
+          nullable: true
+          description: An array of phone numbers.
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
+        webLinks:
+          type: array
+          nullable: true
+          description: An array of weblinks.
+          items:
+            $ref: '#/components/schemas/WebLink'
+        ledgerLockDate:
+          $ref: '#/components/schemas/DateTime'
+          description: If set in the accounting software, the date (in the ISO 8601 date/time format) after which accounting transactions cannot be edited. Commonly used when books are closed at year-end.
+        registrationNumber:
+          type: string
+          nullable: true
+          description: Registration number given to the linked company by the companies authority in the country of origin. In the UK this is Companies House.
+        taxNumber:
+          type: string
+          nullable: true
+          description: Company tax number.
+        financialYearStartDate:
+          $ref: '#/components/schemas/DateTime'
+          description: Start date of the financial year for the company.
+        baseCurrency:
+          type: string
+          nullable: true
+          description: Currency set in the accounting software of the linked company. Used by the currency rate.
+        sourceUrls:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+          nullable: true
+          description: 'URL addresses for the accounting source.
+
+
+            For example, for Xero integrations two URLs are returned. These have many potential use cases, such as [deep linking](https://developer.xero.com/documentation/api-guides/deep-link-xero).'
+        createdDate:
+          $ref: '#/components/schemas/DateTime'
+          description: Date the linked company was created in the accounting software.
+        supplementalData:
+          $ref: '#/components/schemas/SupplementalData'
+      examples:
+      - companyName: ACME Corporation
+        accountingPlatformRef: 4444e827-401b-4925-92cb-d79086bf3b6b
+        companyLegalName: ACME Corporation Ltd.
+        addresses:
+        - type: Billing
+          line1: Warner House
+          line2: 98 Theobald's Road
+          city: London
+          region: ''
+          country: United Kingdom
+          postalcode: WC1X 8WB
+        - type: Unknown
+          line1: 123 Sierra Way
+          line2: ''
+          city: San Pablo
+          region: CA
+          country: ''
+          postalCode: '87999'
+        phoneNumbers:
+        - number: 010 1234 5678
+          type: Landline
+        webLinks:
+        - type: Website
+          url: https://www.wbsl.com/
+        ledgerLockDate: '2019-03-04T12:08:01.881Z'
+        registrationNumber: '1234567890'
+        taxNumber: GB 123456789
+        financialYearStartDate: '2019-04-01T00:00:00Z'
+        baseCurrency: USD
+        sourceUrls:
+          url1: https://go.xero.com/organisationlogin/default.aspx?shortcode=!rxs0Q
+          url2: https://reporting.xero.com/!rxs0Q
+        createdDate: '2020-02-03T16:42:02Z'
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    CommerceOrder:
+      title: 'Commerce: Order'
+      description: 'Orders contain the transaction details for all products sold by the company, and include details of any payments, service charges, or refunds related to each order. You can use data from the Orders endpoints to calculate key metrics, such as gross sales values and monthly recurring revenue (MRR).
+
+        '
+      allOf:
+      - type: object
+        x-stoplight:
+          id: 516bf0ecc4907
+        required:
+        - id
+        properties:
+          id:
+            type: string
+            description: A unique, persistent identifier for this record
+            examples:
+            - 13d946f0-c5d5-42bc-b092-97ece17923ab
+            - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+            - 7110701885
+            - EILBDVJVNUAGVKRQ
+            x-codat-validation:
+            - validator: UniqueWithinConnection
+      - properties:
+          orderNumber:
+            type: string
+            description: Friendly reference for the order in the commerce or point of sale platform.
+          country:
+            description: "The Codat country property is returned as it was provided in the underlying platform by the company without any formatting on our part.\n\nDepending on the platform the value of this property will either be an <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\"_blank\">ISO 3166</a> code (2-alpha or 3-alpha) or free-form text returned as a string name in our model. \n\nFor POST operations against platforms that demand a specific format for the country code, we have documented accepted values in the [options](https://docs.codat.io/lending-api#/operations/get-companies-companyId-connections-connectionId-push) endpoint."
+            type: string
+            format: ISO3166 Alpha-3
+            examples:
+            - GBR
+            - USA
+            - ABW
+          currency:
+            allOf:
+            - $ref: '#/components/schemas/SourceAccount/properties/currency'
+            - description: Currency in which the order was placed.
+          closedDate:
+            $ref: '#/components/schemas/DateTime'
+            description: Date on which order was closed after the product was shipped, paid for, and any refund period had elapsed.
+          totalAmount:
+            description: Total amount of the order, including discounts, refunds, and tax, but excluding gratuities.
+            type: number
+            format: decimal
+          totalRefund:
+            description: Total amount of any refunds issued on the order, including discounts and tax, but excluding gratuities. This is always negative.
+            type: number
+            format: decimal
+          totalTaxAmount:
+            description: Total amount of tax applied to the order.
+            type: number
+            format: decimal
+          totalDiscount:
+            description: Total amount of any discounts applied to the order, excluding tax. This is typically positive (for discounts which decrease the amount of the order), but can also be negative (for discounts which increase the amount of the order).
+            type: number
+            format: decimal
+          totalGratuity:
+            description: Extra amount added to the order.
+            type: number
+            format: decimal
+          orderLineItems:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceOrder/definitions/orderLineItem'
+          payments:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommercePayment/definitions/paymentRef'
+          serviceCharges:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceOrder/definitions/serviceCharge'
+          locationRef:
+            $ref: '#/components/schemas/CommerceLocation/definitions/locationRef'
+          customerRef:
+            $ref: '#/components/schemas/CommerceCustomer/definitions/commerceCustomerRef'
+          supplementalData:
+            $ref: '#/components/schemas/SupplementalData'
+      - title: Created date
+        type: object
+        x-internal: true
+        properties:
+          createdDate:
+            $ref: '#/components/schemas/DateTime'
+            description: The date the entity was created.
+      - title: Modified dates
+        x-internal: true
+        allOf:
+        - title: ModifiedDate
+          x-internal: true
+          type: object
+          properties:
+            modifiedDate:
+              allOf:
+              - $ref: '#/components/schemas/DateTime'
+              - description: 'The date when the record was last fetched from the accounting software, commerce software, or open banking provider and updated in Codat’s data cache.
+
+
+                  Use it to identify and retrieve records that have changed since your last fetch. For example, filtering `modifiedDate` to today will provide new records updated in Codat today.
+
+
+                  This date is populated for all data types except for attachments, balance sheets, company information, and profit & loss reports ([read more](https://docs.codat.io/using-the-api/modified-dates#modified-date)).
+
+
+                  In Codat''s data model, dates and times are represented using the <a class="external" href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601 standard</a>.'
+        - title: Source Modified Date
+          x-internal: true
+          type: object
+          nullable: true
+          properties:
+            sourceModifiedDate:
+              allOf:
+              - $ref: '#/components/schemas/DateTime'
+              - description: "The date when a record was last modified in the accounting software, usually by the business or a business process. For example, when payments are made against an invoice. \n\nIt is not populated ([read more](https://docs.codat.io/using-the-api/modified-dates#source-modified-date)) when:\n  - Pulling attachments\n  - The accounting software does not provide modification dates for a data type\n  - A record has been deleted from the source platform and Codat doesn't have a record of when the deletion occurred\n  - A record has been voided. For certain platforms that soft delete records, `isDeleted` metadata is used to identify void records\n\nIn Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>."
+      definitions:
+        orderLineItem:
+          allOf:
+          - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+          - type: object
+            properties:
+              quantity:
+                type: number
+                format: decimal
+                description: 'Number of units of the product sold.
+
+                  For refunds, quantity is negative.
+
+                  '
+              taxPercentage:
+                type: number
+                format: decimal
+                description: Percentage rate (from 0 to 100) of any sales tax applied to the unit price.
+                examples:
+                - 0
+                - 12.5
+                - '45.00'
+              totalAmount:
+                type: number
+                format: decimal
+                description: Total amount of the line item, including discounts and tax.
+              totalTaxAmount:
+                type: number
+                format: decimal
+                description: Total amount of tax applied to the line item, factoring in any discounts.
+              unitPrice:
+                type: number
+                format: decimal
+                description: Price per unit of goods or services, excluding discounts and tax.
+              taxes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommerceTaxComponent/definitions/taxComponentAllocation'
+                description: Taxes breakdown as applied to order lines.
+              productRef:
+                $ref: '#/components/schemas/CommerceProduct/definitions/productRef'
+              productVariantRef:
+                $ref: '#/components/schemas/CommerceProduct/definitions/productVariantRef'
+              discountAllocations:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommerceOrder/definitions/orderDiscountAllocation'
+        serviceCharge:
+          type: object
+          properties:
+            description:
+              description: Service charges for this order.
+              type: string
+              example: A service charge
+            totalAmount:
+              description: Total amount of the service charge, including tax.
+              type: number
+              format: decimal
+              examples:
+              - 0
+              - 12.5
+              - 45
+            taxPercentage:
+              description: Percentage rate (from 0 to 100) of any tax applied to the service charge.
+              type: number
+              format: decimal
+              examples:
+              - 0
+              - 12.5
+              - 45
+            taxAmount:
+              description: Amount of the service charge that is tax.
+              type: number
+              format: decimal
+              examples:
+              - 0
+              - 12.5
+              - 45
+            taxes:
+              description: Taxes breakdown as applied to service charges.
+              type: array
+              items:
+                $ref: '#/components/schemas/CommerceTaxComponent/definitions/taxComponentAllocation'
+            quantity:
+              description: The number of times the charge is charged.
+              type: integer
+              examples:
+              - 1
+              - 12
+              - 45
+            type:
+              $ref: '#/components/schemas/CommerceOrder/definitions/serviceChargeType'
+        serviceChargeType:
+          description: The type of the service charge.
+          type: string
+          enum:
+          - Generic
+          - Shipping
+          - Overpayment
+          - Unknown
+          example: Overpayment
+        orderDiscountAllocation:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the discount in the commerce or point of sale platform.
+              example: Promotional Discount
+            totalAmount:
+              type: number
+              format: decimal
+              description: Total amount of discount applied, excluding tax. This is typically positive (for discounts which decrease the amount of the order line), but can also be negative (for discounts which increase the amount of the order line).
+              example: 15.25
+      examples:
+      - id: 01e63721-1205-478e-8503-9d8bf8a93f44
+        orderNumber: '99123956'
+        country: CAN
+        currency: CAD
+        createdDate: '2021-03-28T03:00:14'
+        totalAmount: 12
+        totalRefund: 0
+        totalTaxAmount: 2
+        totalDiscount: 0
+        totalGratuity: 1
+        orderLineItems:
+        - id: 116113a6-54d3-4624-ba73-26a77a5ffd51
+          quantity: 1
+          taxPercentage: 20
+          totalAmount: 12
+          totalTaxAmount: 2
+          unitPrice: 10
+          taxes:
+          - taxComponentRef:
+              id: '72'
+              name: Sales Tax
+            taxAmount: ''
+          - taxComponentRef:
+              id: '72'
+              name: City Tax
+            taxAmount: ''
+          productRef:
+            id: ac186646-41f2-4280-afea-1012c59459ab
+            name: Intelligent Concrete Salad
+          productVariantRef:
+            id: f9ca9de5-9e31-460d-ac81-368f4e7c8fc0
+            name: Small Incredible Wooden Soap
+          discountAllocations: []
+        payments:
+        - id: defdceb6-83a3-4b7d-a74e-e9ef947d5f48
+          amount: 12
+          currency: CAD
+          type: Paypal
+          status: Unknown
+          dueDate: '2021-04-04T03:00:14'
+          createdDate: '2021-03-28T03:00:14'
+          modifiedDate: '2022-02-02T11:02:45'
+        serviceCharges:
+        - description: Service Charge
+          totalAmount: 1.2
+          taxPercentage: 20
+          taxAmount: 0.2
+          taxes:
+          - taxComponentRef:
+              id: '72'
+              name: Service Tax
+            taxAmount: ''
+          quantity: 1
+          type: Generic
+        locationRef:
+          id: 47bbffc7-c045-4b0f-a3bb-ecf1f669edfa
+        customerRef:
+          id: 2634d180-7205-43f0-a73d-84af6443a005
+          name: Emmy Roberts
+        modifiedDate: '2022-02-02T11:02:45Z'
+        sourceModifiedDate: '2021-03-28T03:00:14'
+      type: object
+    AccountingAddress:
+      title: 'Accounting: Address'
+      x-internal: true
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AccountingAddress/definitions/accountingAddressType'
+        line1:
+          type: string
+          nullable: true
+          description: Line 1 of the customer address.
+        line2:
+          type: string
+          nullable: true
+          description: Line 2 of the customer address.
+        city:
+          type: string
+          nullable: true
+          description: City of the customer address.
+        region:
+          type: string
+          nullable: true
+          description: Region of the customer address.
+        country:
+          type: string
+          nullable: true
+          description: Country of the customer address.
+        postalCode:
+          type: string
+          nullable: true
+          description: Postal code or zip code.
+      required:
+      - type
+      definitions:
+        accountingAddressType:
+          description: The type of the address
+          type: string
+          enum:
+          - Unknown
+          - Billing
+          - Delivery
+    PhoneNumber:
+      title: Phone
+      type: object
+      x-internal: true
+      properties:
+        number:
+          type: string
+          nullable: true
+          examples:
+          - +44 25691 154789
+          - (877) 492-8687
+          - 01224 658 999
+          description: A phone number.
+        type:
+          description: The type of phone number
+          type: string
+          enum:
+          - Primary
+          - Landline
+          - Mobile
+          - Fax
+          - Unknown
+      required:
+      - type
+    SourceAccount:
+      title: Source account (v1)
+      type: object
+      description: The target bank account in a supported accounting software for ingestion into a bank feed.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Unique ID for the bank account.
+        accountName:
+          type: string
+          nullable: true
+          description: The bank account name.
+        accountType:
+          type: string
+          nullable: true
+          description: The type of bank account e.g. Credit.
+        accountNumber:
+          type: string
+          nullable: true
+          description: The account number.
+        sortCode:
+          type: string
+          nullable: true
+          description: The sort code.
+        currency:
+          title: Currency
+          x-internal: true
+          type: string
+          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
+          format: ISO4217
+          examples:
+          - GBP
+          - USD
+          - EUR
+        balance:
+          type: number
+          format: decimal
+          nullable: true
+          description: The latest balance for the bank account.
+        modifiedDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: The last date the bank account was modified.
+        status:
+          type: string
+          nullable: true
+          description: Status of the source account.
+          enum:
+          - pending
+          - connected
+          - connecting
+          - disconnected
+          - unknown
+        feedStartDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+      required:
+      - id
+      definitions:
+        sourceAccountPrototype:
+          title: Source account (v1)
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/SourceAccount/properties/id'
+            accountName:
+              $ref: '#/components/schemas/SourceAccount/properties/accountName'
+            accountType:
+              $ref: '#/components/schemas/SourceAccount/properties/accountType'
+            accountNumber:
+              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
+            sortCode:
+              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            balance:
+              $ref: '#/components/schemas/SourceAccount/properties/balance'
+            modifiedDate:
+              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
+          required:
+          - id
+        sourceAccounts:
+          title: Source accounts
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAccount'
+      examples:
+      - id: acc-002
+        accountName: account-081
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345670'
+        currency: GBP
+        balance: 99.99
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+      - id: acc-003
+        accountName: account-095
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345671'
+        currency: USD
+        balance: 0
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+  parameters:
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+  responses:
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Conflict:
+      description: The data type's dataset has not been requested or is still syncing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 409
+                service: PublicApi
+                error: The data set has not been requested.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Data connection not found:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  securitySchemes:
+    auth_header:
+      name: Authorization
+      description: The word "Basic" followed by a space and your API key. [API keys](https://docs.codat.io/platform-api#/schemas/ApiKeyDetails) are tokens used to control access to the API. You can get an API key via [the Codat Portal](https://app.codat.io/developers/api-keys), via [the API](https://docs.codat.io/platform-api#/operations/list-api-keys), or [read more](https://docs.codat.io/using-the-api/authentication) about authentication at Codat.
+      type: apiKey
+      in: header
+      x-speakeasy-example: Basic BASE_64_ENCODED(API_KEY)
+x-speakeasy-retries:
+  strategy: backoff
+  backoff:
+    initialInterval: 500
+    maxInterval: 60000
+    maxElapsedTime: 3600000
+    exponent: 1.5
+  statusCodes:
+  - 408
+  - 429
+  - 5XX
+  retryConnectionErrors: true
+x-speakeasy-name-override:
+- operationId: ^list-.*?
+  methodNameOverride: list
+- operationId: ^list-.*?-attachments
+  methodNameOverride: list-attachments
+- operationId: ^get-.*?
+  methodNameOverride: get
+- operationId: ^get-create-.*?-model
+  methodNameOverride: get-create-model
+- operationId: ^get-create-update.*?-model
+  methodNameOverride: get-create-update-model
+- operationId: ^get-.*?-attachment
+  methodNameOverride: get-attachment
+- operationId: ^update-.*?
+  methodNameOverride: update
+- operationId: ^create-.*?
+  methodNameOverride: create
+- operationId: ^delete-.*?
+  methodNameOverride: delete
+- operationId: ^delete-.*?-attachment
+  methodNameOverride: delete-attachment
+- operationId: ^download-.*?-attachment
+  methodNameOverride: download-attachment
+- operationId: ^upload-.*?-attachment
+  methodNameOverride: upload-attachment
+x-codat-docs-path: bank-feeds-api
+x-codat-keep-docs-paths-local: true
+x-codat-speakeasy-pagination:
+  type: offsetLimit
+  inputs:
+  - name: page
+    in: parameters
+    type: page
+  outputs:
+    results: $.results
