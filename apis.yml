@@ -5,9 +5,22 @@ segments:
 description: Codat is a unified API platform focused on SMB financial data, connecting
   to 30+ accounting, ERP, banking, and payment platforms.
 type: Index
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/codat.png
 tags:
 - Unified_API
 created: '2026-03-03'
@@ -15,79 +28,13 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/codat/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-- aid: codat:platform-api
-  name: Codat Platform API
-  description: The Codat Platform API provides core functionality used across all
-    Codat solutions, including programmatic creation and management of companies,
-    data connections, and configuration of integrations with accounting, banking,
-    and commerce platforms.
-  humanURL: https://docs.codat.io/using-the-api/overview
-  tags:
-  - Companies
-  - Connections
-  - Platform
-  - Unified_API
-  properties:
-  - type: Documentation
-    url: https://docs.codat.io/using-the-api/overview
-  - type: APIReference
-    url: https://docs.codat.io/platform-api
-  - type: OpenAPI Source
-    url: https://github.com/codatio/oas
-  - type: OpenAPI
-    url: openapi/codat-platform-openapi.json
-  - url: graphql/codat-graphql.md
-    type: GraphQL
-- aid: codat:lending-api
-  name: Codat Lending API
-  description: The Codat Lending API enables digital lenders, neobanks, and corporate
-    card providers to make smarter credit decisions on small businesses by aggregating
-    and analyzing standardized financial data from accounting, banking, and commerce
-    platforms to assess SMB creditworthiness.
-  humanURL: https://docs.codat.io/lending/overview
-  tags:
-  - Credit
-  - Financial Data
-  - Lending
-  - Underwriting
-  - Unified_API
-  properties:
-  - type: Documentation
-    url: https://docs.codat.io/lending/overview
-  - type: APIReference
-    url: https://docs.codat.io/lending-api
-  - type: OpenAPI
-    url: openapi/codat-lending-openapi.json
-  - type: OpenAPI Source
-    url: https://github.com/codatio/oas
-- aid: codat:bank-feeds-api
-  name: Codat Bank Feeds API
-  description: The Codat Bank Feeds API enables banks, neobanks, corporate card issuers,
-    and payment providers to set up automatic bank feeds from their applications to
-    supported accounting software, simplifying the deployment of bank statement synchronization
-    into SMB accounting platforms through a single standardized integration.
-  humanURL: https://docs.codat.io/bank-feeds/overview
-  tags:
-  - Accounting
-  - Bank Feeds
-  - Reconciliation
-  - Unified_API
-  properties:
-  - type: Documentation
-    url: https://docs.codat.io/bank-feeds/overview
-  - type: OpenAPI
-    url: openapi/codat-bank-feeds-openapi.json
-  - type: APIReference
-    url: https://docs.codat.io/bank-feeds-api
-  - type: OpenAPI Source
-    url: https://github.com/codatio/oas
 - aid: codat:sync-for-expenses-api
   name: Codat Sync for Expenses API
-  description: The Codat Sync for Expenses API enables corporate card and expense
-    management platforms to provide high-quality integrations with multiple accounting
-    platforms, synchronizing categorized expense data including receipts, general
-    ledger mappings, and tracking categories into SMB accounting software through
-    a standardized data model.
+  description: >-
+    The Codat Sync for Expenses API enables corporate card and expense management platforms to provide
+    high-quality integrations with multiple accounting platforms, synchronizing categorized expense data
+    including receipts, general ledger mappings, and tracking categories into SMB accounting software
+    through a standardized data model.
   humanURL: https://docs.codat.io/expenses/overview
   tags:
   - Accounting Sync
@@ -103,10 +50,10 @@ apis:
     url: https://github.com/codatio/oas
 - aid: codat:sync-for-payables-api
   name: Codat Bill Pay API
-  description: The Codat Bill Pay API (Sync for Payables) enables neobanks, expense
-    management providers, and B2B payment platforms to automate customers' accounts
-    payable workflows, providing a standardized data model to sync bills and bill
-    payments with all major accounting software in real time.
+  description: >-
+    The Codat Bill Pay API (Sync for Payables) enables neobanks, expense management providers, and B2B
+    payment platforms to automate customers' accounts payable workflows, providing a standardized data
+    model to sync bills and bill payments with all major accounting software in real time.
   humanURL: https://docs.codat.io/payables/overview
   tags:
   - Accounts Payable
@@ -122,11 +69,11 @@ apis:
     url: https://github.com/codatio/oas
 - aid: codat:spend-insights-api
   name: Codat Spend Insights API
-  description: The Codat Spend Insights API enables banks and commercial card issuers
-    to access clients' accounts payable data from their ERP or accounting software
-    within minutes, providing insights on spend and supplier activity to identify
-    suppliers eligible for virtual card programs and grow commercial card volume in
-    B2B payments.
+  description: >-
+    The Codat Spend Insights API enables banks and commercial card issuers to access clients' accounts
+    payable data from their ERP or accounting software within minutes, providing insights on spend and
+    supplier activity to identify suppliers eligible for virtual card programs and grow commercial card
+    volume in B2B payments.
   humanURL: https://docs.codat.io/spend-insights/overview
   tags:
   - Accounts Payable
@@ -142,10 +89,10 @@ apis:
     url: https://github.com/codatio/oas
 - aid: codat:sync-for-commerce-api
   name: Codat Sync for Commerce API
-  description: The Codat Sync for Commerce API automatically replicates and reconciles
-    sales data from merchant point-of-sale, payments, and eCommerce systems into their
-    accounting software, transforming raw sales and payments data into detailed sales
-    invoices for automated accounting reconciliation.
+  description: >-
+    The Codat Sync for Commerce API automatically replicates and reconciles sales data from merchant point-of-sale,
+    payments, and eCommerce systems into their accounting software, transforming raw sales and payments
+    data into detailed sales invoices for automated accounting reconciliation.
   humanURL: https://docs.codat.io/commerce/overview
   tags:
   - Commerce
@@ -161,10 +108,10 @@ apis:
     url: https://github.com/codatio/oas
 - aid: codat:sync-for-payroll-api
   name: Codat Sync for Payroll API
-  description: The Codat Sync for Payroll API enables HR, payroll, and vertical SaaS
-    platforms to integrate their customers' payroll data into accounting software
-    and support its reconciliation, providing a standardized data model to create
-    and manage accounts, journal entries, and tracking categories across all supported
+  description: >-
+    The Codat Sync for Payroll API enables HR, payroll, and vertical SaaS platforms to integrate their
+    customers' payroll data into accounting software and support its reconciliation, providing a standardized
+    data model to create and manage accounts, journal entries, and tracking categories across all supported
     accounting and ERP packages.
   humanURL: https://docs.codat.io/payroll/overview
   tags:
@@ -179,6 +126,814 @@ apis:
     url: https://docs.codat.io/sync-for-payroll-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
+- aid: codat:codat-account-mapping-api
+  name: Codat Account mapping API
+  description: Extra functionality for building an account management UI.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Account mapping
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-account-mapping-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-accounting-bank-data-api
+  name: Codat Accounting bank data API
+  description: Access bank transactions from an accounting software.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Accounting bank data
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-accounting-bank-data-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-accounts-payable-api
+  name: Codat Accounts payable API
+  description: >-
+    Data from a linked accounting software representing money the business owes money to its suppliers.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Accounts payable
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-accounts-payable-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-accounts-receivable-api
+  name: Codat Accounts receivable API
+  description: >-
+    Data from a linked accounting software representing money owed to the business for sold goods or services.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Accounts receivable
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-accounts-receivable-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-bank-accounts-api
+  name: Codat Bank accounts API
+  description: Access bank accounts in an SMBs accounting software.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Bank accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-bank-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-bank-statements-api
+  name: Codat Bank statements API
+  description: Retrieve banking data from linked bank accounts.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Bank statements
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-bank-statements-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-companies-api
+  name: Codat Companies API
+  description: Create and manage your SMB users' companies.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-companies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-company-info-api
+  name: Codat Company info API
+  description: View company information fetched from the source platform.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Company info
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-company-info-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-company-information-api
+  name: Codat Company information API
+  description: Get detailed information about a company from the underlying accounting software.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Company information
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-company-information-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-connection-management-api
+  name: Codat Connection management API
+  description: Configure UI and retrieve access tokens for authentication used by **Connections SDK**.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Connection management
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-connection-management-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-connections-api
+  name: Codat Connections API
+  description: Create new and manage existing data connections for a company.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-connections-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-custom-data-type-api
+  name: Codat Custom data type API
+  description: >-
+    Configure and pull additional data types that are not included in Codat's standardized data model.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Custom data type
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-custom-data-type-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-data-integrity-api
+  name: Codat Data integrity API
+  description: >-
+    Match mutable accounting data with immutable banking data to increase confidence in financial data.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Data integrity
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-data-integrity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-excel-reports-api
+  name: Codat Excel reports API
+  description: Download reports in Excel format.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Excel reports
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-excel-reports-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-file-upload-api
+  name: Codat File upload API
+  description: Endpoints to manage uploaded files.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - File upload
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-file-upload-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-financial-statements-api
+  name: Codat Financial statements API
+  description: Financial data and reports from a linked accounting software.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Financial statements
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-financial-statements-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-financial-summary-api
+  name: Codat Financial summary API
+  description: >-
+    View financial summary information for a company, including credit model reports and accounting score.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Financial summary
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-financial-summary-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-integrations-api
+  name: Codat Integrations API
+  description: Get a list of integrations supported by Codat and their logos.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-liabilities-api
+  name: Codat Liabilities API
+  description: Debt and other liabilities.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Liabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-liabilities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-loan-writeback-api
+  name: Codat Loan writeback API
+  description: >-
+    Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure
+    in your lending process to maintain an accurate position of a loan during the entire lending cycle.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Loan writeback
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-loan-writeback-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-manage-data-api
+  name: Codat Manage data API
+  description: Control how data is retrieved from an integration.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Manage data
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-manage-data-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-manage-reports-api
+  name: Codat Manage reports API
+  description: Generate and review generated reports for a company.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Manage reports
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-manage-reports-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-managed-bank-feeds-api
+  name: Codat Managed bank feeds API
+  description: Manage bank feed syncs for source accounts.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Managed bank feeds
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-managed-bank-feeds-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-push-data-api
+  name: Codat Push data API
+  description: Initiate and monitor Create, Update, and Delete operations.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Push data
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-push-data-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-read-data-api
+  name: Codat Read data API
+  description: View validation outcomes for completed read data operations.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Read data
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-read-data-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-refresh-data-api
+  name: Codat Refresh data API
+  description: Initiate data refreshes, view pull status and history.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Refresh data
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-refresh-data-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-sales-api
+  name: Codat Sales API
+  description: Retrieve standardized sales data from a linked commerce software.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Sales
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-sales-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-settings-api
+  name: Codat Settings API
+  description: Manage company profile configuration, sync settings, and API keys.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-settings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-source-accounts-api
+  name: Codat Source accounts API
+  description: Provide and manage lists of source bank accounts.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Source accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-source-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-supplemental-data-api
+  name: Codat Supplemental data API
+  description: Configure and pull additional data you can include in Codat's standard data types.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Supplemental data
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-supplemental-data-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-transactions-api
+  name: Codat Transactions API
+  description: >-
+    Create new bank account transactions for a company's connections, and see previous operations.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-webhooks-api
+  name: Codat Webhooks API
+  description: Create and manage webhooks that listen to Codat's events.
+  humanURL: https://docs.codat.io/using-the-api/overview
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.codat.io/using-the-api/overview
+  - type: APIReference
+    url: https://docs.codat.io/platform-api
+  - type: OpenAPI Source
+    url: https://github.com/codatio/oas
+  - type: GraphQL
+    url: graphql/codat-graphql.md
+  - type: Documentation
+    url: https://docs.codat.io/lending/overview
+  - type: APIReference
+    url: https://docs.codat.io/lending-api
+  - type: Documentation
+    url: https://docs.codat.io/bank-feeds/overview
+  - type: APIReference
+    url: https://docs.codat.io/bank-feeds-api
 common:
 - type: AgenticAccess
   url: agentic-access/codat-agentic-access.yml
