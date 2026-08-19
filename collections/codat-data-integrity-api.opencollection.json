@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bank Feeds Account mapping Data integrity API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data integrity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get data integrity status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/data/companies/:companyId/assess/dataTypes/:dataType/dataIntegrity/status",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "dataType",
+                "value": "",
+                "type": "path",
+                "description": "A key for a Codat data type."
+              }
+            ]
+          },
+          "docs": "The *Get data integrity status* endpoint returns the [status](https://docs.codat.io/lending-api#/schemas/DataIntegrityStatus) for the company’s match results between the data type provided in the URL and other data types that Data Integrity uses to support matching.\nThis endpoint helps you understand whether match data is available and, if so, how to usefully query it.\n\nThe response tells you:\n\n- Whether match results are available.\n- When the results were generated, and their status.\n- The conn"
+        },
+        {
+          "info": {
+            "name": "Get data integrity summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/data/companies/:companyId/assess/dataTypes/:dataType/dataIntegrity/summaries",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "dataType",
+                "value": "",
+                "type": "path",
+                "description": "A key for a Codat data type."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              }
+            ]
+          },
+          "docs": "The *Get data integrity summary* endpoint returns a [summary](https://docs.codat.io/lending-api#/schemas/DataIntegritySummary) of match results for a given data type filtered by a query string in the [Codat query language](https://docs.codat.io/using-the-api/querying). \n\nFor example, if you wanted to see summary match results only for transactions after 1 December 2020, you could include a query parameter of `query=date>2020-12-01`.\n\nThe endpoint response includes only the summary results, not t"
+        },
+        {
+          "info": {
+            "name": "List data integrity details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/data/companies/:companyId/assess/dataTypes/:dataType/dataIntegrity/details",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "dataType",
+                "value": "",
+                "type": "path",
+                "description": "A key for a Codat data type."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              }
+            ]
+          },
+          "docs": "The *List data integrity details* endpoint returns the match result record by record for a given data type, filtered based on a query string in the same way as summary results.\n\nThe [details](https://docs.codat.io/lending-api#/schemas/DataIntegrityDetail) are paginated and support ordering, following the same conventions as our other data endpoints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

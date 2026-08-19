@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bank Feeds Account mapping Read data API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Read data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get validation results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/sync/:datasetId/validation",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the dataset that completed its sync."
+              }
+            ]
+          },
+          "docs": "Use the **Get validation results** endpoint to review warnings and errors encountered during the data type validation phase.\n\nThe validation result [schema](https://docs.codat.io/platform-api#/schemas/ValidationResult) contains two message arrays:\n\n- **`warnings`** array lists potential issues with the data type that may require attention but don't block usage.\n- **`errors`** array contains critical issues that must be resolved before the data type can be used."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

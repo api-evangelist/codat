@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bank Feeds Account mapping Supplemental data API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Supplemental data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/integrations/:platformKey/dataTypes/:dataType/supplementalDataConfig",
+            "params": [
+              {
+                "name": "platformKey",
+                "value": "",
+                "type": "path",
+                "description": "A unique 4-letter key to represent a platform in each integration."
+              },
+              {
+                "name": "dataType",
+                "value": "",
+                "type": "path",
+                "description": "Supported supplemental data data type."
+              }
+            ]
+          },
+          "docs": "The *Get configuration* endpoint returns supplemental data configuration previously created for each integration and data type combination.\n\n[Supplemental data](https://docs.codat.io/using-the-api/supplemental-data/overview) is additional data you can include in Codat's standard data types."
+        },
+        {
+          "info": {
+            "name": "Configure",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.codat.io/integrations/:platformKey/dataTypes/:dataType/supplementalDataConfig",
+            "params": [
+              {
+                "name": "platformKey",
+                "value": "",
+                "type": "path",
+                "description": "A unique 4-letter key to represent a platform in each integration."
+              },
+              {
+                "name": "dataType",
+                "value": "",
+                "type": "path",
+                "description": "Supported supplemental data data type."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The *Configure* endpoint allows you to maintain or change configuration required to return supplemental data for each integration and data type combination.\n\n[Supplemental data](https://docs.codat.io/using-the-api/supplemental-data/overview) is additional data you can include in Codat's standard data types.\n\n**Integration-specific behavior**\nSee the *examples* for integration-specific frequently requested properties."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

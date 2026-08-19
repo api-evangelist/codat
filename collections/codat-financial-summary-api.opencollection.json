@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bank Feeds Account mapping Financial summary API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Financial summary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download credit model Excel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/reports/creditModel/:reportId/excel",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a report, use either the Id of the report or `latest` for the most recently generate report."
+              },
+              {
+                "name": "maxAge",
+                "value": "",
+                "type": "query",
+                "description": "The maximum age of report to fetch."
+              }
+            ]
+          },
+          "docs": "> **Available as beta release**\n>\n> This endpoint is part of a beta release. Please contact your account manager if you want to enable it.\n\nUse the *Download Credit Model Excel* endpoint to download the credit model Excel file. \n\nBefore using it, you must call the [Generate report](https://docs.codat.io/lending-api#/operations/generate-report) endpoint of type `creditModel`."
+        },
+        {
+          "info": {
+            "name": "Get financial summary insights",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/reports/creditModel/:reportId/financialSummary",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a report, use either the Id of the report or `latest` for the most recently generate report."
+              }
+            ]
+          },
+          "docs": "> **Available as beta release**\n>\n> This endpoint is part of a beta release. Please contact your account manager if you want to enable it.\n\nFinancial summary insights provide high-level indicators about the accuracy and completeness of a business’s financial data. These insights include:\n- Closed Books Indicator – An estimate of the most recent accounting period officially closed by a business\n- Accounting Score – An evaluation of the quality and completeness of a business’s bookkeeping\n\nBefore "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

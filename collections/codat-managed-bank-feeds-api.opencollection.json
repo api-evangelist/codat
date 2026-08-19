@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bank Feeds Account mapping Managed bank feeds API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Managed bank feeds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/bankFeedAccounts/:sourceAccountId/managedBankFeeds/syncs/:syncId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "sourceAccountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the source bank account."
+              },
+              {
+                "name": "syncId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the sync."
+              }
+            ]
+          },
+          "docs": "The _Get sync_ endpoint returns the [sync status](https://docs.codat.io/bank-feeds-api#/schemas/SyncStatusResult) for a given 'syncId'. \n\nA sync is a single execution that fetches bank transactions from a connected bank account and records them in the company's accounting software."
+        },
+        {
+          "info": {
+            "name": "Get latest sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/bankFeedAccounts/:sourceAccountId/managedBankFeeds/syncs/latest",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "sourceAccountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the source bank account."
+              }
+            ]
+          },
+          "docs": "The _Get latest sync_ endpoint returns the status for a given source account's [most recent sync](https://docs.codat.io/bank-feeds-api#/schemas/SyncStatusResult). \n\nA sync is a single execution that fetches bank transactions from a connected bank account and records them in the company's accounting software."
+        },
+        {
+          "info": {
+            "name": "Run ad-hoc sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/bankFeedAccounts/:sourceAccountId/managedBankFeeds/syncs",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              },
+              {
+                "name": "sourceAccountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the source bank account."
+              }
+            ]
+          },
+          "docs": "The _Run ad-hoc sync_ endpoint immediately runs a sync with a fetch period from the last successful sync to the execution time of the new sync.\n\nA sync is a single execution that fetches bank transactions from a connected bank account and records them in the company's accounting software.\n\nUse either the [_Get latest sync_](https://docs.codat.io/bank-feeds-api#/operations/get-latest-managed-bank-feed-sync) endpoint or the [_Get sync_](https://docs.codat.io/bank-feeds-api#/operations/fetch-manage"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

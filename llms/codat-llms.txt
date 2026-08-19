@@ -1,0 +1,24 @@
+# Codat
+
+> Banking on Better Data
+> Last updated: 2026-08-16
+
+## Search
+
+- Search URL: `https://codat.io?s={query}`
+
+## Recent Content
+
+- [Advisory Intelligence Platform](https://codat.io/products/advisory-intelligence-platform/)
+- [What is ERP data? A guide for commercial banks](https://codat.io/resources/what-is-erp-data/): What ERP data means for commercial banks: where it comes from, how it differs from the data banks already hold, and how banks can access it. The term ERP data comes up in vendor conversations, product strategy discussions, and questions about what client information a bank is missing, often without anyone pausing to properly define [&hellip;]
+- [AI will make banking's data paradox impossible to ignore](https://codat.io/resources/ai-will-make-bankings-data-paradox-impossible-to-ignore/): Banks are training AI on decades of their own data. The problem is everything that data leaves out. By Joey Rault, Chief Revenue Officer A year ago, when I talked to commercial banking leaders about AI, the conversation stayed in the realm of ambition. I’d hear things like “here’s what this could do for us [&hellip;]
+- [Codat launches advisory intelligence platform bringing real-time data &amp; AI solutions to commercial banks](https://codat.io/resources/codat-launches-advisory-intelligence-platform-bringing-real-time-data-ai-solutions-to-commercial-banks/): BMO is among the first banks to collaborate with Codat to deploy its AI-powered insights to middle market clients. LONDON and NEW YORK, May 5, 2026 &#8211; After nearly a decade building the data infrastructure connecting financial institutions to their business customers, Codat today announced the launch of a strategic repositioning and a new advisory [&hellip;]
+- [Grow Together - Video &amp; Carousel](https://codat.io/grow-together/)
+
+## Complete Sitemap
+
+For a comprehensive list of all URLs, see: https://codat.io/sitemaps.xml
+
+---
+
+*This file is dynamically generated and highlights our most important content.*

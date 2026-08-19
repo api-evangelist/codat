@@ -1,0 +1,4534 @@
+{
+  "item": [
+    {
+      "id": "d5f61b55-2abe-416e-8fb0-d1a2e5dc6a79",
+      "name": "Settings",
+      "description": {
+        "content": "Manage company profile configuration, sync settings, and API keys.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3d47f279-181e-4940-bd17-ce90704ec1f5",
+          "name": "Get CORS settings (old)",
+          "request": {
+            "name": "Get CORS settings (old)",
+            "description": {
+              "content": "﻿The *Get CORS settings* endpoint returns the allowed origins (i.e. your domains) you want to allow cross-origin resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)) with Codat. \n\nEnabling CORS with Codat is required by our embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to access Codat's API endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectionManagement",
+                "corsSettings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6418bdaf-0140-4efc-af18-9c719a2778a7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f4feebe-f2d2-4847-af89-d6787a55c5aa",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c799110e-67af-4d48-8509-f23f2e36400b",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bd62669-ef78-42ae-9957-82c2ce108bc4",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae0d2cb8-d4ed-4636-927c-a910a794c789",
+              "name": "One or more of the resources you referenced could not be found.\nThis might be because your company or data connection id is wrong, or was already deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"service\": \"PublicApi\",\n  \"error\": \"Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found\",\n  \"correlationId\": \"8fa2b5f4794970a4ee73758f612e8df0\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37681b6c-049a-413d-9e69-6f1e126e63f9",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3bd48bc-bf74-4b84-b30b-41ca90367656",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "224e9fc4-8588-4280-9070-9a4c2bb34ff4",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3934f214-86e2-4e84-b000-0180fc4b23e9",
+          "name": "Set CORS settings (old)",
+          "request": {
+            "name": "Set CORS settings (old)",
+            "description": {
+              "content": "﻿The *Set CORS settings* endpoint allows you to register allowed origins (i.e. your domains) for use in cross-origin resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)).\n \nEnabling CORS with Codat is required by our embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to access Codat's API endpoints. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectionManagement",
+                "corsSettings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"allowedOrigins\": [\n    \"<uri>\",\n    \"<uri>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e2209863-45ca-4d4d-8005-a16eae047017",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5678369-c308-40c7-92c7-fb0f61333d25",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97f65d42-0192-4fcf-84c3-757ee5941732",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb4cce5c-0c33-470c-a397-363d7c317fa4",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b9c6a75-9807-4fb9-a0b5-858044c289f9",
+              "name": "One or more of the resources you referenced could not be found.\nThis might be because your company or data connection id is wrong, or was already deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"service\": \"PublicApi\",\n  \"error\": \"Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found\",\n  \"correlationId\": \"8fa2b5f4794970a4ee73758f612e8df0\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f431fffa-fa68-4003-a7c9-277d3e7ebc2f",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71ddb2cd-8675-4815-a030-68866682f0d2",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf6f80ce-2ce9-40b9-be97-a055efb85dcf",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectionManagement",
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e30a951-adb1-4b8c-95d4-6e6cdca03060",
+          "name": "Get CORS settings",
+          "request": {
+            "name": "Get CORS settings",
+            "description": {
+              "content": "﻿The *Get CORS settings* endpoint returns the allowed origins (i.e. your domains) you want to allow cross-origin resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)) with Codat. \n\nEnabling CORS with Codat is required by our embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to access Codat's API endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "corsSettings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1d9558d-ef9a-409c-970f-695020b69d50",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7784a988-8f7b-450f-9731-2718afabe27b",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8459468d-1e0d-4e3a-a4d4-608a06f5475e",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1716dee9-03c2-4ef0-b376-5a07afc1d0b7",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2bb57b4-4b1a-44d8-bd25-6fdab380340c",
+              "name": "One or more of the resources you referenced could not be found.\nThis might be because your company or data connection id is wrong, or was already deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"service\": \"PublicApi\",\n  \"error\": \"Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found\",\n  \"correlationId\": \"8fa2b5f4794970a4ee73758f612e8df0\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5171dd5c-4923-410f-a703-cd16f182f271",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9a32269-5299-48b8-b232-252d14f59d4a",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18ae746c-1b1e-4fc0-84d9-3e722fb49e7b",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56115407-8b4d-40b3-9de5-17de99cb1190",
+          "name": "Set CORS settings",
+          "request": {
+            "name": "Set CORS settings",
+            "description": {
+              "content": "﻿The *Set CORS settings* endpoint allows you to register allowed origins (i.e. your domains) for use in cross-origin resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)).\n \nEnabling CORS with Codat is required by our embeddable UIs (such as [Connections SDK](https://docs.codat.io/auth-flow/optimize/connection-management) and [Link SDK](https://docs.codat.io/auth-flow/authorize-embedded-link)) to access Codat's API endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "corsSettings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"allowedOrigins\": [\n    \"<uri>\",\n    \"<uri>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a086b36-866f-45f7-8334-b6c863614c22",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d3f4e23-e2d5-4f42-9515-f04d838fa57b",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89a147e6-3f56-4c6b-8765-52154bdf8af5",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1c15b6f-d492-4149-8d08-80be372d784b",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87731b0c-b0c5-4f35-bbfa-9fa0bddfbc16",
+              "name": "One or more of the resources you referenced could not be found.\nThis might be because your company or data connection id is wrong, or was already deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"service\": \"PublicApi\",\n  \"error\": \"Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found\",\n  \"correlationId\": \"8fa2b5f4794970a4ee73758f612e8df0\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82820c7a-35f9-4564-a08c-a5aef0509f6d",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "faa83625-25b1-422c-8e34-66f0643f8b9e",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e7a1b65-61f6-445a-9d81-72713fe1d477",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corsSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowedOrigins\": [\n    \"https://www.bank-of-dave.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "358f49f5-6f3a-4a23-8c5f-83f4ebfbda92",
+          "name": "Get profile",
+          "request": {
+            "name": "Get profile",
+            "description": {
+              "content": "Fetch your Codat profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3cf6c41-fa9d-4ea3-924d-fd5615b8ad27",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Bob's Burgers\",\n  \"logoUrl\": \"https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png\",\n  \"iconUrl\": \"https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico\",\n  \"redirectUrl\": \"https://bobs-burgers.{countrySuffix}/{companyId}\",\n  \"whiteListUrls\": [\n    \"https://bobs-burgers.com\",\n    \"https://bobs-burgers.co.uk\"\n  ],\n  \"confirmCompanyName\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09229f6d-5d71-4903-8a25-9267e49498a4",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0b522d1-98a2-4d9b-af9a-db49b56813b4",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "174441d4-c56b-4d5a-8a41-fb7a4728bcee",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9ee5785-5399-4db4-93e3-3593f2bc617b",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0681f0e3-0a94-4550-85b5-858672b6eeab",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "430587b5-2073-42e3-afcf-be756391e933",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af2dedd2-a41f-4b3a-b75a-1ab2ac42346b",
+          "name": "Update profile",
+          "request": {
+            "name": "Update profile",
+            "description": {
+              "content": "Update your Codat profile",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"redirectUrl\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"iconUrl\": \"<string>\",\n  \"whiteListUrls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"apiKey\": \"<string>\",\n  \"confirmCompanyName\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2bf53c64-8ddf-4ddd-aa10-d3c4df79a90b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Bob's Burgers\",\n  \"logoUrl\": \"https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png\",\n  \"iconUrl\": \"https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico\",\n  \"redirectUrl\": \"https://bobs-burgers.{countrySuffix}/{companyId}\",\n  \"whiteListUrls\": [\n    \"https://bobs-burgers.com\",\n    \"https://bobs-burgers.co.uk\"\n  ],\n  \"confirmCompanyName\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Bob's Burgers\",\n  \"logoUrl\": \"https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png\",\n  \"iconUrl\": \"https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico\",\n  \"redirectUrl\": \"https://bobs-burgers.{countrySuffix}/{companyId}\",\n  \"whiteListUrls\": [\n    \"https://bobs-burgers.com\",\n    \"https://bobs-burgers.co.uk\"\n  ],\n  \"confirmCompanyName\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2841fed8-4168-4460-beb0-58cdb20336c5",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Bob's Burgers\",\n  \"logoUrl\": \"https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png\",\n  \"iconUrl\": \"https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico\",\n  \"redirectUrl\": \"https://bobs-burgers.{countrySuffix}/{companyId}\",\n  \"whiteListUrls\": [\n    \"https://bobs-burgers.com\",\n    \"https://bobs-burgers.co.uk\"\n  ],\n  \"confirmCompanyName\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d366dac-cf11-453b-b4c7-63ccc843b14f",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Bob's Burgers\",\n  \"logoUrl\": \"https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png\",\n  \"iconUrl\": \"https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico\",\n  \"redirectUrl\": \"https://bobs-burgers.{countrySuffix}/{companyId}\",\n  \"whiteListUrls\": [\n    \"https://bobs-burgers.com\",\n    \"https://bobs-burgers.co.uk\"\n  ],\n  \"confirmCompanyName\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "830bb344-c68a-4f04-a90b-366ca6f2c35a",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Bob's Burgers\",\n  \"logoUrl\": \"https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png\",\n  \"iconUrl\": \"https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico\",\n  \"redirectUrl\": \"https://bobs-burgers.{countrySuffix}/{companyId}\",\n  \"whiteListUrls\": [\n    \"https://bobs-burgers.com\",\n    \"https://bobs-burgers.co.uk\"\n  ],\n  \"confirmCompanyName\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5311baad-cf4c-41b7-9be7-065c18f9913f",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Bob's Burgers\",\n  \"logoUrl\": \"https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png\",\n  \"iconUrl\": \"https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico\",\n  \"redirectUrl\": \"https://bobs-burgers.{countrySuffix}/{companyId}\",\n  \"whiteListUrls\": [\n    \"https://bobs-burgers.com\",\n    \"https://bobs-burgers.co.uk\"\n  ],\n  \"confirmCompanyName\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c1c36a9-64c3-4ef7-921d-f3892c13f667",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Bob's Burgers\",\n  \"logoUrl\": \"https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png\",\n  \"iconUrl\": \"https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico\",\n  \"redirectUrl\": \"https://bobs-burgers.{countrySuffix}/{companyId}\",\n  \"whiteListUrls\": [\n    \"https://bobs-burgers.com\",\n    \"https://bobs-burgers.co.uk\"\n  ],\n  \"confirmCompanyName\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b320612f-4a65-44c8-9c53-fc48d1c1df2f",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Bob's Burgers\",\n  \"logoUrl\": \"https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png\",\n  \"iconUrl\": \"https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico\",\n  \"redirectUrl\": \"https://bobs-burgers.{countrySuffix}/{companyId}\",\n  \"whiteListUrls\": [\n    \"https://bobs-burgers.com\",\n    \"https://bobs-burgers.co.uk\"\n  ],\n  \"confirmCompanyName\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac2ea00b-5638-4752-af1a-0498fb04fe6e",
+          "name": "Get sync settings",
+          "request": {
+            "name": "Get sync settings",
+            "description": {
+              "content": "Retrieve the [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings) for your client. This includes how often data types should be queued to be updated, and how much history should be fetched.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profile",
+                "syncSettings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24bf9ea3-6457-4acd-b188-0324ecd58bbd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"clientId\": \"367f7975-267b-439b-90c6-a6040ee680f3\",\n  \"settings\": [\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    }\n  ],\n  \"overridesDefaults\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00ada6e7-8cd4-4f69-bb16-067989fb9f8e",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "088fd625-5283-4ae8-b58a-70722c1e6c27",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6866eee9-1b5a-4f09-811c-e66ba2c4412d",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f68b3d16-6b69-46fd-aae1-4cfa8c5962ca",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a9ea8a0-22c0-4dbc-a1a9-78d71d94077a",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44c07844-1762-4cce-b1a7-730576c6a159",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5a44632-0f0d-4e5f-a094-586233293db9",
+          "name": "Update all sync settings",
+          "request": {
+            "name": "Update all sync settings",
+            "description": {
+              "content": "Update sync settings for all data types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profile",
+                "syncSettings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b262396a-a58b-4bac-9491-eae7391b8f1a",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"36f09f2f-6d4a-f4f4-c994-6901f0d05137\",\n  \"settings\": [\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    },\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    }\n  ],\n  \"overridesDefaults\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a6bbe97a-c283-4c6b-be39-509cb2e1e574",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"36f09f2f-6d4a-f4f4-c994-6901f0d05137\",\n  \"settings\": [\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    },\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    }\n  ],\n  \"overridesDefaults\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c3420a8-b073-4351-af4d-fe447c3e5531",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"36f09f2f-6d4a-f4f4-c994-6901f0d05137\",\n  \"settings\": [\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    },\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    }\n  ],\n  \"overridesDefaults\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22ca84aa-b937-45f4-a88d-7051b474391c",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"36f09f2f-6d4a-f4f4-c994-6901f0d05137\",\n  \"settings\": [\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    },\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    }\n  ],\n  \"overridesDefaults\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e88418b4-278f-4afe-a51e-03df8cf29680",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"36f09f2f-6d4a-f4f4-c994-6901f0d05137\",\n  \"settings\": [\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    },\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    }\n  ],\n  \"overridesDefaults\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffecf837-0ba8-4e60-be07-363eff9efa74",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"36f09f2f-6d4a-f4f4-c994-6901f0d05137\",\n  \"settings\": [\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    },\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    }\n  ],\n  \"overridesDefaults\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d991aae-d215-42f9-a445-de43e12ee18a",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "syncSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"36f09f2f-6d4a-f4f4-c994-6901f0d05137\",\n  \"settings\": [\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    },\n    {\n      \"dataType\": \"invoices\",\n      \"fetchOnFirstLink\": true,\n      \"syncSchedule\": 24,\n      \"syncOrder\": 0,\n      \"syncFromUtc\": \"2020-01-01T12:00:00.000Z\",\n      \"syncFromWindow\": 24,\n      \"monthsToSync\": 24,\n      \"isLocked\": true\n    }\n  ],\n  \"overridesDefaults\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10dadd37-0405-45db-b564-c389de9b2c2a",
+          "name": "List API keys",
+          "request": {
+            "name": "List API keys",
+            "description": {
+              "content": "Use the *List API keys* endpoint to return a list of all API keys that currently exist for your client. This includes keys created via the Portal UI or the *Create API keys* endpoint.\n\n[API keys](https://docs.codat.io/platform-api#/schemas/apiKeys) are tokens used to control access to the API. Include this token in the `Authorization` header parameter when making API calls, following the word \"Basic\" and a space with your API key.\n\nYou can [read more](https://docs.codat.io/using-the-api/authentication) about authentication at Codat and managing API keys via the Portal UI or API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apiKeys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3a3c16f-8daa-487e-8acd-2de7ff8eb966",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"0498e921-9b53-4396-a412-4f2f5983b0a2\",\n      \"apiKey\": \"ztHQGvnC4XN2CgUhaDWEG4ySLUJqWjp7zkbZkGHd\",\n      \"createdDate\": \"2022-04-11T13:49:37Z\"\n    },\n    {\n      \"id\": \"c438836a-61fe-443f-8a19-24cc18be21e4\",\n      \"name\": \"azure-invoice-finance-processor\",\n      \"apiKey\": \"ztHQGvnC4XN2CgUhaDWEG4ySLUJqWjp7zkbZkGHd\",\n      \"createdDate\": \"2022-04-23T09:43:48Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65574568-7fbf-4901-bbd0-a2980115a9e6",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a76fdb97-be40-49b1-9cda-f183fa23fc7a",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "682404b6-7b04-4fa5-b611-dc8507c3ba8e",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e9ac811-53e0-461f-b91a-5449208da3ef",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d7c658e-5264-4ccb-b9c7-076049bbb3f0",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54be4f95-99a9-4326-b08d-ca8acf534efa",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca8dc3af-1fb8-47cb-928b-2b6f3a76267a",
+          "name": "Create API key",
+          "request": {
+            "name": "Create API key",
+            "description": {
+              "content": "Use the *Create API keys* endpoint to generate a new API key for your client.\n\n[API keys](https://docs.codat.io/platform-api#/schemas/apiKeys) are tokens used to control access to the API. Include this token in the `Authorization` header parameter when making API calls, following the word \"Basic\" and a space with your API key.\n\nYou can [read more](https://docs.codat.io/using-the-api/authentication) about authentication at Codat and managing API keys via the Portal UI or API.\n\n### Tips and pitfalls\n\n* Your first API key is created for you. Access this key via [Codat's Portal](https://app.codat.io/developers/api-keys).\n* If you require multiple API keys, perform multiple calls to the *Create API keys* endpoint. \n* The number of API keys is limited to 10. If you have reached the maximum amount of keys, use the *Delete API key* endpoint to delete an unused key first.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apiKeys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44ee93a0-73f1-446c-9933-a4bf761c0a7d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"azure-invoice-finance-processor\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"0498e921-9b53-4396-a412-4f2f5983b0a2\",\n  \"apiKey\": \"ztHQGvnC4XN2CgUhaDWEG4ySLUJqWjp7zkbZkGHd\",\n  \"createdDate\": \"2022-04-11T13:49:37Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89f633cd-8842-4f78-8a75-7acb1257e254",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"azure-invoice-finance-processor\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"service\": \"PublicApi\",\n  \"error\": \"Max string length (50) for `name` reached.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "416ab911-07ba-423a-a719-3ad096d4cee2",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"azure-invoice-finance-processor\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a7ea62f-e772-4c8b-a89c-c6d39d363676",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"azure-invoice-finance-processor\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5966d0b4-6be0-48c8-bbda-35c72569e2f4",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"azure-invoice-finance-processor\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e96f1f93-f603-4022-8fce-ec7d685f7f7d",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"azure-invoice-finance-processor\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"service\": \"PublicApi\",\n  \"error\": \"Maximum number of API keys reached. To create a new API key, delete an unused key and try again.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13b293cd-9939-45f5-99af-8838e3d21032",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"azure-invoice-finance-processor\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26c2e7b0-62d4-43d6-9776-dba1ea049279",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"azure-invoice-finance-processor\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e4ef426-efd7-464b-a422-f327ea662684",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"azure-invoice-finance-processor\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "383948a3-fda2-409c-b42b-c9446a6a00a9",
+          "name": "Delete API key",
+          "request": {
+            "name": "Delete API key",
+            "description": {
+              "content": "Use the *Delete API keys* endpoint to delete an existing API key, providing its valid `id` as a parameter. Note that this operation is not reversible.\n\n[API keys](https://docs.codat.io/platform-api#/schemas/apiKeys) are tokens used to control access to the API. Include this token in the `Authorization` header parameter when making API calls, following the word \"Basic\" and a space with your API key.\n\nYou can [read more](https://docs.codat.io/using-the-api/authentication) about authentication at Codat and managing API keys via the Portal UI or API.\n\n### Tips and pitfalls\n\n* It is possible to delete the last remaining API key. If this happens, a new key can be created via the [API key management page](https://app.codat.io/developers/api-keys) of the Portal.\n* It is possible to delete the API key used to authenticate the *Delete API key* request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apiKeys",
+                ":apiKeyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiKeyId",
+                  "description": "(Required) Unique identifier for api key."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10938589-4a8e-4279-ac94-3873dbd673e8",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys",
+                    ":apiKeyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKeyId",
+                      "description": "(Required) Unique identifier for api key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9112b85f-8287-4824-b727-e17cfde9f29f",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys",
+                    ":apiKeyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKeyId",
+                      "description": "(Required) Unique identifier for api key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08b15d15-ff71-45fb-a02b-bfb50afcbe44",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys",
+                    ":apiKeyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKeyId",
+                      "description": "(Required) Unique identifier for api key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d030c244-c073-46ad-85a1-88b5b4a89d0b",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys",
+                    ":apiKeyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKeyId",
+                      "description": "(Required) Unique identifier for api key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5359baa6-3121-4f00-9db0-cb2866ab01a1",
+              "name": "One or more of the resources you referenced could not be found.\nThis might be because your company or data connection id is wrong, or was already deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys",
+                    ":apiKeyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKeyId",
+                      "description": "(Required) Unique identifier for api key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"service\": \"PublicApi\",\n  \"error\": \"Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found\",\n  \"correlationId\": \"8fa2b5f4794970a4ee73758f612e8df0\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c55b8fe-9d05-46b1-a49c-321b4a9cd906",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys",
+                    ":apiKeyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKeyId",
+                      "description": "(Required) Unique identifier for api key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26fc7097-6113-475f-86ff-253bf1bd8a26",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys",
+                    ":apiKeyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKeyId",
+                      "description": "(Required) Unique identifier for api key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d39cde11-2194-4f4f-8df0-294370c6b789",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiKeys",
+                    ":apiKeyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKeyId",
+                      "description": "(Required) Unique identifier for api key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.codat.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4d306706-5a36-4332-8169-1e0a249e5493",
+    "name": "Bank Feeds Account mapping Settings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.\n\nA bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.\n\n[Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)\n\n---\n<!-- Start Codat Tags Table -->\n## Endpoints\n\n| Endpoints | Description |\n| :- |:- |\n| Companies | Create and manage your SMB users' companies. |\n| Connections | Create new and manage existing data connections for a company. |\n| Source accounts | Provide and manage lists of source bank accounts. |\n| Account mapping | Extra functionality for building an account management UI. |\n| Company information | Get detailed information about a company from the underlying platform. |\n| Transactions | Create new bank account transactions for a company's connections, and see previous operations. |\n<!-- End Codat Tags Table -->\n\nContact Support:\n Name: Codat\n Email: support@codat.io",
+      "type": "text/plain"
+    }
+  }
+}

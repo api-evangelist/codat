@@ -1,0 +1,1518 @@
+{
+  "item": [
+    {
+      "id": "1d683cc1-0298-4fe6-b16b-2bce9b419078",
+      "name": "Integrations",
+      "description": {
+        "content": "Get a list of integrations supported by Codat and their logos.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c5981fb-924e-4c1b-ad3f-4c046ef65e70",
+          "name": "List integrations",
+          "request": {
+            "name": "List integrations",
+            "description": {
+              "content": "List your available integrations",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a979113f-f744-4ad6-896f-ca427b48c4ca",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "query",
+                      "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "-modifiedDate"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageNumber\": 5763,\n  \"pageSize\": 630,\n  \"totalResults\": 1310,\n  \"_links\": {\n    \"self\": {\n      \"href\": \"/companies\"\n    },\n    \"current\": {\n      \"href\": \"/companies?page=1&pageSize=10\"\n    }\n  },\n  \"results\": [\n    {\n      \"key\": \"gbol\",\n      \"logoUrl\": \"http://OY.himTVA3xeUom0gmCfT78hnF9sdaJe+aoMrIkGg.PUwH-5hYLQz,6mRWhcKSw.M2yf.-RVbNlag\",\n      \"name\": \"Xero\",\n      \"enabled\": true,\n      \"sourceId\": \"35b92968-9851-4095-ad60-395c95cbcba4\",\n      \"sourceType\": \"Accounting\",\n      \"integrationId\": \"fd321cb6-7963-4506-b873-e99593a45e30\",\n      \"isOfflineConnector\": true,\n      \"isBeta\": true,\n      \"dataProvidedBy\": \"string\",\n      \"datatypeFeatures\": [\n        {\n          \"datatype\": \"invoices\",\n          \"supportedFeatures\": [\n            {\n              \"featureType\": \"Get\",\n              \"featureState\": \"Release\"\n            }\n          ]\n        },\n        {\n          \"datatype\": \"invoices\",\n          \"supportedFeatures\": [\n            {\n              \"featureType\": \"Get\",\n              \"featureState\": \"Release\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"key\": \"gbol\",\n      \"logoUrl\": \"http://SoCsPPCnOSz.lbstaN2rR1pjG,nG,-,U32baC1c2uhleiU9vdUhUsqAIfyBkZJ.B04+P5+LBaspVO48pyR\",\n      \"name\": \"Xero\",\n      \"enabled\": false,\n      \"sourceId\": \"35b92968-9851-4095-ad60-395c95cbcba4\",\n      \"sourceType\": \"Accounting\",\n      \"integrationId\": \"fd321cb6-7963-4506-b873-e99593a45e30\",\n      \"isOfflineConnector\": true,\n      \"isBeta\": true,\n      \"dataProvidedBy\": \"string\",\n      \"datatypeFeatures\": [\n        {\n          \"datatype\": \"invoices\",\n          \"supportedFeatures\": [\n            {\n              \"featureType\": \"Get\",\n              \"featureState\": \"Release\"\n            }\n          ]\n        },\n        {\n          \"datatype\": \"invoices\",\n          \"supportedFeatures\": [\n            {\n              \"featureType\": \"Get\",\n              \"featureState\": \"Release\"\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5fea644-5bc0-4c41-9db1-730f67f34419",
+              "name": "Your `query` parameter was not correctly formed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "query",
+                      "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "-modifiedDate"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"service\": \"ClientsApi\",\n  \"error\": \"Error parsing query - Malformed query.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9f790d7-c0fe-4be3-9c6b-be4280b40a28",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "query",
+                      "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "-modifiedDate"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "392c09e9-2f30-42b2-be47-4b30b83eb717",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "query",
+                      "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "-modifiedDate"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17fe6370-457e-42f5-ad99-b8d933e719ce",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "query",
+                      "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "-modifiedDate"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1828f87d-f0e0-4f32-acea-3adf98996702",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "query",
+                      "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "-modifiedDate"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85dad1a7-ae50-4e4e-a337-29c2672b1443",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "query",
+                      "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "-modifiedDate"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e563395b-7768-415c-a28b-639e8d1a2c1f",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "query",
+                      "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "-modifiedDate"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b07c24fb-70b4-459b-9061-1b519c5dea0d",
+          "name": "Get integration",
+          "request": {
+            "name": "Get integration",
+            "description": {
+              "content": "Get single integration, by platformKey",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":platformKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "platformKey",
+                  "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "420b331c-a32d-4e83-aa17-31f4950cbfc4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"gbol\",\n  \"logoUrl\": \"http://WBbHQVIHUWGneboHhFvzGjUyhEAnh.efia\",\n  \"name\": \"Xero\",\n  \"enabled\": false,\n  \"sourceId\": \"35b92968-9851-4095-ad60-395c95cbcba4\",\n  \"sourceType\": \"Accounting\",\n  \"integrationId\": \"fd321cb6-7963-4506-b873-e99593a45e30\",\n  \"isOfflineConnector\": true,\n  \"isBeta\": true,\n  \"dataProvidedBy\": \"string\",\n  \"datatypeFeatures\": [\n    {\n      \"datatype\": \"invoices\",\n      \"supportedFeatures\": [\n        {\n          \"featureType\": \"Get\",\n          \"featureState\": \"Release\"\n        }\n      ]\n    },\n    {\n      \"datatype\": \"invoices\",\n      \"supportedFeatures\": [\n        {\n          \"featureType\": \"Get\",\n          \"featureState\": \"Release\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "730b53f6-8f20-4789-a546-ca3c7f3b5c8c",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "837b2f62-60d2-4e7a-b51f-ba74ad78cef4",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf9752c1-d084-4573-808a-ab7c207e3005",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfc41ac9-0598-4d40-a6f2-afe5d9ea6824",
+              "name": "One or more of the resources you referenced could not be found.\nThis might be because your company or data connection id is wrong, or was already deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"service\": \"PublicApi\",\n  \"error\": \"Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found\",\n  \"correlationId\": \"8fa2b5f4794970a4ee73758f612e8df0\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6890d93-fef8-49a1-ac88-f009bc30c72c",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "699c4f09-dd66-40e0-a3b7-0f55ddbdf03d",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "638d3943-31be-401b-bdc0-30b60b5597c7",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee28b152-eff3-42d6-b52f-97b1c7bbffeb",
+          "name": "Get branding",
+          "request": {
+            "name": "Get branding",
+            "description": {
+              "content": "Get branding for platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":platformKey",
+                "branding"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "platformKey",
+                  "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e34644b7-ef0b-4fe8-90dd-004c0df0fa02",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey",
+                    "branding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logo\": {\n    \"full\": {\n      \"image\": {\n        \"src\": \"https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png\",\n        \"alt\": \"xero full icon\"\n      }\n    },\n    \"square\": {\n      \"image\": {\n        \"src\": \"https://static.codat.io/public/officialLogos/Square/8A156A5A-39CB-4F9D-856E-76EF9B2W3607.png\",\n        \"alt\": \"xero square icon\"\n      }\n    }\n  },\n  \"button\": {\n    \"default\": {\n      \"image\": {\n        \"src\": \"https://static.codat.io/public/officialButtons/Full/8A156A5A-39CB-4F9D-856E-76EF9Q7A9607.png\",\n        \"alt\": \"xero default button icon\"\n      }\n    },\n    \"hover\": {\n      \"image\": {\n        \"src\": \"https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png\",\n        \"alt\": \"xero hover button icon\"\n      }\n    }\n  },\n  \"sourceId\": \"35b92968-9851-4095-ad60-395c95cbcba4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f831ba71-d270-4a27-b181-d5dc81cad239",
+              "name": "Your API request was not properly authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey",
+                    "branding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"service\": \"PublicApi\",\n  \"error\": \"Unauthorized\",\n  \"correlationId\": \"7eb40d6b415d7bcd99ce658268284056\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35e42bfe-763c-4954-9078-f516446c489d",
+              "name": "An account limit has been exceeded. The type of limit is described in the error property:\n\n- You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.\n- The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.\n- Your Free account is older than 365 days and has expired. Contact support@codat.io.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey",
+                    "branding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca9b0f82-6298-4011-b3f0-00aa98b75491",
+              "name": "You are using an outdated API key or a key not associated with that resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey",
+                    "branding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"service\": \"PublicApi\",\n  \"error\": \"You are using an outdated API key or a key not associated with that resource.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5287cc7-1056-4a19-b3c4-0afbe1883ca2",
+              "name": "One or more of the resources you referenced could not be found.\nThis might be because your company or data connection id is wrong, or was already deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey",
+                    "branding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"service\": \"PublicApi\",\n  \"error\": \"Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found\",\n  \"correlationId\": \"8fa2b5f4794970a4ee73758f612e8df0\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1d376f0-526b-4f96-9387-5631c42329cb",
+              "name": "Too many requests were made in a given amount of time. Wait a short period and then try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey",
+                    "branding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"service\": \"PublicApi\",\n  \"error\": \"You have made too many requests in a given amount of time; please retry later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e555055-2b6a-4aa4-a0ae-4ac172c82f22",
+              "name": "There is a problem with our server. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey",
+                    "branding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"There is a problem with our server. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd2a1ef2-d179-45a2-bd08-e303b8f45b51",
+              "name": "The Codat API is temporarily offline for maintenance. Please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":platformKey",
+                    "branding"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platformKey",
+                      "description": "(Required) A unique 4-letter key to represent a platform in each integration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"service\": \"PublicApi\",\n  \"error\": \"The Codat API is temporarily offline for maintenance. Please try again later.\",\n  \"correlationId\": \"bc997528a9d7abb9161ef45f05d38599\",\n  \"canBeRetried\": \"Unknown\",\n  \"detailedErrorCode\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.codat.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f80f9768-4926-48c7-a543-94ed7684c923",
+    "name": "Bank Feeds Account mapping Integrations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.\n\nA bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.\n\n[Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)\n\n---\n<!-- Start Codat Tags Table -->\n## Endpoints\n\n| Endpoints | Description |\n| :- |:- |\n| Companies | Create and manage your SMB users' companies. |\n| Connections | Create new and manage existing data connections for a company. |\n| Source accounts | Provide and manage lists of source bank accounts. |\n| Account mapping | Extra functionality for building an account management UI. |\n| Company information | Get detailed information about a company from the underlying platform. |\n| Transactions | Create new bank account transactions for a company's connections, and see previous operations. |\n<!-- End Codat Tags Table -->\n\nContact Support:\n Name: Codat\n Email: support@codat.io",
+      "type": "text/plain"
+    }
+  }
+}

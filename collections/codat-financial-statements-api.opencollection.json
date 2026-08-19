@@ -1,0 +1,267 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bank Feeds Account mapping Financial statements API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Financial statements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get categorized profit and loss statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/reports/enhancedProfitAndLoss/accounts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "reportDate",
+                "value": "",
+                "type": "query",
+                "description": "The date in which the report is created up to. Users must specify a specific date, however the response will be provided for the full month."
+              },
+              {
+                "name": "numberOfPeriods",
+                "value": "",
+                "type": "query",
+                "description": "The number of periods to return. If not provided, 12 periods will be used as the default value."
+              }
+            ]
+          },
+          "docs": "The *Get categorized profit and loss statement* endpoint returns a list of categorized accounts that appear on a company’s Profit and Loss statement. It also includes a balance as of the financial statement date.\n\nCodat suggests a category for each account automatically, but you can [change it](https://docs.codat.io/lending/features/financial-statements-overview#recategorizing-accounts) to a more suitable one."
+        },
+        {
+          "info": {
+            "name": "Get categorized balance sheet statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/reports/enhancedBalanceSheet/accounts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "reportDate",
+                "value": "",
+                "type": "query",
+                "description": "The date in which the report is created up to. Users must specify a specific date, however the response will be provided for the full month."
+              },
+              {
+                "name": "numberOfPeriods",
+                "value": "",
+                "type": "query",
+                "description": "The number of periods to return. If not provided, 12 periods will be used as the default value."
+              }
+            ]
+          },
+          "docs": "The *Get categorized balance sheet statement* endpoint returns a list of categorized accounts that appear on a company’s Balance Sheet along with a balance per financial statement date.\n\nCodat suggests a category for each account automatically, but you can [change it](https://docs.codat.io/lending/features/financial-statements-overview#recategorizing-accounts) to a more suitable one."
+        },
+        {
+          "info": {
+            "name": "List accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/data/accounts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging)."
+              },
+              {
+                "name": "query",
+                "value": "id=e3334455-1aed-4e71-ab43-6bccf12092ee",
+                "type": "query",
+                "description": "Codat query string. [Read more](https://docs.codat.io/using-the-api/querying)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results)."
+              }
+            ]
+          },
+          "docs": "﻿The *List accounts* endpoint returns a list of [accounts](https://docs.codat.io/lending-api#/schemas/Account) for a given company's connection.\n\n[Accounts](https://docs.codat.io/lending-api#/schemas/Account) are the categories a business uses to record accounting transactions.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data)."
+        },
+        {
+          "info": {
+            "name": "Get account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/data/accounts/:accountId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for an account."
+              }
+            ]
+          },
+          "docs": "The *Get account* endpoint returns a single account for a given accountId.\n\n[Accounts](https://docs.codat.io/lending-api#/schemas/Account) are the categories a business uses to record accounting transactions.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n"
+        },
+        {
+          "info": {
+            "name": "Get balance sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/data/financials/balanceSheet",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "periodLength",
+                "value": "",
+                "type": "query",
+                "description": "Number of months defining the period of interest."
+              },
+              {
+                "name": "periodsToCompare",
+                "value": "",
+                "type": "query",
+                "description": "Number of periods with `periodLength` to compare."
+              },
+              {
+                "name": "startMonth",
+                "value": "",
+                "type": "query",
+                "description": "The month the report starts from."
+              }
+            ]
+          },
+          "docs": "Gets the latest balance sheet for a company."
+        },
+        {
+          "info": {
+            "name": "Get profit and loss",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/data/financials/profitAndLoss",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "periodLength",
+                "value": "",
+                "type": "query",
+                "description": "Number of months defining the period of interest."
+              },
+              {
+                "name": "periodsToCompare",
+                "value": "",
+                "type": "query",
+                "description": "Number of periods with `periodLength` to compare."
+              },
+              {
+                "name": "startMonth",
+                "value": "",
+                "type": "query",
+                "description": "The month the report starts from."
+              }
+            ]
+          },
+          "docs": "Gets the latest profit and loss for a company."
+        },
+        {
+          "info": {
+            "name": "Get cash flow statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/data/financials/cashFlowStatement",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "periodLength",
+                "value": "",
+                "type": "query",
+                "description": "Number of months defining the period of interest."
+              },
+              {
+                "name": "periodsToCompare",
+                "value": "",
+                "type": "query",
+                "description": "Number of periods with `periodLength` to compare."
+              },
+              {
+                "name": "startMonth",
+                "value": "",
+                "type": "query",
+                "description": "The month the report starts from."
+              }
+            ]
+          },
+          "docs": "Gets the latest cash flow statement for a company."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

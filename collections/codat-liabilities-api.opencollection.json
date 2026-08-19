@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bank Feeds Account mapping Liabilities API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Liabilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List loan transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/reports/liabilities/loans/transactions",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "sourceType",
+                "value": "",
+                "type": "query",
+                "description": "Data source type."
+              }
+            ]
+          },
+          "docs": "The *List loan transactions* endpoint returns all [loan transactions](https://docs.codat.io/lending-api#/schemas/LoanTransactions) identified from a company's accounting, banking, and commerce integrations.\n\nThis detail gives analysts a better idea of the loan obligations a company may have.\n\nMake sure you have [synced a company](https://docs.codat.io/lending-api#/operations/refresh-company-data) recently before calling the endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "Generate loan transactions report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/reports/liabilities/loans/transactions",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "sourceType",
+                "value": "",
+                "type": "query",
+                "description": "Data source type."
+              }
+            ]
+          },
+          "docs": "The _Generate loan transactions_ endpoint requests the generation of the Loan Transactions report.\n\nLearn more about Codat's liabilities feature [here](https://docs.codat.io/lending/features/liabilities-overview).\n\nMake sure you have [synced a company](https://docs.codat.io/lending-api#/operations/refresh-company-data) recently before calling the endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "Get loan summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/reports/liabilities/loans",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "sourceType",
+                "value": "",
+                "type": "query",
+                "description": "Data source type."
+              }
+            ]
+          },
+          "docs": "The *Get loan summaries* endpoint returns a summary by integration type of all loans identified from a company's accounting, banking, and commerce integrations.\n\nThe endpoint returns a list of a company's [loan summaries](https://docs.codat.io/lending-api#/schemas/LoanSummary) for each valid data connection.\n\nMake sure you have [synced a company](https://docs.codat.io/lending-api#/operations/refresh-company-data) recently before calling the endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "Generate loan summaries report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.codat.io/companies/:companyId/reports/liabilities/loans",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "sourceType",
+                "value": "",
+                "type": "query",
+                "description": "Data source type."
+              }
+            ]
+          },
+          "docs": "The _Generate loan summaries_ endpoint requests the generation of the Loan Summaries report.\n\nLearn more about Codat's liabilities feature [here](https://docs.codat.io/lending/features/liabilities-overview).\n\nMake sure you have [synced a company](https://docs.codat.io/lending-api#/operations/refresh-company-data) recently before calling the endpoint.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

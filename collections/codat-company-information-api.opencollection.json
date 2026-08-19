@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bank Feeds Account mapping Company information API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get company information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.codat.io/companies/:companyId/connections/:connectionId/bankFeeds/info",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a company."
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for a connection."
+              }
+            ]
+          },
+          "docs": "Use the *Get company information* endpoint to return information about the company available from the underlying accounting software.\n\n### Supported Integrations\n| Integration           | Supported |\n|-----------------------|-----------|\n| Oracle NetSuite       | Yes       |\n| Xero                  | Yes       |\n| Exact                 | No        |\n| FreeAgent             | No        |\n| Sage                  | No        |\n| QuickBooks Online     | No        |"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
