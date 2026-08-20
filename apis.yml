@@ -22,6 +22,8 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/codat.png
 tags:
+- Unified-API
+tags_raw:
 - Unified_API
 created: '2026-03-03'
 modified: '2026-05-19'
@@ -37,6 +39,11 @@ apis:
     through a standardized data model.
   humanURL: https://docs.codat.io/expenses/overview
   tags:
+  - Accounting Sync
+  - Corporate Cards
+  - Expenses
+  - Unified-API
+  tags_raw:
   - Accounting Sync
   - Corporate Cards
   - Expenses
@@ -59,6 +66,11 @@ apis:
   - Accounts Payable
   - Bill Pay
   - Payables
+  - Unified-API
+  tags_raw:
+  - Accounts Payable
+  - Bill Pay
+  - Payables
   - Unified_API
   properties:
   - type: Documentation
@@ -78,6 +90,11 @@ apis:
   tags:
   - Accounts Payable
   - Spend Insights
+  - Unified-API
+  - Virtual Cards
+  tags_raw:
+  - Accounts Payable
+  - Spend Insights
   - Unified_API
   - Virtual Cards
   properties:
@@ -95,6 +112,11 @@ apis:
     data into detailed sales invoices for automated accounting reconciliation.
   humanURL: https://docs.codat.io/commerce/overview
   tags:
+  - Commerce
+  - Point-of-Sale
+  - Reconciliation
+  - Unified-API
+  tags_raw:
   - Commerce
   - Point of Sale
   - Reconciliation
@@ -118,6 +140,11 @@ apis:
   - Accounting Sync
   - HR
   - Payroll
+  - Unified-API
+  tags_raw:
+  - Accounting Sync
+  - HR
+  - Payroll
   - Unified_API
   properties:
   - type: Documentation
@@ -131,6 +158,8 @@ apis:
   description: Extra functionality for building an account management UI.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Account Mapping
+  tags_raw:
   - Account mapping
   properties:
   - type: OpenAPI
@@ -182,6 +211,8 @@ apis:
     Data from a linked accounting software representing money the business owes money to its suppliers.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Accounts Payable
+  tags_raw:
   - Accounts payable
   properties:
   - type: OpenAPI
@@ -208,6 +239,8 @@ apis:
     Data from a linked accounting software representing money owed to the business for sold goods or services.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Accounts Receivable
+  tags_raw:
   - Accounts receivable
   properties:
   - type: OpenAPI
@@ -233,6 +266,8 @@ apis:
   description: Access bank accounts in an SMBs accounting software.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Bank Accounts
+  tags_raw:
   - Bank accounts
   properties:
   - type: OpenAPI
@@ -258,6 +293,8 @@ apis:
   description: Retrieve banking data from linked bank accounts.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Bank Statements
+  tags_raw:
   - Bank statements
   properties:
   - type: OpenAPI
@@ -308,6 +345,8 @@ apis:
   description: View company information fetched from the source platform.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Company Info
+  tags_raw:
   - Company info
   properties:
   - type: OpenAPI
@@ -358,6 +397,8 @@ apis:
   description: Configure UI and retrieve access tokens for authentication used by **Connections SDK**.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Connection Management
+  tags_raw:
   - Connection management
   properties:
   - type: OpenAPI
@@ -435,6 +476,8 @@ apis:
     Match mutable accounting data with immutable banking data to increase confidence in financial data.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Data Integrity
+  tags_raw:
   - Data integrity
   properties:
   - type: OpenAPI
@@ -485,6 +528,8 @@ apis:
   description: Endpoints to manage uploaded files.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - File Upload
+  tags_raw:
   - File upload
   properties:
   - type: OpenAPI
@@ -510,6 +555,8 @@ apis:
   description: Financial data and reports from a linked accounting software.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Financial Statements
+  tags_raw:
   - Financial statements
   properties:
   - type: OpenAPI
@@ -561,6 +608,8 @@ apis:
   description: Get a list of integrations supported by Codat and their logos.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
@@ -889,6 +938,8 @@ apis:
     Create new bank account transactions for a company's connections, and see previous operations.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -914,6 +965,8 @@ apis:
   description: Create and manage webhooks that listen to Codat's events.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
