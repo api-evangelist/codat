@@ -5,6 +5,18 @@ segments:
 description: Codat is a unified API platform focused on SMB financial data, connecting
   to 30+ accounting, ERP, banking, and payment platforms.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
