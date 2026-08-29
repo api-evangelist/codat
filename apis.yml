@@ -1000,6 +1000,9 @@ apis:
   - type: APIReference
     url: https://docs.codat.io/bank-feeds-api
 common:
+- type: CapabilityMap
+  url: capabilities/codat-capability-edges.yml
+  name: Codat Business Capability Map
 - type: AgenticAccess
   url: agentic-access/codat-agentic-access.yml
 - type: DomainSecurity

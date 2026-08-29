@@ -1,0 +1,77 @@
+slug: codat
+provider: Codat
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Accounts payable
+  spec_file: codat-accounts-payable-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.92
+  evidence: list-accounting-bills  List bills; list-accounting-bill-payments  List bill payments; list-accounting-suppliers  List
+    suppliers; schema AccountingAgedCreditorReport
+  reason: Operations expose supplier bills, bill credit notes, bill payments and an aged creditor report
+    — the canonical accounts payable object set. Title mentions Bank Feeds but operations clearly govern
+    payables.
+- tag: Accounts receivable
+  spec_file: codat-accounts-receivable-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.92
+  evidence: list-reconciled-invoices  List reconciled invoices; list-accounting-credit-notes; list-accounting-customers;
+    schema AccountingAgedDebtorReport
+  reason: Customer invoices, credit notes, payments, customers and an aged debtor report are the receivables/cash-application
+    object set, matching Accounts Receivable Management.
+- tag: Financial statements
+  spec_file: codat-financial-statements-api-openapi.yml
+  capability_id: BC-200.60
+  capability_id_l1: BC-200
+  capability_name: Financial Reporting Management
+  confidence: 0.85
+  evidence: GET /companies/{companyId}/data/financials/balanceSheet 'Get balance sheet'; 'Get profit and
+    loss'; 'Get cash flow statement'; schemas AccountingBalanceSheet, AccountingProfitAndLossReport, AccountingCashFlowStatement
+  reason: Operations retrieve the core financial statements and chart-of-accounts data from accounting
+    platforms — this is financial reporting/consolidation of accounting data, i.e. Financial Reporting
+    Management.
+- tag: Webhooks
+  spec_file: codat-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.85
+  evidence: '''List webhook consumers'', ''Create webhook consumer'', ''Delete webhook consumer'''
+  reason: Lifecycle management of outbound webhook subscriptions on an API platform maps directly to Webhook
+    & Event Subscription Management.
+- tag: Data integrity
+  spec_file: codat-data-integrity-api-openapi.yml
+  capability_id: BC-610.30
+  capability_id_l1: BC-610
+  capability_name: Data Quality Management
+  confidence: 0.7
+  evidence: GET /data/companies/{companyId}/assess/dataTypes/{dataType}/dataIntegrity/summaries  get-data-integrity-summaries;
+    schemas DataIntegrityStatus, DataIntegrityDetail
+  reason: Operations report integrity status, summaries and record-level details across data types — data
+    quality monitoring and profiling over ingested datasets.
+- tag: Transactions
+  spec_file: codat-transactions-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.7
+  evidence: '''List journal entries'', ''List account transactions'', ''Create bank transactions''; schemas
+    AccountingJournalEntry, AccountingJournal, AccountingAccountTransaction'
+  reason: The operations read and write accounting ledger artefacts — journal entries, account transactions,
+    transfers, direct costs — which is General Ledger Management. Some spread into direct costs/attachments
+    keeps confidence moderate.
