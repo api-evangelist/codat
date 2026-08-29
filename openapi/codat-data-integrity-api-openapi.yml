@@ -1,20 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bank Feeds Account mapping Data integrity API
-  version: 3.0.0
-  contact:
-    email: support@codat.io
-    name: Codat
-  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
+  title: Lending Data integrity API
+  description: 'Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers'' latest data from accounting, banking, and commerce software they are already using. It also includes features to help providers verify the accuracy of data and process it more efficiently.
 
 
-    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
+    The Lending solution is built on top of the latest accounting, commerce, and banking data, providing you with the most important data points you need to get a full picture of SMB creditworthiness and make a comprehensive assessment of your customers.
 
 
-    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
+    [Explore solution](https://docs.codat.io/lending/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
 
-
-    ---
 
     <!-- Start Codat Tags Table -->
 
@@ -29,15 +23,37 @@ info:
 
     | Connections | Create new and manage existing data connections for a company. |
 
-    | Source accounts | Provide and manage lists of source bank accounts. |
+    | Bank statements | Retrieve banking data from linked bank accounts. |
 
-    | Account mapping | Extra functionality for building an account management UI. |
+    | Sales | Retrieve standardized sales data from a linked commerce software. |
 
-    | Company information | Get detailed information about a company from the underlying platform. |
+    | Financial statements | Financial data and reports from a linked accounting software. |
 
-    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
+    | Liabilities | Debt and other liabilities. |
+
+    | Accounts payable | Data from a linked accounting software representing money the business owes money to its suppliers. |
+
+    | Accounts receivable | Data from a linked accounting software representing money owed to the business for sold goods or services. |
+
+    | Transactions | Data from a linked accounting software representing transactions. |
+
+    | Company info | View company information fetched from the source platform. |
+
+    | Data integrity | Match mutable accounting data with immutable banking data to increase confidence in financial data. |
+
+    | Excel reports | Download reports in Excel format. |
+
+    | Manage data | Control how data is retrieved from an integration. |
+
+    | File upload | Endpoints to manage uploaded files. |
+
+    | Loan writeback | Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure in your lending process to maintain an accurate position of a loan during the entire lending cycle. |
 
     <!-- End Codat Tags Table -->'
+  version: 3.0.0
+  contact:
+    name: Codat
+    email: support@codat.io
   termsOfService: https://www.codat.io/legals/
 servers:
 - description: Production
@@ -173,112 +189,6 @@ paths:
         The [details](https://docs.codat.io/lending-api#/schemas/DataIntegrityDetail) are paginated and support ordering, following the same conventions as our other data endpoints.'
 components:
   schemas:
-    DataIntegrityStatus:
-      title: Data integrity status
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/DataIntegritySummary/definitions/dataIntegrityType'
-      - type: object
-        properties:
-          statusInfo:
-            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityStatusInfo'
-          connectionIds:
-            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityConnectionId'
-          amounts:
-            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityAmounts'
-          dates:
-            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityDates'
-      definitions:
-        dataIntegrityStatusInfo:
-          type: object
-          properties:
-            lastMatched:
-              type: string
-              $ref: '#/components/schemas/DateTime'
-              description: The date the matching algorithm last ran against the company’s data type specified.
-              readOnly: true
-            currentStatus:
-              $ref: '#/components/schemas/DataIntegrityStatus/definitions/integrityStatus'
-            statusMessage:
-              type: string
-              description: Detailed explanation supporting the status value.
-        dataIntegrityConnectionId:
-          type: object
-          properties:
-            source:
-              type: array
-              description: An array of strings. The connection IDs for the type specified in the url.
-              items:
-                type: string
-            target:
-              type: array
-              description: An array of strings. The connection IDs for the type being matched to.
-              items:
-                type: string
-        dataIntegrityAmounts:
-          type: object
-          description: Only returned for transactions. For accounts, there is nothing returned.
-          properties:
-            min:
-              type: number
-              format: decimal
-              description: Lowest value of transaction set.
-            max:
-              type: number
-              format: decimal
-              description: Highest value of transaction set.
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-        dataIntegrityDates:
-          type: object
-          description: Only returned for transactions. For accounts, there is nothing returned.
-          properties:
-            minDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Earliest date of transaction set.
-              readOnly: true
-            maxDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Latest date of transaction set.
-              readOnly: true
-            minOverlappingDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Earliest date where transactions exist in both accounting and banking platforms.
-              readOnly: true
-            maxOverlappingDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Latest date where transactions exist in both account and banking platforms.
-              readOnly: true
-        integrityStatus:
-          type: string
-          enum:
-          - Unknown
-          - DoesNotExist
-          - Error
-          - Complete
-          description: The current status of the most recently run matching algorithm.
-      examples:
-      - type: string
-        statusInfo:
-          lastMatched: '2021-10-24T14:15:22Z'
-          currentStatus: Unknown
-          statusMessage: string
-        connectionIds:
-          source:
-          - d5a8d1b2-b38a-4e44-8641-548ad43be6bb
-          - da8c9f39-8af9-4a98-964b-f1e207942837
-          target:
-          - 3d7ce25a-c107-44bc-8e0c-36c10bdd14e0
-          - a5300eac-01fa-4a77-b5b0-ea0b86a3be69
-        amounts:
-          min: 130
-          max: 2450
-          currency: GBP
-        dates:
-          minDate: '2021-09-17T12:09:33.441Z'
-          maxDate: '2021-12-16T12:12:53.441Z'
-          minOverlappingDate: '2021-09-30T12:09:13.441Z'
-          maxOverlappingDate: '2021-11-27T12:19:33.441Z'
     DataIntegrityDetail:
       title: Data integrity detail
       type: object
@@ -337,220 +247,6 @@ components:
             currency:
               $ref: '#/components/schemas/SourceAccount/properties/currency'
               description: The currency of the transaction.
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    DataIntegritySummary:
-      title: Data integrity summary
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/DataIntegritySummary/definitions/dataIntegrityType'
-      - type: object
-        properties:
-          byAmount:
-            $ref: '#/components/schemas/DataIntegritySummary/definitions/dataIntegrityByAmount'
-          byCount:
-            $ref: '#/components/schemas/DataIntegritySummary/definitions/dataIntegrityByCount'
-      definitions:
-        dataIntegrityType:
-          type: object
-          properties:
-            type:
-              type: string
-              description: The data type which the data type in the URL has been matched against. For example, if you've matched accountTransactions and banking-transactions, and you call this endpoint with accountTransactions in the URL, this property would be banking-transactions.
-        dataIntegrityByAmount:
-          title: Data integrity by amount
-          type: object
-          properties:
-            matchPercentage:
-              type: number
-              format: decimal
-              description: The percentage of the absolute value of transactions of the type specified in the route which have a match.
-            unmatched:
-              type: number
-              format: decimal
-              description: The sum of the absolute value of transactions of the type specified in the route which don't have a match.
-            matched:
-              type: number
-              format: decimal
-              description: The sum of the absolute value of transactions of the type specified in the route which have a match.
-            total:
-              type: number
-              format: decimal
-              description: The total of unmatched and matched.
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-        dataIntegrityByCount:
-          title: Data integrity by count
-          type: object
-          properties:
-            matchPercentage:
-              type: number
-              format: decimal
-              description: The percentage of records of the type specified in the route which have a match.
-            unmatched:
-              type: number
-              format: decimal
-              description: The number of records of the type specified in the route which don't have a match.
-            matched:
-              type: number
-              format: decimal
-              description: The number of records of the type specified in the route which do have a match.
-            total:
-              type: number
-              format: decimal
-              description: The total of unmatched and matched.
-    PagingInfo:
-      type: object
-      title: Pagination information
-      x-internal: true
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number.
-        pageSize:
-          type: integer
-          description: Number of items to return in results array.
-          maximum: 2000
-        totalResults:
-          type: integer
-          description: Total number of items.
-        _links:
-          $ref: '#/components/schemas/PagingInfo/definitions/links'
-      definitions:
-        links:
-          title: Hal Links
-          type: object
-          required:
-          - self
-          - current
-          properties:
-            self:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            current:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            next:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            previous:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-          examples:
-          - self:
-              href: /companies
-            current:
-              href: /companies?page=1&pageSize=10
-        halRef:
-          title: Hypertext reference
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri-reference
-              description: Uri hypertext reference.
-      required:
-      - pageNumber
-      - pageSize
-      - totalResults
-      - _links
-      examples:
-      - pageNumber: 1
-        pageSize: 10
-        totalResults: 1
-        _links:
-          self:
-            href: /companies/{id}/data/{dataType}
-          current:
-            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    DataIntegrityDetails:
-      title: Data integrity details
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/DataIntegrityDetail'
-      - $ref: '#/components/schemas/PagingInfo'
-    ErrorMessage:
-      title: Error message
-      type: object
-      x-internal: true
-      properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
-          type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
-          nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
-    DataIntegritySummaries:
-      title: Data integrity summaries
-      x-internal: true
-      type: object
-      properties:
-        summaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataIntegritySummary'
-    DataIntegrityStatuses:
-      title: Data integrity statuses
-      x-internal: true
-      type: object
-      properties:
-        metadata:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataIntegrityStatus'
     SourceAccount:
       title: Source account (v1)
       type: object
@@ -657,6 +353,387 @@ components:
         balance: 0
         modifiedDate: '2023-01-09T14:14:14.1057478Z'
         status: pending
+    DataIntegrityStatus:
+      title: Data integrity status
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataIntegritySummary/definitions/dataIntegrityType'
+      - type: object
+        properties:
+          statusInfo:
+            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityStatusInfo'
+          connectionIds:
+            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityConnectionId'
+          amounts:
+            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityAmounts'
+          dates:
+            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityDates'
+      definitions:
+        dataIntegrityStatusInfo:
+          type: object
+          properties:
+            lastMatched:
+              type: string
+              $ref: '#/components/schemas/DateTime'
+              description: The date the matching algorithm last ran against the company’s data type specified.
+              readOnly: true
+            currentStatus:
+              $ref: '#/components/schemas/DataIntegrityStatus/definitions/integrityStatus'
+            statusMessage:
+              type: string
+              description: Detailed explanation supporting the status value.
+        dataIntegrityConnectionId:
+          type: object
+          properties:
+            source:
+              type: array
+              description: An array of strings. The connection IDs for the type specified in the url.
+              items:
+                type: string
+            target:
+              type: array
+              description: An array of strings. The connection IDs for the type being matched to.
+              items:
+                type: string
+        dataIntegrityAmounts:
+          type: object
+          description: Only returned for transactions. For accounts, there is nothing returned.
+          properties:
+            min:
+              type: number
+              format: decimal
+              description: Lowest value of transaction set.
+            max:
+              type: number
+              format: decimal
+              description: Highest value of transaction set.
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+        dataIntegrityDates:
+          type: object
+          description: Only returned for transactions. For accounts, there is nothing returned.
+          properties:
+            minDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Earliest date of transaction set.
+              readOnly: true
+            maxDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Latest date of transaction set.
+              readOnly: true
+            minOverlappingDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Earliest date where transactions exist in both accounting and banking platforms.
+              readOnly: true
+            maxOverlappingDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Latest date where transactions exist in both account and banking platforms.
+              readOnly: true
+        integrityStatus:
+          type: string
+          enum:
+          - Unknown
+          - DoesNotExist
+          - Error
+          - Complete
+          description: The current status of the most recently run matching algorithm.
+      examples:
+      - type: string
+        statusInfo:
+          lastMatched: '2021-10-24T14:15:22Z'
+          currentStatus: Unknown
+          statusMessage: string
+        connectionIds:
+          source:
+          - d5a8d1b2-b38a-4e44-8641-548ad43be6bb
+          - da8c9f39-8af9-4a98-964b-f1e207942837
+          target:
+          - 3d7ce25a-c107-44bc-8e0c-36c10bdd14e0
+          - a5300eac-01fa-4a77-b5b0-ea0b86a3be69
+        amounts:
+          min: 130
+          max: 2450
+          currency: GBP
+        dates:
+          minDate: '2021-09-17T12:09:33.441Z'
+          maxDate: '2021-12-16T12:12:53.441Z'
+          minOverlappingDate: '2021-09-30T12:09:13.441Z'
+          maxOverlappingDate: '2021-11-27T12:19:33.441Z'
+    DataIntegritySummary:
+      title: Data integrity summary
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataIntegritySummary/definitions/dataIntegrityType'
+      - type: object
+        properties:
+          byAmount:
+            $ref: '#/components/schemas/DataIntegritySummary/definitions/dataIntegrityByAmount'
+          byCount:
+            $ref: '#/components/schemas/DataIntegritySummary/definitions/dataIntegrityByCount'
+      definitions:
+        dataIntegrityType:
+          type: object
+          properties:
+            type:
+              type: string
+              description: The data type which the data type in the URL has been matched against. For example, if you've matched accountTransactions and banking-transactions, and you call this endpoint with accountTransactions in the URL, this property would be banking-transactions.
+        dataIntegrityByAmount:
+          title: Data integrity by amount
+          type: object
+          properties:
+            matchPercentage:
+              type: number
+              format: decimal
+              description: The percentage of the absolute value of transactions of the type specified in the route which have a match.
+            unmatched:
+              type: number
+              format: decimal
+              description: The sum of the absolute value of transactions of the type specified in the route which don't have a match.
+            matched:
+              type: number
+              format: decimal
+              description: The sum of the absolute value of transactions of the type specified in the route which have a match.
+            total:
+              type: number
+              format: decimal
+              description: The total of unmatched and matched.
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+        dataIntegrityByCount:
+          title: Data integrity by count
+          type: object
+          properties:
+            matchPercentage:
+              type: number
+              format: decimal
+              description: The percentage of records of the type specified in the route which have a match.
+            unmatched:
+              type: number
+              format: decimal
+              description: The number of records of the type specified in the route which don't have a match.
+            matched:
+              type: number
+              format: decimal
+              description: The number of records of the type specified in the route which do have a match.
+            total:
+              type: number
+              format: decimal
+              description: The total of unmatched and matched.
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    DataIntegrityStatuses:
+      title: Data integrity statuses
+      x-internal: true
+      type: object
+      properties:
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataIntegrityStatus'
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    PagingInfo:
+      type: object
+      title: Pagination information
+      x-internal: true
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number.
+        pageSize:
+          type: integer
+          description: Number of items to return in results array.
+          maximum: 2000
+        totalResults:
+          type: integer
+          description: Total number of items.
+        _links:
+          $ref: '#/components/schemas/PagingInfo/definitions/links'
+      definitions:
+        links:
+          title: Hal Links
+          type: object
+          required:
+          - self
+          - current
+          properties:
+            self:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            current:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            next:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            previous:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+          examples:
+          - self:
+              href: /companies
+            current:
+              href: /companies?page=1&pageSize=10
+        halRef:
+          title: Hypertext reference
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri-reference
+              description: Uri hypertext reference.
+      required:
+      - pageNumber
+      - pageSize
+      - totalResults
+      - _links
+      examples:
+      - pageNumber: 1
+        pageSize: 10
+        totalResults: 1
+        _links:
+          self:
+            href: /companies/{id}/data/{dataType}
+          current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+    DataIntegrityDetails:
+      title: Data integrity details
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/DataIntegrityDetail'
+      - $ref: '#/components/schemas/PagingInfo'
+    DataIntegritySummaries:
+      title: Data integrity summaries
+      x-internal: true
+      type: object
+      properties:
+        summaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataIntegritySummary'
+  parameters:
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    dataIntegrityDataType:
+      name: dataType
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - banking-accounts
+        - banking-transactions
+        - bankAccounts
+        - accountTransactions
+        example: banking-accounts
+      description: A key for a Codat data type.
   responses:
     Unauthorized:
       description: Your API request was not properly authorized.
@@ -671,6 +748,21 @@ components:
                 service: PublicApi
                 error: Unauthorized
                 correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Malformed-Query:
@@ -696,6 +788,36 @@ components:
                 correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
     Payment-Required:
       description: 'An account limit has been exceeded. The type of limit is described in the error property:
 
@@ -717,21 +839,6 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -783,97 +890,6 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-  parameters:
-    orderBy:
-      name: orderBy
-      in: query
-      required: false
-      schema:
-        type: string
-        example: -modifiedDate
-      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    dataIntegrityDataType:
-      name: dataType
-      in: path
-      required: true
-      schema:
-        type: string
-        enum:
-        - banking-accounts
-        - banking-transactions
-        - bankAccounts
-        - accountTransactions
-        example: banking-accounts
-      description: A key for a Codat data type.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
   securitySchemes:
     auth_header:
       name: Authorization
@@ -918,7 +934,7 @@ x-speakeasy-name-override:
   methodNameOverride: download-attachment
 - operationId: ^upload-.*?-attachment
   methodNameOverride: upload-attachment
-x-codat-docs-path: bank-feeds-api
+x-codat-docs-path: lending-api
 x-codat-keep-docs-paths-local: true
 x-codat-speakeasy-pagination:
   type: offsetLimit

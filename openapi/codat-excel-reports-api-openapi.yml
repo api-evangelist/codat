@@ -1,20 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bank Feeds Account mapping Excel reports API
-  version: 3.0.0
-  contact:
-    email: support@codat.io
-    name: Codat
-  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
+  title: Lending Excel reports API
+  description: 'Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers'' latest data from accounting, banking, and commerce software they are already using. It also includes features to help providers verify the accuracy of data and process it more efficiently.
 
 
-    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
+    The Lending solution is built on top of the latest accounting, commerce, and banking data, providing you with the most important data points you need to get a full picture of SMB creditworthiness and make a comprehensive assessment of your customers.
 
 
-    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
+    [Explore solution](https://docs.codat.io/lending/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
 
-
-    ---
 
     <!-- Start Codat Tags Table -->
 
@@ -29,15 +23,37 @@ info:
 
     | Connections | Create new and manage existing data connections for a company. |
 
-    | Source accounts | Provide and manage lists of source bank accounts. |
+    | Bank statements | Retrieve banking data from linked bank accounts. |
 
-    | Account mapping | Extra functionality for building an account management UI. |
+    | Sales | Retrieve standardized sales data from a linked commerce software. |
 
-    | Company information | Get detailed information about a company from the underlying platform. |
+    | Financial statements | Financial data and reports from a linked accounting software. |
 
-    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
+    | Liabilities | Debt and other liabilities. |
+
+    | Accounts payable | Data from a linked accounting software representing money the business owes money to its suppliers. |
+
+    | Accounts receivable | Data from a linked accounting software representing money owed to the business for sold goods or services. |
+
+    | Transactions | Data from a linked accounting software representing transactions. |
+
+    | Company info | View company information fetched from the source platform. |
+
+    | Data integrity | Match mutable accounting data with immutable banking data to increase confidence in financial data. |
+
+    | Excel reports | Download reports in Excel format. |
+
+    | Manage data | Control how data is retrieved from an integration. |
+
+    | File upload | Endpoints to manage uploaded files. |
+
+    | Loan writeback | Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure in your lending process to maintain an accurate position of a loan during the entire lending cycle. |
 
     <!-- End Codat Tags Table -->'
+  version: 3.0.0
+  contact:
+    name: Codat
+    email: support@codat.io
   termsOfService: https://www.codat.io/legals/
 servers:
 - description: Production
@@ -177,6 +193,21 @@ paths:
       - $ref: '#/components/parameters/excelReportType'
 components:
   responses:
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
     BadRequest:
       description: The request made is not valid.
       content:
@@ -216,8 +247,8 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
       content:
         application/json:
           schema:
@@ -225,10 +256,48 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 403
+                statusCode: 500
                 service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
+                error: There is a problem with our server. Please try again later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Too-Many-Requests:
@@ -246,19 +315,19 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
           examples:
-            Unauthorized:
+            Conflict:
               value:
-                statusCode: 401
+                statusCode: 500
                 service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Not-Found:
@@ -294,124 +363,7 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Malformed-Query:
-      description: Your `query` parameter was not correctly formed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: ClientsApi
-                error: Error parsing query - Malformed query.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Unresolved property:
-              value:
-                statusCode: 400
-                service: PullApi
-                error: Error parsing query - Could not resolve property isCompleted on Dataset
-                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-  parameters:
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    excelReportType:
-      name: reportType
-      in: query
-      schema:
-        $ref: '#/components/schemas/ExcelStatus/definitions/excelReportTypes'
-      description: The type of report you want to generate and download.
-      required: true
   schemas:
-    ExcelStatus:
-      type: object
-      title: Excel status
-      properties:
-        lastGenerated:
-          $ref: '#/components/schemas/DateTime'
-          description: The date and time of when the generation of the most recent report was initiated.
-        inProgress:
-          type: boolean
-          description: When true, the request was successful and the report is being generated. If false, the request was unsuccessful and the report is not being generated.
-        queued:
-          type: string
-          description: The date and time of when a successful request was queued for the most recent report.
-        success:
-          type: boolean
-          description: True if the requested report was successfully queued and false if the requested report was not able to be queued.
-        errorMessage:
-          type: string
-          description: Error details in case the report generation request was unsuccessful.
-        lastInvocationId:
-          type: string
-          description: A unique ID generated for this request.
-        reportType:
-          $ref: '#/components/schemas/ExcelStatus/definitions/excelReportTypes'
-        fileSize:
-          type: integer
-          nullable: true
-          description: The file size in Bytes is populated upon successful generation of the report.
-      definitions:
-        excelReportTypes:
-          type: string
-          enum:
-          - audit
-          - enhancedFinancials
-          - enhancedInvoices
-          - enhancedCashFlow
-          description: The type of the report requested in the query string.
-      examples:
-      - lastGenerated: '2023-01-25T22:36:05.125Z'
-        inProgress: true
-        queued: '2023-01-25T22:36:05.125Z'
-        success: true
-        errorMessage: string
-        lastInvocationId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        reportType: string
-        fileSize: 0
     DateTime:
       title: Date time
       type: string
@@ -477,6 +429,70 @@ components:
               type: string
               nullable: true
               description: Name of validator.
+    ExcelStatus:
+      type: object
+      title: Excel status
+      properties:
+        lastGenerated:
+          $ref: '#/components/schemas/DateTime'
+          description: The date and time of when the generation of the most recent report was initiated.
+        inProgress:
+          type: boolean
+          description: When true, the request was successful and the report is being generated. If false, the request was unsuccessful and the report is not being generated.
+        queued:
+          type: string
+          description: The date and time of when a successful request was queued for the most recent report.
+        success:
+          type: boolean
+          description: True if the requested report was successfully queued and false if the requested report was not able to be queued.
+        errorMessage:
+          type: string
+          description: Error details in case the report generation request was unsuccessful.
+        lastInvocationId:
+          type: string
+          description: A unique ID generated for this request.
+        reportType:
+          $ref: '#/components/schemas/ExcelStatus/definitions/excelReportTypes'
+        fileSize:
+          type: integer
+          nullable: true
+          description: The file size in Bytes is populated upon successful generation of the report.
+      definitions:
+        excelReportTypes:
+          type: string
+          enum:
+          - audit
+          - enhancedFinancials
+          - enhancedInvoices
+          - enhancedCashFlow
+          description: The type of the report requested in the query string.
+      examples:
+      - lastGenerated: '2023-01-25T22:36:05.125Z'
+        inProgress: true
+        queued: '2023-01-25T22:36:05.125Z'
+        success: true
+        errorMessage: string
+        lastInvocationId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        reportType: string
+        fileSize: 0
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    excelReportType:
+      name: reportType
+      in: query
+      schema:
+        $ref: '#/components/schemas/ExcelStatus/definitions/excelReportTypes'
+      description: The type of report you want to generate and download.
+      required: true
   securitySchemes:
     auth_header:
       name: Authorization
@@ -521,7 +537,7 @@ x-speakeasy-name-override:
   methodNameOverride: download-attachment
 - operationId: ^upload-.*?-attachment
   methodNameOverride: upload-attachment
-x-codat-docs-path: bank-feeds-api
+x-codat-docs-path: lending-api
 x-codat-keep-docs-paths-local: true
 x-codat-speakeasy-pagination:
   type: offsetLimit

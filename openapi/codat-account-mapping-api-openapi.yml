@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Bank Feeds Account mapping API
   version: 3.0.0
@@ -143,107 +143,6 @@ paths:
           $ref: '#/components/responses/Service-Unavailable'
 components:
   schemas:
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    BankFeedMapping:
-      title: Bank feed mapping
-      type: object
-      additionalProperties: false
-      properties:
-        sourceAccountId:
-          type: string
-          description: Unique ID for the source account.
-        sourceAccountName:
-          type: string
-          description: Name for the source account.
-        sourceAccountNumber:
-          type: string
-          description: Account number for the source account.
-        sourceBalance:
-          type: number
-          format: decimal
-          description: Balance for the source account.
-        sourceCurrency:
-          $ref: '#/components/schemas/SourceAccount/properties/currency'
-        targetAccountId:
-          type: string
-          nullable: true
-          description: Unique ID for the target account in the accounting software.
-        targetAccountName:
-          type: string
-          description: Name for the target account in the accounting software.
-        status:
-          type: string
-          description: The status.
-        targetAccountOptions:
-          type: array
-          nullable: true
-          description: An array of potential target accounts.
-          items:
-            $ref: '#/components/schemas/BankFeedMapping/definitions/targetAccountOption'
-        feedStartDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-          description: The date from which bank transactions can be provided to the platform.
-      description: A bank feed connection between a source account and a target account, including potential target accounts.
-      definitions:
-        targetAccountOption:
-          title: Target Account Option
-          type: object
-          properties:
-            id:
-              type: string
-              description: Id of the target account.
-            name:
-              type: string
-              nullable: true
-              description: Name of the target account.
-            balance:
-              type: number
-              format: decimal
-              nullable: true
-              description: The balance of the account.
-            sortCode:
-              type: string
-              nullable: true
-              description: The sort code of the account.
-            accountNumber:
-              type: string
-              nullable: true
-              description: The account number of the account.
-        bankFeedMappings:
-          title: Bank feed mappings
-          type: array
-          items:
-            $ref: '#/components/schemas/BankFeedMapping'
-          additionalProperties: false
-      examples:
-      - sourceAccountId: acc-002
-        targetAccountId: account-081
-        sourceCurrency: USD
-        status: Success
-        feedStartDate: '2023-01-09T14:14:14.1057478Z'
-        sourceAccountName: ACME Bank
-        sourceAccountNumber: 1234-5678
-        sourceBalance: 500
-        targetAccountName: ACME Bank
-      - sourceAccountId: c53fd75a-dddb-4493-839a-5090b008f625
-        status: pending
-        targetAccountOptions:
-        - name: account-081
-          id: 044096a7-1478-4554-8820-f478caad1b00
-          balance: 100.99
-          sortCode: '602336'
-          accountNumber: '23203'
-        sourceAccountName: bank name here
-        sourceAccountNumber: '5670'
-        sourceBalance: 1550
-        sourceCurrency: GBP
     BankFeedAccountMapping:
       title: Bank feed account mapping
       type: object
@@ -265,89 +164,6 @@ components:
       examples:
       - sourceAccountId: acc-002
         targetAccountId: account-081
-    ErrorMessage:
-      title: Error message
-      type: object
-      x-internal: true
-      properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
-          type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
-          nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
-    BankFeedAccountMappingResponse:
-      title: Bank feed account mapping response
-      type: object
-      additionalProperties: false
-      properties:
-        sourceAccountId:
-          type: string
-          description: Unique ID for the source account.
-        targetAccountId:
-          type: string
-          nullable: true
-          description: Unique ID for the target account.
-        status:
-          type: string
-          nullable: true
-          description: Status of the POST request.
-        error:
-          type: string
-          nullable: true
-          description: Error returned during the post request
-      examples:
-      - sourceAccountId: acc-002
-        targetAccountId: account-081
-        status: Failed
-        error: A feed connection already exists to this account
     SourceAccount:
       title: Source account (v1)
       type: object
@@ -454,27 +270,190 @@ components:
         balance: 0
         modifiedDate: '2023-01-09T14:14:14.1057478Z'
         status: pending
-  parameters:
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
-        description: Unique identifier for a company's data connection.
-      description: Unique identifier for a connection.
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    BankFeedMapping:
+      title: Bank feed mapping
+      type: object
+      additionalProperties: false
+      properties:
+        sourceAccountId:
+          type: string
+          description: Unique ID for the source account.
+        sourceAccountName:
+          type: string
+          description: Name for the source account.
+        sourceAccountNumber:
+          type: string
+          description: Account number for the source account.
+        sourceBalance:
+          type: number
+          format: decimal
+          description: Balance for the source account.
+        sourceCurrency:
+          $ref: '#/components/schemas/SourceAccount/properties/currency'
+        targetAccountId:
+          type: string
+          nullable: true
+          description: Unique ID for the target account in the accounting software.
+        targetAccountName:
+          type: string
+          description: Name for the target account in the accounting software.
+        status:
+          type: string
+          description: The status.
+        targetAccountOptions:
+          type: array
+          nullable: true
+          description: An array of potential target accounts.
+          items:
+            $ref: '#/components/schemas/BankFeedMapping/definitions/targetAccountOption'
+        feedStartDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: The date from which bank transactions can be provided to the platform.
+      description: A bank feed connection between a source account and a target account, including potential target accounts.
+      definitions:
+        targetAccountOption:
+          title: Target Account Option
+          type: object
+          properties:
+            id:
+              type: string
+              description: Id of the target account.
+            name:
+              type: string
+              nullable: true
+              description: Name of the target account.
+            balance:
+              type: number
+              format: decimal
+              nullable: true
+              description: The balance of the account.
+            sortCode:
+              type: string
+              nullable: true
+              description: The sort code of the account.
+            accountNumber:
+              type: string
+              nullable: true
+              description: The account number of the account.
+        bankFeedMappings:
+          title: Bank feed mappings
+          type: array
+          items:
+            $ref: '#/components/schemas/BankFeedMapping'
+          additionalProperties: false
+      examples:
+      - sourceAccountId: acc-002
+        targetAccountId: account-081
+        sourceCurrency: USD
+        status: Success
+        feedStartDate: '2023-01-09T14:14:14.1057478Z'
+        sourceAccountName: ACME Bank
+        sourceAccountNumber: 1234-5678
+        sourceBalance: 500
+        targetAccountName: ACME Bank
+      - sourceAccountId: c53fd75a-dddb-4493-839a-5090b008f625
+        status: pending
+        targetAccountOptions:
+        - name: account-081
+          id: 044096a7-1478-4554-8820-f478caad1b00
+          balance: 100.99
+          sortCode: '602336'
+          accountNumber: '23203'
+        sourceAccountName: bank name here
+        sourceAccountNumber: '5670'
+        sourceBalance: 1550
+        sourceCurrency: GBP
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    BankFeedAccountMappingResponse:
+      title: Bank feed account mapping response
+      type: object
+      additionalProperties: false
+      properties:
+        sourceAccountId:
+          type: string
+          description: Unique ID for the source account.
+        targetAccountId:
+          type: string
+          nullable: true
+          description: Unique ID for the target account.
+        status:
+          type: string
+          nullable: true
+          description: Status of the POST request.
+        error:
+          type: string
+          nullable: true
+          description: Error returned during the post request
+      examples:
+      - sourceAccountId: acc-002
+        targetAccountId: account-081
+        status: Failed
+        error: A feed connection already exists to this account
   responses:
     Unauthorized:
       description: Your API request was not properly authorized.
@@ -489,6 +468,51 @@ components:
                 service: PublicApi
                 error: Unauthorized
                 correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Payment-Required:
@@ -578,51 +602,27 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
+  parameters:
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
   securitySchemes:
     auth_header:
       name: Authorization

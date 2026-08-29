@@ -999,6 +999,33 @@ apis:
     url: https://docs.codat.io/bank-feeds/overview
   - type: APIReference
     url: https://docs.codat.io/bank-feeds-api
+- aid: codat:codat-bank-feeds-api
+  name: Codat Bank Feeds API
+  description: The Bank Feeds API from Codat — 0 operation(s) for bank feeds.
+  humanURL: https://docs.codat.io/expenses/overview
+  tags:
+  - Bank Feeds
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-bank-feeds-api-openapi.yml
+- aid: codat:codat-lending-api
+  name: Codat Lending API
+  description: The Lending API from Codat — 0 operation(s) for lending.
+  humanURL: https://docs.codat.io/expenses/overview
+  tags:
+  - Lending
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-lending-api-openapi.yml
+- aid: codat:codat-platform-api-api
+  name: Codat Platform API
+  description: The Platform API API from Codat — 0 operation(s) for platform api.
+  humanURL: https://docs.codat.io/expenses/overview
+  tags:
+  - Platform API
+  properties:
+  - type: OpenAPI
+    url: openapi/codat-platform-api-api-openapi.yml
 common:
 - type: CapabilityMap
   url: capabilities/codat-capability-edges.yml

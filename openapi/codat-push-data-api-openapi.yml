@@ -1,43 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bank Feeds Account mapping Push data API
+  title: Platform Push data API
   version: 3.0.0
+  summary: Platform API
+  description: "An API for the common components of all of Codat's products.\n\nThese end points cover creating and managing your companies, data connections, and integrations.\n\n[Read about the building blocks of Codat...](https://docs.codat.io/core-concepts/companies) | [See our OpenAPI spec](https://github.com/codatio/oas) \n\n---\n<!-- Start Codat Tags Table -->\n## Endpoints\n\n| Endpoints | Description |\n| :- |:- |\n| Companies | Create and manage your SMB users' companies. |\n| Connections | Create new and manage existing data connections for a company. |\n| Connection management | Configure connection management UI and retrieve access tokens for authentication. |\n| Webhooks | Create and manage webhooks that listen to Codat's events. |\n| Integrations | Get a list of integrations supported by Codat and their logos. |\n| Refresh data | Initiate data refreshes, view pull status and history. |\n| Settings | Manage company profile configuration, sync settings, and API keys. |\n| Push data | Initiate and monitor Create, Update, and Delete operations. |\n| Supplemental data | Configure and pull additional data you can include in Codat's standard data types. |\n| Custom data type | Configure and pull additional data types that are not included in Codat's standardized data model. |\n<!-- End Codat Tags Table -->"
   contact:
-    email: support@codat.io
     name: Codat
-  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
-
-
-    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
-
-
-    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
-
-
-    ---
-
-    <!-- Start Codat Tags Table -->
-
-    ## Endpoints
-
-
-    | Endpoints | Description |
-
-    | :- |:- |
-
-    | Companies | Create and manage your SMB users'' companies. |
-
-    | Connections | Create new and manage existing data connections for a company. |
-
-    | Source accounts | Provide and manage lists of source bank accounts. |
-
-    | Account mapping | Extra functionality for building an account management UI. |
-
-    | Company information | Get detailed information about a company from the underlying platform. |
-
-    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
-
-    <!-- End Codat Tags Table -->'
+    email: support@codat.io
   termsOfService: https://www.codat.io/legals/
 servers:
 - description: Production
@@ -295,151 +264,9 @@ components:
               $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/description'
             required:
               $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/required'
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    DataStatus:
-      title: Data status
-      description: Describes the state of data in the Codat cache for a company and data type
-      type: object
-      required:
-      - dataType
-      - currentStatus
-      properties:
-        dataType:
-          title: Data types
-          x-internal: true
-          type: string
-          description: Available data types
-          enum:
-          - accountTransactions
-          - balanceSheet
-          - bankAccounts
-          - bankTransactions
-          - billCreditNotes
-          - billPayments
-          - bills
-          - cashFlowStatement
-          - chartOfAccounts
-          - company
-          - creditNotes
-          - customers
-          - directCosts
-          - directIncomes
-          - invoices
-          - itemReceipts
-          - items
-          - journalEntries
-          - journals
-          - paymentMethods
-          - payments
-          - profitAndLoss
-          - purchaseOrders
-          - salesOrders
-          - suppliers
-          - taxRates
-          - trackingCategories
-          - transfers
-          - banking-accountBalances
-          - banking-accounts
-          - banking-transactionCategories
-          - banking-transactions
-          - commerce-companyInfo
-          - commerce-customers
-          - commerce-disputes
-          - commerce-locations
-          - commerce-orders
-          - commerce-paymentMethods
-          - commerce-payments
-          - commerce-productCategories
-          - commerce-products
-          - commerce-taxComponents
-          - commerce-transactions
-          example: invoices
-        lastSuccessfulSync:
-          $ref: '#/components/schemas/DateTime'
-        currentStatus:
-          $ref: '#/components/schemas/PullOperation/properties/status'
-        latestSyncId:
-          type: string
-          description: Unique identifier for most recent sync of data type.
-          format: uuid
-          example: ad474a37-2003-478e-baee-9af9f1ec2fe3
-        latestSuccessfulSyncId:
-          type: string
-          description: Unique identifier for the most recent successful sync of data type.
-          format: uuid
-          example: 8220fc90-55b6-47bc-9417-48ac6ea93101
-      examples:
-      - dataType: string
-        lastSuccessfulSync: '2022-01-01T13:00:00.000Z'
-        currentStatus: string
-        latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
-        latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
-    PagingInfo:
-      type: object
-      title: Pagination information
+    DataType:
       x-internal: true
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number.
-        pageSize:
-          type: integer
-          description: Number of items to return in results array.
-          maximum: 2000
-        totalResults:
-          type: integer
-          description: Total number of items.
-        _links:
-          $ref: '#/components/schemas/PagingInfo/definitions/links'
-      definitions:
-        links:
-          title: Hal Links
-          type: object
-          required:
-          - self
-          - current
-          properties:
-            self:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            current:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            next:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            previous:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-          examples:
-          - self:
-              href: /companies
-            current:
-              href: /companies?page=1&pageSize=10
-        halRef:
-          title: Hypertext reference
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri-reference
-              description: Uri hypertext reference.
-      required:
-      - pageNumber
-      - pageSize
-      - totalResults
-      - _links
-      examples:
-      - pageNumber: 1
-        pageSize: 10
-        totalResults: 1
-        _links:
-          self:
-            href: /companies/{id}/data/{dataType}
-          current:
-            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+      $ref: '#/components/schemas/DataStatus/properties/dataType'
     PushOperation:
       title: Push operation
       type: object
@@ -572,6 +399,84 @@ components:
               type: string
               description: Unique identifier for the attachment created otherwise null.
               nullable: true
+    DataStatus:
+      title: Data status
+      description: Describes the state of data in the Codat cache for a company and data type
+      type: object
+      required:
+      - dataType
+      - currentStatus
+      properties:
+        dataType:
+          title: Data types
+          x-internal: true
+          type: string
+          description: Available data types
+          enum:
+          - accountTransactions
+          - balanceSheet
+          - bankAccounts
+          - bankTransactions
+          - billCreditNotes
+          - billPayments
+          - bills
+          - cashFlowStatement
+          - chartOfAccounts
+          - company
+          - creditNotes
+          - customers
+          - directCosts
+          - directIncomes
+          - invoices
+          - itemReceipts
+          - items
+          - journalEntries
+          - journals
+          - paymentMethods
+          - payments
+          - profitAndLoss
+          - purchaseOrders
+          - salesOrders
+          - suppliers
+          - taxRates
+          - trackingCategories
+          - transfers
+          - banking-accountBalances
+          - banking-accounts
+          - banking-transactionCategories
+          - banking-transactions
+          - commerce-companyInfo
+          - commerce-customers
+          - commerce-disputes
+          - commerce-locations
+          - commerce-orders
+          - commerce-paymentMethods
+          - commerce-payments
+          - commerce-productCategories
+          - commerce-products
+          - commerce-taxComponents
+          - commerce-transactions
+          example: invoices
+        lastSuccessfulSync:
+          $ref: '#/components/schemas/DateTime'
+        currentStatus:
+          $ref: '#/components/schemas/PullOperation/properties/status'
+        latestSyncId:
+          type: string
+          description: Unique identifier for most recent sync of data type.
+          format: uuid
+          example: ad474a37-2003-478e-baee-9af9f1ec2fe3
+        latestSuccessfulSyncId:
+          type: string
+          description: Unique identifier for the most recent successful sync of data type.
+          format: uuid
+          example: 8220fc90-55b6-47bc-9417-48ac6ea93101
+      examples:
+      - dataType: string
+        lastSuccessfulSync: '2022-01-01T13:00:00.000Z'
+        currentStatus: string
+        latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
+        latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
     ErrorMessage:
       title: Error message
       type: object
@@ -630,6 +535,73 @@ components:
               type: string
               nullable: true
               description: Name of validator.
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    PagingInfo:
+      type: object
+      title: Pagination information
+      x-internal: true
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number.
+        pageSize:
+          type: integer
+          description: Number of items to return in results array.
+          maximum: 2000
+        totalResults:
+          type: integer
+          description: Total number of items.
+        _links:
+          $ref: '#/components/schemas/PagingInfo/definitions/links'
+      definitions:
+        links:
+          title: Hal Links
+          type: object
+          required:
+          - self
+          - current
+          properties:
+            self:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            current:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            next:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            previous:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+          examples:
+          - self:
+              href: /companies
+            current:
+              href: /companies?page=1&pageSize=10
+        halRef:
+          title: Hypertext reference
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri-reference
+              description: Uri hypertext reference.
+      required:
+      - pageNumber
+      - pageSize
+      - totalResults
+      - _links
+      examples:
+      - pageNumber: 1
+        pageSize: 10
+        totalResults: 1
+        _links:
+          self:
+            href: /companies/{id}/data/{dataType}
+          current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
     PushOperations:
       title: Push operations
       x-internal: true
@@ -641,10 +613,17 @@ components:
             items:
               $ref: '#/components/schemas/PushOperation'
       - $ref: '#/components/schemas/PagingInfo'
-    DataType:
-      x-internal: true
-      $ref: '#/components/schemas/DataStatus/properties/dataType'
   parameters:
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
     connectionId:
       name: connectionId
       in: path
@@ -655,14 +634,14 @@ components:
         example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
         description: Unique identifier for a company's data connection.
       description: Unique identifier for a connection.
-    orderBy:
-      name: orderBy
+    query:
+      name: query
       in: query
       required: false
       schema:
         type: string
-        example: -modifiedDate
-      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
     pageSize:
       name: pageSize
       in: query
@@ -674,14 +653,6 @@ components:
         minimum: 1
         maximum: 5000
       description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
     companyId:
       name: companyId
       in: path
@@ -689,16 +660,6 @@ components:
       schema:
         $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
       description: Unique identifier for a company.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
     dataType:
       name: dataType
       description: The key of a Codat data type.
@@ -706,6 +667,14 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/DataType'
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
   responses:
     Unauthorized:
       description: Your API request was not properly authorized.
@@ -720,6 +689,21 @@ components:
                 service: PublicApi
                 error: Unauthorized
                 correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Malformed-Query:
@@ -745,6 +729,36 @@ components:
                 correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
     Payment-Required:
       description: 'An account limit has been exceeded. The type of limit is described in the error property:
 
@@ -766,21 +780,6 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -832,36 +831,6 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
   securitySchemes:
     auth_header:
       name: Authorization
@@ -869,6 +838,8 @@ components:
       type: apiKey
       in: header
       x-speakeasy-example: Basic BASE_64_ENCODED(API_KEY)
+x-stoplight:
+  id: 466k6ayziv9at
 x-speakeasy-retries:
   strategy: backoff
   backoff:
@@ -906,7 +877,7 @@ x-speakeasy-name-override:
   methodNameOverride: download-attachment
 - operationId: ^upload-.*?-attachment
   methodNameOverride: upload-attachment
-x-codat-docs-path: bank-feeds-api
+x-codat-docs-path: platform-api
 x-codat-keep-docs-paths-local: true
 x-codat-speakeasy-pagination:
   type: offsetLimit

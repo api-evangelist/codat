@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bank Feeds Account mapping Bank accounts API
+  title: Bank Feeds Bank accounts API
   version: 3.0.0
   contact:
     email: support@codat.io
@@ -1359,7 +1359,18 @@ paths:
         '503':
           $ref: '#/components/responses/Service-Unavailable'
       operationId: get-create-bankAccounts-model
-      description: "The *Get create/update bank account model* endpoint returns the expected data for the request payload when creating and updating a [bank account](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) for a given company and integration.\r\n\r\n[Bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) are financial accounts maintained by a bank or other financial institution.\r\n\r\n**Integration-specific behavior**\r\n\r\nSee the *response examples* for integration-specific indicative models.\r\n"
+      description: 'The *Get create/update bank account model* endpoint returns the expected data for the request payload when creating and updating a [bank account](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) for a given company and integration.
+
+
+        [Bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) are financial accounts maintained by a bank or other financial institution.
+
+
+        **Integration-specific behavior**
+
+
+        See the *response examples* for integration-specific indicative models.
+
+        '
   /companies/{companyId}/connections/{connectionId}/push/bankAccounts:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -1401,7 +1412,16 @@ paths:
           $ref: '#/components/responses/Internal-Server-Error'
         '503':
           $ref: '#/components/responses/Service-Unavailable'
-      description: "The *Create bank account* endpoint creates a new [bank account](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) for a given company's connection.\r\n\r\n[Bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) are financial accounts maintained by a bank or other financial institution.\r\n\r\n**Integration-specific behavior**\r\n\r\nRequired data may vary by integration. To see what data to post, first call [Get create/update bank account model](https://docs.codat.io/bank-feeds-api#/operations/get-create-update-bankAccounts-model)."
+      description: 'The *Create bank account* endpoint creates a new [bank account](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) for a given company''s connection.
+
+
+        [Bank accounts](https://docs.codat.io/bank-feeds-api#/schemas/BankAccount) are financial accounts maintained by a bank or other financial institution.
+
+
+        **Integration-specific behavior**
+
+
+        Required data may vary by integration. To see what data to post, first call [Get create/update bank account model](https://docs.codat.io/bank-feeds-api#/operations/get-create-update-bankAccounts-model).'
       operationId: create-bank-account
 components:
   schemas:
@@ -1532,82 +1552,162 @@ components:
               $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/description'
             required:
               $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/required'
-    Companies:
-      title: Companies
+    DataType:
+      title: Data types
       x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Company'
-      - type: object
-        title: Pagination information
-        x-internal: true
-        properties:
-          pageNumber:
-            type: integer
-            description: Current page number.
-          pageSize:
-            type: integer
-            description: Number of items to return in results array.
-            maximum: 2000
-          totalResults:
-            type: integer
-            description: Total number of items.
-          _links:
-            $ref: '#/components/schemas/Companies/allOf/1/definitions/links'
-        definitions:
-          links:
-            title: Hal Links
-            type: object
-            required:
-            - self
-            - current
-            properties:
-              self:
-                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
-              current:
-                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
-              next:
-                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
-              previous:
-                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
-            examples:
-            - self:
-                href: /companies
-              current:
-                href: /companies?page=1&pageSize=10
-          halRef:
-            title: Hypertext reference
-            type: object
-            properties:
-              href:
-                type: string
-                format: uri-reference
-                description: Uri hypertext reference.
-        required:
-        - pageNumber
-        - pageSize
-        - totalResults
-        - _links
-        examples:
-        - pageNumber: 1
-          pageSize: 10
-          totalResults: 1
-          _links:
-            self:
-              href: /companies/{id}/data/{dataType}
-            current:
-              href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    DateTime:
-      title: Date time
       type: string
+      description: Available data types
+      enum:
+      - accountTransactions
+      - balanceSheet
+      - bankAccounts
+      - bankTransactions
+      - billCreditNotes
+      - billPayments
+      - bills
+      - cashFlowStatement
+      - chartOfAccounts
+      - company
+      - creditNotes
+      - customers
+      - directCosts
+      - directIncomes
+      - invoices
+      - itemReceipts
+      - items
+      - journalEntries
+      - journals
+      - paymentMethods
+      - payments
+      - profitAndLoss
+      - purchaseOrders
+      - salesOrders
+      - suppliers
+      - taxRates
+      - trackingCategories
+      - transfers
+      - banking-accountBalances
+      - banking-accounts
+      - banking-transactionCategories
+      - banking-transactions
+      - commerce-companyInfo
+      - commerce-customers
+      - commerce-disputes
+      - commerce-locations
+      - commerce-orders
+      - commerce-paymentMethods
+      - commerce-payments
+      - commerce-productCategories
+      - commerce-products
+      - commerce-taxComponents
+      - commerce-transactions
+      example: invoices
+    SourceAccount:
+      title: Source account (v1)
+      type: object
+      description: The target bank account in a supported accounting software for ingestion into a bank feed.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Unique ID for the bank account.
+        accountName:
+          type: string
+          nullable: true
+          description: The bank account name.
+        accountType:
+          type: string
+          nullable: true
+          description: The type of bank account e.g. Credit.
+        accountNumber:
+          type: string
+          nullable: true
+          description: The account number.
+        sortCode:
+          type: string
+          nullable: true
+          description: The sort code.
+        currency:
+          title: Currency
+          x-internal: true
+          type: string
+          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
+          format: ISO4217
+          examples:
+          - GBP
+          - USD
+          - EUR
+        balance:
+          type: number
+          format: decimal
+          nullable: true
+          description: The latest balance for the bank account.
+        modifiedDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: The last date the bank account was modified.
+        status:
+          type: string
+          nullable: true
+          description: Status of the source account.
+          enum:
+          - pending
+          - connected
+          - connecting
+          - disconnected
+          - unknown
+        feedStartDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+      required:
+      - id
+      definitions:
+        sourceAccountPrototype:
+          title: Source account (v1)
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/SourceAccount/properties/id'
+            accountName:
+              $ref: '#/components/schemas/SourceAccount/properties/accountName'
+            accountType:
+              $ref: '#/components/schemas/SourceAccount/properties/accountType'
+            accountNumber:
+              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
+            sortCode:
+              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            balance:
+              $ref: '#/components/schemas/SourceAccount/properties/balance'
+            modifiedDate:
+              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
+          required:
+          - id
+        sourceAccounts:
+          title: Source accounts
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAccount'
       examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+      - id: acc-002
+        accountName: account-081
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345670'
+        currency: GBP
+        balance: 99.99
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+      - id: acc-003
+        accountName: account-095
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345671'
+        currency: USD
+        balance: 0
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
     PushOperation:
       title: Push operation
       type: object
@@ -1984,163 +2084,100 @@ components:
               type: string
               nullable: true
               description: Name of validator.
-    SourceAccount:
-      title: Source account (v1)
-      type: object
-      description: The target bank account in a supported accounting software for ingestion into a bank feed.
-      additionalProperties: false
-      properties:
-        id:
-          type: string
-          description: Unique ID for the bank account.
-        accountName:
-          type: string
-          nullable: true
-          description: The bank account name.
-        accountType:
-          type: string
-          nullable: true
-          description: The type of bank account e.g. Credit.
-        accountNumber:
-          type: string
-          nullable: true
-          description: The account number.
-        sortCode:
-          type: string
-          nullable: true
-          description: The sort code.
-        currency:
-          title: Currency
-          x-internal: true
-          type: string
-          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
-          format: ISO4217
-          examples:
-          - GBP
-          - USD
-          - EUR
-        balance:
-          type: number
-          format: decimal
-          nullable: true
-          description: The latest balance for the bank account.
-        modifiedDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-          description: The last date the bank account was modified.
-        status:
-          type: string
-          nullable: true
-          description: Status of the source account.
-          enum:
-          - pending
-          - connected
-          - connecting
-          - disconnected
-          - unknown
-        feedStartDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-      required:
-      - id
-      definitions:
-        sourceAccountPrototype:
-          title: Source account (v1)
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/SourceAccount/properties/id'
-            accountName:
-              $ref: '#/components/schemas/SourceAccount/properties/accountName'
-            accountType:
-              $ref: '#/components/schemas/SourceAccount/properties/accountType'
-            accountNumber:
-              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
-            sortCode:
-              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-            balance:
-              $ref: '#/components/schemas/SourceAccount/properties/balance'
-            modifiedDate:
-              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
-          required:
-          - id
-        sourceAccounts:
-          title: Source accounts
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceAccount'
-      examples:
-      - id: acc-002
-        accountName: account-081
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345670'
-        currency: GBP
-        balance: 99.99
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
-      - id: acc-003
-        accountName: account-095
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345671'
-        currency: USD
-        balance: 0
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
-    DataType:
-      title: Data types
-      x-internal: true
+    DateTime:
+      title: Date time
       type: string
-      description: Available data types
-      enum:
-      - accountTransactions
-      - balanceSheet
-      - bankAccounts
-      - bankTransactions
-      - billCreditNotes
-      - billPayments
-      - bills
-      - cashFlowStatement
-      - chartOfAccounts
-      - company
-      - creditNotes
-      - customers
-      - directCosts
-      - directIncomes
-      - invoices
-      - itemReceipts
-      - items
-      - journalEntries
-      - journals
-      - paymentMethods
-      - payments
-      - profitAndLoss
-      - purchaseOrders
-      - salesOrders
-      - suppliers
-      - taxRates
-      - trackingCategories
-      - transfers
-      - banking-accountBalances
-      - banking-accounts
-      - banking-transactionCategories
-      - banking-transactions
-      - commerce-companyInfo
-      - commerce-customers
-      - commerce-disputes
-      - commerce-locations
-      - commerce-orders
-      - commerce-paymentMethods
-      - commerce-payments
-      - commerce-productCategories
-      - commerce-products
-      - commerce-taxComponents
-      - commerce-transactions
-      example: invoices
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    Companies:
+      title: Companies
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Company'
+      - type: object
+        title: Pagination information
+        x-internal: true
+        properties:
+          pageNumber:
+            type: integer
+            description: Current page number.
+          pageSize:
+            type: integer
+            description: Number of items to return in results array.
+            maximum: 2000
+          totalResults:
+            type: integer
+            description: Total number of items.
+          _links:
+            $ref: '#/components/schemas/Companies/allOf/1/definitions/links'
+        definitions:
+          links:
+            title: Hal Links
+            type: object
+            required:
+            - self
+            - current
+            properties:
+              self:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+              current:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+              next:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+              previous:
+                $ref: '#/components/schemas/Companies/allOf/1/definitions/halRef'
+            examples:
+            - self:
+                href: /companies
+              current:
+                href: /companies?page=1&pageSize=10
+          halRef:
+            title: Hypertext reference
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri-reference
+                description: Uri hypertext reference.
+        required:
+        - pageNumber
+        - pageSize
+        - totalResults
+        - _links
+        examples:
+        - pageNumber: 1
+          pageSize: 10
+          totalResults: 1
+          _links:
+            self:
+              href: /companies/{id}/data/{dataType}
+            current:
+              href: /companies/{id}/data/{dataType}?page=1&pageSize=10
   parameters:
+    timeoutInMinutes:
+      name: timeoutInMinutes
+      in: query
+      schema:
+        type: integer
+        format: int32
+      description: Time limit for the push operation to complete before it is timed out.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
     connectionId:
       name: connectionId
       in: path
@@ -2151,6 +2188,25 @@ components:
         example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
         description: Unique identifier for a company's data connection.
       description: Unique identifier for a connection.
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
     companyId:
       name: companyId
       in: path
@@ -2169,42 +2225,6 @@ components:
         type: string
         example: -modifiedDate
       description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
-    timeoutInMinutes:
-      name: timeoutInMinutes
-      in: query
-      schema:
-        type: integer
-        format: int32
-      description: Time limit for the push operation to complete before it is timed out.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
   responses:
     Unauthorized:
       description: Your API request was not properly authorized.
@@ -2221,8 +2241,8 @@ components:
                 correlationId: 7eb40d6b415d7bcd99ce658268284056
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Conflict:
-      description: The data type's dataset has not been requested or is still syncing.
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
       content:
         application/json:
           schema:
@@ -2230,9 +2250,9 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 409
+                statusCode: 403
                 service: PublicApi
-                error: The data set has not been requested.
+                error: You are using an outdated API key or a key not associated with that resource.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -2259,6 +2279,51 @@ components:
                 correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
     Payment-Required:
       description: 'An account limit has been exceeded. The type of limit is described in the error property:
 
@@ -2280,21 +2345,6 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -2331,6 +2381,21 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Conflict:
+      description: The data type's dataset has not been requested or is still syncing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 409
+                service: PublicApi
+                error: The data set has not been requested.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
     Internal-Server-Error:
       description: There is a problem with our server. Please try again later.
       content:
@@ -2343,51 +2408,6 @@ components:
                 statusCode: 500
                 service: PublicApi
                 error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0

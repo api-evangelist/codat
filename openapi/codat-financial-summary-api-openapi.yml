@@ -1,20 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bank Feeds Account mapping Financial summary API
-  version: 3.0.0
-  contact:
-    email: support@codat.io
-    name: Codat
-  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
+  title: Lending Financial summary API
+  description: 'Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers'' latest data from accounting, banking, and commerce software they are already using. It also includes features to help providers verify the accuracy of data and process it more efficiently.
 
 
-    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
+    The Lending solution is built on top of the latest accounting, commerce, and banking data, providing you with the most important data points you need to get a full picture of SMB creditworthiness and make a comprehensive assessment of your customers.
 
 
-    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
+    [Explore solution](https://docs.codat.io/lending/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
 
-
-    ---
 
     <!-- Start Codat Tags Table -->
 
@@ -29,15 +23,37 @@ info:
 
     | Connections | Create new and manage existing data connections for a company. |
 
-    | Source accounts | Provide and manage lists of source bank accounts. |
+    | Bank statements | Retrieve banking data from linked bank accounts. |
 
-    | Account mapping | Extra functionality for building an account management UI. |
+    | Sales | Retrieve standardized sales data from a linked commerce software. |
 
-    | Company information | Get detailed information about a company from the underlying platform. |
+    | Financial statements | Financial data and reports from a linked accounting software. |
 
-    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
+    | Liabilities | Debt and other liabilities. |
+
+    | Accounts payable | Data from a linked accounting software representing money the business owes money to its suppliers. |
+
+    | Accounts receivable | Data from a linked accounting software representing money owed to the business for sold goods or services. |
+
+    | Transactions | Data from a linked accounting software representing transactions. |
+
+    | Company info | View company information fetched from the source platform. |
+
+    | Data integrity | Match mutable accounting data with immutable banking data to increase confidence in financial data. |
+
+    | Excel reports | Download reports in Excel format. |
+
+    | Manage data | Control how data is retrieved from an integration. |
+
+    | File upload | Endpoints to manage uploaded files. |
+
+    | Loan writeback | Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure in your lending process to maintain an accurate position of a loan during the entire lending cycle. |
 
     <!-- End Codat Tags Table -->'
+  version: 3.0.0
+  contact:
+    name: Codat
+    email: support@codat.io
   termsOfService: https://www.codat.io/legals/
 servers:
 - description: Production
@@ -150,6 +166,21 @@ paths:
           $ref: '#/components/responses/Service-Unavailable'
 components:
   responses:
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
     BadRequest:
       description: The request made is not valid.
       content:
@@ -189,21 +220,6 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Too-Many-Requests:
       description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
@@ -216,6 +232,21 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -232,6 +263,21 @@ components:
                 service: PublicApi
                 error: Unauthorized
                 correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Not-Found:
@@ -267,69 +313,6 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-  parameters:
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    reportId:
-      name: reportId
-      description: Unique identifier for a report, use either the Id of the report or `latest` for the most recently generate report.
-      in: path
-      required: true
-      schema:
-        oneOf:
-        - type: string
-          title: ID
-          format: uuid
-          example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        - type: string
-          title: Latest
-          enum:
-          - latest
-    maxAge:
-      description: The maximum age of report to fetch.
-      name: maxAge
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/DateTime'
   schemas:
     DateTime:
       title: Date time
@@ -436,6 +419,39 @@ components:
               - Balance sheet is unbalanced.
               - Negative Tangible Assets on Balance Sheet
               - Negative Accounts Receivable on Balance Sheet
+  parameters:
+    maxAge:
+      description: The maximum age of report to fetch.
+      name: maxAge
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/DateTime'
+    reportId:
+      name: reportId
+      description: Unique identifier for a report, use either the Id of the report or `latest` for the most recently generate report.
+      in: path
+      required: true
+      schema:
+        oneOf:
+        - type: string
+          title: ID
+          format: uuid
+          example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        - type: string
+          title: Latest
+          enum:
+          - latest
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
   securitySchemes:
     auth_header:
       name: Authorization
@@ -480,7 +496,7 @@ x-speakeasy-name-override:
   methodNameOverride: download-attachment
 - operationId: ^upload-.*?-attachment
   methodNameOverride: upload-attachment
-x-codat-docs-path: bank-feeds-api
+x-codat-docs-path: lending-api
 x-codat-keep-docs-paths-local: true
 x-codat-speakeasy-pagination:
   type: offsetLimit

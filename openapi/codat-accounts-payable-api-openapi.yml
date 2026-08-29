@@ -1,20 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bank Feeds Account mapping Accounts payable API
-  version: 3.0.0
-  contact:
-    email: support@codat.io
-    name: Codat
-  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
+  title: Lending Accounts payable API
+  description: 'Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers'' latest data from accounting, banking, and commerce software they are already using. It also includes features to help providers verify the accuracy of data and process it more efficiently.
 
 
-    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
+    The Lending solution is built on top of the latest accounting, commerce, and banking data, providing you with the most important data points you need to get a full picture of SMB creditworthiness and make a comprehensive assessment of your customers.
 
 
-    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
+    [Explore solution](https://docs.codat.io/lending/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
 
-
-    ---
 
     <!-- Start Codat Tags Table -->
 
@@ -29,15 +23,37 @@ info:
 
     | Connections | Create new and manage existing data connections for a company. |
 
-    | Source accounts | Provide and manage lists of source bank accounts. |
+    | Bank statements | Retrieve banking data from linked bank accounts. |
 
-    | Account mapping | Extra functionality for building an account management UI. |
+    | Sales | Retrieve standardized sales data from a linked commerce software. |
 
-    | Company information | Get detailed information about a company from the underlying platform. |
+    | Financial statements | Financial data and reports from a linked accounting software. |
 
-    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
+    | Liabilities | Debt and other liabilities. |
+
+    | Accounts payable | Data from a linked accounting software representing money the business owes money to its suppliers. |
+
+    | Accounts receivable | Data from a linked accounting software representing money owed to the business for sold goods or services. |
+
+    | Transactions | Data from a linked accounting software representing transactions. |
+
+    | Company info | View company information fetched from the source platform. |
+
+    | Data integrity | Match mutable accounting data with immutable banking data to increase confidence in financial data. |
+
+    | Excel reports | Download reports in Excel format. |
+
+    | Manage data | Control how data is retrieved from an integration. |
+
+    | File upload | Endpoints to manage uploaded files. |
+
+    | Loan writeback | Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure in your lending process to maintain an accurate position of a loan during the entire lending cycle. |
 
     <!-- End Codat Tags Table -->'
+  version: 3.0.0
+  contact:
+    name: Codat
+    email: support@codat.io
   termsOfService: https://www.codat.io/legals/
 servers:
 - description: Production
@@ -12294,7 +12310,471 @@ paths:
         '503':
           $ref: '#/components/responses/Service-Unavailable'
 components:
+  responses:
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Data connection not found:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Conflict:
+      description: The data type's dataset has not been requested or is still syncing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 409
+                service: PublicApi
+                error: The data set has not been requested.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  parameters:
+    accountingPeriodLengthDays:
+      name: periodLengthDays
+      in: query
+      schema:
+        type: integer
+        format: int32
+        example: 30
+      description: The length of period in days.
+    accountingBillPaymentId:
+      name: billPaymentId
+      in: path
+      required: true
+      schema:
+        type: string
+        examples:
+        - 13d946f0-c5d5-42bc-b092-97ece17923ab
+        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+        - 7110701885
+        - EILBDVJVNUAGVKRQ
+      description: Unique identifier for a bill payment.
+    accountingBillId:
+      name: billId
+      in: path
+      required: true
+      schema:
+        type: string
+        examples:
+        - 13d946f0-c5d5-42bc-b092-97ece17923ab
+        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+        - 7110701885
+        - EILBDVJVNUAGVKRQ
+      description: Unique identifier for a bill.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    accountingSupplierId:
+      name: supplierId
+      in: path
+      required: true
+      schema:
+        type: string
+        examples:
+        - 13d946f0-c5d5-42bc-b092-97ece17923ab
+        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+        - 7110701885
+        - EILBDVJVNUAGVKRQ
+      description: Unique identifier for a supplier.
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    accountingNumberOfPeriods:
+      name: numberOfPeriods
+      in: query
+      schema:
+        type: integer
+        format: int32
+        example: 12
+      description: Number of periods to include in the report.
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    accountingReportDate:
+      name: reportDate
+      in: query
+      schema:
+        type: string
+        format: date
+        example: '2022-12-31'
+      description: Date the report is generated up to.
+    attachmentId:
+      name: attachmentId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+      description: Unique identifier for an attachment.
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
   schemas:
+    AccountingTrackingCategory:
+      x-internal: true
+      title: 'Accounting: Tracking category'
+      description: "Details of a category used for tracking transactions.\n\n> Language tip\n>\n> Parameters used to track types of spend in various parts of an organization can be called  **dimensions**, **projects**, **classes**, or **locations** in different accounting software. In Codat, we refer to these as tracking categories.\n\n## Overview\n\nTracking categories are used to monitor cost centres and control budgets that sit outside the standard chart of accounts. Customers may use tracking categories to group together and track the income and costs of specific departments, projects, locations or customers.\n\nFrom their accounting system, customers can: \n\n- Create and maintain tracking categories and tracking category types.\n- View all tracking categories that are available for use.\n- View the relationships between the categories.\n- Assign invoices, bills, credit notes, or bill credit notes to one or more categories.\n- View the categories that a transaction belongs to.\n- View all transactions in a tracking category.\n\n### Tracking categories per platform\n\nReview the platform-specific tracking categories that Codat supports, and the level they are assigned to in the source platform. \n\n<table>\n<thead>\n  <tr>\n    <th>Platform</th>\n    <th>Tracking category</th>\n    <th>Tracking level</th>\n  </tr>\n</thead>\n<tbody>\n  <tr>\n    <td><b>Dynamics 365</b></td>\n    <td>Dimensions</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td><b>Freshbooks</b></td>\n    <td>Expense&nbsp;categories</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td><b>MYOB</b></td>\n    <td>Categories</td>\n    <td>Transaction</td>\n  </tr>\n  <tr>\n    <td rowspan=4><b>Netsuite</b></td>\n    <td>Classes</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td>Locations</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td>Departments</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td>Custom&nbsp;segments</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td rowspan=2><b>QuickBooks Desktop</b></td>\n    <td>Classes</td>\n    <td>Line item or transaction level</td>\n  </tr>\n  <tr>\n    <td>Locations</td>\n    <td>Transaction</td>\n  </tr>\n  <tr>\n    <td rowspan=2><b>QuickBooks Online</b></td>\n    <td>Classes</td>\n    <td>Line item or transaction level</td>\n  </tr>\n  <tr>\n    <td>Locations</td>\n    <td>Transaction</td>\n  </tr>\n  <tr>\n    <td rowspan=3><b>Sage 200</b></td>\n    <td>Cost&nbsp;centers</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n      <td>Departments</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td>Analysis&nbsp;codes</td>\n    <td>Transaction</td>\n  </tr>\n  <tr>\n    <td rowspan=3><b>Sage 50</b></td>\n    <td>Departments</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n     <td>Costcodes</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td>Projects</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td><b>Sage Intacct</b></td>\n    <td>Dimensions</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td><b>Xero</b></td>\n    <td>Tracking&nbsp;categories</td>\n    <td>Line item</td>\n  </tr>\n</tbody>\n</table>\n\n> **Example use case**\n>\n> Monitor the budget for your annual conference using a tracking category called 'AnnualConference2020' with the **type** set to **Costing**.\n\nIf a tracking category has a parent category, the ID of that parent category is displayed. There is also a `hasChildren` field that shows whether there are child subcategories nested beneath. "
+      type: object
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The identifier for the item, unique per tracking category.
+            nullable: true
+          name:
+            type: string
+            description: The name of the tracking category.
+            nullable: true
+          status:
+            $ref: '#/components/schemas/AccountingTrackingCategory/definitions/status'
+          parentId:
+            type: string
+            description: The identifier for this item's immediate parent.
+            nullable: true
+          hasChildren:
+            type: boolean
+            description: Boolean value indicating whether this category has SubCategories.
+          metadata:
+            $ref: '#/components/schemas/Metadata'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      definitions:
+        trackingCategoryRef:
+          required:
+          - id
+          type: object
+          description: References a category against which the item is tracked.
+          deprecated: true
+          properties:
+            id:
+              minLength: 1
+              type: string
+              description: Unique identifier to the tracking category.
+            name:
+              type: string
+              nullable: true
+              description: Name of tracking category.
+        status:
+          title: Tracking category status
+          type: string
+          description: Current state of the tracking category.
+          enum:
+          - Unknown
+          - Active
+          - Archived
+      examples:
+      - id: string
+        name: string
+        status: Unknown
+        parentId: string
+        hasChildren: true
+        modifiedDate: '2022-10-23T00:00:00Z'
+        sourceModifiedDate: '2022-10-23T00:00:00Z'
+    SourceAccount:
+      title: Source account (v1)
+      type: object
+      description: The target bank account in a supported accounting software for ingestion into a bank feed.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Unique ID for the bank account.
+        accountName:
+          type: string
+          nullable: true
+          description: The bank account name.
+        accountType:
+          type: string
+          nullable: true
+          description: The type of bank account e.g. Credit.
+        accountNumber:
+          type: string
+          nullable: true
+          description: The account number.
+        sortCode:
+          type: string
+          nullable: true
+          description: The sort code.
+        currency:
+          title: Currency
+          x-internal: true
+          type: string
+          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
+          format: ISO4217
+          examples:
+          - GBP
+          - USD
+          - EUR
+        balance:
+          type: number
+          format: decimal
+          nullable: true
+          description: The latest balance for the bank account.
+        modifiedDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: The last date the bank account was modified.
+        status:
+          type: string
+          nullable: true
+          description: Status of the source account.
+          enum:
+          - pending
+          - connected
+          - connecting
+          - disconnected
+          - unknown
+        feedStartDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+      required:
+      - id
+      definitions:
+        sourceAccountPrototype:
+          title: Source account (v1)
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/SourceAccount/properties/id'
+            accountName:
+              $ref: '#/components/schemas/SourceAccount/properties/accountName'
+            accountType:
+              $ref: '#/components/schemas/SourceAccount/properties/accountType'
+            accountNumber:
+              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
+            sortCode:
+              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            balance:
+              $ref: '#/components/schemas/SourceAccount/properties/balance'
+            modifiedDate:
+              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
+          required:
+          - id
+        sourceAccounts:
+          title: Source accounts
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAccount'
+      examples:
+      - id: acc-002
+        accountName: account-081
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345670'
+        currency: GBP
+        balance: 99.99
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+      - id: acc-003
+        accountName: account-095
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345671'
+        currency: USD
+        balance: 0
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
     AccountingBillPayment:
       title: 'Accounting: Bill payment'
       description: "> **Bill payments or payments?**  \n> \n> We distinguish between transactions where the company received money vs. paid money. If the transaction represents a company spending money (accounts payable) we call this a Bill payment.\n>\n> See [payments](https://docs.codat.io/lending-api#/schemas/Payment) for the accounts receivable equivalent of Bill payments, which covers [invoices](https://docs.codat.io/lending-api#/schemas/Invoice) and [credit notes](https://docs.codat.io/lending-api#/schemas/CreditNote).\n\n## Overview\n\nBill payments include all accounts payable transaction data ([bills](https://docs.codat.io/lending-api#/schemas/Bill) and [credit notes against bills](https://docs.codat.io/lending-api#/schemas/BillCreditNote)).\n\nA bill payment in Codat usually represents an allocation of money within any customer accounts payable account. This includes, but is not strictly limited to:\n\n- A payment made against a bill — for example, a credit card payment, cheque payment, or cash payment.\n- An allocation of a supplier's credit note to a bill or perhaps a refund.\n- A bill payment made directly to an accounts payable account. This could be an overpayment or a prepayment, or a refund of a payment made directly to an accounts payable account.\n\nDepending on the bill payments which are allowed by the underlying accounting software, some of these types may be combined. Please see the example data section for samples of what these cases look like.\n\nIn Codat, a bill payment contains details of:\n\n- When the bill payment was recorded in the accounting system.\n- How much it is for and in the currency.\n- Who the payment has been paid to, the _supplier_.\n- The types of bill payments, the _line items_.  \n\nSome accounting software give a separate name to purchases where the payment is made immediately, such as something bought with a credit card or online payment. One example of this would be QuickBooks Online's _expenses_. You can find these types of transactions in our [Direct costs](https://docs.codat.io/lending-api#/schemas/DirectCost) data model.\n\nBill payments is a child data type of [account transactions](https://docs.codat.io/lending-api#/schemas/AccountTransaction).\n\n---\n\n## Bill payment types\n\n### Payment of a bill\n\nA payment paying a single bill should have the following properties:\n\n- A `totalAmount` indicating the amount of the bill that was paid. This is always positive.\n- A `lines` array containing one element with the following properties:\n  - An `amount` equal to the `totalAmount` above.\n  - A `links` array containing one element with the following properties:\n    - A `type` indicating the type of link, in this case a `Bill`.\n    - An `id` containing the ID of the bill that was paid.\n    - An amount of `-totalAmount` (negative `totalAmount`), indicating that the entirety of the paid amount is allocated to the bill.\n\n### Payment of multiple bills\n\nIt is possible for one payment to pay multiple bills. This can be represented using two possible formats, depending on how the supplier keeps their books:\n\n1. The payment has multiple entries in its **lines** array, one for each bill that is paid. Each line will follow the above example for paying a bill, and the rules detailed in the data model.\n2. The payment has a line with multiple links to each bill. This occurs when the proportion of the original payment allocated to each bill is not available.\n\nEach line is the same as those described above, with the **amount** indicating how much of the payment is allocated to the bill. The **amount** on the lines sum to the **totalAmount** on the payment.\n\n> Pushing batch payments to Xero\n> \n> When pushing a single bill payment to Xero to pay multiple bills, only the first format is supported—multiple entries in the payment **lines** array.\n\n### Payments and refunds on account\n\nA payment on account, that is a payment that doesn’t pay a specific bill, has one entry in its lines array.\n\nThe line has the following properties:\n\n- A **totalAmount** indicating the amount paid by a supplier or refunded to them by a company. A payment to the supplier is always negative. A refund is always positive.\n- A **links** array containing one element with the following properties:\n  - A **type** indicating the type of link. For a payment this is `PaymentOnAccount`. For a refund this is `Refund`.\n  - The **id** containing the ID of the supplier.\n  - An amount for the link is `0` **totalAmount** or the amount of the payment or refund.\n\nIt is possible to have a payment that is part on account and part allocated to a bill. Each line should follow the examples above.\n\n### Using a credit note to pay a bill\n\nThe payment of a bill using a credit note has one entry in its `lines` array. This **line** has the following properties:\n\n- An **amount** indicating the amount of money moved, which in this case is `0`, as the credit note and bill allocation must balance each other.\n- A **links** array containing two elements:\n  - The first link has:\n    - A **type** indicating the type of link, in this case a `Bill`.\n    - An **id** containing the ID of the bill that was paid.\n  - The second link has:\n    - A **type** indicating the type of link, in this case a `CreditNote`.\n    - An **id** containing the ID of the credit note used by this payment.\n\nThe **amount** field on the **line** equals the **totalAmount** on the payment.\n\n### Refunding a credit note\n\nA bill payment refunding a credit note has one entry in its **lines** array. This line has the following properties:\n\n- An **amount** indicating the amount of the credit note that was refunded. This is always negative, indicating that it is a refund.\n- A **links** array containing one element with the following properties:\n  - A **type** indicating the type of `link`, in this case a `CreditNote`.\n  - An **id** containing the ID of the credit note that was refunded.\n\nThe **totalAmount** field on the payment equals the line's **amount** field. These are both negative, as this is money leaving accounts payable.\n\n### Refunding a payment\n\nIf a payment is refunded, for example, when a company overpaid a bill and the overpayment is returned, there are two payment records: \n\n- One for the incoming overpayment.\n- Another for the outgoing refund.\n\nThe payment issuing the refund is identified by the fact that the **totalAmount** is negative. This payment has one entry in its lines array that have the following properties:\n\n- An **amount** indicating the amount that was refunded. This is always negative.\n- A **links** array containing one element with the following properties:\n  - A **type** indicating the type of a the link, in this case a `BillPayment`.\n  - An **id** containing the ID of the payment that was refunded.\n\nThe **amount** field on the line equals the **totalAmount** on the payment and is negative as this is money leaving accounts payable.\n\nThe payment that was refunded can be identified as it has a line where the `amount` on its `line` is positive and the type of the link is `Refund`. This payment may have several entries in its **lines** array if it was partly used to pay an bill. For example, a £1,050 payment paying a £1,000 bill with a refund of £50 has two lines: \n\n- One for £1,000 linked to the bill that was paid\n- Another for £50 linked to the payment that refunded the over payment. This link is of type `Refund` but the ID corresponds to a bill payment.\n\nThe line linked to the bill payment has the following properties:\n\n- An **amount** indicating the amount that was refunded. This is positive as its money that was added to accounts payable, but is balanced out by the negative amount of the refund.\n- A **links** array containing one element with the following properties:\n  - A **type** indicating the type of the link, in this case a `Refund`.\n  - An **id** containing the ID of the payment that refunded this line.\n\n> Linked payments\n> \n> Not all accounting software support linked payments in this way. In these platforms you may see a payment on account and a refund on account.\n\n## Foreign currencies\n\nThere are two types of currency rate that are detailed in the bill payments data type: \n\nPayment currency rate: \n\n- Base currency of the accounts payable account.\n- Foreign currency of the bill payment.\n\nPayment line link currency rate: \n\n- Base currency of the item that the link represents.\n- Foreign currency of the payment.\n\nThese two rates allow the calculation of currency loss or gain for any of the transactions affected by the payment lines. The second rate is used when a bill payment is applied to an item in a currency that does not match either:\n\n- The base currency for the accounts payable account. \n- The currency of the item.\n"
@@ -12579,173 +13059,6 @@ components:
           - type: CreditNote
             id: z
             amount: 750
-    AgedCurrencyOutstanding:
-      type: object
-      title: 'Accounting: Aged currency outstanding'
-      properties:
-        currency:
-          $ref: '#/components/schemas/SourceAccount/properties/currency'
-        agedOutstandingAmounts:
-          type: array
-          description: Array of outstanding amounts by period.
-          items:
-            $ref: '#/components/schemas/AgedCurrencyOutstanding/definitions/agedOutstandingAmount'
-      definitions:
-        agedOutstandingAmount:
-          type: object
-          title: Aged outstanding amount
-          properties:
-            fromDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Start date of period.
-            toDate:
-              $ref: '#/components/schemas/DateTime'
-              description: End date of period.
-            amount:
-              type: number
-              format: decimal
-              description: The amount outstanding.
-            details:
-              type: array
-              description: Array of details.
-              items:
-                $ref: '#/components/schemas/AgedCurrencyOutstanding/definitions/agedOutstandingAmountDetail'
-        agedOutstandingAmountDetail:
-          type: object
-          title: Amounts outstanding by data type
-          properties:
-            name:
-              type: string
-              description: Name of data type with outstanding amount for given period.
-            amount:
-              type: number
-              format: decimal
-              description: The amount outstanding.
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    AccountingPaymentAllocation:
-      title: 'Accounting: Payment allocation'
-      type: object
-      properties:
-        payment:
-          $ref: '#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment'
-        allocation:
-          type: object
-          properties:
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-              description: The currency of the transaction.
-            currencyRate:
-              $ref: '#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate'
-            allocatedOnDate:
-              $ref: '#/components/schemas/DateTime'
-              description: The date the payment was allocated.
-            totalAmount:
-              type: number
-              format: decimal
-              description: The total amount that has been allocated.
-      required:
-      - payment
-      - allocation
-      definitions:
-        paymentAllocationPayment:
-          type: object
-          properties:
-            id:
-              type: string
-              description: Identifier of the allocated payment.
-            note:
-              type: string
-              nullable: true
-              description: Notes attached to the allocated payment.
-            reference:
-              type: string
-              nullable: true
-              description: Reference to the allocated payment.
-            accountRef:
-              $ref: '#/components/schemas/AccountingAccount/definitions/accountRef'
-              description: The account that the allocated payment is made from or to.
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-              description: Currency the payment has been made in.
-            currencyRate:
-              title: Currency rate
-              type: number
-              format: decimal
-              nullable: true
-              description: "Rate to convert the total amount of the payment into the base currency for the company at the time of the payment.\n\nCurrency rates in Codat are implemented as the multiple of foreign currency units to each base currency unit.  \n\nIt is not possible to perform the currency conversion with two or more non-base currencies participating in the transaction. For example, if a company's base currency is USD, and it has a bill issued in EUR, then the bill payment must happen in USD or EUR.\n\nWhere the currency rate is provided by the underlying accounting software, it will be available from Codat with the same precision (up to a maximum of 9 decimal places). \n\nFor accounting software which do not provide an explicit currency rate, it is calculated as `baseCurrency / foreignCurrency` and will be returned to 9 decimal places.\n\n## Examples with base currency of GBP\n\n| Foreign Currency | Foreign Amount | Currency Rate | Base Currency Amount (GBP) |\n| :--------------- | :------------- | :------------ | :------------------------- |\n| **USD**          | $20            | 0.781         | £15.62                     |\n| **EUR**          | €20            | 0.885         | £17.70                     |\n| **RUB**          | ₽20            | 0.011         | £0.22                      |\n\n## Examples with base currency of USD\n\n| Foreign Currency | Foreign Amount | Currency Rate | Base Currency Amount (USD) |\n| :--------------- | :------------- | :------------ | :------------------------- |\n| **GBP**          | £20            | 1.277         | $25.54                     |\n| **EUR**          | €20            | 1.134         | $22.68                     |\n| **RUB**          | ₽20            | 0.015         | $0.30                      |\n\n\n### Integration-specific details\n\n| Integration       | Scenario                                        | System behavior                                                                                                                                                      |\n|-------------------|-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| QuickBooks Online | Transaction currency differs from base currency | If currency rate value is left `null`, a rate of 1 will be used by QBO by default. To override this, specify a currencyRate in the request body.  |"
-            paidOnDate:
-              $ref: '#/components/schemas/DateTime'
-              description: The date the payment was paid.
-            totalAmount:
-              type: number
-              format: decimal
-              description: Total amount that was paid.
-    AccountingAgedCreditorReport:
-      title: 'Accounting: Aged creditors report'
-      description: "The Aged Creditors report shows the total balance owed by a business to its suppliers over time.\n\nYou can generate it for a company based on recently synced data from your customers' accounting software. The report is available in the **Reports** tab in the Codat portal.\n\nTotal assets or liabilities are grouped into 30-day periods for each supplier, up to the current date. You can adjust the report date, period length, and number of periods to show on each report. The data can be grouped by customer or currency.\n\n> It is not guaranteed that write-offs are included in the Aged Creditors report.\n\n## Underlying data\n\nThe Aged Creditors report is generated from a set of required data types: [Suppliers](https://docs.codat.io/lending-api#/schemas/Supplier), [Bills](https://docs.codat.io/lending-api#/schemas/Bill), [Bill credit notes](https://docs.codat.io/lending-api#/schemas/BillCreditNote), and [Bill payments](https://docs.codat.io/lending-api#/schemas/BillPayment).\n\nTo generate the report, the underlying data types must have been synced within 24 hours of each other. Otherwise an error is displayed when you try to run the report. Sync the required data types by clicking the link in the error, and then run the report again.\n\n> The Aged Creditor report runs based on the **issue dates** of the underlying data types rather than the due date.\n\n## Accessing the Aged Creditors report in Portal\n\nApart from returning the report via the API as JSON and query, you can also return the Aged Creditors report in the Codat portal.\n\n1. In the navigation bar, click **Companies**.\n2. Click the name of the company you want to generate the report for. The company's data page is displayed.\n3. Click the **Accounting** tab then click **Reports**.\n4. Select **Aged Creditors**.\n5. _(Optional)_ Edit the default reporting parameters.\n   a. You can change the report date in the **Date** box. By default, the report includes transactions that occurred up to, but not including, today's date. To include transactions for today, enter tomorrow's date. \n   b. In the **Period Length Days** box, select the default period length for each column (the default is 30 days).\n   b. In the **Number of Periods** box, enter the number of periods to show as columns in the report (the default is 4 periods).\n6. To run the report, click **Load aged creditors**.\n7. The report is generated and displayed at the bottom of the page.\n\nThe report will be grouped per supplier and depending on the periods requested. The details indicates whether the amounts owed come from outstanding bills or bill credit notes."
-      type: object
-      properties:
-        generated:
-          $ref: '#/components/schemas/DateTime'
-          description: Date and time the report was generated.
-        reportDate:
-          $ref: '#/components/schemas/DateTime'
-          description: Date the report is generated up to.
-        data:
-          type: array
-          description: Array of aged creditor.
-          items:
-            $ref: '#/components/schemas/AccountingAgedCreditorReport/definitions/agedCreditor'
-      examples:
-      - generated: '2022-10-23T00:00:00Z'
-        reportDate: '2022-10-23T00:00:00Z'
-        data:
-        - customerId: f594cefb-7750-4c3a-bab2-b5322026dee9
-          customerName: John Doe
-          agedCurrencyOutstanding:
-          - currency: GBP
-            agedOutstandingAmounts:
-            - fromDate: '2022-10-01T00:00:00Z'
-              toDate: '2022-10-31T00:00:00Z'
-              amount: 1547.5
-              details:
-              - name: Bills
-                amount: 1547.5
-      definitions:
-        agedCreditor:
-          title: Aged creditor
-          type: object
-          properties:
-            supplierId:
-              type: string
-              description: Supplier ID of the aged creditor.
-              example: f594cefb-7750-4c3a-bab2-b5322026dee9
-            supplierName:
-              type: string
-              description: Supplier name of the aged creditor.
-              example: John Doe
-            agedCurrencyOutstanding:
-              type: array
-              description: Array of aged creditors by currency.
-              items:
-                $ref: '#/components/schemas/AgedCurrencyOutstanding'
-    AccountingBillPayments:
-      title: 'Accounting: Bill payments'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/AccountingBillPayment'
-      - $ref: '#/components/schemas/PagingInfo'
     SupplementalData:
       title: Supplemental data
       type: object
@@ -12758,6 +13071,254 @@ components:
             type: object
             additionalProperties: true
           nullable: true
+    AccountingBill:
+      title: 'Accounting: Bill'
+      description: '> **Invoices or bills?**
+
+        >
+
+        > We distinguish between invoices where the company *owes money* vs. *is owed money*. If the company has received an invoice, and owes money to someone else (accounts payable) we call this a Bill.
+
+        >
+
+        > See [Invoices](https://docs.codat.io/lending-api#/schemas/Invoice) for the accounts receivable equivalent of bills.
+
+
+        ## Overview
+
+
+        In Codat, a bill contains details of:
+
+        * When the bill was recorded in the accounting system.
+
+        * How much the bill is for and the currency of the amount.
+
+        * Who the bill was received from — the *supplier*.
+
+        * What the bill is for — the *line items*.
+
+
+        Some accounting software give a separate name to purchases where the payment is made immediately, such as something bought with a credit card or online payment. One example of this would be QuickBooks Online''s *expenses*.
+
+
+        You can find these types of transactions in our [Direct costs](https://docs.codat.io/lending-api#/schemas/DirectCost) data model.'
+      type: object
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            description: Identifier for the bill, unique for the company in the accounting software.
+          reference:
+            type: string
+            nullable: true
+            description: User-friendly reference for the bill.
+          supplierRef:
+            $ref: '#/components/schemas/AccountingSupplier/definitions/supplierRef'
+          purchaseOrderRefs:
+            type: array
+            nullable: true
+            items:
+              title: Purchase order Reference
+              type: object
+              additionalProperties: false
+              properties:
+                id:
+                  type: string
+                  description: Identifier for the purchase order, unique for the company in the accounting software.
+                purchaseOrderNumber:
+                  type: string
+                  nullable: true
+                  description: Friendly reference for the purchase order, commonly generated by the accounting software.
+          issueDate:
+            allOf:
+            - description: Date of the bill as recorded in the accounting software.
+            - $ref: '#/components/schemas/DateTime'
+          dueDate:
+            allOf:
+            - description: Date the supplier is due to be paid.
+            - $ref: '#/components/schemas/DateTime'
+          currency:
+            $ref: '#/components/schemas/SourceAccount/properties/currency'
+          currencyRate:
+            $ref: '#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate'
+          lineItems:
+            type: array
+            nullable: true
+            description: Array of Bill line items.
+            items:
+              $ref: '#/components/schemas/AccountingBill/definitions/billLineItem'
+          withholdingTax:
+            type: array
+            nullable: true
+            items:
+              type: object
+              properties:
+                name:
+                  minLength: 1
+                  type: string
+                  description: Name assigned to withheld tax.
+                amount:
+                  type: number
+                  format: decimal
+                  description: Amount of tax withheld.
+              required:
+              - amount
+              - name
+          status:
+            $ref: '#/components/schemas/AccountingBill/definitions/billStatus'
+          subTotal:
+            type: number
+            format: decimal
+            description: Total amount of the bill, excluding any taxes.
+          taxAmount:
+            type: number
+            format: decimal
+            description: Amount of tax on the bill.
+          totalAmount:
+            type: number
+            format: decimal
+            description: Amount of the bill, including tax.
+          amountDue:
+            type: number
+            format: decimal
+            nullable: true
+            description: Amount outstanding on the bill.
+          note:
+            type: string
+            nullable: true
+            description: Any private, company notes about the bill, such as payment information.
+          paymentAllocations:
+            type: array
+            nullable: true
+            description: An array of payment allocations.
+            items:
+              $ref: '#/components/schemas/AccountingPaymentAllocation'
+          metadata:
+            $ref: '#/components/schemas/Metadata'
+          supplementalData:
+            $ref: '#/components/schemas/SupplementalData'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      required:
+      - issueDate
+      - status
+      - subTotal
+      - taxAmount
+      - totalAmount
+      definitions:
+        billStatus:
+          description: Current state of the bill.
+          type: string
+          enum:
+          - Unknown
+          - Open
+          - PartiallyPaid
+          - Paid
+          - Void
+          - Draft
+        billLineItem:
+          title: Bill line item
+          type: object
+          properties:
+            lineNumber:
+              type: string
+              nullable: true
+              description: The bill line's number.
+            description:
+              type: string
+              nullable: true
+              description: Friendly name of the goods or services received.
+            unitAmount:
+              type: number
+              format: decimal
+              description: Price of each unit of goods or services.
+            quantity:
+              type: number
+              format: decimal
+              description: Number of units of goods or services received.
+            unitOfMeasurement:
+              type: string
+              nullable: true
+              description: The measurement which defines a unit for this item (e.g. 'kilogram', 'litre').
+            discountAmount:
+              type: number
+              format: decimal
+              nullable: true
+              description: 'Numerical value of any discounts applied.
+
+
+                Do not use to apply discounts in Oracle NetSuite—see Oracle NetSuite integration reference.'
+            subTotal:
+              type: number
+              format: decimal
+              nullable: true
+              description: Amount of the line, inclusive of discounts but exclusive of tax.
+            taxAmount:
+              type: number
+              format: decimal
+              nullable: true
+              description: Amount of tax for the line.
+            totalAmount:
+              type: number
+              format: decimal
+              nullable: true
+              description: Total amount of the line, including tax.
+            discountPercentage:
+              type: number
+              format: decimal
+              nullable: true
+              description: Percentage rate of any discount applied to the bill.
+            accountRef:
+              $ref: '#/components/schemas/AccountingAccount/definitions/accountRef'
+              description: Reference to the account to which the line item is linked.
+              nullable: true
+            taxRateRef:
+              $ref: '#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/taxRateRef'
+              description: Reference to the tax rate to which the line item is linked.
+            itemRef:
+              $ref: '#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/itemRef'
+              description: Reference to the product, service type, or inventory item to which the line item is linked.
+            purchaseOrderLineRef:
+              allOf:
+              - type: object
+                x-internal: true
+                title: Record line reference
+                description: "Links the current record line to the underlying record line that created it. \n\nFor example, if a bill is generated from a purchase order, this property allows you to connect the bill line item to the purchase order line item in our data model. "
+                properties:
+                  id:
+                    type: string
+                    description: '''id'' of the underlying record.'
+                  dataType:
+                    type: string
+                    description: Allowed name of the 'dataType'.
+                    enum:
+                    - purchaseOrders
+                    - bills
+                  lineNumber:
+                    type: string
+                    description: Line number of the underlying record.
+              - description: Reference to the purchase order line this line was generated from.
+            trackingCategoryRefs:
+              type: array
+              nullable: true
+              description: Collection of categories against which this item is tracked.
+              items:
+                $ref: '#/components/schemas/AccountingTrackingCategory/definitions/trackingCategoryRef'
+            tracking:
+              $ref: '#/components/schemas/AccountsPayableTracking'
+            isDirectCost:
+              type: boolean
+              description: The bill is a direct cost if `True`.
+    Attachments:
+      x-internal: true
+      type: object
+      properties:
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountingAttachment'
+          nullable: true
+      title: Attachments
     AccountingBillCreditNote:
       title: 'Accounting: Bill credit note'
       description: "> **Bill credit notes or credit notes?**\n> \n> In Codat, bill credit notes represent accounts payable only. For accounts receivable, see [Credit notes](https://docs.codat.io/lending-api#/schemas/CreditNote).\n\n## Overview\n\nA bill credit note is issued by a supplier for the purpose of recording credit. For example, if a supplier was unable to fulfil an order that was placed by a business, or delivered damaged goods, they would issue a bill credit note. A bill credit note reduces the amount a business owes to the supplier. It can be refunded to the business or used to pay off future bills.\n\nIn the Codat API, a bill credit note is an accounts payable record issued by a [supplier](https://docs.codat.io/lending-api#/schemas/Supplier). \n\nA bill credit note includes details of:\n* The original and remaining credit.\n* Any allocations of the credit against other records, such as [bills](https://docs.codat.io/lending-api#/schemas/Bill).\n* The supplier that issued the bill credit note."
@@ -13059,81 +13620,6 @@ components:
           id: '8462'
           dataType: bills
           line: 1
-    PagingInfo:
-      type: object
-      title: Pagination information
-      x-internal: true
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number.
-        pageSize:
-          type: integer
-          description: Number of items to return in results array.
-          maximum: 2000
-        totalResults:
-          type: integer
-          description: Total number of items.
-        _links:
-          $ref: '#/components/schemas/PagingInfo/definitions/links'
-      definitions:
-        links:
-          title: Hal Links
-          type: object
-          required:
-          - self
-          - current
-          properties:
-            self:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            current:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            next:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            previous:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-          examples:
-          - self:
-              href: /companies
-            current:
-              href: /companies?page=1&pageSize=10
-        halRef:
-          title: Hypertext reference
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri-reference
-              description: Uri hypertext reference.
-      required:
-      - pageNumber
-      - pageSize
-      - totalResults
-      - _links
-      examples:
-      - pageNumber: 1
-        pageSize: 10
-        totalResults: 1
-        _links:
-          self:
-            href: /companies/{id}/data/{dataType}
-          current:
-            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    ProjectRef:
-      title: 'Accounting: Project reference'
-      x-internal: true
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          minLength: 1
-          type: string
-          description: Unique identifier to the project reference.
-        name:
-          type: string
-          nullable: true
-          description: The project's name.
     AccountsPayableTracking:
       title: Tracking
       x-internal: true
@@ -13165,382 +13651,124 @@ components:
           - NotApplicable
           - Customer
           - Project
-    Metadata:
-      title: Metadata
-      type: object
+    AccountingBills:
+      title: 'Accounting: Bills'
       x-internal: true
-      properties:
-        isDeleted:
-          type: boolean
-          description: Indicates whether the record has been deleted in the third-party system this record originated from.
-          nullable: true
-    AccountingSupplier:
-      title: 'Accounting: Supplier'
-      description: '## Overview
-
-
-        From the **Suppliers** endpoints, you can retrieve a list of [all the suppliers for a company](https://docs.codat.io/lending-api#/operations/list-suppliers). Suppliers'' data links to accounts payable [bills](https://docs.codat.io/lending-api#/schemas/Bill).'
-      type: object
       allOf:
       - type: object
         properties:
-          id:
-            type: string
-            description: Identifier for the supplier, unique to the company in the accounting software.
-          supplierName:
-            type: string
-            nullable: true
-            description: Name of the supplier as recorded in the accounting system, typically the company name.
-          contactName:
-            type: string
-            nullable: true
-            description: Name of the main contact for the supplier.
-          emailAddress:
-            type: string
-            nullable: true
-            description: Email address that the supplier may be contacted on.
-          phone:
-            type: string
-            nullable: true
-            description: Phone number that the supplier may be contacted on.
-            examples:
-            - +44 25691 154789
-            - (877) 492-8687
-            - 01224 658 999
-          addresses:
+          results:
             type: array
-            nullable: true
-            description: An array of Addresses.
             items:
-              $ref: '#/components/schemas/AccountingAddress'
-          registrationNumber:
-            type: string
-            nullable: true
-            description: Company number of the supplier. In the UK, this is typically the company registration number issued by Companies House.
-          taxNumber:
-            type: string
-            nullable: true
-            description: Supplier's company tax number.
-          status:
-            $ref: '#/components/schemas/AccountingSupplier/definitions/supplierStatus'
-          defaultCurrency:
-            type: string
-            nullable: true
-            description: Default currency the supplier's transactional data is recorded in.
-          metadata:
-            $ref: '#/components/schemas/Metadata'
-          supplementalData:
-            $ref: '#/components/schemas/SupplementalData'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      required:
-      - status
-      definitions:
-        supplierRef:
-          title: Supplier reference
-          description: Reference to the supplier the record relates to.
-          type: object
-          properties:
-            id:
-              minLength: 1
-              type: string
-              description: The supplier's unique ID
-            supplierName:
-              type: string
-              nullable: true
-              description: The supplier's name
-          required:
-          - id
-        supplierStatus:
-          description: Status of the supplier.
-          type: string
-          enum:
-          - Unknown
-          - Active
-          - Archived
-      examples:
-      - id: C520FFD4-F6F6-4FC2-A6D2-5D7088B2B14F
-        supplierName: Kelly's Industrial Supplies
-        contactName: Kelly's Industrial Supplies
-        emailAddress: sales@kellysupplies.com
-        phone: 07999 999999
-        addresses:
-        - type: Billing
-          line1: Unit 51
-          line2: Bakersfield Industrial Estate
-          city: Bakersfield
-          region: California
-          country: USA
-          postalcode: '93308'
-        registrationNumber: string
-        taxNumber: string
-        status: Unknown
-        defaultCurrency: string
-        metadata:
-          isDeleted: true
-        supplementalData:
-          content:
-            property1:
-              property1: null
-              property2: null
-            property2:
-              property1: null
-              property2: null
-        modifiedDate: '2022-10-23T00:00:00Z'
-        sourceModifiedDate: '2022-10-23T00:00:00Z'
-    PaymentMethodRef:
+              $ref: '#/components/schemas/AccountingBill'
+      - $ref: '#/components/schemas/PagingInfo'
+    AccountingPaymentAllocation:
+      title: 'Accounting: Payment allocation'
       type: object
-      title: Payment method reference
-      description: The payment method the record is linked to in the accounting or commerce software.
       properties:
-        id:
-          description: The unique identifier of the location being referenced.
-          type: string
-        name:
-          description: Name of the location being referenced.
-          type: string
-      required:
-      - id
-      example:
-        id: EILBDVJVNUAGVKRQ
-        name: AliPay
-    AccountingBill:
-      title: 'Accounting: Bill'
-      description: '> **Invoices or bills?**
-
-        >
-
-        > We distinguish between invoices where the company *owes money* vs. *is owed money*. If the company has received an invoice, and owes money to someone else (accounts payable) we call this a Bill.
-
-        >
-
-        > See [Invoices](https://docs.codat.io/lending-api#/schemas/Invoice) for the accounts receivable equivalent of bills.
-
-
-        ## Overview
-
-
-        In Codat, a bill contains details of:
-
-        * When the bill was recorded in the accounting system.
-
-        * How much the bill is for and the currency of the amount.
-
-        * Who the bill was received from — the *supplier*.
-
-        * What the bill is for — the *line items*.
-
-
-        Some accounting software give a separate name to purchases where the payment is made immediately, such as something bought with a credit card or online payment. One example of this would be QuickBooks Online''s *expenses*.
-
-
-        You can find these types of transactions in our [Direct costs](https://docs.codat.io/lending-api#/schemas/DirectCost) data model.'
-      type: object
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            description: Identifier for the bill, unique for the company in the accounting software.
-          reference:
-            type: string
-            nullable: true
-            description: User-friendly reference for the bill.
-          supplierRef:
-            $ref: '#/components/schemas/AccountingSupplier/definitions/supplierRef'
-          purchaseOrderRefs:
-            type: array
-            nullable: true
-            items:
-              title: Purchase order Reference
-              type: object
-              additionalProperties: false
-              properties:
-                id:
-                  type: string
-                  description: Identifier for the purchase order, unique for the company in the accounting software.
-                purchaseOrderNumber:
-                  type: string
-                  nullable: true
-                  description: Friendly reference for the purchase order, commonly generated by the accounting software.
-          issueDate:
-            allOf:
-            - description: Date of the bill as recorded in the accounting software.
-            - $ref: '#/components/schemas/DateTime'
-          dueDate:
-            allOf:
-            - description: Date the supplier is due to be paid.
-            - $ref: '#/components/schemas/DateTime'
-          currency:
-            $ref: '#/components/schemas/SourceAccount/properties/currency'
-          currencyRate:
-            $ref: '#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate'
-          lineItems:
-            type: array
-            nullable: true
-            description: Array of Bill line items.
-            items:
-              $ref: '#/components/schemas/AccountingBill/definitions/billLineItem'
-          withholdingTax:
-            type: array
-            nullable: true
-            items:
-              type: object
-              properties:
-                name:
-                  minLength: 1
-                  type: string
-                  description: Name assigned to withheld tax.
-                amount:
-                  type: number
-                  format: decimal
-                  description: Amount of tax withheld.
-              required:
-              - amount
-              - name
-          status:
-            $ref: '#/components/schemas/AccountingBill/definitions/billStatus'
-          subTotal:
-            type: number
-            format: decimal
-            description: Total amount of the bill, excluding any taxes.
-          taxAmount:
-            type: number
-            format: decimal
-            description: Amount of tax on the bill.
-          totalAmount:
-            type: number
-            format: decimal
-            description: Amount of the bill, including tax.
-          amountDue:
-            type: number
-            format: decimal
-            nullable: true
-            description: Amount outstanding on the bill.
-          note:
-            type: string
-            nullable: true
-            description: Any private, company notes about the bill, such as payment information.
-          paymentAllocations:
-            type: array
-            nullable: true
-            description: An array of payment allocations.
-            items:
-              $ref: '#/components/schemas/AccountingPaymentAllocation'
-          metadata:
-            $ref: '#/components/schemas/Metadata'
-          supplementalData:
-            $ref: '#/components/schemas/SupplementalData'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      required:
-      - issueDate
-      - status
-      - subTotal
-      - taxAmount
-      - totalAmount
-      definitions:
-        billStatus:
-          description: Current state of the bill.
-          type: string
-          enum:
-          - Unknown
-          - Open
-          - PartiallyPaid
-          - Paid
-          - Void
-          - Draft
-        billLineItem:
-          title: Bill line item
+        payment:
+          $ref: '#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment'
+        allocation:
           type: object
           properties:
-            lineNumber:
-              type: string
-              nullable: true
-              description: The bill line's number.
-            description:
-              type: string
-              nullable: true
-              description: Friendly name of the goods or services received.
-            unitAmount:
-              type: number
-              format: decimal
-              description: Price of each unit of goods or services.
-            quantity:
-              type: number
-              format: decimal
-              description: Number of units of goods or services received.
-            unitOfMeasurement:
-              type: string
-              nullable: true
-              description: The measurement which defines a unit for this item (e.g. 'kilogram', 'litre').
-            discountAmount:
-              type: number
-              format: decimal
-              nullable: true
-              description: 'Numerical value of any discounts applied.
-
-
-                Do not use to apply discounts in Oracle NetSuite—see Oracle NetSuite integration reference.'
-            subTotal:
-              type: number
-              format: decimal
-              nullable: true
-              description: Amount of the line, inclusive of discounts but exclusive of tax.
-            taxAmount:
-              type: number
-              format: decimal
-              nullable: true
-              description: Amount of tax for the line.
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+              description: The currency of the transaction.
+            currencyRate:
+              $ref: '#/components/schemas/AccountingPaymentAllocation/definitions/paymentAllocationPayment/properties/currencyRate'
+            allocatedOnDate:
+              $ref: '#/components/schemas/DateTime'
+              description: The date the payment was allocated.
             totalAmount:
               type: number
               format: decimal
+              description: The total amount that has been allocated.
+      required:
+      - payment
+      - allocation
+      definitions:
+        paymentAllocationPayment:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Identifier of the allocated payment.
+            note:
+              type: string
               nullable: true
-              description: Total amount of the line, including tax.
-            discountPercentage:
+              description: Notes attached to the allocated payment.
+            reference:
+              type: string
+              nullable: true
+              description: Reference to the allocated payment.
+            accountRef:
+              $ref: '#/components/schemas/AccountingAccount/definitions/accountRef'
+              description: The account that the allocated payment is made from or to.
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+              description: Currency the payment has been made in.
+            currencyRate:
+              title: Currency rate
               type: number
               format: decimal
               nullable: true
-              description: Percentage rate of any discount applied to the bill.
-            accountRef:
-              $ref: '#/components/schemas/AccountingAccount/definitions/accountRef'
-              description: Reference to the account to which the line item is linked.
-              nullable: true
-            taxRateRef:
-              $ref: '#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/taxRateRef'
-              description: Reference to the tax rate to which the line item is linked.
-            itemRef:
-              $ref: '#/components/schemas/AccountingBillCreditNote/definitions/billCreditNoteLineItem/properties/itemRef'
-              description: Reference to the product, service type, or inventory item to which the line item is linked.
-            purchaseOrderLineRef:
-              allOf:
-              - type: object
-                x-internal: true
-                title: Record line reference
-                description: "Links the current record line to the underlying record line that created it. \n\nFor example, if a bill is generated from a purchase order, this property allows you to connect the bill line item to the purchase order line item in our data model. "
-                properties:
-                  id:
-                    type: string
-                    description: '''id'' of the underlying record.'
-                  dataType:
-                    type: string
-                    description: Allowed name of the 'dataType'.
-                    enum:
-                    - purchaseOrders
-                    - bills
-                  lineNumber:
-                    type: string
-                    description: Line number of the underlying record.
-              - description: Reference to the purchase order line this line was generated from.
-            trackingCategoryRefs:
+              description: "Rate to convert the total amount of the payment into the base currency for the company at the time of the payment.\n\nCurrency rates in Codat are implemented as the multiple of foreign currency units to each base currency unit.  \n\nIt is not possible to perform the currency conversion with two or more non-base currencies participating in the transaction. For example, if a company's base currency is USD, and it has a bill issued in EUR, then the bill payment must happen in USD or EUR.\n\nWhere the currency rate is provided by the underlying accounting software, it will be available from Codat with the same precision (up to a maximum of 9 decimal places). \n\nFor accounting software which do not provide an explicit currency rate, it is calculated as `baseCurrency / foreignCurrency` and will be returned to 9 decimal places.\n\n## Examples with base currency of GBP\n\n| Foreign Currency | Foreign Amount | Currency Rate | Base Currency Amount (GBP) |\n| :--------------- | :------------- | :------------ | :------------------------- |\n| **USD**          | $20            | 0.781         | £15.62                     |\n| **EUR**          | €20            | 0.885         | £17.70                     |\n| **RUB**          | ₽20            | 0.011         | £0.22                      |\n\n## Examples with base currency of USD\n\n| Foreign Currency | Foreign Amount | Currency Rate | Base Currency Amount (USD) |\n| :--------------- | :------------- | :------------ | :------------------------- |\n| **GBP**          | £20            | 1.277         | $25.54                     |\n| **EUR**          | €20            | 1.134         | $22.68                     |\n| **RUB**          | ₽20            | 0.015         | $0.30                      |\n\n\n### Integration-specific details\n\n| Integration       | Scenario                                        | System behavior                                                                                                                                                      |\n|-------------------|-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| QuickBooks Online | Transaction currency differs from base currency | If currency rate value is left `null`, a rate of 1 will be used by QBO by default. To override this, specify a currencyRate in the request body.  |"
+            paidOnDate:
+              $ref: '#/components/schemas/DateTime'
+              description: The date the payment was paid.
+            totalAmount:
+              type: number
+              format: decimal
+              description: Total amount that was paid.
+    AccountingAgedCreditorReport:
+      title: 'Accounting: Aged creditors report'
+      description: "The Aged Creditors report shows the total balance owed by a business to its suppliers over time.\n\nYou can generate it for a company based on recently synced data from your customers' accounting software. The report is available in the **Reports** tab in the Codat portal.\n\nTotal assets or liabilities are grouped into 30-day periods for each supplier, up to the current date. You can adjust the report date, period length, and number of periods to show on each report. The data can be grouped by customer or currency.\n\n> It is not guaranteed that write-offs are included in the Aged Creditors report.\n\n## Underlying data\n\nThe Aged Creditors report is generated from a set of required data types: [Suppliers](https://docs.codat.io/lending-api#/schemas/Supplier), [Bills](https://docs.codat.io/lending-api#/schemas/Bill), [Bill credit notes](https://docs.codat.io/lending-api#/schemas/BillCreditNote), and [Bill payments](https://docs.codat.io/lending-api#/schemas/BillPayment).\n\nTo generate the report, the underlying data types must have been synced within 24 hours of each other. Otherwise an error is displayed when you try to run the report. Sync the required data types by clicking the link in the error, and then run the report again.\n\n> The Aged Creditor report runs based on the **issue dates** of the underlying data types rather than the due date.\n\n## Accessing the Aged Creditors report in Portal\n\nApart from returning the report via the API as JSON and query, you can also return the Aged Creditors report in the Codat portal.\n\n1. In the navigation bar, click **Companies**.\n2. Click the name of the company you want to generate the report for. The company's data page is displayed.\n3. Click the **Accounting** tab then click **Reports**.\n4. Select **Aged Creditors**.\n5. _(Optional)_ Edit the default reporting parameters.\n   a. You can change the report date in the **Date** box. By default, the report includes transactions that occurred up to, but not including, today's date. To include transactions for today, enter tomorrow's date. \n   b. In the **Period Length Days** box, select the default period length for each column (the default is 30 days).\n   b. In the **Number of Periods** box, enter the number of periods to show as columns in the report (the default is 4 periods).\n6. To run the report, click **Load aged creditors**.\n7. The report is generated and displayed at the bottom of the page.\n\nThe report will be grouped per supplier and depending on the periods requested. The details indicates whether the amounts owed come from outstanding bills or bill credit notes."
+      type: object
+      properties:
+        generated:
+          $ref: '#/components/schemas/DateTime'
+          description: Date and time the report was generated.
+        reportDate:
+          $ref: '#/components/schemas/DateTime'
+          description: Date the report is generated up to.
+        data:
+          type: array
+          description: Array of aged creditor.
+          items:
+            $ref: '#/components/schemas/AccountingAgedCreditorReport/definitions/agedCreditor'
+      examples:
+      - generated: '2022-10-23T00:00:00Z'
+        reportDate: '2022-10-23T00:00:00Z'
+        data:
+        - customerId: f594cefb-7750-4c3a-bab2-b5322026dee9
+          customerName: John Doe
+          agedCurrencyOutstanding:
+          - currency: GBP
+            agedOutstandingAmounts:
+            - fromDate: '2022-10-01T00:00:00Z'
+              toDate: '2022-10-31T00:00:00Z'
+              amount: 1547.5
+              details:
+              - name: Bills
+                amount: 1547.5
+      definitions:
+        agedCreditor:
+          title: Aged creditor
+          type: object
+          properties:
+            supplierId:
+              type: string
+              description: Supplier ID of the aged creditor.
+              example: f594cefb-7750-4c3a-bab2-b5322026dee9
+            supplierName:
+              type: string
+              description: Supplier name of the aged creditor.
+              example: John Doe
+            agedCurrencyOutstanding:
               type: array
-              nullable: true
-              description: Collection of categories against which this item is tracked.
+              description: Array of aged creditors by currency.
               items:
-                $ref: '#/components/schemas/AccountingTrackingCategory/definitions/trackingCategoryRef'
-            tracking:
-              $ref: '#/components/schemas/AccountsPayableTracking'
-            isDirectCost:
-              type: boolean
-              description: The bill is a direct cost if `True`.
+                $ref: '#/components/schemas/AgedCurrencyOutstanding'
     ErrorMessage:
       title: Error message
       type: object
@@ -13599,138 +13827,131 @@ components:
               type: string
               nullable: true
               description: Name of validator.
-    Attachments:
+    PaymentMethodRef:
+      type: object
+      title: Payment method reference
+      description: The payment method the record is linked to in the accounting or commerce software.
+      properties:
+        id:
+          description: The unique identifier of the location being referenced.
+          type: string
+        name:
+          description: Name of the location being referenced.
+          type: string
+      required:
+      - id
+      example:
+        id: EILBDVJVNUAGVKRQ
+        name: AliPay
+    AccountingBillCreditNotes:
+      title: 'Accounting: Bill credit notes'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/AccountingBillCreditNote'
+      - $ref: '#/components/schemas/PagingInfo'
+    AgedCurrencyOutstanding:
+      type: object
+      title: 'Accounting: Aged currency outstanding'
+      properties:
+        currency:
+          $ref: '#/components/schemas/SourceAccount/properties/currency'
+        agedOutstandingAmounts:
+          type: array
+          description: Array of outstanding amounts by period.
+          items:
+            $ref: '#/components/schemas/AgedCurrencyOutstanding/definitions/agedOutstandingAmount'
+      definitions:
+        agedOutstandingAmount:
+          type: object
+          title: Aged outstanding amount
+          properties:
+            fromDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Start date of period.
+            toDate:
+              $ref: '#/components/schemas/DateTime'
+              description: End date of period.
+            amount:
+              type: number
+              format: decimal
+              description: The amount outstanding.
+            details:
+              type: array
+              description: Array of details.
+              items:
+                $ref: '#/components/schemas/AgedCurrencyOutstanding/definitions/agedOutstandingAmountDetail'
+        agedOutstandingAmountDetail:
+          type: object
+          title: Amounts outstanding by data type
+          properties:
+            name:
+              type: string
+              description: Name of data type with outstanding amount for given period.
+            amount:
+              type: number
+              format: decimal
+              description: The amount outstanding.
+    AccountingAddress:
+      title: 'Accounting: Address'
       x-internal: true
       type: object
       properties:
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountingAttachment'
+        type:
+          $ref: '#/components/schemas/AccountingAddress/definitions/accountingAddressType'
+        line1:
+          type: string
           nullable: true
-      title: Attachments
-    AccountingAccount:
-      title: 'Accounting: Account'
-      description: "\uFEFF> **Language tip:** Accounts are also referred to as **chart of accounts**, **nominal accounts**, and **general ledger**.\n\n## Overview\n\nAccounts are the categories a business uses to record accounting transactions. From the Accounts endpoints, you can retrieve a list of all accounts for a specified company.\n\nThe categories for an account include:\n* Asset\n* Expense\n* Income\n* Liability\n* Equity.\n\nThe same account may have a different category based on the integration it is used in. For example, a current account (known as checking in the US) should be categorized as `Asset.Current` for Xero, and `Asset.Bank.Checking` for QuickBooks Online.\n\nAt the same time, each integration may have its own requirements to the categories. For example, a Paypal account in Xero is of the `Asset.Bank` category and therefore requires additional properties to be provided.\n\nTo determine the list of allowed categories for a specific integration, you can:\n- Follow our [Create, update, delete data](https://docs.codat.io/using-the-api/push) guide and use the [Get create account model](https://docs.codat.io/lending-api#/operations/get-create-chartOfAccounts-model).\n- Refer to the integration's own documentation.\n\n> **Accounts with no category**\n>\n> If an account is pulled from the chart of accounts and its nominal code does not lie within the category layout for the company's accounts, then the **type** is `Unknown`. The **fullyQualifiedCategory** and **fullyQualifiedName** fields return `null`.\n>\n> This approach gives a true representation of the company's accounts whilst preventing distorting financials such as a company's profit and loss and balance sheet reports."
-      allOf:
-      - properties:
-          id:
-            type: string
-            description: Identifier for the account, unique for the company.
-            example: 1b6266d1-1e44-46c5-8eb5-a8f98e03124e
-      - $ref: '#/components/schemas/AccountingAccount/definitions/accountPrototype'
-      - properties:
-          metadata:
-            $ref: '#/components/schemas/Metadata'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+          description: Line 1 of the customer address.
+        line2:
+          type: string
+          nullable: true
+          description: Line 2 of the customer address.
+        city:
+          type: string
+          nullable: true
+          description: City of the customer address.
+        region:
+          type: string
+          nullable: true
+          description: Region of the customer address.
+        country:
+          type: string
+          nullable: true
+          description: Country of the customer address.
+        postalCode:
+          type: string
+          nullable: true
+          description: Postal code or zip code.
+      required:
+      - type
       definitions:
-        accountPrototype:
-          title: Account prototype
-          type: object
-          properties:
-            nominalCode:
-              type: string
-              nullable: true
-              description: Reference given to each nominal account for a business. It ensures money is allocated to the correct account. This code isn't a unique identifier in the Codat system.
-              example: '610'
-            name:
-              type: string
-              nullable: true
-              description: Name of the account.
-              example: Accounts Receivable
-            description:
-              type: string
-              nullable: true
-              description: Description for the account.
-              example: Invoices the business has issued but has not yet collected payment on.
-            fullyQualifiedCategory:
-              type: string
-              nullable: true
-              description: "Full category of the account. \r\n\r\nFor example, `Liability.Current` or `Income.Revenue`. To determine a list of possible categories for each integration, see our examples, follow our [Create, update, delete data](https://docs.codat.io/using-the-api/push) guide, or refer to the integration's own documentation."
-              example: Asset.Current
-            fullyQualifiedName:
-              type: string
-              nullable: true
-              description: 'Full name of the account, for example:
-
-                - `Cash On Hand`
-
-                - `Rents Held In Trust`
-
-                - `Fixed Asset`'
-              examples:
-              - Cash On Hand
-              - Fixed Asset
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-            currentBalance:
-              type: number
-              format: decimal
-              nullable: true
-              description: Current balance in the account.
-              example: 0
-            type:
-              $ref: '#/components/schemas/AccountingAccount/definitions/accountType'
-            status:
-              $ref: '#/components/schemas/AccountingAccount/definitions/accountStatus'
-            isBankAccount:
-              type: boolean
-              description: Confirms whether the account is a bank account or not.
-            validDatatypeLinks:
-              type: array
-              nullable: true
-              description: The validDatatypeLinks can be used to determine whether an account can be correctly mapped to another object; for example, accounts with a `type` of `income` might only support being used on an Invoice and Direct Income. For more information, see [Valid Data Type Links](/lending-api#/schemas/ValidDataTypeLinks).
-              items:
-                title: Valid data type links
-                description: "When querying Codat's data model, some data types return `validDatatypeLinks` metadata in the JSON response. This indicates where that object can be used as a reference—a _valid link_—when creating or updating other data.\n\nFor example, `validDatatypeLinks` might indicate the following references:\n\n- Which tax rates are valid to use on the line item of a bill.\n- Which items can be used when creating an invoice. \n\nYou can use `validDatatypeLinks` to present your SMB customers with only valid choices when selecting objects from a list, for example.\n\n## `validDatatypeLinks` example\n\nThe following example uses the `Accounting.Accounts` data type. It shows that, on the linked integration, this account is valid as the account on a payment or bill payment; and as the account referenced on the line item of a direct income or direct cost. Because there is no valid link to Invoices or Bills, using this account on those data types will result in an error.\n\n```json validDatatypeLinks for an account\n{\n            \"id\": \"bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4\",\n            \"nominalCode\": \"090\",\n            \"name\": \"Business Bank Account\",\n            #...\n            \"validDatatypeLinks\": [\n                {\n                    \"property\": \"Id\",\n                    \"links\": [\n                        \"Payment.AccountRef.Id\",\n                        \"BillPayment.AccountRef.Id\",\n                        \"DirectIncome.LineItems.AccountRef.Id\",\n                        \"DirectCost.LineItems.AccountRef.Id\"\n                    ]\n                }\n            ]\n        }\n```\n\n\n\n## Support for `validDatatypeLinks`\n\nCodat currently supports `validDatatypeLinks` for some data types on our Xero, QuickBooks Online, QuickBooks Desktop, Exact (NL), and Sage Business Cloud integrations. \n\nIf you'd like us to extend support to more data types or integrations, suggest or vote for this on our <a href=\"https://portal.productboard.com/codat/5-product-roadmap\">Product Roadmap</a>."
-                type: object
-                properties:
-                  property:
-                    type: string
-                    nullable: true
-                    description: The property from the account that can be linked.
-                  links:
-                    type: array
-                    nullable: true
-                    description: Supported `dataTypes` that the record can be linked to.
-                    items:
-                      type: string
-            supplementalData:
-              $ref: '#/components/schemas/SupplementalData'
-        accountRef:
-          title: Account reference
-          type: object
-          description: Data types that reference an account, for example bill and invoice line items, use an accountRef that includes the ID and name of the linked account.
-          properties:
-            id:
-              type: string
-              description: '''id'' from the Accounts data type.'
-            name:
-              type: string
-              description: '''name'' from the Accounts data type.'
-        accountType:
-          title: Account type
+        accountingAddressType:
+          description: The type of the address
+          type: string
           enum:
           - Unknown
-          - Asset
-          - Expense
-          - Income
-          - Liability
-          - Equity
-          type: string
-          description: Type of account
-          example: Asset
-        accountStatus:
-          title: Account status
-          enum:
-          - Unknown
-          - Active
-          - Archived
-          - Pending
-          type: string
-          description: Status of the account
-          example: Active
+          - Billing
+          - Delivery
+    ProjectRef:
+      title: 'Accounting: Project reference'
+      x-internal: true
+      required:
+      - id
       type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+          description: Unique identifier to the project reference.
+        name:
+          type: string
+          nullable: true
+          description: The project's name.
     AccountingCustomer:
       title: 'Accounting: Customer'
       description: '## Overview
@@ -13845,17 +14066,126 @@ components:
               $ref: '#/components/schemas/DateTime'
           required:
           - status
-    AccountingBillCreditNotes:
-      title: 'Accounting: Bill credit notes'
-      x-internal: true
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    AccountingSupplier:
+      title: 'Accounting: Supplier'
+      description: '## Overview
+
+
+        From the **Suppliers** endpoints, you can retrieve a list of [all the suppliers for a company](https://docs.codat.io/lending-api#/operations/list-suppliers). Suppliers'' data links to accounts payable [bills](https://docs.codat.io/lending-api#/schemas/Bill).'
+      type: object
       allOf:
       - type: object
         properties:
-          results:
+          id:
+            type: string
+            description: Identifier for the supplier, unique to the company in the accounting software.
+          supplierName:
+            type: string
+            nullable: true
+            description: Name of the supplier as recorded in the accounting system, typically the company name.
+          contactName:
+            type: string
+            nullable: true
+            description: Name of the main contact for the supplier.
+          emailAddress:
+            type: string
+            nullable: true
+            description: Email address that the supplier may be contacted on.
+          phone:
+            type: string
+            nullable: true
+            description: Phone number that the supplier may be contacted on.
+            examples:
+            - +44 25691 154789
+            - (877) 492-8687
+            - 01224 658 999
+          addresses:
             type: array
+            nullable: true
+            description: An array of Addresses.
             items:
-              $ref: '#/components/schemas/AccountingBillCreditNote'
-      - $ref: '#/components/schemas/PagingInfo'
+              $ref: '#/components/schemas/AccountingAddress'
+          registrationNumber:
+            type: string
+            nullable: true
+            description: Company number of the supplier. In the UK, this is typically the company registration number issued by Companies House.
+          taxNumber:
+            type: string
+            nullable: true
+            description: Supplier's company tax number.
+          status:
+            $ref: '#/components/schemas/AccountingSupplier/definitions/supplierStatus'
+          defaultCurrency:
+            type: string
+            nullable: true
+            description: Default currency the supplier's transactional data is recorded in.
+          metadata:
+            $ref: '#/components/schemas/Metadata'
+          supplementalData:
+            $ref: '#/components/schemas/SupplementalData'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      required:
+      - status
+      definitions:
+        supplierRef:
+          title: Supplier reference
+          description: Reference to the supplier the record relates to.
+          type: object
+          properties:
+            id:
+              minLength: 1
+              type: string
+              description: The supplier's unique ID
+            supplierName:
+              type: string
+              nullable: true
+              description: The supplier's name
+          required:
+          - id
+        supplierStatus:
+          description: Status of the supplier.
+          type: string
+          enum:
+          - Unknown
+          - Active
+          - Archived
+      examples:
+      - id: C520FFD4-F6F6-4FC2-A6D2-5D7088B2B14F
+        supplierName: Kelly's Industrial Supplies
+        contactName: Kelly's Industrial Supplies
+        emailAddress: sales@kellysupplies.com
+        phone: 07999 999999
+        addresses:
+        - type: Billing
+          line1: Unit 51
+          line2: Bakersfield Industrial Estate
+          city: Bakersfield
+          region: California
+          country: USA
+          postalcode: '93308'
+        registrationNumber: string
+        taxNumber: string
+        status: Unknown
+        defaultCurrency: string
+        metadata:
+          isDeleted: true
+        supplementalData:
+          content:
+            property1:
+              property1: null
+              property2: null
+            property2:
+              property1: null
+              property2: null
+        modifiedDate: '2022-10-23T00:00:00Z'
+        sourceModifiedDate: '2022-10-23T00:00:00Z'
     AccountingSuppliers:
       title: Suppliers
       x-internal: true
@@ -13867,8 +14197,25 @@ components:
             items:
               $ref: '#/components/schemas/AccountingSupplier'
       - $ref: '#/components/schemas/PagingInfo'
-    AccountingBills:
-      title: 'Accounting: Bills'
+    AccountingRecordRef:
+      type: object
+      x-internal: true
+      title: Record reference
+      description: "Links the current record to the underlying record or data type that created it. \n\nFor example, if a journal entry is generated based on an invoice, this property allows you to connect the journal entry to the underlying invoice in our data model. "
+      properties:
+        id:
+          type: string
+          description: '''id'' of the underlying record or data type.'
+        dataType:
+          type: string
+          description: Allowed name of the 'dataType'.
+          examples:
+          - journalEntry
+          - invoice
+          - accountTransaction
+          - transfer
+    AccountingBillPayments:
+      title: 'Accounting: Bill payments'
       x-internal: true
       allOf:
       - type: object
@@ -13876,49 +14223,68 @@ components:
           results:
             type: array
             items:
-              $ref: '#/components/schemas/AccountingBill'
+              $ref: '#/components/schemas/AccountingBillPayment'
       - $ref: '#/components/schemas/PagingInfo'
-    AccountingAddress:
-      title: 'Accounting: Address'
-      x-internal: true
+    PagingInfo:
       type: object
+      title: Pagination information
+      x-internal: true
       properties:
-        type:
-          $ref: '#/components/schemas/AccountingAddress/definitions/accountingAddressType'
-        line1:
-          type: string
-          nullable: true
-          description: Line 1 of the customer address.
-        line2:
-          type: string
-          nullable: true
-          description: Line 2 of the customer address.
-        city:
-          type: string
-          nullable: true
-          description: City of the customer address.
-        region:
-          type: string
-          nullable: true
-          description: Region of the customer address.
-        country:
-          type: string
-          nullable: true
-          description: Country of the customer address.
-        postalCode:
-          type: string
-          nullable: true
-          description: Postal code or zip code.
-      required:
-      - type
+        pageNumber:
+          type: integer
+          description: Current page number.
+        pageSize:
+          type: integer
+          description: Number of items to return in results array.
+          maximum: 2000
+        totalResults:
+          type: integer
+          description: Total number of items.
+        _links:
+          $ref: '#/components/schemas/PagingInfo/definitions/links'
       definitions:
-        accountingAddressType:
-          description: The type of the address
-          type: string
-          enum:
-          - Unknown
-          - Billing
-          - Delivery
+        links:
+          title: Hal Links
+          type: object
+          required:
+          - self
+          - current
+          properties:
+            self:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            current:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            next:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            previous:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+          examples:
+          - self:
+              href: /companies
+            current:
+              href: /companies?page=1&pageSize=10
+        halRef:
+          title: Hypertext reference
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri-reference
+              description: Uri hypertext reference.
+      required:
+      - pageNumber
+      - pageSize
+      - totalResults
+      - _links
+      examples:
+      - pageNumber: 1
+        pageSize: 10
+        totalResults: 1
+        _links:
+          self:
+            href: /companies/{id}/data/{dataType}
+          current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
     AccountingAttachment:
       title: 'Accounting: Attachment'
       description: "The Codat API supports pulling and pushing of file attachments for invoices, bills, direct costs, and direct incomes.\n\n> **Retrieving attachments**\n> \n> If a company is authorized, you can query the Codat API to read, download, and upload attachments without requiring a fresh sync of data.\n\nUnlike other data types, Codat doesn't support [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings) for attachments.\n\nNote that different integrations have different requirements to file size and extension of attachments.\n\n| Integration       | File size | File extension                                                                                                                                               |\n|-------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Xero              | 4 MB      | 7Z, BMP, CSV, DOC, DOCX, EML, GIF, JPEG, JPG, KEYNOTE, MSG, NUMBERS, ODF,   ODS, ODT, PAGES, PDF, PNG, PPT, PPTX, RAR, RTF, TIF, TIFF, TXT, XLS, XLSX,   ZIP |\n| QuickBooks Online | 100 MB    | AI, CSV, DOC, DOCX, EPS, GIF, JPEG, JPG, ODS, PAGES, PDF, PNG, RTF, TIF,   TXT, XLS, XLSX, XML                                                               |\n| NetSuite          | 100 MB    | BMP, CSV, XLS, XLSX, JSON, PDF, PJPG, PJPEG, PNG, TXT, SVG, TIF, TIFF,   DOC, DOCX, ZIP                                                                      |\n| Dynamics 365 Business Central          | 350 MB    | Dynamics do not explicitly outline which file types are supported but they do state <a className=\"external\" href=\"https://learn.microsoft.com/en-gb/dynamics365/business-central/ui-how-add-link-to-record#to-attach-a-file-to-a-purchase-invoice\" target=\"_blank\">here</a> that \"You can attach any type of file, such as text, image, or video files\".                                                                   |\n"
@@ -13963,189 +14329,6 @@ components:
               items:
                 $ref: '#/components/schemas/AccountingAttachment'
               nullable: true
-    SourceAccount:
-      title: Source account (v1)
-      type: object
-      description: The target bank account in a supported accounting software for ingestion into a bank feed.
-      additionalProperties: false
-      properties:
-        id:
-          type: string
-          description: Unique ID for the bank account.
-        accountName:
-          type: string
-          nullable: true
-          description: The bank account name.
-        accountType:
-          type: string
-          nullable: true
-          description: The type of bank account e.g. Credit.
-        accountNumber:
-          type: string
-          nullable: true
-          description: The account number.
-        sortCode:
-          type: string
-          nullable: true
-          description: The sort code.
-        currency:
-          title: Currency
-          x-internal: true
-          type: string
-          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
-          format: ISO4217
-          examples:
-          - GBP
-          - USD
-          - EUR
-        balance:
-          type: number
-          format: decimal
-          nullable: true
-          description: The latest balance for the bank account.
-        modifiedDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-          description: The last date the bank account was modified.
-        status:
-          type: string
-          nullable: true
-          description: Status of the source account.
-          enum:
-          - pending
-          - connected
-          - connecting
-          - disconnected
-          - unknown
-        feedStartDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-      required:
-      - id
-      definitions:
-        sourceAccountPrototype:
-          title: Source account (v1)
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/SourceAccount/properties/id'
-            accountName:
-              $ref: '#/components/schemas/SourceAccount/properties/accountName'
-            accountType:
-              $ref: '#/components/schemas/SourceAccount/properties/accountType'
-            accountNumber:
-              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
-            sortCode:
-              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-            balance:
-              $ref: '#/components/schemas/SourceAccount/properties/balance'
-            modifiedDate:
-              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
-          required:
-          - id
-        sourceAccounts:
-          title: Source accounts
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceAccount'
-      examples:
-      - id: acc-002
-        accountName: account-081
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345670'
-        currency: GBP
-        balance: 99.99
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
-      - id: acc-003
-        accountName: account-095
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345671'
-        currency: USD
-        balance: 0
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
-    AccountingRecordRef:
-      type: object
-      x-internal: true
-      title: Record reference
-      description: "Links the current record to the underlying record or data type that created it. \n\nFor example, if a journal entry is generated based on an invoice, this property allows you to connect the journal entry to the underlying invoice in our data model. "
-      properties:
-        id:
-          type: string
-          description: '''id'' of the underlying record or data type.'
-        dataType:
-          type: string
-          description: Allowed name of the 'dataType'.
-          examples:
-          - journalEntry
-          - invoice
-          - accountTransaction
-          - transfer
-    AccountingTrackingCategory:
-      x-internal: true
-      title: 'Accounting: Tracking category'
-      description: "Details of a category used for tracking transactions.\n\n> Language tip\n>\n> Parameters used to track types of spend in various parts of an organization can be called  **dimensions**, **projects**, **classes**, or **locations** in different accounting software. In Codat, we refer to these as tracking categories.\n\n## Overview\n\nTracking categories are used to monitor cost centres and control budgets that sit outside the standard chart of accounts. Customers may use tracking categories to group together and track the income and costs of specific departments, projects, locations or customers.\n\nFrom their accounting system, customers can: \n\n- Create and maintain tracking categories and tracking category types.\n- View all tracking categories that are available for use.\n- View the relationships between the categories.\n- Assign invoices, bills, credit notes, or bill credit notes to one or more categories.\n- View the categories that a transaction belongs to.\n- View all transactions in a tracking category.\n\n### Tracking categories per platform\n\nReview the platform-specific tracking categories that Codat supports, and the level they are assigned to in the source platform. \n\n<table>\n<thead>\n  <tr>\n    <th>Platform</th>\n    <th>Tracking category</th>\n    <th>Tracking level</th>\n  </tr>\n</thead>\n<tbody>\n  <tr>\n    <td><b>Dynamics 365</b></td>\n    <td>Dimensions</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td><b>Freshbooks</b></td>\n    <td>Expense&nbsp;categories</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td><b>MYOB</b></td>\n    <td>Categories</td>\n    <td>Transaction</td>\n  </tr>\n  <tr>\n    <td rowspan=4><b>Netsuite</b></td>\n    <td>Classes</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td>Locations</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td>Departments</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td>Custom&nbsp;segments</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td rowspan=2><b>QuickBooks Desktop</b></td>\n    <td>Classes</td>\n    <td>Line item or transaction level</td>\n  </tr>\n  <tr>\n    <td>Locations</td>\n    <td>Transaction</td>\n  </tr>\n  <tr>\n    <td rowspan=2><b>QuickBooks Online</b></td>\n    <td>Classes</td>\n    <td>Line item or transaction level</td>\n  </tr>\n  <tr>\n    <td>Locations</td>\n    <td>Transaction</td>\n  </tr>\n  <tr>\n    <td rowspan=3><b>Sage 200</b></td>\n    <td>Cost&nbsp;centers</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n      <td>Departments</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td>Analysis&nbsp;codes</td>\n    <td>Transaction</td>\n  </tr>\n  <tr>\n    <td rowspan=3><b>Sage 50</b></td>\n    <td>Departments</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n     <td>Costcodes</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td>Projects</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td><b>Sage Intacct</b></td>\n    <td>Dimensions</td>\n    <td>Line item</td>\n  </tr>\n  <tr>\n    <td><b>Xero</b></td>\n    <td>Tracking&nbsp;categories</td>\n    <td>Line item</td>\n  </tr>\n</tbody>\n</table>\n\n> **Example use case**\n>\n> Monitor the budget for your annual conference using a tracking category called 'AnnualConference2020' with the **type** set to **Costing**.\n\nIf a tracking category has a parent category, the ID of that parent category is displayed. There is also a `hasChildren` field that shows whether there are child subcategories nested beneath. "
-      type: object
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            description: The identifier for the item, unique per tracking category.
-            nullable: true
-          name:
-            type: string
-            description: The name of the tracking category.
-            nullable: true
-          status:
-            $ref: '#/components/schemas/AccountingTrackingCategory/definitions/status'
-          parentId:
-            type: string
-            description: The identifier for this item's immediate parent.
-            nullable: true
-          hasChildren:
-            type: boolean
-            description: Boolean value indicating whether this category has SubCategories.
-          metadata:
-            $ref: '#/components/schemas/Metadata'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      definitions:
-        trackingCategoryRef:
-          required:
-          - id
-          type: object
-          description: References a category against which the item is tracked.
-          deprecated: true
-          properties:
-            id:
-              minLength: 1
-              type: string
-              description: Unique identifier to the tracking category.
-            name:
-              type: string
-              nullable: true
-              description: Name of tracking category.
-        status:
-          title: Tracking category status
-          type: string
-          description: Current state of the tracking category.
-          enum:
-          - Unknown
-          - Active
-          - Archived
-      examples:
-      - id: string
-        name: string
-        status: Unknown
-        parentId: string
-        hasChildren: true
-        modifiedDate: '2022-10-23T00:00:00Z'
-        sourceModifiedDate: '2022-10-23T00:00:00Z'
     CommerceOrder:
       title: 'Commerce: Order'
       description: 'Orders contain the transaction details for all products sold by the company, and include details of any payments, service charges, or refunds related to each order. You can use data from the Orders endpoints to calculate key metrics, such as gross sales values and monthly recurring revenue (MRR).
@@ -14437,304 +14620,137 @@ components:
         modifiedDate: '2022-02-02T11:02:45Z'
         sourceModifiedDate: '2021-03-28T03:00:14'
       type: object
-  parameters:
-    accountingBillPaymentId:
-      name: billPaymentId
-      in: path
-      required: true
-      schema:
-        type: string
-        examples:
-        - 13d946f0-c5d5-42bc-b092-97ece17923ab
-        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-        - 7110701885
-        - EILBDVJVNUAGVKRQ
-      description: Unique identifier for a bill payment.
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
-        description: Unique identifier for a company's data connection.
-      description: Unique identifier for a connection.
-    orderBy:
-      name: orderBy
-      in: query
-      required: false
-      schema:
-        type: string
-        example: -modifiedDate
-      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
-    accountingPeriodLengthDays:
-      name: periodLengthDays
-      in: query
-      schema:
-        type: integer
-        format: int32
-        example: 30
-      description: The length of period in days.
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    accountingBillId:
-      name: billId
-      in: path
-      required: true
-      schema:
-        type: string
-        examples:
-        - 13d946f0-c5d5-42bc-b092-97ece17923ab
-        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-        - 7110701885
-        - EILBDVJVNUAGVKRQ
-      description: Unique identifier for a bill.
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
-    accountingSupplierId:
-      name: supplierId
-      in: path
-      required: true
-      schema:
-        type: string
-        examples:
-        - 13d946f0-c5d5-42bc-b092-97ece17923ab
-        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-        - 7110701885
-        - EILBDVJVNUAGVKRQ
-      description: Unique identifier for a supplier.
-    accountingReportDate:
-      name: reportDate
-      in: query
-      schema:
-        type: string
-        format: date
-        example: '2022-12-31'
-      description: Date the report is generated up to.
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    accountingNumberOfPeriods:
-      name: numberOfPeriods
-      in: query
-      schema:
-        type: integer
-        format: int32
-        example: 12
-      description: Number of periods to include in the report.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
-    attachmentId:
-      name: attachmentId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-      description: Unique identifier for an attachment.
-  responses:
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Conflict:
-      description: The data type's dataset has not been requested or is still syncing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 409
-                service: PublicApi
-                error: The data set has not been requested.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Malformed-Query:
-      description: Your `query` parameter was not correctly formed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: ClientsApi
-                error: Error parsing query - Malformed query.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Unresolved property:
-              value:
-                statusCode: 400
-                service: PullApi
-                error: Error parsing query - Could not resolve property isCompleted on Dataset
-                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+    Metadata:
+      title: Metadata
+      type: object
+      x-internal: true
+      properties:
+        isDeleted:
+          type: boolean
+          description: Indicates whether the record has been deleted in the third-party system this record originated from.
+          nullable: true
+    AccountingAccount:
+      title: 'Accounting: Account'
+      description: "\uFEFF> **Language tip:** Accounts are also referred to as **chart of accounts**, **nominal accounts**, and **general ledger**.\n\n## Overview\n\nAccounts are the categories a business uses to record accounting transactions. From the Accounts endpoints, you can retrieve a list of all accounts for a specified company.\n\nThe categories for an account include:\n* Asset\n* Expense\n* Income\n* Liability\n* Equity.\n\nThe same account may have a different category based on the integration it is used in. For example, a current account (known as checking in the US) should be categorized as `Asset.Current` for Xero, and `Asset.Bank.Checking` for QuickBooks Online.\n\nAt the same time, each integration may have its own requirements to the categories. For example, a Paypal account in Xero is of the `Asset.Bank` category and therefore requires additional properties to be provided.\n\nTo determine the list of allowed categories for a specific integration, you can:\n- Follow our [Create, update, delete data](https://docs.codat.io/using-the-api/push) guide and use the [Get create account model](https://docs.codat.io/lending-api#/operations/get-create-chartOfAccounts-model).\n- Refer to the integration's own documentation.\n\n> **Accounts with no category**\n>\n> If an account is pulled from the chart of accounts and its nominal code does not lie within the category layout for the company's accounts, then the **type** is `Unknown`. The **fullyQualifiedCategory** and **fullyQualifiedName** fields return `null`.\n>\n> This approach gives a true representation of the company's accounts whilst preventing distorting financials such as a company's profit and loss and balance sheet reports."
+      allOf:
+      - properties:
+          id:
+            type: string
+            description: Identifier for the account, unique for the company.
+            example: 1b6266d1-1e44-46c5-8eb5-a8f98e03124e
+      - $ref: '#/components/schemas/AccountingAccount/definitions/accountPrototype'
+      - properties:
+          metadata:
+            $ref: '#/components/schemas/Metadata'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      definitions:
+        accountPrototype:
+          title: Account prototype
+          type: object
+          properties:
+            nominalCode:
+              type: string
+              nullable: true
+              description: Reference given to each nominal account for a business. It ensures money is allocated to the correct account. This code isn't a unique identifier in the Codat system.
+              example: '610'
+            name:
+              type: string
+              nullable: true
+              description: Name of the account.
+              example: Accounts Receivable
+            description:
+              type: string
+              nullable: true
+              description: Description for the account.
+              example: Invoices the business has issued but has not yet collected payment on.
+            fullyQualifiedCategory:
+              type: string
+              nullable: true
+              description: "Full category of the account. \n\nFor example, `Liability.Current` or `Income.Revenue`. To determine a list of possible categories for each integration, see our examples, follow our [Create, update, delete data](https://docs.codat.io/using-the-api/push) guide, or refer to the integration's own documentation."
+              example: Asset.Current
+            fullyQualifiedName:
+              type: string
+              nullable: true
+              description: 'Full name of the account, for example:
 
+                - `Cash On Hand`
 
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+                - `Rents Held In Trust`
 
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Not-Found:
-      description: 'One or more of the resources you referenced could not be found.
-
-        This might be because your company or data connection id is wrong, or was already deleted.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Data connection not found:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
-                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Company not found:
-              value:
-                statusCode: 404
-                service: ClientsApi
-                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            No data available:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
+                - `Fixed Asset`'
+              examples:
+              - Cash On Hand
+              - Fixed Asset
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            currentBalance:
+              type: number
+              format: decimal
+              nullable: true
+              description: Current balance in the account.
+              example: 0
+            type:
+              $ref: '#/components/schemas/AccountingAccount/definitions/accountType'
+            status:
+              $ref: '#/components/schemas/AccountingAccount/definitions/accountStatus'
+            isBankAccount:
+              type: boolean
+              description: Confirms whether the account is a bank account or not.
+            validDatatypeLinks:
+              type: array
+              nullable: true
+              description: The validDatatypeLinks can be used to determine whether an account can be correctly mapped to another object; for example, accounts with a `type` of `income` might only support being used on an Invoice and Direct Income. For more information, see [Valid Data Type Links](/lending-api#/schemas/ValidDataTypeLinks).
+              items:
+                title: Valid data type links
+                description: "When querying Codat's data model, some data types return `validDatatypeLinks` metadata in the JSON response. This indicates where that object can be used as a reference—a _valid link_—when creating or updating other data.\n\nFor example, `validDatatypeLinks` might indicate the following references:\n\n- Which tax rates are valid to use on the line item of a bill.\n- Which items can be used when creating an invoice. \n\nYou can use `validDatatypeLinks` to present your SMB customers with only valid choices when selecting objects from a list, for example.\n\n## `validDatatypeLinks` example\n\nThe following example uses the `Accounting.Accounts` data type. It shows that, on the linked integration, this account is valid as the account on a payment or bill payment; and as the account referenced on the line item of a direct income or direct cost. Because there is no valid link to Invoices or Bills, using this account on those data types will result in an error.\n\n```json validDatatypeLinks for an account\n{\n            \"id\": \"bd9e85e0-0478-433d-ae9f-0b3c4f04bfe4\",\n            \"nominalCode\": \"090\",\n            \"name\": \"Business Bank Account\",\n            #...\n            \"validDatatypeLinks\": [\n                {\n                    \"property\": \"Id\",\n                    \"links\": [\n                        \"Payment.AccountRef.Id\",\n                        \"BillPayment.AccountRef.Id\",\n                        \"DirectIncome.LineItems.AccountRef.Id\",\n                        \"DirectCost.LineItems.AccountRef.Id\"\n                    ]\n                }\n            ]\n        }\n```\n\n\n\n## Support for `validDatatypeLinks`\n\nCodat currently supports `validDatatypeLinks` for some data types on our Xero, QuickBooks Online, QuickBooks Desktop, Exact (NL), and Sage Business Cloud integrations. \n\nIf you'd like us to extend support to more data types or integrations, suggest or vote for this on our <a href=\"https://portal.productboard.com/codat/5-product-roadmap\">Product Roadmap</a>."
+                type: object
+                properties:
+                  property:
+                    type: string
+                    nullable: true
+                    description: The property from the account that can be linked.
+                  links:
+                    type: array
+                    nullable: true
+                    description: Supported `dataTypes` that the record can be linked to.
+                    items:
+                      type: string
+            supplementalData:
+              $ref: '#/components/schemas/SupplementalData'
+        accountRef:
+          title: Account reference
+          type: object
+          description: Data types that reference an account, for example bill and invoice line items, use an accountRef that includes the ID and name of the linked account.
+          properties:
+            id:
+              type: string
+              description: '''id'' from the Accounts data type.'
+            name:
+              type: string
+              description: '''name'' from the Accounts data type.'
+        accountType:
+          title: Account type
+          enum:
+          - Unknown
+          - Asset
+          - Expense
+          - Income
+          - Liability
+          - Equity
+          type: string
+          description: Type of account
+          example: Asset
+        accountStatus:
+          title: Account status
+          enum:
+          - Unknown
+          - Active
+          - Archived
+          - Pending
+          type: string
+          description: Status of the account
+          example: Active
+      type: object
   securitySchemes:
     auth_header:
       name: Authorization
@@ -14779,7 +14795,7 @@ x-speakeasy-name-override:
   methodNameOverride: download-attachment
 - operationId: ^upload-.*?-attachment
   methodNameOverride: upload-attachment
-x-codat-docs-path: bank-feeds-api
+x-codat-docs-path: lending-api
 x-codat-keep-docs-paths-local: true
 x-codat-speakeasy-pagination:
   type: offsetLimit

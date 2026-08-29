@@ -1,20 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bank Feeds Account mapping Liabilities API
-  version: 3.0.0
-  contact:
-    email: support@codat.io
-    name: Codat
-  description: 'Bank Feeds solution enables your SMB users to set up bank feeds from accounts in your application to supported accounting software.
+  title: Lending Liabilities API
+  description: 'Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers'' latest data from accounting, banking, and commerce software they are already using. It also includes features to help providers verify the accuracy of data and process it more efficiently.
 
 
-    A bank feed is a connection between a source bank account in your application and a target bank account in a supported accounting software.
+    The Lending solution is built on top of the latest accounting, commerce, and banking data, providing you with the most important data points you need to get a full picture of SMB creditworthiness and make a comprehensive assessment of your customers.
 
 
-    [Explore solution](https://docs.codat.io/bank-feeds-api/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
+    [Explore solution](https://docs.codat.io/lending/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
 
-
-    ---
 
     <!-- Start Codat Tags Table -->
 
@@ -29,15 +23,37 @@ info:
 
     | Connections | Create new and manage existing data connections for a company. |
 
-    | Source accounts | Provide and manage lists of source bank accounts. |
+    | Bank statements | Retrieve banking data from linked bank accounts. |
 
-    | Account mapping | Extra functionality for building an account management UI. |
+    | Sales | Retrieve standardized sales data from a linked commerce software. |
 
-    | Company information | Get detailed information about a company from the underlying platform. |
+    | Financial statements | Financial data and reports from a linked accounting software. |
 
-    | Transactions | Create new bank account transactions for a company''s connections, and see previous operations. |
+    | Liabilities | Debt and other liabilities. |
+
+    | Accounts payable | Data from a linked accounting software representing money the business owes money to its suppliers. |
+
+    | Accounts receivable | Data from a linked accounting software representing money owed to the business for sold goods or services. |
+
+    | Transactions | Data from a linked accounting software representing transactions. |
+
+    | Company info | View company information fetched from the source platform. |
+
+    | Data integrity | Match mutable accounting data with immutable banking data to increase confidence in financial data. |
+
+    | Excel reports | Download reports in Excel format. |
+
+    | Manage data | Control how data is retrieved from an integration. |
+
+    | File upload | Endpoints to manage uploaded files. |
+
+    | Loan writeback | Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure in your lending process to maintain an accurate position of a loan during the entire lending cycle. |
 
     <!-- End Codat Tags Table -->'
+  version: 3.0.0
+  contact:
+    name: Codat
+    email: support@codat.io
   termsOfService: https://www.codat.io/legals/
 servers:
 - description: Production
@@ -216,13 +232,120 @@ paths:
       x-speakeasy-name-override: get-loan-summary
 components:
   schemas:
-    DateTime:
-      title: Date time
-      type: string
+    LoanSummary:
+      title: Loan summary
+      type: object
+      properties:
+        reportInfo:
+          $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryReportInfo'
+        reportItems:
+          type: array
+          description: Returns a summary of all loan activity for that integration type
+          items:
+            $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryReportItem'
+      definitions:
+        loanSummaryReportInfo:
+          title: Loan Summary Report Info
+          type: object
+          properties:
+            reportName:
+              type: string
+              description: The name of the report.
+            companyName:
+              type: string
+              description: Name of the company queried.
+            generatedDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Returns the YYYY-MM-DD datetime of report generation.  urns the YYYY-MM-DD datetime of report generation.
+        loanRef:
+          title: Loan Reference
+          type: object
+          properties:
+            id:
+              type: string
+              description: The id of the object being referred to.
+            dataConnectionId:
+              type: string
+              description: The dataConnectionId the object being referred to is associated with.
+              x-stoplight:
+                id: vrnhmgrfndjhh
+            type:
+              type: string
+              description: The object type data is referring to, e.g. Account.
+        loanSummaryRecordRef:
+          title: Item reference
+          type: object
+          properties:
+            id:
+              type: string
+              description: The id of the object being referred to.
+            dataConnectionId:
+              type: string
+              description: The dataConnectionId the object being referred to is associated with.
+            integrationType:
+              $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryIntegrationType'
+            recordRefType:
+              $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryRecordRefType'
+        loanSummaryReportItem:
+          type: object
+          properties:
+            recordRef:
+              $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryRecordRef'
+              description: Contains object that contains a summary of all loan transactions for that integration type.
+            description:
+              type: string
+              description: The description of the object being referred to. E.g. the account.
+            startDate:
+              $ref: '#/components/schemas/DateTime'
+              description: The date of the earliest loan transaction.
+            totalDrawdowns:
+              type: number
+              format: decimal
+              description: The total loan drawdowns.
+            totalRepayments:
+              type: number
+              format: decimal
+              description: The total loan repayments which includes capital plus any interest.
+            balance:
+              type: number
+              format: decimal
+              description: The loan outstanding balance.  This may not equal totalDrawdowns - totalRepayments due to interest which has been accrued.
+            lender:
+              type: string
+              description: The name of lender providing the loan.
+        loanSummaryIntegrationType:
+          title: Integration type
+          type: string
+          enum:
+          - Accounting
+          - Banking
+          - Commerce
+          description: The integration type begin referred to.
+        loanSummaryRecordRefType:
+          title: Record reference type
+          type: string
+          enum:
+          - accounts
+          - banking-accounts
+          - commerce-transactions
+          description: The datatype being referred to.
       examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+      - reportInfo:
+          reportName: LoanSummaryReport
+          companyName: The Coffee shop
+          generatedDate: '2022-10-23T00:00:00Z'
+        reportItems:
+        - recordRef:
+            id: string
+            dataConnectionId: DE34E8E3-089F-4DF4-89E9-F7C43618FCAAA
+            integrationType: Accounting
+            recordRefType: accounts
+          description: string
+          startDate: '2021-01-01'
+          totalInvestments: 100000
+          totalRepayments: 83481.72
+          balance: 42513.18
+          lender: Barclays Bank
     LoanTransactions:
       title: Loan transactions
       type: object
@@ -389,120 +512,13 @@ components:
               type: string
               nullable: true
               description: Name of validator.
-    LoanSummary:
-      title: Loan summary
-      type: object
-      properties:
-        reportInfo:
-          $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryReportInfo'
-        reportItems:
-          type: array
-          description: Returns a summary of all loan activity for that integration type
-          items:
-            $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryReportItem'
-      definitions:
-        loanSummaryReportInfo:
-          title: Loan Summary Report Info
-          type: object
-          properties:
-            reportName:
-              type: string
-              description: The name of the report.
-            companyName:
-              type: string
-              description: Name of the company queried.
-            generatedDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Returns the YYYY-MM-DD datetime of report generation.  urns the YYYY-MM-DD datetime of report generation.
-        loanRef:
-          title: Loan Reference
-          type: object
-          properties:
-            id:
-              type: string
-              description: The id of the object being referred to.
-            dataConnectionId:
-              type: string
-              description: The dataConnectionId the object being referred to is associated with.
-              x-stoplight:
-                id: vrnhmgrfndjhh
-            type:
-              type: string
-              description: The object type data is referring to, e.g. Account.
-        loanSummaryRecordRef:
-          title: Item reference
-          type: object
-          properties:
-            id:
-              type: string
-              description: The id of the object being referred to.
-            dataConnectionId:
-              type: string
-              description: The dataConnectionId the object being referred to is associated with.
-            integrationType:
-              $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryIntegrationType'
-            recordRefType:
-              $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryRecordRefType'
-        loanSummaryReportItem:
-          type: object
-          properties:
-            recordRef:
-              $ref: '#/components/schemas/LoanSummary/definitions/loanSummaryRecordRef'
-              description: Contains object that contains a summary of all loan transactions for that integration type.
-            description:
-              type: string
-              description: The description of the object being referred to. E.g. the account.
-            startDate:
-              $ref: '#/components/schemas/DateTime'
-              description: The date of the earliest loan transaction.
-            totalDrawdowns:
-              type: number
-              format: decimal
-              description: The total loan drawdowns.
-            totalRepayments:
-              type: number
-              format: decimal
-              description: The total loan repayments which includes capital plus any interest.
-            balance:
-              type: number
-              format: decimal
-              description: The loan outstanding balance.  This may not equal totalDrawdowns - totalRepayments due to interest which has been accrued.
-            lender:
-              type: string
-              description: The name of lender providing the loan.
-        loanSummaryIntegrationType:
-          title: Integration type
-          type: string
-          enum:
-          - Accounting
-          - Banking
-          - Commerce
-          description: The integration type begin referred to.
-        loanSummaryRecordRefType:
-          title: Record reference type
-          type: string
-          enum:
-          - accounts
-          - banking-accounts
-          - commerce-transactions
-          description: The datatype being referred to.
+    DateTime:
+      title: Date time
+      type: string
       examples:
-      - reportInfo:
-          reportName: LoanSummaryReport
-          companyName: The Coffee shop
-          generatedDate: '2022-10-23T00:00:00Z'
-        reportItems:
-        - recordRef:
-            id: string
-            dataConnectionId: DE34E8E3-089F-4DF4-89E9-F7C43618FCAAA
-            integrationType: Accounting
-            recordRefType: accounts
-          description: string
-          startDate: '2021-01-01'
-          totalInvestments: 100000
-          totalRepayments: 83481.72
-          balance: 42513.18
-          lender: Barclays Bank
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
   responses:
     Unauthorized:
       description: Your API request was not properly authorized.
@@ -517,6 +533,51 @@ components:
                 service: PublicApi
                 error: Unauthorized
                 correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Payment-Required:
@@ -540,21 +601,6 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -621,36 +667,6 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
   parameters:
     companyId:
       name: companyId
@@ -706,7 +722,7 @@ x-speakeasy-name-override:
   methodNameOverride: download-attachment
 - operationId: ^upload-.*?-attachment
   methodNameOverride: upload-attachment
-x-codat-docs-path: bank-feeds-api
+x-codat-docs-path: lending-api
 x-codat-keep-docs-paths-local: true
 x-codat-speakeasy-pagination:
   type: offsetLimit
