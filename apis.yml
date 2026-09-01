@@ -34,7 +34,7 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/codat.png
 tags:
-- Unified_API
+- Unified-API
 tags_raw:
 - Unified_API
 created: '2026-03-03'
@@ -54,7 +54,7 @@ apis:
   - Accounting Sync
   - Corporate Cards
   - Expenses
-  - Unified_API
+  - Unified-API
   tags_raw:
   - Accounting Sync
   - Corporate Cards
@@ -78,7 +78,7 @@ apis:
   - Accounts Payable
   - Bill Pay
   - Payables
-  - Unified_API
+  - Unified-API
   tags_raw:
   - Accounts Payable
   - Bill Pay
@@ -102,7 +102,7 @@ apis:
   tags:
   - Accounts Payable
   - Spend Insights
-  - Unified_API
+  - Unified-API
   - Virtual Cards
   tags_raw:
   - Accounts Payable
@@ -127,7 +127,7 @@ apis:
   - Commerce
   - Point-of-Sale
   - Reconciliation
-  - Unified_API
+  - Unified-API
   tags_raw:
   - Commerce
   - Point of Sale
@@ -152,7 +152,7 @@ apis:
   - Accounting Sync
   - HR
   - Payroll
-  - Unified_API
+  - Unified-API
   tags_raw:
   - Accounting Sync
   - HR
@@ -170,7 +170,7 @@ apis:
   description: Extra functionality for building an account management UI.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
-  - Account mapping
+  - Account Mapping
   tags_raw:
   - Account mapping
   properties:
@@ -223,7 +223,7 @@ apis:
     Data from a linked accounting software representing money the business owes money to its suppliers.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
-  - Accounts payable
+  - Accounts Payable
   tags_raw:
   - Accounts payable
   properties:
@@ -251,7 +251,7 @@ apis:
     Data from a linked accounting software representing money owed to the business for sold goods or services.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
-  - Accounts receivable
+  - Accounts Receivable
   tags_raw:
   - Accounts receivable
   properties:
@@ -305,7 +305,7 @@ apis:
   description: Retrieve banking data from linked bank accounts.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
-  - Bank statements
+  - Bank Statements
   tags_raw:
   - Bank statements
   properties:
@@ -357,7 +357,7 @@ apis:
   description: View company information fetched from the source platform.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
-  - Company info
+  - Company Info
   tags_raw:
   - Company info
   properties:
@@ -411,7 +411,7 @@ apis:
   description: Configure UI and retrieve access tokens for authentication used by **Connections SDK**.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
-  - Connection management
+  - Connection Management
   tags_raw:
   - Connection management
   properties:
@@ -490,7 +490,7 @@ apis:
     Match mutable accounting data with immutable banking data to increase confidence in financial data.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
-  - Data integrity
+  - Data Integrity
   tags_raw:
   - Data integrity
   properties:
@@ -569,7 +569,7 @@ apis:
   description: Financial data and reports from a linked accounting software.
   humanURL: https://docs.codat.io/using-the-api/overview
   tags:
-  - Financial statements
+  - Financial Statements
   tags_raw:
   - Financial statements
   properties:
