@@ -1030,6 +1030,8 @@ apis:
   - type: OpenAPI
     url: openapi/codat-platform-api-api-openapi.yml
 common:
+- type: Website
+  url: https://www.codat.io/
 - type: CapabilityMap
   url: capabilities/codat-capability-edges.yml
   name: Codat Business Capability Map
