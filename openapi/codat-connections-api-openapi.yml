@@ -80,7 +80,7 @@ paths:
           $ref: '#/components/responses/Service-Unavailable'
     post:
       summary: Create connection
-      description: "\uFEFFCreates a connection for the company by providing a valid `platformKey`. \n\nUse the [List Integrations](https://docs.codat.io/platform-api#/operations/list-integrations) endpoint to access valid platform keys. "
+      description: "\uFEFFCreates a connection for the company by providing a valid `platformKey`.\n\nUse the List Integrations endpoint to access valid platform keys."
       parameters:
       - $ref: '#/components/parameters/companyId'
       tags:
@@ -303,6 +303,64 @@ paths:
       url: https://api.codat.io
 components:
   schemas:
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
     Connection:
       title: Connection
       description: "\uFEFFA connection represents a [company's](https://docs.codat.io/bank-feeds-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
@@ -432,64 +490,6 @@ components:
         lastSync: '2022-10-27T10:22:43.6464237Z'
         created: '2022-10-27T09:53:29Z'
         sourceType: Banking
-    ErrorMessage:
-      title: Error message
-      type: object
-      x-internal: true
-      properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
-          type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
-          nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
     DateTime:
       title: Date time
       type: string
@@ -497,6 +497,17 @@ components:
       - '2022-10-23T00:00:00Z'
       - '2022-10-23'
       description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    Connections:
+      title: Connections
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Connection'
+      - $ref: '#/components/schemas/Companies/allOf/1'
     Companies:
       title: Companies
       x-internal: true
@@ -566,17 +577,6 @@ components:
               href: /companies/{id}/data/{dataType}
             current:
               href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    Connections:
-      title: Connections
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Connection'
-      - $ref: '#/components/schemas/Companies/allOf/1'
     Connection_2:
       title: Connection
       description: "\uFEFFA connection represents a [company's](https://docs.codat.io/lending-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
@@ -777,131 +777,6 @@ components:
             items:
               $ref: '#/components/schemas/Connection_2'
       - $ref: '#/components/schemas/PagingInfo'
-    UpdateConnectionStatus:
-      title: Update connection
-      x-internal: true
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/Connection/definitions/dataConnectionStatus'
-          description: The current authorization status of the data connection.
-          nullable: true
-      additionalProperties: false
-    Connection_3:
-      title: Connection
-      description: "\uFEFFA connection represents a [company's](https://docs.codat.io/platform-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
-      type: object
-      properties:
-        id:
-          $ref: '#/components/parameters/connectionId/schema'
-        integrationId:
-          type: string
-          format: uuid
-          example: fd321cb6-7963-4506-b873-e99593a45e30
-          description: A Codat ID representing the integration.
-        integrationKey:
-          type: string
-          description: A unique four-character ID that identifies the platform of the company's data connection. This ensures continuity if the platform changes its name in the future.
-        sourceId:
-          $ref: '#/components/schemas/Branding/properties/sourceId'
-        sourceType:
-          $ref: '#/components/schemas/Integration/definitions/sourceType'
-        platformName:
-          type: string
-          description: Name of integration connected to company.
-        linkUrl:
-          type: string
-          format: uri
-          description: The link URL your customers can use to authorize access to their business application.
-          example: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/2e2eb431-c1fa-4dc9-93fa-d29781c12bcd/start
-        status:
-          $ref: '#/components/schemas/Connection/definitions/dataConnectionStatus'
-        lastSync:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-        created:
-          $ref: '#/components/schemas/DateTime'
-        dataConnectionErrors:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/Connection/definitions/dataConnectionError'
-        connectionInfo:
-          type: object
-          nullable: true
-          additionalProperties: true
-      additionalProperties: false
-      required:
-      - id
-      - integrationId
-      - integrationKey
-      - sourceId
-      - platformName
-      - linkUrl
-      - status
-      - created
-      - sourceType
-      definitions:
-        dataConnectionStatus:
-          title: Data connection status
-          description: The current authorization status of the data connection.
-          type: string
-          enum:
-          - PendingAuth
-          - Linked
-          - Unlinked
-          - Deauthorized
-        dataConnectionError:
-          title: Data connection error
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: The HTTP status code returned by the source platform when the error occurred.
-            statusText:
-              type: string
-              description: A non-numeric status code/text returned by the source platform when the error occurred.
-            errorMessage:
-              type: string
-              description: A message about a error returned by Codat.
-            erroredOnUtc:
-              $ref: '#/components/schemas/DateTime'
-            status:
-              title: Error status
-              description: The current status of a transient error. Null statuses indicate that the error is not transient.
-              type: string
-              nullable: true
-              enum:
-              - Active
-              - Resolved
-            resolvedOnUtc:
-              description: The datetime in Utc that the error was resolved.
-              nullable: true
-              $ref: '#/components/schemas/DateTime'
-        dataConnectionSourceType:
-          title: Source Type
-          description: The type of platform of the connection.
-          type: string
-          enum:
-          - Accounting
-          - Banking
-          - BankFeed
-          - Commerce
-          - Expense
-          - Other
-          - Unknown
-          example: Accounting
-      example:
-        id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
-        integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
-        integrationKey: dfxm
-        sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
-        platformName: Basiq
-        linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
-        status: Linked
-        lastSync: '2022-10-27T10:22:43.6464237Z'
-        created: '2022-10-27T09:53:29Z'
-        sourceType: Banking
     Integration:
       title: Integration
       description: An integration that Codat supports
@@ -1032,6 +907,142 @@ components:
           - GetAttachments
           - UploadAttachment
           example: Get
+    Connection_3:
+      title: Connection
+      description: "\uFEFFA connection represents a [company's](https://docs.codat.io/platform-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
+      type: object
+      properties:
+        id:
+          $ref: '#/components/parameters/connectionId/schema'
+        integrationId:
+          type: string
+          format: uuid
+          example: fd321cb6-7963-4506-b873-e99593a45e30
+          description: A Codat ID representing the integration.
+        integrationKey:
+          type: string
+          description: A unique four-character ID that identifies the platform of the company's data connection. This ensures continuity if the platform changes its name in the future.
+        sourceId:
+          $ref: '#/components/schemas/Branding/properties/sourceId'
+        sourceType:
+          $ref: '#/components/schemas/Integration/definitions/sourceType'
+        platformName:
+          type: string
+          description: Name of integration connected to company.
+        linkUrl:
+          type: string
+          format: uri
+          description: The link URL your customers can use to authorize access to their business application.
+          example: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/2e2eb431-c1fa-4dc9-93fa-d29781c12bcd/start
+        status:
+          $ref: '#/components/schemas/Connection/definitions/dataConnectionStatus'
+        lastSync:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+        created:
+          $ref: '#/components/schemas/DateTime'
+        dataConnectionErrors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Connection/definitions/dataConnectionError'
+        connectionInfo:
+          type: object
+          nullable: true
+          additionalProperties: true
+      additionalProperties: false
+      required:
+      - id
+      - integrationId
+      - integrationKey
+      - sourceId
+      - platformName
+      - linkUrl
+      - status
+      - created
+      - sourceType
+      definitions:
+        dataConnectionStatus:
+          title: Data connection status
+          description: The current authorization status of the data connection.
+          type: string
+          enum:
+          - PendingAuth
+          - Linked
+          - Unlinked
+          - Deauthorized
+        dataConnectionError:
+          title: Data connection error
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: The HTTP status code returned by the source platform when the error occurred.
+            statusText:
+              type: string
+              description: A non-numeric status code/text returned by the source platform when the error occurred.
+            errorMessage:
+              type: string
+              description: A message about a error returned by Codat.
+            erroredOnUtc:
+              $ref: '#/components/schemas/DateTime'
+            status:
+              title: Error status
+              description: The current status of a transient error. Null statuses indicate that the error is not transient.
+              type: string
+              nullable: true
+              enum:
+              - Active
+              - Resolved
+            resolvedOnUtc:
+              description: The datetime in Utc that the error was resolved.
+              nullable: true
+              $ref: '#/components/schemas/DateTime'
+        dataConnectionSourceType:
+          title: Source Type
+          description: The type of platform of the connection.
+          type: string
+          enum:
+          - Accounting
+          - Banking
+          - BankFeed
+          - Commerce
+          - Expense
+          - Other
+          - Unknown
+          example: Accounting
+      example:
+        id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
+        integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
+        integrationKey: dfxm
+        sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
+        platformName: Basiq
+        linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
+        status: Linked
+        lastSync: '2022-10-27T10:22:43.6464237Z'
+        created: '2022-10-27T09:53:29Z'
+        sourceType: Banking
+    UpdateConnectionStatus:
+      title: Update connection
+      x-internal: true
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Connection/definitions/dataConnectionStatus'
+          description: The current authorization status of the data connection.
+          nullable: true
+      additionalProperties: false
+    Connections_3:
+      title: Connections
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Connection_3'
+      - $ref: '#/components/schemas/PagingInfo'
     Branding:
       title: Branding
       type: object
@@ -1101,110 +1112,7 @@ components:
               src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
               alt: xero hover button icon
         sourceId: 35b92968-9851-4095-ad60-395c95cbcba4
-    Connections_3:
-      title: Connections
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Connection_3'
-      - $ref: '#/components/schemas/PagingInfo'
   responses:
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Malformed-Query:
-      description: Your `query` parameter was not correctly formed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: ClientsApi
-                error: Error parsing query - Malformed query.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Unresolved property:
-              value:
-                statusCode: 400
-                service: PullApi
-                error: Error parsing query - Could not resolve property isCompleted on Dataset
-                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Too-Many-Requests:
       description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
@@ -1218,6 +1126,21 @@ components:
                 service: PublicApi
                 error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Not-Found:
@@ -1268,17 +1191,84 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
   parameters:
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
     connectionId:
       name: connectionId
       in: path
@@ -1289,14 +1279,16 @@ components:
         example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
         description: Unique identifier for a company's data connection.
       description: Unique identifier for a connection.
-    query:
-      name: query
-      in: query
-      required: false
+    companyId:
+      name: companyId
+      in: path
+      required: true
       schema:
         type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
     pageSize:
       name: pageSize
       in: query
@@ -1308,16 +1300,24 @@ components:
         minimum: 1
         maximum: 5000
       description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    companyId:
-      name: companyId
-      in: path
-      required: true
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    query:
+      name: query
+      in: query
+      required: false
       schema:
         type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
     orderBy:
       name: orderBy
       in: query

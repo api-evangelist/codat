@@ -1,0 +1,27 @@
+# Front Door AI Index — codat — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: codat
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.codat.io
+  final_host: codat.io
+  ownership: own
+  owner: codat
+  shares_host_with:
+  - codat-io
+  inherited_from: null
+  verdict: scored
+  score: 2
+  host_score: 2
+  density: 1.3
+  words: 1543
+  tiers:
+    agentic: 0
+    core: 2
+    model: 0
+  ambiguous: 9
+  top_terms:
+    intelligence: 9
+    AI: 2

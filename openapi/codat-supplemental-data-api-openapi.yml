@@ -3,7 +3,7 @@ info:
   title: Platform Supplemental data API
   version: 3.0.0
   summary: Platform API
-  description: "An API for the common components of all of Codat's products.\n\nThese end points cover creating and managing your companies, data connections, and integrations.\n\n[Read about the building blocks of Codat...](https://docs.codat.io/core-concepts/companies) | [See our OpenAPI spec](https://github.com/codatio/oas) \n\n---\n<!-- Start Codat Tags Table -->\n## Endpoints\n\n| Endpoints | Description |\n| :- |:- |\n| Companies | Create and manage your SMB users' companies. |\n| Connections | Create new and manage existing data connections for a company. |\n| Connection management | Configure connection management UI and retrieve access tokens for authentication. |\n| Webhooks | Create and manage webhooks that listen to Codat's events. |\n| Integrations | Get a list of integrations supported by Codat and their logos. |\n| Refresh data | Initiate data refreshes, view pull status and history. |\n| Settings | Manage company profile configuration, sync settings, and API keys. |\n| Push data | Initiate and monitor Create, Update, and Delete operations. |\n| Supplemental data | Configure and pull additional data you can include in Codat's standard data types. |\n| Custom data type | Configure and pull additional data types that are not included in Codat's standardized data model. |\n<!-- End Codat Tags Table -->"
+  description: An API for the common components of all of Codat's products.
   contact:
     name: Codat
     email: support@codat.io
@@ -56,7 +56,7 @@ paths:
       description: 'The *Configure* endpoint allows you to maintain or change configuration required to return supplemental data for each integration and data type combination.
 
 
-        [Supplemental data](https://docs.codat.io/using-the-api/supplemental-data/overview) is additional data you can include in Codat''s standard data types.
+        Supplemental data is additional data you can include in Codat''s standard data types.
 
 
         **Integration-specific behavior**
@@ -145,7 +145,7 @@ paths:
       description: 'The *Get configuration* endpoint returns supplemental data configuration previously created for each integration and data type combination.
 
 
-        [Supplemental data](https://docs.codat.io/using-the-api/supplemental-data/overview) is additional data you can include in Codat''s standard data types.'
+        Supplemental data is additional data you can include in Codat''s standard data types.'
       operationId: get-supplemental-data-configuration
       x-speakeasy-name-override: get-configuration
       tags:
@@ -172,6 +172,19 @@ paths:
         '503':
           $ref: '#/components/responses/Service-Unavailable'
 components:
+  parameters:
+    platformKey:
+      name: platformKey
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 4
+        maxLength: 4
+        pattern: '[a-z]{4}'
+        example: gbol
+        description: A unique 4-letter key to represent a platform in each integration. View [accounting](https://docs.codat.io/integrations/accounting/overview#platform-keys), [banking](https://docs.codat.io/integrations/banking/overview#platform-keys), and [commerce](https://docs.codat.io/integrations/commerce/overview#platform-keys) platform keys.
+      description: A unique 4-letter key to represent a platform in each integration.
   responses:
     Forbidden:
       description: You are using an outdated API key or a key not associated with that resource.
@@ -186,6 +199,51 @@ components:
                 service: PublicApi
                 error: You are using an outdated API key or a key not associated with that resource.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Payment-Required:
@@ -209,66 +267,6 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -303,6 +301,21 @@ components:
                 service: PublicApi
                 error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
   schemas:
@@ -399,19 +412,6 @@ components:
               orderNumber: order_num
             pushData:
               orderNumber: order_num
-  parameters:
-    platformKey:
-      name: platformKey
-      in: path
-      required: true
-      schema:
-        type: string
-        minLength: 4
-        maxLength: 4
-        pattern: '[a-z]{4}'
-        example: gbol
-        description: A unique 4-letter key to represent a platform in each integration. View [accounting](https://docs.codat.io/integrations/accounting/overview#platform-keys), [banking](https://docs.codat.io/integrations/banking/overview#platform-keys), and [commerce](https://docs.codat.io/integrations/commerce/overview#platform-keys) platform keys.
-      description: A unique 4-letter key to represent a platform in each integration.
   securitySchemes:
     auth_header:
       name: Authorization

@@ -3,7 +3,7 @@ info:
   title: Platform Webhooks API
   version: 3.0.0
   summary: Platform API
-  description: "An API for the common components of all of Codat's products.\n\nThese end points cover creating and managing your companies, data connections, and integrations.\n\n[Read about the building blocks of Codat...](https://docs.codat.io/core-concepts/companies) | [See our OpenAPI spec](https://github.com/codatio/oas) \n\n---\n<!-- Start Codat Tags Table -->\n## Endpoints\n\n| Endpoints | Description |\n| :- |:- |\n| Companies | Create and manage your SMB users' companies. |\n| Connections | Create new and manage existing data connections for a company. |\n| Connection management | Configure connection management UI and retrieve access tokens for authentication. |\n| Webhooks | Create and manage webhooks that listen to Codat's events. |\n| Integrations | Get a list of integrations supported by Codat and their logos. |\n| Refresh data | Initiate data refreshes, view pull status and history. |\n| Settings | Manage company profile configuration, sync settings, and API keys. |\n| Push data | Initiate and monitor Create, Update, and Delete operations. |\n| Supplemental data | Configure and pull additional data you can include in Codat's standard data types. |\n| Custom data type | Configure and pull additional data types that are not included in Codat's standardized data model. |\n<!-- End Codat Tags Table -->"
+  description: An API for the common components of all of Codat's products.
   contact:
     name: Codat
     email: support@codat.io
@@ -22,7 +22,7 @@ paths:
       summary: List webhook consumers
       operationId: list-webhook-consumers
       x-speakeasy-name-override: list-consumers
-      description: "\uFEFFUse the *List webhook consumers* endpoint to return a list of all webhook consumers that currently exist for your client.\n\n[Webhook consumer](https://docs.codat.io/platform-api#/schemas/WebhookConsumer) is an HTTP endpoint that you configure to subscribe to specific events. See our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview)."
+      description: "\uFEFFUse the *List webhook consumers* endpoint to return a list of all webhook consumers that currently exist for your client.\n\nWebhook consumer is an HTTP endpoint that you configure to subscribe to specific events. See our documentation for more details on Codat's webhook service."
       tags:
       - Webhooks
       responses:
@@ -64,7 +64,7 @@ paths:
       summary: Create webhook consumer
       operationId: create-webhook-consumer
       x-speakeasy-name-override: create-consumer
-      description: "\uFEFFUse the *Create webhook consumer* endpoint to create a new webhook consumer that will listen to messages we send you.\n\n[Webhook consumer](https://docs.codat.io/platform-api#/schemas/WebhookConsumer) is an HTTP endpoint that you configure to subscribe to specific events. See our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview).\n\n### Tips and traps\n- The number of webhook consumers you can create is limited to 50. If you have reached the maximum number of consumers, use the [*Delete webhook consumer*](https://docs.codat.io/platform-api#/operations/delete-webhook-consumer) endpoint to delete an unused consumer first."
+      description: "\uFEFFUse the *Create webhook consumer* endpoint to create a new webhook consumer that will listen to messages we send you.\n\nWebhook consumer is an HTTP endpoint that you configure to subscribe to specific events. See our documentation for more details on Codat's webhook service.\n\n### Tips and traps\n- The number of webhook consumers you can create is limited to 50. If you have reached the maximum number of consumers, use the *Delete webhook consumer* endpoint to delete an unused consumer first."
       tags:
       - Webhooks
       requestBody:
@@ -129,7 +129,7 @@ paths:
       summary: Delete webhook consumer
       operationId: delete-webhook-consumer
       x-speakeasy-name-override: delete-consumer
-      description: "\uFEFFUse the *Delete webhook consumer* endpoint to delete an existing webhoook consumer, providing its valid `id` as a parameter.\n\n[Webhook consumer](https://docs.codat.io/platform-api#/schemas/WebhookConsumer) is an HTTP endpoint that you configure to subscribe to specific events. See our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview)."
+      description: "\uFEFFUse the *Delete webhook consumer* endpoint to delete an existing webhoook consumer, providing its valid `id` as a parameter.\n\nWebhook consumer is an HTTP endpoint that you configure to subscribe to specific events. See our documentation for more details on Codat's webhook service."
       tags:
       - Webhooks
       responses:
@@ -154,7 +154,7 @@ paths:
       summary: Rotate Zapier key
       operationId: rotate-zapier-key
       x-speakeasy-ignore: true
-      description: "\uFEFFThe *Rotate Zapier key* endpoint returns the Zapier integration key needed to configure Zaps triggered by Codat's webhooks. \n\nIf a key has already been created, calling this will revoke that existing key.\n\nThe key changes each time this endpoint is called. If you are already using our Zapier integration and called this endpoint again, you need to reauthenticate using the latest integration key returned in the response.\n\nOur Zapier integration makes it simple for you to set up and receive user notifications in your preferred ways, such as via email or Slack. See our [Zapier documentation](https://docs.codat.io/using-the-api/webhooks/zapier-integration) for detailed instructions on setting up this integration.\n\n"
+      description: "\uFEFFThe *Rotate Zapier key* endpoint returns the Zapier integration key needed to configure Zaps triggered by Codat's webhooks.\n\nIf a key has already been created, calling this will revoke that existing key.\n\nThe key changes each time this endpoint is called. If you are already using our Zapier integration and called this endpoint again, you need to reauthenticate using the latest integration key returned in the response.\n\nOur Zapier integration makes it simple for you to set up and receive user notifications in your preferred ways, such as via email or Slack. See our Zapier documentation for detailed instructions on setting up this integration."
       tags:
       - Webhooks
       responses:
@@ -182,60 +182,6 @@ paths:
           $ref: '#/components/responses/Service-Unavailable'
 components:
   schemas:
-    WebhookConsumer:
-      title: Webhook consumer
-      type: object
-      description: "\uFEFFA webhook consumer is an HTTP endpoint that developers can configure to subscribe to Codat's supported event types.\n\nSee our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview).\n"
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 8a210b68-6988-11ed-a1eb-0242ac120002
-          description: Unique identifier for the webhook consumer.
-        url:
-          type: string
-          format: uri
-          description: The URL that will consume webhook events dispatched by Codat.
-        disabled:
-          type: boolean
-          description: Flag that enables or disables the endpoint from receiving events. Disabled when set to `true`.
-          nullable: true
-          default: false
-        eventTypes:
-          type: array
-          description: An array of event types the webhook consumer subscribes to.
-          items:
-            type: string
-        companyTags:
-          type: array
-          nullable: true
-          description: Company tags provide an additional way to filter messages, independent of event types. Company tags are case-sensitive, and only messages from companies with matching tags will be sent to this endpoint. Use the format `tagKey:tagValue`.
-          items:
-            type: string
-            maxLength: 128
-          maxItems: 10
-      definitions:
-        webhookConsumerPrototype:
-          title: Create webhook consumer
-          type: object
-          properties:
-            url:
-              $ref: '#/components/schemas/WebhookConsumer/properties/url'
-            disabled:
-              $ref: '#/components/schemas/WebhookConsumer/properties/disabled'
-            eventTypes:
-              $ref: '#/components/schemas/WebhookConsumer/properties/eventTypes'
-            companyTags:
-              $ref: '#/components/schemas/WebhookConsumer/properties/companyTags'
-        webhookConsumers:
-          title: Webhook consumers
-          type: object
-          properties:
-            results:
-              type: array
-              maxItems: 50
-              items:
-                $ref: '#/components/schemas/WebhookConsumer'
     ErrorMessage:
       title: Error message
       type: object
@@ -294,6 +240,60 @@ components:
               type: string
               nullable: true
               description: Name of validator.
+    WebhookConsumer:
+      title: Webhook consumer
+      type: object
+      description: "\uFEFFA webhook consumer is an HTTP endpoint that developers can configure to subscribe to Codat's supported event types.\n\nSee our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview).\n"
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 8a210b68-6988-11ed-a1eb-0242ac120002
+          description: Unique identifier for the webhook consumer.
+        url:
+          type: string
+          format: uri
+          description: The URL that will consume webhook events dispatched by Codat.
+        disabled:
+          type: boolean
+          description: Flag that enables or disables the endpoint from receiving events. Disabled when set to `true`.
+          nullable: true
+          default: false
+        eventTypes:
+          type: array
+          description: An array of event types the webhook consumer subscribes to.
+          items:
+            type: string
+        companyTags:
+          type: array
+          nullable: true
+          description: Company tags provide an additional way to filter messages, independent of event types. Company tags are case-sensitive, and only messages from companies with matching tags will be sent to this endpoint. Use the format `tagKey:tagValue`.
+          items:
+            type: string
+            maxLength: 128
+          maxItems: 10
+      definitions:
+        webhookConsumerPrototype:
+          title: Create webhook consumer
+          type: object
+          properties:
+            url:
+              $ref: '#/components/schemas/WebhookConsumer/properties/url'
+            disabled:
+              $ref: '#/components/schemas/WebhookConsumer/properties/disabled'
+            eventTypes:
+              $ref: '#/components/schemas/WebhookConsumer/properties/eventTypes'
+            companyTags:
+              $ref: '#/components/schemas/WebhookConsumer/properties/companyTags'
+        webhookConsumers:
+          title: Webhook consumers
+          type: object
+          properties:
+            results:
+              type: array
+              maxItems: 50
+              items:
+                $ref: '#/components/schemas/WebhookConsumer'
     WebhookZapierKey:
       title: Zapier integration key
       type: object
@@ -305,51 +305,6 @@ components:
       examples:
       - key: sk_integ_WM4dfoK1nKZnDE_kceze6hWDjbRwOZwG.us
   responses:
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Bad-Request:
       description: The request made is not valid.
       content:
@@ -362,30 +317,6 @@ components:
                 statusCode: 400
                 service: PublicApi
                 error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -402,6 +333,21 @@ components:
                 service: PublicApi
                 error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Not-Found:
@@ -449,6 +395,60 @@ components:
                 statusCode: 500
                 service: PublicApi
                 error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0

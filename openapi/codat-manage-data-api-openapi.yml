@@ -1,55 +1,7 @@
 openapi: 3.2.0
 info:
   title: Lending Manage data API
-  description: 'Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers'' latest data from accounting, banking, and commerce software they are already using. It also includes features to help providers verify the accuracy of data and process it more efficiently.
-
-
-    The Lending solution is built on top of the latest accounting, commerce, and banking data, providing you with the most important data points you need to get a full picture of SMB creditworthiness and make a comprehensive assessment of your customers.
-
-
-    [Explore solution](https://docs.codat.io/lending/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
-
-
-    <!-- Start Codat Tags Table -->
-
-    ## Endpoints
-
-
-    | Endpoints | Description |
-
-    | :- |:- |
-
-    | Companies | Create and manage your SMB users'' companies. |
-
-    | Connections | Create new and manage existing data connections for a company. |
-
-    | Bank statements | Retrieve banking data from linked bank accounts. |
-
-    | Sales | Retrieve standardized sales data from a linked commerce software. |
-
-    | Financial statements | Financial data and reports from a linked accounting software. |
-
-    | Liabilities | Debt and other liabilities. |
-
-    | Accounts payable | Data from a linked accounting software representing money the business owes money to its suppliers. |
-
-    | Accounts receivable | Data from a linked accounting software representing money owed to the business for sold goods or services. |
-
-    | Transactions | Data from a linked accounting software representing transactions. |
-
-    | Company info | View company information fetched from the source platform. |
-
-    | Data integrity | Match mutable accounting data with immutable banking data to increase confidence in financial data. |
-
-    | Excel reports | Download reports in Excel format. |
-
-    | Manage data | Control how data is retrieved from an integration. |
-
-    | File upload | Endpoints to manage uploaded files. |
-
-    | Loan writeback | Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure in your lending process to maintain an accurate position of a loan during the entire lending cycle. |
-
-    <!-- End Codat Tags Table -->'
+  description: Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers' latest data from accounting, banking, and commerce software they are already using.
   version: 3.0.0
   contact:
     name: Codat
@@ -61,7 +13,7 @@ servers:
 security:
 - auth_header: []
 tags:
-- name: Manage data
+- name: Manage Data
   description: Control how data is retrieved from an integration.
 paths:
   /companies/{companyId}/data/all:
@@ -97,9 +49,9 @@ paths:
         This is an asynchronous operation, and will bring updated data into Codat from the linked integration for you to view.
 
 
-        [Read more](https://docs.codat.io/core-concepts/data-type-settings) about data type settings and `fetch on first link`.'
+        Read more about data type settings and `fetch on first link`.'
       tags:
-      - Manage data
+      - Manage Data
   /companies/{companyId}/dataStatus:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -110,7 +62,7 @@ paths:
       x-speakeasy-name-override: get-status
       description: Get the state of each data type for a company
       tags:
-      - Manage data
+      - Manage Data
       responses:
         '200':
           description: OK
@@ -539,7 +491,7 @@ paths:
 
         This is an asynchronous operation, and will bring updated data into Codat from the linked integration for you to view.'
       tags:
-      - Manage data
+      - Manage Data
       parameters:
       - schema:
           type: string
@@ -576,7 +528,7 @@ paths:
     get:
       summary: List pull operations
       tags:
-      - Manage data
+      - Manage Data
       operationId: list-pull-operations
       x-speakeasy-group: manage-data.pull-operations
       responses:
@@ -640,7 +592,7 @@ paths:
       operationId: get-pull-operation
       x-speakeasy-group: manage-data.pull-operations
       tags:
-      - Manage data
+      - Manage Data
       responses:
         '200':
           description: OK
@@ -666,87 +618,6 @@ paths:
       description: Retrieve information about a single dataset or pull operation.
 components:
   schemas:
-    DataType:
-      x-internal: true
-      $ref: '#/components/schemas/DataStatus/properties/dataType'
-    DataStatus:
-      title: Data status
-      description: Describes the state of data in the Codat cache for a company and data type
-      type: object
-      required:
-      - dataType
-      - currentStatus
-      properties:
-        dataType:
-          title: Data types
-          x-internal: true
-          type: string
-          description: Available data types
-          enum:
-          - accountTransactions
-          - balanceSheet
-          - bankAccounts
-          - bankTransactions
-          - billCreditNotes
-          - billPayments
-          - bills
-          - cashFlowStatement
-          - chartOfAccounts
-          - company
-          - creditNotes
-          - customers
-          - directCosts
-          - directIncomes
-          - invoices
-          - itemReceipts
-          - items
-          - journalEntries
-          - journals
-          - paymentMethods
-          - payments
-          - profitAndLoss
-          - purchaseOrders
-          - salesOrders
-          - suppliers
-          - taxRates
-          - trackingCategories
-          - transfers
-          - banking-accountBalances
-          - banking-accounts
-          - banking-transactionCategories
-          - banking-transactions
-          - commerce-companyInfo
-          - commerce-customers
-          - commerce-disputes
-          - commerce-locations
-          - commerce-orders
-          - commerce-paymentMethods
-          - commerce-payments
-          - commerce-productCategories
-          - commerce-products
-          - commerce-taxComponents
-          - commerce-transactions
-          example: invoices
-        lastSuccessfulSync:
-          $ref: '#/components/schemas/DateTime'
-        currentStatus:
-          $ref: '#/components/schemas/PullOperation/properties/status'
-        latestSyncId:
-          type: string
-          description: Unique identifier for most recent sync of data type.
-          format: uuid
-          example: ad474a37-2003-478e-baee-9af9f1ec2fe3
-        latestSuccessfulSyncId:
-          type: string
-          description: Unique identifier for the most recent successful sync of data type.
-          format: uuid
-          example: 8220fc90-55b6-47bc-9417-48ac6ea93101
-      examples:
-      - dataType: string
-        lastSuccessfulSync: '2022-01-01T13:00:00.000Z'
-        currentStatus: string
-        latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
-        latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
     PullOperation:
       title: Pull operation
       description: 'Information about a queued, in progress or completed pull operation.
@@ -901,24 +772,6 @@ components:
               type: string
               nullable: true
               description: Name of validator.
-    PullOperations:
-      title: Pull operations
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/PullOperation'
-      - $ref: '#/components/schemas/PagingInfo'
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
     PagingInfo:
       type: object
       title: Pagination information
@@ -979,163 +832,106 @@ components:
             href: /companies/{id}/data/{dataType}
           current:
             href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-  parameters:
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
-    datasetId:
-      name: datasetId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        description: Unique identifier for the dataset that completed its sync.
-      description: Unique identifier for the dataset that completed its sync.
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    dataType:
-      name: dataType
-      description: A key for a Codat data type.
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/DataType'
-    orderBy:
-      name: orderBy
-      in: query
-      required: false
-      schema:
-        type: string
-        example: -modifiedDate
-      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    DataType:
+      x-internal: true
+      $ref: '#/components/schemas/DataStatus/properties/dataType'
+    DataStatus:
+      title: Data status
+      description: Describes the state of data in the Codat cache for a company and data type
+      type: object
+      required:
+      - dataType
+      - currentStatus
+      properties:
+        dataType:
+          title: Data types
+          x-internal: true
+          type: string
+          description: Available data types
+          enum:
+          - accountTransactions
+          - balanceSheet
+          - bankAccounts
+          - bankTransactions
+          - billCreditNotes
+          - billPayments
+          - bills
+          - cashFlowStatement
+          - chartOfAccounts
+          - company
+          - creditNotes
+          - customers
+          - directCosts
+          - directIncomes
+          - invoices
+          - itemReceipts
+          - items
+          - journalEntries
+          - journals
+          - paymentMethods
+          - payments
+          - profitAndLoss
+          - purchaseOrders
+          - salesOrders
+          - suppliers
+          - taxRates
+          - trackingCategories
+          - transfers
+          - banking-accountBalances
+          - banking-accounts
+          - banking-transactionCategories
+          - banking-transactions
+          - commerce-companyInfo
+          - commerce-customers
+          - commerce-disputes
+          - commerce-locations
+          - commerce-orders
+          - commerce-paymentMethods
+          - commerce-payments
+          - commerce-productCategories
+          - commerce-products
+          - commerce-taxComponents
+          - commerce-transactions
+          example: invoices
+        lastSuccessfulSync:
+          $ref: '#/components/schemas/DateTime'
+        currentStatus:
+          $ref: '#/components/schemas/PullOperation/properties/status'
+        latestSyncId:
+          type: string
+          description: Unique identifier for most recent sync of data type.
+          format: uuid
+          example: ad474a37-2003-478e-baee-9af9f1ec2fe3
+        latestSuccessfulSyncId:
+          type: string
+          description: Unique identifier for the most recent successful sync of data type.
+          format: uuid
+          example: 8220fc90-55b6-47bc-9417-48ac6ea93101
+      examples:
+      - dataType: string
+        lastSuccessfulSync: '2022-01-01T13:00:00.000Z'
+        currentStatus: string
+        latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
+        latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
+    PullOperations:
+      title: Pull operations
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/PullOperation'
+      - $ref: '#/components/schemas/PagingInfo'
   responses:
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Malformed-Query:
-      description: Your `query` parameter was not correctly formed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: ClientsApi
-                error: Error parsing query - Malformed query.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Unresolved property:
-              value:
-                statusCode: 400
-                service: PullApi
-                error: Error parsing query - Could not resolve property isCompleted on Dataset
-                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Too-Many-Requests:
       description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
@@ -1149,6 +945,21 @@ components:
                 service: PublicApi
                 error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Not-Found:
@@ -1199,6 +1010,147 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    dataType:
+      name: dataType
+      description: A key for a Codat data type.
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/DataType'
+    datasetId:
+      name: datasetId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        description: Unique identifier for the dataset that completed its sync.
+      description: Unique identifier for the dataset that completed its sync.
   securitySchemes:
     auth_header:
       name: Authorization

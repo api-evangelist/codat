@@ -1,55 +1,7 @@
 openapi: 3.2.0
 info:
   title: Lending Bank statements API
-  description: 'Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers'' latest data from accounting, banking, and commerce software they are already using. It also includes features to help providers verify the accuracy of data and process it more efficiently.
-
-
-    The Lending solution is built on top of the latest accounting, commerce, and banking data, providing you with the most important data points you need to get a full picture of SMB creditworthiness and make a comprehensive assessment of your customers.
-
-
-    [Explore solution](https://docs.codat.io/lending/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
-
-
-    <!-- Start Codat Tags Table -->
-
-    ## Endpoints
-
-
-    | Endpoints | Description |
-
-    | :- |:- |
-
-    | Companies | Create and manage your SMB users'' companies. |
-
-    | Connections | Create new and manage existing data connections for a company. |
-
-    | Bank statements | Retrieve banking data from linked bank accounts. |
-
-    | Sales | Retrieve standardized sales data from a linked commerce software. |
-
-    | Financial statements | Financial data and reports from a linked accounting software. |
-
-    | Liabilities | Debt and other liabilities. |
-
-    | Accounts payable | Data from a linked accounting software representing money the business owes money to its suppliers. |
-
-    | Accounts receivable | Data from a linked accounting software representing money owed to the business for sold goods or services. |
-
-    | Transactions | Data from a linked accounting software representing transactions. |
-
-    | Company info | View company information fetched from the source platform. |
-
-    | Data integrity | Match mutable accounting data with immutable banking data to increase confidence in financial data. |
-
-    | Excel reports | Download reports in Excel format. |
-
-    | Manage data | Control how data is retrieved from an integration. |
-
-    | File upload | Endpoints to manage uploaded files. |
-
-    | Loan writeback | Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure in your lending process to maintain an accurate position of a loan during the entire lending cycle. |
-
-    <!-- End Codat Tags Table -->'
+  description: Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers' latest data from accounting, banking, and commerce software they are already using.
   version: 3.0.0
   contact:
     name: Codat
@@ -61,7 +13,7 @@ servers:
 security:
 - auth_header: []
 tags:
-- name: Bank statements
+- name: Bank Statements
   description: Retrieve banking data from linked bank accounts.
 paths:
   /companies/{companyId}/reports/enhancedCashFlow/transactions:
@@ -73,7 +25,7 @@ paths:
       x-speakeasy-group: banking.categorized-statement
       description: "\uFEFF> **Categorization engine**\n>\n> The categorization engine uses machine learning and has been fully trained against Plaid and TrueLayer banking data sources. It is not fully trained against the Basiq banking data source.\n\nThe _Get categorized bank statement_ endpoint provides a fully categorized list of banking transactions for a company. Accounts and transaction data are obtained from the company's banking data sources."
       tags:
-      - Bank statements
+      - Bank Statements
       responses:
         '200':
           description: OK
@@ -107,11 +59,17 @@ paths:
   /companies/{companyId}/connections/{connectionId}/data/banking-accountBalances:
     get:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: List account balances
       operationId: list-banking-account-balances
       x-speakeasy-group: banking.account-balances
-      description: "The *List account balances* endpoint returns a list of [account balances](https://docs.codat.io/lending-api#/schemas/AccountBalance) for a given company's connection.\n\n[Account balances](https://docs.codat.io/lending-api#/schemas/AccountBalance) are balances for a bank account, including end-of-day batch balance or running balances per transaction.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List account balances* endpoint returns a list of account balances for a given company''s connection.
+
+
+        Account balances are balances for a bank account, including end-of-day batch balance or running balances per transaction.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
       parameters:
       - $ref: '#/components/parameters/companyId'
       - $ref: '#/components/parameters/connectionId'
@@ -194,11 +152,17 @@ paths:
   /companies/{companyId}/connections/{connectionId}/data/banking-accounts:
     get:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: List accounts
       operationId: list-banking-accounts
       x-speakeasy-group: banking.accounts
-      description: "The *List accounts* endpoint returns a list of [accounts](https://docs.codat.io/lending-api#/schemas/Account) for a given company's connection.\n\n[Accounts](https://docs.codat.io/lending-api#/schemas/Account) are financial accounts maintained by a bank or other financial institution.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List accounts* endpoint returns a list of accounts for a given company''s connection.
+
+
+        Accounts are financial accounts maintained by a bank or other financial institution.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
       parameters:
       - $ref: '#/components/parameters/companyId'
       - $ref: '#/components/parameters/connectionId'
@@ -331,17 +295,17 @@ paths:
   /companies/{companyId}/connections/{connectionId}/data/banking-accounts/{accountId}:
     get:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: Get account
       operationId: get-banking-account
       x-speakeasy-group: banking.accounts
       description: 'The *Get account* endpoint returns a single account for a given accountId.
 
 
-        [Accounts](https://docs.codat.io/lending-api#/schemas/Account) are financial accounts maintained by a bank or other financial institution.
+        Accounts are financial accounts maintained by a bank or other financial institution.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).'
+        Before using this endpoint, you must have retrieved data for the company.'
       parameters:
       - $ref: '#/components/parameters/companyId'
       - $ref: '#/components/parameters/connectionId'
@@ -428,11 +392,17 @@ paths:
     - $ref: '#/components/parameters/connectionId'
     get:
       tags:
-      - Bank statements
+      - Bank Statements
       operationId: list-banking-transactions
       x-speakeasy-group: banking.transactions
       summary: List transactions
-      description: "The *List transactions* endpoint returns a list of [transactions](https://docs.codat.io/lending-api#/schemas/Transaction) for a given company's connection.\n\n[Transactions](https://docs.codat.io/lending-api#/schemas/Transaction) provide an immutable source of up-to-date information on income and expenditure.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List transactions* endpoint returns a list of transactions for a given company''s connection.
+
+
+        Transactions provide an immutable source of up-to-date information on income and expenditure.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
       parameters:
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
@@ -552,7 +522,7 @@ paths:
     get:
       summary: Get bank transaction
       tags:
-      - Bank statements
+      - Bank Statements
       responses:
         '200':
           description: Success
@@ -608,12 +578,10 @@ paths:
       description: 'The *Get transaction* endpoint returns a single transaction for a given transactionId.
 
 
-        [Transactions](https://docs.codat.io/lending-api#/schemas/Transaction) provide an immutable source of up-to-date information on income and expenditure.
+        Transactions provide an immutable source of up-to-date information on income and expenditure.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
       operationId: get-banking-transaction
       x-speakeasy-group: banking.transactions
   /companies/{companyId}/connections/{connectionId}/data/banking-transactionCategories:
@@ -622,7 +590,7 @@ paths:
     - $ref: '#/components/parameters/connectionId'
     get:
       tags:
-      - Bank statements
+      - Bank Statements
       operationId: list-banking-transaction-categories
       x-speakeasy-group: banking.transaction-categories
       summary: List transaction categories
@@ -704,7 +672,13 @@ paths:
           $ref: '#/components/responses/Internal-Server-Error'
         '503':
           $ref: '#/components/responses/Service-Unavailable'
-      description: "The *List transaction categories* endpoint returns a list of [transaction categories](https://docs.codat.io/lending-api#/schemas/TransactionCategory) for a given company's connection.\n\n[Transaction categories](https://docs.codat.io/lending-api#/schemas/TransactionCategory) are associated with a transaction to provide greater contextual meaning to transaction activity.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List transaction categories* endpoint returns a list of transaction categories for a given company''s connection.
+
+
+        Transaction categories are associated with a transaction to provide greater contextual meaning to transaction activity.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/banking-transactionCategories/{transactionCategoryId}:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -717,19 +691,17 @@ paths:
       description: The unique identifier for a banking transaction category
     get:
       tags:
-      - Bank statements
+      - Bank Statements
       operationId: get-banking-transaction-category
       x-speakeasy-group: banking.transaction-categories
       summary: Get transaction category
       description: 'The *Get transaction category* endpoint returns a single transaction category for a given transactionCategoryId.
 
 
-        [Transaction categories](https://docs.codat.io/lending-api#/schemas/TransactionCategory) are associated with a transaction to provide greater contextual meaning to transaction activity.
+        Transaction categories are associated with a transaction to provide greater contextual meaning to transaction activity.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
       responses:
         '200':
           description: Success
@@ -774,7 +746,7 @@ paths:
     - $ref: '#/components/parameters/connectionId'
     get:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: Get upload configuration
       description: 'Use the *Get upload configuration* endpoint to view the existing bank statement upload configuration for the specified data connection.
 
@@ -782,7 +754,7 @@ paths:
         With this configuration, you set the source of the data you plan to upload, the ID of the account in third-party banking platform, and a provider ID, if required. This lets us determine the expected format of the data and any source-specific requirements.
 
 
-        When you use the [*Upload data*](https://docs.codat.io/lending-api#/operations/upload-bank-statement-data) endpoint next, you must upload the data for the account you configured. '
+        When you use the *Upload data* endpoint next, you must upload the data for the account you configured.'
       operationId: get-bank-statement-upload-configuration
       x-speakeasy-name-override: get-upload-configuration
       responses:
@@ -813,9 +785,15 @@ paths:
           $ref: '#/components/responses/Service-Unavailable'
     post:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: Set upload configuration
-      description: "Use the *Set upload configuration* endpoint to create bank statement upload configuration for the specified data connection. \n\nWith this configuration, you set the source of the data you plan to upload, the ID of the account in third-party banking platform, and a provider ID, if required. This lets us determine the expected format of the data and any source-specific requirements.\n\nEach data connection can only have one configuration for each company and external account ID combination. You will receive a Bad Request response if you try to set it again. "
+      description: 'Use the *Set upload configuration* endpoint to create bank statement upload configuration for the specified data connection.
+
+
+        With this configuration, you set the source of the data you plan to upload, the ID of the account in third-party banking platform, and a provider ID, if required. This lets us determine the expected format of the data and any source-specific requirements.
+
+
+        Each data connection can only have one configuration for each company and external account ID combination. You will receive a Bad Request response if you try to set it again.'
       operationId: set-bank-statement-upload-configuration
       x-speakeasy-name-override: set-upload-configuration
       requestBody:
@@ -858,9 +836,15 @@ paths:
     - $ref: '#/components/parameters/connectionId'
     post:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: Start upload session
-      description: "Use the *Start upload session* endpoint to initiate a bank statement upload session for a given company.\n\nA session is a one-time process that enables you to upload bank statements to Codat. It will time out after 90 minutes if no data is uploaded. \n\nYou can only have one active session per data type at a time. You can complete or cancel a session using the [*End upload session*](https://docs.codat.io/lending-api#/operations/end-bank-statement-upload-session) endpoint."
+      description: 'Use the *Start upload session* endpoint to initiate a bank statement upload session for a given company.
+
+
+        A session is a one-time process that enables you to upload bank statements to Codat. It will time out after 90 minutes if no data is uploaded.
+
+
+        You can only have one active session per data type at a time. You can complete or cancel a session using the *End upload session* endpoint.'
       operationId: start-bank-statement-upload-session
       x-speakeasy-name-override: start-upload-session
       requestBody:
@@ -899,12 +883,12 @@ paths:
     - $ref: '#/components/parameters/path'
     post:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: Upload data
       description: 'During an active session, use the **Upload data* endpoint to uploads a page of bank accounts or bank transactions data to the session.
 
 
-        Make sure you created configuration for the account using the [*Set upload configuration*](https://docs.codat.io/lending-api#/operations/set-bank-statement-upload-configuration) endpoint before attempting an upload. '
+        Make sure you created configuration for the account using the *Set upload configuration* endpoint before attempting an upload.'
       operationId: upload-bank-statement-data
       requestBody:
         required: true
@@ -941,7 +925,7 @@ paths:
     - $ref: '#/components/parameters/datasetId'
     post:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: End upload session
       description: 'Use the *End upload session* endpoint to finalize a bank statement upload session. Include a `status` in the request body to indicate if you want to cancel the processing of the dataset or trigger the ingestion and enrichment of the data.
 
@@ -984,12 +968,12 @@ paths:
     - $ref: '#/components/parameters/orderBy'
     get:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: Get categorized bank statement transactions
       description: 'The *Get categorized bank statement transactions* endpoint returns fully categorized bank transactions for a company. Transaction data is obtained from the company''s connected bank accounts.
 
 
-        Before using it, you must call the [Generate report](https://docs.codat.io/lending-api#/operations/generate-report) endpoint of type `categorizedBankStatement`.'
+        Before using it, you must call the Generate report endpoint of type `categorizedBankStatement`.'
       operationId: get-categorized-bank-statement-transactions
       x-speakeasy-name-override: get-categorized-bank-statement-transactions
       responses:
@@ -1257,9 +1241,12 @@ paths:
     - $ref: '#/components/parameters/orderBy'
     get:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: List categorized bank statement accounts
-      description: "The *Get categorized bank statement accounts* endpoint returns a list of bank accounts associated with categorized transactions for a company. \n\nBefore using it, you must call the [Generate report](https://docs.codat.io/lending-api#/operations/generate-report) endpoint of type `categorizedBankStatement`."
+      description: 'The *Get categorized bank statement accounts* endpoint returns a list of bank accounts associated with categorized transactions for a company.
+
+
+        Before using it, you must call the Generate report endpoint of type `categorizedBankStatement`.'
       operationId: list-categorized-bank-statement-accounts
       x-speakeasy-name-override: list-categorized-bank-statement-accounts
       responses:
@@ -1336,9 +1323,12 @@ paths:
     - $ref: '#/components/parameters/maxAge'
     get:
       tags:
-      - Bank statements
+      - Bank Statements
       summary: Download categorized bank statement Excel
-      description: "Use the *Download categorized bank statement Excel* endpoint to download the categorized bank statement Excel file. \n\nBefore using it, you must call the [Generate report](https://docs.codat.io/lending-api#/operations/generate-report) endpoint of type `categorizedBankStatement`."
+      description: 'Use the *Download categorized bank statement Excel* endpoint to download the categorized bank statement Excel file.
+
+
+        Before using it, you must call the Generate report endpoint of type `categorizedBankStatement`.'
       operationId: download-categorized-bank-statement-excel
       x-speakeasy-name-override: download-categorized-bank-statement-excel
       responses:
@@ -1364,377 +1354,7 @@ paths:
         '503':
           $ref: '#/components/responses/Service-Unavailable'
 components:
-  parameters:
-    accountingAccountId:
-      name: accountId
-      in: path
-      required: true
-      schema:
-        type: string
-        examples:
-        - 13d946f0-c5d5-42bc-b092-97ece17923ab
-        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-        - 7110701885
-        - EILBDVJVNUAGVKRQ
-      description: Unique identifier for an account.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
-    path:
-      name: path
-      description: The endpoint path of the third-party banking service that the request body originates from. Only required if the source is not `codat`.
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - auth/get
-    datasetId:
-      name: datasetId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        description: Unique identifier for the dataset that completed its sync.
-      description: Unique identifier for the dataset that completed its sync.
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
-        description: Unique identifier for a company's data connection.
-      description: Unique identifier for a connection.
-    maxAge:
-      description: The maximum age of report to fetch.
-      name: maxAge
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/DateTime'
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    reportId:
-      name: reportId
-      description: Unique identifier for a report, use either the Id of the report or `latest` for the most recently generate report.
-      in: path
-      required: true
-      schema:
-        oneOf:
-        - type: string
-          title: ID
-          format: uuid
-          example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        - type: string
-          title: Latest
-          enum:
-          - latest
-    orderBy:
-      name: orderBy
-      in: query
-      required: false
-      schema:
-        type: string
-        example: -modifiedDate
-      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
   schemas:
-    BankingAccount:
-      title: 'Banking: Bank account'
-      description: 'This data type provides a list of all the SMB''s bank accounts, with rich data like balances, account numbers, and institutions holding the accounts.
-
-
-        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.'
-      type: object
-      allOf:
-      - type: object
-        properties:
-          id:
-            minLength: 1
-            type: string
-            description: The ID of the account from the provider.
-          name:
-            minLength: 1
-            type: string
-            description: The name of the account according to the provider.
-          informalName:
-            type: string
-            nullable: true
-            description: The friendly name of the account, chosen by the holder. This may not have been set by the account holder and therefore is not always available.
-          holder:
-            type: string
-            nullable: true
-            description: The name of the person or company who holds the account.
-          type:
-            $ref: '#/components/schemas/AccountingBankAccountType'
-          balance:
-            $ref: '#/components/schemas/BankingAccountBalance/definitions/accountBalanceAmounts'
-            description: An object containing bank balance data.
-          identifiers:
-            $ref: '#/components/schemas/BankingAccount/definitions/accountIdentifiers'
-          currency:
-            minLength: 1
-            type: string
-            description: The currency code for the account.
-          institution:
-            $ref: '#/components/schemas/BankingAccount/definitions/accountInstitution'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      required:
-      - id
-      - name
-      - type
-      - balance
-      - identifiers
-      - currency
-      - institution
-      definitions:
-        accountIdentifiers:
-          title: Account Identifiers
-          description: An object containing bank account identification information.
-          type: object
-          x-internal: true
-          additionalProperties: false
-          properties:
-            type:
-              $ref: '#/components/schemas/BankingAccount/definitions/accountIdentifierType'
-            subtype:
-              type: string
-              nullable: true
-              description: Detailed account category
-            number:
-              type: string
-              nullable: true
-              description: The account number for the account. When combined with the`bankCode`, this is usually enough to uniquely identify an account within a jurisdiction.
-            bankCode:
-              type: string
-              nullable: true
-              description: 'The local (usually national) routing number for the account.
-
-
-                This is known by different names in different countries:
-
-                * BSB code (Australia)
-
-                * routing number (Canada, USA)
-
-                * sort code (UK)'
-            iban:
-              type: string
-              nullable: true
-              description: The international bank account number (IBAN) for the account, if known.
-            bic:
-              type: string
-              nullable: true
-              description: The ISO 9362 code (commonly called SWIFT code, SWIFT-BIC or BIC) for the account.
-            maskedAccountNumber:
-              type: string
-              nullable: true
-              description: A portion of the actual account `number` to help account identification where number is tokenised (Plaid only)
-          required:
-          - type
-        accountIdentifierType:
-          type: string
-          x-internal: true
-          description: Type of account
-          enum:
-          - Account
-          - Card
-          - Credit
-          - Depository
-          - Investment
-          - Loan
-          - Other
-        accountInstitution:
-          title: Account Institution
-          description: The bank or other financial institution providing the account.
-          x-internal: true
-          type: object
-          additionalProperties: false
-          properties:
-            id:
-              type: string
-              description: The institution's ID, according to the provider.
-            name:
-              type: string
-              description: The institution's name, according to the underlying provider.
-      examples:
-      - results:
-        - id: 1703194f-7805-4da8-bac0-2ba5da4a4216
-          name: Business Current Account
-          informalName: Codat
-          holder: Codat Ltd
-          type: Debit
-          balance:
-            available: -459987.97
-            current: -459964.9
-            limit: 5000
-          identifiers:
-            type: Depository
-            subtype: checking
-            number: '46762629'
-            bankCode: 009911
-            iban: GB29 LOYD 4773 2346 7626 29
-            bic: LOYDGB21006
-            maskedAccountNumber: LOYDGB21006
-          currency: GBP
-          institution:
-            id: lloyds-bank
-            name: Lloyds Bank
-          modifiedDate: '2022-05-23T16:32:50Z'
-          sourceModifiedDate: '2021-08-14T05:04:12'
-    BankingTransactions:
-      title: 'Banking: Transactions'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/BankingTransaction'
-      - $ref: '#/components/schemas/PagingInfo'
-    SourceAccount:
-      title: Source account (v1)
-      type: object
-      description: The target bank account in a supported accounting software for ingestion into a bank feed.
-      additionalProperties: false
-      properties:
-        id:
-          type: string
-          description: Unique ID for the bank account.
-        accountName:
-          type: string
-          nullable: true
-          description: The bank account name.
-        accountType:
-          type: string
-          nullable: true
-          description: The type of bank account e.g. Credit.
-        accountNumber:
-          type: string
-          nullable: true
-          description: The account number.
-        sortCode:
-          type: string
-          nullable: true
-          description: The sort code.
-        currency:
-          title: Currency
-          x-internal: true
-          type: string
-          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
-          format: ISO4217
-          examples:
-          - GBP
-          - USD
-          - EUR
-        balance:
-          type: number
-          format: decimal
-          nullable: true
-          description: The latest balance for the bank account.
-        modifiedDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-          description: The last date the bank account was modified.
-        status:
-          type: string
-          nullable: true
-          description: Status of the source account.
-          enum:
-          - pending
-          - connected
-          - connecting
-          - disconnected
-          - unknown
-        feedStartDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-      required:
-      - id
-      definitions:
-        sourceAccountPrototype:
-          title: Source account (v1)
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/SourceAccount/properties/id'
-            accountName:
-              $ref: '#/components/schemas/SourceAccount/properties/accountName'
-            accountType:
-              $ref: '#/components/schemas/SourceAccount/properties/accountType'
-            accountNumber:
-              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
-            sortCode:
-              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-            balance:
-              $ref: '#/components/schemas/SourceAccount/properties/balance'
-            modifiedDate:
-              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
-          required:
-          - id
-        sourceAccounts:
-          title: Source accounts
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceAccount'
-      examples:
-      - id: acc-002
-        accountName: account-081
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345670'
-        currency: GBP
-        balance: 99.99
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
-      - id: acc-003
-        accountName: account-095
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345671'
-        currency: USD
-        balance: 0
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
     EnhancedCashFlowTransactions:
       title: Enhanced cash flow transactions
       description: '> **Categorization engine**
@@ -1995,36 +1615,102 @@ components:
             platformName: Plaid
             counterpartyNames: []
             modifiedDate: '2023-01-25T22:36:05.125Z'
-    StartUploadSessionRequest:
-      title: Upload session start request
+    PullOperation:
+      title: Pull operation
+      description: 'Information about a queued, in progress or completed pull operation.
+
+        *Formally called `dataset`*'
       type: object
       properties:
-        dataType:
+        id:
           type: string
+          format: uuid
+          description: Unique identifier of the pull operation.
+          example: 943accd0-4247-42d8-865b-363c8629e1da
+        companyId:
+          type: string
+          format: uuid
+          description: Unique identifier of the company associated to this pull operation.
+          example: 22ece347-e5f6-4896-95e0-35a4c7f17023
+        connectionId:
+          type: string
+          format: uuid
+          description: Unique identifier of the connection associated to this pull operation.
+          example: 50830828-7d39-4367-b0eb-5ddb2de5faa5
+        dataType:
+          title: Data types
+          x-internal: true
+          type: string
+          description: The data type you are requesting in a pull operation.
+        status:
+          title: Dataset status
+          type: string
+          description: The current status of the dataset.
           enum:
-          - banking-accounts
-          - banking-transactions
-          description: A key for a Codat data type.
-    BankingAccounts:
-      title: 'Banking: Bank accounts'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/BankingAccount'
-      - $ref: '#/components/schemas/PagingInfo'
-    AccountingBankAccountType:
-      title: Bank Account Type
-      x-internal: true
-      enum:
-      - Unknown
-      - Credit
-      - Debit
-      type: string
-      description: "The type of transactions and balances on the account.  \nFor Credit accounts, positive balances are liabilities, and positive transactions **reduce** liabilities.  \nFor Debit accounts, positive balances are assets, and positive transactions **increase** assets."
+          - Initial
+          - Queued
+          - Fetching
+          - MapQueued
+          - Mapping
+          - Complete
+          - FetchError
+          - MapError
+          - InternalError
+          - ProcessingQueued
+          - Processing
+          - ProcessingError
+          - ValidationQueued
+          - Validating
+          - ValidationError
+          - AuthError
+          - Cancelled
+          - NotSupported
+          - RateLimitError
+          - PermissionsError
+          - PrerequisiteNotMet
+        statusDescription:
+          type: string
+          nullable: true
+          description: Additional information about the dataset status.
+          example: Paused until 2022-10-23T00:00:00.000Z
+        errorMessage:
+          type: string
+          nullable: true
+          description: A message about a transient or persistent error returned by Codat or the source platform.
+        requested:
+          $ref: '#/components/schemas/DateTime'
+        completed:
+          $ref: '#/components/schemas/DateTime'
+        progress:
+          type: integer
+          description: An integer signifying the progress of the pull operation.
+        isCompleted:
+          type: boolean
+          description: '`True` if the pull operation is completed successfully. The `isCompleted` property is not queryable. To filter failed pull operations, query by `status!=Complete&&status!=NotSupported` instead.'
+        isErrored:
+          type: boolean
+          description: '`True` if the pull operation entered an error state.'
+      required:
+      - id
+      - companyId
+      - connectionId
+      - dataType
+      - status
+      - requested
+      - progress
+      - isCompleted
+      - isErrored
+      examples:
+      - id: 97d60846-f07a-4d42-b5a0-0bdcc6ebf56b
+        companyId: 4645bd78-8988-45bc-ac9e-67ba5df6e4e5
+        connectionId: 51baa045-4836-4317-a42e-3542e991e581
+        dataType: invoices
+        status: Initial
+        statusDescription: Paused until 2022-10-23T00:00:00.000Z
+        requested: '2022-11-14T11:18:37.2798351Z'
+        progress: 10
+        isCompleted: false
+        isErrored: false
     ErrorMessage:
       title: Error message
       type: object
@@ -2083,23 +1769,66 @@ components:
               type: string
               nullable: true
               description: Name of validator.
-    BankStatementUploadConfiguration:
-      title: Banking data upload settings
-      description: Configuration settings for uploading banking data to Codat
-      additionalProperties: false
+    PagingInfo:
       type: object
+      title: Pagination information
+      x-internal: true
       properties:
-        source:
-          type: string
-          enum:
-          - codat
-          description: The source of the banking data that determines its format
-        accountId:
-          type: string
-          description: The ID of the account in the third-party platform
-        providerId:
-          type: string
-          description: TrueLayer provider ID (only required if source is TrueLayer)
+        pageNumber:
+          type: integer
+          description: Current page number.
+        pageSize:
+          type: integer
+          description: Number of items to return in results array.
+          maximum: 2000
+        totalResults:
+          type: integer
+          description: Total number of items.
+        _links:
+          $ref: '#/components/schemas/PagingInfo/definitions/links'
+      definitions:
+        links:
+          title: Hal Links
+          type: object
+          required:
+          - self
+          - current
+          properties:
+            self:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            current:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            next:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            previous:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+          examples:
+          - self:
+              href: /companies
+            current:
+              href: /companies?page=1&pageSize=10
+        halRef:
+          title: Hypertext reference
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri-reference
+              description: Uri hypertext reference.
+      required:
+      - pageNumber
+      - pageSize
+      - totalResults
+      - _links
+      examples:
+      - pageNumber: 1
+        pageSize: 10
+        totalResults: 1
+        _links:
+          self:
+            href: /companies/{id}/data/{dataType}
+          current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
     BankingAccountBalance:
       title: 'Banking: Account balance'
       description: "The Banking Account Balances data type provides a list of balances for a bank account including end-of-day batch balance or running balances per transaction.\n\nResponses are paged, so you should provide `page` and `pageSize` query parameters in your request.\n\n> **How often should I pull Account Balances?**\n>\n> Because these balances are closing balances, we recommend you pull Account Balance no more frequently than daily. If you require a live intraday balance, this can be found for each account on the [Account](https://docs.codat.io/lending-api#/schemas/Account) data type.\n> \n> Whilst you can choose to sync hourly, this may incur usage charges from Plaid or TrueLayer."
@@ -2169,8 +1898,442 @@ components:
             current: -644925.84
             limit: 0
           date: '2022-03-09T00:00:00'
-    BankingTransactionCategories:
-      title: 'Banking: Transaction categories'
+    BankingAccount:
+      title: 'Banking: Bank account'
+      description: 'This data type provides a list of all the SMB''s bank accounts, with rich data like balances, account numbers, and institutions holding the accounts.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.'
+      type: object
+      allOf:
+      - type: object
+        properties:
+          id:
+            minLength: 1
+            type: string
+            description: The ID of the account from the provider.
+          name:
+            minLength: 1
+            type: string
+            description: The name of the account according to the provider.
+          informalName:
+            type: string
+            nullable: true
+            description: The friendly name of the account, chosen by the holder. This may not have been set by the account holder and therefore is not always available.
+          holder:
+            type: string
+            nullable: true
+            description: The name of the person or company who holds the account.
+          type:
+            $ref: '#/components/schemas/AccountingBankAccountType'
+          balance:
+            $ref: '#/components/schemas/BankingAccountBalance/definitions/accountBalanceAmounts'
+            description: An object containing bank balance data.
+          identifiers:
+            $ref: '#/components/schemas/BankingAccount/definitions/accountIdentifiers'
+          currency:
+            minLength: 1
+            type: string
+            description: The currency code for the account.
+          institution:
+            $ref: '#/components/schemas/BankingAccount/definitions/accountInstitution'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      required:
+      - id
+      - name
+      - type
+      - balance
+      - identifiers
+      - currency
+      - institution
+      definitions:
+        accountIdentifiers:
+          title: Account Identifiers
+          description: An object containing bank account identification information.
+          type: object
+          x-internal: true
+          additionalProperties: false
+          properties:
+            type:
+              $ref: '#/components/schemas/BankingAccount/definitions/accountIdentifierType'
+            subtype:
+              type: string
+              nullable: true
+              description: Detailed account category
+            number:
+              type: string
+              nullable: true
+              description: The account number for the account. When combined with the`bankCode`, this is usually enough to uniquely identify an account within a jurisdiction.
+            bankCode:
+              type: string
+              nullable: true
+              description: 'The local (usually national) routing number for the account.
+
+
+                This is known by different names in different countries:
+
+                * BSB code (Australia)
+
+                * routing number (Canada, USA)
+
+                * sort code (UK)'
+            iban:
+              type: string
+              nullable: true
+              description: The international bank account number (IBAN) for the account, if known.
+            bic:
+              type: string
+              nullable: true
+              description: The ISO 9362 code (commonly called SWIFT code, SWIFT-BIC or BIC) for the account.
+            maskedAccountNumber:
+              type: string
+              nullable: true
+              description: A portion of the actual account `number` to help account identification where number is tokenised (Plaid only)
+          required:
+          - type
+        accountIdentifierType:
+          type: string
+          x-internal: true
+          description: Type of account
+          enum:
+          - Account
+          - Card
+          - Credit
+          - Depository
+          - Investment
+          - Loan
+          - Other
+        accountInstitution:
+          title: Account Institution
+          description: The bank or other financial institution providing the account.
+          x-internal: true
+          type: object
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+              description: The institution's ID, according to the provider.
+            name:
+              type: string
+              description: The institution's name, according to the underlying provider.
+      examples:
+      - results:
+        - id: 1703194f-7805-4da8-bac0-2ba5da4a4216
+          name: Business Current Account
+          informalName: Codat
+          holder: Codat Ltd
+          type: Debit
+          balance:
+            available: -459987.97
+            current: -459964.9
+            limit: 5000
+          identifiers:
+            type: Depository
+            subtype: checking
+            number: '46762629'
+            bankCode: 009911
+            iban: GB29 LOYD 4773 2346 7626 29
+            bic: LOYDGB21006
+            maskedAccountNumber: LOYDGB21006
+          currency: GBP
+          institution:
+            id: lloyds-bank
+            name: Lloyds Bank
+          modifiedDate: '2022-05-23T16:32:50Z'
+          sourceModifiedDate: '2021-08-14T05:04:12'
+    BankingTransaction:
+      title: 'Banking: Transaction'
+      description: 'The Banking Transactions data type provides an immutable source of up-to-date information on income and expenditure.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.'
+      type: object
+      allOf:
+      - type: object
+        properties:
+          id:
+            minLength: 1
+            type: string
+            description: The unique identifier of the bank transaction.
+          accountId:
+            minLength: 1
+            type: string
+            description: The unique identifier of the bank account.
+          description:
+            type: string
+            nullable: true
+            description: The description of the bank transaction.
+          amount:
+            type: number
+            format: decimal
+            description: The amount of the bank transaction.
+          currency:
+            minLength: 1
+            type: string
+            description: The currency of the bank transaction.
+          postedDate:
+            $ref: '#/components/schemas/DateTime'
+            description: The date the bank transaction was cleared.
+          authorizedDate:
+            $ref: '#/components/schemas/DateTime'
+            description: The date the bank transaction was authorized.
+          code:
+            $ref: '#/components/schemas/BankingTransaction/definitions/transactionCode'
+          merchantName:
+            type: string
+            nullable: true
+            description: The name of the merchant.
+          transactionCategoryRef:
+            $ref: '#/components/schemas/BankingTransactionCategory/definitions/transactionCategoryRef'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      required:
+      - id
+      - accountId
+      - currency
+      definitions:
+        transactionCode:
+          type: string
+          x-internal: true
+          description: Code to identify the underlying transaction.
+          enum:
+          - Unknown
+          - Fee
+          - Payment
+          - Cash
+          - Transfer
+          - Interest
+          - Cashback
+          - Cheque
+          - DirectDebit
+          - Purchase
+          - StandingOrder
+          - Adjustment
+          - Credit
+          - Other
+          - NotSupported
+      examples:
+      - id: 0130b5bb-1419-40f6-8a27-7362d0381229
+        accountId: 1703194f-7805-4da8-bac0-2ba5da4a4216
+        description: Payments for direct income ce149943-c157-43fc-aac7-42a716b655b6
+        amount: 5062.39
+        currency: GBP
+        postedDate: '2021-07-06T00:00:00'
+        authorizedDate: '2021-07-06T00:00:00'
+        merchantName: New Look
+        transactionCategoryRef:
+          id: health-and-fitness-sports
+        modifiedDate: '2022-05-23T16:32:50Z'
+        sourceModifiedDate: '2021-06-28T10:48:12'
+    CategorizedBankStatementAccounts:
+      title: Categorized bank statement accounts
+      description: '> **Categorization engine**
+
+        >
+
+        > The categorization engine uses machine learning and has been fully trained against Plaid and TrueLayer banking data sources. It is not fully trained against the Basiq banking data source.
+
+
+        The Enhanced Cash Flow accounts endpoint provides a list of accounts that categorized transactions have been taken from.'
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              title: Account
+              type: object
+              properties:
+                id:
+                  description: The ID of the account from the provider.
+                  type: string
+                sourceRef:
+                  $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/accounts/properties/sourceRef'
+                platformName:
+                  description: Name of the banking data source, e.g. "Plaid".
+                  type: string
+                accountProvider:
+                  description: The bank or other financial institution providing the account.
+                  type: string
+                accountName:
+                  description: The name of the account according to the provider.
+                  type: string
+                accountType:
+                  description: The type of banking account, e.g. credit or debit.
+                  type: string
+                currency:
+                  $ref: '#/components/schemas/SourceAccount/properties/currency'
+                  description: The currency code for the bank account.
+                currentBalance:
+                  description: The balance of the bank account.
+                  type: number
+                  format: decimal
+                identifiers:
+                  $ref: '#/components/schemas/BankingAccount/definitions/accountIdentifiers'
+      - $ref: '#/components/schemas/PagingInfo'
+      example:
+        results:
+        - sourceRef:
+            sourceType: Banking
+          platformName: Banking Sandbox
+          accountProvider: Lloyds Bank
+          accountName: Business Savings Account
+          accountType: Debit
+          currency: GBP
+          currentBalance: 0
+        - sourceRef:
+            sourceType: Banking
+          platformName: Banking Sandbox
+          accountProvider: Lloyds Bank
+          accountName: Banking - Business Credit Card
+          accountType: Credit
+          currency: GBP
+          currentBalance: 0
+        - sourceRef:
+            sourceType: Banking
+          platformName: Banking Sandbox
+          accountProvider: Lloyds Bank
+          accountName: Business Undeposited Funds
+          accountType: Debit
+          currency: GBP
+          currentBalance: 0
+        - sourceRef:
+            sourceType: Banking
+          platformName: Banking Sandbox
+          accountProvider: Lloyds Bank
+          accountName: Business Current Account
+          accountType: Debit
+          currency: GBP
+          currentBalance: 0
+        pageNumber: 1
+        pageSize: 10
+        totalResults: 15
+        _links:
+          self:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts
+          current:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts?page=1&pageSize=10
+          next:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts?page=2&pageSize=10
+    ThirdPartySchema:
+      title: Third-party schema
+      description: The format should be identical to the file format receieved from the third-party banking source (e.g. Plaid or TrueLayer).
+      type: object
+      x-speakeasy-type-override: any
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    SourceAccount:
+      title: Source account (v1)
+      type: object
+      description: The target bank account in a supported accounting software for ingestion into a bank feed.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Unique ID for the bank account.
+        accountName:
+          type: string
+          nullable: true
+          description: The bank account name.
+        accountType:
+          type: string
+          nullable: true
+          description: The type of bank account e.g. Credit.
+        accountNumber:
+          type: string
+          nullable: true
+          description: The account number.
+        sortCode:
+          type: string
+          nullable: true
+          description: The sort code.
+        currency:
+          title: Currency
+          x-internal: true
+          type: string
+          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
+          format: ISO4217
+          examples:
+          - GBP
+          - USD
+          - EUR
+        balance:
+          type: number
+          format: decimal
+          nullable: true
+          description: The latest balance for the bank account.
+        modifiedDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: The last date the bank account was modified.
+        status:
+          type: string
+          nullable: true
+          description: Status of the source account.
+          enum:
+          - pending
+          - connected
+          - connecting
+          - disconnected
+          - unknown
+        feedStartDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+      required:
+      - id
+      definitions:
+        sourceAccountPrototype:
+          title: Source account (v1)
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/SourceAccount/properties/id'
+            accountName:
+              $ref: '#/components/schemas/SourceAccount/properties/accountName'
+            accountType:
+              $ref: '#/components/schemas/SourceAccount/properties/accountType'
+            accountNumber:
+              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
+            sortCode:
+              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            balance:
+              $ref: '#/components/schemas/SourceAccount/properties/balance'
+            modifiedDate:
+              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
+          required:
+          - id
+        sourceAccounts:
+          title: Source accounts
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAccount'
+      examples:
+      - id: acc-002
+        accountName: account-081
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345670'
+        currency: GBP
+        balance: 99.99
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+      - id: acc-003
+        accountName: account-095
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345671'
+        currency: USD
+        balance: 0
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+    BankingAccountBalances:
+      title: 'Banking: Account balances'
       x-internal: true
       allOf:
       - type: object
@@ -2178,8 +2341,85 @@ components:
           results:
             type: array
             items:
-              $ref: '#/components/schemas/BankingTransactionCategory'
+              $ref: '#/components/schemas/BankingAccountBalance'
       - $ref: '#/components/schemas/PagingInfo'
+    CategorizedBankStatementTransactions:
+      title: Categorized bank statement transactions
+      description: '> **Categorization engine**
+
+        >
+
+        > The categorization engine uses machine learning and has been fully trained against Plaid and TrueLayer banking data sources. It is not fully trained against the Basiq banking data source.
+
+
+        The Enhanced Cash Flow Transactions endpoint provides a fully categorized list of banking transactions for a company. Accounts and transaction data are obtained from the company''s banking data sources.'
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/enhancedCashFlowItem/properties/transactions/items'
+      - $ref: '#/components/schemas/PagingInfo'
+      example:
+        results:
+        - sourceRef:
+            sourceType: Banking
+        - accountRef:
+            id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
+            name: Business Current Account
+          id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+          date: '2023-01-25'
+          description: Payment to supplier
+          amount: 100
+          currency: USD
+          transactionCategory:
+            confidence: 92.7
+            levels:
+            - Asset
+            - Current
+            - Bank
+            confidences:
+            - 92.7
+            - 95
+            - 96
+          platformName: Plaid
+          counterpartyNames:
+          - Counterparty
+          modifiedDate: '2023-01-25T22:36:05.125Z'
+          isRecurring: true
+        - sourceRef:
+            sourceType: Banking
+        - accountRef:
+            id: 12345678-1234-1234-1234-123456789012
+            name: Business Saving Account
+          id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+          date: '2023-01-25'
+          description: Payment to supplier
+          amount: 100
+          currency: USD
+          transactionCategory:
+            confidence: 92.7
+            levels:
+            - Expense
+            - Operating
+            confidences:
+            - 92.7
+            - 95
+          platformName: Plaid
+          counterpartyNames: []
+          modifiedDate: '2023-01-25T22:36:05.125Z'
+          isRecurring: false
+        pageNumber: 1
+        pageSize: 100
+        totalResults: 2401
+        _links:
+          self:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions
+          current:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=1&pageSize=100
+          next:
+            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=2&pageSize=100
     EnhancedInvoicesReport:
       title: Enhanced invoices report
       description: The enhanced invoices report takes the key elements of the Invoices report verifying those marked as paid in the accounting software have actually been paid by matching with the bank statement.
@@ -2323,410 +2563,6 @@ components:
                 reportName: string
                 companyName: string
                 generatedDate: '2023-01-26T07:36:40.487Z'
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    ThirdPartySchema:
-      title: Third-party schema
-      description: The format should be identical to the file format receieved from the third-party banking source (e.g. Plaid or TrueLayer).
-      type: object
-      x-speakeasy-type-override: any
-    PullOperation:
-      title: Pull operation
-      description: 'Information about a queued, in progress or completed pull operation.
-
-        *Formally called `dataset`*'
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier of the pull operation.
-          example: 943accd0-4247-42d8-865b-363c8629e1da
-        companyId:
-          type: string
-          format: uuid
-          description: Unique identifier of the company associated to this pull operation.
-          example: 22ece347-e5f6-4896-95e0-35a4c7f17023
-        connectionId:
-          type: string
-          format: uuid
-          description: Unique identifier of the connection associated to this pull operation.
-          example: 50830828-7d39-4367-b0eb-5ddb2de5faa5
-        dataType:
-          title: Data types
-          x-internal: true
-          type: string
-          description: The data type you are requesting in a pull operation.
-        status:
-          title: Dataset status
-          type: string
-          description: The current status of the dataset.
-          enum:
-          - Initial
-          - Queued
-          - Fetching
-          - MapQueued
-          - Mapping
-          - Complete
-          - FetchError
-          - MapError
-          - InternalError
-          - ProcessingQueued
-          - Processing
-          - ProcessingError
-          - ValidationQueued
-          - Validating
-          - ValidationError
-          - AuthError
-          - Cancelled
-          - NotSupported
-          - RateLimitError
-          - PermissionsError
-          - PrerequisiteNotMet
-        statusDescription:
-          type: string
-          nullable: true
-          description: Additional information about the dataset status.
-          example: Paused until 2022-10-23T00:00:00.000Z
-        errorMessage:
-          type: string
-          nullable: true
-          description: A message about a transient or persistent error returned by Codat or the source platform.
-        requested:
-          $ref: '#/components/schemas/DateTime'
-        completed:
-          $ref: '#/components/schemas/DateTime'
-        progress:
-          type: integer
-          description: An integer signifying the progress of the pull operation.
-        isCompleted:
-          type: boolean
-          description: '`True` if the pull operation is completed successfully. The `isCompleted` property is not queryable. To filter failed pull operations, query by `status!=Complete&&status!=NotSupported` instead.'
-        isErrored:
-          type: boolean
-          description: '`True` if the pull operation entered an error state.'
-      required:
-      - id
-      - companyId
-      - connectionId
-      - dataType
-      - status
-      - requested
-      - progress
-      - isCompleted
-      - isErrored
-      examples:
-      - id: 97d60846-f07a-4d42-b5a0-0bdcc6ebf56b
-        companyId: 4645bd78-8988-45bc-ac9e-67ba5df6e4e5
-        connectionId: 51baa045-4836-4317-a42e-3542e991e581
-        dataType: invoices
-        status: Initial
-        statusDescription: Paused until 2022-10-23T00:00:00.000Z
-        requested: '2022-11-14T11:18:37.2798351Z'
-        progress: 10
-        isCompleted: false
-        isErrored: false
-    CategorizedBankStatementAccounts:
-      title: Categorized bank statement accounts
-      description: '> **Categorization engine**
-
-        >
-
-        > The categorization engine uses machine learning and has been fully trained against Plaid and TrueLayer banking data sources. It is not fully trained against the Basiq banking data source.
-
-
-        The Enhanced Cash Flow accounts endpoint provides a list of accounts that categorized transactions have been taken from.'
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              title: Account
-              type: object
-              properties:
-                id:
-                  description: The ID of the account from the provider.
-                  type: string
-                sourceRef:
-                  $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/accounts/properties/sourceRef'
-                platformName:
-                  description: Name of the banking data source, e.g. "Plaid".
-                  type: string
-                accountProvider:
-                  description: The bank or other financial institution providing the account.
-                  type: string
-                accountName:
-                  description: The name of the account according to the provider.
-                  type: string
-                accountType:
-                  description: The type of banking account, e.g. credit or debit.
-                  type: string
-                currency:
-                  $ref: '#/components/schemas/SourceAccount/properties/currency'
-                  description: The currency code for the bank account.
-                currentBalance:
-                  description: The balance of the bank account.
-                  type: number
-                  format: decimal
-                identifiers:
-                  $ref: '#/components/schemas/BankingAccount/definitions/accountIdentifiers'
-      - $ref: '#/components/schemas/PagingInfo'
-      example:
-        results:
-        - sourceRef:
-            sourceType: Banking
-          platformName: Banking Sandbox
-          accountProvider: Lloyds Bank
-          accountName: Business Savings Account
-          accountType: Debit
-          currency: GBP
-          currentBalance: 0
-        - sourceRef:
-            sourceType: Banking
-          platformName: Banking Sandbox
-          accountProvider: Lloyds Bank
-          accountName: Banking - Business Credit Card
-          accountType: Credit
-          currency: GBP
-          currentBalance: 0
-        - sourceRef:
-            sourceType: Banking
-          platformName: Banking Sandbox
-          accountProvider: Lloyds Bank
-          accountName: Business Undeposited Funds
-          accountType: Debit
-          currency: GBP
-          currentBalance: 0
-        - sourceRef:
-            sourceType: Banking
-          platformName: Banking Sandbox
-          accountProvider: Lloyds Bank
-          accountName: Business Current Account
-          accountType: Debit
-          currency: GBP
-          currentBalance: 0
-        pageNumber: 1
-        pageSize: 10
-        totalResults: 15
-        _links:
-          self:
-            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts
-          current:
-            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts?page=1&pageSize=10
-          next:
-            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/accounts?page=2&pageSize=10
-    BankingTransaction:
-      title: 'Banking: Transaction'
-      description: 'The Banking Transactions data type provides an immutable source of up-to-date information on income and expenditure.
-
-
-        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.'
-      type: object
-      allOf:
-      - type: object
-        properties:
-          id:
-            minLength: 1
-            type: string
-            description: The unique identifier of the bank transaction.
-          accountId:
-            minLength: 1
-            type: string
-            description: The unique identifier of the bank account.
-          description:
-            type: string
-            nullable: true
-            description: The description of the bank transaction.
-          amount:
-            type: number
-            format: decimal
-            description: The amount of the bank transaction.
-          currency:
-            minLength: 1
-            type: string
-            description: The currency of the bank transaction.
-          postedDate:
-            $ref: '#/components/schemas/DateTime'
-            description: The date the bank transaction was cleared.
-          authorizedDate:
-            $ref: '#/components/schemas/DateTime'
-            description: The date the bank transaction was authorized.
-          code:
-            $ref: '#/components/schemas/BankingTransaction/definitions/transactionCode'
-          merchantName:
-            type: string
-            nullable: true
-            description: The name of the merchant.
-          transactionCategoryRef:
-            $ref: '#/components/schemas/BankingTransactionCategory/definitions/transactionCategoryRef'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      required:
-      - id
-      - accountId
-      - currency
-      definitions:
-        transactionCode:
-          type: string
-          x-internal: true
-          description: Code to identify the underlying transaction.
-          enum:
-          - Unknown
-          - Fee
-          - Payment
-          - Cash
-          - Transfer
-          - Interest
-          - Cashback
-          - Cheque
-          - DirectDebit
-          - Purchase
-          - StandingOrder
-          - Adjustment
-          - Credit
-          - Other
-          - NotSupported
-      examples:
-      - id: 0130b5bb-1419-40f6-8a27-7362d0381229
-        accountId: 1703194f-7805-4da8-bac0-2ba5da4a4216
-        description: Payments for direct income ce149943-c157-43fc-aac7-42a716b655b6
-        amount: 5062.39
-        currency: GBP
-        postedDate: '2021-07-06T00:00:00'
-        authorizedDate: '2021-07-06T00:00:00'
-        merchantName: New Look
-        transactionCategoryRef:
-          id: health-and-fitness-sports
-        modifiedDate: '2022-05-23T16:32:50Z'
-        sourceModifiedDate: '2021-06-28T10:48:12'
-    PagingInfo:
-      type: object
-      title: Pagination information
-      x-internal: true
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number.
-        pageSize:
-          type: integer
-          description: Number of items to return in results array.
-          maximum: 2000
-        totalResults:
-          type: integer
-          description: Total number of items.
-        _links:
-          $ref: '#/components/schemas/PagingInfo/definitions/links'
-      definitions:
-        links:
-          title: Hal Links
-          type: object
-          required:
-          - self
-          - current
-          properties:
-            self:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            current:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            next:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            previous:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-          examples:
-          - self:
-              href: /companies
-            current:
-              href: /companies?page=1&pageSize=10
-        halRef:
-          title: Hypertext reference
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri-reference
-              description: Uri hypertext reference.
-      required:
-      - pageNumber
-      - pageSize
-      - totalResults
-      - _links
-      examples:
-      - pageNumber: 1
-        pageSize: 10
-        totalResults: 1
-        _links:
-          self:
-            href: /companies/{id}/data/{dataType}
-          current:
-            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    BankingTransactionCategory:
-      title: 'Banking: Transaction category'
-      description: 'The Banking Transaction Categories data type provides a list of hierarchical categories associated with a transaction for greater contextual meaning to transaction activity.
-
-
-        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.'
-      type: object
-      allOf:
-      - type: object
-        description: Status of the bank transaction category.
-        properties:
-          id:
-            minLength: 1
-            type: string
-            description: The unique identifier of the bank transaction category.
-          name:
-            minLength: 1
-            type: string
-            description: The name of the bank transaction category.
-          parentId:
-            type: string
-            nullable: true
-            description: The unique identifier of the parent bank transaction category.
-          hasChildren:
-            type: boolean
-            description: A Boolean indicating whether there are other bank transaction categories beneath this one in the hierarchy.
-          status:
-            $ref: '#/components/schemas/BankingTransactionCategory/definitions/transactionCategoryStatus'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      required:
-      - id
-      - name
-      definitions:
-        transactionCategoryRef:
-          type: object
-          x-internal: true
-          description: An object of bank transaction category reference data.
-          properties:
-            id:
-              minLength: 1
-              type: string
-              description: The unique category reference id for the bank transaction.
-            name:
-              type: string
-              nullable: true
-              description: The category name reference for the bank transaction.
-          required:
-          - id
-        transactionCategoryStatus:
-          type: string
-          description: The status of the transaction category.
-          x-internal: true
-          enum:
-          - Unknown
-          - Active
-          - Archived
-      examples:
-      - id: auto-and-transport
-        name: Auto & Transport
-        hasChildren: true
-        status: Active
-        modifiedDate: '2022-05-23T16:32:50'
-        sourceModifiedDate: '2021-04-24T07:59:10'
     CommerceOrder:
       title: 'Commerce: Order'
       description: 'Orders contain the transaction details for all products sold by the company, and include details of any payments, service charges, or refunds related to each order. You can use data from the Orders endpoints to calculate key metrics, such as gross sales values and monthly recurring revenue (MRR).
@@ -3018,83 +2854,138 @@ components:
         modifiedDate: '2022-02-02T11:02:45Z'
         sourceModifiedDate: '2021-03-28T03:00:14'
       type: object
-    CategorizedBankStatementTransactions:
-      title: Categorized bank statement transactions
-      description: '> **Categorization engine**
-
-        >
-
-        > The categorization engine uses machine learning and has been fully trained against Plaid and TrueLayer banking data sources. It is not fully trained against the Basiq banking data source.
-
-
-        The Enhanced Cash Flow Transactions endpoint provides a fully categorized list of banking transactions for a company. Accounts and transaction data are obtained from the company''s banking data sources.'
+    BankStatementUploadConfiguration:
+      title: Banking data upload settings
+      description: Configuration settings for uploading banking data to Codat
+      additionalProperties: false
+      type: object
+      properties:
+        source:
+          type: string
+          enum:
+          - codat
+          description: The source of the banking data that determines its format
+        accountId:
+          type: string
+          description: The ID of the account in the third-party platform
+        providerId:
+          type: string
+          description: TrueLayer provider ID (only required if source is TrueLayer)
+    BankingAccounts:
+      title: 'Banking: Bank accounts'
+      x-internal: true
       allOf:
       - type: object
         properties:
           results:
             type: array
             items:
-              $ref: '#/components/schemas/EnhancedCashFlowTransactions/definitions/enhancedCashFlowItem/properties/transactions/items'
+              $ref: '#/components/schemas/BankingAccount'
       - $ref: '#/components/schemas/PagingInfo'
-      example:
-        results:
-        - sourceRef:
-            sourceType: Banking
-        - accountRef:
-            id: 4f78a6b0-e9bb-40f2-82fd-f3a2daa1fd0a
-            name: Business Current Account
-          id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-          date: '2023-01-25'
-          description: Payment to supplier
-          amount: 100
-          currency: USD
-          transactionCategory:
-            confidence: 92.7
-            levels:
-            - Asset
-            - Current
-            - Bank
-            confidences:
-            - 92.7
-            - 95
-            - 96
-          platformName: Plaid
-          counterpartyNames:
-          - Counterparty
-          modifiedDate: '2023-01-25T22:36:05.125Z'
-          isRecurring: true
-        - sourceRef:
-            sourceType: Banking
-        - accountRef:
-            id: 12345678-1234-1234-1234-123456789012
-            name: Business Saving Account
-          id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-          date: '2023-01-25'
-          description: Payment to supplier
-          amount: 100
-          currency: USD
-          transactionCategory:
-            confidence: 92.7
-            levels:
-            - Expense
-            - Operating
-            confidences:
-            - 92.7
-            - 95
-          platformName: Plaid
-          counterpartyNames: []
-          modifiedDate: '2023-01-25T22:36:05.125Z'
-          isRecurring: false
-        pageNumber: 1
-        pageSize: 100
-        totalResults: 2401
-        _links:
-          self:
-            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions
-          current:
-            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=1&pageSize=100
-          next:
-            href: /companies/82458839-6812-49e9-baac-7dcf8c32de1f/reports/categorizedBankStatement/latest/transactions?page=2&pageSize=100
+    BankingTransactionCategory:
+      title: 'Banking: Transaction category'
+      description: 'The Banking Transaction Categories data type provides a list of hierarchical categories associated with a transaction for greater contextual meaning to transaction activity.
+
+
+        Responses are paged, so you should provide `page` and `pageSize` query parameters in your request.'
+      type: object
+      allOf:
+      - type: object
+        description: Status of the bank transaction category.
+        properties:
+          id:
+            minLength: 1
+            type: string
+            description: The unique identifier of the bank transaction category.
+          name:
+            minLength: 1
+            type: string
+            description: The name of the bank transaction category.
+          parentId:
+            type: string
+            nullable: true
+            description: The unique identifier of the parent bank transaction category.
+          hasChildren:
+            type: boolean
+            description: A Boolean indicating whether there are other bank transaction categories beneath this one in the hierarchy.
+          status:
+            $ref: '#/components/schemas/BankingTransactionCategory/definitions/transactionCategoryStatus'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      required:
+      - id
+      - name
+      definitions:
+        transactionCategoryRef:
+          type: object
+          x-internal: true
+          description: An object of bank transaction category reference data.
+          properties:
+            id:
+              minLength: 1
+              type: string
+              description: The unique category reference id for the bank transaction.
+            name:
+              type: string
+              nullable: true
+              description: The category name reference for the bank transaction.
+          required:
+          - id
+        transactionCategoryStatus:
+          type: string
+          description: The status of the transaction category.
+          x-internal: true
+          enum:
+          - Unknown
+          - Active
+          - Archived
+      examples:
+      - id: auto-and-transport
+        name: Auto & Transport
+        hasChildren: true
+        status: Active
+        modifiedDate: '2022-05-23T16:32:50'
+        sourceModifiedDate: '2021-04-24T07:59:10'
+    AccountingBankAccountType:
+      title: Bank Account Type
+      x-internal: true
+      enum:
+      - Unknown
+      - Credit
+      - Debit
+      type: string
+      description: "The type of transactions and balances on the account.  \nFor Credit accounts, positive balances are liabilities, and positive transactions **reduce** liabilities.  \nFor Debit accounts, positive balances are assets, and positive transactions **increase** assets."
+    StartUploadSessionRequest:
+      title: Upload session start request
+      type: object
+      properties:
+        dataType:
+          type: string
+          enum:
+          - banking-accounts
+          - banking-transactions
+          description: A key for a Codat data type.
+    BankingTransactions:
+      title: 'Banking: Transactions'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/BankingTransaction'
+      - $ref: '#/components/schemas/PagingInfo'
+    BankingTransactionCategories:
+      title: 'Banking: Transaction categories'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/BankingTransactionCategory'
+      - $ref: '#/components/schemas/PagingInfo'
     EndUploadSessionRequest:
       title: End upload session request
       type: object
@@ -3105,203 +2996,6 @@ components:
           - Cancel
           - Process
           description: An indicator to cancel the dataset processing or trigger ingestion and enrichment of data.
-    BankingAccountBalances:
-      title: 'Banking: Account balances'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/BankingAccountBalance'
-      - $ref: '#/components/schemas/PagingInfo'
-  responses:
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Malformed-Query:
-      description: Your `query` parameter was not correctly formed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: ClientsApi
-                error: Error parsing query - Malformed query.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Unresolved property:
-              value:
-                statusCode: 400
-                service: PullApi
-                error: Error parsing query - Could not resolve property isCompleted on Dataset
-                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Not-Found:
-      description: 'One or more of the resources you referenced could not be found.
-
-        This might be because your company or data connection id is wrong, or was already deleted.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Data connection not found:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
-                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Company not found:
-              value:
-                statusCode: 404
-                service: ClientsApi
-                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            No data available:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Conflict:
-      description: The data type's dataset has not been requested or is still syncing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 409
-                service: PublicApi
-                error: The data set has not been requested.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
   examples:
     EnhancedCashflowExample:
       value:
@@ -3562,6 +3256,302 @@ components:
         source: codat
         accountId: abc123-ABC
       summary: Settings for uploading codat data
+  parameters:
+    maxAge:
+      description: The maximum age of report to fetch.
+      name: maxAge
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/DateTime'
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    reportId:
+      name: reportId
+      description: Unique identifier for a report, use either the Id of the report or `latest` for the most recently generate report.
+      in: path
+      required: true
+      schema:
+        oneOf:
+        - type: string
+          title: ID
+          format: uuid
+          example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        - type: string
+          title: Latest
+          enum:
+          - latest
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    path:
+      name: path
+      description: The endpoint path of the third-party banking service that the request body originates from. Only required if the source is not `codat`.
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - auth/get
+    accountingAccountId:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        examples:
+        - 13d946f0-c5d5-42bc-b092-97ece17923ab
+        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+        - 7110701885
+        - EILBDVJVNUAGVKRQ
+      description: Unique identifier for an account.
+    datasetId:
+      name: datasetId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        description: Unique identifier for the dataset that completed its sync.
+      description: Unique identifier for the dataset that completed its sync.
+  responses:
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Data connection not found:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Conflict:
+      description: The data type's dataset has not been requested or is still syncing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 409
+                service: PublicApi
+                error: The data set has not been requested.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
   securitySchemes:
     auth_header:
       name: Authorization

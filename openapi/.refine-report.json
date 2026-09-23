@@ -82,7 +82,8 @@
     "codat-platform-openapi.json: declared missing tag: Platform API",
     "tag 'Companies' spans 3 source specs (codat-bank-feeds-openapi.json, codat-lending-openapi.json, codat-platform-openapi.json): per-path servers applied",
     "tag 'Connections' spans 3 source specs (codat-bank-feeds-openapi.json, codat-lending-openapi.json, codat-platform-openapi.json): per-path servers applied",
-    "tag 'Transactions' spans 2 source specs (codat-bank-feeds-openapi.json, codat-lending-openapi.json): per-path servers applied"
+    "tag 'Transactions' spans 2 source specs (codat-bank-feeds-openapi.json, codat-lending-openapi.json): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "codat-account-mapping-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -90,6 +91,7 @@
     "codat-accounts-payable-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-accounts-receivable-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-bank-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codat-bank-feeds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-bank-statements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-companies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-company-info-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -103,11 +105,13 @@
     "codat-financial-statements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-financial-summary-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-integrations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codat-lending-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-liabilities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-loan-writeback-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-manage-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-manage-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-managed-bank-feeds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "codat-platform-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-push-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-read-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "codat-refresh-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",

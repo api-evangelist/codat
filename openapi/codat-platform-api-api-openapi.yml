@@ -3,7 +3,7 @@ info:
   title: Platform API
   version: 3.0.0
   summary: Platform API
-  description: "An API for the common components of all of Codat's products.\n\nThese end points cover creating and managing your companies, data connections, and integrations.\n\n[Read about the building blocks of Codat...](https://docs.codat.io/core-concepts/companies) | [See our OpenAPI spec](https://github.com/codatio/oas) \n\n---\n<!-- Start Codat Tags Table -->\n## Endpoints\n\n| Endpoints | Description |\n| :- |:- |\n| Companies | Create and manage your SMB users' companies. |\n| Connections | Create new and manage existing data connections for a company. |\n| Connection management | Configure connection management UI and retrieve access tokens for authentication. |\n| Webhooks | Create and manage webhooks that listen to Codat's events. |\n| Integrations | Get a list of integrations supported by Codat and their logos. |\n| Refresh data | Initiate data refreshes, view pull status and history. |\n| Settings | Manage company profile configuration, sync settings, and API keys. |\n| Push data | Initiate and monitor Create, Update, and Delete operations. |\n| Supplemental data | Configure and pull additional data you can include in Codat's standard data types. |\n| Custom data type | Configure and pull additional data types that are not included in Codat's standardized data model. |\n<!-- End Codat Tags Table -->"
+  description: An API for the common components of all of Codat's products.
   contact:
     name: Codat
     email: support@codat.io
@@ -46,6 +46,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create company created
+      x-summary-source: derived
   company.deleted:
     post:
       description: Called when a company is deleted in Codat.
@@ -75,6 +77,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create company deleted
+      x-summary-source: derived
   connection.created:
     post:
       description: Called when a connection is created by the SMB.
@@ -115,6 +119,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create connection created
+      x-summary-source: derived
   connection.connected:
     post:
       description: Called when a connection is successfully linked by the SMB.
@@ -155,6 +161,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create connection connected
+      x-summary-source: derived
   connection.failed:
     post:
       description: Called when a connection failed linking to the SMB.
@@ -200,6 +208,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create connection failed
+      x-summary-source: derived
   connection.disconnected:
     post:
       description: Called when a connection is disconnected either due to being unlinked or de-authorized by the SMB or integration.
@@ -272,6 +282,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create connection disconnected
+      x-summary-source: derived
   connection.reconnected:
     post:
       description: Called when a connection is reconnected after becoming disconnected.
@@ -312,6 +324,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create connection reconnected
+      x-summary-source: derived
   connection.deleted:
     post:
       description: Called when a connection is deleted.
@@ -352,6 +366,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create connection deleted
+      x-summary-source: derived
   read.completed:
     post:
       description: Called when the fetch of data types for a product has completed.
@@ -410,6 +426,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create read completed
+      x-summary-source: derived
   read.completed.initial:
     post:
       description: Called when the initial fetch of data types for a product has been completed.
@@ -468,9 +486,61 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create read completed initial
+      x-summary-source: derived
   '{dataType}.write.successful':
     post:
-      description: "Indicates that a `dataType` has been successfully created, updated, deleted, or had an attachment uploaded in the accounting software.\n\nCodat now refers to push operations as write requests.\n\nFor example, to subscribe to events where a bill is written into the accounting software, use the `bills.write.successful` webhook.\n\n### Supported data types and write types\n\n| `dataType`       | Create  | Update  | Delete  | UploadAttachment |\n|------------------|---------|---------|---------|------------------|\n| bankAccounts     | &#9989; | &#9989; | -       | -                |  \n| bankTransactions | &#9989; | -       | -       | -                |\n| billCreditNotes  | &#9989; | &#9989; | -       | &#9989;          |  \n| billPayments     | &#9989; | -       | &#9989; | -                | \n| bills            | &#9989; | &#9989; | &#9989; | &#9989;          | \n| chartOfAccounts  | &#9989; | -       | -       | -                | \n| creditNotes      | &#9989; | &#9989; | -       | -                | \n| customers        | &#9989; | &#9989; | -       | -                | \n| directCosts      | &#9989; | -       | &#9989; | &#9989;          | \n| directIncomes    | &#9989; | -       | -       | &#9989;          | \n| invoices         | &#9989; | &#9989; | &#9989; | &#9989;          | \n| items            | &#9989; | -       | -       | -                | \n| journalEntries   | &#9989; | -       | &#9989; | -                | \n| journals         | &#9989; | -       | -       | -                | \n| payments         | &#9989; | -       | -       | -                | \n| purchaseOrders   | &#9989; | &#9989; | -       | -                | \n| suppliers        | &#9989; | &#9989; | -       | -                | \n| transfers        | &#9989; | -       | -       | &#9989;          | \n"
+      description: 'Indicates that a `dataType` has been successfully created, updated, deleted, or had an attachment uploaded in the accounting software.
+
+
+        Codat now refers to push operations as write requests.
+
+
+        For example, to subscribe to events where a bill is written into the accounting software, use the `bills.write.successful` webhook.
+
+
+        ### Supported data types and write types
+
+
+        | `dataType` | Create | Update | Delete | UploadAttachment |
+
+        |------------------|---------|---------|---------|------------------|
+
+        | bankAccounts | ✅ | ✅ | - | - |
+
+        | bankTransactions | ✅ | - | - | - |
+
+        | billCreditNotes | ✅ | ✅ | - | ✅ |
+
+        | billPayments | ✅ | - | ✅ | - |
+
+        | bills | ✅ | ✅ | ✅ | ✅ |
+
+        | chartOfAccounts | ✅ | - | - | - |
+
+        | creditNotes | ✅ | ✅ | - | - |
+
+        | customers | ✅ | ✅ | - | - |
+
+        | directCosts | ✅ | - | ✅ | ✅ |
+
+        | directIncomes | ✅ | - | - | ✅ |
+
+        | invoices | ✅ | ✅ | ✅ | ✅ |
+
+        | items | ✅ | - | - | - |
+
+        | journalEntries | ✅ | - | ✅ | - |
+
+        | journals | ✅ | - | - | - |
+
+        | payments | ✅ | - | - | - |
+
+        | purchaseOrders | ✅ | ✅ | - | - |
+
+        | suppliers | ✅ | ✅ | - | - |
+
+        | transfers | ✅ | - | - | ✅ |'
       requestBody:
         content:
           application/json:
@@ -519,9 +589,61 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received.
       tags:
       - Platform API
+      summary: Create {data type} write successful
+      x-summary-source: derived
   '{dataType}.write.unsuccessful':
     post:
-      description: "Indicates that a `dataType` has not been successfully created, updated, deleted, or had an attachment uploaded in the accounting software.\n\nCodat now refers to push operations as write requests.\n\nFor example, to subscribe to events where a bill is written into the accounting software, use the `bills.write.unsuccessful` webhook.\n\n### Supported data types and write types\n\n| `dataType`       | Create  | Update  | Delete  | UploadAttachment |\n|------------------|---------|---------|---------|------------------|\n| bankAccounts     | &#9989; | &#9989; | -       | -                |  \n| bankTransactions | &#9989; | -       | -       | -                |\n| billCreditNotes  | &#9989; | &#9989; | -       | &#9989;          |  \n| billPayments     | &#9989; | -       | &#9989; | -                | \n| bills            | &#9989; | &#9989; | &#9989; | &#9989;          | \n| chartOfAccounts  | &#9989; | -       | -       | -                | \n| creditNotes      | &#9989; | &#9989; | -       | -                | \n| customers        | &#9989; | &#9989; | -       | -                | \n| directCosts      | &#9989; | -       | &#9989; | &#9989;          | \n| directIncomes    | &#9989; | -       | -       | &#9989;          | \n| invoices         | &#9989; | &#9989; | &#9989; | &#9989;          | \n| items            | &#9989; | -       | -       | -                | \n| journalEntries   | &#9989; | -       | &#9989; | -                | \n| journals         | &#9989; | -       | -       | -                | \n| payments         | &#9989; | -       | -       | -                | \n| purchaseOrders   | &#9989; | &#9989; | -       | -                | \n| suppliers        | &#9989; | &#9989; | -       | -                | \n| transfers        | &#9989; | -       | -       | &#9989;          | \n"
+      description: 'Indicates that a `dataType` has not been successfully created, updated, deleted, or had an attachment uploaded in the accounting software.
+
+
+        Codat now refers to push operations as write requests.
+
+
+        For example, to subscribe to events where a bill is written into the accounting software, use the `bills.write.unsuccessful` webhook.
+
+
+        ### Supported data types and write types
+
+
+        | `dataType` | Create | Update | Delete | UploadAttachment |
+
+        |------------------|---------|---------|---------|------------------|
+
+        | bankAccounts | ✅ | ✅ | - | - |
+
+        | bankTransactions | ✅ | - | - | - |
+
+        | billCreditNotes | ✅ | ✅ | - | ✅ |
+
+        | billPayments | ✅ | - | ✅ | - |
+
+        | bills | ✅ | ✅ | ✅ | ✅ |
+
+        | chartOfAccounts | ✅ | - | - | - |
+
+        | creditNotes | ✅ | ✅ | - | - |
+
+        | customers | ✅ | ✅ | - | - |
+
+        | directCosts | ✅ | - | ✅ | ✅ |
+
+        | directIncomes | ✅ | - | - | ✅ |
+
+        | invoices | ✅ | ✅ | ✅ | ✅ |
+
+        | items | ✅ | - | - | - |
+
+        | journalEntries | ✅ | - | ✅ | - |
+
+        | journals | ✅ | - | - | - |
+
+        | payments | ✅ | - | - | - |
+
+        | purchaseOrders | ✅ | ✅ | - | - |
+
+        | suppliers | ✅ | ✅ | - | - |
+
+        | transfers | ✅ | - | - | ✅ |'
       requestBody:
         content:
           application/json:
@@ -583,6 +705,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received.
       tags:
       - Platform API
+      summary: Create {data type} write unsuccessful
+      x-summary-source: derived
   client.rateLimit.reached:
     post:
       description: Called when your client’s request count to Codat's API surpasses the allocated quota.
@@ -606,6 +730,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create client rate limit reached
+      x-summary-source: derived
   client.rateLimit.reset:
     post:
       description: Called when your client's rate limit quota is reset, allowing additional requests to Codat's API.
@@ -629,6 +755,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Platform API
+      summary: Create client rate limit reset
+      x-summary-source: derived
 components:
   schemas:
     ReadCompletedWebhook:
@@ -753,429 +881,6 @@ components:
                   type: string
                   description: A link to Codat's documentation with additional information on how to troubleshoot this issue.
                   example: https://docs.codat.io/using-the-api/get-data-troubleshooting#warning.validation
-    CompanyWebhook:
-      title: Company webhook
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: ba29118f-5406-4e59-b05c-ba307ca38d01
-          description: Unique identifier of the event
-        eventType:
-          type: string
-          description: The type of event.
-          examples:
-          - company.created
-          - company.deleted
-        generatedDate:
-          $ref: '#/components/schemas/DateTime'
-          description: The date time in UTC the event was generated in Codat.
-        payload:
-          $ref: '#/components/schemas/Company/definitions/companyDetails'
-    Company:
-      title: Company
-      description: "\uFEFFIn Codat, a company represents a business sharing access to their data. Each company can have multiple [connections](https://docs.codat.io/platform-api#/schemas/Connection) to different data sources such as one connection to [Xero](https://docs.codat.io/integrations/accounting/xero/accounting-xero) for accounting data, two connections to [Plaid](https://docs.codat.io/integrations/banking/plaid/banking-plaid) for two bank accounts and a connection to [Zettle](https://docs.codat.io/integrations/commerce/zettle/commerce-zettle) for POS data.\n\nTypically each company is one of your customers.\n\nWhen you create a company, you can specify a `name` and we will automatically generate a unique `id` for the company. You can also add a `description` to store any additional information about the company."
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Company/definitions/companyDetails'
-      - type: object
-        properties:
-          dataConnections:
-            type: array
-            items:
-              $ref: '#/components/schemas/Connection'
-      definitions:
-        companyDetails:
-          title: Company details
-          type: object
-          properties:
-            id:
-              $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
-            name:
-              type: string
-              description: The name of the company
-              example: Codat Ltd.
-            description:
-              $ref: '#/components/schemas/CompanyRequestBody/properties/description'
-              nullable: true
-            redirect:
-              type: string
-              format: uri
-              description: The `redirect` [Link URL](https://docs.codat.io/auth-flow/authorize-hosted-link) enabling the customer to start their auth flow journey for the company.
-              example: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
-            lastSync:
-              $ref: '#/components/schemas/DateTime'
-              nullable: true
-            created:
-              $ref: '#/components/schemas/DateTime'
-            createdByUserName:
-              type: string
-              description: Name of user that created the company in Codat.
-              nullable: true
-            products:
-              type: array
-              items:
-                type: string
-              description: An array of products that are currently enabled for the company.
-            tags:
-              title: Tags
-              type: object
-              maxProperties: 10
-              propertyNames:
-                pattern: ^.{1,27}$
-              additionalProperties:
-                type: string
-                maxLength: 100
-              description: A collection of user-defined key-value pairs that store custom metadata against the company.
-            referenceParentCompany:
-              $ref: '#/components/schemas/Company/definitions/companyReference'
-              nullable: true
-              description: The parent entity or controlling organization of this company. Null if the company has no parent.
-            referenceSubsidiaryCompanies:
-              type: array
-              nullable: false
-              description: A list of subsidiary companies owned or controlled by this entity. Empty if the company has no children.
-              minItems: 0
-              items:
-                $ref: '#/components/schemas/Company/definitions/companyReference'
-          required:
-          - id
-          - name
-          - redirect
-        companyReference:
-          title: Company reference
-          type: object
-          properties:
-            id:
-              $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
-            name:
-              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/name'
-            description:
-              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/description'
-            links:
-              type: object
-              description: A collection of links for the company.
-              properties:
-                portal:
-                  type: string
-                  format: uri
-                  description: Link to the company page in the portal.
-            tags:
-              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
-      examples:
-      - id: 0498e921-9b53-4396-a412-4f2f5983b0a2
-        name: string
-        redirect: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
-        lastSync: '2022-01-01T12:00:00.000Z'
-        created: '2022-01-01T12:00:00.000Z'
-        createdByUserName: string
-        tags:
-          region: us
-          uid: f6b0c253-16c7-4da1-a0c5-9c871e9c9d6c
-        dataConnections:
-        - id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
-          integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
-          integrationKey: dfxm
-          sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
-          platformName: Basiq
-          linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
-          status: Linked
-          lastSync: '2022-10-27T10:22:43.6464237Z'
-          created: '2022-10-27T09:53:29Z'
-          sourceType: Banking
-        products:
-        - spend-insights
-        - lending
-    Connection:
-      title: Connection
-      description: "\uFEFFA connection represents a [company's](https://docs.codat.io/platform-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
-      type: object
-      properties:
-        id:
-          $ref: '#/components/parameters/connectionId/schema'
-        integrationId:
-          type: string
-          format: uuid
-          example: fd321cb6-7963-4506-b873-e99593a45e30
-          description: A Codat ID representing the integration.
-        integrationKey:
-          type: string
-          description: A unique four-character ID that identifies the platform of the company's data connection. This ensures continuity if the platform changes its name in the future.
-        sourceId:
-          $ref: '#/components/schemas/Branding/properties/sourceId'
-        sourceType:
-          $ref: '#/components/schemas/Integration/definitions/sourceType'
-        platformName:
-          type: string
-          description: Name of integration connected to company.
-        linkUrl:
-          type: string
-          format: uri
-          description: The link URL your customers can use to authorize access to their business application.
-          example: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/2e2eb431-c1fa-4dc9-93fa-d29781c12bcd/start
-        status:
-          $ref: '#/components/schemas/Connection/definitions/dataConnectionStatus'
-        lastSync:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-        created:
-          $ref: '#/components/schemas/DateTime'
-        dataConnectionErrors:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/Connection/definitions/dataConnectionError'
-        connectionInfo:
-          type: object
-          nullable: true
-          additionalProperties: true
-      additionalProperties: false
-      required:
-      - id
-      - integrationId
-      - integrationKey
-      - sourceId
-      - platformName
-      - linkUrl
-      - status
-      - created
-      - sourceType
-      definitions:
-        dataConnectionStatus:
-          title: Data connection status
-          description: The current authorization status of the data connection.
-          type: string
-          enum:
-          - PendingAuth
-          - Linked
-          - Unlinked
-          - Deauthorized
-        dataConnectionError:
-          title: Data connection error
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: The HTTP status code returned by the source platform when the error occurred.
-            statusText:
-              type: string
-              description: A non-numeric status code/text returned by the source platform when the error occurred.
-            errorMessage:
-              type: string
-              description: A message about a error returned by Codat.
-            erroredOnUtc:
-              $ref: '#/components/schemas/DateTime'
-            status:
-              title: Error status
-              description: The current status of a transient error. Null statuses indicate that the error is not transient.
-              type: string
-              nullable: true
-              enum:
-              - Active
-              - Resolved
-            resolvedOnUtc:
-              description: The datetime in Utc that the error was resolved.
-              nullable: true
-              $ref: '#/components/schemas/DateTime'
-        dataConnectionSourceType:
-          title: Source Type
-          description: The type of platform of the connection.
-          type: string
-          enum:
-          - Accounting
-          - Banking
-          - BankFeed
-          - Commerce
-          - Expense
-          - Other
-          - Unknown
-          example: Accounting
-      example:
-        id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
-        integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
-        integrationKey: dfxm
-        sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
-        platformName: Basiq
-        linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
-        status: Linked
-        lastSync: '2022-10-27T10:22:43.6464237Z'
-        created: '2022-10-27T09:53:29Z'
-        sourceType: Banking
-    DataStatus:
-      title: Data status
-      description: Describes the state of data in the Codat cache for a company and data type
-      type: object
-      required:
-      - dataType
-      - currentStatus
-      properties:
-        dataType:
-          title: Data types
-          x-internal: true
-          type: string
-          description: Available data types
-          enum:
-          - accountTransactions
-          - balanceSheet
-          - bankAccounts
-          - bankTransactions
-          - billCreditNotes
-          - billPayments
-          - bills
-          - cashFlowStatement
-          - chartOfAccounts
-          - company
-          - creditNotes
-          - customers
-          - directCosts
-          - directIncomes
-          - invoices
-          - itemReceipts
-          - items
-          - journalEntries
-          - journals
-          - paymentMethods
-          - payments
-          - profitAndLoss
-          - purchaseOrders
-          - salesOrders
-          - suppliers
-          - taxRates
-          - trackingCategories
-          - transfers
-          - banking-accountBalances
-          - banking-accounts
-          - banking-transactionCategories
-          - banking-transactions
-          - commerce-companyInfo
-          - commerce-customers
-          - commerce-disputes
-          - commerce-locations
-          - commerce-orders
-          - commerce-paymentMethods
-          - commerce-payments
-          - commerce-productCategories
-          - commerce-products
-          - commerce-taxComponents
-          - commerce-transactions
-          example: invoices
-        lastSuccessfulSync:
-          $ref: '#/components/schemas/DateTime'
-        currentStatus:
-          $ref: '#/components/schemas/PullOperation/properties/status'
-        latestSyncId:
-          type: string
-          description: Unique identifier for most recent sync of data type.
-          format: uuid
-          example: ad474a37-2003-478e-baee-9af9f1ec2fe3
-        latestSuccessfulSyncId:
-          type: string
-          description: Unique identifier for the most recent successful sync of data type.
-          format: uuid
-          example: 8220fc90-55b6-47bc-9417-48ac6ea93101
-      examples:
-      - dataType: string
-        lastSuccessfulSync: '2022-01-01T13:00:00.000Z'
-        currentStatus: string
-        latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
-        latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
-    PullOperation:
-      title: Pull operation
-      description: 'Information about a queued, in progress or completed pull operation.
-
-        *Formally called `dataset`*'
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier of the pull operation.
-          example: 943accd0-4247-42d8-865b-363c8629e1da
-        companyId:
-          type: string
-          format: uuid
-          description: Unique identifier of the company associated to this pull operation.
-          example: 22ece347-e5f6-4896-95e0-35a4c7f17023
-        connectionId:
-          type: string
-          format: uuid
-          description: Unique identifier of the connection associated to this pull operation.
-          example: 50830828-7d39-4367-b0eb-5ddb2de5faa5
-        dataType:
-          title: Data types
-          x-internal: true
-          type: string
-          description: The data type you are requesting in a pull operation.
-        status:
-          title: Dataset status
-          type: string
-          description: The current status of the dataset.
-          enum:
-          - Initial
-          - Queued
-          - Fetching
-          - MapQueued
-          - Mapping
-          - Complete
-          - FetchError
-          - MapError
-          - InternalError
-          - ProcessingQueued
-          - Processing
-          - ProcessingError
-          - ValidationQueued
-          - Validating
-          - ValidationError
-          - AuthError
-          - Cancelled
-          - NotSupported
-          - RateLimitError
-          - PermissionsError
-          - PrerequisiteNotMet
-        statusDescription:
-          type: string
-          nullable: true
-          description: Additional information about the dataset status.
-          example: Paused until 2022-10-23T00:00:00.000Z
-        errorMessage:
-          type: string
-          nullable: true
-          description: A message about a transient or persistent error returned by Codat or the source platform.
-        requested:
-          $ref: '#/components/schemas/DateTime'
-        completed:
-          $ref: '#/components/schemas/DateTime'
-        progress:
-          type: integer
-          description: An integer signifying the progress of the pull operation.
-        isCompleted:
-          type: boolean
-          description: '`True` if the pull operation is completed successfully. The `isCompleted` property is not queryable. To filter failed pull operations, query by `status!=Complete&&status!=NotSupported` instead.'
-        isErrored:
-          type: boolean
-          description: '`True` if the pull operation entered an error state.'
-      required:
-      - id
-      - companyId
-      - connectionId
-      - dataType
-      - status
-      - requested
-      - progress
-      - isCompleted
-      - isErrored
-      examples:
-      - id: 97d60846-f07a-4d42-b5a0-0bdcc6ebf56b
-        companyId: 4645bd78-8988-45bc-ac9e-67ba5df6e4e5
-        connectionId: 51baa045-4836-4317-a42e-3542e991e581
-        dataType: invoices
-        status: Initial
-        statusDescription: Paused until 2022-10-23T00:00:00.000Z
-        requested: '2022-11-14T11:18:37.2798351Z'
-        progress: 10
-        isCompleted: false
-        isErrored: false
     Integration:
       title: Integration
       description: An integration that Codat supports
@@ -1306,6 +1011,302 @@ components:
           - GetAttachments
           - UploadAttachment
           example: Get
+    Company:
+      title: Company
+      description: "\uFEFFIn Codat, a company represents a business sharing access to their data. Each company can have multiple [connections](https://docs.codat.io/platform-api#/schemas/Connection) to different data sources such as one connection to [Xero](https://docs.codat.io/integrations/accounting/xero/accounting-xero) for accounting data, two connections to [Plaid](https://docs.codat.io/integrations/banking/plaid/banking-plaid) for two bank accounts and a connection to [Zettle](https://docs.codat.io/integrations/commerce/zettle/commerce-zettle) for POS data.\n\nTypically each company is one of your customers.\n\nWhen you create a company, you can specify a `name` and we will automatically generate a unique `id` for the company. You can also add a `description` to store any additional information about the company."
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Company/definitions/companyDetails'
+      - type: object
+        properties:
+          dataConnections:
+            type: array
+            items:
+              $ref: '#/components/schemas/Connection'
+      definitions:
+        companyDetails:
+          title: Company details
+          type: object
+          properties:
+            id:
+              $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
+            name:
+              type: string
+              description: The name of the company
+              example: Codat Ltd.
+            description:
+              $ref: '#/components/schemas/CompanyRequestBody/properties/description'
+              nullable: true
+            redirect:
+              type: string
+              format: uri
+              description: The `redirect` [Link URL](https://docs.codat.io/auth-flow/authorize-hosted-link) enabling the customer to start their auth flow journey for the company.
+              example: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
+            lastSync:
+              $ref: '#/components/schemas/DateTime'
+              nullable: true
+            created:
+              $ref: '#/components/schemas/DateTime'
+            createdByUserName:
+              type: string
+              description: Name of user that created the company in Codat.
+              nullable: true
+            products:
+              type: array
+              items:
+                type: string
+              description: An array of products that are currently enabled for the company.
+            tags:
+              title: Tags
+              type: object
+              maxProperties: 10
+              propertyNames:
+                pattern: ^.{1,27}$
+              additionalProperties:
+                type: string
+                maxLength: 100
+              description: A collection of user-defined key-value pairs that store custom metadata against the company.
+            referenceParentCompany:
+              $ref: '#/components/schemas/Company/definitions/companyReference'
+              nullable: true
+              description: The parent entity or controlling organization of this company. Null if the company has no parent.
+            referenceSubsidiaryCompanies:
+              type: array
+              nullable: false
+              description: A list of subsidiary companies owned or controlled by this entity. Empty if the company has no children.
+              minItems: 0
+              items:
+                $ref: '#/components/schemas/Company/definitions/companyReference'
+          required:
+          - id
+          - name
+          - redirect
+        companyReference:
+          title: Company reference
+          type: object
+          properties:
+            id:
+              $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
+            name:
+              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/name'
+            description:
+              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/description'
+            links:
+              type: object
+              description: A collection of links for the company.
+              properties:
+                portal:
+                  type: string
+                  format: uri
+                  description: Link to the company page in the portal.
+            tags:
+              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
+      examples:
+      - id: 0498e921-9b53-4396-a412-4f2f5983b0a2
+        name: string
+        redirect: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
+        lastSync: '2022-01-01T12:00:00.000Z'
+        created: '2022-01-01T12:00:00.000Z'
+        createdByUserName: string
+        tags:
+          region: us
+          uid: f6b0c253-16c7-4da1-a0c5-9c871e9c9d6c
+        dataConnections:
+        - id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
+          integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
+          integrationKey: dfxm
+          sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
+          platformName: Basiq
+          linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
+          status: Linked
+          lastSync: '2022-10-27T10:22:43.6464237Z'
+          created: '2022-10-27T09:53:29Z'
+          sourceType: Banking
+        products:
+        - spend-insights
+        - lending
+    ClientRateLimitWebhook:
+      title: Client rate limit webhook
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 743ec94a-8aa4-44bb-8bd4-e1855ee0e74b
+          description: Unique identifier of the event.
+        eventType:
+          type: string
+          description: The type of event.
+          examples:
+          - client.rateLimit.reset
+          - client.rateLimit.reached
+        generatedDate:
+          $ref: '#/components/schemas/DateTime'
+          description: The date time in UTC the event was generated in Codat.
+        payload:
+          $ref: '#/components/schemas/ClientRateLimitWebhook/definitions/clientRateLimitWebhookPayload'
+      definitions:
+        clientRateLimitWebhookPayload:
+          title: Client rate limit webhook payload
+          type: object
+          properties:
+            dailyQuota:
+              type: integer
+              description: The number of available requests per day.
+            quotaRemaining:
+              type: integer
+              description: Total number of requests remaining for your client.
+            expiryDate:
+              $ref: '#/components/schemas/DateTime'
+              description: The date time in UTC when your daily quota is reset.
+    Connection:
+      title: Connection
+      description: "\uFEFFA connection represents a [company's](https://docs.codat.io/platform-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
+      type: object
+      properties:
+        id:
+          $ref: '#/components/parameters/connectionId/schema'
+        integrationId:
+          type: string
+          format: uuid
+          example: fd321cb6-7963-4506-b873-e99593a45e30
+          description: A Codat ID representing the integration.
+        integrationKey:
+          type: string
+          description: A unique four-character ID that identifies the platform of the company's data connection. This ensures continuity if the platform changes its name in the future.
+        sourceId:
+          $ref: '#/components/schemas/Branding/properties/sourceId'
+        sourceType:
+          $ref: '#/components/schemas/Integration/definitions/sourceType'
+        platformName:
+          type: string
+          description: Name of integration connected to company.
+        linkUrl:
+          type: string
+          format: uri
+          description: The link URL your customers can use to authorize access to their business application.
+          example: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/2e2eb431-c1fa-4dc9-93fa-d29781c12bcd/start
+        status:
+          $ref: '#/components/schemas/Connection/definitions/dataConnectionStatus'
+        lastSync:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+        created:
+          $ref: '#/components/schemas/DateTime'
+        dataConnectionErrors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Connection/definitions/dataConnectionError'
+        connectionInfo:
+          type: object
+          nullable: true
+          additionalProperties: true
+      additionalProperties: false
+      required:
+      - id
+      - integrationId
+      - integrationKey
+      - sourceId
+      - platformName
+      - linkUrl
+      - status
+      - created
+      - sourceType
+      definitions:
+        dataConnectionStatus:
+          title: Data connection status
+          description: The current authorization status of the data connection.
+          type: string
+          enum:
+          - PendingAuth
+          - Linked
+          - Unlinked
+          - Deauthorized
+        dataConnectionError:
+          title: Data connection error
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: The HTTP status code returned by the source platform when the error occurred.
+            statusText:
+              type: string
+              description: A non-numeric status code/text returned by the source platform when the error occurred.
+            errorMessage:
+              type: string
+              description: A message about a error returned by Codat.
+            erroredOnUtc:
+              $ref: '#/components/schemas/DateTime'
+            status:
+              title: Error status
+              description: The current status of a transient error. Null statuses indicate that the error is not transient.
+              type: string
+              nullable: true
+              enum:
+              - Active
+              - Resolved
+            resolvedOnUtc:
+              description: The datetime in Utc that the error was resolved.
+              nullable: true
+              $ref: '#/components/schemas/DateTime'
+        dataConnectionSourceType:
+          title: Source Type
+          description: The type of platform of the connection.
+          type: string
+          enum:
+          - Accounting
+          - Banking
+          - BankFeed
+          - Commerce
+          - Expense
+          - Other
+          - Unknown
+          example: Accounting
+      example:
+        id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
+        integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
+        integrationKey: dfxm
+        sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
+        platformName: Basiq
+        linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
+        status: Linked
+        lastSync: '2022-10-27T10:22:43.6464237Z'
+        created: '2022-10-27T09:53:29Z'
+        sourceType: Banking
+    ConnectionWebhook:
+      title: Connection webhook
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: ba29118f-5406-4e59-b05c-ba307ca38d01
+          description: Unique identifier of the event.
+        eventType:
+          type: string
+          description: The type of event.
+          examples:
+          - connection.created
+          - connection.connected
+          - connection.disconnected
+          - connection.reconnected
+          - connection.deleted
+          - connection.failed
+        generatedDate:
+          $ref: '#/components/schemas/DateTime'
+          description: The date time in UTC the event was generated in Codat.
+        payload:
+          $ref: '#/components/schemas/ConnectionWebhook/definitions/connectionWebhookPayload'
+      definitions:
+        connectionWebhookPayload:
+          title: Connection webhook payload
+          type: object
+          properties:
+            referenceCompany:
+              $ref: '#/components/schemas/Company/definitions/companyReference'
+            connection:
+              $ref: '#/components/schemas/Connection'
     DataTypeWriteWebhook:
       title: Write data type webhook
       type: object
@@ -1379,6 +1380,13 @@ components:
           - Success
           - TimedOut
           description: The current status of the write request, which is the same as the push operation status.
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
     Branding:
       title: Branding
       type: object
@@ -1448,80 +1456,102 @@ components:
               src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
               alt: xero hover button icon
         sourceId: 35b92968-9851-4095-ad60-395c95cbcba4
-    DateTime:
-      title: Date time
-      type: string
+    PullOperation:
+      title: Pull operation
+      description: 'Information about a queued, in progress or completed pull operation.
+
+        *Formally called `dataset`*'
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the pull operation.
+          example: 943accd0-4247-42d8-865b-363c8629e1da
+        companyId:
+          type: string
+          format: uuid
+          description: Unique identifier of the company associated to this pull operation.
+          example: 22ece347-e5f6-4896-95e0-35a4c7f17023
+        connectionId:
+          type: string
+          format: uuid
+          description: Unique identifier of the connection associated to this pull operation.
+          example: 50830828-7d39-4367-b0eb-5ddb2de5faa5
+        dataType:
+          title: Data types
+          x-internal: true
+          type: string
+          description: The data type you are requesting in a pull operation.
+        status:
+          title: Dataset status
+          type: string
+          description: The current status of the dataset.
+          enum:
+          - Initial
+          - Queued
+          - Fetching
+          - MapQueued
+          - Mapping
+          - Complete
+          - FetchError
+          - MapError
+          - InternalError
+          - ProcessingQueued
+          - Processing
+          - ProcessingError
+          - ValidationQueued
+          - Validating
+          - ValidationError
+          - AuthError
+          - Cancelled
+          - NotSupported
+          - RateLimitError
+          - PermissionsError
+          - PrerequisiteNotMet
+        statusDescription:
+          type: string
+          nullable: true
+          description: Additional information about the dataset status.
+          example: Paused until 2022-10-23T00:00:00.000Z
+        errorMessage:
+          type: string
+          nullable: true
+          description: A message about a transient or persistent error returned by Codat or the source platform.
+        requested:
+          $ref: '#/components/schemas/DateTime'
+        completed:
+          $ref: '#/components/schemas/DateTime'
+        progress:
+          type: integer
+          description: An integer signifying the progress of the pull operation.
+        isCompleted:
+          type: boolean
+          description: '`True` if the pull operation is completed successfully. The `isCompleted` property is not queryable. To filter failed pull operations, query by `status!=Complete&&status!=NotSupported` instead.'
+        isErrored:
+          type: boolean
+          description: '`True` if the pull operation entered an error state.'
+      required:
+      - id
+      - companyId
+      - connectionId
+      - dataType
+      - status
+      - requested
+      - progress
+      - isCompleted
+      - isErrored
       examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    ClientRateLimitWebhook:
-      title: Client rate limit webhook
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 743ec94a-8aa4-44bb-8bd4-e1855ee0e74b
-          description: Unique identifier of the event.
-        eventType:
-          type: string
-          description: The type of event.
-          examples:
-          - client.rateLimit.reset
-          - client.rateLimit.reached
-        generatedDate:
-          $ref: '#/components/schemas/DateTime'
-          description: The date time in UTC the event was generated in Codat.
-        payload:
-          $ref: '#/components/schemas/ClientRateLimitWebhook/definitions/clientRateLimitWebhookPayload'
-      definitions:
-        clientRateLimitWebhookPayload:
-          title: Client rate limit webhook payload
-          type: object
-          properties:
-            dailyQuota:
-              type: integer
-              description: The number of available requests per day.
-            quotaRemaining:
-              type: integer
-              description: Total number of requests remaining for your client.
-            expiryDate:
-              $ref: '#/components/schemas/DateTime'
-              description: The date time in UTC when your daily quota is reset.
-    ConnectionWebhook:
-      title: Connection webhook
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: ba29118f-5406-4e59-b05c-ba307ca38d01
-          description: Unique identifier of the event.
-        eventType:
-          type: string
-          description: The type of event.
-          examples:
-          - connection.created
-          - connection.connected
-          - connection.disconnected
-          - connection.reconnected
-          - connection.deleted
-          - connection.failed
-        generatedDate:
-          $ref: '#/components/schemas/DateTime'
-          description: The date time in UTC the event was generated in Codat.
-        payload:
-          $ref: '#/components/schemas/ConnectionWebhook/definitions/connectionWebhookPayload'
-      definitions:
-        connectionWebhookPayload:
-          title: Connection webhook payload
-          type: object
-          properties:
-            referenceCompany:
-              $ref: '#/components/schemas/Company/definitions/companyReference'
-            connection:
-              $ref: '#/components/schemas/Connection'
+      - id: 97d60846-f07a-4d42-b5a0-0bdcc6ebf56b
+        companyId: 4645bd78-8988-45bc-ac9e-67ba5df6e4e5
+        connectionId: 51baa045-4836-4317-a42e-3542e991e581
+        dataType: invoices
+        status: Initial
+        statusDescription: Paused until 2022-10-23T00:00:00.000Z
+        requested: '2022-11-14T11:18:37.2798351Z'
+        progress: 10
+        isCompleted: false
+        isErrored: false
     CompanyRequestBody:
       title: Create company request
       x-internal: true
@@ -1541,6 +1571,104 @@ components:
           $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
       required:
       - name
+    CompanyWebhook:
+      title: Company webhook
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: ba29118f-5406-4e59-b05c-ba307ca38d01
+          description: Unique identifier of the event
+        eventType:
+          type: string
+          description: The type of event.
+          examples:
+          - company.created
+          - company.deleted
+        generatedDate:
+          $ref: '#/components/schemas/DateTime'
+          description: The date time in UTC the event was generated in Codat.
+        payload:
+          $ref: '#/components/schemas/Company/definitions/companyDetails'
+    DataStatus:
+      title: Data status
+      description: Describes the state of data in the Codat cache for a company and data type
+      type: object
+      required:
+      - dataType
+      - currentStatus
+      properties:
+        dataType:
+          title: Data types
+          x-internal: true
+          type: string
+          description: Available data types
+          enum:
+          - accountTransactions
+          - balanceSheet
+          - bankAccounts
+          - bankTransactions
+          - billCreditNotes
+          - billPayments
+          - bills
+          - cashFlowStatement
+          - chartOfAccounts
+          - company
+          - creditNotes
+          - customers
+          - directCosts
+          - directIncomes
+          - invoices
+          - itemReceipts
+          - items
+          - journalEntries
+          - journals
+          - paymentMethods
+          - payments
+          - profitAndLoss
+          - purchaseOrders
+          - salesOrders
+          - suppliers
+          - taxRates
+          - trackingCategories
+          - transfers
+          - banking-accountBalances
+          - banking-accounts
+          - banking-transactionCategories
+          - banking-transactions
+          - commerce-companyInfo
+          - commerce-customers
+          - commerce-disputes
+          - commerce-locations
+          - commerce-orders
+          - commerce-paymentMethods
+          - commerce-payments
+          - commerce-productCategories
+          - commerce-products
+          - commerce-taxComponents
+          - commerce-transactions
+          example: invoices
+        lastSuccessfulSync:
+          $ref: '#/components/schemas/DateTime'
+        currentStatus:
+          $ref: '#/components/schemas/PullOperation/properties/status'
+        latestSyncId:
+          type: string
+          description: Unique identifier for most recent sync of data type.
+          format: uuid
+          example: ad474a37-2003-478e-baee-9af9f1ec2fe3
+        latestSuccessfulSyncId:
+          type: string
+          description: Unique identifier for the most recent successful sync of data type.
+          format: uuid
+          example: 8220fc90-55b6-47bc-9417-48ac6ea93101
+      examples:
+      - dataType: string
+        lastSuccessfulSync: '2022-01-01T13:00:00.000Z'
+        currentStatus: string
+        latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
+        latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
   parameters:
     connectionId:
       name: connectionId

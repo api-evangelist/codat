@@ -1,55 +1,7 @@
 openapi: 3.2.0
 info:
   title: Lending Sales API
-  description: 'Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers'' latest data from accounting, banking, and commerce software they are already using. It also includes features to help providers verify the accuracy of data and process it more efficiently.
-
-
-    The Lending solution is built on top of the latest accounting, commerce, and banking data, providing you with the most important data points you need to get a full picture of SMB creditworthiness and make a comprehensive assessment of your customers.
-
-
-    [Explore solution](https://docs.codat.io/lending/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
-
-
-    <!-- Start Codat Tags Table -->
-
-    ## Endpoints
-
-
-    | Endpoints | Description |
-
-    | :- |:- |
-
-    | Companies | Create and manage your SMB users'' companies. |
-
-    | Connections | Create new and manage existing data connections for a company. |
-
-    | Bank statements | Retrieve banking data from linked bank accounts. |
-
-    | Sales | Retrieve standardized sales data from a linked commerce software. |
-
-    | Financial statements | Financial data and reports from a linked accounting software. |
-
-    | Liabilities | Debt and other liabilities. |
-
-    | Accounts payable | Data from a linked accounting software representing money the business owes money to its suppliers. |
-
-    | Accounts receivable | Data from a linked accounting software representing money owed to the business for sold goods or services. |
-
-    | Transactions | Data from a linked accounting software representing transactions. |
-
-    | Company info | View company information fetched from the source platform. |
-
-    | Data integrity | Match mutable accounting data with immutable banking data to increase confidence in financial data. |
-
-    | Excel reports | Download reports in Excel format. |
-
-    | Manage data | Control how data is retrieved from an integration. |
-
-    | File upload | Endpoints to manage uploaded files. |
-
-    | Loan writeback | Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure in your lending process to maintain an accurate position of a loan during the entire lending cycle. |
-
-    <!-- End Codat Tags Table -->'
+  description: Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers' latest data from accounting, banking, and commerce software they are already using.
   version: 3.0.0
   contact:
     name: Codat
@@ -150,7 +102,40 @@ paths:
       operationId: get-commerce-revenue-metrics
       x-speakeasy-name-override: get-revenue
       x-speakeasy-group: sales.metrics
-      description: "The *Get revenue report* endpoint returns the revenue and revenue growth for a specific company connection over one or more periods of time.\n\nThis detail helps you assess a merchant's health and advise them on performance improvement strategies. It also provides you with key insights you need to assess the credit risk of a company. \n\n[Learn more](https://docs.codat.io/lending/features/sales-overview#metrics) about the formulas used to calculate the revenue metrics.\n\n#### Response structure\n\nThe Revenue report's dimensions and measures are:\n\n| Index         | Dimensions |\n|---------------|------------|\n|   `index` = 0 | Period     |\n|   `index` = 1 | Revenue    |\n\n| Index         | Measures                                                                                                                 |\n|---------------|--------------------------------------------------------------------------------------------------------------------------|\n| `index` = 0   | Value                                                                                                                    |\n| `index` = 1   | Percentage change, defined as the change between the current and previous periods' values and expressed as a percentage. |\n\nThe report data then combines multiple reporting dimensions and measures and outputs the value of each combination.\n"
+      description: 'The *Get revenue report* endpoint returns the revenue and revenue growth for a specific company connection over one or more periods of time.
+
+
+        This detail helps you assess a merchant''s health and advise them on performance improvement strategies. It also provides you with key insights you need to assess the credit risk of a company.
+
+
+        Learn more about the formulas used to calculate the revenue metrics.
+
+
+        #### Response structure
+
+
+        The Revenue report''s dimensions and measures are:
+
+
+        | Index | Dimensions |
+
+        |---------------|------------|
+
+        | `index` = 0 | Period |
+
+        | `index` = 1 | Revenue |
+
+
+        | Index | Measures |
+
+        |---------------|--------------------------------------------------------------------------------------------------------------------------|
+
+        | `index` = 0 | Value |
+
+        | `index` = 1 | Percentage change, defined as the change between the current and previous periods'' values and expressed as a percentage. |
+
+
+        The report data then combines multiple reporting dimensions and measures and outputs the value of each combination.'
       parameters:
       - $ref: '#/components/parameters/reportDateRequired'
       - $ref: '#/components/parameters/periodLength'
@@ -252,7 +237,40 @@ paths:
       operationId: get-commerce-orders-report
       x-speakeasy-name-override: get-orders
       x-speakeasy-group: sales.reports
-      description: "The *Get orders report* endpoint returns the number of orders, total value, and average order value for a specific company's commerce connection over one or more periods of time.\n\nThis detail helps you assess a merchant's health and advise them on performance improvement strategies. It also provides you with key insights you need to assess the credit risk of a company. \n\n[Learn more](https://docs.codat.io/lending/features/sales-overview#metrics) about the formulas used to calculate the order metrics.\n\n#### Response structure\n\nThe Orders report's dimensions and measures are:\n\n| Index         | Dimensions     |\n|---------------|----------------|\n|   `index` = 0 | Period         |\n|   `index` = 1 | Order metrics  |\n\n| Index         | Measures   |\n|---------------|------------|\n| `index` = 0   | Count      |\n| `index` = 1   | Value      |\n\nThe report data then combines multiple reporting dimensions and measures and outputs the value of each combination.\n"
+      description: 'The *Get orders report* endpoint returns the number of orders, total value, and average order value for a specific company''s commerce connection over one or more periods of time.
+
+
+        This detail helps you assess a merchant''s health and advise them on performance improvement strategies. It also provides you with key insights you need to assess the credit risk of a company.
+
+
+        Learn more about the formulas used to calculate the order metrics.
+
+
+        #### Response structure
+
+
+        The Orders report''s dimensions and measures are:
+
+
+        | Index | Dimensions |
+
+        |---------------|----------------|
+
+        | `index` = 0 | Period |
+
+        | `index` = 1 | Order metrics |
+
+
+        | Index | Measures |
+
+        |---------------|------------|
+
+        | `index` = 0 | Count |
+
+        | `index` = 1 | Value |
+
+
+        The report data then combines multiple reporting dimensions and measures and outputs the value of each combination.'
       parameters:
       - $ref: '#/components/parameters/reportDateRequired'
       - $ref: '#/components/parameters/periodLength'
@@ -358,7 +376,42 @@ paths:
       operationId: get-commerce-refunds-report
       x-speakeasy-name-override: get-refunds
       x-speakeasy-group: sales.reports
-      description: "The *Get refunds report* endpoint returns the number and total value of refunds and the refund rate for a specific company's commerce connection over one or more periods of time.\n\nThis detail helps you assess a merchant's health and advise them on performance improvement strategies. It also provides you with key insights you need to assess the credit risk of a company. \n\n[Learn more](https://docs.codat.io/lending/features/sales-overview#metrics) about the formulas used to calculate the refunds metrics.\n\n#### Response structure\n\nThe Refunds report's dimensions and measures are:\n\n| Index          | Dimensions     |\n|----------------|----------------|\n| `index` = 0    | Period         |\n| `index` = 1    | Refund metrics |\n\n| Index          | Measures    |\n|----------------|------------|\n| `index` = 0    | Count      |\n| `index` = 1    | Value      |\n| `index` = 2    | Percentage |\n\nThe report data then combines multiple reporting dimensions and measures and outputs the value of each combination.\n"
+      description: 'The *Get refunds report* endpoint returns the number and total value of refunds and the refund rate for a specific company''s commerce connection over one or more periods of time.
+
+
+        This detail helps you assess a merchant''s health and advise them on performance improvement strategies. It also provides you with key insights you need to assess the credit risk of a company.
+
+
+        Learn more about the formulas used to calculate the refunds metrics.
+
+
+        #### Response structure
+
+
+        The Refunds report''s dimensions and measures are:
+
+
+        | Index | Dimensions |
+
+        |----------------|----------------|
+
+        | `index` = 0 | Period |
+
+        | `index` = 1 | Refund metrics |
+
+
+        | Index | Measures |
+
+        |----------------|------------|
+
+        | `index` = 0 | Count |
+
+        | `index` = 1 | Value |
+
+        | `index` = 2 | Percentage |
+
+
+        The report data then combines multiple reporting dimensions and measures and outputs the value of each combination.'
       parameters:
       - $ref: '#/components/parameters/reportDateRequired'
       - $ref: '#/components/parameters/periodLength'
@@ -479,7 +532,54 @@ paths:
       operationId: get-commerce-customer-retention-metrics
       x-speakeasy-name-override: get-customer-retention
       x-speakeasy-group: sales.metrics
-      description: "The *Get customer retention metrics* endpoint returns customer retention insights for a specific company's commerce connection over one or more periods of time.\n\nThis detail helps you assess a merchant's health and advise them on performance improvement strategies. It also provides you with key insights you need to assess the credit risk of a company. \n\n#### Customer retention metrics\n\n- __Existing customers__: the number of unique customers that have placed an order(s) in the specified period and any previous period. \n- __New customers__: the number of unique customers that have placed an order(s) in the specified period and none in any previous period.\n- __Total customers__: the total number of existing and new customers within the specified period.\n- __Retention rate__: the ratio of existing customers within the specified period compared to the total customers at the end of the previous period represented as a percentage.\n- __Repeat rate__: the ratio of existing customers to total customers over the specified period represented as a percentage.\n\n[Learn more](https://docs.codat.io/lending/features/sales-overview#metrics) about the formulas used to calculate customer retention metrics.\n\n#### Response structure\n\nThe Customer retention report's dimensions and measures are:\n\n| Index                       | Dimensions                 |\n|-----------------------------|----------------------------|\n| `index` = 0                 | Period                     |\n| `index` = 1                 | Customer retention metrics |\n\n| Index                | Measures    |\n|----------------------|------------|\n| `index` = 0          | Count      |\n| `index` = 1          | Percentage |\n\nThe report data then combines multiple reporting dimensions and measures and outputs the value of each combination."
+      description: 'The *Get customer retention metrics* endpoint returns customer retention insights for a specific company''s commerce connection over one or more periods of time.
+
+
+        This detail helps you assess a merchant''s health and advise them on performance improvement strategies. It also provides you with key insights you need to assess the credit risk of a company.
+
+
+        #### Customer retention metrics
+
+
+        - __Existing customers__: the number of unique customers that have placed an order(s) in the specified period and any previous period.
+
+        - __New customers__: the number of unique customers that have placed an order(s) in the specified period and none in any previous period.
+
+        - __Total customers__: the total number of existing and new customers within the specified period.
+
+        - __Retention rate__: the ratio of existing customers within the specified period compared to the total customers at the end of the previous period represented as a percentage.
+
+        - __Repeat rate__: the ratio of existing customers to total customers over the specified period represented as a percentage.
+
+
+        Learn more about the formulas used to calculate customer retention metrics.
+
+
+        #### Response structure
+
+
+        The Customer retention report''s dimensions and measures are:
+
+
+        | Index | Dimensions |
+
+        |-----------------------------|----------------------------|
+
+        | `index` = 0 | Period |
+
+        | `index` = 1 | Customer retention metrics |
+
+
+        | Index | Measures |
+
+        |----------------------|------------|
+
+        | `index` = 0 | Count |
+
+        | `index` = 1 | Percentage |
+
+
+        The report data then combines multiple reporting dimensions and measures and outputs the value of each combination.'
       parameters:
       - $ref: '#/components/parameters/reportDateRequired'
       - $ref: '#/components/parameters/periodLength'
@@ -564,7 +664,7 @@ paths:
         This detail helps you assess a merchant''s health and advise them on performance improvement strategies. It also provides you with key insights you need to assess the credit risk of a company.
 
 
-        [Learn more](https://docs.codat.io/lending/features/sales-overview#metrics) about the formulas used to calculate the lifetime value metrics.
+        Learn more about the formulas used to calculate the lifetime value metrics.
 
 
         #### Response structure
@@ -573,25 +673,23 @@ paths:
         The Lifetime value report''s dimensions and measures are:
 
 
-        | Index         | Dimensions             |
+        | Index | Dimensions |
 
         |---------------|------------------------|
 
-        | `index` = 0   | Period                 |
+        | `index` = 0 | Period |
 
-        | `index` = 1   | Lifetime value metrics |
+        | `index` = 1 | Lifetime value metrics |
 
 
-        | Index             | Measures |
+        | Index | Measures |
 
         |-------------------|---------|
 
-        |   `index` = 1     | Value   |
+        | `index` = 1 | Value |
 
 
-        The report data then combines multiple reporting dimensions and measures and outputs the value of each combination.
-
-        '
+        The report data then combines multiple reporting dimensions and measures and outputs the value of each combination.'
       parameters:
       - $ref: '#/components/parameters/reportDateRequired'
       - $ref: '#/components/parameters/periodLength'
@@ -608,7 +706,13 @@ paths:
       summary: List customers
       operationId: list-commerce-customers
       x-speakeasy-group: sales.customers
-      description: "The *List customers* endpoint returns a list of [customers](https://docs.codat.io/lending-api#/schemas/Customer) for a given company's connection.\n\n[Customers](https://docs.codat.io/lending-api#/schemas/Customer) are people or organizations that place orders, make payments and recieve goods and/or services from the SMB.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List customers* endpoint returns a list of customers for a given company''s connection.
+
+
+        Customers are people or organizations that place orders, make payments and recieve goods and/or services from the SMB.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
       parameters:
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
@@ -992,12 +1096,10 @@ paths:
       description: 'The *Get customer* endpoint returns a single customer for a given customerId.
 
 
-        [Customers](https://docs.codat.io/lending-api#/schemas/Customer) are people or organizations that place orders, make payments and receive goods and/or services from the SMB.
+        Customers are people or organizations that place orders, make payments and receive goods and/or services from the SMB.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
       responses:
         '200':
           description: OK
@@ -1267,7 +1369,13 @@ paths:
           $ref: '#/components/responses/Internal-Server-Error'
         '503':
           $ref: '#/components/responses/Service-Unavailable'
-      description: "The *List disputes* endpoint returns a list of [disputes](https://docs.codat.io/lending-api#/schemas/Dispute) for a given company's connection.\n\n[Disputes](https://docs.codat.io/lending-api#/schemas/Dispute) are created when a customer is unsatisfied with their purchase or believe they have been charged incorrectly.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List disputes* endpoint returns a list of disputes for a given company''s connection.
+
+
+        Disputes are created when a customer is unsatisfied with their purchase or believe they have been charged incorrectly.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-disputes/{disputeId}:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -1343,12 +1451,10 @@ paths:
       description: 'The *Get dispute* endpoint returns a single dispute for a given disputeId.
 
 
-        [Disputes](https://docs.codat.io/lending-api#/schemas/Dispute) are created when a customer is unsatisfied with their purchase or believe they have been charged incorrectly.
+        Disputes are created when a customer is unsatisfied with their purchase or believe they have been charged incorrectly.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-locations:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -1465,7 +1571,13 @@ paths:
           $ref: '#/components/responses/Internal-Server-Error'
         '503':
           $ref: '#/components/responses/Service-Unavailable'
-      description: "The *List locations* endpoint returns a list of [locations](https://docs.codat.io/lending-api#/schemas/Location) for a given company's connection.\n\n[Locations](https://docs.codat.io/lending-api#/schemas/Location) hold information on the geographic location at which stocks of [products](https://docs.codat.io/lending-api#/schemas/Product) may be held or where [orders](https://docs.codat.io/lending-api#/schemas/Order) were placed.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List locations* endpoint returns a list of locations for a given company''s connection.
+
+
+        Locations hold information on the geographic location at which stocks of products may be held or where orders were placed.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-locations/{locationId}:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -1560,12 +1672,10 @@ paths:
       description: 'The *Get location* endpoint returns a single location for a given locationId.
 
 
-        [Locations](https://docs.codat.io/lending-api#/schemas/Location) hold information on the geographic location at which stocks of [products](https://docs.codat.io/lending-api#/schemas/Product) may be held or where [orders](https://docs.codat.io/lending-api#/schemas/Order) were placed.
+        Locations hold information on the geographic location at which stocks of products may be held or where orders were placed.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-orders:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -2590,7 +2700,13 @@ paths:
           $ref: '#/components/responses/Internal-Server-Error'
         '503':
           $ref: '#/components/responses/Service-Unavailable'
-      description: "The *List orders* endpoint returns a list of [orders](https://docs.codat.io/lending-api#/schemas/Order) for a given company's connection.\n\n[Orders](https://docs.codat.io/lending-api#/schemas/Order) contain the transaction details for all products sold by the company.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List orders* endpoint returns a list of orders for a given company''s connection.
+
+
+        Orders contain the transaction details for all products sold by the company.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
       parameters:
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
@@ -3187,12 +3303,10 @@ paths:
       description: 'The *Get order* endpoint returns a single order for a given orderId.
 
 
-        [Orders](https://docs.codat.io/lending-api#/schemas/Order) contain the transaction details for all products sold by the company.
+        Orders contain the transaction details for all products sold by the company.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-paymentMethods:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -3395,7 +3509,13 @@ paths:
           $ref: '#/components/responses/Internal-Server-Error'
         '503':
           $ref: '#/components/responses/Service-Unavailable'
-      description: "The *List payment methods* endpoint returns a list of [payment methods](https://docs.codat.io/lending-api#/schemas/PaymentMethod) for a given company's connection.\n\n[Payment methods](https://docs.codat.io/lending-api#/schemas/PaymentMethod) represent the payment method(s) used to make payments.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List payment methods* endpoint returns a list of payment methods for a given company''s connection.
+
+
+        Payment methods represent the payment method(s) used to make payments.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
       parameters:
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
@@ -3497,12 +3617,10 @@ paths:
       description: 'The *Get payment method* endpoint returns a single payment method for a given paymentMethodId.
 
 
-        [Payment methods](https://docs.codat.io/lending-api#/schemas/PaymentMethod) represent the payment method(s) used to make payments.
+        Payment methods represent the payment method(s) used to make payments.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-payments:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -3825,7 +3943,13 @@ paths:
           $ref: '#/components/responses/Internal-Server-Error'
         '503':
           $ref: '#/components/responses/Service-Unavailable'
-      description: "The *List payments* endpoint returns a list of [payments](https://docs.codat.io/lending-api#/schemas/Payment) for a given company's connection.\n\n[Payments](https://docs.codat.io/lending-api#/schemas/Payment) contain details of all payments made by customers to the company.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List payments* endpoint returns a list of payments for a given company''s connection.
+
+
+        Payments contain details of all payments made by customers to the company.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
       parameters:
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
@@ -3971,12 +4095,10 @@ paths:
       description: 'The *Get payment* endpoint returns a single payment for a given paymentId.
 
 
-        [Payments](https://docs.codat.io/lending-api#/schemas/Payment) contain details of all payments made by customers to the company.
+        Payments contain details of all payments made by customers to the company.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-productCategories:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -4041,7 +4163,13 @@ paths:
       - $ref: '#/components/parameters/pageSize'
       - $ref: '#/components/parameters/query'
       - $ref: '#/components/parameters/orderBy'
-      description: "The *List product categories* endpoint returns a list of [product categories](https://docs.codat.io/lending-api#/schemas/ProductCategory) for a given company's connection.\n\n[Product categories](https://docs.codat.io/lending-api#/schemas/ProductCategory) are used to classify a group of products together, either by type (e.g. \"Furniture\"), or sometimes by tax profile.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List product categories* endpoint returns a list of product categories for a given company''s connection.
+
+
+        Product categories are used to classify a group of products together, either by type (e.g. "Furniture"), or sometimes by tax profile.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-productCategories/{productId}:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -4087,12 +4215,10 @@ paths:
       description: 'The *Get product* endpoint returns a single product for a given productId.
 
 
-        [Product categories](https://docs.codat.io/lending-api#/schemas/ProductCategory) are used to classify a group of products together, either by type (e.g. "Furniture"), or sometimes by tax profile.
+        Product categories are used to classify a group of products together, either by type (e.g. "Furniture"), or sometimes by tax profile.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-products:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -4956,7 +5082,13 @@ paths:
       - $ref: '#/components/parameters/pageSize'
       - $ref: '#/components/parameters/query'
       - $ref: '#/components/parameters/orderBy'
-      description: "The *List products* endpoint returns a list of [products](https://docs.codat.io/lending-api#/schemas/Product) for a given company's connection.\n\n[Products](https://docs.codat.io/lending-api#/schemas/Product) are items in the company's inventory that are available for sale.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List products* endpoint returns a list of products for a given company''s connection.
+
+
+        Products are items in the company''s inventory that are available for sale.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-products/{productId}:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -5397,12 +5529,10 @@ paths:
       description: 'The *Get product* endpoint returns a single product for a given productId.
 
 
-        [Products](https://docs.codat.io/lending-api#/schemas/Product) are items in the company''s inventory that are available for sale.
+        Products are items in the company''s inventory that are available for sale.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
   /companies/{companyId}/connections/{connectionId}/data/commerce-transactions:
     parameters:
     - $ref: '#/components/parameters/companyId'
@@ -5619,7 +5749,13 @@ paths:
           $ref: '#/components/responses/Internal-Server-Error'
         '503':
           $ref: '#/components/responses/Service-Unavailable'
-      description: "The *List transactions* endpoint returns a list of [transactions](https://docs.codat.io/lending-api#/schemas/Transaction) for a given company's connection.\n\n[Transactions](https://docs.codat.io/lending-api#/schemas/Transaction) detail all financial affairs recorded in the commerce or point of sale system.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).\n    "
+      description: 'The *List transactions* endpoint returns a list of transactions for a given company''s connection.
+
+
+        Transactions detail all financial affairs recorded in the commerce or point of sale system.
+
+
+        Before using this endpoint, you must have retrieved data for the company.'
       parameters:
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/pageSize'
@@ -5736,12 +5872,10 @@ paths:
       description: 'The *Get transaction* endpoint returns a single transaction for a given transactionId.
 
 
-        [Transactions](https://docs.codat.io/lending-api#/schemas/Transaction) detail all financial affairs recorded in the commerce or point of sale system.
+        Transactions detail all financial affairs recorded in the commerce or point of sale system.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
 components:
   schemas:
     CommerceProducts:
@@ -5755,419 +5889,17 @@ components:
             items:
               $ref: '#/components/schemas/CommerceProduct'
       - $ref: '#/components/schemas/PagingInfo'
-    CommerceDispute:
-      title: 'Commerce: Dispute'
-      description: "A customer may file a payment dispute with their bank or other card issuer when they're unsatisfied with their purchase or believe they have been charged incorrectly. For example:  \n- They didn't receive an order.  \n- The product they received was different to the commerce store's description.  \n- They've been the victim of online fraud.  \n\nYou can use data from the Disputes endpoints to calculate key metrics, such as the number of chargebacks."
-      type: object
+    CommercePayments:
+      title: 'Commerce: Payments'
+      x-internal: true
       allOf:
-      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
       - type: object
-        required:
-        - currency
         properties:
-          disputedTransactions:
-            description: Link to the source event(s) which triggered this transaction.
+          results:
             type: array
             items:
-              $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceRef'
-          totalAmount:
-            description: Total transaction amount that is under dispute.
-            format: decimal
-            examples:
-            - 194.12
-            - -283.56
-            - 0
-          currency:
-            description: Currency of the disputed transaction.
-            $ref: '#/components/schemas/SourceAccount/properties/currency'
-          status:
-            $ref: '#/components/schemas/CommerceDispute/definitions/disputeStatus'
-          reason:
-            description: Reason for the dispute
-            type: string
-            examples:
-            - Unhappy with product
-          dueDate:
-            description: Date when the next action in the dispute resolution is due
-            $ref: '#/components/schemas/DateTime'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      definitions:
-        disputeStatus:
-          description: Current status of the dispute
-          x-internal: true
-          type: string
-          enum:
-          - Won
-          - Lost
-          - Accepted
-          - Processing
-          - ChargeRefunded
-          - EvidenceRequired
-          - InquiryEvidenceRequired
-          - InquiryProcessing
-          - InquiryClosed
-          - WaitingThirdParty
-          - Unknown
-          example: EvidenceRequired
-      examples:
-      - id: 03e608e3-bd1c-454f-8c2b-fb0133e43b95
-        disputedTransactions:
-        - id: e63ad857-7e12-4e64-9185-cdfd7c45d09d
-          type: Order
-        totalAmount: -47.66
-        currency: GBP
-        status: InquiryEvidenceRequired
-        reason: Unhappy with product
-        dueDate: '2021-03-29T14:39:55'
-        createdDate: '2021-03-22T14:39:55'
-        modifiedDate: '2022-02-02T11:02:45Z'
-        sourceModifiedDate: '2021-03-22T14:39:55'
-    CommerceReport:
-      title: Commerce report
-      description: "## Structure\n\nAssess reports follow a consistent structure. Reports contain four sections of information:\n\n### 1. Report definition\n\nInformation such as:\n\n  1. The report info (e.g. enhanced_profit_and_loss).\n  2. The display name of the report (e.g. Enhanced Profit and Loss).\n  \n### 2. Dimension info\n\nInformation about the dimension contained in the reports such as:\n\n  1. The type of dimension (e.g. datetime, recordRef).\n  2. The display name of the dimension (e.g. Period, Category type, Category sub type).\n  3. The details about each item within the dimension (e.g. displayName:\"Jan 2022\", start:\"...\", end:\"...\", id:\"...\", name:\"...\").\n\n### 3. Measure info\n\nInformation about the measures contained in the report such as:\n\n  1. The display name of the measure (e.g. value of account, percentage change).\n  2. The type of the measure (e.g. currency, percentage).\n  3. The unit of the measure (e.g. %, GBP).\n  \n### 4. The data for the report\n\nWhen the *includeDisplayName* parameter is set to *true*, it shows the *dimensionDisplayName* and *itemDisplayName* to make the data human-readable. The default setting for *includeDisplayName* is *false*.\n\n\n## Displaying the report\n\nReports can be rendered as follows (ordering is implicit rather than explicit):\n\n![A table showing an example of how a report can be rendered](https://files.readme.io/1fa20ca-Report1.png)\n\n# Data model\n\n## Dimensions"
-      type: object
-      properties:
-        reportInfo:
-          type: object
-          additionalProperties:
-            type: string
-        dimensions:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommerceReport/definitions/commerceReportDimension'
-        measures:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommerceReport/definitions/commerceReportMeasure'
-        reportData:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommerceReport/definitions/commerceReportComponent'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommerceReport/definitions/commerceReportError'
-      definitions:
-        commerceReportMeasure:
-          title: Measure
-          type: object
-          properties:
-            displayName:
-              description: The measure's display name.
-              type: string
-            units:
-              type: string
-              description: The measure's units e.g. percentage (%).
-            index:
-              type: integer
-              description: The measure's index.
-            type:
-              type: string
-              description: The measure's type.
-        commerceReportError:
-          title: Error
-          type: object
-          properties:
-            message:
-              type: string
-              description: Message returned by error.
-            type:
-              type: string
-              description: The type of error.
-            details:
-              description: Additional details on the error.
-              type: object
-              additionalProperties:
-                type: array
-                items:
-                  type: string
-        commerceReportDimension:
-          title: Dimension
-          type: object
-          properties:
-            index:
-              type: integer
-              description: The dimension's index.
-            displayName:
-              type: string
-              description: The dimension's display name.
-            type:
-              type: string
-              description: The dimension's type.
-            items:
-              type: array
-              items:
-                type: object
-                properties:
-                  index:
-                    type: integer
-                    description: The dimension's items index.
-        commerceReportComponent:
-          title: Report component
-          type: object
-          properties:
-            dimension:
-              type: integer
-              description: The component's dimension.
-            dimensionDisplayName:
-              type: string
-              description: The component's display name.
-            item:
-              type: integer
-              description: The component's item number.
-            itemDisplayName:
-              type: string
-              description: The component's item display name.
-            measures:
-              type: array
-              items:
-                $ref: '#/components/schemas/CommerceReport/definitions/reportComponentMeasure'
-            components:
-              type: array
-              items:
-                $ref: '#/components/schemas/CommerceReport/definitions/commerceReportComponent'
-        reportComponentMeasure:
-          type: object
-          title: Report component measure
-          properties:
-            index:
-              type: integer
-              description: The measure's index.
-            measureDisplayName:
-              type: string
-              description: The measure's display name.
-            value:
-              type: number
-              format: decimal
-              description: The measure's value.
-      x-examples:
-        Example 1:
-          reportInfo:
-            additionalProp1: string
-            additionalProp2: string
-            additionalProp3: string
-          dimensions:
-          - index: 0
-            displayName: string
-            type: string
-            items:
-            - index: 0
-          measures:
-          - displayName: string
-            units: string
-            index: 0
-            type: string
-          reportData:
-          - dimension: 0
-            dimensionDisplayName: string
-            item: 0
-            itemDisplayName: string
-            measures:
-            - index: 0
-              measureDisplayName: string
-            components:
-            - string
-          errors:
-          - message: string
-            type: DatesOutOfRange
-            details:
-              additionalProp1:
-              - string
-              additionalProp2:
-              - string
-              additionalProp3:
-              - string
-    CommercePayment:
-      title: 'Commerce: Payment'
-      description: 'Payments contain details of all payments made by customers to a company, including: amounts, currency used, payment method, payment provider, and payment status.
-
-
-        Refunds are recorded as separate, negative payments. Note that a refund can only occur in relation to a payment that has been completed (i.e. has a status of `Paid`). When a customer cancels an order _before_ a payment has been completed, the payment shows as `Cancelled`.
-
-
-        You can use data from the Payments endpoints to calculate key metrics, such as gross sales and monthly recurring revenue (MRR).'
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-      - type: object
-        properties:
-          amount:
-            type: number
-            format: decimal
-            description: Payment Amount (including gratuity)
-            examples:
-            - 194.12
-            - -283.56
-            - 0
-          currency:
-            $ref: '#/components/schemas/SourceAccount/properties/currency'
-            description: Currency in which the payment was made
-          paymentMethodRef:
-            $ref: '#/components/schemas/PaymentMethodRef'
-          status:
-            $ref: '#/components/schemas/CommercePayment/definitions/paymentStatus'
-          paymentProvider:
-            type: string
-            description: Service provider of the payment, if applicable.
-            examples:
-            - Amazon Pay
-            - Checkout.com
-            - SagePay
-          dueDate:
-            description: Date by which payment must be made
-            $ref: '#/components/schemas/DateTime'
-          supplementalData:
-            $ref: '#/components/schemas/SupplementalData'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      definitions:
-        paymentStatus:
-          type: string
-          x-internal: true
-          description: Status of the payment.
-          enum:
-          - Pending
-          - Authorized
-          - Paid
-          - Failed
-          - Cancelled
-          - Unknown
-        paymentType:
-          type: string
-          x-internal: true
-          nullable: true
-          description: Type of payment.
-          enum:
-          - Cash
-          - Card
-          - Invoice
-          - OnlineCard
-          - Swish
-          - Vipps
-          - Mobile
-          - StoreCredit
-          - Paypal
-          - Custom
-          - Prepaid
-          - Unknown
-          example: Cash
-        paymentRef:
-          x-internal: true
-          allOf:
-          - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-          - type: object
-            properties:
-              amount:
-                type: number
-                format: decimal
-                nullable: true
-                description: Payment Amount (including gratuity).
-                examples:
-                - 194.12
-                - -283.56
-                - 0
-              currency:
-                $ref: '#/components/schemas/SourceAccount/properties/currency'
-                description: Currency in which the payment was made.
-              type:
-                $ref: '#/components/schemas/CommercePayment/definitions/paymentType'
-              status:
-                $ref: '#/components/schemas/CommercePayment/definitions/paymentStatus'
-              paymentProvider:
-                type: string
-                description: Service provider of the payment, if applicable.
-                examples:
-                - Amazon Pay
-                - Checkout.com
-                - SagePay
-              dueDate:
-                description: Date by which payment must be made
-                $ref: '#/components/schemas/DateTime'
-          - $ref: '#/components/schemas/CommerceOrder/allOf/2'
-          - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-    CommerceTransaction:
-      title: 'Commerce: Transaction'
-      description: "Details of all financial transactions recorded in the commerce or point of sale system are added to the Transactions data type. For example, payments, service charges, and fees.\n\nYou can use data from the Transactions endpoints to calculate key metrics, such as:  \n- Transaction volumes  \n- Average transaction volume  \n- Average transaction value  \n- Returns  \n- Payouts"
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-      - type: object
-        properties:
-          totalAmount:
-            description: The total transaction amount
-            type: number
-            format: decimal
-            examples:
-            - 194.12
-            - -283.56
-            - 0
-          currency:
-            $ref: '#/components/schemas/SourceAccount/properties/currency'
-          type:
-            $ref: '#/components/schemas/CommerceTransaction/definitions/transactionType'
-          subType:
-            description: Non-standardised transaction type data from the commerce software
-            type: string
-            examples:
-            - CardPayment
-            - Invoice payment
-          transactionSourceRef:
-            description: Link to the source event which triggered this transaction
-            allOf:
-            - $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceRef'
-          supplementalData:
-            $ref: '#/components/schemas/SupplementalData'
-      - allOf:
-        - type: object
-          x-stoplight:
-            id: c590b4405180f
-          allOf:
-          - $ref: '#/components/schemas/CommerceOrder/allOf/2'
-          - type: object
-            x-stoplight:
-              id: gdyjg7bg783br
-            properties:
-              sourceCreatedDate:
-                $ref: '#/components/schemas/DateTime'
-                description: The date on which this record was created in the originating system
-        - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-        x-stoplight:
-          id: 9e815c1766554
-      definitions:
-        transactionSourceRef:
-          title: Transaction Source Reference
-          x-internal: true
-          allOf:
-          - $ref: '#/components/schemas/CommerceRecordRef'
-          - type: object
-            properties:
-              type:
-                $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceType'
-        transactionSourceType:
-          x-internal: true
-          type: string
-          description: The type of source the transaction arose.
-          enum:
-          - Fee
-          - Order
-          - Payment
-          - ServiceCharge
-          - Unknown
-        transactionType:
-          x-internal: true
-          description: "The type of the platform transaction:  \n- `Unknown`  \n- `FailedPayout` — Failed transfer of funds from the seller's merchant account to their bank account.  \n- `Payment` — Credit and debit card payments.  \n- `PaymentFee` — Payment provider's fee on each card payment.  \n- `PaymentFeeRefund` — Payment provider's fee that has been refunded to the seller.  \n- `Payout` — Transfer of funds from the seller's merchant account to their bank account.  \n- `Refund` — Refunds to a customer's credit or debit card.  \n- `Transfer` — Secure transfer of funds to the seller's bank account.  "
-          type: string
-          enum:
-          - Payment
-          - Refund
-          - Payout
-          - FailedPayout
-          - Transfer
-          - PaymentFee
-          - PaymentFeeRefund
-          - Unknown
-      examples: []
+              $ref: '#/components/schemas/CommercePayment'
+      - $ref: '#/components/schemas/PagingInfo'
     CommerceProduct:
       title: 'Commerce: Product'
       description: 'A Product is an item in the company''s inventory, and includes information about the price and quantity of all products, and variants thereof, available for sale.
@@ -6356,97 +6088,243 @@ components:
           - Unknown
           - Published
           - Unpublished
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    CommerceAddress:
-      title: 'Commerce: Address'
-      x-internal: true
+    CommerceReport:
+      title: Commerce report
+      description: "## Structure\n\nAssess reports follow a consistent structure. Reports contain four sections of information:\n\n### 1. Report definition\n\nInformation such as:\n\n  1. The report info (e.g. enhanced_profit_and_loss).\n  2. The display name of the report (e.g. Enhanced Profit and Loss).\n  \n### 2. Dimension info\n\nInformation about the dimension contained in the reports such as:\n\n  1. The type of dimension (e.g. datetime, recordRef).\n  2. The display name of the dimension (e.g. Period, Category type, Category sub type).\n  3. The details about each item within the dimension (e.g. displayName:\"Jan 2022\", start:\"...\", end:\"...\", id:\"...\", name:\"...\").\n\n### 3. Measure info\n\nInformation about the measures contained in the report such as:\n\n  1. The display name of the measure (e.g. value of account, percentage change).\n  2. The type of the measure (e.g. currency, percentage).\n  3. The unit of the measure (e.g. %, GBP).\n  \n### 4. The data for the report\n\nWhen the *includeDisplayName* parameter is set to *true*, it shows the *dimensionDisplayName* and *itemDisplayName* to make the data human-readable. The default setting for *includeDisplayName* is *false*.\n\n\n## Displaying the report\n\nReports can be rendered as follows (ordering is implicit rather than explicit):\n\n![A table showing an example of how a report can be rendered](https://files.readme.io/1fa20ca-Report1.png)\n\n# Data model\n\n## Dimensions"
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/CommerceAddress/definitions/commerceAddressType'
-        line1:
-          description: The first line of the address
-          type: string
-        line2:
-          description: The second line of the address
-          type: string
-        city:
-          description: The third line of the address, or city
-          type: string
-        region:
-          description: The fourth line of the address, or region
-          type: string
-        country:
-          description: The country for the address
-          type: string
-        postalCode:
-          description: The postal (or zip) code for the address
-          type: string
+        reportInfo:
+          type: object
+          additionalProperties:
+            type: string
+        dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommerceReport/definitions/commerceReportDimension'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommerceReport/definitions/commerceReportMeasure'
+        reportData:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommerceReport/definitions/commerceReportComponent'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommerceReport/definitions/commerceReportError'
       definitions:
-        commerceAddressType:
-          description: The type of the address
-          type: string
-          enum:
-          - Billing
-          - Delivery
-          - Order
-          - Inventory
-          - Unknown
-    CommerceLocation:
-      title: 'Commerce: Location'
+        commerceReportMeasure:
+          title: Measure
+          type: object
+          properties:
+            displayName:
+              description: The measure's display name.
+              type: string
+            units:
+              type: string
+              description: The measure's units e.g. percentage (%).
+            index:
+              type: integer
+              description: The measure's index.
+            type:
+              type: string
+              description: The measure's type.
+        commerceReportError:
+          title: Error
+          type: object
+          properties:
+            message:
+              type: string
+              description: Message returned by error.
+            type:
+              type: string
+              description: The type of error.
+            details:
+              description: Additional details on the error.
+              type: object
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+        commerceReportDimension:
+          title: Dimension
+          type: object
+          properties:
+            index:
+              type: integer
+              description: The dimension's index.
+            displayName:
+              type: string
+              description: The dimension's display name.
+            type:
+              type: string
+              description: The dimension's type.
+            items:
+              type: array
+              items:
+                type: object
+                properties:
+                  index:
+                    type: integer
+                    description: The dimension's items index.
+        commerceReportComponent:
+          title: Report component
+          type: object
+          properties:
+            dimension:
+              type: integer
+              description: The component's dimension.
+            dimensionDisplayName:
+              type: string
+              description: The component's display name.
+            item:
+              type: integer
+              description: The component's item number.
+            itemDisplayName:
+              type: string
+              description: The component's item display name.
+            measures:
+              type: array
+              items:
+                $ref: '#/components/schemas/CommerceReport/definitions/reportComponentMeasure'
+            components:
+              type: array
+              items:
+                $ref: '#/components/schemas/CommerceReport/definitions/commerceReportComponent'
+        reportComponentMeasure:
+          type: object
+          title: Report component measure
+          properties:
+            index:
+              type: integer
+              description: The measure's index.
+            measureDisplayName:
+              type: string
+              description: The measure's display name.
+            value:
+              type: number
+              format: decimal
+              description: The measure's value.
+      x-examples:
+        Example 1:
+          reportInfo:
+            additionalProp1: string
+            additionalProp2: string
+            additionalProp3: string
+          dimensions:
+          - index: 0
+            displayName: string
+            type: string
+            items:
+            - index: 0
+          measures:
+          - displayName: string
+            units: string
+            index: 0
+            type: string
+          reportData:
+          - dimension: 0
+            dimensionDisplayName: string
+            item: 0
+            itemDisplayName: string
+            measures:
+            - index: 0
+              measureDisplayName: string
+            components:
+            - string
+          errors:
+          - message: string
+            type: DatesOutOfRange
+            details:
+              additionalProp1:
+              - string
+              additionalProp2:
+              - string
+              additionalProp3:
+              - string
+    CommerceTransaction:
+      title: 'Commerce: Transaction'
+      description: "Details of all financial transactions recorded in the commerce or point of sale system are added to the Transactions data type. For example, payments, service charges, and fees.\n\nYou can use data from the Transactions endpoints to calculate key metrics, such as:  \n- Transaction volumes  \n- Average transaction volume  \n- Average transaction value  \n- Returns  \n- Payouts"
       type: object
-      description: 'The Location datatype holds information on the geographic location at which stocks of products may be held, as referenced in the Products data type.
-
-
-        A Location also holds information on geographic locations where orders were placed, as referenced in the Orders data type.'
       allOf:
       - $ref: '#/components/schemas/CommerceOrder/allOf/0'
       - type: object
         properties:
-          name:
-            description: Name of this location
+          totalAmount:
+            description: The total transaction amount
+            type: number
+            format: decimal
+            examples:
+            - 194.12
+            - -283.56
+            - 0
+          currency:
+            $ref: '#/components/schemas/SourceAccount/properties/currency'
+          type:
+            $ref: '#/components/schemas/CommerceTransaction/definitions/transactionType'
+          subType:
+            description: Non-standardised transaction type data from the commerce software
             type: string
-          address:
-            description: Address associated with the location
-            $ref: '#/components/schemas/CommerceAddress'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+            examples:
+            - CardPayment
+            - Invoice payment
+          transactionSourceRef:
+            description: Link to the source event which triggered this transaction
+            allOf:
+            - $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceRef'
+          supplementalData:
+            $ref: '#/components/schemas/SupplementalData'
+      - allOf:
+        - type: object
+          x-stoplight:
+            id: c590b4405180f
+          allOf:
+          - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+          - type: object
+            x-stoplight:
+              id: gdyjg7bg783br
+            properties:
+              sourceCreatedDate:
+                $ref: '#/components/schemas/DateTime'
+                description: The date on which this record was created in the originating system
+        - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+        x-stoplight:
+          id: 9e815c1766554
       definitions:
-        locationRef:
-          type: object
-          description: Reference to the geographic location where the order was placed.
-          properties:
-            id:
-              description: The unique identitifer of the location being referenced.
-              type: string
-              examples:
-              - 13d946f0-c5d5-42bc-b092-97ece17923ab
-              - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-              - 7110701885
-              - EILBDVJVNUAGVKRQ
-            name:
-              description: Name of the location being referenced.
-              type: string
-          required:
-          - id
-      examples:
-      - id: '15'
-        name: London Warehouse
-        address:
-          type: Inventory
-          line1: Warner House
-          line2: 98 Theobald's Road
-          city: London
-          region: ''
-          country: United Kingdom
-          postalCode: WC1X 8WB
-        modifiedDate: '2020-08-12T14:37:37'
-        sourceModifiedDate: '2020-08-12T14:37:37'
+        transactionSourceRef:
+          title: Transaction Source Reference
+          x-internal: true
+          allOf:
+          - $ref: '#/components/schemas/CommerceRecordRef'
+          - type: object
+            properties:
+              type:
+                $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceType'
+        transactionSourceType:
+          x-internal: true
+          type: string
+          description: The type of source the transaction arose.
+          enum:
+          - Fee
+          - Order
+          - Payment
+          - ServiceCharge
+          - Unknown
+        transactionType:
+          x-internal: true
+          description: "The type of the platform transaction:  \n- `Unknown`  \n- `FailedPayout` — Failed transfer of funds from the seller's merchant account to their bank account.  \n- `Payment` — Credit and debit card payments.  \n- `PaymentFee` — Payment provider's fee on each card payment.  \n- `PaymentFeeRefund` — Payment provider's fee that has been refunded to the seller.  \n- `Payout` — Transfer of funds from the seller's merchant account to their bank account.  \n- `Refund` — Refunds to a customer's credit or debit card.  \n- `Transfer` — Secure transfer of funds to the seller's bank account.  "
+          type: string
+          enum:
+          - Payment
+          - Refund
+          - Payout
+          - FailedPayout
+          - Transfer
+          - PaymentFee
+          - PaymentFeeRefund
+          - Unknown
+      examples: []
     CommerceOrder:
       title: 'Commerce: Order'
       description: 'Orders contain the transaction details for all products sold by the company, and include details of any payments, service charges, or refunds related to each order. You can use data from the Orders endpoints to calculate key metrics, such as gross sales values and monthly recurring revenue (MRR).
@@ -6738,66 +6616,452 @@ components:
         modifiedDate: '2022-02-02T11:02:45Z'
         sourceModifiedDate: '2021-03-28T03:00:14'
       type: object
-    PagingInfo:
+    CommerceLocation:
+      title: 'Commerce: Location'
       type: object
-      title: Pagination information
+      description: 'The Location datatype holds information on the geographic location at which stocks of products may be held, as referenced in the Products data type.
+
+
+        A Location also holds information on geographic locations where orders were placed, as referenced in the Orders data type.'
+      allOf:
+      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+      - type: object
+        properties:
+          name:
+            description: Name of this location
+            type: string
+          address:
+            description: Address associated with the location
+            $ref: '#/components/schemas/CommerceAddress'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      definitions:
+        locationRef:
+          type: object
+          description: Reference to the geographic location where the order was placed.
+          properties:
+            id:
+              description: The unique identitifer of the location being referenced.
+              type: string
+              examples:
+              - 13d946f0-c5d5-42bc-b092-97ece17923ab
+              - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+              - 7110701885
+              - EILBDVJVNUAGVKRQ
+            name:
+              description: Name of the location being referenced.
+              type: string
+          required:
+          - id
+      examples:
+      - id: '15'
+        name: London Warehouse
+        address:
+          type: Inventory
+          line1: Warner House
+          line2: 98 Theobald's Road
+          city: London
+          region: ''
+          country: United Kingdom
+          postalCode: WC1X 8WB
+        modifiedDate: '2020-08-12T14:37:37'
+        sourceModifiedDate: '2020-08-12T14:37:37'
+    CommerceCustomers:
+      title: 'Commerce: Customers'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceCustomer'
+      - $ref: '#/components/schemas/PagingInfo'
+    CommerceTransactions:
+      title: 'Commerce: Transactions'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceTransaction'
+      - $ref: '#/components/schemas/PagingInfo'
+    CommercePayment:
+      title: 'Commerce: Payment'
+      description: 'Payments contain details of all payments made by customers to a company, including: amounts, currency used, payment method, payment provider, and payment status.
+
+
+        Refunds are recorded as separate, negative payments. Note that a refund can only occur in relation to a payment that has been completed (i.e. has a status of `Paid`). When a customer cancels an order _before_ a payment has been completed, the payment shows as `Cancelled`.
+
+
+        You can use data from the Payments endpoints to calculate key metrics, such as gross sales and monthly recurring revenue (MRR).'
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+      - type: object
+        properties:
+          amount:
+            type: number
+            format: decimal
+            description: Payment Amount (including gratuity)
+            examples:
+            - 194.12
+            - -283.56
+            - 0
+          currency:
+            $ref: '#/components/schemas/SourceAccount/properties/currency'
+            description: Currency in which the payment was made
+          paymentMethodRef:
+            $ref: '#/components/schemas/PaymentMethodRef'
+          status:
+            $ref: '#/components/schemas/CommercePayment/definitions/paymentStatus'
+          paymentProvider:
+            type: string
+            description: Service provider of the payment, if applicable.
+            examples:
+            - Amazon Pay
+            - Checkout.com
+            - SagePay
+          dueDate:
+            description: Date by which payment must be made
+            $ref: '#/components/schemas/DateTime'
+          supplementalData:
+            $ref: '#/components/schemas/SupplementalData'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      definitions:
+        paymentStatus:
+          type: string
+          x-internal: true
+          description: Status of the payment.
+          enum:
+          - Pending
+          - Authorized
+          - Paid
+          - Failed
+          - Cancelled
+          - Unknown
+        paymentType:
+          type: string
+          x-internal: true
+          nullable: true
+          description: Type of payment.
+          enum:
+          - Cash
+          - Card
+          - Invoice
+          - OnlineCard
+          - Swish
+          - Vipps
+          - Mobile
+          - StoreCredit
+          - Paypal
+          - Custom
+          - Prepaid
+          - Unknown
+          example: Cash
+        paymentRef:
+          x-internal: true
+          allOf:
+          - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+          - type: object
+            properties:
+              amount:
+                type: number
+                format: decimal
+                nullable: true
+                description: Payment Amount (including gratuity).
+                examples:
+                - 194.12
+                - -283.56
+                - 0
+              currency:
+                $ref: '#/components/schemas/SourceAccount/properties/currency'
+                description: Currency in which the payment was made.
+              type:
+                $ref: '#/components/schemas/CommercePayment/definitions/paymentType'
+              status:
+                $ref: '#/components/schemas/CommercePayment/definitions/paymentStatus'
+              paymentProvider:
+                type: string
+                description: Service provider of the payment, if applicable.
+                examples:
+                - Amazon Pay
+                - Checkout.com
+                - SagePay
+              dueDate:
+                description: Date by which payment must be made
+                $ref: '#/components/schemas/DateTime'
+          - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+          - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+    CommerceLocations:
+      title: 'Commerce: Locations'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceLocation'
+      - $ref: '#/components/schemas/PagingInfo'
+    PhoneNumber:
+      title: Phone
+      type: object
       x-internal: true
       properties:
-        pageNumber:
-          type: integer
-          description: Current page number.
-        pageSize:
-          type: integer
-          description: Number of items to return in results array.
-          maximum: 2000
-        totalResults:
-          type: integer
-          description: Total number of items.
-        _links:
-          $ref: '#/components/schemas/PagingInfo/definitions/links'
-      definitions:
-        links:
-          title: Hal Links
-          type: object
-          required:
-          - self
-          - current
-          properties:
-            self:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            current:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            next:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            previous:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+        number:
+          type: string
+          nullable: true
           examples:
-          - self:
-              href: /companies
-            current:
-              href: /companies?page=1&pageSize=10
-        halRef:
-          title: Hypertext reference
+          - +44 25691 154789
+          - (877) 492-8687
+          - 01224 658 999
+          description: A phone number.
+        type:
+          description: The type of phone number
+          type: string
+          enum:
+          - Primary
+          - Landline
+          - Mobile
+          - Fax
+          - Unknown
+      required:
+      - type
+    CommerceDispute:
+      title: 'Commerce: Dispute'
+      description: "A customer may file a payment dispute with their bank or other card issuer when they're unsatisfied with their purchase or believe they have been charged incorrectly. For example:  \n- They didn't receive an order.  \n- The product they received was different to the commerce store's description.  \n- They've been the victim of online fraud.  \n\nYou can use data from the Disputes endpoints to calculate key metrics, such as the number of chargebacks."
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+      - type: object
+        required:
+        - currency
+        properties:
+          disputedTransactions:
+            description: Link to the source event(s) which triggered this transaction.
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceRef'
+          totalAmount:
+            description: Total transaction amount that is under dispute.
+            format: decimal
+            examples:
+            - 194.12
+            - -283.56
+            - 0
+          currency:
+            description: Currency of the disputed transaction.
+            $ref: '#/components/schemas/SourceAccount/properties/currency'
+          status:
+            $ref: '#/components/schemas/CommerceDispute/definitions/disputeStatus'
+          reason:
+            description: Reason for the dispute
+            type: string
+            examples:
+            - Unhappy with product
+          dueDate:
+            description: Date when the next action in the dispute resolution is due
+            $ref: '#/components/schemas/DateTime'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      definitions:
+        disputeStatus:
+          description: Current status of the dispute
+          x-internal: true
+          type: string
+          enum:
+          - Won
+          - Lost
+          - Accepted
+          - Processing
+          - ChargeRefunded
+          - EvidenceRequired
+          - InquiryEvidenceRequired
+          - InquiryProcessing
+          - InquiryClosed
+          - WaitingThirdParty
+          - Unknown
+          example: EvidenceRequired
+      examples:
+      - id: 03e608e3-bd1c-454f-8c2b-fb0133e43b95
+        disputedTransactions:
+        - id: e63ad857-7e12-4e64-9185-cdfd7c45d09d
+          type: Order
+        totalAmount: -47.66
+        currency: GBP
+        status: InquiryEvidenceRequired
+        reason: Unhappy with product
+        dueDate: '2021-03-29T14:39:55'
+        createdDate: '2021-03-22T14:39:55'
+        modifiedDate: '2022-02-02T11:02:45Z'
+        sourceModifiedDate: '2021-03-22T14:39:55'
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
           type: object
           properties:
-            href:
+            itemId:
               type: string
-              format: uri-reference
-              description: Uri hypertext reference.
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    SourceAccount:
+      title: Source account (v1)
+      type: object
+      description: The target bank account in a supported accounting software for ingestion into a bank feed.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Unique ID for the bank account.
+        accountName:
+          type: string
+          nullable: true
+          description: The bank account name.
+        accountType:
+          type: string
+          nullable: true
+          description: The type of bank account e.g. Credit.
+        accountNumber:
+          type: string
+          nullable: true
+          description: The account number.
+        sortCode:
+          type: string
+          nullable: true
+          description: The sort code.
+        currency:
+          title: Currency
+          x-internal: true
+          type: string
+          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
+          format: ISO4217
+          examples:
+          - GBP
+          - USD
+          - EUR
+        balance:
+          type: number
+          format: decimal
+          nullable: true
+          description: The latest balance for the bank account.
+        modifiedDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: The last date the bank account was modified.
+        status:
+          type: string
+          nullable: true
+          description: Status of the source account.
+          enum:
+          - pending
+          - connected
+          - connecting
+          - disconnected
+          - unknown
+        feedStartDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
       required:
-      - pageNumber
-      - pageSize
-      - totalResults
-      - _links
+      - id
+      definitions:
+        sourceAccountPrototype:
+          title: Source account (v1)
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/SourceAccount/properties/id'
+            accountName:
+              $ref: '#/components/schemas/SourceAccount/properties/accountName'
+            accountType:
+              $ref: '#/components/schemas/SourceAccount/properties/accountType'
+            accountNumber:
+              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
+            sortCode:
+              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            balance:
+              $ref: '#/components/schemas/SourceAccount/properties/balance'
+            modifiedDate:
+              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
+          required:
+          - id
+        sourceAccounts:
+          title: Source accounts
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAccount'
       examples:
-      - pageNumber: 1
-        pageSize: 10
-        totalResults: 1
-        _links:
-          self:
-            href: /companies/{id}/data/{dataType}
-          current:
-            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+      - id: acc-002
+        accountName: account-081
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345670'
+        currency: GBP
+        balance: 99.99
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+      - id: acc-003
+        accountName: account-095
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345671'
+        currency: USD
+        balance: 0
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
     CommerceTaxComponent:
       title: 'Commerce: Tax component'
       description: The Tax Components endpoints return tax rates data from the commerce software, including tax rate names and values. This is to support the mapping of tax rates from the commerce software to those in the accounting software.
@@ -6863,124 +7127,6 @@ components:
         isCompound: true
         modifiedDate: '2022-10-23T00:00:00Z'
         sourceModifiedDate: '2022-10-23T00:00:00Z'
-    CommercePayments:
-      title: 'Commerce: Payments'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommercePayment'
-      - $ref: '#/components/schemas/PagingInfo'
-    CommerceOrders:
-      title: 'Commerce: Orders'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceOrder'
-      - $ref: '#/components/schemas/PagingInfo'
-    CommerceDisputes:
-      title: 'Commerce: Disputes'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceDispute'
-      - $ref: '#/components/schemas/PagingInfo'
-    CommerceLocations:
-      title: 'Commerce: Locations'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceLocation'
-      - $ref: '#/components/schemas/PagingInfo'
-    PaymentMethodRef:
-      type: object
-      title: Payment method reference
-      description: The payment method the record is linked to in the accounting or commerce software.
-      properties:
-        id:
-          description: The unique identifier of the location being referenced.
-          type: string
-        name:
-          description: Name of the location being referenced.
-          type: string
-      required:
-      - id
-      example:
-        id: EILBDVJVNUAGVKRQ
-        name: AliPay
-    ErrorMessage:
-      title: Error message
-      type: object
-      x-internal: true
-      properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
-          type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
-          nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
     CommerceCustomer:
       title: 'Commerce: Customer'
       description: When a customer places an order with the connected commerce store their details are added to the Customers dataset. You can use the data from the Customers endpoints to calculate key metrics, such as customer churn.
@@ -7098,199 +7244,6 @@ components:
           createdDate: '0001-01-01T00:00:00'
           modifiedDate: null
           sourceModifiedDate: '2020-08-12T14:37:37'
-    CommerceCustomers:
-      title: 'Commerce: Customers'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceCustomer'
-      - $ref: '#/components/schemas/PagingInfo'
-    CommercePaymentMethod:
-      title: 'Commerce: Payment method'
-      description: A Payment Method represents the payment method(s) used to make payments.
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-      - type: object
-        properties:
-          name:
-            type: string
-            description: The name of the PaymentMethod
-            example: Alipay
-          status:
-            description: Status of the Payment Method.
-            x-internal: true
-            type: string
-            enum:
-            - Unknown
-            - Active
-            - Archived
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-    CommerceTransactions:
-      title: 'Commerce: Transactions'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceTransaction'
-      - $ref: '#/components/schemas/PagingInfo'
-    PhoneNumber:
-      title: Phone
-      type: object
-      x-internal: true
-      properties:
-        number:
-          type: string
-          nullable: true
-          examples:
-          - +44 25691 154789
-          - (877) 492-8687
-          - 01224 658 999
-          description: A phone number.
-        type:
-          description: The type of phone number
-          type: string
-          enum:
-          - Primary
-          - Landline
-          - Mobile
-          - Fax
-          - Unknown
-      required:
-      - type
-    CommerceRecordRef:
-      title: Record Ref
-      x-internal: true
-      type: object
-      properties:
-        id:
-          description: The unique identitifer of the record being referenced
-          type: string
-          examples:
-          - 13d946f0-c5d5-42bc-b092-97ece17923ab
-          - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-          - 7110701885
-          - EILBDVJVNUAGVKRQ
-        type:
-          description: The type of record being referenced.
-          type: string
-      required:
-      - id
-      - type
-      description: ''
-    SourceAccount:
-      title: Source account (v1)
-      type: object
-      description: The target bank account in a supported accounting software for ingestion into a bank feed.
-      additionalProperties: false
-      properties:
-        id:
-          type: string
-          description: Unique ID for the bank account.
-        accountName:
-          type: string
-          nullable: true
-          description: The bank account name.
-        accountType:
-          type: string
-          nullable: true
-          description: The type of bank account e.g. Credit.
-        accountNumber:
-          type: string
-          nullable: true
-          description: The account number.
-        sortCode:
-          type: string
-          nullable: true
-          description: The sort code.
-        currency:
-          title: Currency
-          x-internal: true
-          type: string
-          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
-          format: ISO4217
-          examples:
-          - GBP
-          - USD
-          - EUR
-        balance:
-          type: number
-          format: decimal
-          nullable: true
-          description: The latest balance for the bank account.
-        modifiedDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-          description: The last date the bank account was modified.
-        status:
-          type: string
-          nullable: true
-          description: Status of the source account.
-          enum:
-          - pending
-          - connected
-          - connecting
-          - disconnected
-          - unknown
-        feedStartDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-      required:
-      - id
-      definitions:
-        sourceAccountPrototype:
-          title: Source account (v1)
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/SourceAccount/properties/id'
-            accountName:
-              $ref: '#/components/schemas/SourceAccount/properties/accountName'
-            accountType:
-              $ref: '#/components/schemas/SourceAccount/properties/accountType'
-            accountNumber:
-              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
-            sortCode:
-              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-            balance:
-              $ref: '#/components/schemas/SourceAccount/properties/balance'
-            modifiedDate:
-              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
-          required:
-          - id
-        sourceAccounts:
-          title: Source accounts
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceAccount'
-      examples:
-      - id: acc-002
-        accountName: account-081
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345670'
-        currency: GBP
-        balance: 99.99
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
-      - id: acc-003
-        accountName: account-095
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345671'
-        currency: USD
-        balance: 0
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
     CommerceProductCategory:
       title: 'Commerce: Product category'
       description: Product categories are used to classify a group of products together, either by type (e.g. "Furniture"), or sometimes by tax profile.
@@ -7341,6 +7294,198 @@ components:
           hasChildren: false
           modifiedDate: '2022-01-01T12:00:00Z'
           sourceModifiedDate: '2021-12-25T12:00:00Z'
+    CommercePaymentMethod:
+      title: 'Commerce: Payment method'
+      description: A Payment Method represents the payment method(s) used to make payments.
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: The name of the PaymentMethod
+            example: Alipay
+          status:
+            description: Status of the Payment Method.
+            x-internal: true
+            type: string
+            enum:
+            - Unknown
+            - Active
+            - Archived
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+    CommerceAddress:
+      title: 'Commerce: Address'
+      x-internal: true
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CommerceAddress/definitions/commerceAddressType'
+        line1:
+          description: The first line of the address
+          type: string
+        line2:
+          description: The second line of the address
+          type: string
+        city:
+          description: The third line of the address, or city
+          type: string
+        region:
+          description: The fourth line of the address, or region
+          type: string
+        country:
+          description: The country for the address
+          type: string
+        postalCode:
+          description: The postal (or zip) code for the address
+          type: string
+      definitions:
+        commerceAddressType:
+          description: The type of the address
+          type: string
+          enum:
+          - Billing
+          - Delivery
+          - Order
+          - Inventory
+          - Unknown
+    PagingInfo:
+      type: object
+      title: Pagination information
+      x-internal: true
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number.
+        pageSize:
+          type: integer
+          description: Number of items to return in results array.
+          maximum: 2000
+        totalResults:
+          type: integer
+          description: Total number of items.
+        _links:
+          $ref: '#/components/schemas/PagingInfo/definitions/links'
+      definitions:
+        links:
+          title: Hal Links
+          type: object
+          required:
+          - self
+          - current
+          properties:
+            self:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            current:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            next:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            previous:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+          examples:
+          - self:
+              href: /companies
+            current:
+              href: /companies?page=1&pageSize=10
+        halRef:
+          title: Hypertext reference
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri-reference
+              description: Uri hypertext reference.
+      required:
+      - pageNumber
+      - pageSize
+      - totalResults
+      - _links
+      examples:
+      - pageNumber: 1
+        pageSize: 10
+        totalResults: 1
+        _links:
+          self:
+            href: /companies/{id}/data/{dataType}
+          current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+    CommerceRecordRef:
+      title: Record Ref
+      x-internal: true
+      type: object
+      properties:
+        id:
+          description: The unique identitifer of the record being referenced
+          type: string
+          examples:
+          - 13d946f0-c5d5-42bc-b092-97ece17923ab
+          - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+          - 7110701885
+          - EILBDVJVNUAGVKRQ
+        type:
+          description: The type of record being referenced.
+          type: string
+      required:
+      - id
+      - type
+      description: ''
+    CommerceProductCategories:
+      title: 'Commerce: Product categories'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceProductCategory'
+      - $ref: '#/components/schemas/PagingInfo'
+    CommerceDisputes:
+      title: 'Commerce: Disputes'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceDispute'
+      - $ref: '#/components/schemas/PagingInfo'
+    CommerceOrders:
+      title: 'Commerce: Orders'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceOrder'
+      - $ref: '#/components/schemas/PagingInfo'
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    PaymentMethodRef:
+      type: object
+      title: Payment method reference
+      description: The payment method the record is linked to in the accounting or commerce software.
+      properties:
+        id:
+          description: The unique identifier of the location being referenced.
+          type: string
+        name:
+          description: Name of the location being referenced.
+          type: string
+      required:
+      - id
+      example:
+        id: EILBDVJVNUAGVKRQ
+        name: AliPay
     SupplementalData:
       title: Supplemental data
       type: object
@@ -7364,57 +7509,7 @@ components:
             items:
               $ref: '#/components/schemas/CommercePaymentMethod'
       - $ref: '#/components/schemas/PagingInfo'
-    CommerceProductCategories:
-      title: 'Commerce: Product categories'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceProductCategory'
-      - $ref: '#/components/schemas/PagingInfo'
   parameters:
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
-    includeDisplayNames:
-      name: includeDisplayNames
-      in: query
-      schema:
-        type: boolean
-      description: Shows the dimensionDisplayName and itemDisplayName in measures to make the report data human-readable.
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    productId:
-      name: productId
-      in: path
-      required: true
-      schema:
-        type: string
-        examples:
-        - 13d946f0-c5d5-42bc-b092-97ece17923ab
-        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-        - 7110701885
-        - EILBDVJVNUAGVKRQ
-      description: Unique identifier for a product.
     companyId:
       name: companyId
       in: path
@@ -7425,6 +7520,13 @@ components:
         example: 8a210b68-6988-11ed-a1eb-0242ac120002
         description: Unique identifier for your SMB in Codat.
       description: Unique identifier for a company.
+    numberOfPeriodsRequired:
+      name: numberOfPeriods
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: The number of periods to return. There will be no pagination as a query parameter.
     customerId:
       name: customerId
       in: path
@@ -7437,6 +7539,32 @@ components:
         - 7110701885
         - EILBDVJVNUAGVKRQ
       description: Unique identifier for a customer.
+    reportDateRequired:
+      name: reportDate
+      in: query
+      required: true
+      schema:
+        type: string
+        example: 29-09-2020
+      description: The date in which the report is created up to. Users must specify a specific date, however the response will be provided for the full month.
+    periodLength:
+      name: periodLength
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: The number of months per period. E.g. 2 = 2 months per period.
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
     paymentId:
       name: paymentId
       in: path
@@ -7449,21 +7577,6 @@ components:
         - 7110701885
         - EILBDVJVNUAGVKRQ
       description: Unique identifier for a payment.
-    periodLength:
-      name: periodLength
-      in: query
-      required: true
-      schema:
-        type: integer
-      description: The number of months per period. E.g. 2 = 2 months per period.
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
     orderBy:
       name: orderBy
       in: query
@@ -7472,31 +7585,6 @@ components:
         type: string
         example: -modifiedDate
       description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
-    reportDateRequired:
-      name: reportDate
-      in: query
-      required: true
-      schema:
-        type: string
-        example: 29-09-2020
-      description: The date in which the report is created up to. Users must specify a specific date, however the response will be provided for the full month.
-    numberOfPeriodsRequired:
-      name: numberOfPeriods
-      in: query
-      required: true
-      schema:
-        type: integer
-      description: The number of periods to return. There will be no pagination as a query parameter.
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
-        description: Unique identifier for a company's data connection.
-      description: Unique identifier for a connection.
     periodUnit:
       name: periodUnit
       in: query
@@ -7509,7 +7597,113 @@ components:
         - Month
         - Year
       description: The period unit of time returned.
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    includeDisplayNames:
+      name: includeDisplayNames
+      in: query
+      schema:
+        type: boolean
+      description: Shows the dimensionDisplayName and itemDisplayName in measures to make the report data human-readable.
+    productId:
+      name: productId
+      in: path
+      required: true
+      schema:
+        type: string
+        examples:
+        - 13d946f0-c5d5-42bc-b092-97ece17923ab
+        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+        - 7110701885
+        - EILBDVJVNUAGVKRQ
+      description: Unique identifier for a product.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
   responses:
+    Conflict:
+      description: The data type's dataset has not been requested or is still syncing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 409
+                service: PublicApi
+                error: The data set has not been requested.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
     Unauthorized:
       description: Your API request was not properly authorized.
       content:
@@ -7523,6 +7717,21 @@ components:
                 service: PublicApi
                 error: Unauthorized
                 correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Not-Found:
@@ -7558,21 +7767,6 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Service-Unavailable:
       description: The Codat API is temporarily offline for maintenance. Please try again later.
       content:
@@ -7585,21 +7779,6 @@ components:
                 statusCode: 500
                 service: PublicApi
                 error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -7624,51 +7803,6 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Conflict:
-      description: The data type's dataset has not been requested or is still syncing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 409
-                service: PublicApi
-                error: The data set has not been requested.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0

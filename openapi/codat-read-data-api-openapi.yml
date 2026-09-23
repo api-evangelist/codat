@@ -3,7 +3,7 @@ info:
   title: Platform Read data API
   version: 3.0.0
   summary: Platform API
-  description: "An API for the common components of all of Codat's products.\n\nThese end points cover creating and managing your companies, data connections, and integrations.\n\n[Read about the building blocks of Codat...](https://docs.codat.io/core-concepts/companies) | [See our OpenAPI spec](https://github.com/codatio/oas) \n\n---\n<!-- Start Codat Tags Table -->\n## Endpoints\n\n| Endpoints | Description |\n| :- |:- |\n| Companies | Create and manage your SMB users' companies. |\n| Connections | Create new and manage existing data connections for a company. |\n| Connection management | Configure connection management UI and retrieve access tokens for authentication. |\n| Webhooks | Create and manage webhooks that listen to Codat's events. |\n| Integrations | Get a list of integrations supported by Codat and their logos. |\n| Refresh data | Initiate data refreshes, view pull status and history. |\n| Settings | Manage company profile configuration, sync settings, and API keys. |\n| Push data | Initiate and monitor Create, Update, and Delete operations. |\n| Supplemental data | Configure and pull additional data you can include in Codat's standard data types. |\n| Custom data type | Configure and pull additional data types that are not included in Codat's standardized data model. |\n<!-- End Codat Tags Table -->"
+  description: An API for the common components of all of Codat's products.
   contact:
     name: Codat
     email: support@codat.io
@@ -30,7 +30,7 @@ paths:
       description: 'Use the **Get validation results** endpoint to review warnings and errors encountered during the data type validation phase.
 
 
-        The validation result [schema](https://docs.codat.io/platform-api#/schemas/ValidationResult) contains two message arrays:
+        The validation result schema contains two message arrays:
 
 
         - **`warnings`** array lists potential issues with the data type that may require attention but don''t block usage.
@@ -87,30 +87,6 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Too-Many-Requests:
       description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
@@ -126,8 +102,8 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
       content:
         application/json:
           schema:
@@ -137,7 +113,7 @@ components:
               value:
                 statusCode: 500
                 service: PublicApi
-                error: There is a problem with our server. Please try again later.
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -154,21 +130,6 @@ components:
                 service: PublicApi
                 error: Unauthorized
                 correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Not-Found:
@@ -202,6 +163,45 @@ components:
                 service: PublicApi
                 error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
   schemas:

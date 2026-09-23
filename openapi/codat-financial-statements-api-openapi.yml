@@ -1,55 +1,7 @@
 openapi: 3.2.0
 info:
   title: Lending Financial statements API
-  description: 'Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers'' latest data from accounting, banking, and commerce software they are already using. It also includes features to help providers verify the accuracy of data and process it more efficiently.
-
-
-    The Lending solution is built on top of the latest accounting, commerce, and banking data, providing you with the most important data points you need to get a full picture of SMB creditworthiness and make a comprehensive assessment of your customers.
-
-
-    [Explore solution](https://docs.codat.io/lending/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
-
-
-    <!-- Start Codat Tags Table -->
-
-    ## Endpoints
-
-
-    | Endpoints | Description |
-
-    | :- |:- |
-
-    | Companies | Create and manage your SMB users'' companies. |
-
-    | Connections | Create new and manage existing data connections for a company. |
-
-    | Bank statements | Retrieve banking data from linked bank accounts. |
-
-    | Sales | Retrieve standardized sales data from a linked commerce software. |
-
-    | Financial statements | Financial data and reports from a linked accounting software. |
-
-    | Liabilities | Debt and other liabilities. |
-
-    | Accounts payable | Data from a linked accounting software representing money the business owes money to its suppliers. |
-
-    | Accounts receivable | Data from a linked accounting software representing money owed to the business for sold goods or services. |
-
-    | Transactions | Data from a linked accounting software representing transactions. |
-
-    | Company info | View company information fetched from the source platform. |
-
-    | Data integrity | Match mutable accounting data with immutable banking data to increase confidence in financial data. |
-
-    | Excel reports | Download reports in Excel format. |
-
-    | Manage data | Control how data is retrieved from an integration. |
-
-    | File upload | Endpoints to manage uploaded files. |
-
-    | Loan writeback | Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure in your lending process to maintain an accurate position of a loan during the entire lending cycle. |
-
-    <!-- End Codat Tags Table -->'
+  description: Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers' latest data from accounting, banking, and commerce software they are already using.
   version: 3.0.0
   contact:
     name: Codat
@@ -61,7 +13,7 @@ servers:
 security:
 - auth_header: []
 tags:
-- name: Financial statements
+- name: Financial Statements
   description: Financial data and reports from a linked accounting software.
 paths:
   /companies/{companyId}/reports/enhancedProfitAndLoss/accounts:
@@ -72,9 +24,9 @@ paths:
       description: 'The *Get categorized profit and loss statement* endpoint returns a list of categorized accounts that appear on a company’s Profit and Loss statement. It also includes a balance as of the financial statement date.
 
 
-        Codat suggests a category for each account automatically, but you can [change it](https://docs.codat.io/lending/features/financial-statements-overview#recategorizing-accounts) to a more suitable one.'
+        Codat suggests a category for each account automatically, but you can change it to a more suitable one.'
       tags:
-      - Financial statements
+      - Financial Statements
       responses:
         '200':
           description: OK
@@ -453,9 +405,9 @@ paths:
       description: 'The *Get categorized balance sheet statement* endpoint returns a list of categorized accounts that appear on a company’s Balance Sheet along with a balance per financial statement date.
 
 
-        Codat suggests a category for each account automatically, but you can [change it](https://docs.codat.io/lending/features/financial-statements-overview#recategorizing-accounts) to a more suitable one.'
+        Codat suggests a category for each account automatically, but you can change it to a more suitable one.'
       tags:
-      - Financial statements
+      - Financial Statements
       responses:
         '200':
           description: OK
@@ -736,9 +688,9 @@ paths:
   /companies/{companyId}/data/accounts:
     get:
       tags:
-      - Financial statements
+      - Financial Statements
       summary: List accounts
-      description: "\uFEFFThe *List accounts* endpoint returns a list of [accounts](https://docs.codat.io/lending-api#/schemas/Account) for a given company's connection.\n\n[Accounts](https://docs.codat.io/lending-api#/schemas/Account) are the categories a business uses to record accounting transactions.\n\nBefore using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data)."
+      description: "\uFEFFThe *List accounts* endpoint returns a list of accounts for a given company's connection.\n\nAccounts are the categories a business uses to record accounting transactions.\n\nBefore using this endpoint, you must have retrieved data for the company."
       operationId: list-accounting-accounts
       x-speakeasy-group: financial-statements.accounts
       parameters:
@@ -1563,7 +1515,7 @@ paths:
     - $ref: '#/components/parameters/accountingAccountId'
     get:
       tags:
-      - Financial statements
+      - Financial Statements
       summary: Get account
       responses:
         '200':
@@ -1881,12 +1833,10 @@ paths:
       description: 'The *Get account* endpoint returns a single account for a given accountId.
 
 
-        [Accounts](https://docs.codat.io/lending-api#/schemas/Account) are the categories a business uses to record accounting transactions.
+        Accounts are the categories a business uses to record accounting transactions.
 
 
-        Before using this endpoint, you must have [retrieved data for the company](https://docs.codat.io/lending-api#/operations/refresh-company-data).
-
-        '
+        Before using this endpoint, you must have retrieved data for the company.'
       operationId: get-accounting-account
       x-speakeasy-group: financial-statements.accounts
   /companies/{companyId}/data/financials/balanceSheet:
@@ -1894,7 +1844,7 @@ paths:
     - $ref: '#/components/parameters/companyId'
     get:
       tags:
-      - Financial statements
+      - Financial Statements
       summary: Get balance sheet
       description: Gets the latest balance sheet for a company.
       operationId: get-accounting-balance-sheet
@@ -5946,7 +5896,7 @@ paths:
     - $ref: '#/components/parameters/companyId'
     get:
       tags:
-      - Financial statements
+      - Financial Statements
       summary: Get profit and loss
       description: Gets the latest profit and loss for a company.
       operationId: get-accounting-profit-and-loss
@@ -8704,7 +8654,7 @@ paths:
     - $ref: '#/components/parameters/companyId'
     get:
       tags:
-      - Financial statements
+      - Financial Statements
       summary: Get cash flow statement
       description: Gets the latest cash flow statement for a company.
       operationId: get-accounting-cash-flow-statement
@@ -9142,113 +9092,228 @@ paths:
         '503':
           $ref: '#/components/responses/Service-Unavailable'
 components:
-  parameters:
-    accountingAccountId:
-      name: accountId
-      in: path
-      required: true
-      schema:
-        type: string
-        examples:
-        - 13d946f0-c5d5-42bc-b092-97ece17923ab
-        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-        - 7110701885
-        - EILBDVJVNUAGVKRQ
-      description: Unique identifier for an account.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
-    accountingStartMonth:
-      name: startMonth
-      in: query
-      schema:
-        $ref: '#/components/schemas/DateTime'
-      description: The month the report starts from.
-    reportDateRequired:
-      name: reportDate
-      in: query
-      required: true
-      schema:
-        type: string
-        example: 29-09-2020
-      description: The date in which the report is created up to. Users must specify a specific date, however the response will be provided for the full month.
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
-    accountingPeriodLength:
-      name: periodLength
-      description: Number of months defining the period of interest.
-      in: query
-      required: true
-      schema:
-        type: integer
-        format: int32
-        example: 4
-    reportDate:
-      name: reportDate
-      in: query
-      schema:
-        type: string
-        example: 29-09-2020
-      description: The date in which the report is created up to. Users must specify a specific date, however the response will be provided for the full month.
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    accountingPeriodsToCompare:
-      name: periodsToCompare
-      description: Number of periods with `periodLength` to compare.
-      in: query
-      required: true
-      schema:
-        type: integer
-        format: int32
-        example: 20
-    numberOfPeriods:
-      name: numberOfPeriods
-      in: query
-      required: false
-      schema:
-        type: integer
-      description: The number of periods to return. If not provided, 12 periods will be used as the default value.
-    orderBy:
-      name: orderBy
-      in: query
-      required: false
-      schema:
-        type: string
-        example: -modifiedDate
-      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
   schemas:
+    ReportLine:
+      x-internal: true
+      type: object
+      title: 'Accounting: Report line'
+      properties:
+        accountId:
+          type: string
+          nullable: true
+          description: Identifier for the account, unique for the company in the accounting software.
+        name:
+          type: string
+          nullable: true
+          description: Name of the report line item.
+        value:
+          type: number
+          format: decimal
+          description: Numerical value of the line item.
+        items:
+          type: array
+          nullable: true
+          description: An array of ReportLine items.
+          items:
+            $ref: '#/components/schemas/ReportLine'
+      required:
+      - value
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    PagingInfo:
+      type: object
+      title: Pagination information
+      x-internal: true
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number.
+        pageSize:
+          type: integer
+          description: Number of items to return in results array.
+          maximum: 2000
+        totalResults:
+          type: integer
+          description: Total number of items.
+        _links:
+          $ref: '#/components/schemas/PagingInfo/definitions/links'
+      definitions:
+        links:
+          title: Hal Links
+          type: object
+          required:
+          - self
+          - current
+          properties:
+            self:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            current:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            next:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            previous:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+          examples:
+          - self:
+              href: /companies
+            current:
+              href: /companies?page=1&pageSize=10
+        halRef:
+          title: Hypertext reference
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri-reference
+              description: Uri hypertext reference.
+      required:
+      - pageNumber
+      - pageSize
+      - totalResults
+      - _links
+      examples:
+      - pageNumber: 1
+        pageSize: 10
+        totalResults: 1
+        _links:
+          self:
+            href: /companies/{id}/data/{dataType}
+          current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+    AccountingCashFlowStatement:
+      title: 'Accounting: Cash flow statement'
+      description: "> **Operating activities only**  \n> \n> Currently, the cash flow statement shows cash that flows into and out of the company from operating activities *only*. Operating activities generate cash from the sale of goods or services.\n\n## Overview\n\nA cash flow statement is a financial report that records all cash that is received or spent by a company during a given period. It gives you a clearer picture of the company’s performance, and their ability to pay creditors and finance growth.\n\n> **Cash flow statement or balance sheet?**\n> \n> Look at the cash flow statement to understand a company's ability to pay its bills. Although the balance sheet may show healthy earnings at a specific point in time, the cash flow statement allows you to see whether the company is meeting its financial commitments, such as paying creditors or its employees."
+      type: object
+      properties:
+        reports:
+          description: Array of cash flow statements.
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountingCashFlowStatement/definitions/cashFlowStatement'
+        reportBasis:
+          $ref: '#/components/schemas/AccountingCashFlowStatement/definitions/reportBasis'
+        reportInput:
+          $ref: '#/components/schemas/AccountingCashFlowStatement/definitions/reportInput'
+        currency:
+          $ref: '#/components/schemas/SourceAccount/properties/currency'
+          description: Currency of all values in the cash flow statement.
+        mostRecentAvailableMonth:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+        earliestAvailableMonth:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+      required:
+      - reports
+      - reportBasis
+      - reportInput
+      definitions:
+        reportBasis:
+          title: Report basis
+          description: Accounting method used when aggregating the report data. In this case, `Cash`.
+          type: string
+          enum:
+          - Unknown
+          - Accrual
+          - Cash
+        reportInput:
+          description: Accounting method used to prepare the cash flow statement.
+          type: string
+          enum:
+          - Unknown
+          - Indirect
+          - Direct
+        cashFlowStatement:
+          title: Cash flow statement
+          type: object
+          properties:
+            fromDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Start date for the reporting period.
+            toDate:
+              $ref: '#/components/schemas/DateTime'
+              description: End date for the reporting period.
+            cashReceipts:
+              $ref: '#/components/schemas/ReportLine'
+              description: ReportLines for cash receipts from the sale of goods.
+            cashPayments:
+              $ref: '#/components/schemas/ReportLine'
+              description: ReportLines for cash payments to suppliers for the purchase of goods or services.
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    SupplementalData:
+      title: Supplemental data
+      type: object
+      x-internal: true
+      description: "Supplemental data is additional data you can include in our standard data types. \n\nIt is referenced as a configured dynamic key value pair that is unique to the accounting software. [Learn more](https://docs.codat.io/using-the-api/supplemental-data/overview) about supplemental data."
+      properties:
+        content:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: true
+          nullable: true
     SourceAccount:
       title: Source account (v1)
       type: object
@@ -9355,18 +9420,6 @@ components:
         balance: 0
         modifiedDate: '2023-01-09T14:14:14.1057478Z'
         status: pending
-    SupplementalData:
-      title: Supplemental data
-      type: object
-      x-internal: true
-      description: "Supplemental data is additional data you can include in our standard data types. \n\nIt is referenced as a configured dynamic key value pair that is unique to the accounting software. [Learn more](https://docs.codat.io/using-the-api/supplemental-data/overview) about supplemental data."
-      properties:
-        content:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties: true
-          nullable: true
     AccountingAccount:
       title: 'Accounting: Account'
       description: "\uFEFF> **Language tip:** Accounts are also referred to as **chart of accounts**, **nominal accounts**, and **general ledger**.\n\n## Overview\n\nAccounts are the categories a business uses to record accounting transactions. From the Accounts endpoints, you can retrieve a list of all accounts for a specified company.\n\nThe categories for an account include:\n* Asset\n* Expense\n* Income\n* Liability\n* Equity.\n\nThe same account may have a different category based on the integration it is used in. For example, a current account (known as checking in the US) should be categorized as `Asset.Current` for Xero, and `Asset.Bank.Checking` for QuickBooks Online.\n\nAt the same time, each integration may have its own requirements to the categories. For example, a Paypal account in Xero is of the `Asset.Bank` category and therefore requires additional properties to be provided.\n\nTo determine the list of allowed categories for a specific integration, you can:\n- Follow our [Create, update, delete data](https://docs.codat.io/using-the-api/push) guide and use the [Get create account model](https://docs.codat.io/lending-api#/operations/get-create-chartOfAccounts-model).\n- Refer to the integration's own documentation.\n\n> **Accounts with no category**\n>\n> If an account is pulled from the chart of accounts and its nominal code does not lie within the category layout for the company's accounts, then the **type** is `Unknown`. The **fullyQualifiedCategory** and **fullyQualifiedName** fields return `null`.\n>\n> This approach gives a true representation of the company's accounts whilst preventing distorting financials such as a company's profit and loss and balance sheet reports."
@@ -9489,188 +9542,6 @@ components:
           description: Status of the account
           example: Active
       type: object
-    AccountingBalanceSheet:
-      title: 'Accounting: Balance sheet'
-      description: '## Overview
-
-
-        The balance sheet is a snapshot of a company''s accounts at a single point in time that provides a statement of the assets, liabilities and equity of an organization. It gives interested parties an idea of the company''s financial position, in addition to displaying what the company owns and owes.
-
-
-        > **Balance sheet or profit and loss report?**
-
-        >
-
-        > A profit and loss report summarises the total revenue, expenses, and profit or loss during a specified time period. A balance sheet report shows the financial position of a company at a specific moment in time.
-
-
-        **Structure of this report**
-
-        This report will reflect the structure and line descriptions that the business has set in their own accounting software.
-
-
-        **History**
-
-        By default, Codat pulls (up to) 24 months of balance sheets for a company. You can adjust this to fetch more history, where available, by updating the `monthsToSync` value for `balanceSheet` on the [data type settings endpoint](https://docs.codat.io/lending-api#/operations/update-sync-settings).
-
-
-        **Want to pull this in a standardised structure?**
-
-        Our [Enhanced Financials](https://docs.codat.io/lending/features/financial-statements-overview) endpoints provide the same report under standardized headings, allowing you to pull it in the same format for all of your business customers.'
-      type: object
-      additionalProperties: false
-      properties:
-        currency:
-          $ref: '#/components/schemas/SourceAccount/properties/currency'
-          description: Currency of the balance sheet.
-        reports:
-          type: array
-          description: An array of balance sheet reports.
-          items:
-            $ref: '#/components/schemas/AccountingBalanceSheet/definitions/balanceSheet'
-        mostRecentAvailableMonth:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-          description: Most recent available monthly report data.
-        earliestAvailableMonth:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-          description: Earliest available monthly report data.
-      required:
-      - reports
-      definitions:
-        balanceSheet:
-          type: object
-          properties:
-            date:
-              $ref: '#/components/schemas/DateTime'
-              description: Point in time when a snapshot of a company's financial position is taken.
-            assets:
-              $ref: '#/components/schemas/ReportLine'
-              description: ReportLines for assets. For example, fixed and current assets.
-            liabilities:
-              $ref: '#/components/schemas/ReportLine'
-              description: ReportLines for liabilities. For example, current liabilities.
-            netAssets:
-              type: number
-              format: decimal
-              description: Value of net assets for a company in their base currency.
-            equity:
-              $ref: '#/components/schemas/ReportLine'
-              description: ReportLines for equities. For example, retained and current year earnings. See below.
-          required:
-          - netAssets
-    EnhancedFinancialReport:
-      title: Enhanced report
-      type: object
-      properties:
-        reportInfo:
-          $ref: '#/components/schemas/EnhancedFinancialReport/definitions/enhancedReportInfo'
-        reportItems:
-          type: array
-          description: An array of report items.
-          items:
-            title: Report item
-            type: object
-            properties:
-              date:
-                $ref: '#/components/schemas/DateTime'
-                description: Last date of the period.
-              balance:
-                type: number
-                format: decimal
-                description: Balance of the account as reported on the profit and loss or Balance sheet.
-              accountName:
-                type: string
-                description: Name of the account.
-              accountId:
-                type: string
-                description: The unique account ID.
-              accountCategory:
-                $ref: '#/components/schemas/EnhancedFinancialReport/definitions/enhancedReportAccountCategory'
-      definitions:
-        enhancedReportAccountCategory:
-          title: Account category
-          descrciption: An object containing the suggested or confirmed account categories, up to five levels.
-          type: object
-          properties:
-            status:
-              type: string
-              description: Returns a status of "Suggested" or "Confirmed". If an account has a confirmed category, it will replace any suggested category returned.
-            levels:
-              type: array
-              items:
-                $ref: '#/components/schemas/EnhancedFinancialReport/definitions/accountCategoryLevel'
-        accountCategoryLevel:
-          title: Account category level
-          description: An object containing an ordered list of account category levels.
-          type: object
-          properties:
-            levelName:
-              type: string
-              description: Account category name.
-            confidence:
-              type: number
-              format: decimal
-              description: Confidence level of the category. This will only be populated where `status` is `Suggested`.
-        enhancedReportInfo:
-          type: object
-          properties:
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-              description: Currency of the P&L/Balance sheet.
-            reportName:
-              type: string
-              description: The name of the report.
-            companyName:
-              type: string
-              description: Name of the company queried.
-            generatedDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Returns the YYYY-MM-DD datetime of report generation.
-      examples:
-      - reportInfo:
-          reportName: EnhancedProfitAndLossAccounts
-          companyName: ABC LTD
-          generatedDate: '2022-01-01'
-        reportItems:
-        - date: '2022-01-01'
-          balance: 70
-          accountName: Sales UK
-          accountId: 13931cbf-ea06-4d6e-9538-a8457fa66011
-          accountCategory:
-            status: Suggested
-            levels:
-            - levelName: Income
-              confidence: 0.95
-            - levelName: Revenue
-              confidence: 0.9
-        - date: '2022-01-01'
-          balance: 30
-          accountName: Sales US
-          accountId: 13931cbf-ea06-4d6e-9538-a8457fa66011
-          accountCategory:
-            lastUpdated: '2022-01-02'
-            status: Suggested
-            levels:
-            - levelName: Income
-              confidence: 0.95
-            - levelName: Revenue
-              confidence: 0.9
-        - date: '2022-01-01'
-          balance: 70
-          accountName: Amazon
-          accountId: 13931cbf-ea06-4d6e-9538-a8457fa66011
-          accountCategory:
-            lastUpdated: '2022-01-02'
-            status: Suggested
-            levels:
-            - levelName: Income
-              confidence: 0.95
-            - levelName: Revenue
-              confidence: 0.95
-            - levelName: Online
-              confidence: 0.8
     AccountingProfitAndLossReport:
       title: 'Accounting: Profit and loss report'
       description: "> **Language tip:** Profit and loss statement is also referred to as **income statement** under US GAAP (Generally Accepted Accounting Principles).\n\n## Overview\n\nThe purpose of a profit and loss report is to present the financial performance of a company over a specified time period.\n\nA profit and loss report shows a company's total income and expenses for a specified period of time and whether a profit or loss has been made.\n\n> **Profit and loss or balance sheet?**  \n> Profit and loss reports summarise the total revenue, expenses, and profit or loss over a specified time period. A balance sheet report presents all assets, liability, and equity for a given date.\n\n\n**Structure of this report**  \nThis report will reflect the structure and line descriptions that the business has set in their own accounting software.\n\n**History**  \nBy default, Codat pulls (up to) 24 months of profit and loss history for a company. You can adjust this to fetch more history, where available, by updating the `monthsToSync` value for `profitAndLoss` on the [data type settings endpoint](https://docs.codat.io/lending-api#/operations/post-profile-syncSettings).\n\n**Want to pull this in a standardised structure?**  \nOur [Enhanced Financials](https://docs.codat.io/lending/features/financial-statements-overview) endpoints provide the same report under standardized headings, allowing you to pull it in the same format for all of your business customers."
@@ -9749,201 +9620,6 @@ components:
           - netOperatingProfit
           - netOtherIncome
           - netProfit
-    AccountingAccounts:
-      title: 'Accounting: Accounts'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/AccountingAccount'
-      - $ref: '#/components/schemas/PagingInfo'
-    AccountingCashFlowStatement:
-      title: 'Accounting: Cash flow statement'
-      description: "> **Operating activities only**  \n> \n> Currently, the cash flow statement shows cash that flows into and out of the company from operating activities *only*. Operating activities generate cash from the sale of goods or services.\n\n## Overview\n\nA cash flow statement is a financial report that records all cash that is received or spent by a company during a given period. It gives you a clearer picture of the company’s performance, and their ability to pay creditors and finance growth.\n\n> **Cash flow statement or balance sheet?**\n> \n> Look at the cash flow statement to understand a company's ability to pay its bills. Although the balance sheet may show healthy earnings at a specific point in time, the cash flow statement allows you to see whether the company is meeting its financial commitments, such as paying creditors or its employees."
-      type: object
-      properties:
-        reports:
-          description: Array of cash flow statements.
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountingCashFlowStatement/definitions/cashFlowStatement'
-        reportBasis:
-          $ref: '#/components/schemas/AccountingCashFlowStatement/definitions/reportBasis'
-        reportInput:
-          $ref: '#/components/schemas/AccountingCashFlowStatement/definitions/reportInput'
-        currency:
-          $ref: '#/components/schemas/SourceAccount/properties/currency'
-          description: Currency of all values in the cash flow statement.
-        mostRecentAvailableMonth:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-        earliestAvailableMonth:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-      required:
-      - reports
-      - reportBasis
-      - reportInput
-      definitions:
-        reportBasis:
-          title: Report basis
-          description: Accounting method used when aggregating the report data. In this case, `Cash`.
-          type: string
-          enum:
-          - Unknown
-          - Accrual
-          - Cash
-        reportInput:
-          description: Accounting method used to prepare the cash flow statement.
-          type: string
-          enum:
-          - Unknown
-          - Indirect
-          - Direct
-        cashFlowStatement:
-          title: Cash flow statement
-          type: object
-          properties:
-            fromDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Start date for the reporting period.
-            toDate:
-              $ref: '#/components/schemas/DateTime'
-              description: End date for the reporting period.
-            cashReceipts:
-              $ref: '#/components/schemas/ReportLine'
-              description: ReportLines for cash receipts from the sale of goods.
-            cashPayments:
-              $ref: '#/components/schemas/ReportLine'
-              description: ReportLines for cash payments to suppliers for the purchase of goods or services.
-    ErrorMessage:
-      title: Error message
-      type: object
-      x-internal: true
-      properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
-          type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
-          nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    PagingInfo:
-      type: object
-      title: Pagination information
-      x-internal: true
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number.
-        pageSize:
-          type: integer
-          description: Number of items to return in results array.
-          maximum: 2000
-        totalResults:
-          type: integer
-          description: Total number of items.
-        _links:
-          $ref: '#/components/schemas/PagingInfo/definitions/links'
-      definitions:
-        links:
-          title: Hal Links
-          type: object
-          required:
-          - self
-          - current
-          properties:
-            self:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            current:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            next:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            previous:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-          examples:
-          - self:
-              href: /companies
-            current:
-              href: /companies?page=1&pageSize=10
-        halRef:
-          title: Hypertext reference
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri-reference
-              description: Uri hypertext reference.
-      required:
-      - pageNumber
-      - pageSize
-      - totalResults
-      - _links
-      examples:
-      - pageNumber: 1
-        pageSize: 10
-        totalResults: 1
-        _links:
-          self:
-            href: /companies/{id}/data/{dataType}
-          current:
-            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
     CommerceOrder:
       title: 'Commerce: Order'
       description: 'Orders contain the transaction details for all products sold by the company, and include details of any payments, service charges, or refunds related to each order. You can use data from the Orders endpoints to calculate key metrics, such as gross sales values and monthly recurring revenue (MRR).
@@ -10235,31 +9911,117 @@ components:
         modifiedDate: '2022-02-02T11:02:45Z'
         sourceModifiedDate: '2021-03-28T03:00:14'
       type: object
-    ReportLine:
-      x-internal: true
+    EnhancedFinancialReport:
+      title: Enhanced report
       type: object
-      title: 'Accounting: Report line'
       properties:
-        accountId:
-          type: string
-          nullable: true
-          description: Identifier for the account, unique for the company in the accounting software.
-        name:
-          type: string
-          nullable: true
-          description: Name of the report line item.
-        value:
-          type: number
-          format: decimal
-          description: Numerical value of the line item.
-        items:
+        reportInfo:
+          $ref: '#/components/schemas/EnhancedFinancialReport/definitions/enhancedReportInfo'
+        reportItems:
           type: array
-          nullable: true
-          description: An array of ReportLine items.
+          description: An array of report items.
           items:
-            $ref: '#/components/schemas/ReportLine'
-      required:
-      - value
+            title: Report item
+            type: object
+            properties:
+              date:
+                $ref: '#/components/schemas/DateTime'
+                description: Last date of the period.
+              balance:
+                type: number
+                format: decimal
+                description: Balance of the account as reported on the profit and loss or Balance sheet.
+              accountName:
+                type: string
+                description: Name of the account.
+              accountId:
+                type: string
+                description: The unique account ID.
+              accountCategory:
+                $ref: '#/components/schemas/EnhancedFinancialReport/definitions/enhancedReportAccountCategory'
+      definitions:
+        enhancedReportAccountCategory:
+          title: Account category
+          descrciption: An object containing the suggested or confirmed account categories, up to five levels.
+          type: object
+          properties:
+            status:
+              type: string
+              description: Returns a status of "Suggested" or "Confirmed". If an account has a confirmed category, it will replace any suggested category returned.
+            levels:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedFinancialReport/definitions/accountCategoryLevel'
+        accountCategoryLevel:
+          title: Account category level
+          description: An object containing an ordered list of account category levels.
+          type: object
+          properties:
+            levelName:
+              type: string
+              description: Account category name.
+            confidence:
+              type: number
+              format: decimal
+              description: Confidence level of the category. This will only be populated where `status` is `Suggested`.
+        enhancedReportInfo:
+          type: object
+          properties:
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+              description: Currency of the P&L/Balance sheet.
+            reportName:
+              type: string
+              description: The name of the report.
+            companyName:
+              type: string
+              description: Name of the company queried.
+            generatedDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Returns the YYYY-MM-DD datetime of report generation.
+      examples:
+      - reportInfo:
+          reportName: EnhancedProfitAndLossAccounts
+          companyName: ABC LTD
+          generatedDate: '2022-01-01'
+        reportItems:
+        - date: '2022-01-01'
+          balance: 70
+          accountName: Sales UK
+          accountId: 13931cbf-ea06-4d6e-9538-a8457fa66011
+          accountCategory:
+            status: Suggested
+            levels:
+            - levelName: Income
+              confidence: 0.95
+            - levelName: Revenue
+              confidence: 0.9
+        - date: '2022-01-01'
+          balance: 30
+          accountName: Sales US
+          accountId: 13931cbf-ea06-4d6e-9538-a8457fa66011
+          accountCategory:
+            lastUpdated: '2022-01-02'
+            status: Suggested
+            levels:
+            - levelName: Income
+              confidence: 0.95
+            - levelName: Revenue
+              confidence: 0.9
+        - date: '2022-01-01'
+          balance: 70
+          accountName: Amazon
+          accountId: 13931cbf-ea06-4d6e-9538-a8457fa66011
+          accountCategory:
+            lastUpdated: '2022-01-02'
+            status: Suggested
+            levels:
+            - levelName: Income
+              confidence: 0.95
+            - levelName: Revenue
+              confidence: 0.95
+            - levelName: Online
+              confidence: 0.8
     Metadata:
       title: Metadata
       type: object
@@ -10269,114 +10031,89 @@ components:
           type: boolean
           description: Indicates whether the record has been deleted in the third-party system this record originated from.
           nullable: true
+    AccountingBalanceSheet:
+      title: 'Accounting: Balance sheet'
+      description: '## Overview
+
+
+        The balance sheet is a snapshot of a company''s accounts at a single point in time that provides a statement of the assets, liabilities and equity of an organization. It gives interested parties an idea of the company''s financial position, in addition to displaying what the company owns and owes.
+
+
+        > **Balance sheet or profit and loss report?**
+
+        >
+
+        > A profit and loss report summarises the total revenue, expenses, and profit or loss during a specified time period. A balance sheet report shows the financial position of a company at a specific moment in time.
+
+
+        **Structure of this report**
+
+        This report will reflect the structure and line descriptions that the business has set in their own accounting software.
+
+
+        **History**
+
+        By default, Codat pulls (up to) 24 months of balance sheets for a company. You can adjust this to fetch more history, where available, by updating the `monthsToSync` value for `balanceSheet` on the [data type settings endpoint](https://docs.codat.io/lending-api#/operations/update-sync-settings).
+
+
+        **Want to pull this in a standardised structure?**
+
+        Our [Enhanced Financials](https://docs.codat.io/lending/features/financial-statements-overview) endpoints provide the same report under standardized headings, allowing you to pull it in the same format for all of your business customers.'
+      type: object
+      additionalProperties: false
+      properties:
+        currency:
+          $ref: '#/components/schemas/SourceAccount/properties/currency'
+          description: Currency of the balance sheet.
+        reports:
+          type: array
+          description: An array of balance sheet reports.
+          items:
+            $ref: '#/components/schemas/AccountingBalanceSheet/definitions/balanceSheet'
+        mostRecentAvailableMonth:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: Most recent available monthly report data.
+        earliestAvailableMonth:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: Earliest available monthly report data.
+      required:
+      - reports
+      definitions:
+        balanceSheet:
+          type: object
+          properties:
+            date:
+              $ref: '#/components/schemas/DateTime'
+              description: Point in time when a snapshot of a company's financial position is taken.
+            assets:
+              $ref: '#/components/schemas/ReportLine'
+              description: ReportLines for assets. For example, fixed and current assets.
+            liabilities:
+              $ref: '#/components/schemas/ReportLine'
+              description: ReportLines for liabilities. For example, current liabilities.
+            netAssets:
+              type: number
+              format: decimal
+              description: Value of net assets for a company in their base currency.
+            equity:
+              $ref: '#/components/schemas/ReportLine'
+              description: ReportLines for equities. For example, retained and current year earnings. See below.
+          required:
+          - netAssets
+    AccountingAccounts:
+      title: 'Accounting: Accounts'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/AccountingAccount'
+      - $ref: '#/components/schemas/PagingInfo'
   responses:
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Malformed-Query:
-      description: Your `query` parameter was not correctly formed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: ClientsApi
-                error: Error parsing query - Malformed query.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Unresolved property:
-              value:
-                statusCode: 400
-                service: PullApi
-                error: Error parsing query - Could not resolve property isCompleted on Dataset
-                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Too-Many-Requests:
       description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
@@ -10390,6 +10127,21 @@ components:
                 service: PublicApi
                 error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Not-Found:
@@ -10455,6 +10207,204 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    reportDate:
+      name: reportDate
+      in: query
+      schema:
+        type: string
+        example: 29-09-2020
+      description: The date in which the report is created up to. Users must specify a specific date, however the response will be provided for the full month.
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    numberOfPeriods:
+      name: numberOfPeriods
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: The number of periods to return. If not provided, 12 periods will be used as the default value.
+    accountingPeriodLength:
+      name: periodLength
+      description: Number of months defining the period of interest.
+      in: query
+      required: true
+      schema:
+        type: integer
+        format: int32
+        example: 4
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    reportDateRequired:
+      name: reportDate
+      in: query
+      required: true
+      schema:
+        type: string
+        example: 29-09-2020
+      description: The date in which the report is created up to. Users must specify a specific date, however the response will be provided for the full month.
+    accountingStartMonth:
+      name: startMonth
+      in: query
+      schema:
+        $ref: '#/components/schemas/DateTime'
+      description: The month the report starts from.
+    accountingPeriodsToCompare:
+      name: periodsToCompare
+      description: Number of periods with `periodLength` to compare.
+      in: query
+      required: true
+      schema:
+        type: integer
+        format: int32
+        example: 20
+    accountingAccountId:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        examples:
+        - 13d946f0-c5d5-42bc-b092-97ece17923ab
+        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+        - 7110701885
+        - EILBDVJVNUAGVKRQ
+      description: Unique identifier for an account.
   securitySchemes:
     auth_header:
       name: Authorization

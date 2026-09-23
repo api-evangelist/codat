@@ -1,55 +1,7 @@
 openapi: 3.2.0
 info:
   title: Lending API
-  description: 'Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers'' latest data from accounting, banking, and commerce software they are already using. It also includes features to help providers verify the accuracy of data and process it more efficiently.
-
-
-    The Lending solution is built on top of the latest accounting, commerce, and banking data, providing you with the most important data points you need to get a full picture of SMB creditworthiness and make a comprehensive assessment of your customers.
-
-
-    [Explore solution](https://docs.codat.io/lending/overview) | [See OpenAPI spec](https://github.com/codatio/oas)
-
-
-    <!-- Start Codat Tags Table -->
-
-    ## Endpoints
-
-
-    | Endpoints | Description |
-
-    | :- |:- |
-
-    | Companies | Create and manage your SMB users'' companies. |
-
-    | Connections | Create new and manage existing data connections for a company. |
-
-    | Bank statements | Retrieve banking data from linked bank accounts. |
-
-    | Sales | Retrieve standardized sales data from a linked commerce software. |
-
-    | Financial statements | Financial data and reports from a linked accounting software. |
-
-    | Liabilities | Debt and other liabilities. |
-
-    | Accounts payable | Data from a linked accounting software representing money the business owes money to its suppliers. |
-
-    | Accounts receivable | Data from a linked accounting software representing money owed to the business for sold goods or services. |
-
-    | Transactions | Data from a linked accounting software representing transactions. |
-
-    | Company info | View company information fetched from the source platform. |
-
-    | Data integrity | Match mutable accounting data with immutable banking data to increase confidence in financial data. |
-
-    | Excel reports | Download reports in Excel format. |
-
-    | Manage data | Control how data is retrieved from an integration. |
-
-    | File upload | Endpoints to manage uploaded files. |
-
-    | Loan writeback | Implement the [loan writeback](https://docs.codat.io/lending/guides/loan-writeback/introduction) procedure in your lending process to maintain an accurate position of a loan during the entire lending cycle. |
-
-    <!-- End Codat Tags Table -->'
+  description: Our Lending solution helps you make smarter credit decisions on small businesses by enabling you to pull your customers' latest data from accounting, banking, and commerce software they are already using.
   version: 3.0.0
   contact:
     name: Codat
@@ -77,6 +29,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Lending
+      summary: Create account categories updated
+      x-summary-source: derived
   client.rateLimit.reached:
     post:
       description: Called when your client’s request count to Codat's API surpasses the allocated quota.
@@ -100,6 +54,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Lending
+      summary: Create client rate limit reached
+      x-summary-source: derived
   client.rateLimit.reset:
     post:
       description: Called when your client's rate limit quota is reset, allowing additional requests to Codat's API.
@@ -123,6 +79,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Lending
+      summary: Create client rate limit reset
+      x-summary-source: derived
   reports.categorizedBankStatement.generate.successful:
     post:
       description: Called when a categorized bank statement is successfully generated for a company.
@@ -153,6 +111,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Lending
+      summary: Create reports categorized bank statement generate successful
+      x-summary-source: derived
   reports.categorizedBankStatement.generate.unsuccessful:
     post:
       description: Called when a categorized bank statement has failed to be generated for a company.
@@ -183,6 +143,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Lending
+      summary: Create reports categorized bank statement generate unsuccessful
+      x-summary-source: derived
   reports.creditModel.generate.successful:
     post:
       description: Called when a credit model report is successfully generated.
@@ -243,6 +205,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Lending
+      summary: Create reports credit model generate successful
+      x-summary-source: derived
   reports.creditModel.generate.unsuccessful:
     post:
       description: Called when a credit model report has failed to be generated for a company.
@@ -273,6 +237,8 @@ webhooks:
           description: Return a 200 status to indicate that the webhook was received successfully.
       tags:
       - Lending
+      summary: Create reports credit model generate unsuccessful
+      x-summary-source: derived
 components:
   schemas:
     AccountCategoriesUpdatedWebhook:
@@ -331,13 +297,6 @@ components:
         Message: Account categories updated for company f1c35bdc-1546-41b9-baf4-3f31135af968.
         Data:
           modifiedDate: '2019-08-24T14:15:22Z'
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
     Company:
       title: Company
       description: "\uFEFFIn Codat, a company represents a business sharing access to their data. Each company can have multiple [connections](https://docs.codat.io/lending-api#/schemas/Connection) to different data sources such as one connection to [Xero](https://docs.codat.io/integrations/accounting/xero/accounting-xero) for accounting data, two connections to [Plaid](https://docs.codat.io/integrations/banking/plaid/banking-plaid) for two bank accounts and a connection to [Zettle](https://docs.codat.io/integrations/commerce/zettle/commerce-zettle) for POS data.\n\nTypically each company is one of your customers.\n\nWhen you create a company, you can specify a `name` and we will automatically generate a unique `id` for the company. You can also add a `description` to store any additional information about the company."
@@ -452,6 +411,13 @@ components:
         products:
         - spend-insights
         - lending
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
     ClientRateLimitWebhook:
       title: Client rate limit webhook
       type: object
@@ -699,16 +665,6 @@ components:
       required:
       - name
   parameters:
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
-        description: Unique identifier for a company's data connection.
-      description: Unique identifier for a connection.
     companyId:
       name: companyId
       in: path
@@ -719,6 +675,16 @@ components:
         example: 8a210b68-6988-11ed-a1eb-0242ac120002
         description: Unique identifier for your SMB in Codat.
       description: Unique identifier for a company.
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
   securitySchemes:
     auth_header:
       name: Authorization
