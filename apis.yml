@@ -34,10 +34,16 @@ accessModel:
 position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/codat.png
+x-docs-platform: docusaurus
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-24
 tags:
-- Unified-API
+- Unified API
+- Accounting
 tags_raw:
 - Unified_API
+- Accounting
+- Unified-API
 created: '2026-03-03'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/codat/refs/heads/main/apis.yml
@@ -55,12 +61,13 @@ apis:
   - Accounting Sync
   - Corporate Cards
   - Expenses
-  - Unified-API
+  - Unified API
   tags_raw:
   - Accounting Sync
   - Corporate Cards
   - Expenses
   - Unified_API
+  - Unified-API
   properties:
   - type: Documentation
     url: https://docs.codat.io/expenses/overview
@@ -79,12 +86,13 @@ apis:
   - Accounts Payable
   - Bill Pay
   - Payables
-  - Unified-API
+  - Unified API
   tags_raw:
   - Accounts Payable
   - Bill Pay
   - Payables
   - Unified_API
+  - Unified-API
   properties:
   - type: Documentation
     url: https://docs.codat.io/payables/overview
@@ -103,13 +111,14 @@ apis:
   tags:
   - Accounts Payable
   - Spend Insights
-  - Unified-API
+  - Unified API
   - Virtual Cards
   tags_raw:
   - Accounts Payable
   - Spend Insights
   - Unified_API
   - Virtual Cards
+  - Unified-API
   properties:
   - type: Documentation
     url: https://docs.codat.io/spend-insights/overview
@@ -128,12 +137,13 @@ apis:
   - Commerce
   - Point-of-Sale
   - Reconciliation
-  - Unified-API
+  - Unified API
   tags_raw:
   - Commerce
   - Point of Sale
   - Reconciliation
   - Unified_API
+  - Unified-API
   properties:
   - type: Documentation
     url: https://docs.codat.io/commerce/overview
@@ -153,12 +163,13 @@ apis:
   - Accounting Sync
   - Human Resources
   - Payroll
-  - Unified-API
+  - Unified API
   tags_raw:
   - Accounting Sync
   - HR
   - Payroll
   - Unified_API
+  - Unified-API
   properties:
   - type: Documentation
     url: https://docs.codat.io/payroll/overview
@@ -183,8 +194,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -208,8 +217,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -236,8 +243,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -264,8 +269,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -291,8 +294,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -318,8 +319,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -343,8 +342,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -370,8 +367,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -397,8 +392,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -424,8 +417,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -449,8 +440,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -475,8 +464,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -503,8 +490,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -528,8 +513,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -555,8 +538,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -582,8 +563,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -608,8 +587,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -635,8 +612,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -660,8 +635,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -687,8 +660,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -712,8 +683,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -737,8 +706,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -762,8 +729,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -787,8 +752,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -812,8 +775,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -837,8 +798,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -862,8 +821,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -887,8 +844,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -912,8 +867,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -937,8 +890,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -965,8 +916,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
@@ -992,8 +941,6 @@ apis:
     url: https://docs.codat.io/platform-api
   - type: OpenAPI Source
     url: https://github.com/codatio/oas
-  - type: GraphQL
-    url: graphql/codat-graphql.md
   - type: Documentation
     url: https://docs.codat.io/lending/overview
   - type: APIReference
