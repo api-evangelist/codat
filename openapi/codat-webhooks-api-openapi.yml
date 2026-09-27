@@ -182,6 +182,60 @@ paths:
           $ref: '#/components/responses/Service-Unavailable'
 components:
   schemas:
+    WebhookConsumer:
+      title: Webhook consumer
+      type: object
+      description: "\uFEFFA webhook consumer is an HTTP endpoint that developers can configure to subscribe to Codat's supported event types.\n\nSee our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview).\n"
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 8a210b68-6988-11ed-a1eb-0242ac120002
+          description: Unique identifier for the webhook consumer.
+        url:
+          type: string
+          format: uri
+          description: The URL that will consume webhook events dispatched by Codat.
+        disabled:
+          type: boolean
+          description: Flag that enables or disables the endpoint from receiving events. Disabled when set to `true`.
+          nullable: true
+          default: false
+        eventTypes:
+          type: array
+          description: An array of event types the webhook consumer subscribes to.
+          items:
+            type: string
+        companyTags:
+          type: array
+          nullable: true
+          description: Company tags provide an additional way to filter messages, independent of event types. Company tags are case-sensitive, and only messages from companies with matching tags will be sent to this endpoint. Use the format `tagKey:tagValue`.
+          items:
+            type: string
+            maxLength: 128
+          maxItems: 10
+      definitions:
+        webhookConsumerPrototype:
+          title: Create webhook consumer
+          type: object
+          properties:
+            url:
+              $ref: '#/components/schemas/WebhookConsumer/properties/url'
+            disabled:
+              $ref: '#/components/schemas/WebhookConsumer/properties/disabled'
+            eventTypes:
+              $ref: '#/components/schemas/WebhookConsumer/properties/eventTypes'
+            companyTags:
+              $ref: '#/components/schemas/WebhookConsumer/properties/companyTags'
+        webhookConsumers:
+          title: Webhook consumers
+          type: object
+          properties:
+            results:
+              type: array
+              maxItems: 50
+              items:
+                $ref: '#/components/schemas/WebhookConsumer'
     ErrorMessage:
       title: Error message
       type: object
@@ -240,60 +294,6 @@ components:
               type: string
               nullable: true
               description: Name of validator.
-    WebhookConsumer:
-      title: Webhook consumer
-      type: object
-      description: "\uFEFFA webhook consumer is an HTTP endpoint that developers can configure to subscribe to Codat's supported event types.\n\nSee our documentation for more details on [Codat's webhook service](https://docs.codat.io/using-the-api/webhooks/overview).\n"
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 8a210b68-6988-11ed-a1eb-0242ac120002
-          description: Unique identifier for the webhook consumer.
-        url:
-          type: string
-          format: uri
-          description: The URL that will consume webhook events dispatched by Codat.
-        disabled:
-          type: boolean
-          description: Flag that enables or disables the endpoint from receiving events. Disabled when set to `true`.
-          nullable: true
-          default: false
-        eventTypes:
-          type: array
-          description: An array of event types the webhook consumer subscribes to.
-          items:
-            type: string
-        companyTags:
-          type: array
-          nullable: true
-          description: Company tags provide an additional way to filter messages, independent of event types. Company tags are case-sensitive, and only messages from companies with matching tags will be sent to this endpoint. Use the format `tagKey:tagValue`.
-          items:
-            type: string
-            maxLength: 128
-          maxItems: 10
-      definitions:
-        webhookConsumerPrototype:
-          title: Create webhook consumer
-          type: object
-          properties:
-            url:
-              $ref: '#/components/schemas/WebhookConsumer/properties/url'
-            disabled:
-              $ref: '#/components/schemas/WebhookConsumer/properties/disabled'
-            eventTypes:
-              $ref: '#/components/schemas/WebhookConsumer/properties/eventTypes'
-            companyTags:
-              $ref: '#/components/schemas/WebhookConsumer/properties/companyTags'
-        webhookConsumers:
-          title: Webhook consumers
-          type: object
-          properties:
-            results:
-              type: array
-              maxItems: 50
-              items:
-                $ref: '#/components/schemas/WebhookConsumer'
     WebhookZapierKey:
       title: Zapier integration key
       type: object
@@ -305,51 +305,6 @@ components:
       examples:
       - key: sk_integ_WM4dfoK1nKZnDE_kceze6hWDjbRwOZwG.us
   responses:
-    Bad-Request:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Not-Found:
       description: 'One or more of the resources you referenced could not be found.
 
@@ -383,8 +338,8 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
         application/json:
           schema:
@@ -392,39 +347,24 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 500
+                statusCode: 429
                 service: PublicApi
-                error: There is a problem with our server. Please try again later.
+                error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
+    Bad-Request:
+      description: The request made is not valid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
           examples:
-            Conflict:
+            Malformed query:
               value:
-                statusCode: 403
+                statusCode: 400
                 service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                error: Error processing request - not valid.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -449,6 +389,66 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0

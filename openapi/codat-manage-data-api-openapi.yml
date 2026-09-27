@@ -714,6 +714,13 @@ components:
         progress: 10
         isCompleted: false
         isErrored: false
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
     ErrorMessage:
       title: Error message
       type: object
@@ -832,13 +839,6 @@ components:
             href: /companies/{id}/data/{dataType}
           current:
             href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
     DataType:
       x-internal: true
       $ref: '#/components/schemas/DataStatus/properties/dataType'
@@ -932,36 +932,6 @@ components:
               $ref: '#/components/schemas/PullOperation'
       - $ref: '#/components/schemas/PagingInfo'
   responses:
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Not-Found:
       description: 'One or more of the resources you referenced could not be found.
 
@@ -995,8 +965,8 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
         application/json:
           schema:
@@ -1004,39 +974,9 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 500
+                statusCode: 429
                 service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -1087,6 +1027,66 @@ components:
                 correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
   parameters:
     companyId:
       name: companyId
@@ -1098,6 +1098,13 @@ components:
         example: 8a210b68-6988-11ed-a1eb-0242ac120002
         description: Unique identifier for your SMB in Codat.
       description: Unique identifier for a company.
+    dataType:
+      name: dataType
+      description: A key for a Codat data type.
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/DataType'
     pageSize:
       name: pageSize
       in: query
@@ -1109,6 +1116,15 @@ components:
         minimum: 1
         maximum: 5000
       description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    datasetId:
+      name: datasetId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        description: Unique identifier for the dataset that completed its sync.
+      description: Unique identifier for the dataset that completed its sync.
     page:
       name: page
       in: query
@@ -1119,14 +1135,6 @@ components:
         example: 1
         default: 1
       description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
     orderBy:
       name: orderBy
       in: query
@@ -1135,22 +1143,14 @@ components:
         type: string
         example: -modifiedDate
       description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
-    dataType:
-      name: dataType
-      description: A key for a Codat data type.
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/DataType'
-    datasetId:
-      name: datasetId
-      in: path
-      required: true
+    query:
+      name: query
+      in: query
+      required: false
       schema:
         type: string
-        format: uuid
-        description: Unique identifier for the dataset that completed its sync.
-      description: Unique identifier for the dataset that completed its sync.
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
   securitySchemes:
     auth_header:
       name: Authorization

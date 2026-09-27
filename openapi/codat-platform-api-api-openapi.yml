@@ -759,6 +759,102 @@ webhooks:
       x-summary-source: derived
 components:
   schemas:
+    PullOperation:
+      title: Pull operation
+      description: 'Information about a queued, in progress or completed pull operation.
+
+        *Formally called `dataset`*'
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the pull operation.
+          example: 943accd0-4247-42d8-865b-363c8629e1da
+        companyId:
+          type: string
+          format: uuid
+          description: Unique identifier of the company associated to this pull operation.
+          example: 22ece347-e5f6-4896-95e0-35a4c7f17023
+        connectionId:
+          type: string
+          format: uuid
+          description: Unique identifier of the connection associated to this pull operation.
+          example: 50830828-7d39-4367-b0eb-5ddb2de5faa5
+        dataType:
+          title: Data types
+          x-internal: true
+          type: string
+          description: The data type you are requesting in a pull operation.
+        status:
+          title: Dataset status
+          type: string
+          description: The current status of the dataset.
+          enum:
+          - Initial
+          - Queued
+          - Fetching
+          - MapQueued
+          - Mapping
+          - Complete
+          - FetchError
+          - MapError
+          - InternalError
+          - ProcessingQueued
+          - Processing
+          - ProcessingError
+          - ValidationQueued
+          - Validating
+          - ValidationError
+          - AuthError
+          - Cancelled
+          - NotSupported
+          - RateLimitError
+          - PermissionsError
+          - PrerequisiteNotMet
+        statusDescription:
+          type: string
+          nullable: true
+          description: Additional information about the dataset status.
+          example: Paused until 2022-10-23T00:00:00.000Z
+        errorMessage:
+          type: string
+          nullable: true
+          description: A message about a transient or persistent error returned by Codat or the source platform.
+        requested:
+          $ref: '#/components/schemas/DateTime'
+        completed:
+          $ref: '#/components/schemas/DateTime'
+        progress:
+          type: integer
+          description: An integer signifying the progress of the pull operation.
+        isCompleted:
+          type: boolean
+          description: '`True` if the pull operation is completed successfully. The `isCompleted` property is not queryable. To filter failed pull operations, query by `status!=Complete&&status!=NotSupported` instead.'
+        isErrored:
+          type: boolean
+          description: '`True` if the pull operation entered an error state.'
+      required:
+      - id
+      - companyId
+      - connectionId
+      - dataType
+      - status
+      - requested
+      - progress
+      - isCompleted
+      - isErrored
+      examples:
+      - id: 97d60846-f07a-4d42-b5a0-0bdcc6ebf56b
+        companyId: 4645bd78-8988-45bc-ac9e-67ba5df6e4e5
+        connectionId: 51baa045-4836-4317-a42e-3542e991e581
+        dataType: invoices
+        status: Initial
+        statusDescription: Paused until 2022-10-23T00:00:00.000Z
+        requested: '2022-11-14T11:18:37.2798351Z'
+        progress: 10
+        isCompleted: false
+        isErrored: false
     ReadCompletedWebhook:
       title: Read completed webhook
       type: object
@@ -881,66 +977,98 @@ components:
                   type: string
                   description: A link to Codat's documentation with additional information on how to troubleshoot this issue.
                   example: https://docs.codat.io/using-the-api/get-data-troubleshooting#warning.validation
-    Integration:
-      title: Integration
-      description: An integration that Codat supports
-      examples:
-      - key: gbol
-        logoUrl: http://example.com
-        name: Xero
-        enabled: true
-        sourceId: accounting
-        sourceType: 8193a927-ab7a-45a3-9dc2-d357a4932dfe
-        integrationId: 497a18ca-284e-40c0-985d-f72be35d468e
-        isOfflineConnector: true
-        isBeta: true
-        dataProvidedBy: string
-        datatypeFeatures:
-        - datatype: invoices
-          supportedFeatures:
-          - featureType: get
-            featureState: release
+    Connection:
+      title: Connection
+      description: "\uFEFFA connection represents a [company's](https://docs.codat.io/platform-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
       type: object
       properties:
-        key:
-          $ref: '#/components/parameters/platformKey/schema'
-        logoUrl:
+        id:
+          $ref: '#/components/parameters/connectionId/schema'
+        integrationId:
           type: string
-          format: uri
-          description: Static url for integration's logo.
-        name:
+          format: uuid
+          example: fd321cb6-7963-4506-b873-e99593a45e30
+          description: A Codat ID representing the integration.
+        integrationKey:
           type: string
-          example: Xero
-          description: Name of integration.
-        enabled:
-          type: boolean
-          description: Whether this integration is enabled for your customers to use.
+          description: A unique four-character ID that identifies the platform of the company's data connection. This ensures continuity if the platform changes its name in the future.
         sourceId:
           $ref: '#/components/schemas/Branding/properties/sourceId'
         sourceType:
           $ref: '#/components/schemas/Integration/definitions/sourceType'
-        integrationId:
-          $ref: '#/components/schemas/Connection/properties/integrationId'
-        isOfflineConnector:
-          type: boolean
-          description: '`True` if the integration is to an application installed and run locally on an SMBs computer.'
-        isBeta:
-          type: boolean
-          description: '`True` if the integration is currently in beta release.'
-        dataProvidedBy:
+        platformName:
           type: string
-          description: The name of the data provider.
-        datatypeFeatures:
+          description: Name of integration connected to company.
+        linkUrl:
+          type: string
+          format: uri
+          description: The link URL your customers can use to authorize access to their business application.
+          example: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/2e2eb431-c1fa-4dc9-93fa-d29781c12bcd/start
+        status:
+          $ref: '#/components/schemas/Connection/definitions/dataConnectionStatus'
+        lastSync:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+        created:
+          $ref: '#/components/schemas/DateTime'
+        dataConnectionErrors:
           type: array
+          nullable: true
           items:
-            $ref: '#/components/schemas/Integration/definitions/dataTypeFeature'
+            $ref: '#/components/schemas/Connection/definitions/dataConnectionError'
+        connectionInfo:
+          type: object
+          nullable: true
+          additionalProperties: true
+      additionalProperties: false
       required:
-      - key
-      - logoUrl
-      - name
-      - enabled
+      - id
+      - integrationId
+      - integrationKey
+      - sourceId
+      - platformName
+      - linkUrl
+      - status
+      - created
+      - sourceType
       definitions:
-        sourceType:
+        dataConnectionStatus:
+          title: Data connection status
+          description: The current authorization status of the data connection.
+          type: string
+          enum:
+          - PendingAuth
+          - Linked
+          - Unlinked
+          - Deauthorized
+        dataConnectionError:
+          title: Data connection error
+          type: object
+          properties:
+            statusCode:
+              type: string
+              description: The HTTP status code returned by the source platform when the error occurred.
+            statusText:
+              type: string
+              description: A non-numeric status code/text returned by the source platform when the error occurred.
+            errorMessage:
+              type: string
+              description: A message about a error returned by Codat.
+            erroredOnUtc:
+              $ref: '#/components/schemas/DateTime'
+            status:
+              title: Error status
+              description: The current status of a transient error. Null statuses indicate that the error is not transient.
+              type: string
+              nullable: true
+              enum:
+              - Active
+              - Resolved
+            resolvedOnUtc:
+              description: The datetime in Utc that the error was resolved.
+              nullable: true
+              $ref: '#/components/schemas/DateTime'
+        dataConnectionSourceType:
           title: Source Type
           description: The type of platform of the connection.
           type: string
@@ -953,64 +1081,97 @@ components:
           - Other
           - Unknown
           example: Accounting
-        dataTypeFeature:
-          title: Data type feature
-          description: Describes support for a given datatype and associated operations
-          type: object
-          properties:
-            dataType:
-              $ref: '#/components/schemas/DataStatus/properties/dataType'
-            supportedFeatures:
-              type: array
-              items:
-                $ref: '#/components/schemas/Integration/definitions/supportedFeature'
-          required:
-          - datatype
-          - supportedFeatures
+      example:
+        id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
+        integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
+        integrationKey: dfxm
+        sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
+        platformName: Basiq
+        linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
+        status: Linked
+        lastSync: '2022-10-27T10:22:43.6464237Z'
+        created: '2022-10-27T09:53:29Z'
+        sourceType: Banking
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    DataTypeWriteWebhook:
+      title: Write data type webhook
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: ba29118f-5406-4e59-b05c-ba307ca38d01
+          description: Unique identifier of the event.
+        eventType:
+          type: string
+          description: The type of event.
           examples:
-          - datatype: invoices
-            supportedFeatures:
-            - featureType: Get
-              featureState: Release
-        supportedFeature:
+          - bills.write.successful
+          - bills.write.unsuccessful
+        generatedDate:
+          $ref: '#/components/schemas/DateTime'
+          description: The date time in UTC the event was generated in Codat.
+        payload:
+          $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/dataTypeWriteWebhookPayload'
+      definitions:
+        dataTypeWriteWebhookPayload:
+          title: Payload
           type: object
-          x-internal: true
           properties:
-            featureType:
-              $ref: '#/components/schemas/Integration/definitions/featureType'
-            featureState:
-              $ref: '#/components/schemas/Integration/definitions/featureState'
-          required:
-          - featureType
-          - featureState
-        featureState:
-          title: Feature state
+            id:
+              type: string
+              description: Unique identifier of the write request. This is also known as the push operation ID.
+            type:
+              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/writeType'
+            referenceCompany:
+              $ref: '#/components/schemas/Company/definitions/companyReference'
+            connectionId:
+              $ref: '#/components/parameters/connectionId/schema'
+            requestedOnDate:
+              $ref: '#/components/schemas/DateTime'
+              description: The date time in UTC the write request was submitted.
+            completedOnDate:
+              $ref: '#/components/schemas/DateTime'
+              description: The date time in UTC the write request completed.
+            status:
+              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/writeStatus'
+            record:
+              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/dataTypeWriteWebhookRecord'
+              nullable: true
+            attachmentId:
+              type: string
+              nullable: true
+              description: Unique identifier for the uploaded attachment, null if no attachment uploaded.
+        dataTypeWriteWebhookRecord:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the data type created, updated, deleted, or had an attachment uploaded in the accounting platform.
+        writeType:
+          title: Write type
+          description: Type of write request.
           type: string
-          example: Release
-          description: The current release state of the feature.
           enum:
-          - Release
-          - Alpha
-          - Beta
-          - Deprecated
-          - NotSupported
-          - NotImplemented
-        featureType:
-          type: string
-          x-internal: true
-          description: The type of feature.
-          enum:
-          - Get
-          - Post
-          - Categorization
+          - Create
+          - Update
           - Delete
-          - Put
-          - GetAsPdf
-          - DownloadAttachment
-          - GetAttachment
-          - GetAttachments
           - UploadAttachment
-          example: Get
+        writeStatus:
+          title: Write request status
+          type: string
+          enum:
+          - Pending
+          - Failed
+          - Success
+          - TimedOut
+          description: The current status of the write request, which is the same as the push operation status.
     Company:
       title: Company
       description: "\uFEFFIn Codat, a company represents a business sharing access to their data. Each company can have multiple [connections](https://docs.codat.io/platform-api#/schemas/Connection) to different data sources such as one connection to [Xero](https://docs.codat.io/integrations/accounting/xero/accounting-xero) for accounting data, two connections to [Plaid](https://docs.codat.io/integrations/banking/plaid/banking-plaid) for two bank accounts and a connection to [Zettle](https://docs.codat.io/integrations/commerce/zettle/commerce-zettle) for POS data.\n\nTypically each company is one of your customers.\n\nWhen you create a company, you can specify a `name` and we will automatically generate a unique `id` for the company. You can also add a `description` to store any additional information about the company."
@@ -1159,121 +1320,6 @@ components:
             expiryDate:
               $ref: '#/components/schemas/DateTime'
               description: The date time in UTC when your daily quota is reset.
-    Connection:
-      title: Connection
-      description: "\uFEFFA connection represents a [company's](https://docs.codat.io/platform-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
-      type: object
-      properties:
-        id:
-          $ref: '#/components/parameters/connectionId/schema'
-        integrationId:
-          type: string
-          format: uuid
-          example: fd321cb6-7963-4506-b873-e99593a45e30
-          description: A Codat ID representing the integration.
-        integrationKey:
-          type: string
-          description: A unique four-character ID that identifies the platform of the company's data connection. This ensures continuity if the platform changes its name in the future.
-        sourceId:
-          $ref: '#/components/schemas/Branding/properties/sourceId'
-        sourceType:
-          $ref: '#/components/schemas/Integration/definitions/sourceType'
-        platformName:
-          type: string
-          description: Name of integration connected to company.
-        linkUrl:
-          type: string
-          format: uri
-          description: The link URL your customers can use to authorize access to their business application.
-          example: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/2e2eb431-c1fa-4dc9-93fa-d29781c12bcd/start
-        status:
-          $ref: '#/components/schemas/Connection/definitions/dataConnectionStatus'
-        lastSync:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-        created:
-          $ref: '#/components/schemas/DateTime'
-        dataConnectionErrors:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/Connection/definitions/dataConnectionError'
-        connectionInfo:
-          type: object
-          nullable: true
-          additionalProperties: true
-      additionalProperties: false
-      required:
-      - id
-      - integrationId
-      - integrationKey
-      - sourceId
-      - platformName
-      - linkUrl
-      - status
-      - created
-      - sourceType
-      definitions:
-        dataConnectionStatus:
-          title: Data connection status
-          description: The current authorization status of the data connection.
-          type: string
-          enum:
-          - PendingAuth
-          - Linked
-          - Unlinked
-          - Deauthorized
-        dataConnectionError:
-          title: Data connection error
-          type: object
-          properties:
-            statusCode:
-              type: string
-              description: The HTTP status code returned by the source platform when the error occurred.
-            statusText:
-              type: string
-              description: A non-numeric status code/text returned by the source platform when the error occurred.
-            errorMessage:
-              type: string
-              description: A message about a error returned by Codat.
-            erroredOnUtc:
-              $ref: '#/components/schemas/DateTime'
-            status:
-              title: Error status
-              description: The current status of a transient error. Null statuses indicate that the error is not transient.
-              type: string
-              nullable: true
-              enum:
-              - Active
-              - Resolved
-            resolvedOnUtc:
-              description: The datetime in Utc that the error was resolved.
-              nullable: true
-              $ref: '#/components/schemas/DateTime'
-        dataConnectionSourceType:
-          title: Source Type
-          description: The type of platform of the connection.
-          type: string
-          enum:
-          - Accounting
-          - Banking
-          - BankFeed
-          - Commerce
-          - Expense
-          - Other
-          - Unknown
-          example: Accounting
-      example:
-        id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
-        integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
-        integrationKey: dfxm
-        sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
-        platformName: Basiq
-        linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
-        status: Linked
-        lastSync: '2022-10-27T10:22:43.6464237Z'
-        created: '2022-10-27T09:53:29Z'
-        sourceType: Banking
     ConnectionWebhook:
       title: Connection webhook
       type: object
@@ -1307,290 +1353,136 @@ components:
               $ref: '#/components/schemas/Company/definitions/companyReference'
             connection:
               $ref: '#/components/schemas/Connection'
-    DataTypeWriteWebhook:
-      title: Write data type webhook
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: ba29118f-5406-4e59-b05c-ba307ca38d01
-          description: Unique identifier of the event.
-        eventType:
-          type: string
-          description: The type of event.
-          examples:
-          - bills.write.successful
-          - bills.write.unsuccessful
-        generatedDate:
-          $ref: '#/components/schemas/DateTime'
-          description: The date time in UTC the event was generated in Codat.
-        payload:
-          $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/dataTypeWriteWebhookPayload'
-      definitions:
-        dataTypeWriteWebhookPayload:
-          title: Payload
-          type: object
-          properties:
-            id:
-              type: string
-              description: Unique identifier of the write request. This is also known as the push operation ID.
-            type:
-              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/writeType'
-            referenceCompany:
-              $ref: '#/components/schemas/Company/definitions/companyReference'
-            connectionId:
-              $ref: '#/components/parameters/connectionId/schema'
-            requestedOnDate:
-              $ref: '#/components/schemas/DateTime'
-              description: The date time in UTC the write request was submitted.
-            completedOnDate:
-              $ref: '#/components/schemas/DateTime'
-              description: The date time in UTC the write request completed.
-            status:
-              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/writeStatus'
-            record:
-              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/dataTypeWriteWebhookRecord'
-              nullable: true
-            attachmentId:
-              type: string
-              nullable: true
-              description: Unique identifier for the uploaded attachment, null if no attachment uploaded.
-        dataTypeWriteWebhookRecord:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique identifier of the data type created, updated, deleted, or had an attachment uploaded in the accounting platform.
-        writeType:
-          title: Write type
-          description: Type of write request.
-          type: string
-          enum:
-          - Create
-          - Update
-          - Delete
-          - UploadAttachment
-        writeStatus:
-          title: Write request status
-          type: string
-          enum:
-          - Pending
-          - Failed
-          - Success
-          - TimedOut
-          description: The current status of the write request, which is the same as the push operation status.
-    DateTime:
-      title: Date time
-      type: string
+    Integration:
+      title: Integration
+      description: An integration that Codat supports
       examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    Branding:
-      title: Branding
+      - key: gbol
+        logoUrl: http://example.com
+        name: Xero
+        enabled: true
+        sourceId: accounting
+        sourceType: 8193a927-ab7a-45a3-9dc2-d357a4932dfe
+        integrationId: 497a18ca-284e-40c0-985d-f72be35d468e
+        isOfflineConnector: true
+        isBeta: true
+        dataProvidedBy: string
+        datatypeFeatures:
+        - datatype: invoices
+          supportedFeatures:
+          - featureType: get
+            featureState: release
       type: object
       properties:
-        logo:
-          $ref: '#/components/schemas/Branding/definitions/brandingLogo'
-        button:
-          $ref: '#/components/schemas/Branding/definitions/brandingButton'
-        sourceId:
+        key:
+          $ref: '#/components/parameters/platformKey/schema'
+        logoUrl:
           type: string
-          format: uuid
-          example: 35b92968-9851-4095-ad60-395c95cbcba4
-          description: A source-specific ID used to distinguish between different sources originating from the same data connection. In general, a data connection is a single data source. However, for TrueLayer, `sourceId` is associated with a specific bank and has a many-to-one relationship with the `integrationId`.
-      definitions:
-        brandingLogo:
-          description: Logo branding references.
-          type: object
-          properties:
-            full:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-            square:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-        brandingButton:
-          type: object
-          description: Button branding references.
-          properties:
-            default:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-            hover:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-        brandingImage:
-          title: Branding Image
-          type: object
-          properties:
-            image:
-              $ref: '#/components/schemas/Branding/definitions/imageReference'
-          examples: []
-        imageReference:
-          type: object
-          title: Image Reference
-          description: Image reference.
-          properties:
-            src:
-              type: string
-              format: uri
-              description: Source URL for image.
-            alt:
-              type: string
-              description: Alternative text when image is not available.
-      examples:
-      - logo:
-          full:
-            image:
-              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
-              alt: xero full icon
-          square:
-            image:
-              src: https://static.codat.io/public/officialLogos/Square/8A156A5A-39CB-4F9D-856E-76EF9B2W3607.png
-              alt: xero square icon
-        button:
-          default:
-            image:
-              src: https://static.codat.io/public/officialButtons/Full/8A156A5A-39CB-4F9D-856E-76EF9Q7A9607.png
-              alt: xero default button icon
-          hover:
-            image:
-              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
-              alt: xero hover button icon
-        sourceId: 35b92968-9851-4095-ad60-395c95cbcba4
-    PullOperation:
-      title: Pull operation
-      description: 'Information about a queued, in progress or completed pull operation.
-
-        *Formally called `dataset`*'
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier of the pull operation.
-          example: 943accd0-4247-42d8-865b-363c8629e1da
-        companyId:
-          type: string
-          format: uuid
-          description: Unique identifier of the company associated to this pull operation.
-          example: 22ece347-e5f6-4896-95e0-35a4c7f17023
-        connectionId:
-          type: string
-          format: uuid
-          description: Unique identifier of the connection associated to this pull operation.
-          example: 50830828-7d39-4367-b0eb-5ddb2de5faa5
-        dataType:
-          title: Data types
-          x-internal: true
-          type: string
-          description: The data type you are requesting in a pull operation.
-        status:
-          title: Dataset status
-          type: string
-          description: The current status of the dataset.
-          enum:
-          - Initial
-          - Queued
-          - Fetching
-          - MapQueued
-          - Mapping
-          - Complete
-          - FetchError
-          - MapError
-          - InternalError
-          - ProcessingQueued
-          - Processing
-          - ProcessingError
-          - ValidationQueued
-          - Validating
-          - ValidationError
-          - AuthError
-          - Cancelled
-          - NotSupported
-          - RateLimitError
-          - PermissionsError
-          - PrerequisiteNotMet
-        statusDescription:
-          type: string
-          nullable: true
-          description: Additional information about the dataset status.
-          example: Paused until 2022-10-23T00:00:00.000Z
-        errorMessage:
-          type: string
-          nullable: true
-          description: A message about a transient or persistent error returned by Codat or the source platform.
-        requested:
-          $ref: '#/components/schemas/DateTime'
-        completed:
-          $ref: '#/components/schemas/DateTime'
-        progress:
-          type: integer
-          description: An integer signifying the progress of the pull operation.
-        isCompleted:
-          type: boolean
-          description: '`True` if the pull operation is completed successfully. The `isCompleted` property is not queryable. To filter failed pull operations, query by `status!=Complete&&status!=NotSupported` instead.'
-        isErrored:
-          type: boolean
-          description: '`True` if the pull operation entered an error state.'
-      required:
-      - id
-      - companyId
-      - connectionId
-      - dataType
-      - status
-      - requested
-      - progress
-      - isCompleted
-      - isErrored
-      examples:
-      - id: 97d60846-f07a-4d42-b5a0-0bdcc6ebf56b
-        companyId: 4645bd78-8988-45bc-ac9e-67ba5df6e4e5
-        connectionId: 51baa045-4836-4317-a42e-3542e991e581
-        dataType: invoices
-        status: Initial
-        statusDescription: Paused until 2022-10-23T00:00:00.000Z
-        requested: '2022-11-14T11:18:37.2798351Z'
-        progress: 10
-        isCompleted: false
-        isErrored: false
-    CompanyRequestBody:
-      title: Create company request
-      x-internal: true
-      type: object
-      properties:
+          format: uri
+          description: Static url for integration's logo.
         name:
           type: string
-          description: Name of company being connected.
-          pattern: ^[A-Za-z0-9\s\-',&@.,?!\s]+$
-          minLength: 1
-          example: Bank of Dave
-        description:
+          example: Xero
+          description: Name of integration.
+        enabled:
+          type: boolean
+          description: Whether this integration is enabled for your customers to use.
+        sourceId:
+          $ref: '#/components/schemas/Branding/properties/sourceId'
+        sourceType:
+          $ref: '#/components/schemas/Integration/definitions/sourceType'
+        integrationId:
+          $ref: '#/components/schemas/Connection/properties/integrationId'
+        isOfflineConnector:
+          type: boolean
+          description: '`True` if the integration is to an application installed and run locally on an SMBs computer.'
+        isBeta:
+          type: boolean
+          description: '`True` if the integration is currently in beta release.'
+        dataProvidedBy:
           type: string
-          example: Requested early access to the new financing scheme.
-          description: Additional information about the company. This can be used to store foreign IDs, references, etc.
-        tags:
-          $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
+          description: The name of the data provider.
+        datatypeFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Integration/definitions/dataTypeFeature'
       required:
+      - key
+      - logoUrl
       - name
-    CompanyWebhook:
-      title: Company webhook
-      type: object
-      properties:
-        id:
+      - enabled
+      definitions:
+        sourceType:
+          title: Source Type
+          description: The type of platform of the connection.
           type: string
-          format: uuid
-          example: ba29118f-5406-4e59-b05c-ba307ca38d01
-          description: Unique identifier of the event
-        eventType:
-          type: string
-          description: The type of event.
+          enum:
+          - Accounting
+          - Banking
+          - BankFeed
+          - Commerce
+          - Expense
+          - Other
+          - Unknown
+          example: Accounting
+        dataTypeFeature:
+          title: Data type feature
+          description: Describes support for a given datatype and associated operations
+          type: object
+          properties:
+            dataType:
+              $ref: '#/components/schemas/DataStatus/properties/dataType'
+            supportedFeatures:
+              type: array
+              items:
+                $ref: '#/components/schemas/Integration/definitions/supportedFeature'
+          required:
+          - datatype
+          - supportedFeatures
           examples:
-          - company.created
-          - company.deleted
-        generatedDate:
-          $ref: '#/components/schemas/DateTime'
-          description: The date time in UTC the event was generated in Codat.
-        payload:
-          $ref: '#/components/schemas/Company/definitions/companyDetails'
+          - datatype: invoices
+            supportedFeatures:
+            - featureType: Get
+              featureState: Release
+        supportedFeature:
+          type: object
+          x-internal: true
+          properties:
+            featureType:
+              $ref: '#/components/schemas/Integration/definitions/featureType'
+            featureState:
+              $ref: '#/components/schemas/Integration/definitions/featureState'
+          required:
+          - featureType
+          - featureState
+        featureState:
+          title: Feature state
+          type: string
+          example: Release
+          description: The current release state of the feature.
+          enum:
+          - Release
+          - Alpha
+          - Beta
+          - Deprecated
+          - NotSupported
+          - NotImplemented
+        featureType:
+          type: string
+          x-internal: true
+          description: The type of feature.
+          enum:
+          - Get
+          - Post
+          - Categorization
+          - Delete
+          - Put
+          - GetAsPdf
+          - DownloadAttachment
+          - GetAttachment
+          - GetAttachments
+          - UploadAttachment
+          example: Get
     DataStatus:
       title: Data status
       description: Describes the state of data in the Codat cache for a company and data type
@@ -1669,6 +1561,114 @@ components:
         currentStatus: string
         latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
         latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
+    CompanyWebhook:
+      title: Company webhook
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: ba29118f-5406-4e59-b05c-ba307ca38d01
+          description: Unique identifier of the event
+        eventType:
+          type: string
+          description: The type of event.
+          examples:
+          - company.created
+          - company.deleted
+        generatedDate:
+          $ref: '#/components/schemas/DateTime'
+          description: The date time in UTC the event was generated in Codat.
+        payload:
+          $ref: '#/components/schemas/Company/definitions/companyDetails'
+    Branding:
+      title: Branding
+      type: object
+      properties:
+        logo:
+          $ref: '#/components/schemas/Branding/definitions/brandingLogo'
+        button:
+          $ref: '#/components/schemas/Branding/definitions/brandingButton'
+        sourceId:
+          type: string
+          format: uuid
+          example: 35b92968-9851-4095-ad60-395c95cbcba4
+          description: A source-specific ID used to distinguish between different sources originating from the same data connection. In general, a data connection is a single data source. However, for TrueLayer, `sourceId` is associated with a specific bank and has a many-to-one relationship with the `integrationId`.
+      definitions:
+        brandingLogo:
+          description: Logo branding references.
+          type: object
+          properties:
+            full:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+            square:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+        brandingButton:
+          type: object
+          description: Button branding references.
+          properties:
+            default:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+            hover:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+        brandingImage:
+          title: Branding Image
+          type: object
+          properties:
+            image:
+              $ref: '#/components/schemas/Branding/definitions/imageReference'
+          examples: []
+        imageReference:
+          type: object
+          title: Image Reference
+          description: Image reference.
+          properties:
+            src:
+              type: string
+              format: uri
+              description: Source URL for image.
+            alt:
+              type: string
+              description: Alternative text when image is not available.
+      examples:
+      - logo:
+          full:
+            image:
+              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
+              alt: xero full icon
+          square:
+            image:
+              src: https://static.codat.io/public/officialLogos/Square/8A156A5A-39CB-4F9D-856E-76EF9B2W3607.png
+              alt: xero square icon
+        button:
+          default:
+            image:
+              src: https://static.codat.io/public/officialButtons/Full/8A156A5A-39CB-4F9D-856E-76EF9Q7A9607.png
+              alt: xero default button icon
+          hover:
+            image:
+              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
+              alt: xero hover button icon
+        sourceId: 35b92968-9851-4095-ad60-395c95cbcba4
+    CompanyRequestBody:
+      title: Create company request
+      x-internal: true
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of company being connected.
+          pattern: ^[A-Za-z0-9\s\-',&@.,?!\s]+$
+          minLength: 1
+          example: Bank of Dave
+        description:
+          type: string
+          example: Requested early access to the new financing scheme.
+          description: Additional information about the company. This can be used to store foreign IDs, references, etc.
+        tags:
+          $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
+      required:
+      - name
   parameters:
     connectionId:
       name: connectionId

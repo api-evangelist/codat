@@ -172,65 +172,7 @@ paths:
         '503':
           $ref: '#/components/responses/Service-Unavailable'
 components:
-  parameters:
-    platformKey:
-      name: platformKey
-      in: path
-      required: true
-      schema:
-        type: string
-        minLength: 4
-        maxLength: 4
-        pattern: '[a-z]{4}'
-        example: gbol
-        description: A unique 4-letter key to represent a platform in each integration. View [accounting](https://docs.codat.io/integrations/accounting/overview#platform-keys), [banking](https://docs.codat.io/integrations/banking/overview#platform-keys), and [commerce](https://docs.codat.io/integrations/commerce/overview#platform-keys) platform keys.
-      description: A unique 4-letter key to represent a platform in each integration.
   responses:
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Unauthorized:
       description: Your API request was not properly authorized.
       content:
@@ -301,6 +243,51 @@ components:
                 service: PublicApi
                 error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Internal-Server-Error:
@@ -412,6 +399,19 @@ components:
               orderNumber: order_num
             pushData:
               orderNumber: order_num
+  parameters:
+    platformKey:
+      name: platformKey
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 4
+        maxLength: 4
+        pattern: '[a-z]{4}'
+        example: gbol
+        description: A unique 4-letter key to represent a platform in each integration. View [accounting](https://docs.codat.io/integrations/accounting/overview#platform-keys), [banking](https://docs.codat.io/integrations/banking/overview#platform-keys), and [commerce](https://docs.codat.io/integrations/commerce/overview#platform-keys) platform keys.
+      description: A unique 4-letter key to represent a platform in each integration.
   securitySchemes:
     auth_header:
       name: Authorization

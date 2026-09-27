@@ -112,57 +112,205 @@ paths:
         '503':
           $ref: '#/components/responses/Service-Unavailable'
 components:
-  parameters:
-    platformKey:
-      name: platformKey
-      in: path
-      required: true
-      schema:
-        type: string
-        minLength: 4
-        maxLength: 4
-        pattern: '[a-z]{4}'
-        example: gbol
-        description: A unique 4-letter key to represent a platform in each integration. View [accounting](https://docs.codat.io/integrations/accounting/overview#platform-keys), [banking](https://docs.codat.io/integrations/banking/overview#platform-keys), and [commerce](https://docs.codat.io/integrations/commerce/overview#platform-keys) platform keys.
-      description: A unique 4-letter key to represent a platform in each integration.
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
-    orderBy:
-      name: orderBy
-      in: query
-      required: false
-      schema:
-        type: string
-        example: -modifiedDate
-      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
   schemas:
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    Branding:
+      title: Branding
+      type: object
+      properties:
+        logo:
+          $ref: '#/components/schemas/Branding/definitions/brandingLogo'
+        button:
+          $ref: '#/components/schemas/Branding/definitions/brandingButton'
+        sourceId:
+          type: string
+          format: uuid
+          example: 35b92968-9851-4095-ad60-395c95cbcba4
+          description: A source-specific ID used to distinguish between different sources originating from the same data connection. In general, a data connection is a single data source. However, for TrueLayer, `sourceId` is associated with a specific bank and has a many-to-one relationship with the `integrationId`.
+      definitions:
+        brandingLogo:
+          description: Logo branding references.
+          type: object
+          properties:
+            full:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+            square:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+        brandingButton:
+          type: object
+          description: Button branding references.
+          properties:
+            default:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+            hover:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+        brandingImage:
+          title: Branding Image
+          type: object
+          properties:
+            image:
+              $ref: '#/components/schemas/Branding/definitions/imageReference'
+          examples: []
+        imageReference:
+          type: object
+          title: Image Reference
+          description: Image reference.
+          properties:
+            src:
+              type: string
+              format: uri
+              description: Source URL for image.
+            alt:
+              type: string
+              description: Alternative text when image is not available.
+      examples:
+      - logo:
+          full:
+            image:
+              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
+              alt: xero full icon
+          square:
+            image:
+              src: https://static.codat.io/public/officialLogos/Square/8A156A5A-39CB-4F9D-856E-76EF9B2W3607.png
+              alt: xero square icon
+        button:
+          default:
+            image:
+              src: https://static.codat.io/public/officialButtons/Full/8A156A5A-39CB-4F9D-856E-76EF9Q7A9607.png
+              alt: xero default button icon
+          hover:
+            image:
+              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
+              alt: xero hover button icon
+        sourceId: 35b92968-9851-4095-ad60-395c95cbcba4
+    PagingInfo:
+      type: object
+      title: Pagination information
+      x-internal: true
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number.
+        pageSize:
+          type: integer
+          description: Number of items to return in results array.
+          maximum: 2000
+        totalResults:
+          type: integer
+          description: Total number of items.
+        _links:
+          $ref: '#/components/schemas/PagingInfo/definitions/links'
+      definitions:
+        links:
+          title: Hal Links
+          type: object
+          required:
+          - self
+          - current
+          properties:
+            self:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            current:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            next:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            previous:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+          examples:
+          - self:
+              href: /companies
+            current:
+              href: /companies?page=1&pageSize=10
+        halRef:
+          title: Hypertext reference
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri-reference
+              description: Uri hypertext reference.
+      required:
+      - pageNumber
+      - pageSize
+      - totalResults
+      - _links
+      examples:
+      - pageNumber: 1
+        pageSize: 10
+        totalResults: 1
+        _links:
+          self:
+            href: /companies/{id}/data/{dataType}
+          current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+    Integrations:
+      title: Integrations
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Integration'
+      - $ref: '#/components/schemas/PagingInfo'
     Integration:
       title: Integration
       description: An integration that Codat supports
@@ -293,204 +441,84 @@ components:
           - GetAttachments
           - UploadAttachment
           example: Get
-    Integrations:
-      title: Integrations
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Integration'
-      - $ref: '#/components/schemas/PagingInfo'
-    ErrorMessage:
-      title: Error message
+    DataStatus:
+      title: Data status
+      description: Describes the state of data in the Codat cache for a company and data type
       type: object
-      x-internal: true
-      properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
-          type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
-          nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
-    PagingInfo:
-      type: object
-      title: Pagination information
-      x-internal: true
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number.
-        pageSize:
-          type: integer
-          description: Number of items to return in results array.
-          maximum: 2000
-        totalResults:
-          type: integer
-          description: Total number of items.
-        _links:
-          $ref: '#/components/schemas/PagingInfo/definitions/links'
-      definitions:
-        links:
-          title: Hal Links
-          type: object
-          required:
-          - self
-          - current
-          properties:
-            self:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            current:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            next:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            previous:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-          examples:
-          - self:
-              href: /companies
-            current:
-              href: /companies?page=1&pageSize=10
-        halRef:
-          title: Hypertext reference
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri-reference
-              description: Uri hypertext reference.
       required:
-      - pageNumber
-      - pageSize
-      - totalResults
-      - _links
-      examples:
-      - pageNumber: 1
-        pageSize: 10
-        totalResults: 1
-        _links:
-          self:
-            href: /companies/{id}/data/{dataType}
-          current:
-            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    Branding:
-      title: Branding
-      type: object
+      - dataType
+      - currentStatus
       properties:
-        logo:
-          $ref: '#/components/schemas/Branding/definitions/brandingLogo'
-        button:
-          $ref: '#/components/schemas/Branding/definitions/brandingButton'
-        sourceId:
+        dataType:
+          title: Data types
+          x-internal: true
           type: string
+          description: Available data types
+          enum:
+          - accountTransactions
+          - balanceSheet
+          - bankAccounts
+          - bankTransactions
+          - billCreditNotes
+          - billPayments
+          - bills
+          - cashFlowStatement
+          - chartOfAccounts
+          - company
+          - creditNotes
+          - customers
+          - directCosts
+          - directIncomes
+          - invoices
+          - itemReceipts
+          - items
+          - journalEntries
+          - journals
+          - paymentMethods
+          - payments
+          - profitAndLoss
+          - purchaseOrders
+          - salesOrders
+          - suppliers
+          - taxRates
+          - trackingCategories
+          - transfers
+          - banking-accountBalances
+          - banking-accounts
+          - banking-transactionCategories
+          - banking-transactions
+          - commerce-companyInfo
+          - commerce-customers
+          - commerce-disputes
+          - commerce-locations
+          - commerce-orders
+          - commerce-paymentMethods
+          - commerce-payments
+          - commerce-productCategories
+          - commerce-products
+          - commerce-taxComponents
+          - commerce-transactions
+          example: invoices
+        lastSuccessfulSync:
+          $ref: '#/components/schemas/DateTime'
+        currentStatus:
+          $ref: '#/components/schemas/PullOperation/properties/status'
+        latestSyncId:
+          type: string
+          description: Unique identifier for most recent sync of data type.
           format: uuid
-          example: 35b92968-9851-4095-ad60-395c95cbcba4
-          description: A source-specific ID used to distinguish between different sources originating from the same data connection. In general, a data connection is a single data source. However, for TrueLayer, `sourceId` is associated with a specific bank and has a many-to-one relationship with the `integrationId`.
-      definitions:
-        brandingLogo:
-          description: Logo branding references.
-          type: object
-          properties:
-            full:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-            square:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-        brandingButton:
-          type: object
-          description: Button branding references.
-          properties:
-            default:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-            hover:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-        brandingImage:
-          title: Branding Image
-          type: object
-          properties:
-            image:
-              $ref: '#/components/schemas/Branding/definitions/imageReference'
-          examples: []
-        imageReference:
-          type: object
-          title: Image Reference
-          description: Image reference.
-          properties:
-            src:
-              type: string
-              format: uri
-              description: Source URL for image.
-            alt:
-              type: string
-              description: Alternative text when image is not available.
+          example: ad474a37-2003-478e-baee-9af9f1ec2fe3
+        latestSuccessfulSyncId:
+          type: string
+          description: Unique identifier for the most recent successful sync of data type.
+          format: uuid
+          example: 8220fc90-55b6-47bc-9417-48ac6ea93101
       examples:
-      - logo:
-          full:
-            image:
-              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
-              alt: xero full icon
-          square:
-            image:
-              src: https://static.codat.io/public/officialLogos/Square/8A156A5A-39CB-4F9D-856E-76EF9B2W3607.png
-              alt: xero square icon
-        button:
-          default:
-            image:
-              src: https://static.codat.io/public/officialButtons/Full/8A156A5A-39CB-4F9D-856E-76EF9Q7A9607.png
-              alt: xero default button icon
-          hover:
-            image:
-              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
-              alt: xero hover button icon
-        sourceId: 35b92968-9851-4095-ad60-395c95cbcba4
+      - dataType: string
+        lastSuccessfulSync: '2022-01-01T13:00:00.000Z'
+        currentStatus: string
+        latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
+        latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
     Connection:
       title: Connection
       description: "\uFEFFA connection represents a [company's](https://docs.codat.io/platform-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
@@ -606,115 +634,7 @@ components:
         lastSync: '2022-10-27T10:22:43.6464237Z'
         created: '2022-10-27T09:53:29Z'
         sourceType: Banking
-    DataStatus:
-      title: Data status
-      description: Describes the state of data in the Codat cache for a company and data type
-      type: object
-      required:
-      - dataType
-      - currentStatus
-      properties:
-        dataType:
-          title: Data types
-          x-internal: true
-          type: string
-          description: Available data types
-          enum:
-          - accountTransactions
-          - balanceSheet
-          - bankAccounts
-          - bankTransactions
-          - billCreditNotes
-          - billPayments
-          - bills
-          - cashFlowStatement
-          - chartOfAccounts
-          - company
-          - creditNotes
-          - customers
-          - directCosts
-          - directIncomes
-          - invoices
-          - itemReceipts
-          - items
-          - journalEntries
-          - journals
-          - paymentMethods
-          - payments
-          - profitAndLoss
-          - purchaseOrders
-          - salesOrders
-          - suppliers
-          - taxRates
-          - trackingCategories
-          - transfers
-          - banking-accountBalances
-          - banking-accounts
-          - banking-transactionCategories
-          - banking-transactions
-          - commerce-companyInfo
-          - commerce-customers
-          - commerce-disputes
-          - commerce-locations
-          - commerce-orders
-          - commerce-paymentMethods
-          - commerce-payments
-          - commerce-productCategories
-          - commerce-products
-          - commerce-taxComponents
-          - commerce-transactions
-          example: invoices
-        lastSuccessfulSync:
-          $ref: '#/components/schemas/DateTime'
-        currentStatus:
-          $ref: '#/components/schemas/PullOperation/properties/status'
-        latestSyncId:
-          type: string
-          description: Unique identifier for most recent sync of data type.
-          format: uuid
-          example: ad474a37-2003-478e-baee-9af9f1ec2fe3
-        latestSuccessfulSyncId:
-          type: string
-          description: Unique identifier for the most recent successful sync of data type.
-          format: uuid
-          example: 8220fc90-55b6-47bc-9417-48ac6ea93101
-      examples:
-      - dataType: string
-        lastSuccessfulSync: '2022-01-01T13:00:00.000Z'
-        currentStatus: string
-        latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
-        latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
   responses:
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Not-Found:
       description: 'One or more of the resources you referenced could not be found.
 
@@ -748,8 +668,8 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
         application/json:
           schema:
@@ -757,39 +677,9 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 500
+                statusCode: 429
                 service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -840,6 +730,116 @@ components:
                 correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  parameters:
+    platformKey:
+      name: platformKey
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 4
+        maxLength: 4
+        pattern: '[a-z]{4}'
+        example: gbol
+        description: A unique 4-letter key to represent a platform in each integration. View [accounting](https://docs.codat.io/integrations/accounting/overview#platform-keys), [banking](https://docs.codat.io/integrations/banking/overview#platform-keys), and [commerce](https://docs.codat.io/integrations/commerce/overview#platform-keys) platform keys.
+      description: A unique 4-letter key to represent a platform in each integration.
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
   securitySchemes:
     auth_header:
       name: Authorization

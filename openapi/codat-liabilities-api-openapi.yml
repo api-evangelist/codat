@@ -176,64 +176,6 @@ paths:
       x-speakeasy-name-override: get-loan-summary
 components:
   schemas:
-    ErrorMessage:
-      title: Error message
-      type: object
-      x-internal: true
-      properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
-          type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
-          nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
     DateTime:
       title: Date time
       type: string
@@ -355,6 +297,64 @@ components:
           totalRepayments: 83481.72
           balance: 42513.18
           lender: Barclays Bank
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
     LoanTransactions:
       title: Loan transactions
       type: object
@@ -464,36 +464,6 @@ components:
           transactionType: Repayment
           lender: Barclays Bank
   responses:
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Not-Found:
       description: 'One or more of the resources you referenced could not be found.
 
@@ -527,8 +497,8 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
         application/json:
           schema:
@@ -536,54 +506,9 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 500
+                statusCode: 429
                 service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -608,6 +533,81 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0

@@ -147,112 +147,31 @@ paths:
         The details are paginated and support ordering, following the same conventions as our other data endpoints.'
 components:
   schemas:
-    DataIntegrityStatus:
-      title: Data integrity status
+    DataIntegritySummaries:
+      title: Data integrity summaries
+      x-internal: true
       type: object
-      allOf:
-      - $ref: '#/components/schemas/DataIntegritySummary/definitions/dataIntegrityType'
-      - type: object
-        properties:
-          statusInfo:
-            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityStatusInfo'
-          connectionIds:
-            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityConnectionId'
-          amounts:
-            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityAmounts'
-          dates:
-            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityDates'
-      definitions:
-        dataIntegrityStatusInfo:
-          type: object
-          properties:
-            lastMatched:
-              type: string
-              $ref: '#/components/schemas/DateTime'
-              description: The date the matching algorithm last ran against the company’s data type specified.
-              readOnly: true
-            currentStatus:
-              $ref: '#/components/schemas/DataIntegrityStatus/definitions/integrityStatus'
-            statusMessage:
-              type: string
-              description: Detailed explanation supporting the status value.
-        dataIntegrityConnectionId:
-          type: object
-          properties:
-            source:
-              type: array
-              description: An array of strings. The connection IDs for the type specified in the url.
-              items:
-                type: string
-            target:
-              type: array
-              description: An array of strings. The connection IDs for the type being matched to.
-              items:
-                type: string
-        dataIntegrityAmounts:
-          type: object
-          description: Only returned for transactions. For accounts, there is nothing returned.
-          properties:
-            min:
-              type: number
-              format: decimal
-              description: Lowest value of transaction set.
-            max:
-              type: number
-              format: decimal
-              description: Highest value of transaction set.
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-        dataIntegrityDates:
-          type: object
-          description: Only returned for transactions. For accounts, there is nothing returned.
-          properties:
-            minDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Earliest date of transaction set.
-              readOnly: true
-            maxDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Latest date of transaction set.
-              readOnly: true
-            minOverlappingDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Earliest date where transactions exist in both accounting and banking platforms.
-              readOnly: true
-            maxOverlappingDate:
-              $ref: '#/components/schemas/DateTime'
-              description: Latest date where transactions exist in both account and banking platforms.
-              readOnly: true
-        integrityStatus:
-          type: string
-          enum:
-          - Unknown
-          - DoesNotExist
-          - Error
-          - Complete
-          description: The current status of the most recently run matching algorithm.
+      properties:
+        summaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataIntegritySummary'
+    DataIntegrityStatuses:
+      title: Data integrity statuses
+      x-internal: true
+      type: object
+      properties:
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataIntegrityStatus'
+    DateTime:
+      title: Date time
+      type: string
       examples:
-      - type: string
-        statusInfo:
-          lastMatched: '2021-10-24T14:15:22Z'
-          currentStatus: Unknown
-          statusMessage: string
-        connectionIds:
-          source:
-          - d5a8d1b2-b38a-4e44-8641-548ad43be6bb
-          - da8c9f39-8af9-4a98-964b-f1e207942837
-          target:
-          - 3d7ce25a-c107-44bc-8e0c-36c10bdd14e0
-          - a5300eac-01fa-4a77-b5b0-ea0b86a3be69
-        amounts:
-          min: 130
-          max: 2450
-          currency: GBP
-        dates:
-          minDate: '2021-09-17T12:09:33.441Z'
-          maxDate: '2021-12-16T12:12:53.441Z'
-          minOverlappingDate: '2021-09-30T12:09:13.441Z'
-          maxOverlappingDate: '2021-11-27T12:19:33.441Z'
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
     ErrorMessage:
       title: Error message
       type: object
@@ -371,17 +290,170 @@ components:
             href: /companies/{id}/data/{dataType}
           current:
             href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    DataIntegrityDetails:
-      title: Data integrity details
-      x-internal: true
+    DataIntegrityDetail:
+      title: Data integrity detail
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID GUID of the transaction.
+        type:
+          type: string
+          description: The data type of the record.
+        connectionId:
+          type: string
+          format: uuid
+          description: ID GUID representing the connection of the accounting or banking platform.
+          readOnly: true
+        date:
+          $ref: '#/components/schemas/DateTime'
+          description: The date of the transaction.
+        description:
+          type: string
+          description: The transaction description.
+        amount:
+          type: number
+          format: decimal
+          description: The transaction value.
+        currency:
+          $ref: '#/components/schemas/SourceAccount/properties/currency'
+          description: The currency of the transaction.
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataIntegrityDetail/definitions/dataIntegrityMatch'
+      definitions:
+        dataIntegrityMatch:
+          type: object
+          properties:
+            id:
+              type: string
+              description: ID GUID of the transaction.
+            type:
+              type: string
+              description: The data type which the data type in the URL has been matched against. For example, if you've matched accountTransactions and banking-transactions, and you call this endpoint with accountTransactions in the URL, this property would be banking-transactions.
+            connectionId:
+              type: string
+              description: ID GUID representing the connection of the accounting or banking platform.
+              format: uuid
+            date:
+              type: string
+              description: The date of the transaction.
+            description:
+              type: string
+              description: The transaction description.
+            amount:
+              type: string
+              description: The transaction value.
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+              description: The currency of the transaction.
+    DataIntegrityStatus:
+      title: Data integrity status
+      type: object
       allOf:
+      - $ref: '#/components/schemas/DataIntegritySummary/definitions/dataIntegrityType'
       - type: object
         properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/DataIntegrityDetail'
-      - $ref: '#/components/schemas/PagingInfo'
+          statusInfo:
+            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityStatusInfo'
+          connectionIds:
+            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityConnectionId'
+          amounts:
+            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityAmounts'
+          dates:
+            $ref: '#/components/schemas/DataIntegrityStatus/definitions/dataIntegrityDates'
+      definitions:
+        dataIntegrityStatusInfo:
+          type: object
+          properties:
+            lastMatched:
+              type: string
+              $ref: '#/components/schemas/DateTime'
+              description: The date the matching algorithm last ran against the company’s data type specified.
+              readOnly: true
+            currentStatus:
+              $ref: '#/components/schemas/DataIntegrityStatus/definitions/integrityStatus'
+            statusMessage:
+              type: string
+              description: Detailed explanation supporting the status value.
+        dataIntegrityConnectionId:
+          type: object
+          properties:
+            source:
+              type: array
+              description: An array of strings. The connection IDs for the type specified in the url.
+              items:
+                type: string
+            target:
+              type: array
+              description: An array of strings. The connection IDs for the type being matched to.
+              items:
+                type: string
+        dataIntegrityAmounts:
+          type: object
+          description: Only returned for transactions. For accounts, there is nothing returned.
+          properties:
+            min:
+              type: number
+              format: decimal
+              description: Lowest value of transaction set.
+            max:
+              type: number
+              format: decimal
+              description: Highest value of transaction set.
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+        dataIntegrityDates:
+          type: object
+          description: Only returned for transactions. For accounts, there is nothing returned.
+          properties:
+            minDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Earliest date of transaction set.
+              readOnly: true
+            maxDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Latest date of transaction set.
+              readOnly: true
+            minOverlappingDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Earliest date where transactions exist in both accounting and banking platforms.
+              readOnly: true
+            maxOverlappingDate:
+              $ref: '#/components/schemas/DateTime'
+              description: Latest date where transactions exist in both account and banking platforms.
+              readOnly: true
+        integrityStatus:
+          type: string
+          enum:
+          - Unknown
+          - DoesNotExist
+          - Error
+          - Complete
+          description: The current status of the most recently run matching algorithm.
+      examples:
+      - type: string
+        statusInfo:
+          lastMatched: '2021-10-24T14:15:22Z'
+          currentStatus: Unknown
+          statusMessage: string
+        connectionIds:
+          source:
+          - d5a8d1b2-b38a-4e44-8641-548ad43be6bb
+          - da8c9f39-8af9-4a98-964b-f1e207942837
+          target:
+          - 3d7ce25a-c107-44bc-8e0c-36c10bdd14e0
+          - a5300eac-01fa-4a77-b5b0-ea0b86a3be69
+        amounts:
+          min: 130
+          max: 2450
+          currency: GBP
+        dates:
+          minDate: '2021-09-17T12:09:33.441Z'
+          maxDate: '2021-12-16T12:12:53.441Z'
+          minOverlappingDate: '2021-09-30T12:09:13.441Z'
+          maxOverlappingDate: '2021-11-27T12:19:33.441Z'
     DataIntegritySummary:
       title: Data integrity summary
       type: object
@@ -442,13 +514,17 @@ components:
               type: number
               format: decimal
               description: The total of unmatched and matched.
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    DataIntegrityDetails:
+      title: Data integrity details
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/DataIntegrityDetail'
+      - $ref: '#/components/schemas/PagingInfo'
     SourceAccount:
       title: Source account (v1)
       type: object
@@ -555,143 +631,6 @@ components:
         balance: 0
         modifiedDate: '2023-01-09T14:14:14.1057478Z'
         status: pending
-    DataIntegrityDetail:
-      title: Data integrity detail
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID GUID of the transaction.
-        type:
-          type: string
-          description: The data type of the record.
-        connectionId:
-          type: string
-          format: uuid
-          description: ID GUID representing the connection of the accounting or banking platform.
-          readOnly: true
-        date:
-          $ref: '#/components/schemas/DateTime'
-          description: The date of the transaction.
-        description:
-          type: string
-          description: The transaction description.
-        amount:
-          type: number
-          format: decimal
-          description: The transaction value.
-        currency:
-          $ref: '#/components/schemas/SourceAccount/properties/currency'
-          description: The currency of the transaction.
-        matches:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataIntegrityDetail/definitions/dataIntegrityMatch'
-      definitions:
-        dataIntegrityMatch:
-          type: object
-          properties:
-            id:
-              type: string
-              description: ID GUID of the transaction.
-            type:
-              type: string
-              description: The data type which the data type in the URL has been matched against. For example, if you've matched accountTransactions and banking-transactions, and you call this endpoint with accountTransactions in the URL, this property would be banking-transactions.
-            connectionId:
-              type: string
-              description: ID GUID representing the connection of the accounting or banking platform.
-              format: uuid
-            date:
-              type: string
-              description: The date of the transaction.
-            description:
-              type: string
-              description: The transaction description.
-            amount:
-              type: string
-              description: The transaction value.
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-              description: The currency of the transaction.
-    DataIntegrityStatuses:
-      title: Data integrity statuses
-      x-internal: true
-      type: object
-      properties:
-        metadata:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataIntegrityStatus'
-    DataIntegritySummaries:
-      title: Data integrity summaries
-      x-internal: true
-      type: object
-      properties:
-        summaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataIntegritySummary'
-  parameters:
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
-    dataIntegrityDataType:
-      name: dataType
-      in: path
-      required: true
-      schema:
-        type: string
-        enum:
-        - banking-accounts
-        - banking-transactions
-        - bankAccounts
-        - accountTransactions
-        example: banking-accounts
-      description: A key for a Codat data type.
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
-    orderBy:
-      name: orderBy
-      in: query
-      required: false
-      schema:
-        type: string
-        example: -modifiedDate
-      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
   responses:
     Not-Found:
       description: 'One or more of the resources you referenced could not be found.
@@ -726,21 +665,6 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Too-Many-Requests:
       description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
@@ -753,51 +677,6 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -848,6 +727,127 @@ components:
                 correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    dataIntegrityDataType:
+      name: dataType
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - banking-accounts
+        - banking-transactions
+        - bankAccounts
+        - accountTransactions
+        example: banking-accounts
+      description: A key for a Codat data type.
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
   securitySchemes:
     auth_header:
       name: Authorization

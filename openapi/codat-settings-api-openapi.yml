@@ -481,6 +481,13 @@ paths:
           $ref: '#/components/responses/Service-Unavailable'
 components:
   schemas:
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
     ErrorMessage:
       title: Error message
       type: object
@@ -539,65 +546,6 @@ components:
               type: string
               nullable: true
               description: Name of validator.
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    ApiKeyDetails:
-      title: API key details
-      description: Details of the API key.
-      type: object
-      allOf:
-      - properties:
-          id:
-            type: string
-            description: Unique identifier for the API key.
-            example: e288a972-b402-4b21-93f9-b5335ae5679c
-          name:
-            type: string
-            maxLength: 50
-            nullable: true
-            description: A meaningful name assigned to the API key.
-            example: azure-invoice-finance-processor
-          apiKey:
-            type: string
-            description: The API key value used to make authenticated http requests.
-            example: ztHQGvnC4XN2CgUhaDWEG4ySLUJqWjp7zkbZkGHd
-      - nullable: true
-        description: Datetime in UTC the API key was created. The created date will be null if the API key created before YYYY-MM-DD.
-        title: Created date
-        type: object
-        x-internal: true
-        properties:
-          createdDate:
-            $ref: '#/components/schemas/DateTime'
-            description: The date the entity was created.
-    SyncSettings:
-      title: Sync settings
-      x-internal: true
-      type: object
-      properties:
-        clientId:
-          $ref: '#/components/schemas/ClientId'
-        settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/SyncSetting'
-        overridesDefaults:
-          type: boolean
-          description: Set to `True` if you want to override the default [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings).
-    ApiKeys:
-      title: API keys
-      x-internal: true
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiKeyDetails'
     SyncSetting:
       title: SyncSetting
       description: Describes how often, and how much history, should be fetched for the given data type when a pull operation is queued.
@@ -643,71 +591,6 @@ components:
       - fetchOnFirstLink
       - syncSchedule
       - syncOrder
-    CreateApiKey:
-      title: Create API key
-      description: Details about the newly created API key.
-      x-internal: true
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/ApiKeyDetails/allOf/0/properties/name'
-    Profile:
-      title: Profile
-      description: Describes your Codat client instance
-      examples:
-      - name: Bob's Burgers
-        logoUrl: https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png
-        iconUrl: https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico
-        redirectUrl: https://bobs-burgers.{countrySuffix}/{companyId}
-        whiteListUrls:
-        - https://bobs-burgers.com
-        - https://bobs-burgers.co.uk
-        confirmCompanyName: true
-      type: object
-      properties:
-        name:
-          type: string
-          example: Bob's Burgers
-          description: The name given to the instance.
-        logoUrl:
-          type: string
-          description: Static url to your organization's logo.
-          example: https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png
-        iconUrl:
-          type: string
-          description: Static url to your organization's icon.
-          example: https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico
-        redirectUrl:
-          type: string
-          example: https://bobs-burgers.{countrySuffix}/{companyId}
-          description: The redirect URL pasted on to the SMB once Codat's [Hosted Link](https://docs.codat.io/auth-flow/authorize-hosted-link) has been completed by the SMB.
-        whiteListUrls:
-          type: array
-          description: A list of urls that are allowed to communicate with Codat. If empty any url is allowed to communicate with Codat.
-          items:
-            type: string
-            format: uri
-            example: https://bobs-burgers.com
-            description: A url that is allowed to communicate with Codat.
-        apiKey:
-          type: string
-          deprecated: true
-          example: sartANTjHAkLdbyDfaynoTQb7pkmj6hXHmnQKMrB
-          description: The API key for this Codat instance.
-        confirmCompanyName:
-          type: boolean
-          deprecated: true
-          description: '`True` if the company name has been confirmed.'
-      required:
-      - name
-      - redirectUrl
-      x-stoplight:
-        id: b1fyq05edangf
-    ClientId:
-      title: Client ID
-      type: string
-      format: uuid
-      description: Unique identifier for your client in Codat.
     ConnectionManagementAllowedOrigins:
       title: Allowed origins
       type: object
@@ -722,6 +605,54 @@ components:
       example:
         allowedOrigins:
         - https://www.bank-of-dave.com
+    SyncSettings:
+      title: Sync settings
+      x-internal: true
+      type: object
+      properties:
+        clientId:
+          $ref: '#/components/schemas/ClientId'
+        settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyncSetting'
+        overridesDefaults:
+          type: boolean
+          description: Set to `True` if you want to override the default [sync settings](https://docs.codat.io/knowledge-base/advanced-sync-settings).
+    ApiKeyDetails:
+      title: API key details
+      description: Details of the API key.
+      type: object
+      allOf:
+      - properties:
+          id:
+            type: string
+            description: Unique identifier for the API key.
+            example: e288a972-b402-4b21-93f9-b5335ae5679c
+          name:
+            type: string
+            maxLength: 50
+            nullable: true
+            description: A meaningful name assigned to the API key.
+            example: azure-invoice-finance-processor
+          apiKey:
+            type: string
+            description: The API key value used to make authenticated http requests.
+            example: ztHQGvnC4XN2CgUhaDWEG4ySLUJqWjp7zkbZkGHd
+      - nullable: true
+        description: Datetime in UTC the API key was created. The created date will be null if the API key created before YYYY-MM-DD.
+        title: Created date
+        type: object
+        x-internal: true
+        properties:
+          createdDate:
+            $ref: '#/components/schemas/DateTime'
+            description: The date the entity was created.
+    ClientId:
+      title: Client ID
+      type: string
+      format: uuid
+      description: Unique identifier for your client in Codat.
     DataStatus:
       title: Data status
       description: Describes the state of data in the Codat cache for a company and data type
@@ -800,37 +731,76 @@ components:
         currentStatus: string
         latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
         latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
+    Profile:
+      title: Profile
+      description: Describes your Codat client instance
+      examples:
+      - name: Bob's Burgers
+        logoUrl: https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png
+        iconUrl: https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico
+        redirectUrl: https://bobs-burgers.{countrySuffix}/{companyId}
+        whiteListUrls:
+        - https://bobs-burgers.com
+        - https://bobs-burgers.co.uk
+        confirmCompanyName: true
+      type: object
+      properties:
+        name:
+          type: string
+          example: Bob's Burgers
+          description: The name given to the instance.
+        logoUrl:
+          type: string
+          description: Static url to your organization's logo.
+          example: https://client-images.codat.io/logo/042399f5-d104-4f38-9ce8-cac3524f4e88_5806cb1f-7342-4c0e-a0a8-99bfbc47b0ff.png
+        iconUrl:
+          type: string
+          description: Static url to your organization's icon.
+          example: https://client-images.codat.io/icon/042399f5-d104-4f38-9ce8-cac3524f4e88_3f5623af-d992-4c22-bc08-e58c520a8526.ico
+        redirectUrl:
+          type: string
+          example: https://bobs-burgers.{countrySuffix}/{companyId}
+          description: The redirect URL pasted on to the SMB once Codat's [Hosted Link](https://docs.codat.io/auth-flow/authorize-hosted-link) has been completed by the SMB.
+        whiteListUrls:
+          type: array
+          description: A list of urls that are allowed to communicate with Codat. If empty any url is allowed to communicate with Codat.
+          items:
+            type: string
+            format: uri
+            example: https://bobs-burgers.com
+            description: A url that is allowed to communicate with Codat.
+        apiKey:
+          type: string
+          deprecated: true
+          example: sartANTjHAkLdbyDfaynoTQb7pkmj6hXHmnQKMrB
+          description: The API key for this Codat instance.
+        confirmCompanyName:
+          type: boolean
+          deprecated: true
+          description: '`True` if the company name has been confirmed.'
+      required:
+      - name
+      - redirectUrl
+      x-stoplight:
+        id: b1fyq05edangf
+    CreateApiKey:
+      title: Create API key
+      description: Details about the newly created API key.
+      x-internal: true
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ApiKeyDetails/allOf/0/properties/name'
+    ApiKeys:
+      title: API keys
+      x-internal: true
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKeyDetails'
   responses:
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Not-Found:
       description: 'One or more of the resources you referenced could not be found.
 
@@ -864,8 +834,8 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
         application/json:
           schema:
@@ -873,48 +843,9 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 500
+                statusCode: 429
                 service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    ConnectionManagementAllowedOrigins:
-      description: Success
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ConnectionManagementAllowedOrigins'
-          examples:
-            Allowed origins:
-              $ref: '#/components/examples/connectionManagementAllowedOriginsResponse'
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -939,6 +870,75 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    ConnectionManagementAllowedOrigins:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConnectionManagementAllowedOrigins'
+          examples:
+            Allowed origins:
+              $ref: '#/components/examples/connectionManagementAllowedOriginsResponse'
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0

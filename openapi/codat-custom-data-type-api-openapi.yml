@@ -275,66 +275,72 @@ paths:
         '503':
           $ref: '#/components/responses/Service-Unavailable'
 components:
-  parameters:
-    platformKey:
-      name: platformKey
-      in: path
-      required: true
-      schema:
-        type: string
-        minLength: 4
-        maxLength: 4
-        pattern: '[a-z]{4}'
-        example: gbol
-        description: A unique 4-letter key to represent a platform in each integration. View [accounting](https://docs.codat.io/integrations/accounting/overview#platform-keys), [banking](https://docs.codat.io/integrations/banking/overview#platform-keys), and [commerce](https://docs.codat.io/integrations/commerce/overview#platform-keys) platform keys.
-      description: A unique 4-letter key to represent a platform in each integration.
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
-      description: Unique identifier for a company.
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
-        description: Unique identifier for a company's data connection.
-      description: Unique identifier for a connection.
-    customDataIdentifier:
-      name: customDataIdentifier
-      in: path
-      required: true
-      schema:
-        type: string
-        example: DynamicsPurchaseOrders
-      description: Unique identifier for a custom data type.
   schemas:
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
     PullOperation:
       title: Pull operation
       description: 'Information about a queued, in progress or completed pull operation.
@@ -431,118 +437,6 @@ components:
         progress: 10
         isCompleted: false
         isErrored: false
-    ErrorMessage:
-      title: Error message
-      type: object
-      x-internal: true
-      properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
-          type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
-          nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    CustomDataTypeRecords:
-      title: Custom data type records
-      type: object
-      description: Resulting records pulled from the source platform for a specific custom data type.
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomDataTypeRecords/definitions/customDataTypeRecord'
-        pageNumber:
-          $ref: '#/components/schemas/PagingInfo/properties/pageNumber'
-        pageSize:
-          $ref: '#/components/schemas/PagingInfo/properties/pageSize'
-        totalResults:
-          $ref: '#/components/schemas/PagingInfo/properties/totalResults'
-      definitions:
-        customDataTypeRecord:
-          title: Custom data type record
-          type: object
-          properties:
-            id:
-              type: string
-              nullable: false
-              description: Unique identifier of the record.
-            content:
-              type: object
-              description: Values from the source system for the properties defined in the custom data type configuration.
-              additionalProperties:
-                type: object
-            modifiedDate:
-              title: ModifiedDate
-              x-internal: true
-              type: object
-              properties:
-                modifiedDate:
-                  allOf:
-                  - $ref: '#/components/schemas/DateTime'
-                  - description: 'The date when the record was last fetched from the accounting software, commerce software, or open banking provider and updated in Codat’s data cache.
-
-
-                      Use it to identify and retrieve records that have changed since your last fetch. For example, filtering `modifiedDate` to today will provide new records updated in Codat today.
-
-
-                      This date is populated for all data types except for attachments, balance sheets, company information, and profit & loss reports ([read more](https://docs.codat.io/using-the-api/modified-dates#modified-date)).
-
-
-                      In Codat''s data model, dates and times are represented using the <a class="external" href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601 standard</a>.'
     PagingInfo:
       type: object
       title: Pagination information
@@ -643,52 +537,54 @@ components:
         - $[*].id
         sourceModifiedDate:
         - $[*].lastModifiedDateTime
+    CustomDataTypeRecords:
+      title: Custom data type records
+      type: object
+      description: Resulting records pulled from the source platform for a specific custom data type.
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomDataTypeRecords/definitions/customDataTypeRecord'
+        pageNumber:
+          $ref: '#/components/schemas/PagingInfo/properties/pageNumber'
+        pageSize:
+          $ref: '#/components/schemas/PagingInfo/properties/pageSize'
+        totalResults:
+          $ref: '#/components/schemas/PagingInfo/properties/totalResults'
+      definitions:
+        customDataTypeRecord:
+          title: Custom data type record
+          type: object
+          properties:
+            id:
+              type: string
+              nullable: false
+              description: Unique identifier of the record.
+            content:
+              type: object
+              description: Values from the source system for the properties defined in the custom data type configuration.
+              additionalProperties:
+                type: object
+            modifiedDate:
+              title: ModifiedDate
+              x-internal: true
+              type: object
+              properties:
+                modifiedDate:
+                  allOf:
+                  - $ref: '#/components/schemas/DateTime'
+                  - description: 'The date when the record was last fetched from the accounting software, commerce software, or open banking provider and updated in Codat’s data cache.
+
+
+                      Use it to identify and retrieve records that have changed since your last fetch. For example, filtering `modifiedDate` to today will provide new records updated in Codat today.
+
+
+                      This date is populated for all data types except for attachments, balance sheets, company information, and profit & loss reports ([read more](https://docs.codat.io/using-the-api/modified-dates#modified-date)).
+
+
+                      In Codat''s data model, dates and times are represented using the <a class="external" href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601 standard</a>.'
   responses:
-    Bad-Request:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Not-Found:
       description: 'One or more of the resources you referenced could not be found.
 
@@ -722,8 +618,8 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
         application/json:
           schema:
@@ -731,14 +627,14 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 500
+                statusCode: 429
                 service: PublicApi
-                error: There is a problem with our server. Please try again later.
+                error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
+    Legal-Reasons:
+      description: Not currently available due to compliance limitations. Reach out to your Codat contact for further assistance.
       content:
         application/json:
           schema:
@@ -746,10 +642,10 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
+                statusCode: 451
+                service: StdznCustomData
+                error: Platform 'qudb' is not currently available for compliance purposes.
+                correlationId: f63017dabb9b87865573bea95a51e55d
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Service-Unavailable:
@@ -764,6 +660,21 @@ components:
                 statusCode: 500
                 service: PublicApi
                 error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Bad-Request:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -791,8 +702,8 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Legal-Reasons:
-      description: Not currently available due to compliance limitations. Reach out to your Codat contact for further assistance.
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
       content:
         application/json:
           schema:
@@ -800,12 +711,101 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 451
-                service: StdznCustomData
-                error: Platform 'qudb' is not currently available for compliance purposes.
-                correlationId: f63017dabb9b87865573bea95a51e55d
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  parameters:
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
+      description: Unique identifier for a company.
+    platformKey:
+      name: platformKey
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 4
+        maxLength: 4
+        pattern: '[a-z]{4}'
+        example: gbol
+        description: A unique 4-letter key to represent a platform in each integration. View [accounting](https://docs.codat.io/integrations/accounting/overview#platform-keys), [banking](https://docs.codat.io/integrations/banking/overview#platform-keys), and [commerce](https://docs.codat.io/integrations/commerce/overview#platform-keys) platform keys.
+      description: A unique 4-letter key to represent a platform in each integration.
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    customDataIdentifier:
+      name: customDataIdentifier
+      in: path
+      required: true
+      schema:
+        type: string
+        example: DynamicsPurchaseOrders
+      description: Unique identifier for a custom data type.
   securitySchemes:
     auth_header:
       name: Authorization

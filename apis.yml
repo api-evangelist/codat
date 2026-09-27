@@ -40,10 +40,12 @@ x-docs-platform-checked: 2026-09-24
 tags:
 - Unified API
 - Accounting
+- Integration
 tags_raw:
 - Unified_API
 - Accounting
 - Unified-API
+- Integration
 created: '2026-03-03'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/codat/refs/heads/main/apis.yml

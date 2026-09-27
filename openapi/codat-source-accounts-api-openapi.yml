@@ -336,40 +336,178 @@ paths:
         '503':
           $ref: '#/components/responses/Service-Unavailable'
 components:
-  parameters:
-    accountId:
-      name: accountId
-      in: path
-      required: true
-      schema:
-        type: string
-        examples:
-        - 13d946f0-c5d5-42bc-b092-97ece17923ab
-        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-        - 7110701885
-        - EILBDVJVNUAGVKRQ
-      description: Unique identifier for an account.
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
-        description: Unique identifier for a company's data connection.
-      description: Unique identifier for a connection.
   schemas:
+    SourceAccount:
+      title: Source account (v1)
+      type: object
+      description: The target bank account in a supported accounting software for ingestion into a bank feed.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Unique ID for the bank account.
+        accountName:
+          type: string
+          nullable: true
+          description: The bank account name.
+        accountType:
+          type: string
+          nullable: true
+          description: The type of bank account e.g. Credit.
+        accountNumber:
+          type: string
+          nullable: true
+          description: The account number.
+        sortCode:
+          type: string
+          nullable: true
+          description: The sort code.
+        currency:
+          title: Currency
+          x-internal: true
+          type: string
+          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
+          format: ISO4217
+          examples:
+          - GBP
+          - USD
+          - EUR
+        balance:
+          type: number
+          format: decimal
+          nullable: true
+          description: The latest balance for the bank account.
+        modifiedDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: The last date the bank account was modified.
+        status:
+          type: string
+          nullable: true
+          description: Status of the source account.
+          enum:
+          - pending
+          - connected
+          - connecting
+          - disconnected
+          - unknown
+        feedStartDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+      required:
+      - id
+      definitions:
+        sourceAccountPrototype:
+          title: Source account (v1)
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/SourceAccount/properties/id'
+            accountName:
+              $ref: '#/components/schemas/SourceAccount/properties/accountName'
+            accountType:
+              $ref: '#/components/schemas/SourceAccount/properties/accountType'
+            accountNumber:
+              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
+            sortCode:
+              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            balance:
+              $ref: '#/components/schemas/SourceAccount/properties/balance'
+            modifiedDate:
+              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
+          required:
+          - id
+        sourceAccounts:
+          title: Source accounts
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAccount'
+      examples:
+      - id: acc-002
+        accountName: account-081
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345670'
+        currency: GBP
+        balance: 99.99
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+      - id: acc-003
+        accountName: account-095
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345671'
+        currency: USD
+        balance: 0
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
     SourceAccountV2:
       title: Source account (v2)
       type: object
@@ -563,177 +701,6 @@ components:
         modifiedDate: '2024-08-02T00:00:00.000Z'
         status: pending
         feedStartDate: '2024-05-01'
-    ErrorMessage:
-      title: Error message
-      type: object
-      x-internal: true
-      properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
-          type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
-          nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    SourceAccount:
-      title: Source account (v1)
-      type: object
-      description: The target bank account in a supported accounting software for ingestion into a bank feed.
-      additionalProperties: false
-      properties:
-        id:
-          type: string
-          description: Unique ID for the bank account.
-        accountName:
-          type: string
-          nullable: true
-          description: The bank account name.
-        accountType:
-          type: string
-          nullable: true
-          description: The type of bank account e.g. Credit.
-        accountNumber:
-          type: string
-          nullable: true
-          description: The account number.
-        sortCode:
-          type: string
-          nullable: true
-          description: The sort code.
-        currency:
-          title: Currency
-          x-internal: true
-          type: string
-          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
-          format: ISO4217
-          examples:
-          - GBP
-          - USD
-          - EUR
-        balance:
-          type: number
-          format: decimal
-          nullable: true
-          description: The latest balance for the bank account.
-        modifiedDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-          description: The last date the bank account was modified.
-        status:
-          type: string
-          nullable: true
-          description: Status of the source account.
-          enum:
-          - pending
-          - connected
-          - connecting
-          - disconnected
-          - unknown
-        feedStartDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-      required:
-      - id
-      definitions:
-        sourceAccountPrototype:
-          title: Source account (v1)
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/SourceAccount/properties/id'
-            accountName:
-              $ref: '#/components/schemas/SourceAccount/properties/accountName'
-            accountType:
-              $ref: '#/components/schemas/SourceAccount/properties/accountType'
-            accountNumber:
-              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
-            sortCode:
-              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-            balance:
-              $ref: '#/components/schemas/SourceAccount/properties/balance'
-            modifiedDate:
-              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
-          required:
-          - id
-        sourceAccounts:
-          title: Source accounts
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceAccount'
-      examples:
-      - id: acc-002
-        accountName: account-081
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345670'
-        currency: GBP
-        balance: 99.99
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
-      - id: acc-003
-        accountName: account-095
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345671'
-        currency: USD
-        balance: 0
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
     SourceAccountV2BatchCreateResponse:
       title: Batch source account (v2) creation response
       description: Account ID and resulting object of the batch `Create source account` request.
@@ -788,6 +755,23 @@ components:
               description: A brief description of the error.
             account:
               $ref: '#/components/schemas/SourceAccount'
+    BankAccountCredentials:
+      title: Bank Account Credentials
+      description: Result of generate credentials
+      type: object
+      properties:
+        username:
+          type: string
+          example: S0MW-TR0P-7DS0
+          description: Username used by the bank feeds platform to retrieve transactions
+        password:
+          type: string
+          example: cO0ajh0uGyTN0Pwh
+          description: Password to enable the bank feeds platform to securely retrieve transactions.
+      examples:
+      - QuickBooks Online Bank Feeds: null
+        username: S0MW-TR0P-7DS0
+        password: cO0ajh0uGyTN0Pwh
     SourceAccountBatchErrorResponse:
       title: Batch source account creation error
       description: Describes the error that occured when trying to create the specified source account.
@@ -811,54 +795,7 @@ components:
               type: string
               examples:
               - A bank account already exists with the same Id
-    BankAccountCredentials:
-      title: Bank Account Credentials
-      description: Result of generate credentials
-      type: object
-      properties:
-        username:
-          type: string
-          example: S0MW-TR0P-7DS0
-          description: Username used by the bank feeds platform to retrieve transactions
-        password:
-          type: string
-          example: cO0ajh0uGyTN0Pwh
-          description: Password to enable the bank feeds platform to securely retrieve transactions.
-      examples:
-      - QuickBooks Online Bank Feeds: null
-        username: S0MW-TR0P-7DS0
-        password: cO0ajh0uGyTN0Pwh
   responses:
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
     Not-Found:
       description: 'One or more of the resources you referenced could not be found.
 
@@ -892,8 +829,8 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
         application/json:
           schema:
@@ -901,54 +838,9 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 500
+                statusCode: 429
                 service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                error: You have made too many requests in a given amount of time; please retry later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -976,6 +868,114 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  parameters:
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    accountId:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        examples:
+        - 13d946f0-c5d5-42bc-b092-97ece17923ab
+        - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+        - 7110701885
+        - EILBDVJVNUAGVKRQ
+      description: Unique identifier for an account.
   securitySchemes:
     auth_header:
       name: Authorization
