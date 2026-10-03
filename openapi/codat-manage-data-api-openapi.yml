@@ -617,110 +617,163 @@ paths:
           $ref: '#/components/responses/Service-Unavailable'
       description: Retrieve information about a single dataset or pull operation.
 components:
-  schemas:
-    PullOperation:
-      title: Pull operation
-      description: 'Information about a queued, in progress or completed pull operation.
+  responses:
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
 
-        *Formally called `dataset`*'
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier of the pull operation.
-          example: 943accd0-4247-42d8-865b-363c8629e1da
-        companyId:
-          type: string
-          format: uuid
-          description: Unique identifier of the company associated to this pull operation.
-          example: 22ece347-e5f6-4896-95e0-35a4c7f17023
-        connectionId:
-          type: string
-          format: uuid
-          description: Unique identifier of the connection associated to this pull operation.
-          example: 50830828-7d39-4367-b0eb-5ddb2de5faa5
-        dataType:
-          title: Data types
-          x-internal: true
-          type: string
-          description: The data type you are requesting in a pull operation.
-        status:
-          title: Dataset status
-          type: string
-          description: The current status of the dataset.
-          enum:
-          - Initial
-          - Queued
-          - Fetching
-          - MapQueued
-          - Mapping
-          - Complete
-          - FetchError
-          - MapError
-          - InternalError
-          - ProcessingQueued
-          - Processing
-          - ProcessingError
-          - ValidationQueued
-          - Validating
-          - ValidationError
-          - AuthError
-          - Cancelled
-          - NotSupported
-          - RateLimitError
-          - PermissionsError
-          - PrerequisiteNotMet
-        statusDescription:
-          type: string
-          nullable: true
-          description: Additional information about the dataset status.
-          example: Paused until 2022-10-23T00:00:00.000Z
-        errorMessage:
-          type: string
-          nullable: true
-          description: A message about a transient or persistent error returned by Codat or the source platform.
-        requested:
-          $ref: '#/components/schemas/DateTime'
-        completed:
-          $ref: '#/components/schemas/DateTime'
-        progress:
-          type: integer
-          description: An integer signifying the progress of the pull operation.
-        isCompleted:
-          type: boolean
-          description: '`True` if the pull operation is completed successfully. The `isCompleted` property is not queryable. To filter failed pull operations, query by `status!=Complete&&status!=NotSupported` instead.'
-        isErrored:
-          type: boolean
-          description: '`True` if the pull operation entered an error state.'
-      required:
-      - id
-      - companyId
-      - connectionId
-      - dataType
-      - status
-      - requested
-      - progress
-      - isCompleted
-      - isErrored
-      examples:
-      - id: 97d60846-f07a-4d42-b5a0-0bdcc6ebf56b
-        companyId: 4645bd78-8988-45bc-ac9e-67ba5df6e4e5
-        connectionId: 51baa045-4836-4317-a42e-3542e991e581
-        dataType: invoices
-        status: Initial
-        statusDescription: Paused until 2022-10-23T00:00:00.000Z
-        requested: '2022-11-14T11:18:37.2798351Z'
-        progress: 10
-        isCompleted: false
-        isErrored: false
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Data connection not found:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  schemas:
     ErrorMessage:
       title: Error message
       type: object
@@ -839,9 +892,6 @@ components:
             href: /companies/{id}/data/{dataType}
           current:
             href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    DataType:
-      x-internal: true
-      $ref: '#/components/schemas/DataStatus/properties/dataType'
     DataStatus:
       title: Data status
       description: Describes the state of data in the Codat cache for a company and data type
@@ -931,163 +981,130 @@ components:
             items:
               $ref: '#/components/schemas/PullOperation'
       - $ref: '#/components/schemas/PagingInfo'
-  responses:
-    Not-Found:
-      description: 'One or more of the resources you referenced could not be found.
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    PullOperation:
+      title: Pull operation
+      description: 'Information about a queued, in progress or completed pull operation.
 
-        This might be because your company or data connection id is wrong, or was already deleted.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Data connection not found:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
-                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Company not found:
-              value:
-                statusCode: 404
-                service: ClientsApi
-                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            No data available:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Malformed-Query:
-      description: Your `query` parameter was not correctly formed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: ClientsApi
-                error: Error parsing query - Malformed query.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Unresolved property:
-              value:
-                statusCode: 400
-                service: PullApi
-                error: Error parsing query - Could not resolve property isCompleted on Dataset
-                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
+        *Formally called `dataset`*'
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the pull operation.
+          example: 943accd0-4247-42d8-865b-363c8629e1da
+        companyId:
+          type: string
+          format: uuid
+          description: Unique identifier of the company associated to this pull operation.
+          example: 22ece347-e5f6-4896-95e0-35a4c7f17023
+        connectionId:
+          type: string
+          format: uuid
+          description: Unique identifier of the connection associated to this pull operation.
+          example: 50830828-7d39-4367-b0eb-5ddb2de5faa5
+        dataType:
+          title: Data types
+          x-internal: true
+          type: string
+          description: The data type you are requesting in a pull operation.
+        status:
+          title: Dataset status
+          type: string
+          description: The current status of the dataset.
+          enum:
+          - Initial
+          - Queued
+          - Fetching
+          - MapQueued
+          - Mapping
+          - Complete
+          - FetchError
+          - MapError
+          - InternalError
+          - ProcessingQueued
+          - Processing
+          - ProcessingError
+          - ValidationQueued
+          - Validating
+          - ValidationError
+          - AuthError
+          - Cancelled
+          - NotSupported
+          - RateLimitError
+          - PermissionsError
+          - PrerequisiteNotMet
+        statusDescription:
+          type: string
+          nullable: true
+          description: Additional information about the dataset status.
+          example: Paused until 2022-10-23T00:00:00.000Z
+        errorMessage:
+          type: string
+          nullable: true
+          description: A message about a transient or persistent error returned by Codat or the source platform.
+        requested:
+          $ref: '#/components/schemas/DateTime'
+        completed:
+          $ref: '#/components/schemas/DateTime'
+        progress:
+          type: integer
+          description: An integer signifying the progress of the pull operation.
+        isCompleted:
+          type: boolean
+          description: '`True` if the pull operation is completed successfully. The `isCompleted` property is not queryable. To filter failed pull operations, query by `status!=Complete&&status!=NotSupported` instead.'
+        isErrored:
+          type: boolean
+          description: '`True` if the pull operation entered an error state.'
+      required:
+      - id
+      - companyId
+      - connectionId
+      - dataType
+      - status
+      - requested
+      - progress
+      - isCompleted
+      - isErrored
+      examples:
+      - id: 97d60846-f07a-4d42-b5a0-0bdcc6ebf56b
+        companyId: 4645bd78-8988-45bc-ac9e-67ba5df6e4e5
+        connectionId: 51baa045-4836-4317-a42e-3542e991e581
+        dataType: invoices
+        status: Initial
+        statusDescription: Paused until 2022-10-23T00:00:00.000Z
+        requested: '2022-11-14T11:18:37.2798351Z'
+        progress: 10
+        isCompleted: false
+        isErrored: false
+    DataType:
+      x-internal: true
+      $ref: '#/components/schemas/DataStatus/properties/dataType'
   parameters:
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    dataType:
+      name: dataType
+      description: A key for a Codat data type.
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/DataType'
     companyId:
       name: companyId
       in: path
@@ -1098,13 +1115,6 @@ components:
         example: 8a210b68-6988-11ed-a1eb-0242ac120002
         description: Unique identifier for your SMB in Codat.
       description: Unique identifier for a company.
-    dataType:
-      name: dataType
-      description: A key for a Codat data type.
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/DataType'
     pageSize:
       name: pageSize
       in: query
@@ -1116,6 +1126,14 @@ components:
         minimum: 1
         maximum: 5000
       description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
     datasetId:
       name: datasetId
       in: path
@@ -1125,16 +1143,6 @@ components:
         format: uuid
         description: Unique identifier for the dataset that completed its sync.
       description: Unique identifier for the dataset that completed its sync.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
     orderBy:
       name: orderBy
       in: query
@@ -1143,14 +1151,6 @@ components:
         type: string
         example: -modifiedDate
       description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
   securitySchemes:
     auth_header:
       name: Authorization

@@ -72,19 +72,49 @@ paths:
           $ref: '#/components/responses/Service-Unavailable'
 components:
   responses:
-    Unauthorized:
-      description: Your API request was not properly authorized.
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
           examples:
-            Unauthorized:
+            Conflict:
               value:
-                statusCode: 401
+                statusCode: 429
                 service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Payment-Required:
@@ -111,8 +141,23 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
       content:
         application/json:
           schema:
@@ -120,9 +165,9 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 429
+                statusCode: 500
                 service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
+                error: There is a problem with our server. Please try again later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -159,52 +204,36 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
   schemas:
+    ValidationResult:
+      title: Validation result
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult/definitions/validationItem'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult/definitions/validationItem'
+      definitions:
+        validationItem:
+          title: Validation item
+          type: object
+          properties:
+            ruleId:
+              type: string
+              description: The unique identifier of the rule that wasn't met.
+            itemId:
+              type: string
+              description: The unique identifier of the item that was validated.
+            message:
+              type: string
+              description: The message that describes the validation warning or error.
+            validatorName:
+              type: string
+              description: The name of the validator that was used to validate the item.
     ErrorMessage:
       title: Error message
       type: object
@@ -263,36 +292,14 @@ components:
               type: string
               nullable: true
               description: Name of validator.
-    ValidationResult:
-      title: Validation result
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult/definitions/validationItem'
-        warnings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult/definitions/validationItem'
-      definitions:
-        validationItem:
-          title: Validation item
-          type: object
-          properties:
-            ruleId:
-              type: string
-              description: The unique identifier of the rule that wasn't met.
-            itemId:
-              type: string
-              description: The unique identifier of the item that was validated.
-            message:
-              type: string
-              description: The message that describes the validation warning or error.
-            validatorName:
-              type: string
-              description: The name of the validator that was used to validate the item.
   parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
+      description: Unique identifier for a company.
     datasetId:
       name: datasetId
       in: path
@@ -302,13 +309,6 @@ components:
         format: uuid
         description: Unique identifier for the dataset that completed its sync.
       description: Unique identifier for the dataset that completed its sync.
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
-      description: Unique identifier for a company.
   securitySchemes:
     auth_header:
       name: Authorization
