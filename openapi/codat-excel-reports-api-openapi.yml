@@ -141,6 +141,21 @@ paths:
       - $ref: '#/components/parameters/excelReportType'
 components:
   responses:
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
     Too-Many-Requests:
       description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
@@ -153,6 +168,44 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -171,19 +224,37 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
           examples:
-            Conflict:
+            Data connection not found:
               value:
-                statusCode: 500
+                statusCode: 404
                 service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Payment-Required:
@@ -240,96 +311,53 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Not-Found:
-      description: 'One or more of the resources you referenced could not be found.
-
-        This might be because your company or data connection id is wrong, or was already deleted.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Data connection not found:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
-                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Company not found:
-              value:
-                statusCode: 404
-                service: ClientsApi
-                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            No data available:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Malformed-Query:
-      description: Your `query` parameter was not correctly formed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: ClientsApi
-                error: Error parsing query - Malformed query.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Unresolved property:
-              value:
-                statusCode: 400
-                service: PullApi
-                error: Error parsing query - Could not resolve property isCompleted on Dataset
-                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-  parameters:
-    excelReportType:
-      name: reportType
-      in: query
-      schema:
-        $ref: '#/components/schemas/ExcelStatus/definitions/excelReportTypes'
-      description: The type of report you want to generate and download.
-      required: true
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
   schemas:
+    ExcelStatus:
+      type: object
+      title: Excel status
+      properties:
+        lastGenerated:
+          $ref: '#/components/schemas/DateTime'
+          description: The date and time of when the generation of the most recent report was initiated.
+        inProgress:
+          type: boolean
+          description: When true, the request was successful and the report is being generated. If false, the request was unsuccessful and the report is not being generated.
+        queued:
+          type: string
+          description: The date and time of when a successful request was queued for the most recent report.
+        success:
+          type: boolean
+          description: True if the requested report was successfully queued and false if the requested report was not able to be queued.
+        errorMessage:
+          type: string
+          description: Error details in case the report generation request was unsuccessful.
+        lastInvocationId:
+          type: string
+          description: A unique ID generated for this request.
+        reportType:
+          $ref: '#/components/schemas/ExcelStatus/definitions/excelReportTypes'
+        fileSize:
+          type: integer
+          nullable: true
+          description: The file size in Bytes is populated upon successful generation of the report.
+      definitions:
+        excelReportTypes:
+          type: string
+          enum:
+          - audit
+          - enhancedFinancials
+          - enhancedInvoices
+          - enhancedCashFlow
+          description: The type of the report requested in the query string.
+      examples:
+      - lastGenerated: '2023-01-25T22:36:05.125Z'
+        inProgress: true
+        queued: '2023-01-25T22:36:05.125Z'
+        success: true
+        errorMessage: string
+        lastInvocationId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        reportType: string
+        fileSize: 0
     ErrorMessage:
       title: Error message
       type: object
@@ -388,52 +416,6 @@ components:
               type: string
               nullable: true
               description: Name of validator.
-    ExcelStatus:
-      type: object
-      title: Excel status
-      properties:
-        lastGenerated:
-          $ref: '#/components/schemas/DateTime'
-          description: The date and time of when the generation of the most recent report was initiated.
-        inProgress:
-          type: boolean
-          description: When true, the request was successful and the report is being generated. If false, the request was unsuccessful and the report is not being generated.
-        queued:
-          type: string
-          description: The date and time of when a successful request was queued for the most recent report.
-        success:
-          type: boolean
-          description: True if the requested report was successfully queued and false if the requested report was not able to be queued.
-        errorMessage:
-          type: string
-          description: Error details in case the report generation request was unsuccessful.
-        lastInvocationId:
-          type: string
-          description: A unique ID generated for this request.
-        reportType:
-          $ref: '#/components/schemas/ExcelStatus/definitions/excelReportTypes'
-        fileSize:
-          type: integer
-          nullable: true
-          description: The file size in Bytes is populated upon successful generation of the report.
-      definitions:
-        excelReportTypes:
-          type: string
-          enum:
-          - audit
-          - enhancedFinancials
-          - enhancedInvoices
-          - enhancedCashFlow
-          description: The type of the report requested in the query string.
-      examples:
-      - lastGenerated: '2023-01-25T22:36:05.125Z'
-        inProgress: true
-        queued: '2023-01-25T22:36:05.125Z'
-        success: true
-        errorMessage: string
-        lastInvocationId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        reportType: string
-        fileSize: 0
     DateTime:
       title: Date time
       type: string
@@ -441,6 +423,24 @@ components:
       - '2022-10-23T00:00:00Z'
       - '2022-10-23'
       description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+  parameters:
+    excelReportType:
+      name: reportType
+      in: query
+      schema:
+        $ref: '#/components/schemas/ExcelStatus/definitions/excelReportTypes'
+      description: The type of report you want to generate and download.
+      required: true
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
   securitySchemes:
     auth_header:
       name: Authorization

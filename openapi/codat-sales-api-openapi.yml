@@ -5877,193 +5877,340 @@ paths:
 
         Before using this endpoint, you must have retrieved data for the company.'
 components:
-  responses:
-    Conflict:
-      description: The data type's dataset has not been requested or is still syncing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 409
-                service: PublicApi
-                error: The data set has not been requested.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Malformed-Query:
-      description: Your `query` parameter was not correctly formed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: ClientsApi
-                error: Error parsing query - Malformed query.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Unresolved property:
-              value:
-                statusCode: 400
-                service: PullApi
-                error: Error parsing query - Could not resolve property isCompleted on Dataset
-                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Not-Found:
-      description: 'One or more of the resources you referenced could not be found.
-
-        This might be because your company or data connection id is wrong, or was already deleted.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Data connection not found:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
-                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Company not found:
-              value:
-                statusCode: 404
-                service: ClientsApi
-                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            No data available:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
   schemas:
+    CommerceTaxComponent:
+      title: 'Commerce: Tax component'
+      description: The Tax Components endpoints return tax rates data from the commerce software, including tax rate names and values. This is to support the mapping of tax rates from the commerce software to those in the accounting software.
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: Name of the Tax Rate Component in the source commerce software.
+            example: Sales Tax
+          rate:
+            description: Rate of taxation represented as a fraction of the net price (typically in the range 0.00 - 1.00).
+            type: number
+            format: decimal
+            examples:
+            - 0.15
+            - 0.2
+          isCompound:
+            description: The Boolean flag to indicate when a Tax Rate Component compounds on a sale.
+            type: boolean
+            examples:
+            - true
+            - false
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+        required:
+        - name
+      definitions:
+        taxComponentAllocation:
+          title: Tax Component Allocation
+          type: object
+          properties:
+            taxComponentRef:
+              $ref: '#/components/schemas/CommerceTaxComponent/definitions/taxComponentRef'
+            rate:
+              description: Tax amount on order line sale as available from source commerce software.
+              type: number
+              format: decimal
+              nullable: true
+        taxComponentRef:
+          type: object
+          description: Taxes rates reference object depending on the rates being available on source commerce software.
+          properties:
+            id:
+              description: The unique identitifer of the tax component being referenced.
+              type: string
+              examples:
+              - 13d946f0-c5d5-42bc-b092-97ece17923ab
+              - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+              - 7110701885
+              - EILBDVJVNUAGVKRQ
+            name:
+              description: Name of the tax component being referenced.
+              type: string
+          required:
+          - id
+          - name
+      examples:
+      - id: 13d946f0-c5d5-42bc-b092-97ece17923ab
+        name: Sales Tax (15%)
+        rate: 0.15
+        isCompound: true
+        modifiedDate: '2022-10-23T00:00:00Z'
+        sourceModifiedDate: '2022-10-23T00:00:00Z'
+    ErrorMessage:
+      title: Error message
+      type: object
+      x-internal: true
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
+        validation:
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
+      definitions:
+        errorValidation:
+          title: Validation error
+          type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
+          properties:
+            errors:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
+          type: object
+          properties:
+            itemId:
+              type: string
+              nullable: true
+              description: Unique identifier for a validation item.
+            message:
+              type: string
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
+    CommerceDispute:
+      title: 'Commerce: Dispute'
+      description: "A customer may file a payment dispute with their bank or other card issuer when they're unsatisfied with their purchase or believe they have been charged incorrectly. For example:  \n- They didn't receive an order.  \n- The product they received was different to the commerce store's description.  \n- They've been the victim of online fraud.  \n\nYou can use data from the Disputes endpoints to calculate key metrics, such as the number of chargebacks."
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+      - type: object
+        required:
+        - currency
+        properties:
+          disputedTransactions:
+            description: Link to the source event(s) which triggered this transaction.
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceRef'
+          totalAmount:
+            description: Total transaction amount that is under dispute.
+            format: decimal
+            examples:
+            - 194.12
+            - -283.56
+            - 0
+          currency:
+            description: Currency of the disputed transaction.
+            $ref: '#/components/schemas/SourceAccount/properties/currency'
+          status:
+            $ref: '#/components/schemas/CommerceDispute/definitions/disputeStatus'
+          reason:
+            description: Reason for the dispute
+            type: string
+            examples:
+            - Unhappy with product
+          dueDate:
+            description: Date when the next action in the dispute resolution is due
+            $ref: '#/components/schemas/DateTime'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      definitions:
+        disputeStatus:
+          description: Current status of the dispute
+          x-internal: true
+          type: string
+          enum:
+          - Won
+          - Lost
+          - Accepted
+          - Processing
+          - ChargeRefunded
+          - EvidenceRequired
+          - InquiryEvidenceRequired
+          - InquiryProcessing
+          - InquiryClosed
+          - WaitingThirdParty
+          - Unknown
+          example: EvidenceRequired
+      examples:
+      - id: 03e608e3-bd1c-454f-8c2b-fb0133e43b95
+        disputedTransactions:
+        - id: e63ad857-7e12-4e64-9185-cdfd7c45d09d
+          type: Order
+        totalAmount: -47.66
+        currency: GBP
+        status: InquiryEvidenceRequired
+        reason: Unhappy with product
+        dueDate: '2021-03-29T14:39:55'
+        createdDate: '2021-03-22T14:39:55'
+        modifiedDate: '2022-02-02T11:02:45Z'
+        sourceModifiedDate: '2021-03-22T14:39:55'
+    CommerceLocation:
+      title: 'Commerce: Location'
+      type: object
+      description: 'The Location datatype holds information on the geographic location at which stocks of products may be held, as referenced in the Products data type.
+
+
+        A Location also holds information on geographic locations where orders were placed, as referenced in the Orders data type.'
+      allOf:
+      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+      - type: object
+        properties:
+          name:
+            description: Name of this location
+            type: string
+          address:
+            description: Address associated with the location
+            $ref: '#/components/schemas/CommerceAddress'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      definitions:
+        locationRef:
+          type: object
+          description: Reference to the geographic location where the order was placed.
+          properties:
+            id:
+              description: The unique identitifer of the location being referenced.
+              type: string
+              examples:
+              - 13d946f0-c5d5-42bc-b092-97ece17923ab
+              - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+              - 7110701885
+              - EILBDVJVNUAGVKRQ
+            name:
+              description: Name of the location being referenced.
+              type: string
+          required:
+          - id
+      examples:
+      - id: '15'
+        name: London Warehouse
+        address:
+          type: Inventory
+          line1: Warner House
+          line2: 98 Theobald's Road
+          city: London
+          region: ''
+          country: United Kingdom
+          postalCode: WC1X 8WB
+        modifiedDate: '2020-08-12T14:37:37'
+        sourceModifiedDate: '2020-08-12T14:37:37'
+    CommerceTransaction:
+      title: 'Commerce: Transaction'
+      description: "Details of all financial transactions recorded in the commerce or point of sale system are added to the Transactions data type. For example, payments, service charges, and fees.\n\nYou can use data from the Transactions endpoints to calculate key metrics, such as:  \n- Transaction volumes  \n- Average transaction volume  \n- Average transaction value  \n- Returns  \n- Payouts"
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+      - type: object
+        properties:
+          totalAmount:
+            description: The total transaction amount
+            type: number
+            format: decimal
+            examples:
+            - 194.12
+            - -283.56
+            - 0
+          currency:
+            $ref: '#/components/schemas/SourceAccount/properties/currency'
+          type:
+            $ref: '#/components/schemas/CommerceTransaction/definitions/transactionType'
+          subType:
+            description: Non-standardised transaction type data from the commerce software
+            type: string
+            examples:
+            - CardPayment
+            - Invoice payment
+          transactionSourceRef:
+            description: Link to the source event which triggered this transaction
+            allOf:
+            - $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceRef'
+          supplementalData:
+            $ref: '#/components/schemas/SupplementalData'
+      - allOf:
+        - type: object
+          x-stoplight:
+            id: c590b4405180f
+          allOf:
+          - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+          - type: object
+            x-stoplight:
+              id: gdyjg7bg783br
+            properties:
+              sourceCreatedDate:
+                $ref: '#/components/schemas/DateTime'
+                description: The date on which this record was created in the originating system
+        - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+        x-stoplight:
+          id: 9e815c1766554
+      definitions:
+        transactionSourceRef:
+          title: Transaction Source Reference
+          x-internal: true
+          allOf:
+          - $ref: '#/components/schemas/CommerceRecordRef'
+          - type: object
+            properties:
+              type:
+                $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceType'
+        transactionSourceType:
+          x-internal: true
+          type: string
+          description: The type of source the transaction arose.
+          enum:
+          - Fee
+          - Order
+          - Payment
+          - ServiceCharge
+          - Unknown
+        transactionType:
+          x-internal: true
+          description: "The type of the platform transaction:  \n- `Unknown`  \n- `FailedPayout` — Failed transfer of funds from the seller's merchant account to their bank account.  \n- `Payment` — Credit and debit card payments.  \n- `PaymentFee` — Payment provider's fee on each card payment.  \n- `PaymentFeeRefund` — Payment provider's fee that has been refunded to the seller.  \n- `Payout` — Transfer of funds from the seller's merchant account to their bank account.  \n- `Refund` — Refunds to a customer's credit or debit card.  \n- `Transfer` — Secure transfer of funds to the seller's bank account.  "
+          type: string
+          enum:
+          - Payment
+          - Refund
+          - Payout
+          - FailedPayout
+          - Transfer
+          - PaymentFee
+          - PaymentFeeRefund
+          - Unknown
+      examples: []
+    CommercePaymentMethods:
+      title: 'Commerce: Payment methods'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommercePaymentMethod'
+      - $ref: '#/components/schemas/PagingInfo'
     CommerceReport:
       title: Commerce report
       description: "## Structure\n\nAssess reports follow a consistent structure. Reports contain four sections of information:\n\n### 1. Report definition\n\nInformation such as:\n\n  1. The report info (e.g. enhanced_profit_and_loss).\n  2. The display name of the report (e.g. Enhanced Profit and Loss).\n  \n### 2. Dimension info\n\nInformation about the dimension contained in the reports such as:\n\n  1. The type of dimension (e.g. datetime, recordRef).\n  2. The display name of the dimension (e.g. Period, Category type, Category sub type).\n  3. The details about each item within the dimension (e.g. displayName:\"Jan 2022\", start:\"...\", end:\"...\", id:\"...\", name:\"...\").\n\n### 3. Measure info\n\nInformation about the measures contained in the report such as:\n\n  1. The display name of the measure (e.g. value of account, percentage change).\n  2. The type of the measure (e.g. currency, percentage).\n  3. The unit of the measure (e.g. %, GBP).\n  \n### 4. The data for the report\n\nWhen the *includeDisplayName* parameter is set to *true*, it shows the *dimensionDisplayName* and *itemDisplayName* to make the data human-readable. The default setting for *includeDisplayName* is *false*.\n\n\n## Displaying the report\n\nReports can be rendered as follows (ordering is implicit rather than explicit):\n\n![A table showing an example of how a report can be rendered](https://files.readme.io/1fa20ca-Report1.png)\n\n# Data model\n\n## Dimensions"
@@ -6219,6 +6366,362 @@ components:
               - string
               additionalProp3:
               - string
+    CommerceProduct:
+      title: 'Commerce: Product'
+      description: 'A Product is an item in the company''s inventory, and includes information about the price and quantity of all products, and variants thereof, available for sale.
+
+        '
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: Name of the product in the commerce or POS system
+            examples:
+            - Hard Drive
+            - Windows Installation
+            - Software Support (Hourly)
+          description:
+            type: string
+            description: Description of the product recorded in the commerce or point of sale platform.
+            examples:
+            - 1tb Western Digital Hard Drive
+            - Install of Windows 11 (Professional Edition)
+            - 1 hour of support from an agent (phone or remote)
+          categorization:
+            type: string
+            description: Retail category that the product is assigned to e.g. `Hardware`.
+            examples:
+            - Hardware
+            - Software
+            - Support Services
+          isGiftCard:
+            type: boolean
+            description: 'Whether the product represents a gift card or voucher that
+
+              can be redeemed in the commerce or POS platform.
+
+              '
+          variants:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceProduct/definitions/productVariant'
+          supplementalData:
+            $ref: '#/components/schemas/SupplementalData'
+      definitions:
+        productRef:
+          type: object
+          description: Reference that links the line item to the correct product details.
+          properties:
+            id:
+              description: The unique identifier of the product being referenced.
+              type: string
+              examples:
+              - 13d946f0-c5d5-42bc-b092-97ece17923ab
+              - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+              - 7110701885
+              - EILBDVJVNUAGVKRQ
+            name:
+              description: Name of the product being referenced.
+              type: string
+          required:
+          - id
+        productVariant:
+          title: Product Variant
+          description: 'Represents a variation of a product available for sale, for example an item of clothing that may be available for sale in multiple sizes and colors.
+
+            '
+          allOf:
+          - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+            description: Identifier of the product variant, unique to the company.
+          - properties:
+              name:
+                type: string
+                examples:
+                - Red Coat
+                - Black Coat
+                - Large Brown Hat
+                description: Name of the product recorded in the commerce or point of sale platform.
+              isTaxEnabled:
+                type: boolean
+                description: Whether sales taxes are enabled for this product variant.
+              sku:
+                type: string
+                examples:
+                - Coat-Red-Lrg
+                - Coat-Black-Md
+                - LargeBrownHat
+                - A725BA2
+                description: SKU (stock keeping unit) of the variant, as defined by the merchant.
+              barcode:
+                type: string
+                examples:
+                - '564158468416486458646886484'
+                - CSE370
+                description: Unique product number of the variant. This might be a barcode, UPC, ISBN, etc.
+              unitOfMeasure:
+                type: string
+                examples:
+                - kg
+                - m
+                - meters
+                description: Unit of measure for the variant, such as `kg` or `meters`.
+              vatPercentage:
+                type: number
+                format: decimal
+                examples:
+                - 12.5
+                - 0
+                - 20
+                description: VAT rate for the product variant if sales taxes are enabled.
+              prices:
+                type: array
+                description: Prices for the product variants in different currencies.
+                items:
+                  $ref: '#/components/schemas/CommerceProduct/definitions/productPrice'
+              inventory:
+                $ref: '#/components/schemas/CommerceProduct/definitions/productInventory'
+              shippingRequired:
+                type: boolean
+                description: Indicates whether or not the product requires physical delivery.
+              status:
+                $ref: '#/components/schemas/CommerceProduct/definitions/productVariantStatus'
+          - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+          - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+        productVariantRef:
+          title: Product variant reference
+          type: object
+          description: Reference that links the line item to the specific version of product that has been ordered.
+          properties:
+            id:
+              description: The unique identifier of the product variant being referenced.
+              type: string
+              examples:
+              - 13d946f0-c5d5-42bc-b092-97ece17923ab
+              - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+              - 7110701885
+              - EILBDVJVNUAGVKRQ
+            name:
+              description: Name of the product variant being referenced.
+              type: string
+          required:
+          - id
+        productPrice:
+          title: Product Price Variant
+          x-internal: true
+          type: object
+          properties:
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+              nullable: true
+            unitPrice:
+              type: number
+              format: decimal
+              description: The product variant's unit price.
+        productInventory:
+          title: Product Inventory
+          description: Information about the total inventory as well as the locations inventory is in.
+          x-internal: true
+          type: object
+          properties:
+            totalQuantity:
+              type: number
+              format: decimal
+              nullable: true
+              description: The total quantity of stock remaining across locations.
+            locations:
+              type: array
+              items:
+                $ref: '#/components/schemas/CommerceProduct/definitions/productInventoryLocation'
+        productInventoryLocation:
+          title: Product Inventory Location
+          x-internal: true
+          type: object
+          properties:
+            quantity:
+              type: number
+              format: decimal
+              description: The quantity of stock remaining at location.
+            locationRef:
+              $ref: '#/components/schemas/CommerceLocation/definitions/locationRef'
+        productVariantStatus:
+          x-internal: true
+          type: string
+          description: The status of the product variant.
+          enum:
+          - Unknown
+          - Published
+          - Unpublished
+    PagingInfo:
+      type: object
+      title: Pagination information
+      x-internal: true
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number.
+        pageSize:
+          type: integer
+          description: Number of items to return in results array.
+          maximum: 2000
+        totalResults:
+          type: integer
+          description: Total number of items.
+        _links:
+          $ref: '#/components/schemas/PagingInfo/definitions/links'
+      definitions:
+        links:
+          title: Hal Links
+          type: object
+          required:
+          - self
+          - current
+          properties:
+            self:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            current:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            next:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+            previous:
+              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
+          examples:
+          - self:
+              href: /companies
+            current:
+              href: /companies?page=1&pageSize=10
+        halRef:
+          title: Hypertext reference
+          type: object
+          properties:
+            href:
+              type: string
+              format: uri-reference
+              description: Uri hypertext reference.
+      required:
+      - pageNumber
+      - pageSize
+      - totalResults
+      - _links
+      examples:
+      - pageNumber: 1
+        pageSize: 10
+        totalResults: 1
+        _links:
+          self:
+            href: /companies/{id}/data/{dataType}
+          current:
+            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
+    CommercePayment:
+      title: 'Commerce: Payment'
+      description: 'Payments contain details of all payments made by customers to a company, including: amounts, currency used, payment method, payment provider, and payment status.
+
+
+        Refunds are recorded as separate, negative payments. Note that a refund can only occur in relation to a payment that has been completed (i.e. has a status of `Paid`). When a customer cancels an order _before_ a payment has been completed, the payment shows as `Cancelled`.
+
+
+        You can use data from the Payments endpoints to calculate key metrics, such as gross sales and monthly recurring revenue (MRR).'
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+      - type: object
+        properties:
+          amount:
+            type: number
+            format: decimal
+            description: Payment Amount (including gratuity)
+            examples:
+            - 194.12
+            - -283.56
+            - 0
+          currency:
+            $ref: '#/components/schemas/SourceAccount/properties/currency'
+            description: Currency in which the payment was made
+          paymentMethodRef:
+            $ref: '#/components/schemas/PaymentMethodRef'
+          status:
+            $ref: '#/components/schemas/CommercePayment/definitions/paymentStatus'
+          paymentProvider:
+            type: string
+            description: Service provider of the payment, if applicable.
+            examples:
+            - Amazon Pay
+            - Checkout.com
+            - SagePay
+          dueDate:
+            description: Date by which payment must be made
+            $ref: '#/components/schemas/DateTime'
+          supplementalData:
+            $ref: '#/components/schemas/SupplementalData'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      definitions:
+        paymentStatus:
+          type: string
+          x-internal: true
+          description: Status of the payment.
+          enum:
+          - Pending
+          - Authorized
+          - Paid
+          - Failed
+          - Cancelled
+          - Unknown
+        paymentType:
+          type: string
+          x-internal: true
+          nullable: true
+          description: Type of payment.
+          enum:
+          - Cash
+          - Card
+          - Invoice
+          - OnlineCard
+          - Swish
+          - Vipps
+          - Mobile
+          - StoreCredit
+          - Paypal
+          - Custom
+          - Prepaid
+          - Unknown
+          example: Cash
+        paymentRef:
+          x-internal: true
+          allOf:
+          - $ref: '#/components/schemas/CommerceOrder/allOf/0'
+          - type: object
+            properties:
+              amount:
+                type: number
+                format: decimal
+                nullable: true
+                description: Payment Amount (including gratuity).
+                examples:
+                - 194.12
+                - -283.56
+                - 0
+              currency:
+                $ref: '#/components/schemas/SourceAccount/properties/currency'
+                description: Currency in which the payment was made.
+              type:
+                $ref: '#/components/schemas/CommercePayment/definitions/paymentType'
+              status:
+                $ref: '#/components/schemas/CommercePayment/definitions/paymentStatus'
+              paymentProvider:
+                type: string
+                description: Service provider of the payment, if applicable.
+                examples:
+                - Amazon Pay
+                - Checkout.com
+                - SagePay
+              dueDate:
+                description: Date by which payment must be made
+                $ref: '#/components/schemas/DateTime'
+          - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+          - $ref: '#/components/schemas/CommerceOrder/allOf/3'
     CommerceOrder:
       title: 'Commerce: Order'
       description: 'Orders contain the transaction details for all products sold by the company, and include details of any payments, service charges, or refunds related to each order. You can use data from the Orders endpoints to calculate key metrics, such as gross sales values and monthly recurring revenue (MRR).
@@ -6510,738 +7013,6 @@ components:
         modifiedDate: '2022-02-02T11:02:45Z'
         sourceModifiedDate: '2021-03-28T03:00:14'
       type: object
-    CommercePayment:
-      title: 'Commerce: Payment'
-      description: 'Payments contain details of all payments made by customers to a company, including: amounts, currency used, payment method, payment provider, and payment status.
-
-
-        Refunds are recorded as separate, negative payments. Note that a refund can only occur in relation to a payment that has been completed (i.e. has a status of `Paid`). When a customer cancels an order _before_ a payment has been completed, the payment shows as `Cancelled`.
-
-
-        You can use data from the Payments endpoints to calculate key metrics, such as gross sales and monthly recurring revenue (MRR).'
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-      - type: object
-        properties:
-          amount:
-            type: number
-            format: decimal
-            description: Payment Amount (including gratuity)
-            examples:
-            - 194.12
-            - -283.56
-            - 0
-          currency:
-            $ref: '#/components/schemas/SourceAccount/properties/currency'
-            description: Currency in which the payment was made
-          paymentMethodRef:
-            $ref: '#/components/schemas/PaymentMethodRef'
-          status:
-            $ref: '#/components/schemas/CommercePayment/definitions/paymentStatus'
-          paymentProvider:
-            type: string
-            description: Service provider of the payment, if applicable.
-            examples:
-            - Amazon Pay
-            - Checkout.com
-            - SagePay
-          dueDate:
-            description: Date by which payment must be made
-            $ref: '#/components/schemas/DateTime'
-          supplementalData:
-            $ref: '#/components/schemas/SupplementalData'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      definitions:
-        paymentStatus:
-          type: string
-          x-internal: true
-          description: Status of the payment.
-          enum:
-          - Pending
-          - Authorized
-          - Paid
-          - Failed
-          - Cancelled
-          - Unknown
-        paymentType:
-          type: string
-          x-internal: true
-          nullable: true
-          description: Type of payment.
-          enum:
-          - Cash
-          - Card
-          - Invoice
-          - OnlineCard
-          - Swish
-          - Vipps
-          - Mobile
-          - StoreCredit
-          - Paypal
-          - Custom
-          - Prepaid
-          - Unknown
-          example: Cash
-        paymentRef:
-          x-internal: true
-          allOf:
-          - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-          - type: object
-            properties:
-              amount:
-                type: number
-                format: decimal
-                nullable: true
-                description: Payment Amount (including gratuity).
-                examples:
-                - 194.12
-                - -283.56
-                - 0
-              currency:
-                $ref: '#/components/schemas/SourceAccount/properties/currency'
-                description: Currency in which the payment was made.
-              type:
-                $ref: '#/components/schemas/CommercePayment/definitions/paymentType'
-              status:
-                $ref: '#/components/schemas/CommercePayment/definitions/paymentStatus'
-              paymentProvider:
-                type: string
-                description: Service provider of the payment, if applicable.
-                examples:
-                - Amazon Pay
-                - Checkout.com
-                - SagePay
-              dueDate:
-                description: Date by which payment must be made
-                $ref: '#/components/schemas/DateTime'
-          - $ref: '#/components/schemas/CommerceOrder/allOf/2'
-          - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-    PagingInfo:
-      type: object
-      title: Pagination information
-      x-internal: true
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number.
-        pageSize:
-          type: integer
-          description: Number of items to return in results array.
-          maximum: 2000
-        totalResults:
-          type: integer
-          description: Total number of items.
-        _links:
-          $ref: '#/components/schemas/PagingInfo/definitions/links'
-      definitions:
-        links:
-          title: Hal Links
-          type: object
-          required:
-          - self
-          - current
-          properties:
-            self:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            current:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            next:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-            previous:
-              $ref: '#/components/schemas/PagingInfo/definitions/halRef'
-          examples:
-          - self:
-              href: /companies
-            current:
-              href: /companies?page=1&pageSize=10
-        halRef:
-          title: Hypertext reference
-          type: object
-          properties:
-            href:
-              type: string
-              format: uri-reference
-              description: Uri hypertext reference.
-      required:
-      - pageNumber
-      - pageSize
-      - totalResults
-      - _links
-      examples:
-      - pageNumber: 1
-        pageSize: 10
-        totalResults: 1
-        _links:
-          self:
-            href: /companies/{id}/data/{dataType}
-          current:
-            href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    CommerceTransaction:
-      title: 'Commerce: Transaction'
-      description: "Details of all financial transactions recorded in the commerce or point of sale system are added to the Transactions data type. For example, payments, service charges, and fees.\n\nYou can use data from the Transactions endpoints to calculate key metrics, such as:  \n- Transaction volumes  \n- Average transaction volume  \n- Average transaction value  \n- Returns  \n- Payouts"
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-      - type: object
-        properties:
-          totalAmount:
-            description: The total transaction amount
-            type: number
-            format: decimal
-            examples:
-            - 194.12
-            - -283.56
-            - 0
-          currency:
-            $ref: '#/components/schemas/SourceAccount/properties/currency'
-          type:
-            $ref: '#/components/schemas/CommerceTransaction/definitions/transactionType'
-          subType:
-            description: Non-standardised transaction type data from the commerce software
-            type: string
-            examples:
-            - CardPayment
-            - Invoice payment
-          transactionSourceRef:
-            description: Link to the source event which triggered this transaction
-            allOf:
-            - $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceRef'
-          supplementalData:
-            $ref: '#/components/schemas/SupplementalData'
-      - allOf:
-        - type: object
-          x-stoplight:
-            id: c590b4405180f
-          allOf:
-          - $ref: '#/components/schemas/CommerceOrder/allOf/2'
-          - type: object
-            x-stoplight:
-              id: gdyjg7bg783br
-            properties:
-              sourceCreatedDate:
-                $ref: '#/components/schemas/DateTime'
-                description: The date on which this record was created in the originating system
-        - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-        x-stoplight:
-          id: 9e815c1766554
-      definitions:
-        transactionSourceRef:
-          title: Transaction Source Reference
-          x-internal: true
-          allOf:
-          - $ref: '#/components/schemas/CommerceRecordRef'
-          - type: object
-            properties:
-              type:
-                $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceType'
-        transactionSourceType:
-          x-internal: true
-          type: string
-          description: The type of source the transaction arose.
-          enum:
-          - Fee
-          - Order
-          - Payment
-          - ServiceCharge
-          - Unknown
-        transactionType:
-          x-internal: true
-          description: "The type of the platform transaction:  \n- `Unknown`  \n- `FailedPayout` — Failed transfer of funds from the seller's merchant account to their bank account.  \n- `Payment` — Credit and debit card payments.  \n- `PaymentFee` — Payment provider's fee on each card payment.  \n- `PaymentFeeRefund` — Payment provider's fee that has been refunded to the seller.  \n- `Payout` — Transfer of funds from the seller's merchant account to their bank account.  \n- `Refund` — Refunds to a customer's credit or debit card.  \n- `Transfer` — Secure transfer of funds to the seller's bank account.  "
-          type: string
-          enum:
-          - Payment
-          - Refund
-          - Payout
-          - FailedPayout
-          - Transfer
-          - PaymentFee
-          - PaymentFeeRefund
-          - Unknown
-      examples: []
-    CommerceRecordRef:
-      title: Record Ref
-      x-internal: true
-      type: object
-      properties:
-        id:
-          description: The unique identitifer of the record being referenced
-          type: string
-          examples:
-          - 13d946f0-c5d5-42bc-b092-97ece17923ab
-          - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-          - 7110701885
-          - EILBDVJVNUAGVKRQ
-        type:
-          description: The type of record being referenced.
-          type: string
-      required:
-      - id
-      - type
-      description: ''
-    CommerceProduct:
-      title: 'Commerce: Product'
-      description: 'A Product is an item in the company''s inventory, and includes information about the price and quantity of all products, and variants thereof, available for sale.
-
-        '
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-      - type: object
-        properties:
-          name:
-            type: string
-            description: Name of the product in the commerce or POS system
-            examples:
-            - Hard Drive
-            - Windows Installation
-            - Software Support (Hourly)
-          description:
-            type: string
-            description: Description of the product recorded in the commerce or point of sale platform.
-            examples:
-            - 1tb Western Digital Hard Drive
-            - Install of Windows 11 (Professional Edition)
-            - 1 hour of support from an agent (phone or remote)
-          categorization:
-            type: string
-            description: Retail category that the product is assigned to e.g. `Hardware`.
-            examples:
-            - Hardware
-            - Software
-            - Support Services
-          isGiftCard:
-            type: boolean
-            description: 'Whether the product represents a gift card or voucher that
-
-              can be redeemed in the commerce or POS platform.
-
-              '
-          variants:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceProduct/definitions/productVariant'
-          supplementalData:
-            $ref: '#/components/schemas/SupplementalData'
-      definitions:
-        productRef:
-          type: object
-          description: Reference that links the line item to the correct product details.
-          properties:
-            id:
-              description: The unique identifier of the product being referenced.
-              type: string
-              examples:
-              - 13d946f0-c5d5-42bc-b092-97ece17923ab
-              - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-              - 7110701885
-              - EILBDVJVNUAGVKRQ
-            name:
-              description: Name of the product being referenced.
-              type: string
-          required:
-          - id
-        productVariant:
-          title: Product Variant
-          description: 'Represents a variation of a product available for sale, for example an item of clothing that may be available for sale in multiple sizes and colors.
-
-            '
-          allOf:
-          - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-            description: Identifier of the product variant, unique to the company.
-          - properties:
-              name:
-                type: string
-                examples:
-                - Red Coat
-                - Black Coat
-                - Large Brown Hat
-                description: Name of the product recorded in the commerce or point of sale platform.
-              isTaxEnabled:
-                type: boolean
-                description: Whether sales taxes are enabled for this product variant.
-              sku:
-                type: string
-                examples:
-                - Coat-Red-Lrg
-                - Coat-Black-Md
-                - LargeBrownHat
-                - A725BA2
-                description: SKU (stock keeping unit) of the variant, as defined by the merchant.
-              barcode:
-                type: string
-                examples:
-                - '564158468416486458646886484'
-                - CSE370
-                description: Unique product number of the variant. This might be a barcode, UPC, ISBN, etc.
-              unitOfMeasure:
-                type: string
-                examples:
-                - kg
-                - m
-                - meters
-                description: Unit of measure for the variant, such as `kg` or `meters`.
-              vatPercentage:
-                type: number
-                format: decimal
-                examples:
-                - 12.5
-                - 0
-                - 20
-                description: VAT rate for the product variant if sales taxes are enabled.
-              prices:
-                type: array
-                description: Prices for the product variants in different currencies.
-                items:
-                  $ref: '#/components/schemas/CommerceProduct/definitions/productPrice'
-              inventory:
-                $ref: '#/components/schemas/CommerceProduct/definitions/productInventory'
-              shippingRequired:
-                type: boolean
-                description: Indicates whether or not the product requires physical delivery.
-              status:
-                $ref: '#/components/schemas/CommerceProduct/definitions/productVariantStatus'
-          - $ref: '#/components/schemas/CommerceOrder/allOf/2'
-          - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-        productVariantRef:
-          title: Product variant reference
-          type: object
-          description: Reference that links the line item to the specific version of product that has been ordered.
-          properties:
-            id:
-              description: The unique identifier of the product variant being referenced.
-              type: string
-              examples:
-              - 13d946f0-c5d5-42bc-b092-97ece17923ab
-              - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-              - 7110701885
-              - EILBDVJVNUAGVKRQ
-            name:
-              description: Name of the product variant being referenced.
-              type: string
-          required:
-          - id
-        productPrice:
-          title: Product Price Variant
-          x-internal: true
-          type: object
-          properties:
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-              nullable: true
-            unitPrice:
-              type: number
-              format: decimal
-              description: The product variant's unit price.
-        productInventory:
-          title: Product Inventory
-          description: Information about the total inventory as well as the locations inventory is in.
-          x-internal: true
-          type: object
-          properties:
-            totalQuantity:
-              type: number
-              format: decimal
-              nullable: true
-              description: The total quantity of stock remaining across locations.
-            locations:
-              type: array
-              items:
-                $ref: '#/components/schemas/CommerceProduct/definitions/productInventoryLocation'
-        productInventoryLocation:
-          title: Product Inventory Location
-          x-internal: true
-          type: object
-          properties:
-            quantity:
-              type: number
-              format: decimal
-              description: The quantity of stock remaining at location.
-            locationRef:
-              $ref: '#/components/schemas/CommerceLocation/definitions/locationRef'
-        productVariantStatus:
-          x-internal: true
-          type: string
-          description: The status of the product variant.
-          enum:
-          - Unknown
-          - Published
-          - Unpublished
-    PhoneNumber:
-      title: Phone
-      type: object
-      x-internal: true
-      properties:
-        number:
-          type: string
-          nullable: true
-          examples:
-          - +44 25691 154789
-          - (877) 492-8687
-          - 01224 658 999
-          description: A phone number.
-        type:
-          description: The type of phone number
-          type: string
-          enum:
-          - Primary
-          - Landline
-          - Mobile
-          - Fax
-          - Unknown
-      required:
-      - type
-    CommerceProductCategory:
-      title: 'Commerce: Product category'
-      description: Product categories are used to classify a group of products together, either by type (e.g. "Furniture"), or sometimes by tax profile.
-      type: object
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            example: '"102"'
-            description: The unique identifier of the product category
-          name:
-            type: string
-            example: Entertainment
-            description: The name of the product category
-          ancestorRefs:
-            type: array
-            description: A collection of parent product categories implicitly ordered with the immediate parent last in the list.
-            items:
-              $ref: '#/components/schemas/CommerceRecordRef'
-          hasChildren:
-            type: boolean
-            description: A boolean indicating whether there are other product categories beneath this one in the hierarchy.
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      examples:
-      - productCategories:
-        - id: '100'
-          name: Entertainment
-          ancestorRefs: []
-          hasChildren: true
-          modifiedDate: '2022-01-01T12:00:00Z'
-          sourceModifiedDate: '2021-10-01T12:53:21Z'
-        - id: '101'
-          name: Cinema
-          ancestorRefs:
-          - id: '100'
-            name: Entertainment
-          hasChildren: true
-          modifiedDate: '2022-01-01T12:00:00Z'
-          sourceModifiedDate: '2021-10-01T12:55:02Z'
-        - id: '102'
-          name: Movie
-          ancestorRefs:
-          - id: '100'
-            name: Entertainment
-          - id: '101'
-            name: Cinema
-          hasChildren: false
-          modifiedDate: '2022-01-01T12:00:00Z'
-          sourceModifiedDate: '2021-12-25T12:00:00Z'
-    CommerceTransactions:
-      title: 'Commerce: Transactions'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceTransaction'
-      - $ref: '#/components/schemas/PagingInfo'
-    CommerceTaxComponent:
-      title: 'Commerce: Tax component'
-      description: The Tax Components endpoints return tax rates data from the commerce software, including tax rate names and values. This is to support the mapping of tax rates from the commerce software to those in the accounting software.
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-      - type: object
-        properties:
-          name:
-            type: string
-            description: Name of the Tax Rate Component in the source commerce software.
-            example: Sales Tax
-          rate:
-            description: Rate of taxation represented as a fraction of the net price (typically in the range 0.00 - 1.00).
-            type: number
-            format: decimal
-            examples:
-            - 0.15
-            - 0.2
-          isCompound:
-            description: The Boolean flag to indicate when a Tax Rate Component compounds on a sale.
-            type: boolean
-            examples:
-            - true
-            - false
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-        required:
-        - name
-      definitions:
-        taxComponentAllocation:
-          title: Tax Component Allocation
-          type: object
-          properties:
-            taxComponentRef:
-              $ref: '#/components/schemas/CommerceTaxComponent/definitions/taxComponentRef'
-            rate:
-              description: Tax amount on order line sale as available from source commerce software.
-              type: number
-              format: decimal
-              nullable: true
-        taxComponentRef:
-          type: object
-          description: Taxes rates reference object depending on the rates being available on source commerce software.
-          properties:
-            id:
-              description: The unique identitifer of the tax component being referenced.
-              type: string
-              examples:
-              - 13d946f0-c5d5-42bc-b092-97ece17923ab
-              - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-              - 7110701885
-              - EILBDVJVNUAGVKRQ
-            name:
-              description: Name of the tax component being referenced.
-              type: string
-          required:
-          - id
-          - name
-      examples:
-      - id: 13d946f0-c5d5-42bc-b092-97ece17923ab
-        name: Sales Tax (15%)
-        rate: 0.15
-        isCompound: true
-        modifiedDate: '2022-10-23T00:00:00Z'
-        sourceModifiedDate: '2022-10-23T00:00:00Z'
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    CommerceDispute:
-      title: 'Commerce: Dispute'
-      description: "A customer may file a payment dispute with their bank or other card issuer when they're unsatisfied with their purchase or believe they have been charged incorrectly. For example:  \n- They didn't receive an order.  \n- The product they received was different to the commerce store's description.  \n- They've been the victim of online fraud.  \n\nYou can use data from the Disputes endpoints to calculate key metrics, such as the number of chargebacks."
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-      - type: object
-        required:
-        - currency
-        properties:
-          disputedTransactions:
-            description: Link to the source event(s) which triggered this transaction.
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceTransaction/definitions/transactionSourceRef'
-          totalAmount:
-            description: Total transaction amount that is under dispute.
-            format: decimal
-            examples:
-            - 194.12
-            - -283.56
-            - 0
-          currency:
-            description: Currency of the disputed transaction.
-            $ref: '#/components/schemas/SourceAccount/properties/currency'
-          status:
-            $ref: '#/components/schemas/CommerceDispute/definitions/disputeStatus'
-          reason:
-            description: Reason for the dispute
-            type: string
-            examples:
-            - Unhappy with product
-          dueDate:
-            description: Date when the next action in the dispute resolution is due
-            $ref: '#/components/schemas/DateTime'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      definitions:
-        disputeStatus:
-          description: Current status of the dispute
-          x-internal: true
-          type: string
-          enum:
-          - Won
-          - Lost
-          - Accepted
-          - Processing
-          - ChargeRefunded
-          - EvidenceRequired
-          - InquiryEvidenceRequired
-          - InquiryProcessing
-          - InquiryClosed
-          - WaitingThirdParty
-          - Unknown
-          example: EvidenceRequired
-      examples:
-      - id: 03e608e3-bd1c-454f-8c2b-fb0133e43b95
-        disputedTransactions:
-        - id: e63ad857-7e12-4e64-9185-cdfd7c45d09d
-          type: Order
-        totalAmount: -47.66
-        currency: GBP
-        status: InquiryEvidenceRequired
-        reason: Unhappy with product
-        dueDate: '2021-03-29T14:39:55'
-        createdDate: '2021-03-22T14:39:55'
-        modifiedDate: '2022-02-02T11:02:45Z'
-        sourceModifiedDate: '2021-03-22T14:39:55'
-    CommerceLocation:
-      title: 'Commerce: Location'
-      type: object
-      description: 'The Location datatype holds information on the geographic location at which stocks of products may be held, as referenced in the Products data type.
-
-
-        A Location also holds information on geographic locations where orders were placed, as referenced in the Orders data type.'
-      allOf:
-      - $ref: '#/components/schemas/CommerceOrder/allOf/0'
-      - type: object
-        properties:
-          name:
-            description: Name of this location
-            type: string
-          address:
-            description: Address associated with the location
-            $ref: '#/components/schemas/CommerceAddress'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      definitions:
-        locationRef:
-          type: object
-          description: Reference to the geographic location where the order was placed.
-          properties:
-            id:
-              description: The unique identitifer of the location being referenced.
-              type: string
-              examples:
-              - 13d946f0-c5d5-42bc-b092-97ece17923ab
-              - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
-              - 7110701885
-              - EILBDVJVNUAGVKRQ
-            name:
-              description: Name of the location being referenced.
-              type: string
-          required:
-          - id
-      examples:
-      - id: '15'
-        name: London Warehouse
-        address:
-          type: Inventory
-          line1: Warner House
-          line2: 98 Theobald's Road
-          city: London
-          region: ''
-          country: United Kingdom
-          postalCode: WC1X 8WB
-        modifiedDate: '2020-08-12T14:37:37'
-        sourceModifiedDate: '2020-08-12T14:37:37'
     CommerceAddress:
       title: 'Commerce: Address'
       x-internal: true
@@ -7277,8 +7048,8 @@ components:
           - Order
           - Inventory
           - Unknown
-    CommerceProducts:
-      title: 'Commerce: Products'
+    CommerceProductCategories:
+      title: 'Commerce: Product categories'
       x-internal: true
       allOf:
       - type: object
@@ -7286,66 +7057,43 @@ components:
           results:
             type: array
             items:
-              $ref: '#/components/schemas/CommerceProduct'
+              $ref: '#/components/schemas/CommerceProductCategory'
       - $ref: '#/components/schemas/PagingInfo'
-    ErrorMessage:
-      title: Error message
+    PhoneNumber:
+      title: Phone
       type: object
       x-internal: true
       properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
+        number:
           type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
           nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
+          examples:
+          - +44 25691 154789
+          - (877) 492-8687
+          - 01224 658 999
+          description: A phone number.
+        type:
+          description: The type of phone number
+          type: string
+          enum:
+          - Primary
+          - Landline
+          - Mobile
+          - Fax
+          - Unknown
+      required:
+      - type
+    CommerceCustomers:
+      title: 'Commerce: Customers'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceCustomer'
+      - $ref: '#/components/schemas/PagingInfo'
     CommerceCustomer:
       title: 'Commerce: Customer'
       description: When a customer places an order with the connected commerce store their details are added to the Customers dataset. You can use the data from the Customers endpoints to calculate key metrics, such as customer churn.
@@ -7463,6 +7211,177 @@ components:
           createdDate: '0001-01-01T00:00:00'
           modifiedDate: null
           sourceModifiedDate: '2020-08-12T14:37:37'
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    SupplementalData:
+      title: Supplemental data
+      type: object
+      x-internal: true
+      description: "Supplemental data is additional data you can include in our standard data types. \n\nIt is referenced as a configured dynamic key value pair that is unique to the accounting software. [Learn more](https://docs.codat.io/using-the-api/supplemental-data/overview) about supplemental data."
+      properties:
+        content:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: true
+          nullable: true
+    PaymentMethodRef:
+      type: object
+      title: Payment method reference
+      description: The payment method the record is linked to in the accounting or commerce software.
+      properties:
+        id:
+          description: The unique identifier of the location being referenced.
+          type: string
+        name:
+          description: Name of the location being referenced.
+          type: string
+      required:
+      - id
+      example:
+        id: EILBDVJVNUAGVKRQ
+        name: AliPay
+    CommerceProducts:
+      title: 'Commerce: Products'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceProduct'
+      - $ref: '#/components/schemas/PagingInfo'
+    CommerceRecordRef:
+      title: Record Ref
+      x-internal: true
+      type: object
+      properties:
+        id:
+          description: The unique identitifer of the record being referenced
+          type: string
+          examples:
+          - 13d946f0-c5d5-42bc-b092-97ece17923ab
+          - 9wg4lep4ush5cxs79pl8sozmsndbaukll3ind4g7buqbm1h2
+          - 7110701885
+          - EILBDVJVNUAGVKRQ
+        type:
+          description: The type of record being referenced.
+          type: string
+      required:
+      - id
+      - type
+      description: ''
+    CommerceLocations:
+      title: 'Commerce: Locations'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceLocation'
+      - $ref: '#/components/schemas/PagingInfo'
+    CommerceOrders:
+      title: 'Commerce: Orders'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceOrder'
+      - $ref: '#/components/schemas/PagingInfo'
+    CommerceProductCategory:
+      title: 'Commerce: Product category'
+      description: Product categories are used to classify a group of products together, either by type (e.g. "Furniture"), or sometimes by tax profile.
+      type: object
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            example: '"102"'
+            description: The unique identifier of the product category
+          name:
+            type: string
+            example: Entertainment
+            description: The name of the product category
+          ancestorRefs:
+            type: array
+            description: A collection of parent product categories implicitly ordered with the immediate parent last in the list.
+            items:
+              $ref: '#/components/schemas/CommerceRecordRef'
+          hasChildren:
+            type: boolean
+            description: A boolean indicating whether there are other product categories beneath this one in the hierarchy.
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      examples:
+      - productCategories:
+        - id: '100'
+          name: Entertainment
+          ancestorRefs: []
+          hasChildren: true
+          modifiedDate: '2022-01-01T12:00:00Z'
+          sourceModifiedDate: '2021-10-01T12:53:21Z'
+        - id: '101'
+          name: Cinema
+          ancestorRefs:
+          - id: '100'
+            name: Entertainment
+          hasChildren: true
+          modifiedDate: '2022-01-01T12:00:00Z'
+          sourceModifiedDate: '2021-10-01T12:55:02Z'
+        - id: '102'
+          name: Movie
+          ancestorRefs:
+          - id: '100'
+            name: Entertainment
+          - id: '101'
+            name: Cinema
+          hasChildren: false
+          modifiedDate: '2022-01-01T12:00:00Z'
+          sourceModifiedDate: '2021-12-25T12:00:00Z'
+    CommerceDisputes:
+      title: 'Commerce: Disputes'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceDispute'
+      - $ref: '#/components/schemas/PagingInfo'
+    CommerceTransactions:
+      title: 'Commerce: Transactions'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceTransaction'
+      - $ref: '#/components/schemas/PagingInfo'
+    CommercePayments:
+      title: 'Commerce: Payments'
+      x-internal: true
+      allOf:
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommercePayment'
+      - $ref: '#/components/schemas/PagingInfo'
     SourceAccount:
       title: Source account (v1)
       type: object
@@ -7569,111 +7488,6 @@ components:
         balance: 0
         modifiedDate: '2023-01-09T14:14:14.1057478Z'
         status: pending
-    CommercePaymentMethods:
-      title: 'Commerce: Payment methods'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommercePaymentMethod'
-      - $ref: '#/components/schemas/PagingInfo'
-    CommerceCustomers:
-      title: 'Commerce: Customers'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceCustomer'
-      - $ref: '#/components/schemas/PagingInfo'
-    CommercePayments:
-      title: 'Commerce: Payments'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommercePayment'
-      - $ref: '#/components/schemas/PagingInfo'
-    CommerceOrders:
-      title: 'Commerce: Orders'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceOrder'
-      - $ref: '#/components/schemas/PagingInfo'
-    CommerceDisputes:
-      title: 'Commerce: Disputes'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceDispute'
-      - $ref: '#/components/schemas/PagingInfo'
-    CommerceLocations:
-      title: 'Commerce: Locations'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceLocation'
-      - $ref: '#/components/schemas/PagingInfo'
-    PaymentMethodRef:
-      type: object
-      title: Payment method reference
-      description: The payment method the record is linked to in the accounting or commerce software.
-      properties:
-        id:
-          description: The unique identifier of the location being referenced.
-          type: string
-        name:
-          description: Name of the location being referenced.
-          type: string
-      required:
-      - id
-      example:
-        id: EILBDVJVNUAGVKRQ
-        name: AliPay
-    SupplementalData:
-      title: Supplemental data
-      type: object
-      x-internal: true
-      description: "Supplemental data is additional data you can include in our standard data types. \n\nIt is referenced as a configured dynamic key value pair that is unique to the accounting software. [Learn more](https://docs.codat.io/using-the-api/supplemental-data/overview) about supplemental data."
-      properties:
-        content:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties: true
-          nullable: true
-    CommerceProductCategories:
-      title: 'Commerce: Product categories'
-      x-internal: true
-      allOf:
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceProductCategory'
-      - $ref: '#/components/schemas/PagingInfo'
     CommercePaymentMethod:
       title: 'Commerce: Payment method'
       description: A Payment Method represents the payment method(s) used to make payments.
@@ -7696,56 +7510,6 @@ components:
             - Archived
       - $ref: '#/components/schemas/CommerceOrder/allOf/3'
   parameters:
-    periodUnit:
-      name: periodUnit
-      in: query
-      required: true
-      schema:
-        type: string
-        enum:
-        - Day
-        - Week
-        - Month
-        - Year
-      description: The period unit of time returned.
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
-        description: Unique identifier for a company's data connection.
-      description: Unique identifier for a connection.
-    numberOfPeriodsRequired:
-      name: numberOfPeriods
-      in: query
-      required: true
-      schema:
-        type: integer
-      description: The number of periods to return. There will be no pagination as a query parameter.
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
     productId:
       name: productId
       in: path
@@ -7758,6 +7522,58 @@ components:
         - 7110701885
         - EILBDVJVNUAGVKRQ
       description: Unique identifier for a product.
+    periodLength:
+      name: periodLength
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: The number of months per period. E.g. 2 = 2 months per period.
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    includeDisplayNames:
+      name: includeDisplayNames
+      in: query
+      schema:
+        type: boolean
+      description: Shows the dimensionDisplayName and itemDisplayName in measures to make the report data human-readable.
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    reportDateRequired:
+      name: reportDate
+      in: query
+      required: true
+      schema:
+        type: string
+        example: 29-09-2020
+      description: The date in which the report is created up to. Users must specify a specific date, however the response will be provided for the full month.
     query:
       name: query
       in: query
@@ -7766,29 +7582,6 @@ components:
         type: string
       example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
       description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
-    includeDisplayNames:
-      name: includeDisplayNames
-      in: query
-      schema:
-        type: boolean
-      description: Shows the dimensionDisplayName and itemDisplayName in measures to make the report data human-readable.
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    periodLength:
-      name: periodLength
-      in: query
-      required: true
-      schema:
-        type: integer
-      description: The number of months per period. E.g. 2 = 2 months per period.
     customerId:
       name: customerId
       in: path
@@ -7801,14 +7594,6 @@ components:
         - 7110701885
         - EILBDVJVNUAGVKRQ
       description: Unique identifier for a customer.
-    reportDateRequired:
-      name: reportDate
-      in: query
-      required: true
-      schema:
-        type: string
-        example: 29-09-2020
-      description: The date in which the report is created up to. Users must specify a specific date, however the response will be provided for the full month.
     orderBy:
       name: orderBy
       in: query
@@ -7817,6 +7602,25 @@ components:
         type: string
         example: -modifiedDate
       description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    numberOfPeriodsRequired:
+      name: numberOfPeriods
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: The number of periods to return. There will be no pagination as a query parameter.
+    periodUnit:
+      name: periodUnit
+      in: query
+      required: true
+      schema:
+        type: string
+        enum:
+        - Day
+        - Week
+        - Month
+        - Year
+      description: The period unit of time returned.
     paymentId:
       name: paymentId
       in: path
@@ -7829,6 +7633,202 @@ components:
         - 7110701885
         - EILBDVJVNUAGVKRQ
       description: Unique identifier for a payment.
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+  responses:
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Malformed-Query:
+      description: Your `query` parameter was not correctly formed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: ClientsApi
+                error: Error parsing query - Malformed query.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Unresolved property:
+              value:
+                statusCode: 400
+                service: PullApi
+                error: Error parsing query - Could not resolve property isCompleted on Dataset
+                correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Data connection not found:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Conflict:
+      description: The data type's dataset has not been requested or is still syncing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 409
+                service: PublicApi
+                error: The data set has not been requested.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
   securitySchemes:
     auth_header:
       name: Authorization

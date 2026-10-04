@@ -759,227 +759,94 @@ webhooks:
       x-summary-source: derived
 components:
   schemas:
-    Company:
-      title: Company
-      description: "\uFEFFIn Codat, a company represents a business sharing access to their data. Each company can have multiple [connections](https://docs.codat.io/platform-api#/schemas/Connection) to different data sources such as one connection to [Xero](https://docs.codat.io/integrations/accounting/xero/accounting-xero) for accounting data, two connections to [Plaid](https://docs.codat.io/integrations/banking/plaid/banking-plaid) for two bank accounts and a connection to [Zettle](https://docs.codat.io/integrations/commerce/zettle/commerce-zettle) for POS data.\n\nTypically each company is one of your customers.\n\nWhen you create a company, you can specify a `name` and we will automatically generate a unique `id` for the company. You can also add a `description` to store any additional information about the company."
+    CompanyRequestBody:
+      title: Create company request
+      x-internal: true
       type: object
-      allOf:
-      - $ref: '#/components/schemas/Company/definitions/companyDetails'
-      - type: object
-        properties:
-          dataConnections:
-            type: array
-            items:
-              $ref: '#/components/schemas/Connection'
+      properties:
+        name:
+          type: string
+          description: Name of company being connected.
+          pattern: ^[A-Za-z0-9\s\-',&@.,?!\s]+$
+          minLength: 1
+          example: Bank of Dave
+        description:
+          type: string
+          example: Requested early access to the new financing scheme.
+          description: Additional information about the company. This can be used to store foreign IDs, references, etc.
+        tags:
+          $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
+      required:
+      - name
+    Branding:
+      title: Branding
+      type: object
+      properties:
+        logo:
+          $ref: '#/components/schemas/Branding/definitions/brandingLogo'
+        button:
+          $ref: '#/components/schemas/Branding/definitions/brandingButton'
+        sourceId:
+          type: string
+          format: uuid
+          example: 35b92968-9851-4095-ad60-395c95cbcba4
+          description: A source-specific ID used to distinguish between different sources originating from the same data connection. In general, a data connection is a single data source. However, for TrueLayer, `sourceId` is associated with a specific bank and has a many-to-one relationship with the `integrationId`.
       definitions:
-        companyDetails:
-          title: Company details
+        brandingLogo:
+          description: Logo branding references.
           type: object
           properties:
-            id:
-              $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
-            name:
-              type: string
-              description: The name of the company
-              example: Codat Ltd.
-            description:
-              $ref: '#/components/schemas/CompanyRequestBody/properties/description'
-              nullable: true
-            redirect:
+            full:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+            square:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+        brandingButton:
+          type: object
+          description: Button branding references.
+          properties:
+            default:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+            hover:
+              $ref: '#/components/schemas/Branding/definitions/brandingImage'
+        brandingImage:
+          title: Branding Image
+          type: object
+          properties:
+            image:
+              $ref: '#/components/schemas/Branding/definitions/imageReference'
+          examples: []
+        imageReference:
+          type: object
+          title: Image Reference
+          description: Image reference.
+          properties:
+            src:
               type: string
               format: uri
-              description: The `redirect` [Link URL](https://docs.codat.io/auth-flow/authorize-hosted-link) enabling the customer to start their auth flow journey for the company.
-              example: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
-            lastSync:
-              $ref: '#/components/schemas/DateTime'
-              nullable: true
-            created:
-              $ref: '#/components/schemas/DateTime'
-            createdByUserName:
+              description: Source URL for image.
+            alt:
               type: string
-              description: Name of user that created the company in Codat.
-              nullable: true
-            products:
-              type: array
-              items:
-                type: string
-              description: An array of products that are currently enabled for the company.
-            tags:
-              title: Tags
-              type: object
-              maxProperties: 10
-              propertyNames:
-                pattern: ^.{1,27}$
-              additionalProperties:
-                type: string
-                maxLength: 100
-              description: A collection of user-defined key-value pairs that store custom metadata against the company.
-            referenceParentCompany:
-              $ref: '#/components/schemas/Company/definitions/companyReference'
-              nullable: true
-              description: The parent entity or controlling organization of this company. Null if the company has no parent.
-            referenceSubsidiaryCompanies:
-              type: array
-              nullable: false
-              description: A list of subsidiary companies owned or controlled by this entity. Empty if the company has no children.
-              minItems: 0
-              items:
-                $ref: '#/components/schemas/Company/definitions/companyReference'
-          required:
-          - id
-          - name
-          - redirect
-        companyReference:
-          title: Company reference
-          type: object
-          properties:
-            id:
-              $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
-            name:
-              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/name'
-            description:
-              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/description'
-            links:
-              type: object
-              description: A collection of links for the company.
-              properties:
-                portal:
-                  type: string
-                  format: uri
-                  description: Link to the company page in the portal.
-            tags:
-              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
+              description: Alternative text when image is not available.
       examples:
-      - id: 0498e921-9b53-4396-a412-4f2f5983b0a2
-        name: string
-        redirect: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
-        lastSync: '2022-01-01T12:00:00.000Z'
-        created: '2022-01-01T12:00:00.000Z'
-        createdByUserName: string
-        tags:
-          region: us
-          uid: f6b0c253-16c7-4da1-a0c5-9c871e9c9d6c
-        dataConnections:
-        - id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
-          integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
-          integrationKey: dfxm
-          sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
-          platformName: Basiq
-          linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
-          status: Linked
-          lastSync: '2022-10-27T10:22:43.6464237Z'
-          created: '2022-10-27T09:53:29Z'
-          sourceType: Banking
-        products:
-        - spend-insights
-        - lending
-    ClientRateLimitWebhook:
-      title: Client rate limit webhook
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 743ec94a-8aa4-44bb-8bd4-e1855ee0e74b
-          description: Unique identifier of the event.
-        eventType:
-          type: string
-          description: The type of event.
-          examples:
-          - client.rateLimit.reset
-          - client.rateLimit.reached
-        generatedDate:
-          $ref: '#/components/schemas/DateTime'
-          description: The date time in UTC the event was generated in Codat.
-        payload:
-          $ref: '#/components/schemas/ClientRateLimitWebhook/definitions/clientRateLimitWebhookPayload'
-      definitions:
-        clientRateLimitWebhookPayload:
-          title: Client rate limit webhook payload
-          type: object
-          properties:
-            dailyQuota:
-              type: integer
-              description: The number of available requests per day.
-            quotaRemaining:
-              type: integer
-              description: Total number of requests remaining for your client.
-            expiryDate:
-              $ref: '#/components/schemas/DateTime'
-              description: The date time in UTC when your daily quota is reset.
-    DataTypeWriteWebhook:
-      title: Write data type webhook
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: ba29118f-5406-4e59-b05c-ba307ca38d01
-          description: Unique identifier of the event.
-        eventType:
-          type: string
-          description: The type of event.
-          examples:
-          - bills.write.successful
-          - bills.write.unsuccessful
-        generatedDate:
-          $ref: '#/components/schemas/DateTime'
-          description: The date time in UTC the event was generated in Codat.
-        payload:
-          $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/dataTypeWriteWebhookPayload'
-      definitions:
-        dataTypeWriteWebhookPayload:
-          title: Payload
-          type: object
-          properties:
-            id:
-              type: string
-              description: Unique identifier of the write request. This is also known as the push operation ID.
-            type:
-              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/writeType'
-            referenceCompany:
-              $ref: '#/components/schemas/Company/definitions/companyReference'
-            connectionId:
-              $ref: '#/components/parameters/connectionId/schema'
-            requestedOnDate:
-              $ref: '#/components/schemas/DateTime'
-              description: The date time in UTC the write request was submitted.
-            completedOnDate:
-              $ref: '#/components/schemas/DateTime'
-              description: The date time in UTC the write request completed.
-            status:
-              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/writeStatus'
-            record:
-              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/dataTypeWriteWebhookRecord'
-              nullable: true
-            attachmentId:
-              type: string
-              nullable: true
-              description: Unique identifier for the uploaded attachment, null if no attachment uploaded.
-        dataTypeWriteWebhookRecord:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique identifier of the data type created, updated, deleted, or had an attachment uploaded in the accounting platform.
-        writeType:
-          title: Write type
-          description: Type of write request.
-          type: string
-          enum:
-          - Create
-          - Update
-          - Delete
-          - UploadAttachment
-        writeStatus:
-          title: Write request status
-          type: string
-          enum:
-          - Pending
-          - Failed
-          - Success
-          - TimedOut
-          description: The current status of the write request, which is the same as the push operation status.
+      - logo:
+          full:
+            image:
+              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
+              alt: xero full icon
+          square:
+            image:
+              src: https://static.codat.io/public/officialLogos/Square/8A156A5A-39CB-4F9D-856E-76EF9B2W3607.png
+              alt: xero square icon
+        button:
+          default:
+            image:
+              src: https://static.codat.io/public/officialButtons/Full/8A156A5A-39CB-4F9D-856E-76EF9Q7A9607.png
+              alt: xero default button icon
+          hover:
+            image:
+              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
+              alt: xero hover button icon
+        sourceId: 35b92968-9851-4095-ad60-395c95cbcba4
     ReadCompletedWebhook:
       title: Read completed webhook
       type: object
@@ -1102,26 +969,40 @@ components:
                   type: string
                   description: A link to Codat's documentation with additional information on how to troubleshoot this issue.
                   example: https://docs.codat.io/using-the-api/get-data-troubleshooting#warning.validation
-    CompanyWebhook:
-      title: Company webhook
+    ClientRateLimitWebhook:
+      title: Client rate limit webhook
       type: object
       properties:
         id:
           type: string
           format: uuid
-          example: ba29118f-5406-4e59-b05c-ba307ca38d01
-          description: Unique identifier of the event
+          example: 743ec94a-8aa4-44bb-8bd4-e1855ee0e74b
+          description: Unique identifier of the event.
         eventType:
           type: string
           description: The type of event.
           examples:
-          - company.created
-          - company.deleted
+          - client.rateLimit.reset
+          - client.rateLimit.reached
         generatedDate:
           $ref: '#/components/schemas/DateTime'
           description: The date time in UTC the event was generated in Codat.
         payload:
-          $ref: '#/components/schemas/Company/definitions/companyDetails'
+          $ref: '#/components/schemas/ClientRateLimitWebhook/definitions/clientRateLimitWebhookPayload'
+      definitions:
+        clientRateLimitWebhookPayload:
+          title: Client rate limit webhook payload
+          type: object
+          properties:
+            dailyQuota:
+              type: integer
+              description: The number of available requests per day.
+            quotaRemaining:
+              type: integer
+              description: Total number of requests remaining for your client.
+            expiryDate:
+              $ref: '#/components/schemas/DateTime'
+              description: The date time in UTC when your daily quota is reset.
     DataStatus:
       title: Data status
       description: Describes the state of data in the Codat cache for a company and data type
@@ -1200,6 +1081,79 @@ components:
         currentStatus: string
         latestSyncId: ad474a37-2003-478e-baee-9af9f1ec2fe3
         latestSuccessfulSyncId: 8220fc90-55b6-47bc-9417-48ac6ea93101
+    DataTypeWriteWebhook:
+      title: Write data type webhook
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: ba29118f-5406-4e59-b05c-ba307ca38d01
+          description: Unique identifier of the event.
+        eventType:
+          type: string
+          description: The type of event.
+          examples:
+          - bills.write.successful
+          - bills.write.unsuccessful
+        generatedDate:
+          $ref: '#/components/schemas/DateTime'
+          description: The date time in UTC the event was generated in Codat.
+        payload:
+          $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/dataTypeWriteWebhookPayload'
+      definitions:
+        dataTypeWriteWebhookPayload:
+          title: Payload
+          type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the write request. This is also known as the push operation ID.
+            type:
+              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/writeType'
+            referenceCompany:
+              $ref: '#/components/schemas/Company/definitions/companyReference'
+            connectionId:
+              $ref: '#/components/parameters/connectionId/schema'
+            requestedOnDate:
+              $ref: '#/components/schemas/DateTime'
+              description: The date time in UTC the write request was submitted.
+            completedOnDate:
+              $ref: '#/components/schemas/DateTime'
+              description: The date time in UTC the write request completed.
+            status:
+              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/writeStatus'
+            record:
+              $ref: '#/components/schemas/DataTypeWriteWebhook/definitions/dataTypeWriteWebhookRecord'
+              nullable: true
+            attachmentId:
+              type: string
+              nullable: true
+              description: Unique identifier for the uploaded attachment, null if no attachment uploaded.
+        dataTypeWriteWebhookRecord:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the data type created, updated, deleted, or had an attachment uploaded in the accounting platform.
+        writeType:
+          title: Write type
+          description: Type of write request.
+          type: string
+          enum:
+          - Create
+          - Update
+          - Delete
+          - UploadAttachment
+        writeStatus:
+          title: Write request status
+          type: string
+          enum:
+          - Pending
+          - Failed
+          - Success
+          - TimedOut
+          description: The current status of the write request, which is the same as the push operation status.
     Connection:
       title: Connection
       description: "\uFEFFA connection represents a [company's](https://docs.codat.io/platform-api#/schemas/Company) connection to a data source and allows you to synchronize data (pull and/or push) with that source.\n\nA company can have multiple data connections depending on the type of data source it is connecting to. For example, a single company can link to:\n\n- [Accounting data](https://docs.codat.io/accounting-api/overview) - 1 active connection.\n- [Banking data](https://docs.codat.io/banking-api/overview) - Multiple active connections.\n- [Commerce data](https://docs.codat.io/commerce-api/overview) - Multiple active connections.\nAny combination of accounting, banking, and commerce data connections is allowed.\n\nBefore you can use a data connection to pull or push data, the company must grant you access to their business data by [linking the connection](https://docs.codat.io/auth-flow/overview)."
@@ -1315,46 +1269,120 @@ components:
         lastSync: '2022-10-27T10:22:43.6464237Z'
         created: '2022-10-27T09:53:29Z'
         sourceType: Banking
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
-    ConnectionWebhook:
-      title: Connection webhook
+    Company:
+      title: Company
+      description: "\uFEFFIn Codat, a company represents a business sharing access to their data. Each company can have multiple [connections](https://docs.codat.io/platform-api#/schemas/Connection) to different data sources such as one connection to [Xero](https://docs.codat.io/integrations/accounting/xero/accounting-xero) for accounting data, two connections to [Plaid](https://docs.codat.io/integrations/banking/plaid/banking-plaid) for two bank accounts and a connection to [Zettle](https://docs.codat.io/integrations/commerce/zettle/commerce-zettle) for POS data.\n\nTypically each company is one of your customers.\n\nWhen you create a company, you can specify a `name` and we will automatically generate a unique `id` for the company. You can also add a `description` to store any additional information about the company."
       type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: ba29118f-5406-4e59-b05c-ba307ca38d01
-          description: Unique identifier of the event.
-        eventType:
-          type: string
-          description: The type of event.
-          examples:
-          - connection.created
-          - connection.connected
-          - connection.disconnected
-          - connection.reconnected
-          - connection.deleted
-          - connection.failed
-        generatedDate:
-          $ref: '#/components/schemas/DateTime'
-          description: The date time in UTC the event was generated in Codat.
-        payload:
-          $ref: '#/components/schemas/ConnectionWebhook/definitions/connectionWebhookPayload'
+      allOf:
+      - $ref: '#/components/schemas/Company/definitions/companyDetails'
+      - type: object
+        properties:
+          dataConnections:
+            type: array
+            items:
+              $ref: '#/components/schemas/Connection'
       definitions:
-        connectionWebhookPayload:
-          title: Connection webhook payload
+        companyDetails:
+          title: Company details
           type: object
           properties:
-            referenceCompany:
+            id:
+              $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
+            name:
+              type: string
+              description: The name of the company
+              example: Codat Ltd.
+            description:
+              $ref: '#/components/schemas/CompanyRequestBody/properties/description'
+              nullable: true
+            redirect:
+              type: string
+              format: uri
+              description: The `redirect` [Link URL](https://docs.codat.io/auth-flow/authorize-hosted-link) enabling the customer to start their auth flow journey for the company.
+              example: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
+            lastSync:
+              $ref: '#/components/schemas/DateTime'
+              nullable: true
+            created:
+              $ref: '#/components/schemas/DateTime'
+            createdByUserName:
+              type: string
+              description: Name of user that created the company in Codat.
+              nullable: true
+            products:
+              type: array
+              items:
+                type: string
+              description: An array of products that are currently enabled for the company.
+            tags:
+              title: Tags
+              type: object
+              maxProperties: 10
+              propertyNames:
+                pattern: ^.{1,27}$
+              additionalProperties:
+                type: string
+                maxLength: 100
+              description: A collection of user-defined key-value pairs that store custom metadata against the company.
+            referenceParentCompany:
               $ref: '#/components/schemas/Company/definitions/companyReference'
-            connection:
-              $ref: '#/components/schemas/Connection'
+              nullable: true
+              description: The parent entity or controlling organization of this company. Null if the company has no parent.
+            referenceSubsidiaryCompanies:
+              type: array
+              nullable: false
+              description: A list of subsidiary companies owned or controlled by this entity. Empty if the company has no children.
+              minItems: 0
+              items:
+                $ref: '#/components/schemas/Company/definitions/companyReference'
+          required:
+          - id
+          - name
+          - redirect
+        companyReference:
+          title: Company reference
+          type: object
+          properties:
+            id:
+              $ref: '#/paths/~1companies~1%7BcompanyId%7D~1syncSettings/post/requestBody/content/application~1json/schema/allOf/0/properties/companyId'
+            name:
+              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/name'
+            description:
+              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/description'
+            links:
+              type: object
+              description: A collection of links for the company.
+              properties:
+                portal:
+                  type: string
+                  format: uri
+                  description: Link to the company page in the portal.
+            tags:
+              $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
+      examples:
+      - id: 0498e921-9b53-4396-a412-4f2f5983b0a2
+        name: string
+        redirect: https://link.codat.io/company/27628208-459c-46a2-a705-5641ce25f739
+        lastSync: '2022-01-01T12:00:00.000Z'
+        created: '2022-01-01T12:00:00.000Z'
+        createdByUserName: string
+        tags:
+          region: us
+          uid: f6b0c253-16c7-4da1-a0c5-9c871e9c9d6c
+        dataConnections:
+        - id: ee2eb431-c0fa-4dc9-93fa-d29781c12bcd
+          integrationId: bf083d72-62c7-493e-aec9-81b4dbba7e2c
+          integrationKey: dfxm
+          sourceId: bdd831ce-eebd-4896-89a7-20e5ee8989ee
+          platformName: Basiq
+          linkUrl: https://link-api.codat.io/companies/86bd88cb-44ab-4dfb-b32f-87b19b14287f/connections/ee2eb431-c0fa-4dc9-93fa-d29781c12bcd/start
+          status: Linked
+          lastSync: '2022-10-27T10:22:43.6464237Z'
+          created: '2022-10-27T09:53:29Z'
+          sourceType: Banking
+        products:
+        - spend-insights
+        - lending
     PullOperation:
       title: Pull operation
       description: 'Information about a queued, in progress or completed pull operation.
@@ -1451,75 +1479,39 @@ components:
         progress: 10
         isCompleted: false
         isErrored: false
-    Branding:
-      title: Branding
+    ConnectionWebhook:
+      title: Connection webhook
       type: object
       properties:
-        logo:
-          $ref: '#/components/schemas/Branding/definitions/brandingLogo'
-        button:
-          $ref: '#/components/schemas/Branding/definitions/brandingButton'
-        sourceId:
+        id:
           type: string
           format: uuid
-          example: 35b92968-9851-4095-ad60-395c95cbcba4
-          description: A source-specific ID used to distinguish between different sources originating from the same data connection. In general, a data connection is a single data source. However, for TrueLayer, `sourceId` is associated with a specific bank and has a many-to-one relationship with the `integrationId`.
+          example: ba29118f-5406-4e59-b05c-ba307ca38d01
+          description: Unique identifier of the event.
+        eventType:
+          type: string
+          description: The type of event.
+          examples:
+          - connection.created
+          - connection.connected
+          - connection.disconnected
+          - connection.reconnected
+          - connection.deleted
+          - connection.failed
+        generatedDate:
+          $ref: '#/components/schemas/DateTime'
+          description: The date time in UTC the event was generated in Codat.
+        payload:
+          $ref: '#/components/schemas/ConnectionWebhook/definitions/connectionWebhookPayload'
       definitions:
-        brandingLogo:
-          description: Logo branding references.
+        connectionWebhookPayload:
+          title: Connection webhook payload
           type: object
           properties:
-            full:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-            square:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-        brandingButton:
-          type: object
-          description: Button branding references.
-          properties:
-            default:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-            hover:
-              $ref: '#/components/schemas/Branding/definitions/brandingImage'
-        brandingImage:
-          title: Branding Image
-          type: object
-          properties:
-            image:
-              $ref: '#/components/schemas/Branding/definitions/imageReference'
-          examples: []
-        imageReference:
-          type: object
-          title: Image Reference
-          description: Image reference.
-          properties:
-            src:
-              type: string
-              format: uri
-              description: Source URL for image.
-            alt:
-              type: string
-              description: Alternative text when image is not available.
-      examples:
-      - logo:
-          full:
-            image:
-              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
-              alt: xero full icon
-          square:
-            image:
-              src: https://static.codat.io/public/officialLogos/Square/8A156A5A-39CB-4F9D-856E-76EF9B2W3607.png
-              alt: xero square icon
-        button:
-          default:
-            image:
-              src: https://static.codat.io/public/officialButtons/Full/8A156A5A-39CB-4F9D-856E-76EF9Q7A9607.png
-              alt: xero default button icon
-          hover:
-            image:
-              src: https://static.codat.io/public/officialLogos/Full/8A156A5A-39CB-4F9D-856E-76EF9B9A9607.png
-              alt: xero hover button icon
-        sourceId: 35b92968-9851-4095-ad60-395c95cbcba4
+            referenceCompany:
+              $ref: '#/components/schemas/Company/definitions/companyReference'
+            connection:
+              $ref: '#/components/schemas/Connection'
     Integration:
       title: Integration
       description: An integration that Codat supports
@@ -1650,25 +1642,33 @@ components:
           - GetAttachments
           - UploadAttachment
           example: Get
-    CompanyRequestBody:
-      title: Create company request
-      x-internal: true
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    CompanyWebhook:
+      title: Company webhook
       type: object
       properties:
-        name:
+        id:
           type: string
-          description: Name of company being connected.
-          pattern: ^[A-Za-z0-9\s\-',&@.,?!\s]+$
-          minLength: 1
-          example: Bank of Dave
-        description:
+          format: uuid
+          example: ba29118f-5406-4e59-b05c-ba307ca38d01
+          description: Unique identifier of the event
+        eventType:
           type: string
-          example: Requested early access to the new financing scheme.
-          description: Additional information about the company. This can be used to store foreign IDs, references, etc.
-        tags:
-          $ref: '#/components/schemas/Company/definitions/companyDetails/properties/tags'
-      required:
-      - name
+          description: The type of event.
+          examples:
+          - company.created
+          - company.deleted
+        generatedDate:
+          $ref: '#/components/schemas/DateTime'
+          description: The date time in UTC the event was generated in Codat.
+        payload:
+          $ref: '#/components/schemas/Company/definitions/companyDetails'
   parameters:
     connectionId:
       name: connectionId

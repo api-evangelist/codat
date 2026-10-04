@@ -71,6 +71,21 @@ paths:
           $ref: '#/components/responses/Service-Unavailable'
 components:
   responses:
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
     Too-Many-Requests:
       description: Too many requests were made in a given amount of time. Wait a short period and then try again.
       content:
@@ -83,21 +98,6 @@ components:
                 statusCode: 429
                 service: PublicApi
                 error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -116,17 +116,8 @@ components:
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
       content:
         application/json:
           schema:
@@ -134,54 +125,9 @@ components:
           examples:
             Conflict:
               value:
-                statusCode: 429
+                statusCode: 403
                 service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
+                error: You are using an outdated API key or a key not associated with that resource.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
@@ -218,27 +164,60 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
-  parameters:
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
-        description: Unique identifier for a company's data connection.
-      description: Unique identifier for a connection.
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
   schemas:
     ErrorMessage:
       title: Error message
@@ -324,6 +303,27 @@ components:
           description: Array of enabled currencies for the linked company.
           items:
             type: string
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
   securitySchemes:
     auth_header:
       name: Authorization
