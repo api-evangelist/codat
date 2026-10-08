@@ -979,6 +979,12 @@ apis:
   - type: OpenAPI
     url: openapi/codat-platform-api-api-openapi.yml
 common:
+- type: Plans
+  url: plans/codat-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/codat-rate-limits.yml
+- type: FinOps
+  url: finops/codat-finops.yml
 - type: Website
   url: https://www.codat.io/
 - type: CapabilityMap
