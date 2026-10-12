@@ -14,7 +14,7 @@
   evidence: https://docs.codat.io/integrations/accounting/dynamics365businesscentral/accounting-dynamics365businesscentral
   source: edge
   relationship: connector-coverage
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: codat-dynamics-365-finance-operations
   label: Dynamics 365 Finance & Operations
@@ -26,7 +26,7 @@
   evidence: https://docs.codat.io/integrations/accounting/dynamics365financeoperations/overview
   source: edge
   relationship: connector-coverage
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: codat-exact-online-nl-and-uk
   label: Exact Online (NL and UK)
@@ -39,7 +39,7 @@
   evidence: https://docs.codat.io/integrations/accounting/exact-online/accounting-exact-online
   source: edge
   relationship: connector-coverage
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: codat-freeagent
   label: FreeAgent
@@ -52,7 +52,7 @@
   evidence: https://docs.codat.io/integrations/accounting/freeagent/accounting-freeagent
   source: edge
   relationship: connector-coverage
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: codat-freshbooks
   label: FreshBooks
@@ -65,7 +65,7 @@
   evidence: https://docs.codat.io/integrations/accounting/freshbooks/accounting-freshbooks
   source: edge
   relationship: connector-coverage
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: codat-myob-business
   label: MYOB Business
@@ -78,7 +78,7 @@
   evidence: https://docs.codat.io/integrations/accounting/myob/accounting-myob
   source: edge
   relationship: connector-coverage
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: codat-oracle-netsuite
   label: Oracle NetSuite
@@ -91,7 +91,7 @@
   evidence: https://docs.codat.io/integrations/accounting/netsuite/accounting-netsuite
   source: edge
   relationship: connector-coverage
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: codat-quickbooks-desktop-on-premise
   label: QuickBooks Desktop (on-premise)
@@ -103,7 +103,7 @@
   evidence: https://docs.codat.io/integrations/accounting/quickbooksdesktop/accounting-quickbooksdesktop
   source: edge
   relationship: connector-coverage
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: codat-quickbooks-online
   label: QuickBooks Online
@@ -116,7 +116,7 @@
   evidence: https://docs.codat.io/integrations/accounting/quickbooksonline/accounting-quickbooksonline
   source: edge
   relationship: connector-coverage
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: codat-sage-intacct
   label: Sage Intacct
@@ -129,7 +129,7 @@
   evidence: https://docs.codat.io/integrations/accounting/sage-intacct/accounting-sage-intacct
   source: edge
   relationship: connector-coverage
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: codat-sage-200-standard
   label: Sage 200 Standard
@@ -142,7 +142,7 @@
   evidence: https://docs.codat.io/integrations/accounting/sage200/accounting-sage200
   source: edge
   relationship: connector-coverage
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: codat-sage-50-accounts-uk-ireland-on-premise
   label: Sage 50 Accounts (UK & Ireland) (on-premise)
@@ -154,7 +154,7 @@
   evidence: https://docs.codat.io/integrations/accounting/sage50/accounting-sage50
   source: edge
   relationship: connector-coverage
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: codat-sage-accounting
   label: Sage Accounting
@@ -167,7 +167,7 @@
   evidence: https://docs.codat.io/integrations/accounting/sagebusinesscloud/accounting-sagebusinesscloud
   source: edge
   relationship: connector-coverage
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: codat-wave
   label: Wave
@@ -180,7 +180,7 @@
   evidence: https://docs.codat.io/integrations/accounting/wave/accounting-wave
   source: edge
   relationship: connector-coverage
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: codat-workday
   label: Workday
@@ -193,7 +193,7 @@
   evidence: https://docs.codat.io/integrations/accounting/workday/overview
   source: edge
   relationship: connector-coverage
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: codat-xero
   label: Xero
@@ -206,7 +206,7 @@
   evidence: https://docs.codat.io/integrations/accounting/xero/accounting-xero
   source: edge
   relationship: connector-coverage
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: codat-zoho-books
   label: Zoho Books
@@ -219,5 +219,5 @@
   evidence: https://docs.codat.io/integrations/accounting/zoho-books/accounting-zoho-books
   source: edge
   relationship: connector-coverage
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
