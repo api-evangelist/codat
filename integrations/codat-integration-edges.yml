@@ -3,6 +3,7 @@ method: searched
 checked:
 - https://azuremarketplace.microsoft.com/
 - https://docs.codat.io/integrations/accounting/overview
+- https://registry.financialdataexchange.org/
 marketplace_apps:
 - marketplace: coverage
   channel: coverage-list
@@ -265,3 +266,27 @@ edges:
   seller_name: Codat
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: FDX (Financial Data Exchange)
+  partner: fdx
+  type: contract
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://registry.financialdataexchange.org/
+  contract_reference:
+    register: FDX Registry
+    standard: FDX API
+    spec_file: null
+    register_api: https://registry.financialdataexchange.org/fdxregistryapi/organizations/search/listingTags
+    role: data-recipient
+    member_type: MEMBER
+    registered_name: Codat
+    register_id: 175
+    registered_website: https://www.codat.io
+    country: United Kingdom
+    fdx_version: null
+    matched_by: domain:codat.io
+    detected_by: sweep-fdx.py
+    detected: '2026-10-14'
+  detected_by: sweep-fdx.py
+  first_seen: '2026-10-14'
