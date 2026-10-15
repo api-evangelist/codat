@@ -282,7 +282,7 @@
     app_slug: codat
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: codat-pipedream
   label: Pipedream
@@ -308,5 +308,5 @@
     actions: true
     sources: true
     builder: Pipedream repo (component)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
