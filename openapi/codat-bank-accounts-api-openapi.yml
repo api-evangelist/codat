@@ -1396,72 +1396,134 @@ paths:
         Required data may vary by integration. To see what data to post, first call Get create/update bank account model.'
       operationId: create-bank-account
 components:
-  parameters:
-    orderBy:
-      name: orderBy
-      in: query
-      required: false
-      schema:
-        type: string
-        example: -modifiedDate
-      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-        example: 1
-        default: 1
-      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
-    pageSize:
-      name: pageSize
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-        example: 100
-        minimum: 1
-        maximum: 5000
-      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
-        description: Unique identifier for a company's data connection.
-      description: Unique identifier for a connection.
-    query:
-      name: query
-      in: query
-      required: false
-      schema:
-        type: string
-      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
-      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
-    timeoutInMinutes:
-      name: timeoutInMinutes
-      in: query
-      schema:
-        type: integer
-        format: int32
-      description: Time limit for the push operation to complete before it is timed out.
   schemas:
+    PushOption:
+      title: Push option
+      x-internal: true
+      required:
+      - displayName
+      - required
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/PushOption/definitions/pushOptionType'
+        displayName:
+          $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/displayName'
+        description:
+          $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/description'
+        required:
+          $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/required'
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty'
+          nullable: true
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/PushOption/definitions/pushOptionChoice'
+          nullable: true
+        validation:
+          $ref: '#/components/schemas/PushOption/definitions/pushValidationInfo'
+          nullable: true
+      definitions:
+        pushOptionProperty:
+          title: Push Option Property
+          required:
+          - description
+          - displayName
+          - required
+          - type
+          type: object
+          properties:
+            type:
+              $ref: '#/components/schemas/PushOption/definitions/pushOptionType'
+            displayName:
+              minLength: 1
+              type: string
+              description: The property's display name.
+            description:
+              type: string
+              description: A description of the property.
+            required:
+              type: boolean
+              description: The property is required if `True`.
+            properties:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty'
+              nullable: true
+            options:
+              type: array
+              items:
+                $ref: '#/components/schemas/PushOption/definitions/pushOptionChoice'
+              nullable: true
+            validation:
+              $ref: '#/components/schemas/PushOption/definitions/pushValidationInfo'
+        pushValidationInfo:
+          title: Push validation info
+          type: object
+          properties:
+            warnings:
+              type: array
+              items:
+                $ref: '#/components/schemas/PushOption/definitions/pushFieldValidation'
+              nullable: true
+            information:
+              type: array
+              items:
+                $ref: '#/components/schemas/PushOption/definitions/pushFieldValidation'
+              nullable: true
+          additionalProperties: false
+        pushFieldValidation:
+          title: Push field validation
+          required:
+          - details
+          type: object
+          properties:
+            field:
+              type: string
+              description: Field name that resulted in the validation issue.
+            details:
+              minLength: 1
+              type: string
+              description: Details on the validation issue.
+            ref:
+              type: string
+              format: uri
+              nullable: true
+              description: Unique reference identifier for the validation issue.
+          additionalProperties: false
+        pushOptionType:
+          title: Option Type
+          description: The option type.
+          enum:
+          - Array
+          - Object
+          - String
+          - Number
+          - Boolean
+          - DateTime
+          - File
+          - MultiPart
+          type: string
+        pushOptionChoice:
+          title: Push Option Choice
+          type: object
+          properties:
+            value:
+              type: string
+              minLength: 1
+              description: Allowed value for field.
+            type:
+              $ref: '#/components/schemas/PushOption/definitions/pushOptionType'
+            displayName:
+              $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/displayName'
+            description:
+              $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/description'
+            required:
+              $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/required'
     PushOperation:
       title: Push operation
       type: object
@@ -1594,133 +1656,64 @@ components:
               type: string
               description: Unique identifier for the attachment created otherwise null.
               nullable: true
-    PushOption:
-      title: Push option
-      x-internal: true
-      required:
-      - displayName
-      - required
-      - type
+    ErrorMessage:
+      title: Error message
       type: object
+      x-internal: true
       properties:
-        type:
-          $ref: '#/components/schemas/PushOption/definitions/pushOptionType'
-        displayName:
-          $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/displayName'
-        description:
-          $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/description'
-        required:
-          $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/required'
-        properties:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty'
-          nullable: true
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/PushOption/definitions/pushOptionChoice'
-          nullable: true
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the error.
+        service:
+          type: string
+          description: Codat's service the returned the error.
+        error:
+          type: string
+          description: A brief description of the error.
+        correlationId:
+          type: string
+          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
         validation:
-          $ref: '#/components/schemas/PushOption/definitions/pushValidationInfo'
-          nullable: true
+          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
+        canBeRetried:
+          type: string
+          description: '`True` if the error occurred transiently and can be retried.'
+        detailedErrorCode:
+          type: integer
+          description: Machine readable error code used to automate processes based on the code returned.
       definitions:
-        pushOptionProperty:
-          title: Push Option Property
-          required:
-          - description
-          - displayName
-          - required
-          - type
+        errorValidation:
+          title: Validation error
           type: object
+          nullable: true
+          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
           properties:
-            type:
-              $ref: '#/components/schemas/PushOption/definitions/pushOptionType'
-            displayName:
-              minLength: 1
-              type: string
-              description: The property's display name.
-            description:
-              type: string
-              description: A description of the property.
-            required:
-              type: boolean
-              description: The property is required if `True`.
-            properties:
-              type: object
-              additionalProperties:
-                $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty'
-              nullable: true
-            options:
+            errors:
               type: array
-              items:
-                $ref: '#/components/schemas/PushOption/definitions/pushOptionChoice'
               nullable: true
-            validation:
-              $ref: '#/components/schemas/PushOption/definitions/pushValidationInfo'
-        pushValidationInfo:
-          title: Push validation info
-          type: object
-          properties:
+              items:
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
             warnings:
               type: array
-              items:
-                $ref: '#/components/schemas/PushOption/definitions/pushFieldValidation'
               nullable: true
-            information:
-              type: array
               items:
-                $ref: '#/components/schemas/PushOption/definitions/pushFieldValidation'
-              nullable: true
-          additionalProperties: false
-        pushFieldValidation:
-          title: Push field validation
-          required:
-          - details
+                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
+        errorValidationItem:
+          title: Validation error item
           type: object
           properties:
-            field:
+            itemId:
               type: string
-              description: Field name that resulted in the validation issue.
-            details:
-              minLength: 1
-              type: string
-              description: Details on the validation issue.
-            ref:
-              type: string
-              format: uri
               nullable: true
-              description: Unique reference identifier for the validation issue.
-          additionalProperties: false
-        pushOptionType:
-          title: Option Type
-          description: The option type.
-          enum:
-          - Array
-          - Object
-          - String
-          - Number
-          - Boolean
-          - DateTime
-          - File
-          - MultiPart
-          type: string
-        pushOptionChoice:
-          title: Push Option Choice
-          type: object
-          properties:
-            value:
+              description: Unique identifier for a validation item.
+            message:
               type: string
-              minLength: 1
-              description: Allowed value for field.
-            type:
-              $ref: '#/components/schemas/PushOption/definitions/pushOptionType'
-            displayName:
-              $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/displayName'
-            description:
-              $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/description'
-            required:
-              $ref: '#/components/schemas/PushOption/definitions/pushOptionProperty/properties/required'
+              nullable: true
+              description: A message outlining validation item's issue.
+            validatorName:
+              type: string
+              nullable: true
+              description: Name of validator.
     Companies:
       title: Companies
       x-internal: true
@@ -1790,114 +1783,6 @@ components:
               href: /companies/{id}/data/{dataType}
             current:
               href: /companies/{id}/data/{dataType}?page=1&pageSize=10
-    DataType:
-      title: Data types
-      x-internal: true
-      type: string
-      description: Available data types
-      enum:
-      - accountTransactions
-      - balanceSheet
-      - bankAccounts
-      - bankTransactions
-      - billCreditNotes
-      - billPayments
-      - bills
-      - cashFlowStatement
-      - chartOfAccounts
-      - company
-      - creditNotes
-      - customers
-      - directCosts
-      - directIncomes
-      - invoices
-      - itemReceipts
-      - items
-      - journalEntries
-      - journals
-      - paymentMethods
-      - payments
-      - profitAndLoss
-      - purchaseOrders
-      - salesOrders
-      - suppliers
-      - taxRates
-      - trackingCategories
-      - transfers
-      - banking-accountBalances
-      - banking-accounts
-      - banking-transactionCategories
-      - banking-transactions
-      - commerce-companyInfo
-      - commerce-customers
-      - commerce-disputes
-      - commerce-locations
-      - commerce-orders
-      - commerce-paymentMethods
-      - commerce-payments
-      - commerce-productCategories
-      - commerce-products
-      - commerce-taxComponents
-      - commerce-transactions
-      example: invoices
-    ErrorMessage:
-      title: Error message
-      type: object
-      x-internal: true
-      properties:
-        statusCode:
-          type: integer
-          description: The HTTP status code returned by the error.
-        service:
-          type: string
-          description: Codat's service the returned the error.
-        error:
-          type: string
-          description: A brief description of the error.
-        correlationId:
-          type: string
-          description: Unique identifier used to propagate to all downstream services and determine the source of the error.
-        validation:
-          $ref: '#/components/schemas/ErrorMessage/definitions/errorValidation'
-        canBeRetried:
-          type: string
-          description: '`True` if the error occurred transiently and can be retried.'
-        detailedErrorCode:
-          type: integer
-          description: Machine readable error code used to automate processes based on the code returned.
-      definitions:
-        errorValidation:
-          title: Validation error
-          type: object
-          nullable: true
-          description: A human-readable object describing validation decisions Codat has made. If an operation has failed because of validation errors, they will be detailed here.
-          properties:
-            errors:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-            warnings:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/ErrorMessage/definitions/errorValidationItem'
-        errorValidationItem:
-          title: Validation error item
-          type: object
-          properties:
-            itemId:
-              type: string
-              nullable: true
-              description: Unique identifier for a validation item.
-            message:
-              type: string
-              nullable: true
-              description: A message outlining validation item's issue.
-            validatorName:
-              type: string
-              nullable: true
-              description: Name of validator.
     BankAccounts:
       x-internal: true
       title: 'Accounting: Bank accounts'
@@ -2197,59 +2082,70 @@ components:
       - '2022-10-23T00:00:00Z'
       - '2022-10-23'
       description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    DataType:
+      title: Data types
+      x-internal: true
+      type: string
+      description: Available data types
+      enum:
+      - accountTransactions
+      - balanceSheet
+      - bankAccounts
+      - bankTransactions
+      - billCreditNotes
+      - billPayments
+      - bills
+      - cashFlowStatement
+      - chartOfAccounts
+      - company
+      - creditNotes
+      - customers
+      - directCosts
+      - directIncomes
+      - invoices
+      - itemReceipts
+      - items
+      - journalEntries
+      - journals
+      - paymentMethods
+      - payments
+      - profitAndLoss
+      - purchaseOrders
+      - salesOrders
+      - suppliers
+      - taxRates
+      - trackingCategories
+      - transfers
+      - banking-accountBalances
+      - banking-accounts
+      - banking-transactionCategories
+      - banking-transactions
+      - commerce-companyInfo
+      - commerce-customers
+      - commerce-disputes
+      - commerce-locations
+      - commerce-orders
+      - commerce-paymentMethods
+      - commerce-payments
+      - commerce-productCategories
+      - commerce-products
+      - commerce-taxComponents
+      - commerce-transactions
+      example: invoices
   responses:
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
+    Unauthorized:
+      description: Your API request was not properly authorized.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
           examples:
-            Conflict:
+            Unauthorized:
               value:
-                statusCode: 429
+                statusCode: 401
                 service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Forbidden:
@@ -2265,66 +2161,6 @@ components:
                 service: PublicApi
                 error: You are using an outdated API key or a key not associated with that resource.
                 correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Conflict:
-      description: The data type's dataset has not been requested or is still syncing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 409
-                service: PublicApi
-                error: The data set has not been requested.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    BadRequest:
-      description: The request made is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Malformed query:
-              value:
-                statusCode: 400
-                service: PublicApi
-                error: Error processing request - not valid.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Malformed-Query:
@@ -2348,6 +2184,45 @@ components:
                 service: PullApi
                 error: Error parsing query - Could not resolve property isCompleted on Dataset
                 correlationId: 98457fb9956b7f9b4b2fd4f6e23bb5c8
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
                 canBeRetried: Unknown
                 detailedErrorCode: 0
     Not-Found:
@@ -2383,6 +2258,131 @@ components:
                 correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
                 canBeRetried: Unknown
                 detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    BadRequest:
+      description: The request made is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Malformed query:
+              value:
+                statusCode: 400
+                service: PublicApi
+                error: Error processing request - not valid.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Conflict:
+      description: The data type's dataset has not been requested or is still syncing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 409
+                service: PublicApi
+                error: The data set has not been requested.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+  parameters:
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
+        description: Unique identifier for a company's data connection.
+      description: Unique identifier for a connection.
+    pageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        example: 100
+        minimum: 1
+        maximum: 5000
+      description: Number of records to return in a page. [Read more](https://docs.codat.io/using-the-api/paging).
+    timeoutInMinutes:
+      name: timeoutInMinutes
+      in: query
+      schema:
+        type: integer
+        format: int32
+      description: Time limit for the push operation to complete before it is timed out.
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      schema:
+        type: string
+        example: -modifiedDate
+      description: Field to order results by. [Read more](https://docs.codat.io/using-the-api/ordering-results).
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        example: 1
+        default: 1
+      description: Page number. [Read more](https://docs.codat.io/using-the-api/paging).
+    query:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      example: id=e3334455-1aed-4e71-ab43-6bccf12092ee
+      description: Codat query string. [Read more](https://docs.codat.io/using-the-api/querying).
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
   securitySchemes:
     auth_header:
       name: Authorization

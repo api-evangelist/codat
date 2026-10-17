@@ -171,83 +171,155 @@ paths:
 
         social media or website information."'
 components:
+  responses:
+    Unauthorized:
+      description: Your API request was not properly authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Unauthorized:
+              value:
+                statusCode: 401
+                service: PublicApi
+                error: Unauthorized
+                correlationId: 7eb40d6b415d7bcd99ce658268284056
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Forbidden:
+      description: You are using an outdated API key or a key not associated with that resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 403
+                service: PublicApi
+                error: You are using an outdated API key or a key not associated with that resource.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Too-Many-Requests:
+      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have made too many requests in a given amount of time; please retry later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Payment-Required:
+      description: 'An account limit has been exceeded. The type of limit is described in the error property:
+
+
+        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
+
+        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
+
+        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 429
+                service: PublicApi
+                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Not-Found:
+      description: 'One or more of the resources you referenced could not be found.
+
+        This might be because your company or data connection id is wrong, or was already deleted.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Data connection not found:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
+                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            Company not found:
+              value:
+                statusCode: 404
+                service: ClientsApi
+                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+            No data available:
+              value:
+                statusCode: 404
+                service: PublicApi
+                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
+                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Service-Unavailable:
+      description: The Codat API is temporarily offline for maintenance. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: The Codat API is temporarily offline for maintenance. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Internal-Server-Error:
+      description: There is a problem with our server. Please try again later.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 500
+                service: PublicApi
+                error: There is a problem with our server. Please try again later.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
+    Conflict:
+      description: The data type's dataset has not been requested or is still syncing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            Conflict:
+              value:
+                statusCode: 409
+                service: PublicApi
+                error: The data set has not been requested.
+                correlationId: bc997528a9d7abb9161ef45f05d38599
+                canBeRetried: Unknown
+                detailedErrorCode: 0
   schemas:
-    CommerceAddress:
-      title: 'Commerce: Address'
-      x-internal: true
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/CommerceAddress/definitions/commerceAddressType'
-        line1:
-          description: The first line of the address
-          type: string
-        line2:
-          description: The second line of the address
-          type: string
-        city:
-          description: The third line of the address, or city
-          type: string
-        region:
-          description: The fourth line of the address, or region
-          type: string
-        country:
-          description: The country for the address
-          type: string
-        postalCode:
-          description: The postal (or zip) code for the address
-          type: string
-      definitions:
-        commerceAddressType:
-          description: The type of the address
-          type: string
-          enum:
-          - Billing
-          - Delivery
-          - Order
-          - Inventory
-          - Unknown
-    AccountingAddress:
-      title: 'Accounting: Address'
-      x-internal: true
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/AccountingAddress/definitions/accountingAddressType'
-        line1:
-          type: string
-          nullable: true
-          description: Line 1 of the customer address.
-        line2:
-          type: string
-          nullable: true
-          description: Line 2 of the customer address.
-        city:
-          type: string
-          nullable: true
-          description: City of the customer address.
-        region:
-          type: string
-          nullable: true
-          description: Region of the customer address.
-        country:
-          type: string
-          nullable: true
-          description: Country of the customer address.
-        postalCode:
-          type: string
-          nullable: true
-          description: Postal code or zip code.
-      required:
-      - type
-      definitions:
-        accountingAddressType:
-          description: The type of the address
-          type: string
-          enum:
-          - Unknown
-          - Billing
-          - Delivery
     ErrorMessage:
       title: Error message
       type: object
@@ -325,6 +397,188 @@ components:
       example:
         type: Website
         url: https://codat.io
+    CommerceCompanyInfo:
+      title: 'Commerce: Company profile'
+      description: "In the Codat system, company profile includes standard commercial details about \na linked company, such as their address, phone number, and company registration.\n"
+      type: object
+      allOf:
+      - type: object
+        properties:
+          companyName:
+            type: string
+            description: The name of the company
+            example: Codat
+          commercePlatformRef:
+            type: string
+            description: Identifier or reference for the company in the commerce software
+          companyLegalName:
+            type: string
+            description: The full legal name of the company
+            example: Codat Limited
+          addresses:
+            type: array
+            description: Addresses associated with the company
+            items:
+              $ref: '#/components/schemas/CommerceAddress'
+          phoneNumbers:
+            type: array
+            description: Phone numbers associated with the company
+            items:
+              $ref: '#/components/schemas/PhoneNumber'
+          webLinks:
+            description: Weblinks associated with the company
+            type: array
+            items:
+              $ref: '#/components/schemas/WebLink'
+          registrationNumber:
+            description: The registration number of the company
+            type: string
+            examples:
+            - 10480375
+          baseCurrency:
+            $ref: '#/components/schemas/SourceAccount/properties/currency'
+          accountBalances:
+            description: The available and current cash balances for the company's accounts
+            type: array
+            items:
+              $ref: '#/components/schemas/CommerceCompanyInfo/definitions/accountBalance'
+          sourceUrls:
+            description: URL addresses for the originating system. For example, potential use cases include 'deeplinking' to the originating system
+            type: object
+            additionalProperties:
+              type: string
+            example:
+              url1: https://connect.sandbox.com/v2/customers
+              url2: https://connect.sandbox.com/v2/disputes
+      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
+      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
+      definitions:
+        accountBalance:
+          title: Account Balance
+          type: object
+          x-internal: true
+          properties:
+            available:
+              description: The account's current balance
+              type: number
+              format: decimal
+            pending:
+              description: Funds that are not yet available in the balance
+              type: number
+              format: decimal
+            reserved:
+              description: Funds reserved as holdings
+              format: decimal
+            currency:
+              description: The currency of the account
+              allOf:
+              - $ref: '#/components/schemas/SourceAccount/properties/currency'
+    SourceAccount:
+      title: Source account (v1)
+      type: object
+      description: The target bank account in a supported accounting software for ingestion into a bank feed.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Unique ID for the bank account.
+        accountName:
+          type: string
+          nullable: true
+          description: The bank account name.
+        accountType:
+          type: string
+          nullable: true
+          description: The type of bank account e.g. Credit.
+        accountNumber:
+          type: string
+          nullable: true
+          description: The account number.
+        sortCode:
+          type: string
+          nullable: true
+          description: The sort code.
+        currency:
+          title: Currency
+          x-internal: true
+          type: string
+          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
+          format: ISO4217
+          examples:
+          - GBP
+          - USD
+          - EUR
+        balance:
+          type: number
+          format: decimal
+          nullable: true
+          description: The latest balance for the bank account.
+        modifiedDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+          description: The last date the bank account was modified.
+        status:
+          type: string
+          nullable: true
+          description: Status of the source account.
+          enum:
+          - pending
+          - connected
+          - connecting
+          - disconnected
+          - unknown
+        feedStartDate:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+      required:
+      - id
+      definitions:
+        sourceAccountPrototype:
+          title: Source account (v1)
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/SourceAccount/properties/id'
+            accountName:
+              $ref: '#/components/schemas/SourceAccount/properties/accountName'
+            accountType:
+              $ref: '#/components/schemas/SourceAccount/properties/accountType'
+            accountNumber:
+              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
+            sortCode:
+              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
+            currency:
+              $ref: '#/components/schemas/SourceAccount/properties/currency'
+            balance:
+              $ref: '#/components/schemas/SourceAccount/properties/balance'
+            modifiedDate:
+              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
+          required:
+          - id
+        sourceAccounts:
+          title: Source accounts
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAccount'
+      examples:
+      - id: acc-002
+        accountName: account-081
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345670'
+        currency: GBP
+        balance: 99.99
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
+      - id: acc-003
+        accountName: account-095
+        sortCode: '123456'
+        accountType: Credit
+        accountNumber: '12345671'
+        currency: USD
+        balance: 0
+        modifiedDate: '2023-01-09T14:14:14.1057478Z'
+        status: pending
     CommerceOrder:
       title: 'Commerce: Order'
       description: 'Orders contain the transaction details for all products sold by the company, and include details of any payments, service charges, or refunds related to each order. You can use data from the Orders endpoints to calculate key metrics, such as gross sales values and monthly recurring revenue (MRR).
@@ -616,6 +870,48 @@ components:
         modifiedDate: '2022-02-02T11:02:45Z'
         sourceModifiedDate: '2021-03-28T03:00:14'
       type: object
+    DateTime:
+      title: Date time
+      type: string
+      examples:
+      - '2022-10-23T00:00:00Z'
+      - '2022-10-23'
+      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+    CommerceAddress:
+      title: 'Commerce: Address'
+      x-internal: true
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CommerceAddress/definitions/commerceAddressType'
+        line1:
+          description: The first line of the address
+          type: string
+        line2:
+          description: The second line of the address
+          type: string
+        city:
+          description: The third line of the address, or city
+          type: string
+        region:
+          description: The fourth line of the address, or region
+          type: string
+        country:
+          description: The country for the address
+          type: string
+        postalCode:
+          description: The postal (or zip) code for the address
+          type: string
+      definitions:
+        commerceAddressType:
+          description: The type of the address
+          type: string
+          enum:
+          - Billing
+          - Delivery
+          - Order
+          - Inventory
+          - Unknown
     AccountingCompanyInfo:
       title: 'Accounting: Company information'
       description: "Company info provides standard details about a linked company such as their address, phone number, and company registration.\n\n> **Company information or companies?**\n> \n> Company information is standard information that is held in the accounting software about a company. `Companies` is an endpoint that lists businesses in the Codat system that have linked and shared their data sources."
@@ -718,119 +1014,47 @@ components:
           url1: https://go.xero.com/organisationlogin/default.aspx?shortcode=!rxs0Q
           url2: https://reporting.xero.com/!rxs0Q
         createdDate: '2020-02-03T16:42:02Z'
-    SourceAccount:
-      title: Source account (v1)
+    AccountingAddress:
+      title: 'Accounting: Address'
+      x-internal: true
       type: object
-      description: The target bank account in a supported accounting software for ingestion into a bank feed.
-      additionalProperties: false
       properties:
-        id:
-          type: string
-          description: Unique ID for the bank account.
-        accountName:
-          type: string
-          nullable: true
-          description: The bank account name.
-        accountType:
+        type:
+          $ref: '#/components/schemas/AccountingAddress/definitions/accountingAddressType'
+        line1:
           type: string
           nullable: true
-          description: The type of bank account e.g. Credit.
-        accountNumber:
+          description: Line 1 of the customer address.
+        line2:
           type: string
           nullable: true
-          description: The account number.
-        sortCode:
+          description: Line 2 of the customer address.
+        city:
           type: string
           nullable: true
-          description: The sort code.
-        currency:
-          title: Currency
-          x-internal: true
-          type: string
-          description: "The currency data type in Codat is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, e.g. _GBP_.\n\n## Unknown currencies\n\nIn line with the ISO 4217 specification, the code _XXX_ is used when the data source does not return a currency for a transaction. \n\nThere are only a very small number of edge cases where this currency code is returned by the Codat system."
-          format: ISO4217
-          examples:
-          - GBP
-          - USD
-          - EUR
-        balance:
-          type: number
-          format: decimal
-          nullable: true
-          description: The latest balance for the bank account.
-        modifiedDate:
-          $ref: '#/components/schemas/DateTime'
-          nullable: true
-          description: The last date the bank account was modified.
-        status:
+          description: City of the customer address.
+        region:
           type: string
           nullable: true
-          description: Status of the source account.
-          enum:
-          - pending
-          - connected
-          - connecting
-          - disconnected
-          - unknown
-        feedStartDate:
-          $ref: '#/components/schemas/DateTime'
+          description: Region of the customer address.
+        country:
+          type: string
           nullable: true
+          description: Country of the customer address.
+        postalCode:
+          type: string
+          nullable: true
+          description: Postal code or zip code.
       required:
-      - id
+      - type
       definitions:
-        sourceAccountPrototype:
-          title: Source account (v1)
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/SourceAccount/properties/id'
-            accountName:
-              $ref: '#/components/schemas/SourceAccount/properties/accountName'
-            accountType:
-              $ref: '#/components/schemas/SourceAccount/properties/accountType'
-            accountNumber:
-              $ref: '#/components/schemas/SourceAccount/properties/accountNumber'
-            sortCode:
-              $ref: '#/components/schemas/SourceAccount/properties/sortCode'
-            currency:
-              $ref: '#/components/schemas/SourceAccount/properties/currency'
-            balance:
-              $ref: '#/components/schemas/SourceAccount/properties/balance'
-            modifiedDate:
-              $ref: '#/components/schemas/SourceAccount/properties/modifiedDate'
-          required:
-          - id
-        sourceAccounts:
-          title: Source accounts
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceAccount'
-      examples:
-      - id: acc-002
-        accountName: account-081
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345670'
-        currency: GBP
-        balance: 99.99
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
-      - id: acc-003
-        accountName: account-095
-        sortCode: '123456'
-        accountType: Credit
-        accountNumber: '12345671'
-        currency: USD
-        balance: 0
-        modifiedDate: '2023-01-09T14:14:14.1057478Z'
-        status: pending
-    DateTime:
-      title: Date time
-      type: string
-      examples:
-      - '2022-10-23T00:00:00Z'
-      - '2022-10-23'
-      description: "In Codat's data model, dates and times are represented using the <a class=\"external\" href=\"https://en.wikipedia.org/wiki/ISO_8601\" target=\"_blank\">ISO 8601 standard</a>. Date and time fields are formatted as strings; for example:\n\n```\n2020-10-08T22:40:50Z\n2021-01-01T00:00:00\n```\n\n\n\nWhen syncing data that contains `DateTime` fields from Codat, make sure you support the following cases when reading time information:\n\n- Coordinated Universal Time (UTC): `2021-11-15T06:00:00Z`\n- Unqualified local time: `2021-11-15T01:00:00`\n- UTC time offsets: `2021-11-15T01:00:00-05:00`\n\n> Time zones\n> \n> Not all dates from Codat will contain information about time zones.  \n> Where it is not available from the underlying platform, Codat will return these as times local to the business whose data has been synced."
+        accountingAddressType:
+          description: The type of the address
+          type: string
+          enum:
+          - Unknown
+          - Billing
+          - Delivery
     SupplementalData:
       title: Supplemental data
       type: object
@@ -843,82 +1067,6 @@ components:
             type: object
             additionalProperties: true
           nullable: true
-    CommerceCompanyInfo:
-      title: 'Commerce: Company profile'
-      description: "In the Codat system, company profile includes standard commercial details about \na linked company, such as their address, phone number, and company registration.\n"
-      type: object
-      allOf:
-      - type: object
-        properties:
-          companyName:
-            type: string
-            description: The name of the company
-            example: Codat
-          commercePlatformRef:
-            type: string
-            description: Identifier or reference for the company in the commerce software
-          companyLegalName:
-            type: string
-            description: The full legal name of the company
-            example: Codat Limited
-          addresses:
-            type: array
-            description: Addresses associated with the company
-            items:
-              $ref: '#/components/schemas/CommerceAddress'
-          phoneNumbers:
-            type: array
-            description: Phone numbers associated with the company
-            items:
-              $ref: '#/components/schemas/PhoneNumber'
-          webLinks:
-            description: Weblinks associated with the company
-            type: array
-            items:
-              $ref: '#/components/schemas/WebLink'
-          registrationNumber:
-            description: The registration number of the company
-            type: string
-            examples:
-            - 10480375
-          baseCurrency:
-            $ref: '#/components/schemas/SourceAccount/properties/currency'
-          accountBalances:
-            description: The available and current cash balances for the company's accounts
-            type: array
-            items:
-              $ref: '#/components/schemas/CommerceCompanyInfo/definitions/accountBalance'
-          sourceUrls:
-            description: URL addresses for the originating system. For example, potential use cases include 'deeplinking' to the originating system
-            type: object
-            additionalProperties:
-              type: string
-            example:
-              url1: https://connect.sandbox.com/v2/customers
-              url2: https://connect.sandbox.com/v2/disputes
-      - $ref: '#/components/schemas/CommerceOrder/allOf/2'
-      - $ref: '#/components/schemas/CommerceOrder/allOf/3'
-      definitions:
-        accountBalance:
-          title: Account Balance
-          type: object
-          x-internal: true
-          properties:
-            available:
-              description: The account's current balance
-              type: number
-              format: decimal
-            pending:
-              description: Funds that are not yet available in the balance
-              type: number
-              format: decimal
-            reserved:
-              description: Funds reserved as holdings
-              format: decimal
-            currency:
-              description: The currency of the account
-              allOf:
-              - $ref: '#/components/schemas/SourceAccount/properties/currency'
     PhoneNumber:
       title: Phone
       type: object
@@ -943,165 +1091,7 @@ components:
           - Unknown
       required:
       - type
-  responses:
-    Payment-Required:
-      description: 'An account limit has been exceeded. The type of limit is described in the error property:
-
-
-        - You have exceeded the 50-company limit that applies to a Free plan. Delete any companies you no longer need and retry the request.
-
-        - The requested sync schedule is not allowed. You requested an hourly sync schedule but this functionality is not included in the Free plan.
-
-        - Your Free account is older than 365 days and has expired. Contact support@codat.io.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have exceeded the 50-company limit that applies to a Free plan. We recommend that you delete any companies you no longer need and retry the request.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Too-Many-Requests:
-      description: Too many requests were made in a given amount of time. Wait a short period and then try again.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 429
-                service: PublicApi
-                error: You have made too many requests in a given amount of time; please retry later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Service-Unavailable:
-      description: The Codat API is temporarily offline for maintenance. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: The Codat API is temporarily offline for maintenance. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Forbidden:
-      description: You are using an outdated API key or a key not associated with that resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 403
-                service: PublicApi
-                error: You are using an outdated API key or a key not associated with that resource.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Conflict:
-      description: The data type's dataset has not been requested or is still syncing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 409
-                service: PublicApi
-                error: The data set has not been requested.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Internal-Server-Error:
-      description: There is a problem with our server. Please try again later.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Conflict:
-              value:
-                statusCode: 500
-                service: PublicApi
-                error: There is a problem with our server. Please try again later.
-                correlationId: bc997528a9d7abb9161ef45f05d38599
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Unauthorized:
-      description: Your API request was not properly authorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Unauthorized:
-              value:
-                statusCode: 401
-                service: PublicApi
-                error: Unauthorized
-                correlationId: 7eb40d6b415d7bcd99ce658268284056
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-    Not-Found:
-      description: 'One or more of the resources you referenced could not be found.
-
-        This might be because your company or data connection id is wrong, or was already deleted.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-          examples:
-            Data connection not found:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: Data connection a22dd66b-564a-4832-9b37-7b3ce4aeb7de not found
-                correlationId: 8fa2b5f4794970a4ee73758f612e8df0
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            Company not found:
-              value:
-                statusCode: 404
-                service: ClientsApi
-                error: No company was found with ID 846ed55c-974b-4392-a1f1-87b6fdbf3c5e
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
-            No data available:
-              value:
-                statusCode: 404
-                service: PublicApi
-                error: No data available for accounts for ID e5889b459f544926ac5b8e6756df2s
-                correlationId: 0a40c2f31fc8f992fb88b0853e4166f3
-                canBeRetried: Unknown
-                detailedErrorCode: 0
   parameters:
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 8a210b68-6988-11ed-a1eb-0242ac120002
-        description: Unique identifier for your SMB in Codat.
-      description: Unique identifier for a company.
     connectionId:
       name: connectionId
       in: path
@@ -1112,6 +1102,16 @@ components:
         example: 2e9d2c44-f675-40ba-8049-353bfcb5e171
         description: Unique identifier for a company's data connection.
       description: Unique identifier for a connection.
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 8a210b68-6988-11ed-a1eb-0242ac120002
+        description: Unique identifier for your SMB in Codat.
+      description: Unique identifier for a company.
   securitySchemes:
     auth_header:
       name: Authorization
