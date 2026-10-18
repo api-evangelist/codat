@@ -340,5 +340,5 @@
     - bronze
     - silver
     builder: 'community (Meltano Hub variant maintainers: manuphatak, singer-io)'
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
