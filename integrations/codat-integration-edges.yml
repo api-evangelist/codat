@@ -6,6 +6,7 @@ checked:
 - https://crates.io/api/v1
 - https://docs.codat.io/integrations/accounting/overview
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
+- https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
 - https://github.com/meltano/hub
 - https://proxy.golang.org
 - https://pypi.org/pypi
@@ -25,6 +26,107 @@ marketplace_apps:
   identity: domain (each integration page links the platform's site)
   status: ok
 edges:
+- partner_name: Microsoft Azure Marketplace
+  partner: microsoft-azure
+  partner_match: aggregator
+  type: marketplace
+  marketplace: azure-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=Codat
+  listing_count: 1
+  apps:
+  - Codat
+  seller_name: Codat
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
+- partner_name: Go module proxy
+  partner: null
+  partner_match: null
+  type: register
+  direction: provider-built
+  category: official SDK (Go)
+  evidence: https://pkg.go.dev/github.com/codatio/client-sdk-go
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Go module proxy (public registry JSON)
+    spec_file: null
+    language: Go
+    packages:
+    - name: github.com/codatio/client-sdk-go
+      version: v0.0.0-20250408142139-06c0aa953d95
+      released: '2025-04-08'
+      released_field: Time
+      lapsed: false
+      page: https://pkg.go.dev/github.com/codatio/client-sdk-go
+      repo_leg: github-org:codatio
+      publisher_leg: org:codatio
+      matched_by: github-org
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: Meltano
+  partner: meltano
+  partner_match: aggregator
+  type: marketplace
+  marketplace: meltano-hub
+  channel: elt-connector
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://hub.meltano.com/extractors/tap-codat--manuphatak
+  category: null
+  contract_reference:
+    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
+    spec_file: null
+    role: elt-connector:meltano-hub
+    registered_name: Codat
+    matched_domain: codat.io
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    plugins:
+    - tap-codat--manuphatak
+    - tap-codat--singer-io
+    maintenance_status:
+    - active
+    - unknown
+    quality:
+    - bronze
+    - silver
+    builder: 'community (Meltano Hub variant maintainers: manuphatak, singer-io)'
+  detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
+- partner_name: FDX (Financial Data Exchange)
+  partner: fdx
+  type: contract
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://registry.financialdataexchange.org/
+  contract_reference:
+    register: FDX Registry
+    standard: FDX API
+    spec_file: null
+    register_api: https://registry.financialdataexchange.org/fdxregistryapi/organizations/search/listingTags
+    role: data-recipient
+    member_type: MEMBER
+    registered_name: Codat
+    register_id: 175
+    registered_website: https://www.codat.io
+    country: United Kingdom
+    fdx_version: null
+    matched_by: domain:codat.io
+    detected_by: sweep-fdx.py
+    detected: '2026-10-19'
+  detected_by: sweep-fdx.py
+  first_seen: '2026-10-19'
 - partner_name: Dynamics 365 Business Central
   partner: microsoft-dynamics-365-business-central
   partner_match: domain+name-among-holders
@@ -111,7 +213,7 @@ edges:
   partner_url: https://www.myob.com/
 - partner_name: Oracle NetSuite
   partner: netsuite
-  partner_match: domain+name-among-holders
+  partner_match: domain
   partner_candidate: null
   type: coverage
   marketplace: coverage
@@ -137,7 +239,7 @@ edges:
   detected_by: sweep-accounting-stores.py
   detected: '2026-10-12'
 - partner_name: QuickBooks Online
-  partner: quickbooks-online
+  partner: quickbooks
   partner_match: domain+name-among-holders
   partner_candidate: null
   type: coverage
@@ -148,7 +250,7 @@ edges:
   evidence: https://docs.codat.io/integrations/accounting/quickbooksonline/accounting-quickbooksonline
   category: accounting
   detected_by: sweep-accounting-stores.py
-  detected: '2026-10-12'
+  detected: '2026-10-19'
   partner_url: https://quickbooks.intuit.com/uk/online/
 - partner_name: Sage Intacct
   partner: sage-intacct
@@ -235,7 +337,7 @@ edges:
   partner_url: https://www.workday.com/
 - partner_name: Xero
   partner: xero
-  partner_match: domain+name-among-holders
+  partner_match: domain
   partner_candidate: null
   type: coverage
   marketplace: coverage
@@ -261,45 +363,6 @@ edges:
   detected_by: sweep-accounting-stores.py
   detected: '2026-10-12'
   partner_url: https://www.zoho.com/books/
-- partner_name: Microsoft Azure Marketplace
-  partner: microsoft-azure
-  partner_match: aggregator
-  type: marketplace
-  marketplace: azure-marketplace
-  channel: distribution
-  relationship: distribution-channel
-  direction: third-party
-  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=Codat
-  listing_count: 1
-  apps:
-  - Codat
-  seller_name: Codat
-  detected_by: sweep-cloud-marketplaces.py
-  detected: '2026-10-13'
-- partner_name: FDX (Financial Data Exchange)
-  partner: fdx
-  type: contract
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://registry.financialdataexchange.org/
-  contract_reference:
-    register: FDX Registry
-    standard: FDX API
-    spec_file: null
-    register_api: https://registry.financialdataexchange.org/fdxregistryapi/organizations/search/listingTags
-    role: data-recipient
-    member_type: MEMBER
-    registered_name: Codat
-    register_id: 175
-    registered_website: https://www.codat.io
-    country: United Kingdom
-    fdx_version: null
-    matched_by: domain:codat.io
-    detected_by: sweep-fdx.py
-    detected: '2026-10-14'
-  detected_by: sweep-fdx.py
-  first_seen: '2026-10-14'
 - partner_name: Zapier
   partner: zapier
   partner_match: aggregator
@@ -333,7 +396,7 @@ edges:
   channel: open-source-node
   relationship: ipaas-bridge
   direction: third-party
-  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/codat
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/codat
   category: null
   contract_reference:
     register: Pipedream components (PipedreamHQ/pipedream components/)
@@ -351,68 +414,6 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
-- partner_name: Meltano
-  partner: meltano
-  partner_match: aggregator
-  type: marketplace
-  marketplace: meltano-hub
-  channel: elt-connector
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://hub.meltano.com/extractors/tap-codat--manuphatak
-  category: null
-  contract_reference:
-    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
-    spec_file: null
-    role: elt-connector:meltano-hub
-    registered_name: Codat
-    matched_domain: codat.io
-    matched_by: domain
-    detected_by: sweep-data-integration.py
-    detected: '2026-10-18'
-    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
-    plugins:
-    - tap-codat--manuphatak
-    - tap-codat--singer-io
-    maintenance_status:
-    - active
-    - unknown
-    quality:
-    - bronze
-    - silver
-    builder: 'community (Meltano Hub variant maintainers: manuphatak, singer-io)'
-  detected_by: sweep-data-integration.py
-  first_seen: '2026-10-18'
-- partner_name: Go module proxy
-  partner: null
-  partner_match: null
-  type: register
-  direction: provider-built
-  category: official SDK (Go)
-  evidence: https://pkg.go.dev/github.com/codatio/client-sdk-go
-  channel: package-registry
-  relationship: distribution-channel
-  contract_reference:
-    register: Go module proxy (public registry JSON)
-    spec_file: null
-    language: Go
-    packages:
-    - name: github.com/codatio/client-sdk-go
-      version: v0.0.0-20250408142139-06c0aa953d95
-      released: '2025-04-08'
-      released_field: Time
-      lapsed: false
-      page: https://pkg.go.dev/github.com/codatio/client-sdk-go
-      repo_leg: github-org:codatio
-      publisher_leg: org:codatio
-      matched_by: github-org
-    current: true
-    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
-      24 months'
-    detected_by: sweep-official-sdks.py
-    detected: '2026-10-18'
-  detected_by: sweep-official-sdks.py
-  first_seen: '2026-10-18'
 source:
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://zapier.com/api/v4/apps/
