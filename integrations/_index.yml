@@ -372,3 +372,29 @@
     builder: Pipedream repo (component)
   status: not-a-workflow
   arazzo: null
+- slug: codat-claude-plugins-dev
+  label: claude-plugins.dev
+  partner_name: claude-plugins.dev
+  category: Agent Skills register
+  type: register
+  channel: standard-directory
+  evidence: https://claude-plugins.dev/skills/@codatio/codat-docs
+  source: edge
+  relationship: compatible
+  contract_reference:
+    register: claude-plugins.dev (public sitemap / list)
+    spec_file: null
+    standard: Agent Skills (agentskills.io)
+    role: agent-skills-listing
+    matched_org: codatio
+    matched_by: org-name
+    sample_skills:
+    - docusaurus-config
+    - docusaurus-documentation
+    - docusaurus-migration
+    - docusaurus-plugins
+    - google-style-guide
+    detected_by: sweep-agent-skills.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
