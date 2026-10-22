@@ -426,3 +426,88 @@
     sector: fintech
   status: not-a-workflow
   arazzo: null
+- slug: codat-apis-guru-openapi-directory
+  label: APIs.guru OpenAPI Directory
+  partner: apis-guru
+  partner_name: APIs.guru OpenAPI Directory
+  category: API definition directory listing (OpenAPI)
+  type: register
+  channel: standard-directory
+  evidence: https://apis.guru/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: APIs.guru OpenAPI Directory
+    spec_file: null
+    standard: APIs.guru OpenAPI Directory
+    role: listed-in-directory
+    directory_provider: codat.io
+    matched_domain: codat.io
+    matched_by: domain
+    apis_listed: 7
+    version_count: 7
+    first_added: '2023-04-18'
+    last_updated: '2023-04-18'
+    origin_publisher_hosted: false
+    origin_hosts:
+    - raw.githubusercontent.com
+    categories:
+    - ecommerce
+    - financial
+    own_openapi_files: 35
+    listings:
+    - key: codat.io:accounting
+      title: Accounting API
+      preferred: 2.1.0
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/codat.io/accounting/2.1.0/openapi.json
+      origin_url: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Accounting.json
+      openapi_version: 3.1.0
+    - key: codat.io:assess
+      title: Assess API
+      preferred: '1.0'
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/codat.io/assess/1.0/openapi.json
+      origin_url: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Assess.json
+      openapi_version: 3.1.0
+    - key: codat.io:bank-feeds
+      title: Bank Feeds API
+      preferred: 2.1.0
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/codat.io/bank-feeds/2.1.0/openapi.json
+      origin_url: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Bank-Feeds.json
+      openapi_version: 3.1.0
+    - key: codat.io:banking
+      title: Banking API
+      preferred: 2.1.0
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/codat.io/banking/2.1.0/openapi.json
+      origin_url: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Banking.json
+      openapi_version: 3.1.0
+    - key: codat.io:commerce
+      title: Commerce API
+      preferred: 2.1.0
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/codat.io/commerce/2.1.0/openapi.json
+      origin_url: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Commerce.json
+      openapi_version: 3.1.0
+    - key: codat.io:sync-for-commerce
+      title: Sync for Commerce API
+      preferred: '1.1'
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/codat.io/sync-for-commerce/1.1/openapi.json
+      origin_url: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Sync-Commerce.json
+      openapi_version: 3.1.0
+    - key: codat.io:sync-for-expenses
+      title: Codat Expense API
+      preferred: prealpha
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/codat.io/sync-for-expenses/prealpha/openapi.json
+      origin_url: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Expenses.json
+      openapi_version: 3.1.0
+    signal_note: 'participation only: a community directory listing (APIs.guru collects definitions; the provider
+      did not file them). Signals: version_count, apis_listed, origin_publisher_hosted.'
+    detected_by: sweep-openapi-directory-apis-guru.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
