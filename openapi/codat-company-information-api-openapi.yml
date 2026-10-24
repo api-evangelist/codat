@@ -378,3 +378,9 @@ x-codat-speakeasy-pagination:
     type: page
   outputs:
     results: $.results
+x-provenance:
+  method: harvested
+  publisher: Codat
+  source: https://raw.githubusercontent.com/codatio/oas/main/json/Codat-Bank-Feeds.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
